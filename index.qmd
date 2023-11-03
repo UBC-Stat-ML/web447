@@ -1,0 +1,31 @@
+---
+title: "Syllabus"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+## Test
+
+asdfasdf
+
+## Another
+
+adsfasdf
+
+-   asdfasd
+
+-   asdfas
+
+-   asd
+
+aasdfasdf
+
+| Col1  | Col2 | Col3 |
+|-------|------|------|
+| asdfa | asdf | adf  |
+|       | asdf | asdf |
+|       |      | asdf |
+
+asdfasdf
