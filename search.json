@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "index.html#test",
+    "href": "index.html#test",
+    "title": "Syllabus",
+    "section": "Test",
+    "text": "Test\nasdfasdf"
+  },
+  {
+    "objectID": "index.html#another",
+    "href": "index.html#another",
+    "title": "Syllabus",
+    "section": "Another",
+    "text": "Another\nadsfasdf\n\nasdfasd\nasdfas\nasd\n\naasdfasdf\n\n\n\nCol1\nCol2\nCol3\n\n\n\n\nasdfa\nasdf\nadf\n\n\n\nasdf\nasdf\n\n\n\n\nasdf\n\n\n\nasdfasdf"
+  }
+]
