@@ -1,9 +1,13 @@
 project:
   type: website
+  resources:
+    - "*.jpeg"
 
 website:
-  title: "web2"
+  title: "STAT 447"
   navbar:
+    logo: "bayes-black-hole.jpeg"
+    background: black
     left:
       - href: index.qmd
         text: Home
@@ -14,6 +18,7 @@ format:
     theme: flatly
     css: styles.css
     toc: true
+    linkcolor: black
 
 editor: visual
 
