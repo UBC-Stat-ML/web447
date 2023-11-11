@@ -1,21 +1,20 @@
 project:
   type: website
-  resources:
-    - "*.jpeg"
 
 website:
-  title: "STAT 447"
+  title: "Bayes1@UBC"
   navbar:
-    logo: "bayes-black-hole.jpeg"
-    background: black
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - syllabus.qmd
+      - schedule.qmd
+  body-header: | 
+    ::: callout-caution
+    This website is under construction. At this stage, information printed here may not be accurate.
+    :::
 
 format:
   html:
-    theme: flatly
+    theme: cosmo
     css: styles.css
     toc: true
     linkcolor: black

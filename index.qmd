@@ -1,31 +1,10 @@
 ---
-title: "Syllabus"
+title: "Bayes1@UBC"
+about:
+  template: trestles
+  image: bayes-black-hole.jpeg
 ---
 
-This is a Quarto website.
+## Pitch for this course...
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-## Test
-
-asdfasdf
-
-## Another
-
-adsfasdf
-
--   asdfasd
-
--   asdfas
-
--   asd
-
-aasdfasdf
-
-| Col1  | Col2 | Col3 |
-|-------|------|------|
-| asdfa | asdf | adf  |
-|       | asdf | asdf |
-|       |      | asdf |
-
-asdfasdf
+-   Test
