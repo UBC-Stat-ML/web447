@@ -2,6 +2,11 @@
 title: "Syllabus"
 ---
 
+::: callout-caution
+This website is under construction. At this stage, information printed here may changed.
+:::
+
+
 ## Course description
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
@@ -9,7 +14,7 @@ Bayesian inference is a flexible and powerful approach to modeling reality, maki
 In this course, you will:
 
 -   design probabilistic models to approach real-world inferential problems;
--   perform inference using a Bayesian modelling language;
+-   perform inference using Bayesian modelling languages;
 -   critically assess, debug, and iteratively improve Bayesian workflows;
 -   develop and analyze custom posterior approximation machinery.
 
@@ -21,15 +26,15 @@ Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspace
 
 -   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html)
 -   [Miguel Biron-Lattes (TA)](https://miguelbiron.github.io/)
--   **TBA**
+-   **TBA** (TA)
 
 ## Prerequisite
 
 -   Probability: STAT 302, MATH 302 or equivalent.
--   Some basic background in linear algebra (e.g. matrix multiplication, eigenvectors) and calculus (see STAT 302 pre-requisites for example)
+-   Basic background in linear algebra (e.g. matrix multiplication, eigenvectors) and calculus (see STAT 302 pre-requisites for example)
 -   Computing: we will use R in the homeworks and during lectures. If you know another programming language but not R, you can still take this course but be prepared to spend a bit of extra time to get familiar with the R syntax. We will have special office hours sessions at the beginning of the term to help you doing that.
 
-Come talk to me at the end of the first lecture if you are unsure.
+Come talk to me at the end of the first lecture if you are unsure about your preparation for this course.
 
 
 ## Software
@@ -38,7 +43,7 @@ All software used is free and open source:
 
 -   [R](https://cran.r-project.org/)
 -   [RStudio](https://posit.co/download/rstudio-desktop/)
--   [RStan]
+-   [RStan](https://mc-stan.org/users/interfaces/rstan)
 
 
 ## Textbook
@@ -59,17 +64,18 @@ Additional readings and case studies will be drawn from other textbooks that are
 
 -   *Statistical rethinking*. Richard McElreath. [HTML available via UBC library](https://www.library.ubc.ca/).
 
+
 ## Assessments
 
 Click on each item for details.
 
--   [Participation](participation.qmd) 15%
-    -   Weekly reading assignment: asking and answering one question about the readings or lecture on Piazza.
-    -   In-class iClicker questions.
+-   Participation 15%
+    -   [Weekly reading assignment](schedule.qmd): each week ask and answering one question about the readings or lecture on Piazza. 
+    -   [In-class iClicker questions]({{< var canvas >}}) 
 -   [Homeworks](homeworks.qmd) (weekly) 15%
--   [Quizzes](quizzes.qmd) (2 x 20%): 40%
+-   Quizzes (2 x 20%): 40%
     -   In-class.
-    -   Dates: Thursday Feb 27, Tuesday March 26
+    -   Dates: Tuesday Feb 27, Tuesday March 26
 -   [Final project](project.qmd): 30%
 
 ## Office hours
@@ -83,10 +89,10 @@ Available by appointment if you are unable to attend drop-in hours.
 
 ### Announcements
 
-Course announcements will be posted in the [Canvas page](%7B%7B%3C%20var%20canvas%20%3E%7D%7D/announcements).
+Course announcements will be posted in the [Canvas page]({{< var canvas >}}).
 
 ### Questions
 
-Use the [Piazza page](%7B%7B%3C%20var%20piazza%20%3E%7D%7D) for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.
+Use the [Piazza page]({{< var piazza >}}) for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.
 
 Use private piazza questions if, and only if the question is about a personal matter.

@@ -2,7 +2,33 @@
 title: "Schedule"
 ---
 
-
-| Date | Topics | Readings |
-|------|--------|----------|
-|      |        |          |
+| Date          | Topics       | Readings |
+|---------------|--------------|----------|
+| Tue, Jan 9    |              |          |
+| Th, Jan 11    |              |          |
+| Tue, Jan 16   |              |          |
+| Th, Jan 18    |              |          |
+| Tue, Jan 23   |              |          |
+| Th, Jan 25    |              |          |
+| Tue, Jan 30   |              |          |
+| Th, Feb 1     |              |          |
+| Tue, Feb 6    |              |          |
+| Th, Feb 8     |              |          |
+| Tue, Feb 13   |              |          |
+| Th, Feb 15    |              |          |
+| Tue, Feb 20   | Reading week |          |
+| Th, Feb 22    | Reading week |          |
+| Tue, Feb 27   | Quiz 1       |          |
+| Th, Feb 29    |              |          |
+| Tue, Mar 5    |              |          |
+| Th, Mar 7     |              |          |
+| Tue, Mar 12   |              |          |
+| Th, Mar 14    |              |          |
+| Tue, Mar 19   |              |          |
+| Th, Mar 21    |              |          |
+| Tue, March 26 | Quiz 2       |          |
+| Th, Mar 28    |              |          |
+| Tue, Apr 2    |              |          |
+| Th, Apr 4     |              |          |
+| Tue, Apr 9    |              |          |
+| Th, Apr 11    |              |          |

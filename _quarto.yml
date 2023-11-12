@@ -7,10 +7,8 @@ website:
     left:
       - syllabus.qmd
       - schedule.qmd
-  body-header: | 
-    ::: callout-caution
-    This website is under construction. At this stage, information printed here may not be accurate.
-    :::
+      - project.qmd
+
 
 format:
   html:

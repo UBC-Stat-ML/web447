@@ -1,10 +1,14 @@
 ---
-title: "Bayes1@UBC"
+format:
+  html:
+    toc: false
 about:
   template: trestles
-  image: bayes-black-hole.jpeg
+  image: prior-post-unid.gif
 ---
 
-## Pitch for this course...
+## Bayes1@UBC
 
--   Test
+-   Master a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.
+-   Acquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.
+-   Face the limitations of the Bayesian approach and how to work around them.
