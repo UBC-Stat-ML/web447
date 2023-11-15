@@ -2,3 +2,121 @@
 title: "Final project"
 ---
 
+{{< include _construction.qmd >}}
+
+## Overview
+
+The course project involves independent work on a topic 
+selected from a menu of project themes. 
+These projects leave freedom for creativity within constraints designed 
+for pedagogical and fair evaluation. 
+
+
+## Logistics 
+
+- Teams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.
+- Submit on canvas, a pdf document of maximum 5 pages/person (i.e. max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading. 
+
+
+## Project timeline
+
+- **Friday, Mar 8**: prepare proposal, freeze teams, each team sends a 1 page abstract submitted on Canvas. 
+- **Friday, April 19**: due date for the reports. 
+
+
+## Core guideline
+
+Every project should contain a component where Bayesian inference is applied to a real problem and a real dataset. 
+
+In addition, each team should pick one of the "project themes" listed below, exploring topics building and going beyond what 
+we will cover during the course.
+If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with 
+the last proposal submission date). 
+
+After selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. 
+Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.
+
+Some resources:
+
+- [Vanderbilt Biostatistics datasets](https://hbiostat.org/data/)
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+- [Inter-university Consortium for Political and Social Research](https://www.icpsr.umich.edu/web/pages/ICPSR/index.html)
+- [WHO mortality data](https://platform.who.int/mortality/themes/theme-details/topics/indicator-groups/indicator-group-details/MDB/road-traffic-accidents)
+- [The World Bank Data](https://data.worldbank.org/)
+- [More...](https://github.com/awesomedata/awesome-public-datasets)
+
+You should not pick a dataset that has already been analyzed using the same approach as you. 
+Provide references for the closest analyses of the same data and explain how they differ from yours.
+
+
+## Menu of project themes
+
+Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme.
+For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data 
+(consult me and document this request in the proposal).
+
+- Going further on... (more details can be provided upon request)
+  - model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)
+  - time series and state-space models
+  - spatial models
+  - cross-effect models
+  - Bayesian non-parametric models
+  - deep generative models
+  - topics models
+  - variational inference
+
+- A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both side so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
+  - Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
+  - Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?
+  
+- A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
+  - Types of graphs such as matchings
+  - Phylogenetic trees or networks
+  - Multiple sequence alignments
+  - Clustering or feature matrices
+  
+- Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.
+
+
+## Rubric for the project proposal 
+
+- Basic requirements
+  - Team is identified. 
+  - The proposal identifies which of the project themes it will address.
+- Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or `head` of a dataframe).
+- A short summary of potential approaches to tackle the project theme.
+- If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally. 
+
+As long as the team submits a reasonable project proposal, I will five full grade (5/5) (along with some feedback). 
+Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the
+grace period but no later than April 1st. 
+Details of the project can change after submission of the proposals. 
+Larger changes are allowed but with my permission, so they should not be discussed at the last minute, 
+i.e. before April 1st ideally and certainly before the last lecture.
+
+**Total: 5%**
+
+
+## Rubric for the final report
+
+- Basic requirements (5%)
+  - The report fits within the prescribed page limits. 
+  - The report follows best practices of technical writing. 
+  - If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member. 
+- Problem formulation. (15%) The report clearly describes:
+  - a real-world inference task/problem, 
+  - succinct but sufficient context (e.g. biological terminology) needed to understand the problem,
+  - the key modelling/methodological/challenge, clearly associating it with one of the items under "menu of project themes" above.
+- The report contains a literature review: (10%) relevant literature is cited and properly summarized. 
+- Data analysis (40%)
+  - A Bayesian model is precisely described (e.g. using the `.. ~ ..` notation)
+  - Implementation code in the appendix (e.g. using Stan)
+  - Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.
+  - Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies. 
+- Project theme: methodological/theoretical aspect of the project (20%)
+  - Is the approach sound?
+  - Creative?
+- Discussion (5%)
+  - Does the report describe key limitations?
+  
+**Total: 95%**

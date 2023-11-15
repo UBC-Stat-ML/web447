@@ -2,10 +2,7 @@
 title: "Syllabus"
 ---
 
-::: callout-caution
-This website is under construction. At this stage, information printed here may changed.
-:::
-
+{{< include _construction.qmd >}}
 
 ## Course description
 
@@ -27,11 +24,10 @@ Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspace
 
 -   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html)
 -   [Miguel Biron-Lattes (TA)](https://miguelbiron.github.io/)
--   **TBA** (TA)
 
 ## Prerequisite
 
--   Probability: STAT 302, MATH 302 or equivalent.
+-   Probability: STAT 302, MATH 302 or equivalent. I will do a review of the relevant concepts, but Bayesian statistics is entirely built on top of probability theory so prior exposure to probability is the key pre-requisite for this course. 
 -   Basic background in linear algebra (e.g. matrix multiplication, eigenvectors) and calculus (see STAT 302 pre-requisites for example)
 -   Computing: we will use R in the homeworks and during lectures. If you know another programming language but not R, you can still take this course but be prepared to spend a bit of extra time to get familiar with the R syntax. We will have special office hours sessions at the beginning of the term to help you doing that.
 
@@ -40,11 +36,14 @@ Come talk to me at the end of the first lecture if you are unsure about your pre
 
 ## Software
 
-All software used is free and open source:
+All software used is free and open source. Some key tools we will use:
 
 -   [R](https://cran.r-project.org/)
 -   [RStudio](https://posit.co/download/rstudio-desktop/)
 -   [RStan](https://mc-stan.org/users/interfaces/rstan)
+
+We assume you have a laptop on which you can install these tools, if not, you may be able to 
+[borrow one from UBC library](https://services.library.ubc.ca/computers-technology/technology-borrowing/).
 
 
 ## Textbook
@@ -76,7 +75,7 @@ Click on each item for details.
 -   [Homeworks]({{< var canvas >}}) (weekly) 15%
 -   Quizzes (2 x 20%): 40%
     -   In-class.
-    -   Dates: Tuesday Feb 27, Tuesday March 26
+    -   Dates: Tuesday February 27, Tuesday March 26
 -   [Final project](project.qmd): 30%
 
 For the reading assignment and homework, we will drop the lowest week. 
