@@ -1,6 +1,0 @@
----
-title: "Homeworks"
----
-
-
-Homeworks are available and should be submitted on the [canvas page](https://canvas.ubc.ca/courses/135391/assignments).
