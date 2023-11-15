@@ -32,7 +32,7 @@ title: "Schedule"
 | Tue, Apr 2    |                                       |          |
 | Th, Apr 4     |                                       |          |
 | Tue, Apr 9    |                                       |          |
-| Th, Apr 11    |                                       |          |
+| Th, Apr 11    | *Last lecture*                        |          |
 | Fri, Apr 19   | **Final project due**                 |          |
 
 : {.striped .hover}

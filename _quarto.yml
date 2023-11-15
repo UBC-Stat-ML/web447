@@ -5,7 +5,8 @@ website:
   title: "Bayes1@UBC"
   navbar:
     left:
-      - syllabus.qmd
+      - text: "Syllabus"
+        file: syllabus.qmd
       - schedule.qmd
       - project.qmd
 

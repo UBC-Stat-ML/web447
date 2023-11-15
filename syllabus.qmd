@@ -1,5 +1,5 @@
 ---
-title: "Syllabus"
+title: "Syllabus: STAT447C Bayesian Statistics"
 ---
 
 {{< include _construction.qmd >}}
@@ -8,7 +8,7 @@ title: "Syllabus"
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
 
-In this course, you will:
+In **STAT 447C**, you will:
 
 -   design probabilistic models to approach real-world inferential problems;
 -   perform inference using Bayesian modelling languages;
@@ -17,7 +17,10 @@ In this course, you will:
 
 ## Lecture time and place
 
+**Lecture dates:** January 9, 2024 to April 11, 2024. [Detailed schedule](schedule.qmd)
+
 Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspaces.ubc.ca/classrooms/fnh-40)
+
 
 ## Teaching team
 

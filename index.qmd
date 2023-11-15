@@ -7,8 +7,12 @@ about:
   image: prior-post-unid.gif
 ---
 
-## Bayes1@UBC
+## STAT447C: Bayesian Statistics
+
+**Dates:** January 2024---April 2024
 
 -   Master a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.
 -   Acquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.
 -   Face the limitations of the Bayesian approach and how to work around them.
+
+[Detailed syllabus](syllabus.qmd)
