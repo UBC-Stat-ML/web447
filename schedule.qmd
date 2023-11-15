@@ -34,3 +34,5 @@ title: "Schedule"
 | Tue, Apr 9    |                                       |          |
 | Th, Apr 11    |                                       |          |
 | Fri, Apr 19   | **Final project due**                 |          |
+
+: {.striped .hover}

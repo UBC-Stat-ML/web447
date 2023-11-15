@@ -42,6 +42,7 @@ You should not pick a dataset that has already been analyzed using the same appr
 Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal).
 
 -   Going further on... (more details can be provided upon request)
+    -   Bayesian regression and classification (e.g. sparsity, hierarchical structure, etc)
     -   model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)
     -   time series and state-space models
     -   spatial models
@@ -50,7 +51,7 @@ Roughly in increasing order of complexity. During grading I will take into accou
     -   deep generative models
     -   topics models
     -   variational inference
--   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both side so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
+-   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
     -   Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
     -   Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?
 -   A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
@@ -69,7 +70,7 @@ Roughly in increasing order of complexity. During grading I will take into accou
 -   A short summary of potential approaches to tackle the project theme.
 -   If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.
 
-As long as the team submits a reasonable project proposal, I will five full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.
+As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.
 
 **Total: 5%**
 
