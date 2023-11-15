@@ -1,30 +1,163 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "participation.html",
+    "href": "participation.html",
+    "title": "Participation grades",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "There is no need for a physical iClicker devise, use the freely available iClicker cloud provided by UBC."
+  },
+  {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "Final project",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information in this page may change."
+  },
+  {
+    "objectID": "project.html#overview",
+    "href": "project.html#overview",
+    "title": "Final project",
+    "section": "Overview",
+    "text": "Overview\nThe course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation."
+  },
+  {
+    "objectID": "project.html#logistics",
+    "href": "project.html#logistics",
+    "title": "Final project",
+    "section": "Logistics",
+    "text": "Logistics\n\nTeams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.\nSubmit on canvas, a pdf document of maximum 5 pages/person (i.e. max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading."
+  },
+  {
+    "objectID": "project.html#project-timeline",
+    "href": "project.html#project-timeline",
+    "title": "Final project",
+    "section": "Project timeline",
+    "text": "Project timeline\n\nFriday, Mar 8: prepare proposal, freeze teams, each team sends a 1 page abstract submitted on Canvas.\nFriday, April 19: due date for the reports."
+  },
+  {
+    "objectID": "project.html#core-guideline",
+    "href": "project.html#core-guideline",
+    "title": "Final project",
+    "section": "Core guideline",
+    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset.\nIn addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).\nAfter selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.\nSome resources:\n\nVanderbilt Biostatistics datasets\nTidyTuesday\nInter-university Consortium for Political and Social Research\nWHO mortality data\nThe World Bank Data\nMore…\n\nYou should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours."
+  },
+  {
+    "objectID": "project.html#menu-of-project-themes",
+    "href": "project.html#menu-of-project-themes",
+    "title": "Final project",
+    "section": "Menu of project themes",
+    "text": "Menu of project themes\nRoughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal).\n\nGoing further on… (more details can be provided upon request)\n\nmodel selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)\ntime series and state-space models\nspatial models\ncross-effect models\nBayesian non-parametric models\ndeep generative models\ntopics models\nvariational inference\n\nA careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both side so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:\n\nBayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …\nIs there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?\n\nA Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:\n\nTypes of graphs such as matchings\nPhylogenetic trees or networks\nMultiple sequence alignments\nClustering or feature matrices\n\nCreate a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices."
+  },
+  {
+    "objectID": "project.html#rubric-for-the-project-proposal",
+    "href": "project.html#rubric-for-the-project-proposal",
+    "title": "Final project",
+    "section": "Rubric for the project proposal",
+    "text": "Rubric for the project proposal\n\nBasic requirements\n\nTeam is identified.\nThe proposal identifies which of the project themes it will address.\n\nTwo real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or head of a dataframe).\nA short summary of potential approaches to tackle the project theme.\nIf it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.\n\nAs long as the team submits a reasonable project proposal, I will five full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.\nTotal: 5%"
+  },
+  {
+    "objectID": "project.html#rubric-for-the-final-report",
+    "href": "project.html#rubric-for-the-final-report",
+    "title": "Final project",
+    "section": "Rubric for the final report",
+    "text": "Rubric for the final report\n\nBasic requirements (5%)\n\nThe report fits within the prescribed page limits.\nThe report follows best practices of technical writing.\nIf it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.\n\nProblem formulation. (15%) The report clearly describes:\n\na real-world inference task/problem,\nsuccinct but sufficient context (e.g. biological terminology) needed to understand the problem,\nthe key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.\n\nThe report contains a literature review: (10%) relevant literature is cited and properly summarized.\nData analysis (40%)\n\nA Bayesian model is precisely described (e.g. using the .. ~ .. notation)\nImplementation code in the appendix (e.g. using Stan)\nPrior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.\nCritical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.\n\nProject theme: methodological/theoretical aspect of the project (20%)\n\nIs the approach sound?\nCreative?\n\nDiscussion (5%)\n\nDoes the report describe key limitations?\n\n\nTotal: 95%"
+  },
+  {
+    "objectID": "homeworks.html",
+    "href": "homeworks.html",
+    "title": "Homeworks",
+    "section": "",
+    "text": "Homeworks are available and should be submitted on the canvas page."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
+    "title": "Bayes1@UBC",
+    "section": "",
+    "text": "Master a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.\nAcquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.\nFace the limitations of the Bayesian approach and how to work around them."
+  },
+  {
+    "objectID": "index.html#bayes1ubc",
+    "href": "index.html#bayes1ubc",
+    "title": "Bayes1@UBC",
+    "section": "",
+    "text": "Master a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.\nAcquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.\nFace the limitations of the Bayesian approach and how to work around them."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information in this page may change."
   },
   {
-    "objectID": "index.html#test",
-    "href": "index.html#test",
+    "objectID": "syllabus.html#course-description",
+    "href": "syllabus.html#course-description",
     "title": "Syllabus",
-    "section": "Test",
-    "text": "Test\nasdfasdf"
+    "section": "Course description",
+    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn this course, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery."
   },
   {
-    "objectID": "index.html#another",
-    "href": "index.html#another",
+    "objectID": "syllabus.html#lecture-time-and-place",
+    "href": "syllabus.html#lecture-time-and-place",
     "title": "Syllabus",
-    "section": "Another",
-    "text": "Another\nadsfasdf\n\nasdfasd\nasdfas\nasd\n\naasdfasdf\n\n\n\nCol1\nCol2\nCol3\n\n\n\n\nasdfa\nasdf\nadf\n\n\n\nasdf\nasdf\n\n\n\n\nasdf\n\n\n\nasdfasdf"
+    "section": "Lecture time and place",
+    "text": "Lecture time and place\nTuesday and Thursday, 9:30-11:00. FNH Building, Room 40."
+  },
+  {
+    "objectID": "syllabus.html#teaching-team",
+    "href": "syllabus.html#teaching-team",
+    "title": "Syllabus",
+    "section": "Teaching team",
+    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nMiguel Biron-Lattes (TA)"
+  },
+  {
+    "objectID": "syllabus.html#prerequisite",
+    "href": "syllabus.html#prerequisite",
+    "title": "Syllabus",
+    "section": "Prerequisite",
+    "text": "Prerequisite\n\nProbability: STAT 302, MATH 302 or equivalent. I will do a review of the relevant concepts, but Bayesian statistics is entirely built on top of probability theory so prior exposure to probability is the key pre-requisite for this course.\nBasic background in linear algebra (e.g. matrix multiplication, eigenvectors) and calculus (see STAT 302 pre-requisites for example)\nComputing: we will use R in the homeworks and during lectures. If you know another programming language but not R, you can still take this course but be prepared to spend a bit of extra time to get familiar with the R syntax. We will have special office hours sessions at the beginning of the term to help you doing that.\n\nCome talk to me at the end of the first lecture if you are unsure about your preparation for this course."
+  },
+  {
+    "objectID": "syllabus.html#software",
+    "href": "syllabus.html#software",
+    "title": "Syllabus",
+    "section": "Software",
+    "text": "Software\nAll software used is free and open source. Some key tools we will use:\n\nR\nRStudio\nRStan\n\nWe assume you have a laptop on which you can install these tools, if not, you may be able to borrow one from UBC library."
+  },
+  {
+    "objectID": "syllabus.html#textbook",
+    "href": "syllabus.html#textbook",
+    "title": "Syllabus",
+    "section": "Textbook",
+    "text": "Textbook\nNotes will be provided and complemented with readings from the following freely available textbook:\n\nBayesian Data Analysis Third edition. Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. PDF freely available.\n\nAdditional readings and case studies will be drawn from other textbooks that are either freely available or available within UBC VPN:\n\nBayesian essentials with R. Jean-Michel Marin and Christian Robert. PDF available via UBC library. Solution to exercises.\nBayes Rules! Alicia A. Johnson, Miles Q. Ott, Mine Dogucu. HTML freely available\nDoing Bayesian data analysis: a tutorial with R, JAGS, and Stan. John K. Kruschke. PDF freely available.\nProbability and Bayesian modeling. Jim Albert and Jingchen Hu. PDF/HTML/EPUB freely available.\nStatistical rethinking. Richard McElreath. HTML available via UBC library."
+  },
+  {
+    "objectID": "syllabus.html#assessments",
+    "href": "syllabus.html#assessments",
+    "title": "Syllabus",
+    "section": "Assessments",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation 15%\n\nWeekly reading assignment: each week ask and answering one question about the readings or lectures on Piazza.\nIn-class iClicker questions.\n\nHomeworks (weekly) 15%\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Tuesday February 27, Tuesday March 26\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will drop the lowest two lectures. Keep these for sick days/unforeseen circumstances. No need to ask permissions/provide doctor’s note, this will be done automatically for everyone."
+  },
+  {
+    "objectID": "syllabus.html#office-hours",
+    "href": "syllabus.html#office-hours",
+    "title": "Syllabus",
+    "section": "Office hours",
+    "text": "Office hours\n\nInstructor office hour: TBA\nTA office hour: TBA\n\nAvailable by appointment if you are unable to attend drop-in hours."
+  },
+  {
+    "objectID": "syllabus.html#course-communication",
+    "href": "syllabus.html#course-communication",
+    "title": "Syllabus",
+    "section": "Course communication",
+    "text": "Course communication\n\nAnnouncements\nCourse announcements will be posted in the Canvas page.\n\n\nQuestions\nUse the Piazza page for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.\nUse private piazza questions if, and only if the question is about a personal matter."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nBayesian inference on discrete spaces\n\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\n\n\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\n\n\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\n\n\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\n\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\n\n\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week\n\n\n\nTh, Feb 22\nReading week\n\n\n\nTue, Feb 27\nQuiz 1\n\n\n\nTh, Feb 29\n\n\n\n\nTue, Mar 5\n\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due\n\n\n\nTue, Mar 12\n\n\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\n\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2\n\n\n\nTh, Mar 28\n\n\n\n\nTue, Apr 2\n\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\n\n\n\n\nTh, Apr 11\n\n\n\n\nFri, Apr 19\nFinal project due"
   }
 ]

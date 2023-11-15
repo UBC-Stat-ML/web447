@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/about.html</loc>
-    <lastmod>2023-11-03T23:19:15.328Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/participation.html</loc>
+    <lastmod>2023-11-15T04:43:41.938Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/project.html</loc>
+    <lastmod>2023-11-15T04:43:41.460Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/quizzes.html</loc>
+    <lastmod>2023-11-15T04:43:40.734Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/homeworks.html</loc>
+    <lastmod>2023-11-15T04:43:40.286Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/index.html</loc>
-    <lastmod>2023-11-03T23:19:14.588Z</lastmod>
+    <lastmod>2023-11-15T04:43:40.511Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/syllabus.html</loc>
+    <lastmod>2023-11-15T04:43:41.080Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/schedule.html</loc>
+    <lastmod>2023-11-15T04:43:41.729Z</lastmod>
   </url>
 </urlset>
