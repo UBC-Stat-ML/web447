@@ -13,6 +13,8 @@ website:
 
 format:
   html:
+    include-in-header: 
+      - file: macros.qmd
     theme: cosmo
     css: styles.css
     toc: true

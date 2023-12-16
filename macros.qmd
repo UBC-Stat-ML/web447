@@ -1,0 +1,9 @@
+---
+format: html
+---
+
+::: {.hidden}
+$$
+\newcommand{\foo}{E=mc^{2}}
+$$
+:::

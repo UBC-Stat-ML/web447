@@ -1,0 +1,67 @@
+---
+title: "Exercise 1: discrete probabilistic inference"
+---
+
+{{< include ../_construction.qmd >}}
+
+## Setup
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+We will analyze and solve this problem in the first week of class. 
+This exercise explores several extensions leading to 
+key Bayesian inference concepts.gm
+
+
+## Question 1: non uniform prior on coin types
+
+I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails. 
+
+Consider the same probabilistic question:
+
+> If you observe 4 heads, what is the probability that you picked the standard coin?
+
+TODO: provide precise mathematical notation 
+  -> introduce categorical
+
+- Derive the answer from first principles (i.e. assume only the axioms of probability).
+- Provide a numerical answer. 
+
+
+## Question 2: a first posterior inference algorithm
+
+TODO: write math notation for generalization
+
+TODO: part 1: write code
+TODO: part 2: test your code on question 1 
+TODO: part 3: solve a new problem
+
+
+## Optional 1: automated decision tree construction
+
+TODO: incentive to ensure students do do it. competition? or to make it easier to do other questions
+TODO: provide mini tutorial on mermaid
+
+
+## Optional 2: automated probabilistic inference (discrete case)
+
+
+
+## More TBD 
+
+- Different number of heads and tails - binomial
+- Another discrete inference problem? E.g. Mendelian genetics? Many?
+- Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
+
+
+All the Bayesian stuff actually keep for following week:
+
+- Epistemic vs. aleatoric probabilities
+- Different priors - Cromwell (later?)
+- Limit and conjugacy 
+- Predictive (later?)
+- Credible intervals (later?)
+
+
+
+

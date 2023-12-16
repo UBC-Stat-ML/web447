@@ -1,0 +1,19 @@
+- Imagine a bag with 3 biased coins
+- Coin $i\in \{0, 1, 2\}$ has bias $i/2$---in other words:
+  - First coin: bias is $0/2 = 0$ (i.e. both sides are "tails")
+  - Second coin: bias is $1/2 = 0.5$ (i.e. standard coin)
+  - Third coin: bias is $2/2 = 1$ (i.e. both sides are "heads")
+  
+::: {.column-margin}
+![](../images/coinbag.png){width=200}
+:::
+
+- Consider the following two steps sampling process
+  - Step 1: pick one of the three coins, but do not look at it!
+  - Step 2: flip the coin 4 times and observe the flips
+- Our "bag of coin" example explores the following probabilistic inference problem:
+
+> If you observe 4 heads, what is the probability that you picked the standard coin?
+
+
+TODO: add math notation

@@ -26,7 +26,7 @@ Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspace
 
 -   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html) 
 -   [Miguel Biron-Lattes (TA)](https://miguelbiron.github.io/)
--   [Ali Mehrabian (TA)](alimehrabian619@yahoo.com)
+-   [Ali Mehrabian (TA)](mailto:alimehrabian619@yahoo.com)
 
 ## Prerequisite
 

@@ -4,3 +4,5 @@ resources/_gen
 
 /.quarto/
 _site
+_coinbag.html
+blocks/_coinbag_files
