@@ -6,3 +6,4 @@ resources/_gen
 _site
 _coinbag.html
 blocks/_coinbag_files
+.Rhistory

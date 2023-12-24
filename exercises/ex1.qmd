@@ -2,66 +2,127 @@
 title: "Exercise 1: discrete probabilistic inference"
 ---
 
+{{< include ../_macros.qmd >}}
+
 {{< include ../_construction.qmd >}}
+
+## Goals
+
+-   Review discrete probability (axioms, basic properties, conditioning, discrete Bayes rule)
+-   Introduce forward and conditional discrete simulation
+-   Review expectation and the law of large numbers
 
 ## Setup
 
+This exercise is centered around the following scenario:
+
 {{< include ../blocks/_coinbag.qmd >}}
 
-We will analyze and solve this problem in the first week of class. 
-This exercise explores several extensions leading to 
-key Bayesian inference concepts.gm
+
+## Question A: sampling from a joint distribution
+
+1.  Compute $\ex[Y_1]$ mathematically (with a precise mathematical derivation).
+2.  Write a function that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
+3.  How can your code and the law of large number be used to approximate $\ex[Y_1]$?
+4.  Compare the approximation from your code with you answer in part 1. 
+
+::: {.callout-tip}
+## Big idea
+
+Part 4 of this question illustrates a big idea in this course:  
+strategies to *validate* inference, i.e. ensuring it is bug-free in both the code and in the math. 
+In a nutshell, this is possible thanks to theory: we use results that provide two 
+ways to do the same thing, and verifying they indeed 
+agree. 
+:::
 
 
-## Question 1: non uniform prior on coin types
+## Question B: computing a conditional
 
-I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails. 
+Suppose now that you observe the outcome of the 4 coin flips, but not the type 
+of coin that was picked. Say you observe: "heads", "heads", "heads", "heads" = `[0, 0, 0, 0]`. 
+Given that observation, what is the probability that you picked the standard coin (i.e., the one with $p = 1/2$)?
 
-Consider the same probabilistic question:
-
-> If you observe 4 heads, what is the probability that you picked the standard coin?
-
-TODO: provide precise mathematical notation 
-  -> introduce categorical
-
-- Derive the answer from first principles (i.e. assume only the axioms of probability).
-- Provide a numerical answer. 
+1. Write mathematically: "Given you observe 4 heads, what is the probability that you picked the standard coin?"
+2. Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation). 
 
 
-## Question 2: a first posterior inference algorithm
+## Question C: non uniform prior on coin types
 
-TODO: write math notation for generalization
+We now modify the problem as follows: 
+I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails.
+The rest is the same: pick one of the coins, flip it 4 times. 
 
-TODO: part 1: write code
-TODO: part 2: test your code on question 1 
-TODO: part 3: solve a new problem
-
-
-## Optional 1: automated decision tree construction
-
-TODO: incentive to ensure students do do it. competition? or to make it easier to do other questions
-TODO: provide mini tutorial on mermaid
+1. Write the joint distribution of this modified model. Use the $\sim$ notation as in @eq-coin-joint. Hint: use a `Categorical` distribution. 
+2. Compute the numerical value of the expression defined in part 1.
 
 
-## Optional 2: automated probabilistic inference (discrete case)
+## Question D: a first posterior inference algorithm
+
+We now generalize to having $K + 1$ types of coins such that:
+
+- coin type $k \in \{0, 1, \dots, K\}$ has bias $k/K$
+- the fraction of coins in the bag of type $k$ is $\rho_k$. 
+
+We consider the same observation as before: "you observe 4 heads". 
+We want to find the conditional probability $\pi_k$ for all $k$ that we picked coin type 
+$k \in \{0, 1, \dots, K\}$ from the bag given the observation.
+
+1. Write a function taking as input a vector $\rho = (\rho_0, \rho_1, \dots, \rho_K)$ and returning $\pi = (\pi_0, \pi_1, \dots, \pi_K)$. 
+2. Test your code by making sure you can recover the answer in part C as a special case. Report what values of $K$ and $\rho$ you used.
+
+
+## Question E: generalizing observations 
 
 
 
-## More TBD 
 
-- Different number of heads and tails - binomial
-- Another discrete inference problem? E.g. Mendelian genetics? Many?
-- Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
 
+
+## Optional: automated decision tree construction
+
+TODO: incentive to ensure students do do it. competition? or to make it easier to do other questions TODO: provide mini tutorial on mermaid
+
+## Optional?: automated discrete probabilistic inference
+
+## More TBD
+
+-   Different number of heads and tails - binomial
+-   Another discrete inference problem? E.g. Mendelian genetics? Many?
+-   Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
 
 All the Bayesian stuff actually keep for following week:
 
-- Epistemic vs. aleatoric probabilities
-- Different priors - Cromwell (later?)
-- Limit and conjugacy 
-- Predictive (later?)
-- Credible intervals (later?)
+-   Epistemic vs. aleatoric probabilities
+-   Different priors - Cromwell (later?)
+-   Limit and conjugacy
+-   Predictive (later?)
+-   Credible intervals (later?)
 
-
-
-
+```{mermaid}
+%%| fig-height: 5
+flowchart TD
+S__and__C_1__and__F1_true__and__F2_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true__and__F3_false["F3=false"]
+S__and__C_0__and__F1_false -- 1.0 --> S__and__C_0__and__F1_false__and__F2_false["F2=false"]
+S__and__C_1__and__F1_true__and__F2_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true__and__F3_true["F3=true"]
+S__and__C_1__and__F1_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true["F2=true"]
+S__and__C_1__and__F1_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true["F2=true"]
+S__and__C_1__and__F1_true__and__F2_false -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false__and__F3_true["F3=true"]
+S__and__C_1__and__F1_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false["F2=false"]
+S__and__C_2 -- 1.0 --> S__and__C_2__and__F1_true["F1=true"]
+S -- 0.33 --> S__and__C_0["C=0"]
+S__and__C_0 -- 1.0 --> S__and__C_0__and__F1_false["F1=false"]
+S__and__C_1__and__F1_false__and__F2_true -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true__and__F3_false["F3=false"]
+S__and__C_1__and__F1_false__and__F2_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false__and__F3_false["F3=false"]
+S__and__C_1__and__F1_false__and__F2_true -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true__and__F3_true["F3=true"]
+S__and__C_2__and__F1_true__and__F2_true -- 1.0 --> S__and__C_2__and__F1_true__and__F2_true__and__F3_true["F3=true"]
+S__and__C_1__and__F1_true__and__F2_false -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false__and__F3_false["F3=false"]
+S__and__C_1__and__F1_false__and__F2_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false__and__F3_true["F3=true"]
+S__and__C_0__and__F1_false__and__F2_false -- 1.0 --> S__and__C_0__and__F1_false__and__F2_false__and__F3_false["F3=false"]
+S__and__C_2__and__F1_true -- 1.0 --> S__and__C_2__and__F1_true__and__F2_true["F2=true"]
+S -- 0.33 --> S__and__C_1["C=1"]
+S__and__C_1__and__F1_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false["F2=false"]
+S__and__C_1 -- 0.5 --> S__and__C_1__and__F1_true["F1=true"]
+S -- 0.33 --> S__and__C_2["C=2"]
+S__and__C_1 -- 0.5 --> S__and__C_1__and__F1_false["F1=false"]
+```
