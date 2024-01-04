@@ -1,34 +1,33 @@
-::: hidden
-$$
-% text shortcuts
+---
+editor: 
+  mode: source
+---
+
+
 \newcommand{\iid}{\textrm{i.i.d.}\@\xspace}
 \newcommand{\as}{\textrm{a.s.}\@\xspace}
 \newcommand{\aev}{\textrm{a.e.}\@\xspace}
 
-% convergence
 \newcommand{\convas}{\overset{a.s.}{\to}}
 \newcommand{\convp}{\overset{p}{\to}}
 \newcommand{\convd}{\overset{d}{\to}}
 \newcommand{\eqd}{\overset{d}{=}}
 \newcommand{\eqas}{\overset{a.s.}{=}}
 
-% unary/functions
-\newcommand{\pr}{\mathbb{P}}  % probability
-\newcommand{\ex}{\mathbb{E}}	% expectation
+\newcommand{\pr}{\mathbb{P}}  
+\newcommand{\ex}{\mathbb{E}}
 \newcommand{\law}{\mathcal{L}} 
-\newcommand{\var}{\operatorname{Var}}	% variance
-\newcommand{\cov}{\operatorname{Cov}}	% covariance
-\newcommand{\cor}{\operatorname{Corr}}	% correlation
-\newcommand{\supp}{\operatorname{supp}} %support
+\newcommand{\var}{\operatorname{Var}}
+\newcommand{\cov}{\operatorname{Cov}}	
+\newcommand{\cor}{\operatorname{Corr}}
+\newcommand{\supp}{\operatorname{supp}} 
 
-% binary operators
 \newcommand{\dist}{\sim}
 \newcommand{\distiid}{\overset{\text{iid}}{\dist}}
 \newcommand{\distind}{\overset{\text{ind}}{\dist}}
 
-% independence
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern4mu{#1#2}}}
-\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} % independent
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}} 
 
 \newcommand{\distNamed}[1]{{\mathrm{#1}}}
 \newcommand{\distNorm}{\mathcal{N}}
@@ -54,7 +53,7 @@ $$
 \newcommand{\distGeom}{\distNamed{Geom}}
 \newcommand{\distCauchy}{\distNamed{Cauchy}}
 \newcommand{\distVMF}{\distNamed{vMF}}
-% nonparametric distributions
+
 \newcommand{\distBeP}{\distNamed{BeP}}
 \newcommand{\distDP}{\distNamed{DP}}
 \newcommand{\distCRP}{\distNamed{CRP}}
@@ -69,5 +68,4 @@ $$
 \newcommand{\distObs}{\distNamed{Obs}}
 \newcommand{\distCRM}{\distNamed{CRM}}
 \newcommand{\distNCRM}{\distNamed{NCRM}}
-$$
-:::
+
