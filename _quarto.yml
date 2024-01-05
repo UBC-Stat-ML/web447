@@ -11,6 +11,8 @@ website:
       - project.qmd
       - section: "Exercises"
         contents: exercises/*
+      - section: "Lectures"
+        contents: lectures/*
 
 
 format:

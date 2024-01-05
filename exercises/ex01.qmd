@@ -35,7 +35,7 @@ Part 4 of this question illustrates a big idea in this course:
 strategies to *validate* inference, i.e. ensuring it is bug-free in both the code and in the math. 
 In a nutshell, this is possible thanks to theory: we use results that provide two 
 ways to do the same thing, and verifying they indeed 
-agree. 
+agree.
 :::
 
 
