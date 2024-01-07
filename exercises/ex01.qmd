@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1: discrete probabilistic inference"
+title: "Ex. 1: discrete probabilistic inference"
 editor: 
   mode: source
 ---
@@ -23,9 +23,9 @@ This exercise is centered around the following scenario:
 
 ## Question A: sampling from a joint distribution
 
-1.  Compute $\ex[Y_1]$ mathematically (with a precise mathematical derivation).
+1.  Compute $\ex[(1+Y_1)^X]$ mathematically (with a precise mathematical derivation).
 2.  Write a function that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
-3.  How can your code and the law of large number be used to approximate $\ex[Y_1]$?
+3.  How can your code and the law of large number be used to approximate $\ex[(1+Y_1)^X]$?
 4.  Compare the approximation from your code with you answer in part 1. 
 
 ::: {.callout-tip}

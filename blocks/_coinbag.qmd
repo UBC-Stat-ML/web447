@@ -1,3 +1,8 @@
+---
+editor: 
+  mode: source
+---
+
 -   Imagine a bag with 3 coins each with a different probability parameter $p$
 -   Coin $i\in \{0, 1, 2\}$ has bias $i/2$---in other words:
     -   First coin: bias is $0/2 = 0$ (i.e. both sides are "tails", $p = 0$)
@@ -11,11 +16,9 @@
 -   Consider the following two steps sampling process
     -   Step 1: pick one of the three coins, but do not look at it!
     -   Step 2: flip the coin 4 times
-    
-- Mathematically, the joint distribution is:
-$$
-\begin{align*}
-X &\sim \distUnif\{0, 1, 2\} \\
-Y_i | X &\sim \distBern(X/2)
-\end{align*}
-$$ {#eq-coin-joint}
+-   Mathematically, this probability model can be written as follows: $$
+    \begin{align*}
+    X &\sim \distUnif\{0, 1, 2\} \\
+    Y_i | X &\sim \distBern(X/2)
+    \end{align*}
+    $$ {#eq-coin-joint}

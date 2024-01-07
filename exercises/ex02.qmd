@@ -1,5 +1,7 @@
 ---
-title: "Exercise 2: Bayesian inference on discrete spaces"
+title: "Ex. 2: Bayesian inference on discrete spaces"
+editor: 
+  mode: source
 ---
 
 {{< include ../_macros.qmd >}}
@@ -9,17 +11,12 @@ title: "Exercise 2: Bayesian inference on discrete spaces"
 ## Goals
 
 -   Point summary of posterior distribution: mean, median, mode.
--   Constructing credible intervals. 
+-   Constructing credible intervals.
 
+--\> decision theory
 
+--\> basic regression
 
---> decision theory
+--\> graphical models? (probably later!)
 
---> basic regression
-
-
---> graphical models? (probably later!)
-
---> calibration?
-
-
+--\> calibration?

@@ -1,0 +1,114 @@
+---
+title: "Decision trees"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+{{< include ../_construction.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Decision trees
+- Review of basic probability theory concepts: outcome, event, sample space, partitions, conditional probability
+
+### Rationale
+
+- One definition of Bayesian inference: applying probability to statistical inference problems
+  - Therefore, it is critical to understand probability to learn Bayesian inference
+  - This week, we will help you "reload in memory" some of the most important bits of probability theory used in this course
+
+
+## Running example
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+
+## Decision tree
+
+- **Decision tree**: a recursive classification of all possible scenarios
+- Nodes in the tree are "groups of scenarios" which we call **events**
+- Children of a node partitions an event into an exhaustive set of sub-cases, 
+    - $E_1, E_2, \dots$ is a **partition** of $E$ if the $E_i$'s are disjoint (i.e., $E_i \cap E_j = \emptyset$ when $i\neq j$) and their union is $E$ (i.e., $\cup E_i = E$)
+- In the decision tree below, we partitioned events until we get events at the leaves each containing a single scenario
+    - We call one individual scenario an **outcome**
+    - We call the set of all outcomes the **sample space**, $S$, and put it at the root of decision trees. 
+
+```{mermaid}
+%%| fig-height: 5
+flowchart TD
+S__and__X_0 -- 1.0 --> S__and__X_0__and__Y1_false["Y1=false"]
+S__and__X_2__and__Y1_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true["Y2=true"]
+S -- 0.33 --> S__and__X_0["X=0"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S -- 0.33 --> S__and__X_1["X=1"]
+S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1 -- 0.5 --> S__and__X_1__and__Y1_false["Y1=false"]
+S__and__X_1__and__Y1_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true["Y2=true"]
+S__and__X_0__and__Y1_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true["Y2=true"]
+S__and__X_2 -- 1.0 --> S__and__X_2__and__Y1_true["Y1=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1 -- 0.5 --> S__and__X_1__and__Y1_true["Y1=true"]
+S -- 0.33 --> S__and__X_2["X=2"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+```
+
+
+## Nodes and events
+
+To describe the event corresponding to a node $v$ in the tree: 
+
+1. trace the path from the node $v$ to the root
+2. take the intersection of all node labels
+
+**Example:** find the node in the above tree corresponding to the event $(X = 1) \cap (Y_1 = 0)$.
+
+**Probability notation review:** 
+
+- $(X = 1) = \{s \in S : X(s) = 1\}$ 
+- $(X = 1, Y_1 = 0) = (X = 1) \cap (Y_1 = 0)$
+
+
+## Edges and conditional probabilities
+
+When there is an edge from events $E_1$ to $E_2$, we annotate it with $\pr(E_2 | E_1)$. 
+
+**Recall:** conditional probability of $E_2$ given $E_1$
+
+$$\pr(E_2 | E_1) = \frac{\pr(E_1 \cap E_2)}{\pr(E_1)}$$
+
+**Example:** take the edge from $E_1 = (X = 1)$ to $E_2 = (X = 1, Y_1 = 0)$. 
+$$\pr(E_2 | E_1) = \frac{\pr(E_1 \cap E_2)}{\pr(E_1)} = \frac{\pr(E_2)}{\pr(E_1)} = \pr(Y_1 = 0 | X = 1)$$
+In words: "the probability that the first flip is "heads" $(Y_1 = 0)$ given you picked the standard coin $(X = 1)$.''
+Hence the edge from $E_1$ to $E_2$ is labelled $1/2$.
