@@ -9,10 +9,12 @@ website:
         file: syllabus.qmd
       - schedule.qmd
       - project.qmd
-      - section: "Exercises"
-        contents: exercises/*
-      - section: "Lectures"
-        contents: lectures/*
+      - text: "---"
+      - section: "Discrete inference"
+        contents: 
+          - auto: "w01_discrete_inference/*"
+          - text: "Exercises"
+            file: exercises/ex01.qmd
 
 
 format:

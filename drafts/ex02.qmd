@@ -1,0 +1,35 @@
+---
+title: "Exercise 2: Bayesian inference on discrete spaces"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+{{< include ../_construction.qmd >}}
+
+## Goals
+
+-   Point summary of posterior distribution: mean, median, mode.
+-   Constructing credible intervals.
+
+--\> decision theory
+
+--\> basic regression
+
+--\> graphical models? (probably later!)
+
+--\> calibration?
+
+-   Different number of heads and tails - binomial
+-   Another discrete inference problem? E.g. Mendelian genetics? Many?
+
+All the Bayesian stuff actually keep for following week (keep some of those for )
+
+-   Epistemic vs. aleatoric probabilities
+-   Different priors - Cromwell (later?)
+-   Limit and conjugacy
+-   Predictive (later?)
+-   Credible intervals (later?)
+-   Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
+

@@ -1,5 +1,5 @@
 ---
-title: "Joint distributions"
+title: "Axioms of probability"
 editor: 
   mode: source
 ---

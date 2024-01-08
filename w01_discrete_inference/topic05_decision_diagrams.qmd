@@ -38,6 +38,7 @@ editor:
     - We call one individual scenario an **outcome**
     - We call the set of all outcomes the **sample space**, $S$, and put it at the root of decision trees. 
 
+:::{.column-page}
 ```{mermaid}
 %%| fig-height: 5
 flowchart TD
@@ -83,7 +84,7 @@ S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__a
 S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
 S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
 ```
-
+:::
 
 ## Nodes and events
 

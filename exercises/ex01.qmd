@@ -1,5 +1,5 @@
 ---
-title: "Ex. 1: discrete probabilistic inference"
+title: "Exercise 1: discrete probabilistic inference"
 editor: 
   mode: source
 ---
@@ -21,7 +21,7 @@ This exercise is centered around the following scenario:
 {{< include ../blocks/_coinbag.qmd >}}
 
 
-## Question A: sampling from a joint distribution
+## Q.1: sampling from a joint distribution
 
 1.  Compute $\ex[(1+Y_1)^X]$ mathematically (with a precise mathematical derivation).
 2.  Write a function that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
@@ -39,7 +39,7 @@ agree.
 :::
 
 
-## Question B: computing a conditional
+## Q.2: computing a conditional
 
 Suppose now that you observe the outcome of the 4 coin flips, but not the type 
 of coin that was picked. Say you observe: "heads", "heads", "heads", "heads" = `[0, 0, 0, 0]`. 
@@ -49,7 +49,7 @@ Given that observation, what is the probability that you picked the standard coi
 2. Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation). 
 
 
-## Question C: non uniform prior on coin types
+## Q.3: non uniform prior on coin types
 
 We now modify the problem as follows: 
 I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails.
@@ -59,7 +59,7 @@ The rest is the same: pick one of the coins, flip it 4 times.
 2. Compute the numerical value of the expression defined in part 1.
 
 
-## Question D: a first posterior inference algorithm
+## Q.4: a first posterior inference algorithm
 
 We now generalize to having $K + 1$ types of coins such that:
 
@@ -74,57 +74,18 @@ $k \in \{0, 1, \dots, K\}$ from the bag given the observation.
 2. Test your code by making sure you can recover the answer in part C as a special case. Report what values of $K$ and $\rho$ you used.
 
 
-## Question E: generalizing observations 
+## Q.5: generalizing observations 
+
+TODO
+
+## Q.6: TODO
 
 
+## Optional questions
 
+TODO: set up instruction/system for optional questions
 
+TODO: automated decision tree construction?
 
+TODO: additional inference problems?
 
-## Optional: automated decision tree construction
-
-TODO: incentive to ensure students do do it. competition? or to make it easier to do other questions TODO: provide mini tutorial on mermaid
-
-## Optional?: automated discrete probabilistic inference
-
-## More TBD
-
--   Different number of heads and tails - binomial
--   Another discrete inference problem? E.g. Mendelian genetics? Many?
--   Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
-
-All the Bayesian stuff actually keep for following week:
-
--   Epistemic vs. aleatoric probabilities
--   Different priors - Cromwell (later?)
--   Limit and conjugacy
--   Predictive (later?)
--   Credible intervals (later?)
-
-```{mermaid}
-%%| fig-height: 5
-flowchart TD
-S__and__C_1__and__F1_true__and__F2_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true__and__F3_false["F3=false"]
-S__and__C_0__and__F1_false -- 1.0 --> S__and__C_0__and__F1_false__and__F2_false["F2=false"]
-S__and__C_1__and__F1_true__and__F2_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true__and__F3_true["F3=true"]
-S__and__C_1__and__F1_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_true["F2=true"]
-S__and__C_1__and__F1_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true["F2=true"]
-S__and__C_1__and__F1_true__and__F2_false -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false__and__F3_true["F3=true"]
-S__and__C_1__and__F1_true -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false["F2=false"]
-S__and__C_2 -- 1.0 --> S__and__C_2__and__F1_true["F1=true"]
-S -- 0.33 --> S__and__C_0["C=0"]
-S__and__C_0 -- 1.0 --> S__and__C_0__and__F1_false["F1=false"]
-S__and__C_1__and__F1_false__and__F2_true -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true__and__F3_false["F3=false"]
-S__and__C_1__and__F1_false__and__F2_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false__and__F3_false["F3=false"]
-S__and__C_1__and__F1_false__and__F2_true -- 0.5 --> S__and__C_1__and__F1_false__and__F2_true__and__F3_true["F3=true"]
-S__and__C_2__and__F1_true__and__F2_true -- 1.0 --> S__and__C_2__and__F1_true__and__F2_true__and__F3_true["F3=true"]
-S__and__C_1__and__F1_true__and__F2_false -- 0.5 --> S__and__C_1__and__F1_true__and__F2_false__and__F3_false["F3=false"]
-S__and__C_1__and__F1_false__and__F2_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false__and__F3_true["F3=true"]
-S__and__C_0__and__F1_false__and__F2_false -- 1.0 --> S__and__C_0__and__F1_false__and__F2_false__and__F3_false["F3=false"]
-S__and__C_2__and__F1_true -- 1.0 --> S__and__C_2__and__F1_true__and__F2_true["F2=true"]
-S -- 0.33 --> S__and__C_1["C=1"]
-S__and__C_1__and__F1_false -- 0.5 --> S__and__C_1__and__F1_false__and__F2_false["F2=false"]
-S__and__C_1 -- 0.5 --> S__and__C_1__and__F1_true["F1=true"]
-S -- 0.33 --> S__and__C_2["C=2"]
-S__and__C_1 -- 0.5 --> S__and__C_1__and__F1_false["F1=false"]
-```
