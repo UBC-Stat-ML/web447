@@ -10,9 +10,9 @@ editor:
 
 ## Goals
 
--   Review discrete probability (axioms, basic properties, conditioning, discrete Bayes rule)
--   Introduce forward and conditional discrete simulation
--   Review expectation and the law of large numbers
+-   Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).
+-   Introduce forward discrete simulation.
+-   Review expectation and the law of large numbers.
 
 ## Setup
 
@@ -24,7 +24,8 @@ This exercise is centered around the following scenario:
 ## Q.1: sampling from a joint distribution
 
 1.  Compute $\ex[(1+Y_1)^X]$ mathematically (with a precise mathematical derivation).
-2.  Write a function that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
+2.  Write an R function called `forward_sample` that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
+    As a general practice, fix the seed, and submit both the code and the output (here, a single sample).
 3.  How can your code and the law of large number be used to approximate $\ex[(1+Y_1)^X]$?
 4.  Compare the approximation from your code with you answer in part 1. 
 
@@ -55,7 +56,8 @@ We now modify the problem as follows:
 I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails.
 The rest is the same: pick one of the coins, flip it 4 times. 
 
-1. Write the joint distribution of this modified model. Use the $\sim$ notation as in @eq-coin-joint. Hint: use a `Categorical` distribution. 
+1. Write the joint distribution of this modified model. 
+   Use the $\sim$ notation as in @eq-coin-joint. Hint: use a `Categorical` distribution. 
 2. Compute the numerical value of the expression defined in part 1.
 
 
@@ -70,22 +72,24 @@ We consider the same observation as before: "you observe 4 heads".
 We want to find the conditional probability $\pi_k$ for all $k$ that we picked coin type 
 $k \in \{0, 1, \dots, K\}$ from the bag given the observation.
 
-1. Write a function taking as input a vector $\rho = (\rho_0, \rho_1, \dots, \rho_K)$ and returning $\pi = (\pi_0, \pi_1, \dots, \pi_K)$. 
-2. Test your code by making sure you can recover the answer in part C as a special case. Report what values of $K$ and $\rho$ you used.
+1. Write an R function called `posterior_given_four_heads` taking as input a vector $\rho = (\rho_0, \rho_1, \dots, \rho_K)$ and 
+   returning $\pi = (\pi_0, \pi_1, \dots, \pi_K)$. 
+2. Test your code by making sure you can recover the answer in Q. 3 as a special case. Report what values of $K$ and $\rho$ you used.
+3. Show the output for $\rho \propto (1, 2, 3, \dots, 10)$. Here $\propto$ means "proportional to"; try to infer what it means 
+   in this context.
 
 
 ## Q.5: generalizing observations 
 
-TODO
+We now generalize Q. 4 as follows: instead of observing 4 "heads" out of 4 observations, 
+say we observe `n_heads` out of `n_observations`, where `n_heads` and `n_observations` 
+will be additional arguments passed into a new R function. 
 
-## Q.6: TODO
+1. Write the joint distribution of this modified model. 
+   Use the $\sim$ notation as in @eq-coin-joint. Hint: use a `Binomial` distribution. 
+2. Write an R function called `posterior` taking three input arguments in the following order:
+   a vector $\rho$ as in Q. 4, as well as two integers, `n_heads` and `n_observations`.
+3. Test your code by making sure you can recover the answer in Q. 3 as a special case. 
+4. Show the output for $\rho \propto (1, 2, 3, \dots, 10)$ and `n_heads = 2` and `n_observations = 10`.
 
-
-## Optional questions
-
-TODO: set up instruction/system for optional questions
-
-TODO: automated decision tree construction?
-
-TODO: additional inference problems?
 
