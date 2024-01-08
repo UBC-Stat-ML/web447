@@ -10,26 +10,31 @@ editor:
 
 ## Goals
 
+A first contact with several Bayesian concepts. 
+We use the same discrete model for all questions. 
+
+-   Notions of priors, likelihood, posterior.
 -   Point summary of posterior distribution: mean, median, mode.
 -   Constructing credible intervals.
+-   Basic decision theory.
+-   Sequential update of posterior distribution.
 
---\> decision theory
+<!--
+Note:
 
---\> basic regression
+- critically, they have access by week 2 to solution of ex1, and hence of a discrete probability inference function for all of this
 
---\> graphical models? (probably later!)
+- for decision theory, based off: https://www.stat.ubc.ca/~bouchard/courses/stat520-sp2021-22/T2-bayes-estimator-example.html#(2)
+  except done with discrete computation instead of 
 
---\> calibration?
+- include cromwell's rule in the prior construction question
 
--   Different number of heads and tails - binomial
--   Another discrete inference problem? E.g. Mendelian genetics? Many?
+Other potential candidates:
 
-All the Bayesian stuff actually keep for following week (keep some of those for )
+- calibration? might be too much in one week? maybe not if we provide some scaffold code?
 
--   Epistemic vs. aleatoric probabilities
--   Different priors - Cromwell (later?)
--   Limit and conjugacy
--   Predictive (later?)
--   Credible intervals (later?)
--   Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)
+- bonus question on taking the discretization limit and conjugacy?
+
+-->
+
 

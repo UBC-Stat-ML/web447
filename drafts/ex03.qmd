@@ -1,0 +1,17 @@
+---
+title: "Exercise 3: Universal probabilistic inference via importance sampling"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+{{< include ../_construction.qmd >}}
+
+## Goals
+
+
+-   Understanding and implementing importance sampling
+-   Introduction to probabilistic programming
+
+
