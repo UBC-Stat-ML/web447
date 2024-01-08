@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Schedule</title>
+<title>Bayes1@UBC - Exercise 1: discrete probabilistic inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -60,11 +60,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -73,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./schedule.html">Schedule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_random_variables.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../exercises/ex01.html">Exercises</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bayes1@UBC</a> 
+      <a href="../">Bayes1@UBC</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -100,19 +102,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -128,55 +130,55 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision trees</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex01.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -188,14 +190,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#q.1-sampling-from-a-joint-distribution" id="toc-q.1-sampling-from-a-joint-distribution" class="nav-link" data-scroll-target="#q.1-sampling-from-a-joint-distribution">Q.1: sampling from a joint distribution</a></li>
+  <li><a href="#q.2-computing-a-conditional" id="toc-q.2-computing-a-conditional" class="nav-link" data-scroll-target="#q.2-computing-a-conditional">Q.2: computing a conditional</a></li>
+  <li><a href="#q.3-non-uniform-prior-on-coin-types" id="toc-q.3-non-uniform-prior-on-coin-types" class="nav-link" data-scroll-target="#q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</a></li>
+  <li><a href="#q.4-a-first-posterior-inference-algorithm" id="toc-q.4-a-first-posterior-inference-algorithm" class="nav-link" data-scroll-target="#q.4-a-first-posterior-inference-algorithm">Q.4: a first posterior inference algorithm</a></li>
+  <li><a href="#q.5-generalizing-observations" id="toc-q.5-generalizing-observations" class="nav-link" data-scroll-target="#q.5-generalizing-observations">Q.5: generalizing observations</a></li>
+  <li><a href="#q.6-todo" id="toc-q.6-todo" class="nav-link" data-scroll-target="#q.6-todo">Q.6: TODO</a></li>
+  <li><a href="#optional-questions" id="toc-optional-questions" class="nav-link" data-scroll-target="#optional-questions">Optional questions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">Exercise 1: discrete probabilistic inference</h1>
 </div>
 
 
@@ -210,175 +226,123 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<table class="table-striped table-hover table">
-<caption></caption>
-<colgroup>
-<col style="width: 20%">
-<col style="width: 58%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Topics</th>
-<th>Readings</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tue, Jan 9</td>
-<td>Overview. Probabilistic inference on discrete spaces.</td>
-<td>BDA 1.1-1.10</td>
-</tr>
-<tr class="even">
-<td>Th, Jan 11</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 16</td>
-<td>A tour of Bayesian inference (on discrete spaces).</td>
-<td>BDA 2.1-2.5</td>
-</tr>
-<tr class="even">
-<td>Th, Jan 18</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 23</td>
-<td>Universal probabilistic inference via importance sampling.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Jan 25</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 30</td>
-<td>Decision theory.</td>
-<td>BDA 9.1-9.5</td>
-</tr>
-<tr class="even">
-<td>Th, Feb 1</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 6</td>
-<td>Bayesian regression, GLMs, and beyond.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 8</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 13</td>
-<td>Hierarchical models.</td>
-<td>BDA 5.1-5.7</td>
-</tr>
-<tr class="even">
-<td>Th, Feb 15</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 20</td>
-<td><em>Reading week.</em></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 22</td>
-<td><em>Reading week.</em></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 27</td>
-<td><strong>Quiz 1.</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 29</td>
-<td>TBA</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Mar 5</td>
-<td>MCMC user guide (via Stan).</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Mar 7</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Fri, Mar 8</td>
-<td><strong>Project proposal due.</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Mar 12</td>
-<td>Bayesian workflow.</td>
-<td>BDA 6.1-6.5</td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 14</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Mar 19</td>
-<td>Modelling techniques (selected from prior design, mixtures, imputation, complex data collection).</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 21</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, March 26</td>
-<td><strong>Quiz 2.</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 28</td>
-<td>TBA</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Apr 2</td>
-<td>MCMC developer guide.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Apr 4</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Apr 9</td>
-<td>Variational inference.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Apr 11</td>
-<td><em>Last lecture.</em></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Fri, Apr 19</td>
-<td><strong>Final project due.</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Website under construction. At this stage, information on this page may change.</p>
+</div>
+</div>
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<ul>
+<li>Review discrete probability (axioms, basic properties, conditioning, discrete Bayes rule)</li>
+<li>Introduce forward and conditional discrete simulation</li>
+<li>Review expectation and the law of large numbers</li>
+</ul>
+</section>
+<section id="setup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>This exercise is centered around the following scenario:</p>
+<ul>
+<li>Imagine a bag with 3 coins each with a different probability parameter <span class="math inline">\(p\)</span></li>
+<li>Coin <span class="math inline">\(i\in \{0, 1, 2\}\)</span> has bias <span class="math inline">\(i/2\)</span>—in other words:
+<ul>
+<li>First coin: bias is <span class="math inline">\(0/2 = 0\)</span> (i.e.&nbsp;both sides are “tails”, <span class="math inline">\(p = 0\)</span>)</li>
+<li>Second coin: bias is <span class="math inline">\(1/2 = 0.5\)</span> (i.e.&nbsp;standard coin, <span class="math inline">\(p = 1/2\)</span>)</li>
+<li>Third coin: bias is <span class="math inline">\(2/2 = 1\)</span> (i.e.&nbsp;both sides are “heads”, <span class="math inline">\(p = 1\)</span>)</li>
+</ul></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/coinbag.png" class="img-fluid" width="200"></p>
+</div></div><ul>
+<li>Consider the following two steps sampling process
+<ul>
+<li>Step 1: pick one of the three coins, but do not look at it!</li>
+<li>Step 2: flip the coin 4 times</li>
+</ul></li>
+<li>Mathematically, this probability model can be written as follows: <span id="eq-coin-joint"><span class="math display">\[
+\begin{align*}
+X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
+Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
+\end{align*}
+\tag{1}\]</span></span></li>
+</ul>
+</section>
+<section id="q.1-sampling-from-a-joint-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-sampling-from-a-joint-distribution">Q.1: sampling from a joint distribution</h2>
+<ol type="1">
+<li>Compute <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span> mathematically (with a precise mathematical derivation).</li>
+<li>Write a function that samples (“simulates”) from the joint distribution of <span class="math inline">\((X, Y_1, \dots, Y_4)\)</span>.</li>
+<li>How can your code and the law of large number be used to approximate <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span>?</li>
+<li>Compare the approximation from your code with you answer in part 1.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Big idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Part 4 of this question illustrates a big idea in this course:<br>
+strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in both the code and in the math. In a nutshell, this is possible thanks to theory: we use results that provide two ways to do the same thing, and verifying they indeed agree.</p>
+</div>
+</div>
+</section>
+<section id="q.2-computing-a-conditional" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-computing-a-conditional">Q.2: computing a conditional</h2>
+<p>Suppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = <code>[0, 0, 0, 0]</code>. Given that observation, what is the probability that you picked the standard coin (i.e., the one with <span class="math inline">\(p = 1/2\)</span>)?</p>
+<ol type="1">
+<li>Write mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”</li>
+<li>Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation).</li>
+</ol>
+</section>
+<section id="q.3-non-uniform-prior-on-coin-types" class="level2">
+<h2 class="anchored" data-anchor-id="q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</h2>
+<p>We now modify the problem as follows: I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.</p>
+<ol type="1">
+<li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint">Equation&nbsp;1</a>. Hint: use a <code>Categorical</code> distribution.</li>
+<li>Compute the numerical value of the expression defined in part 1.</li>
+</ol>
+</section>
+<section id="q.4-a-first-posterior-inference-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="q.4-a-first-posterior-inference-algorithm">Q.4: a first posterior inference algorithm</h2>
+<p>We now generalize to having <span class="math inline">\(K + 1\)</span> types of coins such that:</p>
+<ul>
+<li>coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> has bias <span class="math inline">\(k/K\)</span></li>
+<li>the fraction of coins in the bag of type <span class="math inline">\(k\)</span> is <span class="math inline">\(\rho_k\)</span>.</li>
+</ul>
+<p>We consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability <span class="math inline">\(\pi_k\)</span> for all <span class="math inline">\(k\)</span> that we picked coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> from the bag given the observation.</p>
+<ol type="1">
+<li>Write a function taking as input a vector <span class="math inline">\(\rho = (\rho_0, \rho_1, \dots, \rho_K)\)</span> and returning <span class="math inline">\(\pi = (\pi_0, \pi_1, \dots, \pi_K)\)</span>.</li>
+<li>Test your code by making sure you can recover the answer in part C as a special case. Report what values of <span class="math inline">\(K\)</span> and <span class="math inline">\(\rho\)</span> you used.</li>
+</ol>
+</section>
+<section id="q.5-generalizing-observations" class="level2">
+<h2 class="anchored" data-anchor-id="q.5-generalizing-observations">Q.5: generalizing observations</h2>
+<p>TODO</p>
+</section>
+<section id="q.6-todo" class="level2">
+<h2 class="anchored" data-anchor-id="q.6-todo">Q.6: TODO</h2>
+</section>
+<section id="optional-questions" class="level2">
+<h2 class="anchored" data-anchor-id="optional-questions">Optional questions</h2>
+<p>TODO: set up instruction/system for optional questions</p>
+<p>TODO: automated decision tree construction?</p>
+<p>TODO: additional inference problems?</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

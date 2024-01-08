@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nBayesian inference on discrete spaces\n\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\n\n\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\n\n\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\n\n\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\n\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\n\n\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week\n\n\n\nTh, Feb 22\nReading week\n\n\n\nTue, Feb 27\nQuiz 1\n\n\n\nTh, Feb 29\n\n\n\n\nTue, Mar 5\n\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due\n\n\n\nTue, Mar 12\n\n\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\n\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2\n\n\n\nTh, Mar 28\n\n\n\n\nTue, Apr 2\n\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\n\n\n\n\nTh, Apr 11\nLast lecture\n\n\n\nFri, Apr 19\nFinal project due"
+    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\nUniversal probabilistic inference via importance sampling.\n\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\nDecision theory.\nBDA 9.1-9.5\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\nBayesian regression, GLMs, and beyond.\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week.\n\n\n\nTh, Feb 22\nReading week.\n\n\n\nTue, Feb 27\nQuiz 1.\n\n\n\nTh, Feb 29\nTBA\n\n\n\nTue, Mar 5\nMCMC user guide (via Stan).\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due.\n\n\n\nTue, Mar 12\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2.\n\n\n\nTh, Mar 28\nTBA\n\n\n\nTue, Apr 2\nMCMC developer guide.\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\nVariational inference.\n\n\n\nTh, Apr 11\nLast lecture.\n\n\n\nFri, Apr 19\nFinal project due."
   },
   {
     "objectID": "syllabus.html",
@@ -77,18 +77,270 @@
     "text": "Course communication\n\nAnnouncements\nCourse announcements will be posted on Canvas.\n\n\nQuestions\nUse Piazza for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.\nUse private piazza questions if, and only if the question is about a personal matter."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Bayes1@UBC",
+    "objectID": "drafts/ex02.html",
+    "href": "drafts/ex02.html",
+    "title": "Exercise 2: Bayesian inference on discrete spaces",
     "section": "",
-    "text": "Dates: January 2024—April 2024\n\nMaster a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.\nAcquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.\nFace the limitations of the Bayesian approach and how to work around them.\n\nDetailed syllabus"
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
   },
   {
-    "objectID": "index.html#stat447c-bayesian-statistics",
-    "href": "index.html#stat447c-bayesian-statistics",
-    "title": "Bayes1@UBC",
+    "objectID": "drafts/ex02.html#goals",
+    "href": "drafts/ex02.html#goals",
+    "title": "Exercise 2: Bayesian inference on discrete spaces",
+    "section": "Goals",
+    "text": "Goals\n\nPoint summary of posterior distribution: mean, median, mode.\nConstructing credible intervals.\n\n–&gt; decision theory\n–&gt; basic regression\n–&gt; graphical models? (probably later!)\n–&gt; calibration?\n\nDifferent number of heads and tails - binomial\nAnother discrete inference problem? E.g. Mendelian genetics? Many?\n\nAll the Bayesian stuff actually keep for following week (keep some of those for )\n\nEpistemic vs. aleatoric probabilities\nDifferent priors - Cromwell (later?)\nLimit and conjugacy\nPredictive (later?)\nCredible intervals (later?)\nEquivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic15_conditional.html",
+    "href": "w01_discrete_inference/topic15_conditional.html",
+    "title": "Conditioning",
     "section": "",
-    "text": "Dates: January 2024—April 2024\n\nMaster a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.\nAcquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.\nFace the limitations of the Bayesian approach and how to work around them.\n\nDetailed syllabus"
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic15_conditional.html#outline",
+    "href": "w01_discrete_inference/topic15_conditional.html#outline",
+    "title": "Conditioning",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\n\nRationale"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic25_expectations.html",
+    "href": "w01_discrete_inference/topic25_expectations.html",
+    "title": "Expectations",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic25_expectations.html#outline",
+    "href": "w01_discrete_inference/topic25_expectations.html#outline",
+    "title": "Expectations",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\n\nRationale"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_axioms.html",
+    "href": "w01_discrete_inference/topic10_axioms.html",
+    "title": "Axioms of probability",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_axioms.html#outline",
+    "href": "w01_discrete_inference/topic10_axioms.html#outline",
+    "title": "Axioms of probability",
+    "section": "Outline",
+    "text": "Outline\n\nSynthetic data\nForward simulation"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_axioms.html#conventions",
+    "href": "w01_discrete_inference/topic10_axioms.html#conventions",
+    "title": "Axioms of probability",
+    "section": "Conventions",
+    "text": "Conventions\n\n\\(X\\): unobserved random variable\n\\(Y\\): observed random variable"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_axioms.html#key-concept-synthetic-dataset",
+    "href": "w01_discrete_inference/topic10_axioms.html#key-concept-synthetic-dataset",
+    "title": "Axioms of probability",
+    "section": "Key concept: synthetic dataset",
+    "text": "Key concept: synthetic dataset\n\nSoon: predict unknown \\(X\\) from \\(Y\\)\nNow: “playing god” i.e. sampling both \\(X\\) and \\(Y\\)\nconvention: x for observed random variable, y for observed\nconcept: synthetic data\nconcept: forward simulation\nintroduce running example, exercise question give some hints"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic30_monte_carlo.html",
+    "href": "w01_discrete_inference/topic30_monte_carlo.html",
+    "title": "Monte Carlo",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic30_monte_carlo.html#outline",
+    "href": "w01_discrete_inference/topic30_monte_carlo.html#outline",
+    "title": "Monte Carlo",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\n\nRationale"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html",
+    "title": "Forward sampling",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html#outline",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html#outline",
+    "title": "Forward sampling",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nNotion of forward sampling (also known as forward simulation)\nHow to do it in practice\n\nUseful functions\nGraphical models\n\n\n\n\nRationale\nSampling is the main way Bayesian inference is performed nowadays. We introduce here the simplest flavour of sampling, forward sampling."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html#forward-sampling-as-depth-first-traversal",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html#forward-sampling-as-depth-first-traversal",
+    "title": "Forward sampling",
+    "section": "Forward sampling as depth-first traversal",
+    "text": "Forward sampling as depth-first traversal"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html#coding-a-forward-sampler",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html#coding-a-forward-sampler",
+    "title": "Forward sampling",
+    "section": "Coding a forward sampler",
+    "text": "Coding a forward sampler"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html#forward-sampling-as-specifying-a-model",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html#forward-sampling-as-specifying-a-model",
+    "title": "Forward sampling",
+    "section": "Forward sampling as specifying a model",
+    "text": "Forward sampling as specifying a model"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_forward_sampling.html#directed-graphical-model",
+    "href": "w01_discrete_inference/topic07_forward_sampling.html#directed-graphical-model",
+    "title": "Forward sampling",
+    "section": "Directed graphical model",
+    "text": "Directed graphical model"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic00_random_variables.html",
+    "href": "w01_discrete_inference/topic00_random_variables.html",
+    "title": "Random variables",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic00_random_variables.html#outline",
+    "href": "w01_discrete_inference/topic00_random_variables.html#outline",
+    "title": "Random variables",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\n\nRationale"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html",
+    "title": "Decision trees",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
+    "title": "Decision trees",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nDecision trees\nReview of basic probability theory concepts: outcome, event, sample space, partitions, conditional probability\n\n\n\nRationale\n\nOne definition of Bayesian inference: applying probability to statistical inference problems\n\nTherefore, it is critical to understand probability to learn Bayesian inference\nThis week, we will help you “reload in memory” some of the most important bits of probability theory used in this course"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
+    "title": "Decision trees",
+    "section": "Running example",
+    "text": "Running example\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
+    "title": "Decision trees",
+    "section": "Decision tree",
+    "text": "Decision tree\n\nDecision tree: a recursive classification of all possible scenarios\nNodes in the tree are “groups of scenarios” which we call events\nChildren of a node partitions an event into an exhaustive set of sub-cases,\n\n\\(E_1, E_2, \\dots\\) is a partition of \\(E\\) if the \\(E_i\\)’s are disjoint (i.e., \\(E_i \\cap E_j = \\emptyset\\) when \\(i\\neq j\\)) and their union is \\(E\\) (i.e., \\(\\cup E_i = E\\))\n\nIn the decision tree below, we partitioned events until we get events at the leaves each containing a single scenario\n\nWe call one individual scenario an outcome\nWe call the set of all outcomes the sample space, \\(S\\), and put it at the root of decision trees.\n\n\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
+    "title": "Decision trees",
+    "section": "Nodes and events",
+    "text": "Nodes and events\nTo describe the event corresponding to a node \\(v\\) in the tree:\n\ntrace the path from the node \\(v\\) to the root\ntake the intersection of all node labels\n\nExample: find the node in the above tree corresponding to the event \\((X = 1) \\cap (Y_1 = 0)\\).\nProbability notation review:\n\n\\((X = 1) = \\{s \\in S : X(s) = 1\\}\\)\n\\((X = 1, Y_1 = 0) = (X = 1) \\cap (Y_1 = 0)\\)"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
+    "title": "Decision trees",
+    "section": "Edges and conditional probabilities",
+    "text": "Edges and conditional probabilities\nWhen there is an edge from events \\(E_1\\) to \\(E_2\\), we annotate it with \\(\\mathbb{P}(E_2 | E_1)\\).\nRecall: conditional probability of \\(E_2\\) given \\(E_1\\)\n\\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)}\\]\nExample: take the edge from \\(E_1 = (X = 1)\\) to \\(E_2 = (X = 1, Y_1 = 0)\\). \\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)} = \\frac{\\mathbb{P}(E_2)}{\\mathbb{P}(E_1)} = \\mathbb{P}(Y_1 = 0 | X = 1)\\] In words: “the probability that the first flip is”heads” \\((Y_1 = 0)\\) given you picked the standard coin \\((X = 1)\\).’’ Hence the edge from \\(E_1\\) to \\(E_2\\) is labelled \\(1/2\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic20_bayes.html",
+    "href": "w01_discrete_inference/topic20_bayes.html",
+    "title": "Bayes rule",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic20_bayes.html#outline",
+    "href": "w01_discrete_inference/topic20_bayes.html#outline",
+    "title": "Bayes rule",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\n\nRationale"
+  },
+  {
+    "objectID": "exercises/ex01.html",
+    "href": "exercises/ex01.html",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "",
+    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+  },
+  {
+    "objectID": "exercises/ex01.html#goals",
+    "href": "exercises/ex01.html#goals",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Goals",
+    "text": "Goals\n\nReview discrete probability (axioms, basic properties, conditioning, discrete Bayes rule)\nIntroduce forward and conditional discrete simulation\nReview expectation and the law of large numbers"
+  },
+  {
+    "objectID": "exercises/ex01.html#setup",
+    "href": "exercises/ex01.html#setup",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Setup",
+    "text": "Setup\nThis exercise is centered around the following scenario:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
+  },
+  {
+    "objectID": "exercises/ex01.html#q.1-sampling-from-a-joint-distribution",
+    "href": "exercises/ex01.html#q.1-sampling-from-a-joint-distribution",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.1: sampling from a joint distribution",
+    "text": "Q.1: sampling from a joint distribution\n\nCompute \\(\\mathbb{E}[(1+Y_1)^X]\\) mathematically (with a precise mathematical derivation).\nWrite a function that samples (“simulates”) from the joint distribution of \\((X, Y_1, \\dots, Y_4)\\).\nHow can your code and the law of large number be used to approximate \\(\\mathbb{E}[(1+Y_1)^X]\\)?\nCompare the approximation from your code with you answer in part 1.\n\n\n\n\n\n\n\nBig idea\n\n\n\nPart 4 of this question illustrates a big idea in this course:\nstrategies to validate inference, i.e. ensuring it is bug-free in both the code and in the math. In a nutshell, this is possible thanks to theory: we use results that provide two ways to do the same thing, and verifying they indeed agree."
+  },
+  {
+    "objectID": "exercises/ex01.html#q.2-computing-a-conditional",
+    "href": "exercises/ex01.html#q.2-computing-a-conditional",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.2: computing a conditional",
+    "text": "Q.2: computing a conditional\nSuppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = [0, 0, 0, 0]. Given that observation, what is the probability that you picked the standard coin (i.e., the one with \\(p = 1/2\\))?\n\nWrite mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”\nCompute the numerical value of the expression defined in part 1 (with a precise mathematical derivation)."
+  },
+  {
+    "objectID": "exercises/ex01.html#q.3-non-uniform-prior-on-coin-types",
+    "href": "exercises/ex01.html#q.3-non-uniform-prior-on-coin-types",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.3: non uniform prior on coin types",
+    "text": "Q.3: non uniform prior on coin types\nWe now modify the problem as follows: I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Categorical distribution.\nCompute the numerical value of the expression defined in part 1."
+  },
+  {
+    "objectID": "exercises/ex01.html#q.4-a-first-posterior-inference-algorithm",
+    "href": "exercises/ex01.html#q.4-a-first-posterior-inference-algorithm",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.4: a first posterior inference algorithm",
+    "text": "Q.4: a first posterior inference algorithm\nWe now generalize to having \\(K + 1\\) types of coins such that:\n\ncoin type \\(k \\in \\{0, 1, \\dots, K\\}\\) has bias \\(k/K\\)\nthe fraction of coins in the bag of type \\(k\\) is \\(\\rho_k\\).\n\nWe consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability \\(\\pi_k\\) for all \\(k\\) that we picked coin type \\(k \\in \\{0, 1, \\dots, K\\}\\) from the bag given the observation.\n\nWrite a function taking as input a vector \\(\\rho = (\\rho_0, \\rho_1, \\dots, \\rho_K)\\) and returning \\(\\pi = (\\pi_0, \\pi_1, \\dots, \\pi_K)\\).\nTest your code by making sure you can recover the answer in part C as a special case. Report what values of \\(K\\) and \\(\\rho\\) you used."
+  },
+  {
+    "objectID": "exercises/ex01.html#q.5-generalizing-observations",
+    "href": "exercises/ex01.html#q.5-generalizing-observations",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.5: generalizing observations",
+    "text": "Q.5: generalizing observations\nTODO"
+  },
+  {
+    "objectID": "exercises/ex01.html#q.6-todo",
+    "href": "exercises/ex01.html#q.6-todo",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.6: TODO",
+    "text": "Q.6: TODO"
+  },
+  {
+    "objectID": "exercises/ex01.html#optional-questions",
+    "href": "exercises/ex01.html#optional-questions",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Optional questions",
+    "text": "Optional questions\nTODO: set up instruction/system for optional questions\nTODO: automated decision tree construction?\nTODO: additional inference problems?"
   },
   {
     "objectID": "project.html",

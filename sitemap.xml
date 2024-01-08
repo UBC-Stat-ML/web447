@@ -2,18 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/schedule.html</loc>
-    <lastmod>2023-11-16T00:01:29.844Z</lastmod>
+    <lastmod>2024-01-08T16:05:51.103Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/syllabus.html</loc>
-    <lastmod>2023-11-16T00:01:29.143Z</lastmod>
+    <lastmod>2024-01-08T16:05:50.465Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/index.html</loc>
-    <lastmod>2023-11-16T00:01:28.817Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/drafts/ex02.html</loc>
+    <lastmod>2024-01-08T16:05:49.831Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic15_conditional.html</loc>
+    <lastmod>2024-01-08T16:05:49.405Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic25_expectations.html</loc>
+    <lastmod>2024-01-08T16:05:48.852Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic10_axioms.html</loc>
+    <lastmod>2024-01-08T16:05:48.427Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic30_monte_carlo.html</loc>
+    <lastmod>2024-01-08T16:05:47.976Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic07_forward_sampling.html</loc>
+    <lastmod>2024-01-08T16:05:48.197Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic00_random_variables.html</loc>
+    <lastmod>2024-01-08T16:05:48.645Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic05_decision_diagrams.html</loc>
+    <lastmod>2024-01-08T16:05:49.194Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic20_bayes.html</loc>
+    <lastmod>2024-01-08T16:05:49.605Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/exercises/ex01.html</loc>
+    <lastmod>2024-01-08T16:05:50.152Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/project.html</loc>
-    <lastmod>2023-11-16T00:01:29.562Z</lastmod>
+    <lastmod>2024-01-08T16:05:50.824Z</lastmod>
   </url>
 </urlset>
