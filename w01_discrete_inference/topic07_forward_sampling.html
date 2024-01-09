@@ -59,7 +59,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -73,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_random_variables.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic07_forward_sampling.html">Forward sampling</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic07_forward_sampling.html">Forward sampling</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Discrete inference</span></a>
+ <span class="menu-text">Probability essentials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -128,8 +133,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic00_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -142,12 +165,6 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Forward sampling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,14 +215,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#forward-sampling-as-depth-first-traversal" id="toc-forward-sampling-as-depth-first-traversal" class="nav-link" data-scroll-target="#forward-sampling-as-depth-first-traversal">Forward sampling as depth-first traversal</a></li>
-  <li><a href="#coding-a-forward-sampler" id="toc-coding-a-forward-sampler" class="nav-link" data-scroll-target="#coding-a-forward-sampler">Coding a forward sampler</a></li>
-  <li><a href="#forward-sampling-as-specifying-a-model" id="toc-forward-sampling-as-specifying-a-model" class="nav-link" data-scroll-target="#forward-sampling-as-specifying-a-model">Forward sampling as specifying a model</a></li>
-  <li><a href="#directed-graphical-model" id="toc-directed-graphical-model" class="nav-link" data-scroll-target="#directed-graphical-model">Directed graphical model</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -224,19 +238,6 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Website under construction. At this stage, information on this page may change.</p>
-</div>
-</div>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
@@ -255,17 +256,70 @@ Caution
 <p>Sampling is the main way Bayesian inference is performed nowadays. We introduce here the simplest flavour of sampling, <em>forward sampling</em>.</p>
 </section>
 </section>
-<section id="forward-sampling-as-depth-first-traversal" class="level2">
+<section id="forward-sampling-as-depth-first-traversal" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="forward-sampling-as-depth-first-traversal">Forward sampling as depth-first traversal</h2>
-</section>
-<section id="coding-a-forward-sampler" class="level2">
-<h2 class="anchored" data-anchor-id="coding-a-forward-sampler">Coding a forward sampler</h2>
-</section>
-<section id="forward-sampling-as-specifying-a-model" class="level2">
-<h2 class="anchored" data-anchor-id="forward-sampling-as-specifying-a-model">Forward sampling as specifying a model</h2>
-</section>
-<section id="directed-graphical-model" class="level2">
-<h2 class="anchored" data-anchor-id="directed-graphical-model">Directed graphical model</h2>
+<p>Recall our recurring bag sampling example, with its corresponding decision tree:</p>
+<div class="column-page">
+<div class="cell" data-fig-height="5">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+S__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false["Y1=false"]
+S__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true["Y2=true"]
+S -- 0.33 --&gt; S__and__X_0["X=0"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S -- 0.33 --&gt; S__and__X_1["X=1"]
+S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false["Y1=false"]
+S__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true["Y2=true"]
+S__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true["Y2=true"]
+S__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true["Y1=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true["Y1=true"]
+S -- 0.33 --&gt; S__and__X_2["X=2"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Forward simulation is a type of <a href="https://en.wikipedia.org/wiki/Tree_traversal">tree traversal</a>. I.e. moving from node to node in the tree.</li>
+<li>Forward simulation is a recursive process initialized at the root of the decision tree (labelled <span class="math inline">\(S\)</span>).</li>
+<li>When we are a node <span class="math inline">\(v\)</span> in the tree, we pick one of its children at random.
+<ul>
+<li>To do so, use <a href="../w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf">the previous section on simulation from PMFs</a></li>
+</ul></li>
+</ul>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Bayes rule</title>
+<title>Bayes1@UBC - Sample space, outcomes, events</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,11 +60,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -73,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic20_bayes.html">Bayes rule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Sample space, outcomes, events</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -128,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
@@ -158,31 +160,31 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic08_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
@@ -209,15 +211,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a></li>
+  <li><a href="#intuition-bayesian-view" id="toc-intuition-bayesian-view" class="nav-link" data-scroll-target="#intuition-bayesian-view">Intuition: Bayesian view</a></li>
+  <li><a href="#intuition-randomized-algorithms" id="toc-intuition-randomized-algorithms" class="nav-link" data-scroll-target="#intuition-randomized-algorithms">Intuition: randomized algorithms</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bayes rule</h1>
+<h1 class="title">Sample space, outcomes, events</h1>
 </div>
 
 
@@ -232,29 +237,68 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Website under construction. At this stage, information on this page may change.</p>
-</div>
-</div>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Review of basic probability theory concepts: outcome, event, sample space</li>
+<li>Intuition from the Bayesian perspective</li>
+</ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-
-
+<ul>
+<li>One definition of Bayesian inference: applying <em>probability theory</em> to <em>statistical inference problems</em>
+<ul>
+<li>Therefore, it is critical to understand probability to learn Bayesian inference</li>
+<li>This week, we will help you “reload in memory” some of the most important bits of probability theory used in this course</li>
+</ul></li>
+</ul>
 </section>
+</section>
+<section id="definitions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<ul>
+<li><strong>Sample space</strong>, denoted <span class="math inline">\(S\)</span>, a set.
+<ul>
+<li>Example: <span class="math inline">\(S = \{1, 2, 3, 4\}\)</span> (see Figure).</li>
+</ul></li>
+<li>Each element <span class="math inline">\(s\)</span> of <span class="math inline">\(S\)</span> is called an <strong>outcome</strong>, <span class="math inline">\(s \in S\)</span>.
+<ul>
+<li>Example: each of the 4 points.</li>
+</ul></li>
+<li>A set of outcomes <span class="math inline">\(E \subset S\)</span> is called an <strong>event</strong>.
+<ul>
+<li>Example: <span class="math inline">\(E = \{s \in S : s \text{ is odd}\}\)</span> (red in the Figure).</li>
+</ul></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sample_space.png" class="img-fluid" width="200"></p>
+</div></div></section>
+<section id="intuition-bayesian-view" class="level2">
+<h2 class="anchored" data-anchor-id="intuition-bayesian-view">Intuition: Bayesian view</h2>
+<ul>
+<li>In Bayesian statistics, an outcome will describe the state of the world.</li>
+<li>We do not know which outcome is the true state of the world.</li>
+<li>We <strong>observe</strong> partial information on the state of the world/outcome.</li>
+<li>We rule out the outcomes that are not consistent with the observation…</li>
+<li>…but there will be several outcomes left!
+<ul>
+<li>We will deal with this situation using probability theory.</li>
+</ul></li>
+</ul>
+</section>
+<section id="intuition-randomized-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="intuition-randomized-algorithms">Intuition: randomized algorithms</h2>
+<ul>
+<li>An algorithm is “randomized” if it has access to virtual dices/coins.</li>
+<li>In practice this is done using <a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">pseudorandom number generators</a>.</li>
+<li>In this context an outcome is a <a href="https://en.wikipedia.org/wiki/Random_seed">random seed</a>, i.e.&nbsp;the initialization of the pseudorandom number generator.</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

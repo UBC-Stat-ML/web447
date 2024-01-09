@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Joint distributions</title>
+<title>Bayes1@UBC - Axioms of probability</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_decision_diagrams.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic02_axioms.html">Joint distributions</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic02_axioms.html">Axioms of probability</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Discrete inference</span></a>
+ <span class="menu-text">Probability essentials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -130,32 +130,62 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic01_decision_diagrams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Decision trees</span></a>
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Joint distributions</span></a>
+ <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_conditional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joint distributions</span></a>
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic04_joint_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joint distributions</span></a>
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic05_expectations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joint distributions</span></a>
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Forward sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditioning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic08_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayes rule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic09_expectations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Expectations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic10_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -176,18 +206,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions">Conventions</a></li>
-  <li><a href="#key-concept-synthetic-dataset" id="toc-key-concept-synthetic-dataset" class="nav-link" data-scroll-target="#key-concept-synthetic-dataset">Key concept: synthetic dataset</a></li>
+  <li><a href="#partitions" id="toc-partitions" class="nav-link active" data-scroll-target="#partitions">Partitions</a></li>
+  <li><a href="#axioms-of-probability" id="toc-axioms-of-probability" class="nav-link" data-scroll-target="#axioms-of-probability">Axioms of probability</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Joint distributions</h1>
+<h1 class="title">Axioms of probability</h1>
 </div>
 
 
@@ -202,42 +231,27 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Website under construction. At this stage, information on this page may change.</p>
-</div>
-</div>
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="partitions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="partitions">Partitions</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/partition.png" class="img-fluid" width="100"></p>
+</div></div><p><strong>Definition:</strong> <span class="math inline">\(E_1, E_2, \dots\)</span> is a <strong>partition</strong> of <span class="math inline">\(E\)</span> if:</p>
 <ul>
-<li>Synthetic data</li>
-<li>Forward simulation</li>
+<li>the <span class="math inline">\(E_i\)</span>’s are disjoint, i.e., <span class="math display">\[E_i \cap E_j = \emptyset \text{ when } i\neq j,\]</span></li>
+<li>and their union is <span class="math inline">\(E\)</span>, i.e., <span class="math inline">\(\cup_i E_i = E\)</span>.</li>
 </ul>
 </section>
-<section id="conventions" class="level2">
-<h2 class="anchored" data-anchor-id="conventions">Conventions</h2>
+<section id="axioms-of-probability" class="level2">
+<h2 class="anchored" data-anchor-id="axioms-of-probability">Axioms of probability</h2>
 <ul>
-<li><span class="math inline">\(X\)</span>: unobserved random variable</li>
-<li><span class="math inline">\(Y\)</span>: observed random variable</li>
-</ul>
-</section>
-<section id="key-concept-synthetic-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="key-concept-synthetic-dataset">Key concept: synthetic dataset</h2>
+<li>A <strong>probability</strong> is a function <span class="math inline">\(\mathbb{P}\)</span> that satisfy the following constraints:
 <ul>
-<li><p>Soon: predict unknown <span class="math inline">\(X\)</span> from <span class="math inline">\(Y\)</span></p></li>
-<li><p>Now: “playing god” i.e.&nbsp;sampling both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></p></li>
-<li><p>convention: x for observed random variable, y for observed</p></li>
-<li><p>concept: synthetic data</p></li>
-<li><p>concept: forward simulation</p></li>
-<li><p>introduce running example, exercise question give some hints</p></li>
+<li><span class="math inline">\(\mathbb{P}\)</span> should take events as input and return a number between zero and one: <span class="math display">\[\mathbb{P}(E) \in [0, 1].\]</span></li>
+<li>If <span class="math inline">\(E_1, E_2, \dots\)</span> is a partition of <span class="math inline">\(E\)</span>, then <span class="math display">\[\mathbb{P}(E) = \sum_i \mathbb{P}(E_i).\]</span></li>
+<li><span class="math inline">\(\mathbb{P}(S) = 1\)</span></li>
+</ul></li>
+<li>Thanks to the constraints, even if I only specify a few known probabilities I can recover many other ones mathematically/computationally.</li>
 </ul>
 
 

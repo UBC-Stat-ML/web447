@@ -2,54 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/schedule.html</loc>
-    <lastmod>2024-01-08T16:05:51.103Z</lastmod>
+    <lastmod>2024-01-09T00:22:52.068Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/syllabus.html</loc>
-    <lastmod>2024-01-08T16:05:50.465Z</lastmod>
+    <lastmod>2024-01-09T00:22:51.435Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/drafts/ex02.html</loc>
-    <lastmod>2024-01-08T16:05:49.831Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic15_conditional.html</loc>
-    <lastmod>2024-01-08T16:05:49.405Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic25_expectations.html</loc>
-    <lastmod>2024-01-08T16:05:48.852Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic10_axioms.html</loc>
-    <lastmod>2024-01-08T16:05:48.427Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic30_monte_carlo.html</loc>
-    <lastmod>2024-01-08T16:05:47.976Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic07_forward_sampling.html</loc>
-    <lastmod>2024-01-08T16:05:48.197Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic00_random_variables.html</loc>
-    <lastmod>2024-01-08T16:05:48.645Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/drafts/ex03.html</loc>
+    <lastmod>2024-01-09T00:22:50.777Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic05_decision_diagrams.html</loc>
-    <lastmod>2024-01-08T16:05:49.194Z</lastmod>
+    <lastmod>2024-01-09T00:22:50.332Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic20_bayes.html</loc>
-    <lastmod>2024-01-08T16:05:49.605Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic01_outcomes.html</loc>
+    <lastmod>2024-01-09T00:22:49.802Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic04_pmfs.html</loc>
+    <lastmod>2024-01-09T00:22:49.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic07_conditional.html</loc>
+    <lastmod>2024-01-09T00:22:48.200Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic06_forward_sampling.html</loc>
+    <lastmod>2024-01-09T00:22:47.739Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic09_expectations.html</loc>
+    <lastmod>2024-01-09T00:22:47.459Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic08_bayes.html</loc>
+    <lastmod>2024-01-09T00:22:47.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic03_random_variables.html</loc>
+    <lastmod>2024-01-09T00:22:48.481Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic10_monte_carlo.html</loc>
+    <lastmod>2024-01-09T00:22:49.547Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic02_axioms.html</loc>
+    <lastmod>2024-01-09T00:22:50.028Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/drafts/ex02.html</loc>
+    <lastmod>2024-01-09T00:22:50.564Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/exercises/ex01.html</loc>
-    <lastmod>2024-01-08T16:05:50.152Z</lastmod>
+    <lastmod>2024-01-09T00:22:51.109Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/project.html</loc>
-    <lastmod>2024-01-08T16:05:50.824Z</lastmod>
+    <lastmod>2024-01-09T00:22:51.803Z</lastmod>
   </url>
 </urlset>

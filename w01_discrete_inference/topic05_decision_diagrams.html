@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_random_variables.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic05_decision_diagrams.html">Decision trees</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic05_decision_diagrams.html">Decision trees</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -125,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Discrete inference</span></a>
+ <span class="menu-text">Probability essentials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -133,8 +133,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -145,37 +163,31 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
@@ -229,37 +241,18 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Website under construction. At this stage, information on this page may change.</p>
-</div>
-</div>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>Decision trees</li>
-<li>Review of basic probability theory concepts: outcome, event, sample space, partitions, conditional probability</li>
+<li>Review of more probability theory concepts, contextualized in decision trees: outcome, event, sample space, partitions, conditional probability</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<ul>
-<li>One definition of Bayesian inference: applying probability to statistical inference problems
-<ul>
-<li>Therefore, it is critical to understand probability to learn Bayesian inference</li>
-<li>This week, we will help you “reload in memory” some of the most important bits of probability theory used in this course</li>
-</ul></li>
-</ul>
+<p>We will use decision trees to provide visualization for a bunch of complex concepts such as forward simulation, posterior inference, importance sampling, probabilistic programming, etc.</p>
 </section>
 </section>
 <section id="running-example" class="level2 page-columns page-full">
@@ -297,7 +290,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <li>Nodes in the tree are “groups of scenarios” which we call <strong>events</strong></li>
 <li>Children of a node partitions an event into an exhaustive set of sub-cases,
 <ul>
-<li><span class="math inline">\(E_1, E_2, \dots\)</span> is a <strong>partition</strong> of <span class="math inline">\(E\)</span> if the <span class="math inline">\(E_i\)</span>’s are disjoint (i.e., <span class="math inline">\(E_i \cap E_j = \emptyset\)</span> when <span class="math inline">\(i\neq j\)</span>) and their union is <span class="math inline">\(E\)</span> (i.e., <span class="math inline">\(\cup E_i = E\)</span>)</li>
+<li>i.e.&nbsp;<span class="math inline">\(E_1, E_2, \dots\)</span> is a <strong>partition</strong> of <span class="math inline">\(E\)</span>.</li>
 </ul></li>
 <li>In the decision tree below, we partitioned events until we get events at the leaves each containing a single scenario
 <ul>
@@ -378,7 +371,12 @@ S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_fal
 <p>When there is an edge from events <span class="math inline">\(E_1\)</span> to <span class="math inline">\(E_2\)</span>, we annotate it with <span class="math inline">\(\mathbb{P}(E_2 | E_1)\)</span>.</p>
 <p><strong>Recall:</strong> conditional probability of <span class="math inline">\(E_2\)</span> given <span class="math inline">\(E_1\)</span></p>
 <p><span class="math display">\[\mathbb{P}(E_2 | E_1) = \frac{\mathbb{P}(E_1 \cap E_2)}{\mathbb{P}(E_1)}\]</span></p>
-<p><strong>Example:</strong> take the edge from <span class="math inline">\(E_1 = (X = 1)\)</span> to <span class="math inline">\(E_2 = (X = 1, Y_1 = 0)\)</span>. <span class="math display">\[\mathbb{P}(E_2 | E_1) = \frac{\mathbb{P}(E_1 \cap E_2)}{\mathbb{P}(E_1)} = \frac{\mathbb{P}(E_2)}{\mathbb{P}(E_1)} = \mathbb{P}(Y_1 = 0 | X = 1)\]</span> In words: “the probability that the first flip is”heads” <span class="math inline">\((Y_1 = 0)\)</span> given you picked the standard coin <span class="math inline">\((X = 1)\)</span>.’’ Hence the edge from <span class="math inline">\(E_1\)</span> to <span class="math inline">\(E_2\)</span> is labelled <span class="math inline">\(1/2\)</span>.</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>take the edge from <span class="math inline">\(E_1 = (X = 1)\)</span> to <span class="math inline">\(E_2 = (X = 1, Y_1 = 0)\)</span>. <span class="math display">\[\mathbb{P}(E_2 | E_1) = \frac{\mathbb{P}(E_1 \cap E_2)}{\mathbb{P}(E_1)} = \frac{\mathbb{P}(E_2)}{\mathbb{P}(E_1)} = \mathbb{P}(Y_1 = 0 | X = 1)\]</span></li>
+<li>Translating <span class="math inline">\(\mathbb{P}(Y_1 = 0 | X = 1)\)</span> into words: “the probability that the first flip is ‘heads’ <span class="math inline">\((Y_1 = 0)\)</span> given that you picked the standard coin <span class="math inline">\((X = 1)\)</span>.’’</li>
+<li>Hence the edge from <span class="math inline">\(E_1\)</span> to <span class="math inline">\(E_2\)</span> is labelled <span class="math inline">\(1/2\)</span>.</li>
+</ul>
 
 
 </section>

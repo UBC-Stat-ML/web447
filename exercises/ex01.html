@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_random_variables.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../exercises/ex01.html">Exercises</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../exercises/ex01.html">Exercises</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Discrete inference</span></a>
+ <span class="menu-text">Probability essentials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -130,8 +130,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -142,37 +160,31 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
@@ -201,8 +213,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#q.3-non-uniform-prior-on-coin-types" id="toc-q.3-non-uniform-prior-on-coin-types" class="nav-link" data-scroll-target="#q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</a></li>
   <li><a href="#q.4-a-first-posterior-inference-algorithm" id="toc-q.4-a-first-posterior-inference-algorithm" class="nav-link" data-scroll-target="#q.4-a-first-posterior-inference-algorithm">Q.4: a first posterior inference algorithm</a></li>
   <li><a href="#q.5-generalizing-observations" id="toc-q.5-generalizing-observations" class="nav-link" data-scroll-target="#q.5-generalizing-observations">Q.5: generalizing observations</a></li>
-  <li><a href="#q.6-todo" id="toc-q.6-todo" class="nav-link" data-scroll-target="#q.6-todo">Q.6: TODO</a></li>
-  <li><a href="#optional-questions" id="toc-optional-questions" class="nav-link" data-scroll-target="#optional-questions">Optional questions</a></li>
   </ul>
 </nav>
     </div>
@@ -242,9 +252,9 @@ Caution
 <section id="goals" class="level2">
 <h2 class="anchored" data-anchor-id="goals">Goals</h2>
 <ul>
-<li>Review discrete probability (axioms, basic properties, conditioning, discrete Bayes rule)</li>
-<li>Introduce forward and conditional discrete simulation</li>
-<li>Review expectation and the law of large numbers</li>
+<li>Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).</li>
+<li>Introduce forward discrete simulation.</li>
+<li>Review expectation and the law of large numbers.</li>
 </ul>
 </section>
 <section id="setup" class="level2 page-columns page-full">
@@ -280,7 +290,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <h2 class="anchored" data-anchor-id="q.1-sampling-from-a-joint-distribution">Q.1: sampling from a joint distribution</h2>
 <ol type="1">
 <li>Compute <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span> mathematically (with a precise mathematical derivation).</li>
-<li>Write a function that samples (“simulates”) from the joint distribution of <span class="math inline">\((X, Y_1, \dots, Y_4)\)</span>.</li>
+<li>Write an R function called <code>forward_sample</code> that samples (“simulates”) from the joint distribution of <span class="math inline">\((X, Y_1, \dots, Y_4)\)</span>. As a general practice, fix the seed, and submit both the code and the output (here, a single sample).</li>
 <li>How can your code and the law of large number be used to approximate <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span>?</li>
 <li>Compare the approximation from your code with you answer in part 1.</li>
 </ol>
@@ -324,22 +334,20 @@ strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in 
 </ul>
 <p>We consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability <span class="math inline">\(\pi_k\)</span> for all <span class="math inline">\(k\)</span> that we picked coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> from the bag given the observation.</p>
 <ol type="1">
-<li>Write a function taking as input a vector <span class="math inline">\(\rho = (\rho_0, \rho_1, \dots, \rho_K)\)</span> and returning <span class="math inline">\(\pi = (\pi_0, \pi_1, \dots, \pi_K)\)</span>.</li>
-<li>Test your code by making sure you can recover the answer in part C as a special case. Report what values of <span class="math inline">\(K\)</span> and <span class="math inline">\(\rho\)</span> you used.</li>
+<li>Write an R function called <code>posterior_given_four_heads</code> taking as input a vector <span class="math inline">\(\rho = (\rho_0, \rho_1, \dots, \rho_K)\)</span> and returning <span class="math inline">\(\pi = (\pi_0, \pi_1, \dots, \pi_K)\)</span>.</li>
+<li>Test your code by making sure you can recover the answer in Q. 3 as a special case. Report what values of <span class="math inline">\(K\)</span> and <span class="math inline">\(\rho\)</span> you used.</li>
+<li>Show the output for <span class="math inline">\(\rho \propto (1, 2, 3, \dots, 10)\)</span>. Here <span class="math inline">\(\propto\)</span> means “proportional to”; try to infer what it means in this context.</li>
 </ol>
 </section>
 <section id="q.5-generalizing-observations" class="level2">
 <h2 class="anchored" data-anchor-id="q.5-generalizing-observations">Q.5: generalizing observations</h2>
-<p>TODO</p>
-</section>
-<section id="q.6-todo" class="level2">
-<h2 class="anchored" data-anchor-id="q.6-todo">Q.6: TODO</h2>
-</section>
-<section id="optional-questions" class="level2">
-<h2 class="anchored" data-anchor-id="optional-questions">Optional questions</h2>
-<p>TODO: set up instruction/system for optional questions</p>
-<p>TODO: automated decision tree construction?</p>
-<p>TODO: additional inference problems?</p>
+<p>We now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe <code>n_heads</code> out of <code>n_observations</code>, where <code>n_heads</code> and <code>n_observations</code> will be additional arguments passed into a new R function.</p>
+<ol type="1">
+<li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint">Equation&nbsp;1</a>. Hint: use a <code>Binomial</code> distribution.</li>
+<li>Write an R function called <code>posterior</code> taking three input arguments in the following order: a vector <span class="math inline">\(\rho\)</span> as in Q. 4, as well as two integers, <code>n_heads</code> and <code>n_observations</code>.</li>
+<li>Test your code by making sure you can recover the answer in Q. 3 as a special case.</li>
+<li>Show the output for <span class="math inline">\(\rho \propto (1, 2, 3, \dots, 10)\)</span> and <code>n_heads = 2</code> and <code>n_observations = 10</code>.</li>
+</ol>
 
 
 </section>

@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Discrete inference</span></a>
+ <span class="menu-text">Probability essentials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -130,8 +130,26 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -142,37 +160,31 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
@@ -233,27 +245,31 @@ Caution
 </div>
 <section id="goals" class="level2">
 <h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<p>A first contact with several Bayesian concepts. We use the same discrete model for all questions.</p>
 <ul>
+<li>Notions of priors, likelihood, posterior.</li>
 <li>Point summary of posterior distribution: mean, median, mode.</li>
 <li>Constructing credible intervals.</li>
+<li>Basic decision theory.</li>
+<li>Sequential update of posterior distribution.</li>
 </ul>
-<p>–&gt; decision theory</p>
-<p>–&gt; basic regression</p>
-<p>–&gt; graphical models? (probably later!)</p>
-<p>–&gt; calibration?</p>
-<ul>
-<li>Different number of heads and tails - binomial</li>
-<li>Another discrete inference problem? E.g. Mendelian genetics? Many?</li>
-</ul>
-<p>All the Bayesian stuff actually keep for following week (keep some of those for )</p>
-<ul>
-<li>Epistemic vs.&nbsp;aleatoric probabilities</li>
-<li>Different priors - Cromwell (later?)</li>
-<li>Limit and conjugacy</li>
-<li>Predictive (later?)</li>
-<li>Credible intervals (later?)</li>
-<li>Equivalence of sequential and batch versions / update a probability given new data (one flip at the time; proof and code)</li>
-</ul>
+<!--
+Note:
+
+- critically, they have access by week 2 to solution of ex1, and hence of a discrete probability inference function for all of this
+
+- for decision theory, based off: https://www.stat.ubc.ca/~bouchard/courses/stat520-sp2021-22/T2-bayes-estimator-example.html#(2)
+  except done with discrete computation instead of 
+
+- include cromwell's rule in the prior construction question
+
+Other potential candidates:
+
+- calibration? might be too much in one week? maybe not if we provide some scaffold code?
+
+- bonus question on taking the discretization limit and conjugacy?
+
+-->
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Bayes rule</title>
+<title>Bayes1@UBC - Random variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,11 +60,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -73,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic20_bayes.html">Bayes rule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_outcomes.html">Discrete inference</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic02_random_variables.html">Random variables</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Probability essentials</span></a>
+ <span class="menu-text">Discrete inference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -134,19 +136,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic02_random_variables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic03_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
@@ -164,13 +160,19 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
@@ -209,15 +211,20 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#probabilists-notation" id="toc-probabilists-notation" class="nav-link" data-scroll-target="#probabilists-notation">Probabilist’s notation</a></li>
+  <li><a href="#conventions-used-in-this-course" id="toc-conventions-used-in-this-course" class="nav-link" data-scroll-target="#conventions-used-in-this-course">Conventions used in this course</a></li>
+  <li><a href="#more-conventions" id="toc-more-conventions" class="nav-link" data-scroll-target="#more-conventions">More conventions</a></li>
+  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension">Extension</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bayes rule</h1>
+<h1 class="title">Random variables</h1>
 </div>
 
 
@@ -249,12 +256,64 @@ Caution
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Random variable as mathematical objects.</li>
+<li>Notation convention for observation/latent</li>
+</ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-
-
+<p>Random variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction).</p>
 </section>
+</section>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>A (real) <strong>random variable</strong> is a function from a sample space <span class="math inline">\(S\)</span> to the reals, <span class="math inline">\(X : S \to \mathbb{R}\)</span>.</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>Continuing the example with <span class="math inline">\(S = \{1, 2, 3, 4\}\)</span>.</li>
+<li>Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise.</li>
+</ul>
+</section>
+<section id="probabilists-notation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="probabilists-notation">Probabilist’s notation</h2>
+<ul>
+<li>Let <span class="math inline">\(X\)</span> denote a random variable.</li>
+<li>The notation <span class="math inline">\((X = 1)\)</span> or <span class="math inline">\((X \in E)\)</span> is invalid in set theory.</li>
+<li>Therefore, probabilists “gave it a meaning” as follows:</li>
+</ul>
+<p><span class="math display">\[(X = 1) = \{s : X(s) = 1\}.\]</span></p>
+<p><strong>Example:</strong> Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise. Then <span class="math inline">\((X = 1)\)</span> corresponds to the red circle.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sample_space.png" class="img-fluid" width="200"></p>
+</div></div></section>
+<section id="conventions-used-in-this-course" class="level2">
+<h2 class="anchored" data-anchor-id="conventions-used-in-this-course">Conventions used in this course</h2>
+<ul>
+<li><span class="math inline">\(X\)</span>: unobserved random variable</li>
+<li><span class="math inline">\(Y\)</span>: observed random variable</li>
+</ul>
+</section>
+<section id="more-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="more-conventions">More conventions</h2>
+<p><strong>Probability convention:</strong></p>
+<ul>
+<li>Random variables are denoted with capitals in probability theory.</li>
+<li>We will start off using this convention.</li>
+</ul>
+<p><strong>Bayesian statistics convention:</strong></p>
+<ul>
+<li>Often the capitalization convention is not used.</li>
+<li>Hence we will eventually drop the probability theory capitalization convention.</li>
+</ul>
+</section>
+<section id="extension" class="level2">
+<h2 class="anchored" data-anchor-id="extension">Extension</h2>
+<p>A <strong>random vector</strong> is a function from a sample space to <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p><strong>Example in Bayesian statistics:</strong> the vector <span class="math inline">\((X, Y)\)</span> containing both the unobserved and observed quantities.</p>
+
+
 </section>
 
 </main> <!-- /main -->
