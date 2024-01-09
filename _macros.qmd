@@ -11,6 +11,8 @@ editor:
 \newcommand{\nats}{\ensuremath{\mathbb{N}}}
 \newcommand{\comps}{\ensuremath{\mathbb{C}}}
 
+
+
 \newcommand{\iid}{\textrm{i.i.d.}\@\xspace}
 \newcommand{\as}{\textrm{a.s.}\@\xspace}
 \newcommand{\aev}{\textrm{a.e.}\@\xspace}
@@ -21,6 +23,8 @@ editor:
 \newcommand{\eqd}{\overset{d}{=}}
 \newcommand{\eqas}{\overset{a.s.}{=}}
 
+\newcommand{\Pr}{\mathbb{P}}  
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\pr}{\mathbb{P}}  
 \newcommand{\ex}{\mathbb{E}}
 \newcommand{\law}{\mathcal{L}} 
@@ -28,6 +32,11 @@ editor:
 \newcommand{\cov}{\operatorname{Cov}}	
 \newcommand{\cor}{\operatorname{Corr}}
 \newcommand{\supp}{\operatorname{supp}} 
+
+\def\argmax{\operatorname{arg\,max}}
+\def\argmin{\operatorname{arg\,min}}
+\def\esssup{\operatorname{ess\,sup}}
+\def\essinf{\operatorname{ess\,inf}}
 
 \newcommand{\dist}{\sim}
 \newcommand{\distiid}{\overset{\text{iid}}{\dist}}

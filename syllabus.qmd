@@ -1,5 +1,7 @@
 ---
 title: "Syllabus: STAT447C Bayesian Statistics"
+editor: 
+  mode: source
 ---
 
 {{< include _construction.qmd >}}
@@ -21,10 +23,9 @@ In **STAT 447C**, you will:
 
 Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspaces.ubc.ca/classrooms/fnh-40)
 
-
 ## Teaching team
 
--   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html) 
+-   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html)
 -   [Miguel Biron-Lattes (TA)](https://miguelbiron.github.io/)
 -   [Ali Mehrabian (TA)](mailto:alimehrabian619@yahoo.com)
 

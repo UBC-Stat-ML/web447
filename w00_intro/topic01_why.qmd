@@ -1,0 +1,71 @@
+---
+title: "Why?"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Bayesian analysis: pros and cons
+
+- Address most data analysis issues (missing data, non-standard data types, non-iid, weird loss functions, adding expert knowledge, ...)
+    - Bayesian analysis: address those in a (semi) automated fashion / principled framework ("reductionist")
+        - Reductionism can be bad or good (main con of reductionism is computational)
+    - Frequentist statistics: every problem is a new problem
+- Implementation complexity
+    - Efficient in analyst's time (thanks to PPLs)
+    - Harder to scale computationally
+    - $\Longrightarrow$ shines on small data problems (there a much more of those than the "big data" hype would like you to think)
+- Statistical properties
+    - Optimal if the model is **well-specified**
+    - Sub-optimal in certain cases when the model is **mis-specified**
+        - Thankfully the modelling flexibility makes it easier to build better models
+        - Important to make model checks
+        
+        
+## Week 2 example
+
+- *Would you rather get strapped to...* 
+    - "shiny rocket": 1 success, 0 failures
+    - "rugged rocket": 98 successes, 2 failures
+
+::: column-margin
+![](../images/spaceman.jpeg){width="300"}
+:::
+
+
+
+
+## Paradox?
+  
+- Maximum likelihood *point estimates*: 
+    - "shiny rocket": 100% success rate (1 success, 0 failures) 
+    - "rugged rocket": 98% success rate (98 successes, 2 failures)
+- What is missing?
+    
+
+## Uncertainty estimates
+
+- Take-home message: 
+    - Point estimates are often insufficient, and can be very dangerous
+    - We want some **measure of uncertainty**
+    
+- Bayesian inference provides one way to build uncertainty measures
+    - Bayesian measures of uncertainty we will describe: **credible intervals**
+
+- Alternatives exist: 
+    - **Confidence intervals**, from frequentist statistics
+    - "End product" looks similar, but very different in interpretation and construction
+    
+    
+## Uncertainty will not go away
+
+::: column-margin
+![](../images/dinos.png){width="300"}
+:::
+
+
+- Just collect more data! Otherwise you inference will not be very useful anyways.
+    - Just launch more rockets and wait?
+    - In some cases the data is gone, i.e. we will never be able to collect more after a point (e.g.: phylogenetic tree inference)

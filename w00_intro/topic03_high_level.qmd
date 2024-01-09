@@ -1,0 +1,46 @@
+---
+title: "High-level picture"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## "Bayesian Recipe": high-level picture
+
+1. Construct a **probability model** including
+    - random variables for what we will measure/observe
+    - random variables for the unknown quantities
+        - those we are interested in ("parameters", "predictions")
+        - others that just help us formulate the problem ("nuisance", "random effects").
+2. Compute the posterior distribution conditionally on the actual data at hand
+3. Use the posterior distribution to:
+    - make prediction (point estimate)
+    - estimate uncertainty (credible intervals)
+    - make a decision (more on this later)
+
+
+## Plan
+
+- First week: probability essentials (foundations for steps 1 and 2 of the Bayesian Recipe)
+- Second week: steps 1, 2, 3 for one specific discrete probability models
+- Third week: step 1, 2, 3 for arbitrary models
+
+
+## First step of the Recipe: "constructing a probability model"
+
+- What is a model?
+- What is a probability model?
+- Example (week 2): building a probability model for the rocket launch problem.
+
+
+## What is a model?
+
+**(Scientific) model:** A simplification of reality amenable to mathematical investigation.
+
+$$\text{Reality} \xrightarrow{\text{Art + Scientific method}} \text{Model} \xrightarrow{\text{Mathematics}} \text{Prediction}$$
+
+- In this course "mathematics" will be Bayesian analysis/probability theory. 
+- Bayesian analysis/probability theory assume a model as starting point. 
+    - To create a first model is a bit of an art. It comes with data analysis experience.
+    - Then after we start with an initial model we can improve it by checking predictions against reality.

@@ -18,4 +18,40 @@ editor:
 ### Rationale
 
 - Conditioning is the workhorse of Bayesian inference!
-    - Used to define models ()
+    - Used to define models (as when we assigned probabilities to edges of a decision tree)
+    - And soon, to gain information on latent variables given observations.
+    
+
+## Conditioning as belief update
+
+**Key concept:** Bayesian methods use probabilities to encode *beliefs*. 
+
+![](../images/conditioning-intuition.png){width="400"}
+
+We will explore this perspective in much more details next week. 
+
+
+## A conditional probability is a probability
+
+The "updated belief" interpretation highlights the fact that we want the result of the 
+conditioning procedure, $\pr(\cdot | E)$ to be a probability 
+when viewed as a function of the first argument for any fixed $E$.
+
+
+## Intuition behind conditioning 
+
+::: column-margin
+![](../images/venn-pr-diag.png){width="300"}
+:::
+
+::: column-margin
+![](../images/conditioning.png){width="200"}
+:::
+
+- For a query even $A$, what should be the updated probability?
+- We want to remove from $A$ all the outcomes that are not compatible with the new information $E$. How?
+    - Take the intersection: $A \cap E$
+    - We also want: $\pr(S | E) = 1$ (last section)
+    - How? *Renormalize*:
+    $$\pr(A | E) = \frac{\pr(A \cap E)}{\pr(E)}$$
+    - Intersection can also be denoted using a comma, for example $\pr(A \cap E) = \pr(A, E)$

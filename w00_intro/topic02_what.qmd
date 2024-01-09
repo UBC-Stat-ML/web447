@@ -1,0 +1,55 @@
+---
+title: "What?"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Poll: What characterizes "Bayesian Analysis"?
+
+1. MAP estimators (maximum a posteriori)
+1. posterior means
+1. Bayes rule
+1. models where some unknown quantities are treated as random
+1. none of the above
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+All these popular answers are misleading and/or very incomplete:
+
+1. MAP estimators (maximum a posteriori)
+    - MAP is seldom used by expert Bayesians (mode is misleading in high dimensions)
+1. posterior means
+    - the posterior mean is often undefined (e.g. Bayesian analysis over combinatorial objects such as graphs)
+1. Bayes rule
+    - Bayes rule is intractable in most practical situations (we use MCMC/variational methods)
+1. models where some unknown quantities are treated as random
+    - true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models
+    
+**So... what *is* Bayesian Analysis?**
+
+### Preview of key definitions
+
+**Bayesian Analysis:** statistical discipline centered around the use of **Bayes estimators** 
+
+**Bayes estimators:** for data $Y$, unobserved $X$, loss $L$, and possible actions $A$, the Bayes estimator is defined as:
+
+$$\argmin \{ \E[L(a, X) | Y] : a \in A \}$$
+
+**Note:** you are not expected to understand this equation at this point!
+
+### This course
+
+The primary objective of this course is to understand Bayes estimators:
+
+- Why they are so powerful.
+- Their limitations (model misspecification, computational challenges).
+- Important special cases (posterior means, credible intervals, MAP).
+- How to do it in practice
+    - how to build models
+    - how to approximate conditional expectations.
+:::

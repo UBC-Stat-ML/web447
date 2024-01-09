@@ -10,6 +10,9 @@ website:
       - schedule.qmd
       - project.qmd
       - text: "---"
+      - section: "Introduction"
+        contents: 
+          - auto: "w00_intro/*"
       - section: "Probability essentials"
         contents: 
           - auto: "w01_discrete_inference/*"

@@ -1,0 +1,29 @@
+---
+title: "Examples"
+editor: 
+  mode: source
+---
+
+## Some examples of Bayesian inference 
+
+::: column-margin
+![](../images/dinos.png){width="300"}
+:::
+
+::: column-margin
+![](../images/bayes-black-hole.jpeg){width="300"}
+:::
+
+
+- Origins of life/cancer/language and characterization of their respective evolutionary processes
+- Modelling high-throughput genomics data (single-cell sequencing, CRISPR-CAS9, ultra-deep, expression) 
+- Black-hole imaging
+- "Classical" tasks: classification, regression, clustering, etc
+- A/B testing and Bayesian optimization
+- Determining fate of the universe from cosmic microwave background 
+
+
+## To read more on example applications
+
+For an entertaining popular science book on various applications of Bayesian statistics, 
+have a look at *The Theory That Would Not Die* Sharon Bertsch McGrayne. [PDF available via UBC library](https://www.library.ubc.ca/).
