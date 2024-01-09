@@ -1,7 +1,7 @@
 resources/_gen
 .hugo_build.lock
 .Rproj.user
-
+.RData
 /.quarto/
 _site
 _coinbag.html
