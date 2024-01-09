@@ -5,7 +5,8 @@ editor:
 
 <!-- 
 tiny-shortex for Quarto
-restricted to macros supported by KaTeX
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
 -->
 
 <!-- common sets and set operations -->
@@ -30,7 +31,7 @@ restricted to macros supported by KaTeX
 <!-- unary functions -->
 \newcommand{\pr}{\mathbb{P}}  
 \newcommand{\ex}{\mathbb{E}}
-\newcommand{\Pr}{\mathbb{P}}  
+<!-- \newcommand{\Pr}{\mathbb{P}}   -->
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}
@@ -38,6 +39,7 @@ restricted to macros supported by KaTeX
 \newcommand{\cor}{\operatorname{Corr}}
 \newcommand{\supp}{\operatorname{supp}} 
 
+<!-- Min and max -->
 \def\argmax{\operatorname{arg\,max}}
 \def\argmin{\operatorname{arg\,min}}
 \def\esssup{\operatorname{ess\,sup}}
@@ -98,3 +100,6 @@ restricted to macros supported by KaTeX
 <!-- calculus -->
 \newcommand{\dee}{\mathrm{d}}
 \newcommand{\der}[2]{\frac{\dee #1}{\dee #2}}
+
+<!-- general purpose math -->
+\newcommand{\ind}{\mathbb{1}}
