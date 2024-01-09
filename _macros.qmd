@@ -30,11 +30,19 @@ restricted to macros supported by KaTeX
 <!-- unary functions -->
 \newcommand{\pr}{\mathbb{P}}  
 \newcommand{\ex}{\mathbb{E}}
+\newcommand{\Pr}{\mathbb{P}}  
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}
 \newcommand{\cov}{\operatorname{Cov}}	
 \newcommand{\cor}{\operatorname{Corr}}
 \newcommand{\supp}{\operatorname{supp}} 
+
+\def\argmax{\operatorname{arg\,max}}
+\def\argmin{\operatorname{arg\,min}}
+\def\esssup{\operatorname{ess\,sup}}
+\def\essinf{\operatorname{ess\,inf}}
+
 
 <!-- binary operators -->
 \newcommand{\dist}{\sim}
