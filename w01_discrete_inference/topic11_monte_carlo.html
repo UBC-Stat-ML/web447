@@ -60,6 +60,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -250,6 +252,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#approximation-of-expectations-using-forward-simulation" id="toc-approximation-of-expectations-using-forward-simulation" class="nav-link" data-scroll-target="#approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</a></li>
   </ul>
 </nav>
     </div>
@@ -275,17 +278,21 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- 
 tiny-shortex for Quarto
-restricted to macros supported by KaTeX
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
 -->
 <!-- common sets and set operations -->
 <!-- text shortcuts -->
 <!-- convergence -->
 <!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   -->
+<!-- Min and max -->
 <!-- binary operators -->
 <!-- independence -->
 <!-- parametric distributions -->
 <!-- nonparametric distributions -->
 <!-- calculus -->
+<!-- general purpose math -->
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -303,12 +310,34 @@ Caution
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Simple Monte Carlo method</li>
+</ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-
-
+<ul>
+<li>Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g.&nbsp;Importance Sampling and Markov chain Monte Carlo (MCMC))</li>
+</ul>
 </section>
+</section>
+<section id="approximation-of-expectations-using-forward-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</h2>
+<ul>
+<li>As before, we want to compute an expectation <span class="math inline">\(\mathbb{E}[g(X, Y_1, \dots, Y_4)]\)</span></li>
+<li>But imagine a very large tree, but where most branches have very low probability and only few have large probability</li>
+<li>In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will <em>approximate</em> expectations using forward simulation (a method know as <strong>simple Monte Carlo</strong>)</li>
+<li>This is done as follows:
+<ul>
+<li>Call your forward simulator <span class="math inline">\(M\)</span> times</li>
+<li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}, Y_1^{(m)}, \dots, Y_4^{(m)}) \sim p_{X, Y_{1:4}}(\cdot)\]</span></li>
+<li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(g^{(m)}\)</span> <span class="math display">\[g^{(m)}= g(X^{(m)}, Y_1^{(m)}, \dots, Y_4^{(m)}).\]</span></li>
+<li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M g^{(m)}.\]</span></li>
+</ul></li>
+</ul>
+<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y_1, \dots, Y_4)].\]</span></p>
+
+
 </section>
 
 </main> <!-- /main -->
