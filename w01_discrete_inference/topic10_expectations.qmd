@@ -13,4 +13,52 @@ editor:
 
 ### Topics 
 
+- Expectation for discrete random models
+- Law of the Unconscious Statistician
+
 ### Rationale
+
+Expectation si the main tool to translate a posterior distribution into 
+the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action). 
+
+
+## Expectation of a single random variable
+
+Recall:
+$$\E[X] = \sum_x x p_X(x),$$
+where the sum is over the point masses of $X$, i.e. $\{x : p_X(x) > 0\}$. 
+
+**Test yourself:** compute $\E[X]$ if $X \sim \distBern(p)$. 
+
+
+## Law of the Unconscious Statistician
+
+**Proposition:** if $g$ is some function,
+$$\E[g(X)] = \sum_x g(x) p_X(x).$$
+
+**Test yourself:** compute $\E[X^2]$ if $X \sim \distBern(p)$, and hence $\var[X] = \E[X^2] - (\E[X])^2$.  
+
+
+## Expectation of a function of several random variables
+
+Let us go back to our running example:
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+**Exercise:** computing $\ex[X (Y_1+1)]$
+
+**Form:** $\ex[g(X, Y_1, \dots, Y_4)]$ for $g(x, y_1, \dots, y_4) = x(y_1+1)$. 
+
+Generic strategy: 
+
+- start the joint PMF of **all** the random variables in the model (even if they do not occur in $g$)
+- compute the expectation using
+$$\ex[g(X, Y_1, \dots, Y_4)] = \sum_x \sum_{y_1} \sum_{y_2} \dots \sum_{y_4} g(x, y_1, \dots, y_4)  p(x, y_1, y_2, y_3, y_4).$$
+- Recall: $p(x, y_1, y_2, y_3, y_4)$ can be computed using the chain rule. 
+
+Recall the decision tree, how to visualize the above equation?
+
+{{< include ../blocks/_decisiontree.qmd >}}
+
+
+

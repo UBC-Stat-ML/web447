@@ -70,8 +70,8 @@ Then $(X = 1)$ corresponds to the red circle.
 
 More precisely:
 
-- $X$ is the "mechanism of observation"..
-- whereas the actual observation is a realization of $X$.
+- $Y$ is the "mechanism of observation"..
+- whereas the actual observation is a realization $y$ of $Y$.
 
 
 ## Extension

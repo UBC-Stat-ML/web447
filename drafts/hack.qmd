@@ -1,0 +1,9 @@
+---
+title: "Do not delete"
+editor: 
+  mode: source
+---
+
+::: column-margin
+![](../prior-post-unid.gif){width="200"}
+:::

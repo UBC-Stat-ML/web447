@@ -14,6 +14,7 @@ editor:
 
 - Mathematical statement
 - Visual intuition on a decision tree
+- Special names for the pieces of chain rule (joint and conditional PMFs)
 - Conditional independence
 
 ### Rationale
@@ -43,7 +44,7 @@ $$\pr(E_1, E_2, E_3 \dots) = \pr(E_1) \pr(E_2 | E_1) \pr(E_3 | E_1, E_2) \dots.$
 
 **Example:** what is the probability of the node in red?
 
-## Poll
+## Poll: probability of a node
 
 1. 1/2
 1. 1/4
@@ -60,7 +61,7 @@ Multiplying the four edge leading to the node we get: $1/2 \cdot 1/2 \cdot 1/2 \
 
 **Review:** what is the event corresponding to that node?
 
-## Poll
+## Poll: event for a node
 
 1. $(Y_3 = 1)$
 1. $(Y_3 = 1, Y_2 = 1)$
@@ -77,6 +78,25 @@ the event is $(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)$.
 The calculation we did visually in the  previous clicker question is mathematically:
 $$\pr(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \pr(X = 1) \pr(Y_1 | X = 1) \pr(Y_2 | X = 1, Y_1 = 1) \pr(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).$$
 :::
+
+## Joint PMF
+
+We will often encounter expression of the form of a conjunction (intersection/and) of several variables. 
+A handy notation for that is the **joint PMF** 
+
+For example, here is the joint PMF of $(X, Y_1, Y_2, Y_3)$:
+
+$$p(x, y_1, y_2, y_3) = \pr(X = x, Y_1 = y_1, Y_2 = y_2, Y_3 = y_3).$$
+
+Sometimes we put the random variables in question as subscript, for example $p_{X, Y_1}(x, y)$ for the joint 
+PMF of $X$ and $Y_1$. 
+
+
+## Conditional PMF
+
+Similarly, here is an example of a conditional PMF:
+$$p_{Y_1|X}(y | x) = \pr(Y_1 = y | X = x).$$
+
 
 ## Conditional independence
 

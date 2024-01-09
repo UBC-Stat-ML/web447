@@ -66,6 +66,6 @@ editor:
 :::
 
 
-- Just collect more data! Otherwise you inference will not be very useful anyways.
+- Just collect more data??
     - Just launch more rockets and wait?
-    - In some cases the data is gone, i.e. we will never be able to collect more after a point (e.g.: phylogenetic tree inference)
+    - In some cases the data is just "gone", i.e. we will never be able to collect more after a point (e.g.: phylogenetic tree inference)
