@@ -60,14 +60,14 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "",
-    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery."
   },
   {
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT447C Bayesian Statistics",
-    "section": "Course description",
-    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery."
+    "section": "",
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery."
   },
   {
     "objectID": "syllabus.html#lecture-time-and-place",
@@ -235,7 +235,7 @@
     "href": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
     "title": "Probability mass functions",
     "section": "Simulation/sampling from a PMF",
-    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 1 1 1 1 1 1 0 0 0 1\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 3 2\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
+    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 0 1 1 1 1 0 0 0 1 0\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 6 1\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
   },
   {
     "objectID": "w01_discrete_inference/topic07_conditional.html",
@@ -431,14 +431,14 @@
     "href": "exercises/ex01.html",
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "",
-    "text": "Caution\n\n\n\nWebsite under construction. At this stage, information on this page may change."
+    "text": "Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).\nIntroduce forward discrete simulation.\nReview expectation and the law of large numbers."
   },
   {
     "objectID": "exercises/ex01.html#goals",
     "href": "exercises/ex01.html#goals",
     "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Goals",
-    "text": "Goals\n\nBring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).\nIntroduce forward discrete simulation.\nReview expectation and the law of large numbers."
+    "section": "",
+    "text": "Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).\nIntroduce forward discrete simulation.\nReview expectation and the law of large numbers."
   },
   {
     "objectID": "exercises/ex01.html#setup",
