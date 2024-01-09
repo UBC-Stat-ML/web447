@@ -8,14 +8,12 @@ tiny-shortex for Quarto
 restricted to macros supported by KaTeX
 -->
 
-\newcommand{\ensuremath}[1]{#1}
-
 <!-- common sets and set operations -->
-\newcommand{\reals}{\ensuremath{\mathbb{R}}}
-\newcommand{\ints}{\ensuremath{\mathbb{Z}}}
-\newcommand{\rats}{\ensuremath{\mathbb{Q}}}
-\newcommand{\nats}{\ensuremath{\mathbb{N}}}
-\newcommand{\comps}{\ensuremath{\mathbb{C}}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\rats}{\mathbb{Q}}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\comps}{\mathbb{C}}
 
 <!-- text shortcuts -->
 \newcommand{\iid}{\textrm{i.i.d.}\@\xspace}
@@ -91,4 +89,4 @@ restricted to macros supported by KaTeX
 
 <!-- calculus -->
 \newcommand{\dee}{\mathrm{d}}
-\newcommand{\der}[2]{\ensuremath{\frac{\dee #1}{\dee #2}}}
+\newcommand{\der}[2]{\frac{\dee #1}{\dee #2}}
