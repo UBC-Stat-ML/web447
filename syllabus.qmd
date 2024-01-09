@@ -4,8 +4,6 @@ editor:
   mode: source
 ---
 
-{{< include _construction.qmd >}}
-
 ## Course description
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
