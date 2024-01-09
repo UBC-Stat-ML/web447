@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Probability mass functions</title>
+<title>Bayes1@UBC - Chain rule</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,6 +59,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -75,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic00_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic03_pmfs.html">Probability mass functions</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic08_chain.html">Chain rule</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Probability essentials</span></a>
+ <span class="menu-text">Introduction</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -130,19 +133,60 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic00_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High-level picture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Probability essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic02_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_pmfs.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
@@ -154,37 +198,37 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Axioms of probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic15_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic20_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Chain rule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic25_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic30_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
@@ -206,16 +250,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition">Definition</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#proposition" id="toc-proposition" class="nav-link" data-scroll-target="#proposition">Proposition</a></li>
+  <li><a href="#generalization" id="toc-generalization" class="nav-link" data-scroll-target="#generalization">Generalization</a></li>
+  <li><a href="#visual-intuition" id="toc-visual-intuition" class="nav-link" data-scroll-target="#visual-intuition">Visual intuition</a></li>
+  <li><a href="#poll" id="toc-poll" class="nav-link" data-scroll-target="#poll">Poll</a></li>
+  <li><a href="#poll-1" id="toc-poll-1" class="nav-link" data-scroll-target="#poll-1">Poll</a></li>
+  <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">Conditional independence</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability mass functions</h1>
+<h1 class="title">Chain rule</h1>
 </div>
 
 
@@ -230,22 +284,170 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<!-- 
+tiny-shortex for Quarto
+restricted to macros supported by KaTeX
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Mathematical statement</li>
+<li>Visual intuition on a decision tree</li>
+<li>Conditional independence</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>The chain rule seem innocent but is used heavily in Bayesian statistics. It is also the building block for Bayes rule.</p>
+</section>
+</section>
+<section id="proposition" class="level2">
+<h2 class="anchored" data-anchor-id="proposition">Proposition</h2>
+<p>If <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are any events, <span class="math display">\[\mathbb{P}(E_1, E_2) = \mathbb{P}(E_1) \mathbb{P}(E_2 | E_1).\]</span></p>
+<p>This is true in any order, i.e.&nbsp;we also have <span class="math inline">\(\mathbb{P}(E_1, E_2) = \mathbb{P}(E_2) \mathbb{P}(E_1 | E_2)\)</span>.</p>
+</section>
+<section id="generalization" class="level2">
+<h2 class="anchored" data-anchor-id="generalization">Generalization</h2>
+<p>For any events <span class="math inline">\(E_1, E_2, E_3 \dots\)</span>,</p>
+<p><span class="math display">\[\mathbb{P}(E_1, E_2, E_3 \dots) = \mathbb{P}(E_1) \mathbb{P}(E_2 | E_1) \mathbb{P}(E_3 | E_1, E_2) \dots.\]</span></p>
+</section>
+<section id="visual-intuition" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="visual-intuition">Visual intuition</h2>
+<p><strong>Chain rule:</strong> the probability of a node is the product of the edge labels on the path to the root.</p>
+<div class="column-page">
+<div class="cell" data-fig-height="5">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+S__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false["Y1=false"]
+S__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true["Y2=true"]
+S -- 0.33 --&gt; S__and__X_0["X=0"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S -- 0.33 --&gt; S__and__X_1["X=1"]
+S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false["Y1=false"]
+S__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true["Y2=true"]
+S__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true["Y2=true"]
+S__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true["Y1=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true["Y1=true"]
+S -- 0.33 --&gt; S__and__X_2["X=2"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+style S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true fill:#f9f,stroke:#333,stroke-width:4px
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Example:</strong> what is the probability of the node in red?</p>
+</section>
+<section id="poll" class="level2">
+<h2 class="anchored" data-anchor-id="poll">Poll</h2>
+<ol type="1">
+<li>1/2</li>
+<li>1/4</li>
+<li>1/8</li>
+<li>1/24</li>
+<li>None of the above</li>
+</ol>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Click for answer
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Website under construction. At this stage, information on this page may change.</p>
+<p>Multiplying the four edge leading to the node we get: <span class="math inline">\(1/2 \cdot 1/2 \cdot 1/2 \cdot 1/3 = 1/24\)</span>.</p>
 </div>
 </div>
-<section id="definition" class="level2">
-<h2 class="anchored" data-anchor-id="definition">Definition</h2>
-<p><strong>Probability Mass Function (PMF)</strong>: the PMF of random variable <span class="math inline">\(X\)</span>, denoted <span class="math inline">\(p\)</span> (or <span class="math inline">\(p_X\)</span> if disambiguation is needed, is defined as <span class="math inline">\(p(x) = \Pr(X = x)\)</span></p>
+</div>
+<p><strong>Review:</strong> what is the event corresponding to that node?</p>
+</section>
+<section id="poll-1" class="level2">
+<h2 class="anchored" data-anchor-id="poll-1">Poll</h2>
+<ol type="1">
+<li><span class="math inline">\((Y_3 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\)</span></li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Recall that the event is the intersection of all node labels to the root, hence the event is <span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\)</span>.</p>
+<p>The calculation we did visually in the previous clicker question is mathematically: <span class="math display">\[\mathbb{P}(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \mathbb{P}(X = 1) \mathbb{P}(Y_1 | X = 1) \mathbb{P}(Y_2 | X = 1, Y_1 = 1) \mathbb{P}(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="conditional-independence" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-independence">Conditional independence</h2>
+<p>The model was specified as:</p>
+<p><span class="math display">\[
+\begin{align*}
+X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
+Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
+\end{align*}
+\]</span> i.e.&nbsp;with <span class="math inline">\(\mathbb{P}(X = x)\)</span> and <span class="math inline">\(\mathbb{P}(Y_i = y | X = x)\)</span> for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<p><strong>Question:</strong> how did we go from <span class="math inline">\(\mathbb{P}(Y_2 | X = 1, Y_1 = 1)\)</span> (in our chain rule computation) to <span class="math inline">\(\mathbb{P}(Y_2 | X = 1)\)</span> (model specification)?</p>
+<p><strong>Definition:</strong> <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> are conditionally independence given <span class="math inline">\(Z\)</span> if <span class="math display">\[\mathbb{P}(V = v, W = w | Z = z) = \mathbb{P}(V = v | Z = z) \mathbb{P}(W = w | Z = z).\]</span></p>
+<p><strong>Exercise:</strong> show the above definition is equivalent to:</p>
+<p><span class="math display">\[\mathbb{P}(V = v | W = w, Z = z) = \mathbb{P}(V = v | Z = z).\]</span></p>
 
 
 </section>
