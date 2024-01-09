@@ -258,8 +258,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#proposition" id="toc-proposition" class="nav-link" data-scroll-target="#proposition">Proposition</a></li>
   <li><a href="#generalization" id="toc-generalization" class="nav-link" data-scroll-target="#generalization">Generalization</a></li>
   <li><a href="#visual-intuition" id="toc-visual-intuition" class="nav-link" data-scroll-target="#visual-intuition">Visual intuition</a></li>
-  <li><a href="#poll" id="toc-poll" class="nav-link" data-scroll-target="#poll">Poll</a></li>
-  <li><a href="#poll-1" id="toc-poll-1" class="nav-link" data-scroll-target="#poll-1">Poll</a></li>
+  <li><a href="#poll-probability-of-a-node" id="toc-poll-probability-of-a-node" class="nav-link" data-scroll-target="#poll-probability-of-a-node">Poll: probability of a node</a></li>
+  <li><a href="#poll-event-for-a-node" id="toc-poll-event-for-a-node" class="nav-link" data-scroll-target="#poll-event-for-a-node">Poll: event for a node</a></li>
+  <li><a href="#joint-pmf" id="toc-joint-pmf" class="nav-link" data-scroll-target="#joint-pmf">Joint PMF</a></li>
+  <li><a href="#conditional-pmf" id="toc-conditional-pmf" class="nav-link" data-scroll-target="#conditional-pmf">Conditional PMF</a></li>
   <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">Conditional independence</a></li>
   </ul>
 </nav>
@@ -304,6 +306,7 @@ restricted to macros supported by KaTeX
 <ul>
 <li>Mathematical statement</li>
 <li>Visual intuition on a decision tree</li>
+<li>Special names for the pieces of chain rule (joint and conditional PMFs)</li>
 <li>Conditional independence</li>
 </ul>
 </section>
@@ -381,8 +384,8 @@ style S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true fill:#f9f,stroke:#33
 </div>
 <p><strong>Example:</strong> what is the probability of the node in red?</p>
 </section>
-<section id="poll" class="level2">
-<h2 class="anchored" data-anchor-id="poll">Poll</h2>
+<section id="poll-probability-of-a-node" class="level2">
+<h2 class="anchored" data-anchor-id="poll-probability-of-a-node">Poll: probability of a node</h2>
 <ol type="1">
 <li>1/2</li>
 <li>1/4</li>
@@ -408,8 +411,8 @@ Click for answer
 </div>
 <p><strong>Review:</strong> what is the event corresponding to that node?</p>
 </section>
-<section id="poll-1" class="level2">
-<h2 class="anchored" data-anchor-id="poll-1">Poll</h2>
+<section id="poll-event-for-a-node" class="level2">
+<h2 class="anchored" data-anchor-id="poll-event-for-a-node">Poll: event for a node</h2>
 <ol type="1">
 <li><span class="math inline">\((Y_3 = 1)\)</span></li>
 <li><span class="math inline">\((Y_3 = 1, Y_2 = 1)\)</span></li>
@@ -434,6 +437,17 @@ Click for answer
 </div>
 </div>
 </div>
+</section>
+<section id="joint-pmf" class="level2">
+<h2 class="anchored" data-anchor-id="joint-pmf">Joint PMF</h2>
+<p>We will often encounter expression of the form of a conjunction (intersection/and) of several variables. A handy notation for that is the <strong>joint PMF</strong></p>
+<p>For example, here is the joint PMF of <span class="math inline">\((X, Y_1, Y_2, Y_3)\)</span>:</p>
+<p><span class="math display">\[p(x, y_1, y_2, y_3) = \mathbb{P}(X = x, Y_1 = y_1, Y_2 = y_2, Y_3 = y_3).\]</span></p>
+<p>Sometimes we put the random variables in question as subscript, for example <span class="math inline">\(p_{X, Y_1}(x, y)\)</span> for the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y_1\)</span>.</p>
+</section>
+<section id="conditional-pmf" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-pmf">Conditional PMF</h2>
+<p>Similarly, here is an example of a conditional PMF: <span class="math display">\[p_{Y_1|X}(y | x) = \mathbb{P}(Y_1 = y | X = x).\]</span></p>
 </section>
 <section id="conditional-independence" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-independence">Conditional independence</h2>
