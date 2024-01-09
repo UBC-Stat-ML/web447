@@ -1,0 +1,47 @@
+---
+title: "Bayes rule"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+
+## Outline
+
+### Topics 
+
+- Bayes rule for discrete models
+- Visual intuition
+
+### Rationale
+
+First example of computing a *posterior distribution*, a key concept in Bayesian statistics.
+
+
+## Running example
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+Consider the question in the first exercise:
+
+Suppose now that you observe the outcome of the 4 coin flips, but not the type 
+of coin that was picked. Say you observe: "heads", "heads", "heads", "heads" = `[0, 0, 0, 0]`. 
+Given that observation, what is the probability that you picked the standard coin (i.e., the one with $p = 1/2$)?
+
+
+## Strategy
+
+Denote the observation by $y_{1:4} = (0, 0, 0, 0)$. 
+
+1. Attack the more general problem $\pi(x) = \pr(X = x | Y_{1:4} = y_{1:4})$. 
+2. By definition of conditioning:
+$$\pi(x) = \frac{\pr(X = x, Y_{1:4} = y_{1:4})}{\pr(Y_{1:4} = y_{1:4})}.$$
+Let us call the numerator 
+$$\gamma(x) = \pr(X = x, Y_{1:4} = y_{1:4}),$$
+and the denominator,
+$$Z = \pr(Y_{1:4} = y_{1:4}).$$
+3. Start by computing $\gamma(x)$ for all $x$. (using chain rule)
+4. Note $Z = \gamma(0) + \gamma(1) + \gamma(2)$ (why?).
+

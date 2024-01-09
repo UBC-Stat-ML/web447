@@ -1,0 +1,53 @@
+---
+editor: 
+  mode: source
+---
+
+:::{.column-page}
+```{mermaid}
+%%| fig-height: 5
+flowchart TD
+S__and__X_0 -- 1.0 --> S__and__X_0__and__Y1_false["Y1=false"]
+S__and__X_2__and__Y1_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true["Y2=true"]
+S -- 0.33 --> S__and__X_0["X=0"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S -- 0.33 --> S__and__X_1["X=1"]
+S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false["Y3=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1 -- 0.5 --> S__and__X_1__and__Y1_false["Y1=false"]
+S__and__X_1__and__Y1_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true["Y2=true"]
+S__and__X_0__and__Y1_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false["Y2=false"]
+S__and__X_1__and__Y1_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true["Y2=true"]
+S__and__X_2 -- 1.0 --> S__and__X_2__and__Y1_true["Y1=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1 -- 0.5 --> S__and__X_1__and__Y1_true["Y1=true"]
+S -- 0.33 --> S__and__X_2["X=2"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --> S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true["Y3=true"]
+S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --> S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false["Y4=false"]
+S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true["Y4=true"]
+S__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --> S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --> S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false["Y3=false"]
+style S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true fill:#f9f,stroke:#333,stroke-width:4px
+```
+:::
