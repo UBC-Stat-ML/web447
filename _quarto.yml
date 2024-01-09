@@ -10,7 +10,7 @@ website:
       - schedule.qmd
       - project.qmd
       - text: "---"
-      - section: "Discrete inference"
+      - section: "Probability essentials"
         contents: 
           - auto: "w01_discrete_inference/*"
           - text: "Exercises"

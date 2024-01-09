@@ -1,7 +1,14 @@
 # web447
 
-## Publishing 
+## Publishing
+
+```         
+quarto publish gh-pages
+```
+
+## Slides
 
 ```
-quarto publish gh-pages
+cd w01_discrete_inference
+quarto preview -t revealjs topic00_outcomes.qmd
 ```

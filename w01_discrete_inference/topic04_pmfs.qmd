@@ -1,0 +1,84 @@
+---
+title: "Probability mass functions"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Definition
+
+**Probability Mass Function (PMF)**: 
+
+- denoted by $p$ (not to be confused by $\pr$),
+- defined by: $$p(x) = \pr(X = x).$$
+- If there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,
+    - $p_X$ for the PMF of the latent random variable,
+    - $p_Y$ for the PMF of the observed random variable.
+
+
+# Example: coins
+
+::: column-margin
+![](../images/Bernoulli.png){width="200"}
+::: 
+
+
+- PMF of fair coin: $p(0) = p(1) = 1/2$
+- Generalization: the family of **Bernoulli PMFs**
+- Recall: when you flip a "Biased" coin 
+    - get a 1 with probability $p \in [0, 1]$ 
+    - get a 0 with probability $1 - p$
+- $p$ is an example of what is called a PMF's *parameter*
+- Notation: $X \sim \distBern(p)$
+
+
+# Example: discrete uniform distributions
+
+::: column-margin
+![](../images/Uniform.png){width="200"}
+::: 
+
+- Example: dice
+- Notation: $Y \sim \distUnif\{1, 2, 3, 4, 5, 6\}$
+
+
+## Simulation/sampling from a PMF {#sec-simulate-pmf}
+
+### In R 
+
+```{r}
+require(extraDistr)
+
+# 10 coin flips:
+rbern(10, prob=0.5)
+
+# two dice rolls
+rdunif(2, min=1, max=6)
+```
+
+
+### How does it work?
+
+- Think of the green lines in the uniform PMF as "sticks" with "labels."
+  - The "labels" are the different realization, e.g. 1, 2, 3, ..., 6.
+- Place the six sticks in the interval $[0, 1]$ so that they do not overlap.
+- Sample a uniform real number in $[0, 1]$ 
+  - in R: `runif(1)`
+- The uniform falls in exactly one of the sticks.
+- Return the label of that stick.
+
+
+### Mathematical explanation
+
+The above "stick-based" algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function. 
+
+**Cumulative distribution function (CDF):** $F(x) = \pr(X \le x).$
+
+**Quantile function:** $F^{-1}(u) = \inf\{x \in \reals: u \le F(x)\}$. 
+
+Then the "stick-based" algorithm can be written as:
+
+1. $U \sim \distUnif[0, 1]$ 
+2. Return $F^{-1}(U)$. 

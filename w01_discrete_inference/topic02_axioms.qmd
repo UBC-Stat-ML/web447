@@ -1,0 +1,29 @@
+---
+title: "Axioms of probability"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Partitions
+
+::: column-margin
+![](../images/partition.png){width="100"}
+:::
+
+**Definition:** $E_1, E_2, \dots$ is a **partition** of $E$ if:
+
+- the $E_i$'s are disjoint, i.e., $$E_i \cap E_j = \emptyset \text{ when } i\neq j,$$ 
+- and their union is $E$, i.e., $\cup_i E_i = E$.
+
+
+## Axioms of probability
+
+- A **probability** is a function $\pr$ that satisfy the following constraints:
+    - $\pr$ should take events as input and return a number between zero and one:
+      $$\pr(E) \in [0, 1].$$
+    - If $E_1, E_2, \dots$ is a partition of $E$, then $$\pr(E) = \sum_i \pr(E_i).$$
+    - $\pr(S) = 1$
+- Thanks to the constraints, even if I only specify a few known probabilities I can recover many other ones mathematically/computationally.

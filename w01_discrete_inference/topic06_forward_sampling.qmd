@@ -1,0 +1,56 @@
+---
+title: "Forward sampling"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics 
+
+- Notion of forward sampling (also known as forward simulation)
+- How to do it in practice
+  - Useful functions
+  - Graphical models
+  
+
+### Rationale
+
+- Sampling is the main way Bayesian inference is performed nowadays. 
+- We introduce here the simplest flavour of sampling, *forward sampling*. 
+- Bayesian inference mostly uses a more complicated type of sampling called *posterior sampling* which we will cover later. 
+- But forward sampling is still helpful to help debug Bayesian inference software as we will see soon.
+
+
+## Forward sampling as depth-first traversal
+
+Recall our recurring bag sampling example, with its corresponding decision tree:
+
+{{< include ../blocks/_decisiontree.qmd >}}
+
+- Forward simulation is a type of [tree traversal](https://en.wikipedia.org/wiki/Tree_traversal).
+  I.e. moving from node to node in the tree. 
+- Forward simulation is a recursive process initialized at the root of the decision tree (labelled $S$).
+    - When we are a node $v$ in the tree, we pick one of $v$'s children at random. 
+        - More precisely, we use methods discussed in [the previous section on simulation from PMFs](topic04_pmfs.qmd#sec-simulate-pmf)
+    - We recurse until we reach a leaf. 
+        - From this leaf we obtain an outcome and hence a realization for all random variables, both "observed" and "unobserved." 
+
+
+## Forward sampling as specifying a model
+
+We have encountered that notation earlier:
+
+$$
+\begin{align*}
+X &\sim \distUnif\{0, 1, 2\} \\
+Y_i | X &\sim \distBern(X/2).
+\end{align*}
+$$ 
+- This notation is a recipe providing all the information required to perform forward sampling. 
+    - Specifically, the PMF to use at each recursion step. 
+    - In continuous models, it will be the same idea except that we will have a probability density instead of a PMF. 
+

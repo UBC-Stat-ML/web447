@@ -1,0 +1,21 @@
+---
+title: "Conditioning"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+
+## Outline
+
+### Topics 
+
+- Intuition on conditioning
+- A conditional probability is a probability. 
+
+### Rationale
+
+- Conditioning is the workhorse of Bayesian inference!
+    - Used to define models ()

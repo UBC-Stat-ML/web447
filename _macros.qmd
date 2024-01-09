@@ -3,6 +3,13 @@ editor:
   mode: source
 ---
 
+\newcommand{\ensuremath}[1]{#1}
+
+\newcommand{\reals}{\ensuremath{\mathbb{R}}}
+\newcommand{\ints}{\ensuremath{\mathbb{Z}}}
+\newcommand{\rats}{\ensuremath{\mathbb{Q}}}
+\newcommand{\nats}{\ensuremath{\mathbb{N}}}
+\newcommand{\comps}{\ensuremath{\mathbb{C}}}
 
 \newcommand{\iid}{\textrm{i.i.d.}\@\xspace}
 \newcommand{\as}{\textrm{a.s.}\@\xspace}
@@ -68,4 +75,6 @@ editor:
 \newcommand{\distObs}{\distNamed{Obs}}
 \newcommand{\distCRM}{\distNamed{CRM}}
 \newcommand{\distNCRM}{\distNamed{NCRM}}
+
+
 
