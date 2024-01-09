@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Probability mass functions</title>
+<title>Bayes1@UBC - Do not delete</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,8 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -109,7 +73,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic04_pmfs.html">Probability mass functions</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -217,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
@@ -277,30 +243,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition">Definition</a></li>
-  <li><a href="#example-coins" id="toc-example-coins" class="nav-link" data-scroll-target="#example-coins">Example: coins</a></li>
-  <li><a href="#example-discrete-uniform-distributions" id="toc-example-discrete-uniform-distributions" class="nav-link" data-scroll-target="#example-discrete-uniform-distributions">Example: discrete uniform distributions</a>
-  <ul class="collapse">
-  <li><a href="#sec-simulate-pmf" id="toc-sec-simulate-pmf" class="nav-link" data-scroll-target="#sec-simulate-pmf">Simulation/sampling from a PMF</a>
-  <ul class="collapse">
-  <li><a href="#in-r" id="toc-in-r" class="nav-link" data-scroll-target="#in-r">In R</a></li>
-  <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work?</a></li>
-  <li><a href="#mathematical-explanation" id="toc-mathematical-explanation" class="nav-link" data-scroll-target="#mathematical-explanation">Mathematical explanation</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Probability mass functions</h1>
+<h1 class="title">Do not delete</h1>
 </div>
 
 
@@ -315,112 +265,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<!-- 
-tiny-shortex for Quarto
-restricted to macros supported by KaTeX
--->
-<!-- common sets and set operations -->
-<!-- text shortcuts -->
-<!-- convergence -->
-<!-- unary functions -->
-<!-- binary operators -->
-<!-- independence -->
-<!-- parametric distributions -->
-<!-- nonparametric distributions -->
-<!-- calculus -->
-<section id="definition" class="level2">
-<h2 class="anchored" data-anchor-id="definition">Definition</h2>
-<p><strong>Probability Mass Function (PMF)</strong>:</p>
-<ul>
-<li>denoted by <span class="math inline">\(p\)</span> (not to be confused by <span class="math inline">\(\mathbb{P}\)</span>),</li>
-<li>defined by: <span class="math display">\[p(x) = \mathbb{P}(X = x).\]</span></li>
-<li>If there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,
-<ul>
-<li><span class="math inline">\(p_X\)</span> for the PMF of the latent random variable,</li>
-<li><span class="math inline">\(p_Y\)</span> for the PMF of the observed random variable.</li>
-</ul></li>
-</ul>
-</section>
-<section id="example-coins" class="level1 page-columns page-full">
-<h1>Example: coins</h1>
+
+
+
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/Bernoulli.png" class="img-fluid" width="200"></p>
-</div></div><ul>
-<li>PMF of fair coin: <span class="math inline">\(p(0) = p(1) = 1/2\)</span></li>
-<li>Generalization: the family of <strong>Bernoulli PMFs</strong></li>
-<li>Recall: when you flip a “Biased” coin
-<ul>
-<li>get a 1 with probability <span class="math inline">\(p \in [0, 1]\)</span></li>
-<li>get a 0 with probability <span class="math inline">\(1 - p\)</span></li>
-</ul></li>
-<li><span class="math inline">\(p\)</span> is an example of what is called a PMF’s <em>parameter</em></li>
-<li>Notation: <span class="math inline">\(X \sim {\mathrm{Bern}}(p)\)</span></li>
-</ul>
-</section>
-<section id="example-discrete-uniform-distributions" class="level1 page-columns page-full">
-<h1>Example: discrete uniform distributions</h1>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/Uniform.png" class="img-fluid" width="200"></p>
-</div></div><ul>
-<li>Example: dice</li>
-<li>Notation: <span class="math inline">\(Y \sim {\mathrm{Unif}}\{1, 2, 3, 4, 5, 6\}\)</span></li>
-</ul>
-<section id="sec-simulate-pmf" class="level2">
-<h2 class="anchored" data-anchor-id="sec-simulate-pmf">Simulation/sampling from a PMF</h2>
-<section id="in-r" class="level3">
-<h3 class="anchored" data-anchor-id="in-r">In R</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(extraDistr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: extraDistr</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 coin flips:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbern</span>(<span class="dv">10</span>, <span class="at">prob=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 1 1 0 0 0 0 0 0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two dice rolls</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rdunif</span>(<span class="dv">2</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 4</code></pre>
-</div>
-</div>
-</section>
-<section id="how-does-it-work" class="level3">
-<h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
-<ul>
-<li>Think of the green lines in the uniform PMF as “sticks” with “labels.”
-<ul>
-<li>The “labels” are the different realization, e.g.&nbsp;1, 2, 3, …, 6.</li>
-</ul></li>
-<li>Place the six sticks in the interval <span class="math inline">\([0, 1]\)</span> so that they do not overlap.</li>
-<li>Sample a uniform real number in <span class="math inline">\([0, 1]\)</span>
-<ul>
-<li>in R: <code>runif(1)</code></li>
-</ul></li>
-<li>The uniform falls in exactly one of the sticks.</li>
-<li>Return the label of that stick.</li>
-</ul>
-</section>
-<section id="mathematical-explanation" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-explanation">Mathematical explanation</h3>
-<p>The above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.</p>
-<p><strong>Cumulative distribution function (CDF):</strong> <span class="math inline">\(F(x) = \mathbb{P}(X \le x).\)</span></p>
-<p><strong>Quantile function:</strong> <span class="math inline">\(F^{-1}(u) = \inf\{x \in \mathbb{R}: u \le F(x)\}\)</span>.</p>
-<p>Then the “stick-based” algorithm can be written as:</p>
-<ol type="1">
-<li><span class="math inline">\(U \sim {\mathrm{Unif}}[0, 1]\)</span></li>
-<li>Return <span class="math inline">\(F^{-1}(U)\)</span>.</li>
-</ol>
-
-
-</section>
-</section>
-</section>
-
-</main> <!-- /main -->
+<p><img src="../prior-post-unid.gif" class="img-fluid" width="200"></p>
+</div></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
