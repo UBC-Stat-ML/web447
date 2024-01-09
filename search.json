@@ -7,6 +7,55 @@
     "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\nUniversal probabilistic inference via importance sampling.\n\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\nDecision theory.\nBDA 9.1-9.5\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\nBayesian regression, GLMs, and beyond.\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week.\n\n\n\nTh, Feb 22\nReading week.\n\n\n\nTue, Feb 27\nQuiz 1.\n\n\n\nTh, Feb 29\nTBA\n\n\n\nTue, Mar 5\nMCMC user guide (via Stan).\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due.\n\n\n\nTue, Mar 12\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2.\n\n\n\nTh, Mar 28\nTBA\n\n\n\nTue, Apr 2\nMCMC developer guide.\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\nVariational inference.\n\n\n\nTh, Apr 11\nLast lecture.\n\n\n\nFri, Apr 19\nFinal project due."
   },
   {
+    "objectID": "w00_intro/topic02_what.html",
+    "href": "w00_intro/topic02_what.html",
+    "title": "What?",
+    "section": "",
+    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nAll these popular answers are misleading and/or very incomplete:\n\nMAP estimators (maximum a posteriori)\n\nMAP is seldom used by expert Bayesians (mode is misleading in high dimensions)\n\nposterior means\n\nthe posterior mean is often undefined (e.g. Bayesian analysis over combinatorial objects such as graphs)\n\nBayes rule\n\nBayes rule is intractable in most practical situations (we use MCMC/variational methods)\n\nmodels where some unknown quantities are treated as random\n\ntrue for Bayesian models, but also for many non-Bayesian models, e.g., random effect models\n\n\nSo… what is Bayesian Analysis?\n\n\nBayesian Analysis: statistical discipline centered around the use of Bayes estimators\nBayes estimators: for data \\(Y\\), unobserved \\(X\\), loss \\(L\\), and possible actions \\(A\\), the Bayes estimator is defined as:\n\\[\\argmin \\{ \\E[L(a, X) | Y] : a \\in A \\}\\]\nNote: you are not expected to understand this equation at this point!\n\n\n\nThe primary objective of this course is to understand Bayes estimators:\n\nWhy they are so powerful.\nTheir limitations (model misspecification, computational challenges).\nImportant special cases (posterior means, credible intervals, MAP).\nHow to do it in practice\n\nhow to build models\nhow to approximate conditional expectations."
+  },
+  {
+    "objectID": "w00_intro/topic02_what.html#poll-what-characterizes-bayesian-analysis",
+    "href": "w00_intro/topic02_what.html#poll-what-characterizes-bayesian-analysis",
+    "title": "What?",
+    "section": "",
+    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nAll these popular answers are misleading and/or very incomplete:\n\nMAP estimators (maximum a posteriori)\n\nMAP is seldom used by expert Bayesians (mode is misleading in high dimensions)\n\nposterior means\n\nthe posterior mean is often undefined (e.g. Bayesian analysis over combinatorial objects such as graphs)\n\nBayes rule\n\nBayes rule is intractable in most practical situations (we use MCMC/variational methods)\n\nmodels where some unknown quantities are treated as random\n\ntrue for Bayesian models, but also for many non-Bayesian models, e.g., random effect models\n\n\nSo… what is Bayesian Analysis?\n\n\nBayesian Analysis: statistical discipline centered around the use of Bayes estimators\nBayes estimators: for data \\(Y\\), unobserved \\(X\\), loss \\(L\\), and possible actions \\(A\\), the Bayes estimator is defined as:\n\\[\\argmin \\{ \\E[L(a, X) | Y] : a \\in A \\}\\]\nNote: you are not expected to understand this equation at this point!\n\n\n\nThe primary objective of this course is to understand Bayes estimators:\n\nWhy they are so powerful.\nTheir limitations (model misspecification, computational challenges).\nImportant special cases (posterior means, credible intervals, MAP).\nHow to do it in practice\n\nhow to build models\nhow to approximate conditional expectations."
+  },
+  {
+    "objectID": "w00_intro/topic03_high_level.html",
+    "href": "w00_intro/topic03_high_level.html",
+    "title": "High-level picture",
+    "section": "",
+    "text": "Construct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution conditionally on the actual data at hand\nUse the posterior distribution to:\n\nmake prediction (point estimate)\nestimate uncertainty (credible intervals)\nmake a decision (more on this later)"
+  },
+  {
+    "objectID": "w00_intro/topic03_high_level.html#bayesian-recipe-high-level-picture",
+    "href": "w00_intro/topic03_high_level.html#bayesian-recipe-high-level-picture",
+    "title": "High-level picture",
+    "section": "",
+    "text": "Construct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution conditionally on the actual data at hand\nUse the posterior distribution to:\n\nmake prediction (point estimate)\nestimate uncertainty (credible intervals)\nmake a decision (more on this later)"
+  },
+  {
+    "objectID": "w00_intro/topic03_high_level.html#plan",
+    "href": "w00_intro/topic03_high_level.html#plan",
+    "title": "High-level picture",
+    "section": "Plan",
+    "text": "Plan\n\nFirst week: probability essentials (foundations for steps 1 and 2 of the Bayesian Recipe)\nSecond week: steps 1, 2, 3 for one specific discrete probability models\nThird week: step 1, 2, 3 for arbitrary models"
+  },
+  {
+    "objectID": "w00_intro/topic03_high_level.html#first-step-of-the-recipe-constructing-a-probability-model",
+    "href": "w00_intro/topic03_high_level.html#first-step-of-the-recipe-constructing-a-probability-model",
+    "title": "High-level picture",
+    "section": "First step of the Recipe: “constructing a probability model”",
+    "text": "First step of the Recipe: “constructing a probability model”\n\nWhat is a model?\nWhat is a probability model?\nExample (week 2): building a probability model for the rocket launch problem."
+  },
+  {
+    "objectID": "w00_intro/topic03_high_level.html#what-is-a-model",
+    "href": "w00_intro/topic03_high_level.html#what-is-a-model",
+    "title": "High-level picture",
+    "section": "What is a model?",
+    "text": "What is a model?\n(Scientific) model: A simplification of reality amenable to mathematical investigation.\n\\[\\text{Reality} \\xrightarrow{\\text{Art + Scientific method}} \\text{Model} \\xrightarrow{\\text{Mathematics}} \\text{Prediction}\\]\n\nIn this course “mathematics” will be Bayesian analysis/probability theory.\nBayesian analysis/probability theory assume a model as starting point.\n\nTo create a first model is a bit of an art. It comes with data analysis experience.\nThen after we start with an initial model we can improve it by checking predictions against reality."
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus: STAT447C Bayesian Statistics",
@@ -186,21 +235,42 @@
     "href": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
     "title": "Probability mass functions",
     "section": "Simulation/sampling from a PMF",
-    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 1 1 1 0 0 1 1 1 0 1\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 4 3\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
+    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 1 1 1 1 1 1 0 0 0 1\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 3 2\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
   },
   {
     "objectID": "w01_discrete_inference/topic07_conditional.html",
     "href": "w01_discrete_inference/topic07_conditional.html",
     "title": "Conditioning",
     "section": "",
-    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models ()"
+    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
   },
   {
     "objectID": "w01_discrete_inference/topic07_conditional.html#outline",
     "href": "w01_discrete_inference/topic07_conditional.html#outline",
     "title": "Conditioning",
     "section": "",
-    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models ()"
+    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
+    "href": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
+    "title": "Conditioning",
+    "section": "Conditioning as belief update",
+    "text": "Conditioning as belief update\nKey concept: Bayesian methods use probabilities to encode beliefs.\n\nWe will explore this perspective in much more details next week."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
+    "href": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
+    "title": "Conditioning",
+    "section": "A conditional probability is a probability",
+    "text": "A conditional probability is a probability\nThe “updated belief” interpretation highlights the fact that we want the result of the conditioning procedure, \\(\\mathbb{P}(\\cdot | E)\\) to be a probability when viewed as a function of the first argument for any fixed \\(E\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
+    "href": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
+    "title": "Conditioning",
+    "section": "Intuition behind conditioning",
+    "text": "Intuition behind conditioning\n\n\n\n\n\n\n\nFor a query even \\(A\\), what should be the updated probability?\nWe want to remove from \\(A\\) all the outcomes that are not compatible with the new information \\(E\\). How?\n\nTake the intersection: \\(A \\cap E\\)\nWe also want: \\(\\mathbb{P}(S | E) = 1\\) (last section)\nHow? Renormalize: \\[\\mathbb{P}(A | E) = \\frac{\\mathbb{P}(A \\cap E)}{\\mathbb{P}(E)}\\]\nIntersection can also be denoted using a comma, for example \\(\\mathbb{P}(A \\cap E) = \\mathbb{P}(A, E)\\)"
   },
   {
     "objectID": "w01_discrete_inference/topic06_forward_sampling.html",
@@ -411,6 +481,69 @@
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "Q.5: generalizing observations",
     "text": "Q.5: generalizing observations\nWe now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe n_heads out of n_observations, where n_heads and n_observations will be additional arguments passed into a new R function.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Binomial distribution.\nWrite an R function called posterior taking three input arguments in the following order: a vector \\(\\rho\\) as in Q. 4, as well as two integers, n_heads and n_observations.\nTest your code by making sure you can recover the answer in Q. 3 as a special case.\nShow the output for \\(\\rho \\propto (1, 2, 3, \\dots, 10)\\) and n_heads = 2 and n_observations = 10."
+  },
+  {
+    "objectID": "w00_intro/topic04_examples.html",
+    "href": "w00_intro/topic04_examples.html",
+    "title": "Examples",
+    "section": "",
+    "text": "Origins of life/cancer/language and characterization of their respective evolutionary processes\nModelling high-throughput genomics data (single-cell sequencing, CRISPR-CAS9, ultra-deep, expression)\nBlack-hole imaging\n“Classical” tasks: classification, regression, clustering, etc\nA/B testing and Bayesian optimization\nDetermining fate of the universe from cosmic microwave background"
+  },
+  {
+    "objectID": "w00_intro/topic04_examples.html#some-examples-of-bayesian-inference",
+    "href": "w00_intro/topic04_examples.html#some-examples-of-bayesian-inference",
+    "title": "Examples",
+    "section": "",
+    "text": "Origins of life/cancer/language and characterization of their respective evolutionary processes\nModelling high-throughput genomics data (single-cell sequencing, CRISPR-CAS9, ultra-deep, expression)\nBlack-hole imaging\n“Classical” tasks: classification, regression, clustering, etc\nA/B testing and Bayesian optimization\nDetermining fate of the universe from cosmic microwave background"
+  },
+  {
+    "objectID": "w00_intro/topic04_examples.html#to-read-more-on-example-applications",
+    "href": "w00_intro/topic04_examples.html#to-read-more-on-example-applications",
+    "title": "Examples",
+    "section": "To read more on example applications",
+    "text": "To read more on example applications\nFor an entertaining popular science book on various applications of Bayesian statistics, have a look at The Theory That Would Not Die Sharon Bertsch McGrayne. PDF available via UBC library."
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html",
+    "href": "w00_intro/topic01_why.html",
+    "title": "Why?",
+    "section": "",
+    "text": "Address most data analysis issues (missing data, non-standard data types, non-iid, weird loss functions, adding expert knowledge, …)\n\nBayesian analysis: address those in a (semi) automated fashion / principled framework (“reductionist”)\n\nReductionism can be bad or good (main con of reductionism is computational)\n\nFrequentist statistics: every problem is a new problem\n\nImplementation complexity\n\nEfficient in analyst’s time (thanks to PPLs)\nHarder to scale computationally\n\\(\\Longrightarrow\\) shines on small data problems (there a much more of those than the “big data” hype would like you to think)\n\nStatistical properties\n\nOptimal if the model is well-specified\nSub-optimal in certain cases when the model is mis-specified\n\nThankfully the modelling flexibility makes it easier to build better models\nImportant to make model checks"
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html#bayesian-analysis-pros-and-cons",
+    "href": "w00_intro/topic01_why.html#bayesian-analysis-pros-and-cons",
+    "title": "Why?",
+    "section": "",
+    "text": "Address most data analysis issues (missing data, non-standard data types, non-iid, weird loss functions, adding expert knowledge, …)\n\nBayesian analysis: address those in a (semi) automated fashion / principled framework (“reductionist”)\n\nReductionism can be bad or good (main con of reductionism is computational)\n\nFrequentist statistics: every problem is a new problem\n\nImplementation complexity\n\nEfficient in analyst’s time (thanks to PPLs)\nHarder to scale computationally\n\\(\\Longrightarrow\\) shines on small data problems (there a much more of those than the “big data” hype would like you to think)\n\nStatistical properties\n\nOptimal if the model is well-specified\nSub-optimal in certain cases when the model is mis-specified\n\nThankfully the modelling flexibility makes it easier to build better models\nImportant to make model checks"
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html#week-2-example",
+    "href": "w00_intro/topic01_why.html#week-2-example",
+    "title": "Why?",
+    "section": "Week 2 example",
+    "text": "Week 2 example\n\nWould you rather get strapped to…\n\n“shiny rocket”: 1 success, 0 failures\n“rugged rocket”: 98 successes, 2 failures"
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html#paradox",
+    "href": "w00_intro/topic01_why.html#paradox",
+    "title": "Why?",
+    "section": "Paradox?",
+    "text": "Paradox?\n\nMaximum likelihood point estimates:\n\n“shiny rocket”: 100% success rate (1 success, 0 failures)\n“rugged rocket”: 98% success rate (98 successes, 2 failures)\n\nWhat is missing?"
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html#uncertainty-estimates",
+    "href": "w00_intro/topic01_why.html#uncertainty-estimates",
+    "title": "Why?",
+    "section": "Uncertainty estimates",
+    "text": "Uncertainty estimates\n\nTake-home message:\n\nPoint estimates are often insufficient, and can be very dangerous\nWe want some measure of uncertainty\n\nBayesian inference provides one way to build uncertainty measures\n\nBayesian measures of uncertainty we will describe: credible intervals\n\nAlternatives exist:\n\nConfidence intervals, from frequentist statistics\n“End product” looks similar, but very different in interpretation and construction"
+  },
+  {
+    "objectID": "w00_intro/topic01_why.html#uncertainty-will-not-go-away",
+    "href": "w00_intro/topic01_why.html#uncertainty-will-not-go-away",
+    "title": "Why?",
+    "section": "Uncertainty will not go away",
+    "text": "Uncertainty will not go away\n\n\n\n\nJust collect more data! Otherwise you inference will not be very useful anyways.\n\nJust launch more rockets and wait?\nIn some cases the data is gone, i.e. we will never be able to collect more after a point (e.g.: phylogenetic tree inference)"
   },
   {
     "objectID": "project.html",

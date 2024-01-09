@@ -60,11 +60,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -120,12 +122,47 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Probability essentials</span></a>
+ <span class="menu-text">Introduction</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High-level picture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Probability essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
@@ -209,11 +246,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#conditioning-as-belief-update" id="toc-conditioning-as-belief-update" class="nav-link" data-scroll-target="#conditioning-as-belief-update">Conditioning as belief update</a></li>
+  <li><a href="#a-conditional-probability-is-a-probability" id="toc-a-conditional-probability-is-a-probability" class="nav-link" data-scroll-target="#a-conditional-probability-is-a-probability">A conditional probability is a probability</a></li>
+  <li><a href="#intuition-behind-conditioning" id="toc-intuition-behind-conditioning" class="nav-link" data-scroll-target="#intuition-behind-conditioning">Intuition behind conditioning</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -232,6 +272,19 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<!-- 
+tiny-shortex for Quarto
+restricted to macros supported by KaTeX
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
@@ -246,12 +299,42 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Conditioning is the workhorse of Bayesian inference!
 <ul>
-<li>Used to define models ()</li>
+<li>Used to define models (as when we assigned probabilities to edges of a decision tree)</li>
+<li>And soon, to gain information on latent variables given observations.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="conditioning-as-belief-update" class="level2">
+<h2 class="anchored" data-anchor-id="conditioning-as-belief-update">Conditioning as belief update</h2>
+<p><strong>Key concept:</strong> Bayesian methods use probabilities to encode <em>beliefs</em>.</p>
+<p><img src="../images/conditioning-intuition.png" class="img-fluid" width="400"></p>
+<p>We will explore this perspective in much more details next week.</p>
+</section>
+<section id="a-conditional-probability-is-a-probability" class="level2">
+<h2 class="anchored" data-anchor-id="a-conditional-probability-is-a-probability">A conditional probability is a probability</h2>
+<p>The “updated belief” interpretation highlights the fact that we want the result of the conditioning procedure, <span class="math inline">\(\mathbb{P}(\cdot | E)\)</span> to be a probability when viewed as a function of the first argument for any fixed <span class="math inline">\(E\)</span>.</p>
+</section>
+<section id="intuition-behind-conditioning" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="intuition-behind-conditioning">Intuition behind conditioning</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/venn-pr-diag.png" class="img-fluid" width="300"></p>
+</div><div class="">
+<p><img src="../images/conditioning.png" class="img-fluid" width="200"></p>
+</div></div>
+<ul>
+<li>For a query even <span class="math inline">\(A\)</span>, what should be the updated probability?</li>
+<li>We want to remove from <span class="math inline">\(A\)</span> all the outcomes that are not compatible with the new information <span class="math inline">\(E\)</span>. How?
+<ul>
+<li>Take the intersection: <span class="math inline">\(A \cap E\)</span></li>
+<li>We also want: <span class="math inline">\(\mathbb{P}(S | E) = 1\)</span> (last section)</li>
+<li>How? <em>Renormalize</em>: <span class="math display">\[\mathbb{P}(A | E) = \frac{\mathbb{P}(A \cap E)}{\mathbb{P}(E)}\]</span></li>
+<li>Intersection can also be denoted using a comma, for example <span class="math inline">\(\mathbb{P}(A \cap E) = \mathbb{P}(A, E)\)</span></li>
 </ul></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

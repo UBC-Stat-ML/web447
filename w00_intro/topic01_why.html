@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Random variables</title>
+<title>Bayes1@UBC - Why?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic03_random_variables.html">Random variables</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w00_intro/topic01_why.html">Introduction</a></li><li class="breadcrumb-item"><a href="../w00_intro/topic01_why.html">Why?</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Why?</span></a>
   </div>
 </li>
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
@@ -241,16 +241,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
-  <li><a href="#probabilists-notation" id="toc-probabilists-notation" class="nav-link" data-scroll-target="#probabilists-notation">Probabilist’s notation</a></li>
-  <li><a href="#conventions-probability-vs-bayesian" id="toc-conventions-probability-vs-bayesian" class="nav-link" data-scroll-target="#conventions-probability-vs-bayesian">Conventions: probability vs Bayesian</a></li>
-  <li><a href="#more-conventions" id="toc-more-conventions" class="nav-link" data-scroll-target="#more-conventions">More conventions</a></li>
-  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension">Extension</a></li>
+  <li><a href="#bayesian-analysis-pros-and-cons" id="toc-bayesian-analysis-pros-and-cons" class="nav-link active" data-scroll-target="#bayesian-analysis-pros-and-cons">Bayesian analysis: pros and cons</a></li>
+  <li><a href="#week-2-example" id="toc-week-2-example" class="nav-link" data-scroll-target="#week-2-example">Week 2 example</a></li>
+  <li><a href="#paradox" id="toc-paradox" class="nav-link" data-scroll-target="#paradox">Paradox?</a></li>
+  <li><a href="#uncertainty-estimates" id="toc-uncertainty-estimates" class="nav-link" data-scroll-target="#uncertainty-estimates">Uncertainty estimates</a></li>
+  <li><a href="#uncertainty-will-not-go-away" id="toc-uncertainty-will-not-go-away" class="nav-link" data-scroll-target="#uncertainty-will-not-go-away">Uncertainty will not go away</a></li>
   </ul>
 </nav>
     </div>
@@ -259,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Random variables</h1>
+<h1 class="title">Why?</h1>
 </div>
 
 
@@ -287,76 +282,89 @@ restricted to macros supported by KaTeX
 <!-- parametric distributions -->
 <!-- nonparametric distributions -->
 <!-- calculus -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<section id="bayesian-analysis-pros-and-cons" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-analysis-pros-and-cons">Bayesian analysis: pros and cons</h2>
 <ul>
-<li>Random variable as mathematical objects.</li>
-<li>Notation convention for observation/latent</li>
+<li>Address most data analysis issues (missing data, non-standard data types, non-iid, weird loss functions, adding expert knowledge, …)
+<ul>
+<li>Bayesian analysis: address those in a (semi) automated fashion / principled framework (“reductionist”)
+<ul>
+<li>Reductionism can be bad or good (main con of reductionism is computational)</li>
+</ul></li>
+<li>Frequentist statistics: every problem is a new problem</li>
+</ul></li>
+<li>Implementation complexity
+<ul>
+<li>Efficient in analyst’s time (thanks to PPLs)</li>
+<li>Harder to scale computationally</li>
+<li><span class="math inline">\(\Longrightarrow\)</span> shines on small data problems (there a much more of those than the “big data” hype would like you to think)</li>
+</ul></li>
+<li>Statistical properties
+<ul>
+<li>Optimal if the model is <strong>well-specified</strong></li>
+<li>Sub-optimal in certain cases when the model is <strong>mis-specified</strong>
+<ul>
+<li>Thankfully the modelling flexibility makes it easier to build better models</li>
+<li>Important to make model checks</li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Random variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction).</p>
-</section>
-</section>
-<section id="definition" class="level2">
-<h2 class="anchored" data-anchor-id="definition">Definition</h2>
-<p>A (real) <strong>random variable</strong> is a function from a sample space <span class="math inline">\(S\)</span> to the reals, <span class="math inline">\(X : S \to \mathbb{R}\)</span>.</p>
-<p><strong>Example:</strong></p>
+<section id="week-2-example" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="week-2-example">Week 2 example</h2>
 <ul>
-<li>Continuing the example with <span class="math inline">\(S = \{1, 2, 3, 4\}\)</span>.</li>
-<li>Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise.</li>
-</ul>
-</section>
-<section id="probabilists-notation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="probabilists-notation">Probabilist’s notation</h2>
+<li><em>Would you rather get strapped to…</em>
 <ul>
-<li>Let <span class="math inline">\(X\)</span> denote a random variable.</li>
-<li>The notation <span class="math inline">\((X = 1)\)</span> or <span class="math inline">\((X \in E)\)</span> is invalid in set theory.</li>
-<li>Therefore, probabilists “gave it a meaning” as follows:</li>
+<li>“shiny rocket”: 1 success, 0 failures</li>
+<li>“rugged rocket”: 98 successes, 2 failures</li>
+</ul></li>
 </ul>
-<p><span class="math display">\[(X = 1) = \{s : X(s) = 1\}.\]</span></p>
-<p><strong>Example:</strong> Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise. Then <span class="math inline">\((X = 1)\)</span> corresponds to the red circle.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sample_space.png" class="img-fluid" width="200"></p>
+<p><img src="../images/spaceman.jpeg" class="img-fluid" width="300"></p>
 </div></div></section>
-<section id="conventions-probability-vs-bayesian" class="level2">
-<h2 class="anchored" data-anchor-id="conventions-probability-vs-bayesian">Conventions: probability vs Bayesian</h2>
-<p><strong>Probability convention:</strong></p>
+<section id="paradox" class="level2">
+<h2 class="anchored" data-anchor-id="paradox">Paradox?</h2>
 <ul>
-<li>Random variables are denoted with capitals in probability theory</li>
-<li>The same letter in small cap is used for a dummy variable holding the output of the random variable.
+<li>Maximum likelihood <em>point estimates</em>:
 <ul>
-<li>Note: “A dummy variable holding the output of the random variable” is called a <strong>realization</strong>.</li>
-<li>Example: <span class="math inline">\(X\)</span> for the random variable and <span class="math inline">\(x\)</span> for its realization.</li>
+<li>“shiny rocket”: 100% success rate (1 success, 0 failures)</li>
+<li>“rugged rocket”: 98% success rate (98 successes, 2 failures)</li>
 </ul></li>
-<li>We will start off using this convention in the first few weeks.</li>
-</ul>
-<p><strong>Bayesian statistics convention:</strong></p>
-<ul>
-<li>Often the capitalization convention is not used in the Bayesian statistics literature.</li>
-<li>Hence we will eventually drop the probability theory capitalization convention.</li>
+<li>What is missing?</li>
 </ul>
 </section>
-<section id="more-conventions" class="level2">
-<h2 class="anchored" data-anchor-id="more-conventions">More conventions</h2>
+<section id="uncertainty-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="uncertainty-estimates">Uncertainty estimates</h2>
 <ul>
-<li><span class="math inline">\(X\)</span>: unobserved random variable</li>
-<li><span class="math inline">\(Y\)</span>: observed random variable</li>
-</ul>
-<p>More precisely:</p>
+<li>Take-home message:
 <ul>
-<li><span class="math inline">\(X\)</span> is the “mechanism of observation”..</li>
-<li>whereas the actual observation is a realization of <span class="math inline">\(X\)</span>.</li>
+<li>Point estimates are often insufficient, and can be very dangerous</li>
+<li>We want some <strong>measure of uncertainty</strong></li>
+</ul></li>
+<li>Bayesian inference provides one way to build uncertainty measures
+<ul>
+<li>Bayesian measures of uncertainty we will describe: <strong>credible intervals</strong></li>
+</ul></li>
+<li>Alternatives exist:
+<ul>
+<li><strong>Confidence intervals</strong>, from frequentist statistics</li>
+<li>“End product” looks similar, but very different in interpretation and construction</li>
+</ul></li>
 </ul>
 </section>
-<section id="extension" class="level2">
-<h2 class="anchored" data-anchor-id="extension">Extension</h2>
-<p>A <strong>random vector</strong> is a function from a sample space to <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
-<p><strong>Example in Bayesian statistics:</strong> the vector <span class="math inline">\((X, Y)\)</span> containing both the unobserved and observed quantities.</p>
+<section id="uncertainty-will-not-go-away" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="uncertainty-will-not-go-away">Uncertainty will not go away</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/dinos.png" class="img-fluid" width="300"></p>
+</div></div><ul>
+<li>Just collect more data! Otherwise you inference will not be very useful anyways.
+<ul>
+<li>Just launch more rockets and wait?</li>
+<li>In some cases the data is gone, i.e.&nbsp;we will never be able to collect more after a point (e.g.: phylogenetic tree inference)</li>
+</ul></li>
+</ul>
 
 
 </section>

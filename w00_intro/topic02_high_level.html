@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Random variables</title>
+<title>Bayes1@UBC - High-level picture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic03_random_variables.html">Random variables</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w00_intro/topic01_motivation.html">Introduction</a></li><li class="breadcrumb-item"><a href="../w00_intro/topic02_high_level.html">High-level picture</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,25 +130,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Why?</span></a>
+  <a href="../w00_intro/topic01_motivation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why Bayes?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic02_high_level.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic03_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
@@ -177,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
@@ -241,25 +235,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
-  <li><a href="#probabilists-notation" id="toc-probabilists-notation" class="nav-link" data-scroll-target="#probabilists-notation">Probabilist’s notation</a></li>
-  <li><a href="#conventions-probability-vs-bayesian" id="toc-conventions-probability-vs-bayesian" class="nav-link" data-scroll-target="#conventions-probability-vs-bayesian">Conventions: probability vs Bayesian</a></li>
-  <li><a href="#more-conventions" id="toc-more-conventions" class="nav-link" data-scroll-target="#more-conventions">More conventions</a></li>
-  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension">Extension</a></li>
+  <li><a href="#poll-what-characterizes-bayesian-analysis" id="toc-poll-what-characterizes-bayesian-analysis" class="nav-link active" data-scroll-target="#poll-what-characterizes-bayesian-analysis">Poll: What characterizes “Bayesian Analysis”?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Random variables</h1>
+<h1 class="title">High-level picture</h1>
 </div>
 
 
@@ -274,89 +259,56 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<!-- 
-tiny-shortex for Quarto
-restricted to macros supported by KaTeX
--->
-<!-- common sets and set operations -->
-<!-- text shortcuts -->
-<!-- convergence -->
-<!-- unary functions -->
-<!-- binary operators -->
-<!-- independence -->
-<!-- parametric distributions -->
-<!-- nonparametric distributions -->
-<!-- calculus -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<section id="poll-what-characterizes-bayesian-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="poll-what-characterizes-bayesian-analysis">Poll: What characterizes “Bayesian Analysis”?</h2>
+<ol type="1">
+<li>MAP estimators (maximum a posteriori)</li>
+<li>posterior means</li>
+<li>Bayes rule</li>
+<li>models where some unknown quantities are treated as random</li>
+<li>none of the above</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>All these popular answers are misleading and/or very incomplete:</p>
+<ol type="1">
+<li>MAP estimators (maximum a posteriori)
 <ul>
-<li>Random variable as mathematical objects.</li>
-<li>Notation convention for observation/latent</li>
-</ul>
-</section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Random variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction).</p>
-</section>
-</section>
-<section id="definition" class="level2">
-<h2 class="anchored" data-anchor-id="definition">Definition</h2>
-<p>A (real) <strong>random variable</strong> is a function from a sample space <span class="math inline">\(S\)</span> to the reals, <span class="math inline">\(X : S \to \mathbb{R}\)</span>.</p>
-<p><strong>Example:</strong></p>
-<ul>
-<li>Continuing the example with <span class="math inline">\(S = \{1, 2, 3, 4\}\)</span>.</li>
-<li>Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise.</li>
-</ul>
-</section>
-<section id="probabilists-notation" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="probabilists-notation">Probabilist’s notation</h2>
-<ul>
-<li>Let <span class="math inline">\(X\)</span> denote a random variable.</li>
-<li>The notation <span class="math inline">\((X = 1)\)</span> or <span class="math inline">\((X \in E)\)</span> is invalid in set theory.</li>
-<li>Therefore, probabilists “gave it a meaning” as follows:</li>
-</ul>
-<p><span class="math display">\[(X = 1) = \{s : X(s) = 1\}.\]</span></p>
-<p><strong>Example:</strong> Consider <span class="math inline">\(X(s) = 1\)</span> if <span class="math inline">\(s\)</span> is odd, and <span class="math inline">\(X(s) = 0\)</span> otherwise. Then <span class="math inline">\((X = 1)\)</span> corresponds to the red circle.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sample_space.png" class="img-fluid" width="200"></p>
-</div></div></section>
-<section id="conventions-probability-vs-bayesian" class="level2">
-<h2 class="anchored" data-anchor-id="conventions-probability-vs-bayesian">Conventions: probability vs Bayesian</h2>
-<p><strong>Probability convention:</strong></p>
-<ul>
-<li>Random variables are denoted with capitals in probability theory</li>
-<li>The same letter in small cap is used for a dummy variable holding the output of the random variable.
-<ul>
-<li>Note: “A dummy variable holding the output of the random variable” is called a <strong>realization</strong>.</li>
-<li>Example: <span class="math inline">\(X\)</span> for the random variable and <span class="math inline">\(x\)</span> for its realization.</li>
+<li>MAP is seldom used by expert Bayesians (mode is misleading in high dimensions)</li>
 </ul></li>
-<li>We will start off using this convention in the first few weeks.</li>
-</ul>
-<p><strong>Bayesian statistics convention:</strong></p>
+<li>posterior means
 <ul>
-<li>Often the capitalization convention is not used in the Bayesian statistics literature.</li>
-<li>Hence we will eventually drop the probability theory capitalization convention.</li>
-</ul>
+<li>the posterior mean is often undefined (e.g.&nbsp;Bayesian analysis over combinatorial objects)</li>
+</ul></li>
+<li>Bayes rule
+<ul>
+<li>Bayes rule is intractable in most practical situations (we use MCMC/variational methods)</li>
+</ul></li>
+<li>models where some unknown quantities are treated as random
+<ul>
+<li>true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models</li>
+</ul></li>
+</ol>
+<p><strong>So??? What <em>is</em> Bayesian Analysis???</strong></p>
+<section id="preview-of-key-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="preview-of-key-definitions">Preview of key definitions</h2>
+<p><strong>Bayesian Analysis:</strong> statistical discipline centered around the use of <strong>Bayes estimators</strong></p>
+<p><strong>Bayes estimators:</strong> for data <span class="math inline">\(Y\)</span>, unobserved <span class="math inline">\(X\)</span>, loss <span class="math inline">\(L\)</span>, and possible actions <span class="math inline">\(A\)</span>, the Bayes estimator is defined as:</p>
+<p><span class="math display">\[\operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \}\]</span></p>
 </section>
-<section id="more-conventions" class="level2">
-<h2 class="anchored" data-anchor-id="more-conventions">More conventions</h2>
-<ul>
-<li><span class="math inline">\(X\)</span>: unobserved random variable</li>
-<li><span class="math inline">\(Y\)</span>: observed random variable</li>
-</ul>
-<p>More precisely:</p>
-<ul>
-<li><span class="math inline">\(X\)</span> is the “mechanism of observation”..</li>
-<li>whereas the actual observation is a realization of <span class="math inline">\(X\)</span>.</li>
-</ul>
-</section>
-<section id="extension" class="level2">
-<h2 class="anchored" data-anchor-id="extension">Extension</h2>
-<p>A <strong>random vector</strong> is a function from a sample space to <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
-<p><strong>Example in Bayesian statistics:</strong> the vector <span class="math inline">\((X, Y)\)</span> containing both the unobserved and observed quantities.</p>
+</div>
+</div>
+</div>
 
 
 </section>
