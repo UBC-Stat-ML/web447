@@ -49,19 +49,19 @@ We assume you have a laptop on which you can install these tools, if not, you ma
 
 Notes will be provided and complemented with readings from the following freely available textbook:
 
--   *Bayesian Data Analysis Third edition.* Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. [PDF freely available](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf).
+-   *Bayesian Data Analysis, Third Rdition.* Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. [PDF freely available](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf).
 
 Additional readings and case studies will be drawn from other textbooks that are either freely available or available within UBC VPN:
 
--   *Bayesian essentials with R*. Jean-Michel Marin and Christian Robert. [PDF available via UBC library](https://www.library.ubc.ca/). [Solution to exercises.](https://arxiv.org/pdf/1503.04662.pdf)
+-   *Bayesian essentials with R, Second Edition*. Jean-Michel Marin and Christian Robert. [PDF available via UBC library](https://www.library.ubc.ca/). [Solution to exercises.](https://arxiv.org/pdf/1503.04662.pdf)
 
 -   *Bayes Rules*! Alicia A. Johnson, Miles Q. Ott, Mine Dogucu. [HTML freely available](https://www.bayesrulesbook.com/preface#navigating-this-book)
 
--   *Doing Bayesian data analysis: a tutorial with R, JAGS, and Stan*. John K. Kruschke. [PDF freely available](https://nyu-cdsc.github.io/learningr/assets/kruschke_bayesian_in_R.pdf).
+-   *Doing Bayesian data analysis: a tutorial with R, JAGS, and Stan, Second Edition*. John K. Kruschke. [PDF freely available](https://nyu-cdsc.github.io/learningr/assets/kruschke_bayesian_in_R.pdf).
 
 -   *Probability and Bayesian modeling.* Jim Albert and Jingchen Hu. [PDF/HTML/EPUB freely available](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html).
 
--   *Statistical rethinking*. Richard McElreath. [HTML available via UBC library](https://www.library.ubc.ca/).
+-   *Statistical Rethinking, Second Edition*. Richard McElreath. [HTML available via UBC library](https://www.library.ubc.ca/).
 
 ## Assessments
 

@@ -67,5 +67,5 @@ editor:
 
 
 - Just collect more data??
-    - Just launch more rockets and wait?
+    - Just launch more rockets and wait? Collecting more data might be too costly/dangerous/unethical.
     - In some cases the data is just "gone", i.e. we will never be able to collect more after a point (e.g.: phylogenetic tree inference)
