@@ -1,0 +1,22 @@
+---
+  title: "Exercise 2: Bayes estimator"
+editor: 
+  mode: source
+---
+  
+  {{< include ../_macros.qmd >}}
+
+## Goals
+
+- Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).
+- ntroduce forward discrete simulation.
+- Review expectation and the law of large numbers.
+
+## Setup
+
+This exercise is centered around the following scenario:
+  
+  {{< include ../blocks/_delta.qmd >}}
+
+
+## Q.1: sampling from a joint distribution
