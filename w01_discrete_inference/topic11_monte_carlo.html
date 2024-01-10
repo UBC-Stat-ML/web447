@@ -253,6 +253,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#approximation-of-expectations-using-forward-simulation" id="toc-approximation-of-expectations-using-forward-simulation" class="nav-link" data-scroll-target="#approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</a></li>
+  <li><a href="#motivation-from-the-law-of-large-numbers" id="toc-motivation-from-the-law-of-large-numbers" class="nav-link" data-scroll-target="#motivation-from-the-law-of-large-numbers">Motivation from the Law of Large Numbers</a></li>
   </ul>
 </nav>
     </div>
@@ -293,32 +294,18 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>Simple Monte Carlo method</li>
+<li>Theoretical guarantee from the Law of Large Numbers</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<ul>
-<li>Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g.&nbsp;Importance Sampling and Markov chain Monte Carlo (MCMC))</li>
-</ul>
+<p>Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g.&nbsp;Importance Sampling and Markov chain Monte Carlo (MCMC))</p>
 </section>
 </section>
 <section id="approximation-of-expectations-using-forward-simulation" class="level2">
@@ -335,12 +322,24 @@ Caution
 <li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M g^{(m)}.\]</span></li>
 </ul></li>
 </ul>
-<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y_1, \dots, Y_4)].\]</span></p>
+<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span id="eq-mc"><span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y_1, \dots, Y_4)]. \tag{1}\]</span></span></p>
+</section>
+<section id="motivation-from-the-law-of-large-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-from-the-law-of-large-numbers">Motivation from the Law of Large Numbers</h2>
+<p><strong>Question:</strong> How can we make <span class="math inline">\(\approx\)</span> more formal in <a href="#eq-mc">Equation&nbsp;1</a>?</p>
+<p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_i].\]</span></p>
+<p>Picking <span class="math inline">\(Z_m = g^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error, we can find a number of iteration <span class="math inline">\(M\)</span> large enough such that we will be within that error with probability.</p>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Here”<span class="math inline">\(\to\)</span>” denotes a suitable notion of convergence of random variables In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
