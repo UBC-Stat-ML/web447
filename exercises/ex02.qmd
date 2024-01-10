@@ -10,7 +10,7 @@ editor:
 
 - Build a probability model for a concrete example.
 - Introduce the concept of Bayes estimators.
-- Review conditioning and Bayes rule.
+- Review sequential Bayes update.
 
 ## Setup
 
@@ -55,7 +55,48 @@ $$
 \pr\left(p=\frac{k}{K}\middle| Z_1=Z_2=Z_3=0 \right)
 $$
 
-3. Give an expression for the posterior predictive probability
+3. Write a function called `posterior_distribution` that takes a vector 
+$\rho\in\reals^{K+1}$ and returns the posterior distribution derived in the previous step.
+
+4. Plot the result of applying `posterior_distribution` to the prior
 $$
-\pr\left(Z_4=1 \middle| Z_1=Z_2=Z_3=0 \right)
+\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
+$$ {#eq-parabola-prior} 
+Add $\rho$ to the plot and compare the two 
+distributions.
+
+5. Report the mean, median, and mode of $p$ under the posterior distribution 
+of the previous step.
+
+
+## Q.3: Bayes action
+
+Let $a\in\{0,1\}$ be a binary variable denoting the decision of buying the
+insurance ($a=1$) or not ($a=0$).
+
+1. Define a loss function $(a,Z_4)\mapsto L(a,Z_4)$ that summarizes the cost of 
+having taken decision $a\in\{0,1\}$ when $Z_4\in\{0,1\}$ occurs.
+2. Derive an expression for the expected loss under the posterior predictive distribution
 $$
+\mathcal{L}(a) := \ex[L(a,Z_4)|Z_{1:3}=0].
+$$
+
+3. Give an expression for the posterior predictive probability of failure
+$$
+\pr\left(Z_4=1 \middle| Z_{1:3}=0 \right)
+$$
+4. Write a function `posterior_failure_prob` that takes a vector 
+$\rho\in\reals^{K+1}$ and returns the posterior predictive probability of failure.
+Your function should call `posterior_distribution`.
+
+5. Write a function `expected_loss` that computes $\mathcal{L}(a)$ for any value
+of $a$. Based on this, formulate a recommendation to the owner of the satellite. 
+
+## Q.4: sequential updating
+
+Let us suppose that we go back in time and are able to recreate the inferences
+that a statistician would have made as the successive launches happened.
+
+1. Derive an expression for $\pr(p|Z_1=0)$.
+2. Use the previous expression as a prior distribution 
+**TODO**
