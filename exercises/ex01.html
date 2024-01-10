@@ -364,10 +364,10 @@ strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in 
 </section>
 <section id="q.3-non-uniform-prior-on-coin-types" class="level2">
 <h2 class="anchored" data-anchor-id="q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</h2>
-<p>We now modify the problem as follows: I stuffed the bag with 100 coins: 98 fair coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.</p>
+<p>We now modify the problem as follows: I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.</p>
 <ol type="1">
 <li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint">Equation&nbsp;1</a>. Hint: use a <code>Categorical</code> distribution.</li>
-<li>Compute the probability that you picked the standard coin, given you see <code>[0, 0, 0, 0]</code>.</li>
+<li>Compute the probability that you picked one of the fair coins, given you see <code>[0, 0, 0, 0]</code>.</li>
 </ol>
 </section>
 <section id="q.4-a-first-posterior-inference-algorithm" class="level2">
