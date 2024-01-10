@@ -6,8 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
-
 
 ## Outline
 
@@ -54,6 +52,7 @@ Generic strategy:
 - start the joint PMF of **all** the random variables in the model (even if they do not occur in $g$)
 - compute the expectation using
 $$\ex[g(X, Y_1, \dots, Y_4)] = \sum_x \sum_{y_1} \sum_{y_2} \dots \sum_{y_4} g(x, y_1, \dots, y_4)  p(x, y_1, y_2, y_3, y_4).$$
+- Each sum runs over the point mass of its PMF as before, e.g. $x \in \{0, 1, 2\}$. 
 - Recall: $p(x, y_1, y_2, y_3, y_4)$ can be computed using the chain rule. 
 
 Recall the decision tree, how to visualize the above equation?
