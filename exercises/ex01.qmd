@@ -6,6 +6,8 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+{{< include ../blocks/_exercise_header.qmd >}} 
+
 ## Goals
 
 -   Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).
