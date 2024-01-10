@@ -51,12 +51,12 @@ Given that observation, what is the probability that you picked the standard coi
 ## Q.3: non uniform prior on coin types
 
 We now modify the problem as follows: 
-I stuffed the bag with 98 fair coins, 1 coin with only heads, and 1 coin with only tails.
+I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails.
 The rest is the same: pick one of the coins, flip it 4 times. 
 
 1. Write the joint distribution of this modified model. 
    Use the $\sim$ notation as in @eq-coin-joint. Hint: use a `Categorical` distribution. 
-2. Compute the numerical value of the expression defined in part 1.
+2. Compute the probability that you picked one of the fair coins, given you see `[0, 0, 0, 0]`.
 
 
 ## Q.4: a first posterior inference algorithm
