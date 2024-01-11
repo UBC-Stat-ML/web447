@@ -346,18 +346,18 @@ https://github.com/trevorcampbell/shortex
 <section id="approximation-of-expectations-using-forward-simulation" class="level2">
 <h2 class="anchored" data-anchor-id="approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</h2>
 <ul>
-<li>As before, we want to compute an expectation <span class="math inline">\(\mathbb{E}[g(X, Y_1, \dots, Y_4)]\)</span></li>
+<li>As before, we want to compute an expectation <span class="math inline">\(\mathbb{E}[g(X, Y)]\)</span></li>
 <li>But imagine a very large tree, but where most branches have very low probability and only few have large probability</li>
 <li>In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will <em>approximate</em> expectations using forward simulation (a method know as <strong>simple Monte Carlo</strong>)</li>
 <li>This is done as follows:
 <ul>
 <li>Call your forward simulator <span class="math inline">\(M\)</span> times</li>
-<li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}, Y_1^{(m)}, \dots, Y_4^{(m)}) \sim p_{X, Y_{1:4}}(\cdot)\]</span></li>
-<li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(g^{(m)}\)</span> <span class="math display">\[g^{(m)}= g(X^{(m)}, Y_1^{(m)}, \dots, Y_4^{(m)}).\]</span></li>
-<li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M g^{(m)}.\]</span></li>
+<li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}, Y^{(m)}) \sim p_{X, Y}(\cdot)\]</span></li>
+<li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(G^{(m)}\)</span> <span class="math display">\[G^{(m)}= g(X^{(m)}, Y^{(m)}).\]</span></li>
+<li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M G^{(m)}.\]</span></li>
 </ul></li>
 </ul>
-<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span id="eq-mc"><span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y_1, \dots, Y_4)]. \tag{1}\]</span></span></p>
+<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span id="eq-mc"><span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y)]. \tag{1}\]</span></span></p>
 </section>
 <section id="example" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
@@ -403,7 +403,7 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 <h2 class="anchored" data-anchor-id="motivation-from-the-law-of-large-numbers">Motivation from the Law of Large Numbers</h2>
 <p><strong>Question:</strong> How can we make <span class="math inline">\(\approx\)</span> more formal in <a href="#eq-mc">Equation&nbsp;1</a>?</p>
 <p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_i].\]</span></p>
-<p>Picking <span class="math inline">\(Z_m = g^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerence, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerence with high probability.</p>
+<p>Picking <span class="math inline">\(Z_m = G^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerence, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerence with high probability.</p>
 
 
 </section>
