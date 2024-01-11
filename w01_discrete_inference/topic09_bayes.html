@@ -342,10 +342,10 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <h2 class="anchored" data-anchor-id="strategy">Strategy</h2>
 <p>Denote the observation by <span class="math inline">\(y_{1:4} = (0, 0, 0, 0)\)</span>.</p>
 <ol type="1">
-<li>Attack the more general problem <span class="math inline">\(\pi(x) = \mathbb{P}(X = x | Y_{1:4} = y_{1:4})\)</span>.</li>
+<li>Attack the more general problem <span class="math inline">\(\pi(x) = \mathbb{P}(X = x | Y_{1:4} = y_{1:4})\)</span> for <strong>all</strong> hypotheses <span class="math inline">\(x \in \{0, 1, 2\}\)</span> instead of just the requested <span class="math inline">\(x = 1\)</span> (corresponding to the “standard coin”).</li>
 <li>By definition of conditioning: <span class="math display">\[\pi(x) = \frac{\mathbb{P}(X = x, Y_{1:4} = y_{1:4})}{\mathbb{P}(Y_{1:4} = y_{1:4})}.\]</span> Let us call the numerator <span class="math display">\[\gamma(x) = \mathbb{P}(X = x, Y_{1:4} = y_{1:4}),\]</span> and the denominator, <span class="math display">\[Z = \mathbb{P}(Y_{1:4} = y_{1:4}).\]</span></li>
-<li>Start by computing <span class="math inline">\(\gamma(x)\)</span> for all <span class="math inline">\(x\)</span>. (using chain rule)</li>
-<li>Note <span class="math inline">\(Z = \gamma(0) + \gamma(1) + \gamma(2)\)</span> (why?).</li>
+<li>Start by computing <span class="math inline">\(\gamma(x)\)</span> for all <span class="math inline">\(x\)</span>. <a href="../w01_discrete_inference/topic08_chain.html#sec-chain-rule">(using chain rule)</a></li>
+<li>Note <span class="math inline">\(Z = \gamma(0) + \gamma(1) + \gamma(2)\)</span> <a href="../w01_discrete_inference/topic02_axioms.html#sec-axioms">(why?)</a>.</li>
 </ol>
 
 
