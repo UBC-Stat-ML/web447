@@ -249,11 +249,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#q.1-sampling-from-a-joint-distribution" id="toc-q.1-sampling-from-a-joint-distribution" class="nav-link" data-scroll-target="#q.1-sampling-from-a-joint-distribution">Q.1: sampling from a joint distribution</a></li>
-  <li><a href="#q.2-computing-a-conditional" id="toc-q.2-computing-a-conditional" class="nav-link" data-scroll-target="#q.2-computing-a-conditional">Q.2: computing a conditional</a></li>
-  <li><a href="#q.3-non-uniform-prior-on-coin-types" id="toc-q.3-non-uniform-prior-on-coin-types" class="nav-link" data-scroll-target="#q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</a></li>
-  <li><a href="#q.4-a-first-posterior-inference-algorithm" id="toc-q.4-a-first-posterior-inference-algorithm" class="nav-link" data-scroll-target="#q.4-a-first-posterior-inference-algorithm">Q.4: a first posterior inference algorithm</a></li>
-  <li><a href="#q.5-generalizing-observations" id="toc-q.5-generalizing-observations" class="nav-link" data-scroll-target="#q.5-generalizing-observations">Q.5: generalizing observations</a></li>
+  <li><a href="#sec-q1" id="toc-sec-q1" class="nav-link" data-scroll-target="#sec-q1">Q.1: sampling from a joint distribution</a></li>
+  <li><a href="#sec-q2" id="toc-sec-q2" class="nav-link" data-scroll-target="#sec-q2">Q.2: computing a conditional</a></li>
+  <li><a href="#sec-q3" id="toc-sec-q3" class="nav-link" data-scroll-target="#sec-q3">Q.3: non uniform prior on coin types</a></li>
+  <li><a href="#sec-q4" id="toc-sec-q4" class="nav-link" data-scroll-target="#sec-q4">Q.4: a first posterior inference algorithm</a></li>
+  <li><a href="#sec-q5" id="toc-sec-q5" class="nav-link" data-scroll-target="#sec-q5">Q.5: generalizing observations</a></li>
   </ul>
 </nav>
     </div>
@@ -349,8 +349,8 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 \tag{1}\]</span></span></li>
 </ul>
 </section>
-<section id="q.1-sampling-from-a-joint-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-sampling-from-a-joint-distribution">Q.1: sampling from a joint distribution</h2>
+<section id="sec-q1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q1">Q.1: sampling from a joint distribution</h2>
 <ol type="1">
 <li>Compute <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span> mathematically (with a precise mathematical derivation).</li>
 <li>Write an R function called <code>forward_sample</code> that samples (“simulates”) from the joint distribution of <span class="math inline">\((X, Y_1, \dots, Y_4)\)</span>. As a general practice, fix the seed, and submit both the code and the output (here, a single sample).</li>
@@ -372,24 +372,24 @@ strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in 
 </div>
 </div>
 </section>
-<section id="q.2-computing-a-conditional" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-computing-a-conditional">Q.2: computing a conditional</h2>
+<section id="sec-q2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q2">Q.2: computing a conditional</h2>
 <p>Suppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = <code>[0, 0, 0, 0]</code>. Given that observation, what is the probability that you picked the standard coin (i.e., the one with <span class="math inline">\(p = 1/2\)</span>)?</p>
 <ol type="1">
 <li>Write mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”</li>
 <li>Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation).</li>
 </ol>
 </section>
-<section id="q.3-non-uniform-prior-on-coin-types" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-non-uniform-prior-on-coin-types">Q.3: non uniform prior on coin types</h2>
+<section id="sec-q3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q3">Q.3: non uniform prior on coin types</h2>
 <p>We now modify the problem as follows: I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.</p>
 <ol type="1">
 <li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint">Equation&nbsp;1</a>. Hint: use a <code>Categorical</code> distribution.</li>
 <li>Compute the probability that you picked one of the fair coins, given you see <code>[0, 0, 0, 0]</code>.</li>
 </ol>
 </section>
-<section id="q.4-a-first-posterior-inference-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="q.4-a-first-posterior-inference-algorithm">Q.4: a first posterior inference algorithm</h2>
+<section id="sec-q4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q4">Q.4: a first posterior inference algorithm</h2>
 <p>We now generalize to having <span class="math inline">\(K + 1\)</span> types of coins such that:</p>
 <ul>
 <li>coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> has bias <span class="math inline">\(k/K\)</span></li>
@@ -402,8 +402,8 @@ strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in 
 <li>Show the output for <span class="math inline">\(\rho \propto (1, 2, 3, \dots, 10)\)</span>. Here <span class="math inline">\(\propto\)</span> means “proportional to”; try to infer what it means in this context.</li>
 </ol>
 </section>
-<section id="q.5-generalizing-observations" class="level2">
-<h2 class="anchored" data-anchor-id="q.5-generalizing-observations">Q.5: generalizing observations</h2>
+<section id="sec-q5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q5">Q.5: generalizing observations</h2>
 <p>We now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe <code>n_heads</code> out of <code>n_observations</code>, where <code>n_heads</code> and <code>n_observations</code> will be additional arguments passed into a new R function.</p>
 <ol type="1">
 <li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint">Equation&nbsp;1</a>. Hint: use a <code>Binomial</code> distribution.</li>

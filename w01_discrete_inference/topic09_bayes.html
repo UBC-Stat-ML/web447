@@ -335,12 +335,12 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 \end{align*}
 \tag{1}\]</span></span></li>
 </ul>
-<p>Consider the question in the first exercise:</p>
+<p>Consider the <a href="../exercises/ex01.html#sec-q2">second question in the first exercise</a>:</p>
 <p>Suppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = <code>[0, 0, 0, 0]</code>. Given that observation, what is the probability that you picked the standard coin (i.e., the one with <span class="math inline">\(p = 1/2\)</span>)?</p>
 </section>
 <section id="strategy" class="level2">
 <h2 class="anchored" data-anchor-id="strategy">Strategy</h2>
-<p>Denote the observation by <span class="math inline">\(y_{1:4} = (0, 0, 0, 0)\)</span>.</p>
+<p>Denote the observation by <span class="math inline">\(y_{1:4} = (0, 0, 0, 0)\)</span>. In the rest of the argument we will always fix <span class="math inline">\(y\)</span> to that value.</p>
 <ol type="1">
 <li>Attack the more general problem <span class="math inline">\(\pi(x) = \mathbb{P}(X = x | Y_{1:4} = y_{1:4})\)</span> for <strong>all</strong> hypotheses <span class="math inline">\(x \in \{0, 1, 2\}\)</span> instead of just the requested <span class="math inline">\(x = 1\)</span> (corresponding to the “standard coin”).</li>
 <li>By definition of conditioning: <span class="math display">\[\pi(x) = \frac{\mathbb{P}(X = x, Y_{1:4} = y_{1:4})}{\mathbb{P}(Y_{1:4} = y_{1:4})}.\]</span> Let us call the numerator <span class="math display">\[\gamma(x) = \mathbb{P}(X = x, Y_{1:4} = y_{1:4}),\]</span> and the denominator, <span class="math display">\[Z = \mathbb{P}(Y_{1:4} = y_{1:4}).\]</span></li>

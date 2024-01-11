@@ -312,11 +312,25 @@ https://github.com/trevorcampbell/shortex
 <p>Expectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action).</p>
 </section>
 </section>
-<section id="expectation-of-a-single-random-variable" class="level2">
+<section id="expectation-of-a-single-random-variable" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="expectation-of-a-single-random-variable">Expectation of a single random variable</h2>
 <p>Recall: <span class="math display">\[\mathbb{E}[X] = \sum_x x p_X(x),\]</span> where the sum is over the point masses of <span class="math inline">\(X\)</span>, i.e.&nbsp;<span class="math inline">\(\{x : p_X(x) &gt; 0\}\)</span>.</p>
-<p><strong>Test yourself:</strong> compute <span class="math inline">\(\mathbb{E}[X]\)</span> if <span class="math inline">\(X \sim {\mathrm{Bern}}(p)\)</span>.</p>
-</section>
+<p><strong>Test yourself:</strong> compute <span class="math inline">\(\mathbb{E}[X]\)</span> if <span class="math inline">\(X \sim {\mathrm{Bern}}(p)\)</span>, with <span class="math inline">\(p = 0.8\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="cell" data-fig-height="5">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+S -- 0.2 --&gt; S__and__X_false["X=false"]
+S -- 0.8 --&gt; S__and__X_true["X=true"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div></div></section>
 <section id="law-of-the-unconscious-statistician" class="level2">
 <h2 class="anchored" data-anchor-id="law-of-the-unconscious-statistician">Law of the Unconscious Statistician</h2>
 <p><strong>Proposition:</strong> if <span class="math inline">\(g\)</span> is some function, <span class="math display">\[\mathbb{E}[g(X)] = \sum_x g(x) p_X(x).\]</span></p>
@@ -350,11 +364,12 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 \end{align*}
 \tag{1}\]</span></span></li>
 </ul>
-<p><strong>Exercise:</strong> computing <span class="math inline">\(\mathbb{E}[X (Y_1+1)]\)</span></p>
-<p><strong>Form:</strong> <span class="math inline">\(\mathbb{E}[g(X, Y_1, \dots, Y_4)]\)</span> for <span class="math inline">\(g(x, y_1, \dots, y_4) = x(y_1+1)\)</span>.</p>
-<p>Generic strategy:</p>
+<p><strong>Example:</strong> computing <span class="math inline">\(\mathbb{E}[X (Y_1+1)]\)</span> (similar to what you will be doing in the exercise in <a href="../exercises/ex01.html#sec-q1">question 1.1</a>)</p>
+<p><strong>Note:</strong> this is of the form <span class="math inline">\(\mathbb{E}[g(\dots)]\)</span>, so we can use the Law of the Unconscious Statistician.</p>
+<p>How to do it:</p>
 <ul>
-<li>start the joint PMF of <strong>all</strong> the random variables in the model (even if they do not occur in <span class="math inline">\(g\)</span>)</li>
+<li>first, identify <span class="math inline">\(g\)</span>, here it is <span class="math inline">\(g(x, y_1, \dots, y_4) = x(y_1+1)\)</span> (in the exercise it is slightly different)</li>
+<li>denote by <span class="math inline">\(p\)</span> the joint PMF of <strong>all</strong> the random variables in the model</li>
 <li>compute the expectation using <span class="math display">\[\mathbb{E}[g(X, Y_1, \dots, Y_4)] = \sum_x \sum_{y_1} \sum_{y_2} \dots \sum_{y_4} g(x, y_1, \dots, y_4)  p(x, y_1, y_2, y_3, y_4).\]</span></li>
 <li>Each sum runs over the point mass of its PMF as before, e.g.&nbsp;<span class="math inline">\(x \in \{0, 1, 2\}\)</span>.</li>
 <li>Recall: <span class="math inline">\(p(x, y_1, y_2, y_3, y_4)\)</span> can be computed using the chain rule.</li>
