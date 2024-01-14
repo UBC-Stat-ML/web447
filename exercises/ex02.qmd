@@ -95,7 +95,7 @@ namely $(0, 1/K, 2/K \dots, 1)$.
 Hint: use the same type of plot as used last week to [plot PMFs](../w01_discrete_inference/topic04_pmfs.qmd#sec-examples). 
 2. Let $\pi_k = \pr(p = k/K | Y_{1:3} = (1, 1, 1))$ denote the posterior probabilities, for 
 $k \in \{0, 1, 2, \dots, K\}$. Create a vector `posterior_probabilities` where entry $i$ is $\pi_{i-1}$. Plot the posterior PMF.
-3. Write a function that computes the posterior mean, mode, and median of $p$,
+3. Write a function that computes the posterior mean and mode of $p$,
 and report these values. 
 Hint: you should obtain $\ex[p | Y_{1:3} = (1, 1, 1)] \approx 0.7$. 
 
@@ -117,6 +117,16 @@ We will show in class that *in this specific model*, $\pr\left(Y_4=1 \middle| Y_
 is the same as the posterior mean, which we computed earlier to be $\approx 0.7$ for our 
 choice of prior.
 3. Formulate a recommendation to the owner of the satellite. 
+
+
+## Q.4: Confidence sets
+
+1. Write a function that builds the highest probability set (HPS) for any coverage
+$\alpha\in[0,1]$.
+2. Write a function that calculates the credible interval for any given
+coverage $\alpha\in[0,1]$.
+3. Compare the HPS and the credible interval for $\alpha=0.99$. Are they equal?
+Explain.
 
 <!-- 
 
