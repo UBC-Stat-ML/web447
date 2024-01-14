@@ -95,8 +95,8 @@ namely $(0, 1/K, 2/K \dots, 1)$.
 Hint: use the same type of plot as used last week to [plot PMFs](../w01_discrete_inference/topic04_pmfs.qmd#sec-examples). 
 2. Let $\pi_k = \pr(p = k/K | Y_{1:3} = (1, 1, 1))$ denote the posterior probabilities, for 
 $k \in \{0, 1, 2, \dots, K\}$. Create a vector `posterior_probabilities` where entry $i$ is $\pi_{i-1}$. Plot the posterior PMF.
-3. What is the posterior mode?
-4. Write a function that compute the posterior mean of $p$. 
+3. Write a function that computes the posterior mean, mode, and median of $p$,
+and report these values. 
 Hint: you should obtain $\ex[p | Y_{1:3} = (1, 1, 1)] \approx 0.7$. 
 
 
