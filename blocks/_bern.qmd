@@ -1,0 +1,13 @@
+---
+editor: 
+  mode: source
+---
+
+:::{.column-margin}
+```{mermaid}
+%%| fig-height: 5
+flowchart TD
+S -- 0.2 --> S__and__X_false["X=false"]
+S -- 0.8 --> S__and__X_true["X=true"]
+```
+:::

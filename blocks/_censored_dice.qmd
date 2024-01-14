@@ -1,0 +1,22 @@
+---
+editor: 
+  mode: source
+---
+
+
+
+Consider the following model:
+
+$$
+\begin{align*}
+X &\sim \distUnif\{1, 2, 3, 4\} \\
+Y | X &\sim \distUnif\{1, \dots, X\}.
+\end{align*}
+$$
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/e/e5/Dice_%28typical_role_playing_game_dice%29.jpg
+){width="200"}
+:::
+
+**Interpretation:** you roll a D&D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice. 

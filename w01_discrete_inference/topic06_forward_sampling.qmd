@@ -55,3 +55,28 @@ $$
     - Specifically, the PMF to use at each recursion step. 
     - In continuous models, it will be the same idea except that we will have a probability density instead of a PMF. 
 
+
+## Example 1
+
+You will practice forward sampling in [Ex1, Q1.1.2](../exercises/ex01.qmd#sec-q1)
+
+## Example 2
+
+{{< include ../blocks/_censored_dice.qmd >}}
+
+**Example of forward simulation code for the above "censored dice":**
+
+```{r}
+require(extraDistr)
+set.seed(4)
+
+forward_simulate_roll_and_pick <- function() {
+  x <- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice
+  y <- rdunif(1, min=1, max=x)
+  c(x, y) # return a vector with these two realizations
+}
+
+forward_simulate_roll_and_pick()
+forward_simulate_roll_and_pick()
+forward_simulate_roll_and_pick()
+```

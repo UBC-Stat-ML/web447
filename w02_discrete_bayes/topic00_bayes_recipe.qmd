@@ -1,0 +1,41 @@
+---
+title: "From probability to Bayes"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Bayesian interpretation of probability models: from aleatoric to epistemic. 
+- Terminology: prior, likelihood, joint.
+
+### Rationale
+
+This week, we will give a new interpretation to the "bag of coin" example 
+(where the uncertainty is "aleatoric"), turning it into a Bayesian model 
+(where the uncertainty is "epistemic").
+Mathematically this is the same model but with a different interpretation. 
+This shift of interpretation is the basis of all Bayesian models. 
+
+
+## This week's running example
+
+- We designed a rocket.
+- We build a bunch of **copies** of the rocket, launch them and enjoy the show!
+
+::: column-margin
+![](../images/delta.jpeg){width="200"}
+:::
+
+**Motivating question:**
+
+- We observe 4 successful launches. 
+- What is the probability that the next launch is a success?
+
+
+

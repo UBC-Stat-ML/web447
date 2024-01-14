@@ -46,7 +46,7 @@ Then $(X = 1)$ corresponds to the red circle.
 :::
 
 
-## Conventions: probability vs Bayesian
+## Conventions: probability vs Bayesian {#sec-conventions-probability-vs-bayesian}
 
 **Probability convention:** 
 

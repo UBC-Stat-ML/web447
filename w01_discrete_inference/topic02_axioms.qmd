@@ -19,7 +19,7 @@ editor:
 - and their union is $E$, i.e., $\cup_i E_i = E$.
 
 
-## Axioms of probability
+## Axioms of probability {#sec-axioms}
 
 - A **probability** is a function $\pr$ that satisfy the following constraints:
     - $\pr$ should take events as input and return a number between zero and one:

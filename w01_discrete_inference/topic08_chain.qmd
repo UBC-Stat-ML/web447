@@ -19,6 +19,8 @@ editor:
 
 ### Rationale
 
+The chain rule allows us to compute a probability that the forward sampling function takes a given path.
+
 The chain rule seem innocent but is used heavily in Bayesian statistics. 
 It is also the building block for Bayes rule. 
 
@@ -29,7 +31,7 @@ If $E_1$ and $E_2$ are any events, $$\pr(E_1, E_2) = \pr(E_1) \pr(E_2 | E_1).$$
 This is true in any order, i.e. we also have $\pr(E_1, E_2) = \pr(E_2) \pr(E_1 | E_2)$.
 
 
-## Generalization
+## Generalization {#sec-chain-rule}
 
 For any events $E_1, E_2, E_3 \dots$, 
 
@@ -42,9 +44,8 @@ $$\pr(E_1, E_2, E_3 \dots) = \pr(E_1) \pr(E_2 | E_1) \pr(E_3 | E_1, E_2) \dots.$
 
 {{< include ../blocks/_decisiontree_node.qmd >}}
 
-**Example:** what is the probability of the node in red?
 
-## Poll: probability of a node
+## Poll: what is the probability of the node in red?
 
 1. 1/2
 1. 1/4
@@ -59,9 +60,8 @@ $$\pr(E_1, E_2, E_3 \dots) = \pr(E_1) \pr(E_2 | E_1) \pr(E_3 | E_1, E_2) \dots.$
 Multiplying the four edge leading to the node we get: $1/2 \cdot 1/2 \cdot 1/2 \cdot 1/3 = 1/24$.
 :::
 
-**Review:** what is the event corresponding to that node?
 
-## Poll: event for a node
+## Poll: what is the event corresponding to that node?
 
 1. $(Y_3 = 1)$
 1. $(Y_3 = 1, Y_2 = 1)$
@@ -78,6 +78,7 @@ the event is $(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)$.
 The calculation we did visually in the  previous clicker question is mathematically:
 $$\pr(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \pr(X = 1) \pr(Y_1 | X = 1) \pr(Y_2 | X = 1, Y_1 = 1) \pr(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).$$
 :::
+
 
 ## Joint PMF
 

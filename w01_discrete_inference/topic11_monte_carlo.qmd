@@ -24,20 +24,52 @@ Simple Monte Carlo is the foundation for more complex Monte Carlo methods used b
 
 \newcommand\parm{{(m)}}
 
-- As before, we want to compute an expectation $\ex[g(X, Y_1, \dots, Y_4)]$
+- As before, we want to compute an expectation $\ex[g(X, Y)]$
 - But imagine a very large tree, but where most branches have very low probability and only few have large probability
 - In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will *approximate* expectations using forward simulation (a method know as **simple Monte Carlo**)
 - This is done as follows:
     - Call your forward simulator $M$ times
     - Denote the output at iteration $m \in \{1, 2, \dots M\}$ by:
-    $$(X^\parm, Y_1^\parm, \dots, Y_4^\parm) \sim p_{X, Y_{1:4}}(\cdot)$$
-    - Compute $g$ on each, call each of the $M$ outputs $g^\parm$
-    $$g^\parm = g(X^\parm, Y_1^\parm, \dots, Y_4^\parm).$$
+    $$(X^\parm, Y^\parm) \sim p_{X, Y}(\cdot)$$
+    - Compute $g$ on each, call each of the $M$ outputs $G^\parm$
+    $$G^\parm = g(X^\parm, Y^\parm).$$
     - Return the average
-    $$\hat G_M = \frac{1}{M} \sum_{m=1}^M g^\parm.$$
+    $$\hat G_M = \frac{1}{M} \sum_{m=1}^M G^\parm.$$
     
 Intuitively, the output $\hat G_M$ has the nice property: 
-$$\hat G_M \approx \ex[g(X, Y_1, \dots, Y_4)].$${#eq-mc}
+$$\hat G_M \approx \ex[g(X, Y)].$${#eq-mc}
+
+## Example 1
+
+[Question 1.2 in the exercise.](../exercises/ex01.qmd#sec-q1)
+
+
+## Example 2
+
+{{< include ../blocks/_censored_dice.qmd >}}
+
+Let us use Monte Carlo to estimate $\ex[X^Y]$:
+
+```{r}
+require(extraDistr)
+set.seed(4)
+
+# Recall our forward simulation code from earlier:
+forward_simulate_roll_and_pick <- function() {
+  x <- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice
+  y <- rdunif(1, min=1, max=x)
+  c(x, y) # return a vector with these two realizations
+}
+
+sum <- 0.0
+n_iterations <- 10000
+for (iteration in 1:n_iterations) {
+  sample <- forward_simulate_roll_and_pick()
+  sum <- sum + sample[1]^sample[2]
+}
+print(sum/n_iterations)
+```
+
 
 ## Motivation from the Law of Large Numbers
 
@@ -51,7 +83,7 @@ $$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_i].$$
     be strengthen to "convergence almost sure." 
     The difference between these notions of convergence will not matter in this course. 
 
-Picking $Z_m = g^\parm$ we arrive to the following formalization of $\approx$: 
+Picking $Z_m = G^\parm$ we arrive to the following formalization of $\approx$: 
 for any approximation error tolerence, we can find a number of iterations $M$ large enough 
 such that we will be within that error tolerence with high probability.
 

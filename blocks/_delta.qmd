@@ -11,6 +11,8 @@ editor:
   same blueprint
 - Should you recommend buying a $2M insurance policy?
 
+**Convention:** use 1 for a success, 0 for a failure.
+
 
 ::: column-margin
 ![](../images/delta.jpeg){width="200"}

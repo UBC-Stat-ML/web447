@@ -18,7 +18,7 @@ editor:
     - $p_Y$ for the PMF of the observed random variable.
 
 
-# Example: coins
+# Example: coins {#sec-examples}
 
 ::: column-margin
 ![](../images/Bernoulli.png){width="200"}
@@ -82,3 +82,23 @@ Then the "stick-based" algorithm can be written as:
 
 1. $U \sim \distUnif[0, 1]$ 
 2. Return $F^{-1}(U)$. 
+
+
+## Plotting PMFs in R
+
+Here is an exampl of how to plot PMFs in R:
+
+```{r}
+realizations <- 0:20
+
+plot(realizations, dbinom(realizations, size=20, prob=.3), type='h')
+```
+
+
+Some explanations:
+
+- Here `dbinom` is the R function for the PMF of a binomial (R uses the prefix `d___` for densities and PMFs).
+- We use the fact that many functions in R such as this one are vectorized, i.e. the normal 
+  PMF function takes a single point $x$ and output $p(x)$ where $p$ is the PMF; the vectorized version 
+  takes vector $(x_1, x_2, \dots)$ and returns $(p(x_1), p(x_2), \dots)$. 
+- The argument `type = 'h'` instructs the plot function to make the plot "histogram"-like. 

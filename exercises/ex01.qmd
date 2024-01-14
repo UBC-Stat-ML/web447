@@ -21,7 +21,7 @@ This exercise is centered around the following scenario:
 {{< include ../blocks/_coinbag.qmd >}}
 
 
-## Q.1: sampling from a joint distribution
+## Q.1: sampling from a joint distribution {#sec-q1}
 
 1.  Compute $\ex[(1+Y_1)^X]$ mathematically (with a precise mathematical derivation).
 2.  Write an R function called `forward_sample` that samples ("simulates") from the joint distribution of $(X, Y_1, \dots, Y_4)$.
@@ -40,7 +40,7 @@ agree.
 :::
 
 
-## Q.2: computing a conditional
+## Q.2: computing a conditional {#sec-q2}
 
 Suppose now that you observe the outcome of the 4 coin flips, but not the type 
 of coin that was picked. Say you observe: "heads", "heads", "heads", "heads" = `[0, 0, 0, 0]`. 
@@ -50,7 +50,7 @@ Given that observation, what is the probability that you picked the standard coi
 2. Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation). 
 
 
-## Q.3: non uniform prior on coin types
+## Q.3: non uniform prior on coin types {#sec-q3}
 
 We now modify the problem as follows: 
 I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails.
@@ -61,7 +61,7 @@ The rest is the same: pick one of the coins, flip it 4 times.
 2. Compute the probability that you picked one of the fair coins, given you see `[0, 0, 0, 0]`.
 
 
-## Q.4: a first posterior inference algorithm
+## Q.4: a first posterior inference algorithm {#sec-q4}
 
 We now generalize to having $K + 1$ types of coins such that:
 
@@ -79,7 +79,7 @@ $k \in \{0, 1, \dots, K\}$ from the bag given the observation.
    in this context.
 
 
-## Q.5: generalizing observations 
+## Q.5: generalizing observations {#sec-q5}
 
 We now generalize Q. 4 as follows: instead of observing 4 "heads" out of 4 observations, 
 say we observe `n_heads` out of `n_observations`, where `n_heads` and `n_observations` 

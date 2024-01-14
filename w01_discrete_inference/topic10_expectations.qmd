@@ -26,7 +26,9 @@ Recall:
 $$\E[X] = \sum_x x p_X(x),$$
 where the sum is over the point masses of $X$, i.e. $\{x : p_X(x) > 0\}$. 
 
-**Test yourself:** compute $\E[X]$ if $X \sim \distBern(p)$. 
+**Test yourself:** compute $\E[X]$ if $X \sim \distBern(p)$, with $p = 0.8$.  
+
+{{< include ../blocks/_bern.qmd >}}
 
 
 ## Law of the Unconscious Statistician
@@ -43,13 +45,14 @@ Let us go back to our running example:
 
 {{< include ../blocks/_coinbag.qmd >}}
 
-**Exercise:** computing $\ex[X (Y_1+1)]$
+**Example:** computing $\ex[X (Y_1+1)]$ (similar to what you will be doing in the exercise in [question 1.1](../exercises/ex01.qmd#sec-q1))
 
-**Form:** $\ex[g(X, Y_1, \dots, Y_4)]$ for $g(x, y_1, \dots, y_4) = x(y_1+1)$. 
+**Note:** this is of the form $\ex[g(\dots)]$, so we can use the Law of the Unconscious Statistician. 
 
-Generic strategy: 
+How to do it: 
 
-- start the joint PMF of **all** the random variables in the model (even if they do not occur in $g$)
+- first, identify $g$, here it is $g(x, y_1, \dots, y_4) = x(y_1+1)$ (in the exercise it is slightly different)
+- denote by $p$ the joint PMF of **all** the random variables in the model
 - compute the expectation using
 $$\ex[g(X, Y_1, \dots, Y_4)] = \sum_x \sum_{y_1} \sum_{y_2} \dots \sum_{y_4} g(x, y_1, \dots, y_4)  p(x, y_1, y_2, y_3, y_4).$$
 - Each sum runs over the point mass of its PMF as before, e.g. $x \in \{0, 1, 2\}$. 
@@ -58,6 +61,5 @@ $$\ex[g(X, Y_1, \dots, Y_4)] = \sum_x \sum_{y_1} \sum_{y_2} \dots \sum_{y_4} g(x
 Recall the decision tree, how to visualize the above equation?
 
 {{< include ../blocks/_decisiontree.qmd >}}
-
 
 
