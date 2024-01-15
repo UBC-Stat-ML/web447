@@ -31,7 +31,7 @@ This exercise is centered around the following scenario:
   - Invariance of updates to order
 
 
-## Q.1: define a Bayesian model
+## Q.1: define a Bayesian model {#sec-q1}
 
 In order to perform inference on the unknown quantities, we must specify how
 they relate to the data; i.e., we need a *probabilistic model*.
@@ -128,15 +128,15 @@ coverage $\alpha\in[0,1]$.
 3. Compare the HPS and the credible interval for $\alpha=0.99$. Are they equal?
 Explain.
 
-<!-- 
 
-## Q.4: sequential updating
+## Q.5: sequential updating
 
-Let us suppose that we go back in time and are able to recreate the inferences
-that a statistician would have made as the successive launches happened.
+Until now, we have assumed that the statistician built a single model after
+observing all of the three launches. We can imagine instead that the statistician
+updated its model each time a new observation from a launch was available. By
+updating, we mean using the posterior $p|Y_{1:i}$ as the prior for predicting
+$Y_{i+1}$.
 
-1. Derive an expression for $\pr(p|Y_1=0)$.
-2. Use the previous expression as a prior distribution 
-**TODO**
+1. Show that the posterior distribution derived via sequential updating coincides
+with the one from [question 1](#sec-q1).
 
--->
