@@ -1,5 +1,5 @@
 ---
-title: "Exercise 2: Bayes estimator"
+title: "Exercise 2: Bayesian inference first contact"
 editor: 
   mode: source
 ---
@@ -11,10 +11,6 @@ editor:
 - Build a probability model for a concrete example.
 - Introduce the concept of Bayes estimators.
 
-<!-- 
-- Review sequential Bayes update.
--->
-
 ## Setup {#sec-setup}
 
 This exercise is centered around the following scenario:
@@ -22,16 +18,8 @@ This exercise is centered around the following scenario:
 {{< include ../blocks/_delta.qmd >}}
 
 
-## TODO:
 
-- Pick a numerical value for $K$ that make the plots look nice (still discrete looking but enough to show continuity) (10?)
-- Give them the numerical value for the predictive
-- Maybe 1 or 2 "challenge question"
-  - Implementing the credible set function
-  - Invariance of updates to order
-
-
-## Q.1: define a Bayesian model
+## Q.1: define a Bayesian model {#sec-q1}
 
 In order to perform inference on the unknown quantities, we must specify how
 they relate to the data; i.e., we need a *probabilistic model*.
@@ -56,35 +44,19 @@ Let $Y_i$ denote a binary variable with $Y_i=1$ encoding a success, and $Y_i=0$ 
 We assume that,
 conditionally on $p$, the $Y_i$'s are independent of each other.
 
+We will use the following prior:
+$$
+\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
+$$ {#eq-parabola-prior} 
+From now on, use $K = 20$. 
+
 1. What are the unknown quantities in this scenario? And what is the data?
 2. Write the joint distribution of this model (use the $\sim$ notation).
 
 
-## Q.2: point estimates
+## Q.2: posterior and point estimates {#sec-q2}
 
-<!-- 
-
-1. Give an expression for the prior predictive probability of failure for the 
-next launch
-$$
-\pr(Y_4=1)
-$$
-
-2. Give an expression for the posterior probability
-$$
-\pr\left(p=\frac{k}{K}\middle| Y_1=Y_2=Y_3=0 \right)
-$$
-
--->
-
-In this question we will use the following prior:
-$$
-\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
-$$ {#eq-parabola-prior} 
-
-From now on, use $K = 20$. 
-
-To help you answer the following question, create the two vectors: 
+To help you answer the following questions, create the two vectors: 
 
 - `prior_probabilities` where entry $i$ containing the prior probability $\rho_{i-1}$ 
 defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and 
@@ -95,12 +67,12 @@ namely $(0, 1/K, 2/K \dots, 1)$.
 Hint: use the same type of plot as used last week to [plot PMFs](../w01_discrete_inference/topic04_pmfs.qmd#sec-examples). 
 2. Let $\pi_k = \pr(p = k/K | Y_{1:3} = (1, 1, 1))$ denote the posterior probabilities, for 
 $k \in \{0, 1, 2, \dots, K\}$. Create a vector `posterior_probabilities` where entry $i$ is $\pi_{i-1}$. Plot the posterior PMF.
-3. What is the posterior mode?
+3. What is the posterior mode? 
 4. Write a function that compute the posterior mean of $p$. 
 Hint: you should obtain $\ex[p | Y_{1:3} = (1, 1, 1)] \approx 0.7$. 
 
 
-## Q.3: Bayes action
+## Q.3: Bayes action {#sec-q3}
 
 Let $a\in\{0,1\}$ be a binary variable denoting the decision of buying the
 insurance ($a=1$) or not ($a=0$).
@@ -117,16 +89,3 @@ We will show in class that *in this specific model*, $\pr\left(Y_4=1 \middle| Y_
 is the same as the posterior mean, which we computed earlier to be $\approx 0.7$ for our 
 choice of prior.
 3. Formulate a recommendation to the owner of the satellite. 
-
-<!-- 
-
-## Q.4: sequential updating
-
-Let us suppose that we go back in time and are able to recreate the inferences
-that a statistician would have made as the successive launches happened.
-
-1. Derive an expression for $\pr(p|Y_1=0)$.
-2. Use the previous expression as a prior distribution 
-**TODO**
-
--->

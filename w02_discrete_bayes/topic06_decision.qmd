@@ -1,0 +1,50 @@
+---
+title: "Decision theory"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+
+### Rationale
+
+
+
+## Decision theory without uncertainty 
+
+Your friend proposes the following game (a good model for any lottery!):
+
+- She flips a standard coin:
+    - if it's a "heads": you give her \$10 
+    - if it's a "tails": she gives you \$9. 
+- Your decision: to play or not to play?
+
+## Decision theory with uncertainty
+
+<!--
+
+## Example: disease screening
+
+- "Screening policy": recommend to doctors to do a certain disease test 
+    every year for everyone in a group 
+      - e.g. mammograms for women over 40 to screen breast cancer.
+- Decision: a jurisdiction is deciding whether to enact a screening policy or not in a given group.
+- Factors:
+    - Early disease detection can prevent deaths.
+    - But false positives can lead to un-necessary impact to healthy people. 
+    
+Terminology:
+
+- "positive" / "positive": the test says "yes" / "no"
+- "false positive": the test says yes when the individual was healthy
+- "false negative": the test says no when the individual was sick.
+
+{{< include ../blocks/_screening.qmd >}}
+
+-->

@@ -1,0 +1,17 @@
+---
+editor: 
+  mode: source
+---
+
+:::{.column-page}
+```{mermaid}
+%%| fig-height: 5
+flowchart TD
+S__and__X_true -- 0.87 --> S__and__X_true__and__Y_true["Y=true"]
+S__and__X_false -- 0.9 --> S__and__X_false__and__Y_false["Y=false"]
+S__and__X_false -- 0.1 --> S__and__X_false__and__Y_true["Y=true"]
+S -- 0.01 --> S__and__X_true["X=true"]
+S -- 0.99 --> S__and__X_false["X=false"]
+S__and__X_true -- 0.13 --> S__and__X_true__and__Y_false["Y=false"]
+```
+:::

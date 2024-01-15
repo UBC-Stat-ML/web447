@@ -1,0 +1,90 @@
+---
+title: "Point estimates"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Common point estimates:
+    - Posterior mean. 
+    - Posterior mode. 
+    - Posterior median.
+
+
+### Rationale
+
+It is often necessary to summarize the posterior distribution with a single "best guess", 
+even though as we will see this hides important information namely our uncertainty 
+about that guess. 
+
+
+## Definitions
+
+- Let $\pi(x) = \pr(X = x | Y = y)$ denote a posterior PMF. 
+- Instead of plotting the full information in $\pi$, 
+  we can report a "location" summary such as the mean of the posterior $\pi$. 
+
+
+### Posterior mean
+
+Recall the mean is computed from a PMF via 
+$$\sum_x x\; \pi(x),$$
+where the sum is over $\{x : \pi(x) > 0 \}$. 
+
+**Notation:** the posterior mean is denoted $\ex[X | Y = y] = \sum x\ \pi(x)$. 
+
+### Example 1
+
+Compute $\ex[X | Y = (1, 1)]$ in the bag of coin example. 
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+1. 0.5
+1. 1.8
+1. 2.25
+1. 3.5
+1. None of the above
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+First, compute the unnormalized posterior $\gamma \propto \pi$:
+$$\gamma = (\gamma(0), \gamma(1), \gamma(2)) = (1/3) (0^2, (1/2)^2, 1^2),$$
+then normalize: 
+$$\pi = \gamma / Z =  (0, 1/5, 4/5).$$
+Finally, compute the conditional expectation:
+$$\ex[X | Y = (1, 1)] = \sum x \; \pi(x) = (0, 1, 2) \cdot (0, 1/5, 4/5) = 9/5 = 1.8.$$
+
+**Common mistake:** forgetting normalization step:
+$$\sum x \; \pi(x) \neq \sum x \; \gamma(x).$$
+
+- This "common mistake" highlights that we really need $Z$ to compute posterior expectations using the 
+exact, exhaustive approach (i.e. the method we are using here). 
+- When we talk more about Monte Carlo methods, we will see that these methods 
+allow us to approximate expecations without having to compute $Z$!
+:::
+
+
+### Posterior mode
+
+The **mode** is the location of the "tallest stick" in the PMF. 
+
+**Notation:** $\argmax \pi(x),$ i.e. the point that achieves the maximum of $\pi$.
+
+In the Bayesian context, the mode of a posterior PMF is also known as 
+the Maximum A Posteriori (MAP) estimator. 
+
+
+### Example 2
+
+You will practice computing the posterior mean/mode in [question 2 of the exercises](../exercises/ex02.qmd#sec-q2). 
+
+

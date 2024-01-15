@@ -1,0 +1,23 @@
+---
+title: "A bit of history"
+editor: 
+  mode: source
+---
+
+
+# Bayesian statistics: short historical overview
+
+- Precursors: 
+    - Thomas Bayes (1702–1761); first special case of Bayes rule, published posthumously in 1763
+    - Pierre-Simon Laplace (1749–1827): generalizations, more applications
+    - Idea temporarily buried by frequentists in the 1920's
+- Second wave: theoretical foundations
+    - Bruno de Finetti, 1930: partial justification for **exchangeable data**
+    - **Stein paradox** and crisis in frequentist statistics (1955)
+    - Objective-Subjective Bayes 'divide'
+        - Popularization of **Subjective Bayes** by Leonard Savage in the '50s
+        - Inception of the **Objective Bayes** school: Harold Jeffreys (1939), further development by José-Miguel Bernardo (1979)
+- Third wave: coming of age as a versatile data analysis tool
+    - Inception: Nicholas Metropolis, Arianna Rosenbluth, Marshall Rosenbluth, Augusta Teller and Edward Teller (1953), **Metropolis-Hastings algorithm** in the physics literature
+    - Introduction to Bayesian statistics: Stuart Geman and Donald Geman (1984)
+    - First major PPL: WinBUGS, David Lunn, Andrew Thomas, Nicky Best, David Spiegelhalter (2000)

@@ -1,0 +1,72 @@
+---
+title: "Bayesian models"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Bayesian interpretation of probability models: from aleatoric to epistemic. 
+- Terminology: prior, likelihood, joint.
+
+### Rationale
+
+This week, we will give a new interpretation to the "bag of coin" example 
+(where the uncertainty is "aleatoric"), turning it into a Bayesian model 
+(where the uncertainty is "epistemic").
+Mathematically this is the same model but with a different interpretation. 
+This shift of interpretation is the basis of all Bayesian models. 
+
+
+## What is a Bayesian model?
+
+A **Bayesian model** is a probability model equipped with:
+
+- random variable(s) representing the data (we use $Y$ in this course)
+- random variable(s) for the unknown quantities  (we use $X$ in this course).
+
+**Note:** concretely, a Bayesian model is a joint PMF over $X$ and $Y$, typically 
+  written using the "$\sim$" notation introduced last week.
+
+
+## From a coins to rockets
+
+For this week's rocket example, 
+we will use the exact same probability model as the bag of coin example from last week. 
+
+Use the following correspondence to link last week's example with this week's:
+
+- $(Y_i = 1)$: 
+    - $\leftrightarrow$ "$i$-th flip is a heads" 
+    - $\leftrightarrow$ "$i$-th launch is a success"
+- $(X = k)$:
+    - $\leftrightarrow$ "the coin drawn from bag has probability $p = k/K$ of heads"
+    - $\leftrightarrow$ "this type of rocket has probability $p = k/K$ of success."
+    
+    
+## Terminology 
+
+The task of constructing a Bayesian model is often broken down into constructing:
+
+- the **prior:** the PMF of the unknown $X$,[^1]
+- the **likelihood:** the conditional PMF of observed $Y$ given $X$.
+
+[^1]: if the unknown quantity is continuous, the prior will be expressed using a density. 
+  A term that captures both the continuous and discrete case is "distribution" 
+  i.e. "prior distribution". 
+  
+  
+## Epistemic vs aleatoric probability
+
+- In the bag of coin example, we can replicate the whole "experiment" several times (both prior and likelihood).
+- In the rocket example, we can only replicate launches (likelihood), not the prior sampling part. 
+- **Epistemic probability**: the part we cannot replicate. 
+- **Aleatoric probability**: the part that can be replicated. 
+
+- Bayesian statistics uses both types of probability, 
+- whereas other fields of statistics, e.g. MLE, typically uses only aleatoric.

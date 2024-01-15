@@ -1,0 +1,45 @@
+---
+title: "The Bayesian recipe"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Introduce the Bayesian Recipe (synonym for the Bayes estimator)
+- Illustrate it using this week's running example
+
+### Rationale
+
+The Bayesian Recipe/Bayes estimator is the guide for all "full Bayesian" statistical analyses. 
+This week we apply it to an example that builds on last week's review. 
+
+
+## This week's running example 
+
+{{< include ../blocks/_delta.qmd >}}
+
+
+## The Bayesian recipe 
+
+The goal this week is to undersand the 3 steps in the Bayesian recipe:
+
+{{< include ../blocks/_recipe.qmd >}}
+
+
+## Plan
+
+- Understanding Step 1 ("construct a probability model"):
+    - we reviewed probability models last week,
+    - in fact, the model we use for this week's problem is the same as last week's!
+    - We will just need to add some Bayesian terminology: **prior, likelihood**.
+- Understanding Step 2 ("condition on the data"):
+    - we reviewed conditional probability last week,
+    - in fact, the conditional probability calculation for this week's problem is the same as last week's!
+    - We just need to add some Bayesian terminology: **posterior distributions**.
+- Understanding Step 3: this is where most of the new material will be for this week.

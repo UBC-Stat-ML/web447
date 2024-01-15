@@ -1,0 +1,16 @@
+---
+editor: 
+  mode: source
+---
+
+1. Construct a **probability model** including
+    - random variables for what we will measure/observe
+    - random variables for the unknown quantities
+        - those we are interested in ("parameters", "predictions")
+        - others that just help us formulate the problem ("nuisance", "random effects").
+2. Compute the **posterior distribution** (condition on the data)
+3. Use the posterior distribution to (**decision theory**):
+    - make prediction (point estimate)
+    - estimate uncertainty (credible intervals)
+    - make a decision 
+
