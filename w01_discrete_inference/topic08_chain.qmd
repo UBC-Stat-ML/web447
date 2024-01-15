@@ -99,7 +99,7 @@ Similarly, here is an example of a conditional PMF:
 $$p_{Y_1|X}(y | x) = \pr(Y_1 = y | X = x).$$
 
 
-## Conditional independence
+## Conditional independence {#sec-conditional-independence}
 
 The model was specified as: 
 

@@ -103,3 +103,5 @@ https://github.com/trevorcampbell/shortex
 
 <!-- general purpose math -->
 \newcommand{\ind}{\mathbb{1}}
+
+\newcommand{\ones}{\boldsymbol{1}}

@@ -87,5 +87,17 @@ $$
 Write $\mathcal{L}(a)$ in terms of $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$. 
 **Important:** you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$ 
 is the same as the posterior mean, which we computed earlier to be $\approx 0.7$ for our 
-choice of prior.
-3. Formulate a recommendation to the owner of the satellite. (again, you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right) \approx 0.7$).
+choice of prior.[^2]
+3. Formulate a recommendation to the owner of the satellite (again, you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right) \approx 0.7$).
+
+[^2]: The proof is as follows, where here we do desambiguate between the random variable $P$ and its realization $p$ (not to be confused with $\pr$ and PMF $p(\cdot)$!):
+  $$\begin{align*}
+  \pr(Y_4 = y_4 | Y_{1:3} = \ones) &= \sum_p \pr(P = p, Y_4 = y_4 | Y_{1:3} = \ones) \;\;\text{(additivity axiom)} \\
+  &= \sum_p  \pr(P = p | Y_{1:3} = \ones) \pr(Y_4 = y_4 | P = p, Y_{1:3} = \ones) \;\;\text{(chain rule)} \\
+  &= \sum_p \pi(p) \pr(Y_4 = y_4 | P = p, Y_{1:3} = \ones) \;\;\text{(definition)} \\
+  &= \sum_p \pi(p) \pr(Y_4 = y_4 | P = p) \;\;\text{(conditional independence)} \\
+  &= \sum_p \pi(p) p \;\;\text{(since each flip is assumed to be Bernoulli)} \\
+  &= \ex[p | Y_{1:3} = \ones].
+  \end{align*}$$
+  Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. 
+  We will cover in class the general method to compute predictive distribution, [see lecture notes](../w02_discrete_bayes/topic07_prediction.qmd). 
