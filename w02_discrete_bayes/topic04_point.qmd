@@ -45,32 +45,8 @@ Compute $\ex[X | Y = (1, 1)]$ in the bag of coin example.
 
 {{< include ../blocks/_coinbag.qmd >}}
 
-1. 0.5
-1. 1.8
-1. 2.25
-1. 3.5
-1. None of the above
+{{< include ../../clickers/w02/_c01.qmd >}}
 
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-First, compute the unnormalized posterior $\gamma \propto \pi$:
-$$\gamma = (\gamma(0), \gamma(1), \gamma(2)) = (1/3) (0^2, (1/2)^2, 1^2),$$
-then normalize: 
-$$\pi = \gamma / Z =  (0, 1/5, 4/5).$$
-Finally, compute the conditional expectation:
-$$\ex[X | Y = (1, 1)] = \sum x \; \pi(x) = (0, 1, 2) \cdot (0, 1/5, 4/5) = 9/5 = 1.8.$$
-
-**Common mistake:** forgetting normalization step:
-$$\sum x \; \pi(x) \neq \sum x \; \gamma(x).$$
-
-- This "common mistake" highlights that we really need $Z$ to compute posterior expectations using the 
-exact, exhaustive approach (i.e. the method we are using here). 
-- When we talk more about Monte Carlo methods, we will see that these methods 
-allow us to approximate expecations without having to compute $Z$!
-:::
 
 
 ### Posterior mode

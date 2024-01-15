@@ -85,7 +85,7 @@ $$
 \mathcal{L}(a) := \ex[L(a,Y_4)|Y_{1:3}=(1, 1, 1)] 
 $$
 Write $\mathcal{L}(a)$ in terms of $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$. 
-We will show in class that *in this specific model*, $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$ 
+**Important:** you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$ 
 is the same as the posterior mean, which we computed earlier to be $\approx 0.7$ for our 
 choice of prior.
-3. Formulate a recommendation to the owner of the satellite. 
+3. Formulate a recommendation to the owner of the satellite. (again, you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right) \approx 0.7$).

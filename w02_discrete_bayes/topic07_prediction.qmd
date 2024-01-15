@@ -1,0 +1,21 @@
+---
+title: "Prediction"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+
+
+### Rationale
+
+
+
+
+## TODO
