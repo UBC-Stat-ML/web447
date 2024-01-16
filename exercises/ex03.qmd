@@ -14,7 +14,7 @@ editor:
 
 ## TODO
 
-- 1 - continuous MC on bounded space and uniform proposal
+- 1 - continuous MC on bounded space and uniform proposal✅
 - 2 - continuous IS on unbounded space and e.g. exponential proposal
 	-> bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?)
 	-> bonus/challenge question? or maybe in class instead?: questions on ESS?
@@ -39,6 +39,14 @@ Show that
 $$
 \int_0^1 f(x)\dee x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
 $${#eq-integral}
+Hint: look at the expression for the 
+[density](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function) 
+of a $\distBeta(\alpha,\beta)$ distribution, and remember that it must integrate
+to one. Then use the fact that for any $\gamma\in(0,1)$, the 
+[beta function satisfies](https://en.wikipedia.org/wiki/Beta_function#Other_identities_and_formulas) 
+$$
+\operatorname{B}(\gamma,1-\gamma) = \frac{\pi}{\sin\left(\gamma\pi\right)}.
+$$
 3. Test your implementation of `mc_estimate` by checking that it produces an
 answer close to the value in @eq-integral.
 4. In order to quantify the uncertainty inherent in the output of the previous 
@@ -57,3 +65,7 @@ $$
 \int_0^1 \frac{\sin(t)}{t} \dee t.
 $$
 Estimate its value using `mc_estimate(f)` and provide a 95% confidence interval.
+
+
+## Q.2: function on unbounded intervals
+
