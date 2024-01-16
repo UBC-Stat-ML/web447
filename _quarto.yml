@@ -23,6 +23,8 @@ website:
           - auto: "w02_discrete_bayes/*"
           - text: "Exercises"
             file: exercises/ex02.qmd
+          - text: "Challenge"
+            file: challenges/ch02.qmd
 
 
 format:
