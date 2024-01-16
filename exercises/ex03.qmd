@@ -15,7 +15,7 @@ editor:
 ## TODO
 
 - 1 - continuous MC on bounded space and uniform proposal✅
-- 2 - continuous IS on unbounded space and e.g. exponential proposal
+- 2 - continuous IS on unbounded space and e.g. exponential proposal✅
 	-> bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?)
 	-> bonus/challenge question? or maybe in class instead?: questions on ESS?
 	-> bonus? an example where the expectation does not converge due to non-integrability
@@ -59,13 +59,37 @@ step, we will construct a confidence interval[^1] for our Monte Carlo estimate
 [^1]: Yes, the frequentist concept! Monte Carlo simulation is one instance 
       where the assumptions of frequentist inference hold by design.
 
-5. The following integral, known as the sine integral, does not admit a closed-form
-expression
+5. The following integral, known as the 
+[sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral),
 $$
 \int_0^1 \frac{\sin(t)}{t} \dee t.
 $$
-Estimate its value using `mc_estimate(f)` and provide a 95% confidence interval.
+does not admit a closed-form expression. Provide a 95% confidence interval for
+its value using `mc_estimate(f)`.
 
 
 ## Q.2: function on unbounded intervals
 
+1. Write a function `is_exponential` that takes a function 
+$f:[0,\infty)\to\reals$ and outputs a Monte Carlo estimate of
+$\int_0^\infty f(x)\dee x$ using Importance Sampling with reference distribution
+$\distExp(1)$ and $n=10000$ i.i.d. samples.
+2. Show that the function $f:[0,\infty)\to[0,\infty)$ given by
+$$
+f(x) = \frac{\exp(-\pi^2/x)}{x^3\sqrt{x}}.
+$$
+satisfies
+$$
+\int_0^\infty f(x)\dee x = \frac{3}{4\pi^4\sqrt{\pi}}.
+$${#eq-integral-unbounded}
+Hint: look at the expression for the 
+[density of an Inverse Gamma distribution](https://en.wikipedia.org/wiki/Inverse-gamma_distribution#Probability_density_function).
+Then use [the fact that](https://en.wikipedia.org/wiki/Gamma_function#General) for $n\in\nats$
+$$
+\Gamma\left(\frac{1}{2}+n\right) = \frac{(2n)!}{4^nn!}\sqrt{\pi}.
+$$
+3. Test your implementation of `is_exponential` by constructing a 95% confidence
+interval for your estimate and checking that it contains the true value.
+4. Write a function `is_exponential_10` that is identical to `is_exponential`
+except that it uses $\distExp(10)$ as reference. Use it to build another 95%
+confidence interval and compare it to the one obtained using `is_exponential`.
