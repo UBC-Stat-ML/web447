@@ -436,8 +436,8 @@ The loss function is given by:
 
 |                 | Do not play ($a = 0$) | Play ($a = 1$) |
 |-----------------|-----------------------|----------------|
-| Heads ($x = 1$) | $0$                   | $-10$          |
-| Tails ($x = 0$) | $0$                   | $9$            |
+| Heads ($x = 1$) | $0$                   | $10$          |
+| Tails ($x = 0$) | $0$                   | $-9$            |
 
 Therefore, the action that maximizes $L(a)$ is $a = 0$ (i.e., $a = 0$ is the "argmin") and gives value $L(0) = 0$.
 :::
@@ -449,14 +449,13 @@ Therefore, the action that maximizes $L(a)$ is $a = 0$ (i.e., $a = 0$ is the "ar
 1 &amp; \text{if the condition is true,} \\
 0 &amp; \text{if the condition is false.}
 \end{array}
-\right.\]</span> This gives us: <span class="math display">\[L(a, x) = \mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, x = 0] \cdot (\$9) +  \mathbb{1}[a = 1, x = 1] \cdot (-\$10).\]</span></p>
-<p>Next, let us simplify the expected loss function: <span class="math display">\[\mathbb{E}[L(a, X)] = \mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, X = 0] \cdot (\$9) +  \mathbb{1}[a = 1, X = 1] \cdot (-\$10)].\]</span></p>
-<p>Next, use <strong>linearity of expectation</strong> which you will recall from probability theory tells us that for any random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, we have <span class="math inline">\(\mathbb{E}[X_1 + c X_2] = \mathbb{E}[X_1] + c \mathbb{E}[X_2]\)</span> for any constant <span class="math inline">\(c\)</span>.</p>
-<p>In our context, using linearity with <span class="math inline">\(c=1\)</span> allows us to simplify the above to: <span class="math display">\[\underbrace{\mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0)]}_0 + \mathbb{E}[\mathbb{1}[a = 1, X = 0] \cdot (\$9)] + \mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (-\$10)].\]</span></p>
-<p><strong>Trick 1:</strong> To deal with each remaining term, use that: <span class="math inline">\(\mathbb{1}[a = 1, X = 1] = \mathbb{1}[a = 1]\mathbb{1}[X = 1]\)</span> (check!), and then use linearity with <span class="math inline">\(c = - \$ 10 \cdot \mathbb{1}[a = 1]\)</span> to get: <span class="math display">\[\mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (-\$10)] = - \$ 10 \cdot \mathbb{1}[a = 1] \mathbb{E}[\mathbb{1}[X = 1]].\]</span></p>
+\right.\]</span> This gives us: <span class="math display">\[L(a, x) = \mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, x = 0] \cdot (-\$9) +  \mathbb{1}[a = 1, x = 1] \cdot (\$10).\]</span></p>
+<p>Let us simplify the expected loss function, i.e. <span class="math display">\[\mathbb{E}[L(a, X)] = \mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, X = 0] \cdot (-\$9) +  \mathbb{1}[a = 1, X = 1] \cdot (\$10)].\]</span> o do that simplification, first use <strong>linearity of expectation</strong> which you will recall from probability theory tells us that for any random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, we have <span class="math inline">\(\mathbb{E}[X_1 + c X_2] = \mathbb{E}[X_1] + c \mathbb{E}[X_2]\)</span> for any constant <span class="math inline">\(c\)</span>.</p>
+<p>In our context, using linearity with <span class="math inline">\(c=1\)</span> allows us to simplify the above to: <span class="math display">\[\underbrace{\mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0)]}_0 + \mathbb{E}[\mathbb{1}[a = 1, X = 0] \cdot (-\$9)] + \mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (\$10)].\]</span></p>
+<p><strong>Trick 1:</strong> To deal with each remaining term, use that: <span class="math inline">\(\mathbb{1}[a = 1, X = 1] = \mathbb{1}[a = 1]\mathbb{1}[X = 1]\)</span> (check!), and then use linearity with <span class="math inline">\(c = \$ 10 \cdot \mathbb{1}[a = 1]\)</span> to get: <span class="math display">\[\mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (\$10)] =  \$ 10 \cdot \mathbb{1}[a = 1] \mathbb{E}[\mathbb{1}[X = 1]].\]</span></p>
 <p><strong>LOTUS:</strong> Finally, we have to compute <span class="math inline">\(\mathbb{E}[\mathbb{1}[X = 1]]\)</span>. From <a href="../w01_discrete_inference/topic10_expectations.html">our review of the Law of the Unconscious Statistician</a>, this is done as follows: <span class="math display">\[\mathbb{E}[\mathbb{1}[X = 1]] = \sum_x \mathbb{1}[x = 1] p_X(x) = 0 + 1 \cdot p_X(1) = 1/2.\]</span></p>
 <p><strong>Trick 2:</strong> you will often take expectation of indicator function, you will always find that <span class="math inline">\(\mathbb{E}[\mathbb{1}[\text{an event}]] = \mathbb{P}(\text{an event})\)</span>.</p>
-<p>Putting it all together: <span class="math display">\[L(a) = \mathbb{E}[L(a, X)] =  \$ 9 \cdot \mathbb{1}[a = 1] (1/2) - \$ 10 \cdot \mathbb{1}[a = 1] (1/2) = -\$0.5 \cdot \mathbb{1}[a = 1].\]</span></p>
+<p>Putting it all together: <span class="math display">\[L(a) = \mathbb{E}[L(a, X)] =  -\$ 9 \cdot \mathbb{1}[a = 1] (1/2) + \$ 10 \cdot \mathbb{1}[a = 1] (1/2) = \$0.5 \cdot \mathbb{1}[a = 1].\]</span></p>
 </section>
 </section>
 <section id="decision-theory-with-data" class="level2">
@@ -472,7 +471,7 @@ Therefore, the action that maximizes $L(a)$ is $a = 0$ (i.e., $a = 0$ is the "ar
 </ul>
 <section id="definition-the-bayes-estimator" class="level3">
 <h3 class="anchored" data-anchor-id="definition-the-bayes-estimator">Definition: the Bayes estimator</h3>
-<p><strong>Mathematically:</strong> use an action <span class="math inline">\(a \in A\)</span> minimizing <span class="math display">\[\operatorname{arg\,min}\mathbb{E}[L(a, X) | Y = y].\]</span> where: <span class="math display">\[\mathbb{E}[L(a, X) | Y = y] = \sum_x L(a, x) p_{X|Y}(x|y).\]</span></p>
+<p><strong>Mathematically:</strong> use an action <span class="math inline">\(a \in A\)</span> minimizing the posterior expected loss, i.e. <span class="math display">\[\operatorname{arg\,min}\mathbb{E}[L(a, X) | Y = y].\]</span> where: <span class="math display">\[\mathbb{E}[L(a, X) | Y = y] = \sum_x L(a, x) p_{X|Y}(x|y).\]</span></p>
 </section>
 <section id="example-1" class="level3">
 <h3 class="anchored" data-anchor-id="example-1">Example</h3>

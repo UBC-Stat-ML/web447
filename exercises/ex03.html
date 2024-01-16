@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Point estimates</title>
+<title>Bayes1@UBC - Exercise 3: inference on continuous spaces</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -75,7 +75,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic01_bayes_recipe.html">Bayes on a discrete model</a></li><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic04_point.html">Point estimates</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -272,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
@@ -318,27 +320,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a>
-  <ul class="collapse">
-  <li><a href="#posterior-mean" id="toc-posterior-mean" class="nav-link" data-scroll-target="#posterior-mean">Posterior mean</a></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
-  <li><a href="#posterior-mode" id="toc-posterior-mode" class="nav-link" data-scroll-target="#posterior-mode">Posterior mode</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
-  </ul></li>
+  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">TODO</a></li>
+  <li><a href="#q.1-functions-on-the-unit-interval" id="toc-q.1-functions-on-the-unit-interval" class="nav-link" data-scroll-target="#q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Point estimates</h1>
+<h1 class="title">Exercise 3: inference on continuous spaces</h1>
 </div>
 
 
@@ -370,106 +363,58 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
 <ul>
-<li>Common point estimates:
+<li>Introduce Monte Carlo integration in continuous spaces.</li>
+<li>Review the concept of importance sampling.</li>
+</ul>
+</section>
+<section id="todo" class="level2">
+<h2 class="anchored" data-anchor-id="todo">TODO</h2>
 <ul>
-<li>Posterior mean.</li>
-<li>Posterior mode.</li>
+<li>1 - continuous MC on bounded space and uniform proposal</li>
+<li>2 - continuous IS on unbounded space and e.g.&nbsp;exponential proposal -&gt; bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?) -&gt; bonus/challenge question? or maybe in class instead?: questions on ESS? -&gt; bonus? an example where the expectation does not converge due to non-integrability</li>
+<li>3 - guided steps to universal PPL (providing scaffold code)
+<ul>
+<li>test case: discrete model from last time (e.g.&nbsp;one for parameters posterior)</li>
+<li>extending to cover predictive?</li>
+<li>model with two variables? (can wait until regression)</li>
 </ul></li>
 </ul>
 </section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>It is often necessary to summarize the posterior distribution with a single “best guess”, even though as we will see this hides important information namely our uncertainty about that guess.</p>
-</section>
-</section>
-<section id="definitions" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
-<ul>
-<li>Let <span class="math inline">\(\pi(x) = \mathbb{P}(X = x | Y = y)\)</span> denote a posterior PMF.</li>
-<li><strong>Point estimate:</strong> Instead of plotting the full information in <span class="math inline">\(\pi\)</span>, we can report a “location” summary such as the mean of the posterior <span class="math inline">\(\pi\)</span>.</li>
-</ul>
-<section id="posterior-mean" class="level3">
-<h3 class="anchored" data-anchor-id="posterior-mean">Posterior mean</h3>
-<p>Recall the mean is computed from a PMF via <span class="math display">\[\sum_x x\; \pi(x),\]</span> where the sum is over <span class="math inline">\(\{x : \pi(x) &gt; 0 \}\)</span>.</p>
-<p><strong>Notation:</strong> the posterior mean is denoted <span class="math inline">\(\mathbb{E}[X | Y = y] = \sum x\ \pi(x)\)</span>.</p>
-</section>
-<section id="example-1" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="example-1">Example 1</h3>
-<p>Compute <span class="math inline">\(\mathbb{E}[X | Y = (1, 1)]\)</span> in the bag of coin example.</p>
-<ul>
-<li>Imagine a bag with 3 coins each with a different probability parameter <span class="math inline">\(p\)</span></li>
-<li>Coin <span class="math inline">\(i\in \{0, 1, 2\}\)</span> has bias <span class="math inline">\(i/2\)</span>—in other words:
-<ul>
-<li>First coin: bias is <span class="math inline">\(0/2 = 0\)</span> (i.e.&nbsp;both sides are “tails”, <span class="math inline">\(p = 0\)</span>)</li>
-<li>Second coin: bias is <span class="math inline">\(1/2 = 0.5\)</span> (i.e.&nbsp;standard coin, <span class="math inline">\(p = 1/2\)</span>)</li>
-<li>Third coin: bias is <span class="math inline">\(2/2 = 1\)</span> (i.e.&nbsp;both sides are “heads”, <span class="math inline">\(p = 1\)</span>)</li>
-</ul></li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/coinbag.png" class="img-fluid" width="200"></p>
-</div></div><ul>
-<li>Consider the following two steps sampling process
-<ul>
-<li>Step 1: pick one of the three coins, but do not look at it!</li>
-<li>Step 2: flip the coin 4 times</li>
-</ul></li>
-<li>Mathematically, this probability model can be written as follows: <span id="eq-coin-joint"><span class="math display">\[
-\begin{align*}
-X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
-Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
-\end{align*}
-\tag{1}\]</span></span></li>
-</ul>
-<!-- 
-
-1. 0.5
-1. 1.8
-1. 2.25
-1. 3.5
-1. None of the above
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-First, compute the unnormalized posterior $\gamma \propto \pi$:
-$$\gamma = (\gamma(0), \gamma(1), \gamma(2)) = (1/3) (0^2, (1/2)^2, 1^2),$$
-then normalize: 
-$$\pi = \gamma / Z =  (0, 1/5, 4/5).$$
-Finally, compute the conditional expectation:
-$$\ex[X | Y = (1, 1)] = \sum x \; \pi(x) = (0, 1, 2) \cdot (0, 1/5, 4/5) = 9/5 = 1.8.$$
-
-**Common mistake:** forgetting normalization step:
-$$\sum x \; \pi(x) \neq \sum x \; \gamma(x).$$
-
-- This "common mistake" highlights that we really need $Z$ to compute posterior expectations using the 
-exact, exhaustive approach (i.e. the method we are using here). 
-- When we talk more about Monte Carlo methods, we will see that these methods 
-allow us to approximate expecations without having to compute $Z$!
-:::
-
--->
-</section>
-<section id="posterior-mode" class="level3">
-<h3 class="anchored" data-anchor-id="posterior-mode">Posterior mode</h3>
-<p>The <strong>mode</strong> is the location of the “tallest stick” in the PMF.</p>
-<p><strong>Notation:</strong> <span class="math inline">\(\operatorname{arg\,max}\pi(x),\)</span> i.e.&nbsp;the point that achieves the maximum of <span class="math inline">\(\pi\)</span>.</p>
-<p>In the Bayesian context, the mode of a posterior PMF is also known as the Maximum A Posteriori (MAP) estimator.</p>
-</section>
-<section id="example-2" class="level3">
-<h3 class="anchored" data-anchor-id="example-2">Example 2</h3>
-<p>You will practice computing the posterior mean/mode in <a href="../exercises/ex02.html#sec-q2">question 2 of the exercises</a>.</p>
+<section id="q.1-functions-on-the-unit-interval" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</h2>
+<ol type="1">
+<li><p>Write a function <code>mc_estimate</code> that takes a function <span class="math inline">\(f:[0,1]\to\mathbb{R}\)</span> and outputs a Monte Carlo estimate of <span class="math inline">\(\int_0^1 f(x)\mathrm{d}x\)</span> using <span class="math inline">\(n=10000\)</span> independent samples from <span class="math inline">\({\mathrm{Unif}}(0,1)\)</span>.</p></li>
+<li><p>Consider the function <span class="math inline">\(f:[0,1]\to[0,\infty)\)</span> given by <span class="math display">\[
+f(x) = \frac{x^{-1/3}}{\sqrt{1-x}}.
+\]</span> Show that <span id="eq-integral"><span class="math display">\[
+\int_0^1 f(x)\mathrm{d}x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
+\tag{1}\]</span></span></p></li>
+<li><p>Test your implementation of <code>mc_estimate</code> by checking that it produces an answer close to the value in <a href="#eq-integral">Equation&nbsp;1</a>.</p></li>
+<li><p>In order to quantify the uncertainty inherent in the output of the previous step, we will construct a confidence interval<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for our Monte Carlo estimate</p>
+<ol type="a">
+<li>Approximate the standard error of the estimator by computing the standard deviation of <span class="math inline">\(K=30\)</span> i.i.d. replications of <code>mc_estimate(f)</code>.</li>
+<li>Use the Central Limit Theorem to provide an asymptotically exact 95% confidence interval.</li>
+</ol></li>
+</ol>
+<ol start="5" type="1">
+<li>The following integral, known as the sine integral, does not have an analytic expression <span class="math display">\[
+\int_0^1 \frac{\sin(t)}{t} \mathrm{d}t.
+\]</span> Estimate its value using <code>mc_estimate(f)</code> and provide a 95% confidence interval.</li>
+</ol>
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Yes, the frequentist concept! Monte Carlo simulation is one instance where the assumptions of frequentist inference hold by design.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
