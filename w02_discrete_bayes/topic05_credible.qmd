@@ -19,14 +19,14 @@ editor:
 
 ### Rationale
 
-As we have seen at the beginning one motivation for Bayesian methods is that 
+As [we have seen at the beginning](../w00_intro/topic01_why.qmd) one motivation for Bayesian methods is that 
 they allow us to quantify uncertainty in our predictions. Credible sets is 
 one way to convey this uncertainty quantification. 
 
 
 ## Nominal coverage
 
-Basic property that we expect from credible sets:
+The "nominal coverage" is the basic property that we use to construct credible sets:
 
 - You are given a level, typically $95\%$ or $90\%$, denoted $1-\alpha = 0.95$ or $1-\alpha = 0.9$
     - Intuition: we want to find a set $T$ such that we are $95\%$ sure that the true $x$ is in $T$. 
@@ -65,7 +65,7 @@ The simplest way of building credible intervals:
 ![](../images/HDI.png){width="800"}
 
 
-**Challenge:** implement a function taking as input a posterior PMF (as a vector), a level, and returns an HDI.
+**Challenge:** implement a function taking as input a posterior PMF (as a vector), a level, and returns an HDI. [Details here.](../challenges/ch02.qmd)
 
 
 ## Credible interval

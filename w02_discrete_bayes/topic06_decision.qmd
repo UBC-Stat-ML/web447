@@ -62,20 +62,19 @@ $$\ind[\text{some condition}] = \left\{
 \end{array}
 \right.$$
 This gives us:
-$$L(a, x) = \ind[a = 0] \cdot (\$0) + \ind[a = 1, x = 0] \cdot (\$9) +  \ind[a = 1, x = 1] \cdot (-\$10).$$
+$$L(a, x) = \ind[a = 0] \cdot (\$0) + \ind[a = 1, x = 0] \cdot (-\$9) +  \ind[a = 1, x = 1] \cdot (\$10).$$
 
-Next, let us simplify the expected loss function:
-$$\ex[L(a, X)] = \ex[\ind[a = 0] \cdot (\$0) + \ind[a = 1, X = 0] \cdot (\$9) +  \ind[a = 1, X = 1] \cdot (-\$10)].$$
-
-Next, use **linearity of expectation** which you will recall from probability theory tells us that 
+Let us simplify the expected loss function, i.e.
+$$\ex[L(a, X)] = \ex[\ind[a = 0] \cdot (\$0) + \ind[a = 1, X = 0] \cdot (-\$9) +  \ind[a = 1, X = 1] \cdot (\$10)].$$
+o do that simplification, first use **linearity of expectation** which you will recall from probability theory tells us that 
 for any random variables $X_1$ and $X_2$, we have $\ex[X_1 + c X_2] = \ex[X_1] + c \ex[X_2]$ for any constant $c$. 
 
 In our context, using linearity with $c=1$ allows us to simplify the above to:
-$$\underbrace{\ex[\ind[a = 0] \cdot (\$0)]}_0 + \ex[\ind[a = 1, X = 0] \cdot (\$9)] + \ex[\ind[a = 1, X = 1] \cdot (-\$10)].$$
+$$\underbrace{\ex[\ind[a = 0] \cdot (\$0)]}_0 + \ex[\ind[a = 1, X = 0] \cdot (-\$9)] + \ex[\ind[a = 1, X = 1] \cdot (\$10)].$$
 
 **Trick 1:** To deal with each remaining term, use that: $\ind[a = 1, X = 1] = \ind[a = 1]\ind[X = 1]$ (check!),
-and then use linearity with $c = - \$ 10 \cdot \ind[a = 1]$ to get:
-$$\ex[\ind[a = 1, X = 1] \cdot (-\$10)] = - \$ 10 \cdot \ind[a = 1] \ex[\ind[X = 1]].$$
+and then use linearity with $c = \$ 10 \cdot \ind[a = 1]$ to get:
+$$\ex[\ind[a = 1, X = 1] \cdot (\$10)] =  \$ 10 \cdot \ind[a = 1] \ex[\ind[X = 1]].$$
 
 **LOTUS:** Finally, we have to compute $\ex[\ind[X = 1]]$. From [our review of the Law of the Unconscious Statistician](../w01_discrete_inference/topic10_expectations.qmd), this is done as follows:
 $$\ex[\ind[X = 1]] = \sum_x \ind[x = 1] p_X(x) = 0 + 1 \cdot p_X(1) = 1/2.$$ 
@@ -83,7 +82,7 @@ $$\ex[\ind[X = 1]] = \sum_x \ind[x = 1] p_X(x) = 0 + 1 \cdot p_X(1) = 1/2.$$
 **Trick 2:** you will often take expectation of indicator function, you will always find that $\ex[\ind[\text{an event}]] = \pr(\text{an event})$. 
 
 Putting it all together:
-$$L(a) = \ex[L(a, X)] =  \$ 9 \cdot \ind[a = 1] (1/2) - \$ 10 \cdot \ind[a = 1] (1/2) = -\$0.5 \cdot \ind[a = 1].$$
+$$L(a) = \ex[L(a, X)] =  -\$ 9 \cdot \ind[a = 1] (1/2) + \$ 10 \cdot \ind[a = 1] (1/2) = \$0.5 \cdot \ind[a = 1].$$
 
 
 ## Decision theory with data
@@ -99,7 +98,7 @@ $$L(a) = \ex[L(a, X)] =  \$ 9 \cdot \ind[a = 1] (1/2) - \$ 10 \cdot \ind[a = 1] 
 
 ### Definition: the Bayes estimator 
 
-**Mathematically:** use an action $a \in A$ minimizing
+**Mathematically:** use an action $a \in A$ minimizing the posterior expected loss, i.e.
 $$\argmin \ex[L(a, X) | Y = y].$$
 where:
 $$\ex[L(a, X) | Y = y] = \sum_x L(a, x) p_{X|Y}(x|y).$$

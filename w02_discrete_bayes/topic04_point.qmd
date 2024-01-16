@@ -14,7 +14,6 @@ editor:
 - Common point estimates:
     - Posterior mean. 
     - Posterior mode. 
-    - Posterior median.
 
 
 ### Rationale
@@ -27,7 +26,7 @@ about that guess.
 ## Definitions
 
 - Let $\pi(x) = \pr(X = x | Y = y)$ denote a posterior PMF. 
-- Instead of plotting the full information in $\pi$, 
+- **Point estimate:** Instead of plotting the full information in $\pi$, 
   we can report a "location" summary such as the mean of the posterior $\pi$. 
 
 
