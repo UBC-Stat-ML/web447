@@ -43,9 +43,9 @@ Hint: look at the expression for the
 [density](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function) 
 of a $\distBeta(\alpha,\beta)$ distribution, and remember that it must integrate
 to one. Then use the fact that for any $\gamma\in(0,1)$, the 
-[beta function satisfies](https://en.wikipedia.org/wiki/Beta_function#Other_identities_and_formulas) 
+[gamma function satisfies](https://en.wikipedia.org/wiki/Gamma_function#General) 
 $$
-\operatorname{B}(\gamma,1-\gamma) = \frac{\pi}{\sin\left(\gamma\pi\right)}.
+\Gamma(\gamma)\Gamma(1-\gamma) = \frac{\pi}{\sin\left(\gamma\pi\right)}.
 $$
 3. Test your implementation of `mc_estimate` by checking that it produces an
 answer close to the value in @eq-integral.
@@ -56,10 +56,10 @@ step, we will construct a confidence interval[^1] for our Monte Carlo estimate
     b. Use the Central Limit Theorem to provide an asymptotically exact
        95% confidence interval.
     
-[^1]: Yes, the frequentist concept! Monte Carlo simulation is one 
-      instance where the assumptions of frequentist inference hold by design.
+[^1]: Yes, the frequentist concept! Monte Carlo simulation is one instance 
+      where the assumptions of frequentist inference hold by design.
 
-5. The following integral, known as the sine integral, does not have an analytic
+5. The following integral, known as the sine integral, does not admit a closed-form
 expression
 $$
 \int_0^1 \frac{\sin(t)}{t} \dee t.
