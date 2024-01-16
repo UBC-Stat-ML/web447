@@ -1,0 +1,59 @@
+---
+title: "Exercise 3: inference on continuous spaces"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+## Goals
+
+- Introduce Monte Carlo integration in continuous spaces.
+- Review the concept of importance sampling.
+
+
+## TODO
+
+- 1 - continuous MC on bounded space and uniform proposal
+- 2 - continuous IS on unbounded space and e.g. exponential proposal
+	-> bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?)
+	-> bonus/challenge question? or maybe in class instead?: questions on ESS?
+	-> bonus? an example where the expectation does not converge due to non-integrability
+- 3 - guided steps to universal PPL (providing scaffold code)
+	- test case: discrete model from last time (e.g. one for parameters posterior)
+	- extending to cover predictive?
+	- model with two variables? (can wait until regression)
+	
+
+## Q.1: functions on the unit interval
+
+1. Write a function `mc_estimate` that takes a function $f:[0,1]\to\reals$ and 
+outputs a Monte Carlo estimate of $\int_0^1 f(x)\dee x$ using $n=10000$ 
+independent samples from $\distUnif(0,1)$.
+
+2. Consider the function $f:[0,1]\to[0,\infty)$ given by
+$$
+f(x) = \frac{1}{\sqrt[3]{x}\sqrt{1-x}}.
+$$
+Show that
+$$
+\int_0^1 f(x)\dee x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
+$${#eq-integral}
+3. Test your implementation of `mc_estimate` by checking that it produces an
+answer close to the value in @eq-integral.
+4. In order to quantify the uncertainty inherent in the output of the previous 
+step, we will construct a confidence interval[^1] for our Monte Carlo estimate
+    a. Approximate the standard error of the estimator by computing the standard
+       deviation of $K=30$ i.i.d. replications of `mc_estimate(f)`.
+    b. Use the Central Limit Theorem to provide an asymptotically exact (as
+       $K\to\infty$) confidence interval of level $\alpha=0.95$.
+    
+[^1]: Yes, the frequentist concept! Monte Carlo simulations are one of the few
+      instances where the assumptions of frequentist inference hold by design.
+
+5. The following integral, known as the sine integral, does not have an analytic
+expression
+$$
+\int_0^1 \frac{\sin(t)}{t} \dee t.
+$$
+Estimate its value using `mc_estimate(f)` and provide a 95% confidence interval.
