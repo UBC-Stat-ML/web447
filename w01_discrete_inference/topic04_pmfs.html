@@ -186,6 +186,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A bit of history</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -271,6 +277,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Bayes on a discrete model</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Bayesian recipe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Posterior distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point estimates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Credible sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -282,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#definition" id="toc-definition" class="nav-link active" data-scroll-target="#definition">Definition</a></li>
-  <li><a href="#example-coins" id="toc-example-coins" class="nav-link" data-scroll-target="#example-coins">Example: coins</a></li>
+  <li><a href="#sec-examples" id="toc-sec-examples" class="nav-link" data-scroll-target="#sec-examples">Example: coins</a></li>
   <li><a href="#example-discrete-uniform-distributions" id="toc-example-discrete-uniform-distributions" class="nav-link" data-scroll-target="#example-discrete-uniform-distributions">Example: discrete uniform distributions</a>
   <ul class="collapse">
   <li><a href="#sec-simulate-pmf" id="toc-sec-simulate-pmf" class="nav-link" data-scroll-target="#sec-simulate-pmf">Simulation/sampling from a PMF</a>
@@ -291,6 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work">How does it work?</a></li>
   <li><a href="#mathematical-explanation" id="toc-mathematical-explanation" class="nav-link" data-scroll-target="#mathematical-explanation">Mathematical explanation</a></li>
   </ul></li>
+  <li><a href="#plotting-pmfs-in-r" id="toc-plotting-pmfs-in-r" class="nav-link" data-scroll-target="#plotting-pmfs-in-r">Plotting PMFs in R</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -345,7 +417,7 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 </ul>
 </section>
-<section id="example-coins" class="level1 page-columns page-full">
+<section id="sec-examples" class="level1 page-columns page-full">
 <h1>Example: coins</h1>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -383,12 +455,12 @@ https://github.com/trevorcampbell/shortex
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 coin flips:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbern</span>(<span class="dv">10</span>, <span class="at">prob=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 1 1 0 1 1 1 0 0</code></pre>
+<pre><code> [1] 1 1 0 0 1 1 1 0 1 0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two dice rolls</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rdunif</span>(<span class="dv">2</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6 1</code></pre>
+<pre><code>[1] 3 1</code></pre>
 </div>
 </div>
 </section>
@@ -418,9 +490,27 @@ https://github.com/trevorcampbell/shortex
 <li><span class="math inline">\(U \sim {\mathrm{Unif}}[0, 1]\)</span></li>
 <li>Return <span class="math inline">\(F^{-1}(U)\)</span>.</li>
 </ol>
-
-
 </section>
+</section>
+<section id="plotting-pmfs-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-pmfs-in-r">Plotting PMFs in R</h2>
+<p>Here is an exampl of how to plot PMFs in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>realizations <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(realizations, <span class="fu">dbinom</span>(realizations, <span class="at">size=</span><span class="dv">20</span>, <span class="at">prob=</span>.<span class="dv">3</span>), <span class="at">type=</span><span class="st">'h'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic04_pmfs_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Some explanations:</p>
+<ul>
+<li>Here <code>dbinom</code> is the R function for the PMF of a binomial (R uses the prefix <code>d___</code> for densities and PMFs).</li>
+<li>We use the fact that many functions in R such as this one are vectorized, i.e.&nbsp;the normal PMF function takes a single point <span class="math inline">\(x\)</span> and output <span class="math inline">\(p(x)\)</span> where <span class="math inline">\(p\)</span> is the PMF; the vectorized version takes vector <span class="math inline">\((x_1, x_2, \dots)\)</span> and returns <span class="math inline">\((p(x_1), p(x_2), \dots)\)</span>.</li>
+<li>The argument <code>type = 'h'</code> instructs the plot function to make the plot “histogram”-like.</li>
+</ul>
+
+
 </section>
 </section>
 

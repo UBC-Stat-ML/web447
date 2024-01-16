@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Exercise 2: Bayes estimator</title>
+<title>Bayes1@UBC - Exercise 2: Bayesian inference first contact</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,9 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic01_bayes_recipe.html">Bayes on a discrete model</a></li><li class="breadcrumb-item"><a href="../exercises/ex02.html">Exercises</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,6 +150,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A bit of history</span></a>
   </div>
 </li>
       </ul>
@@ -239,6 +243,71 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Bayes on a discrete model</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Bayesian recipe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Posterior distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point estimates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Credible sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -250,11 +319,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#q.1-define-a-probabilistic-model" id="toc-q.1-define-a-probabilistic-model" class="nav-link" data-scroll-target="#q.1-define-a-probabilistic-model">Q.1: define a probabilistic model</a></li>
-  <li><a href="#q.2-probability-calculations" id="toc-q.2-probability-calculations" class="nav-link" data-scroll-target="#q.2-probability-calculations">Q.2: probability calculations</a></li>
-  <li><a href="#q.3-bayes-action" id="toc-q.3-bayes-action" class="nav-link" data-scroll-target="#q.3-bayes-action">Q.3: Bayes action</a></li>
-  <li><a href="#q.4-sequential-updating" id="toc-q.4-sequential-updating" class="nav-link" data-scroll-target="#q.4-sequential-updating">Q.4: sequential updating</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">Setup</a></li>
+  <li><a href="#sec-q1" id="toc-sec-q1" class="nav-link" data-scroll-target="#sec-q1">Q.1: define a Bayesian model</a></li>
+  <li><a href="#sec-q2" id="toc-sec-q2" class="nav-link" data-scroll-target="#sec-q2">Q.2: posterior and point estimates</a></li>
+  <li><a href="#sec-q3" id="toc-sec-q3" class="nav-link" data-scroll-target="#sec-q3">Q.3: Bayes action</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise 2: Bayes estimator</h1>
+<h1 class="title">Exercise 2: Bayesian inference first contact</h1>
 </div>
 
 
@@ -295,88 +363,109 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Grading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Our priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.</p>
+<p>We will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:</p>
+<ul>
+<li>1 point if something reasonable was attempted,</li>
+<li>0 otherwise.</li>
+</ul>
+</div>
+</div>
 <section id="goals" class="level2">
 <h2 class="anchored" data-anchor-id="goals">Goals</h2>
 <ul>
 <li>Build a probability model for a concrete example.</li>
 <li>Introduce the concept of Bayes estimators.</li>
-<li>Review sequential Bayes update.</li>
 </ul>
 </section>
-<section id="setup" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<section id="sec-setup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-setup">Setup</h2>
 <p>This exercise is centered around the following scenario:</p>
 <ul>
 <li>You are consulting for a satellite operator</li>
 <li>They are about to send a $100M satellite on a Delta 7925H rocket</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/delta.jpeg" class="img-fluid" width="200"></p>
+</div></div><ul>
 <li><strong>Data</strong>: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with 0 failed launches <!-- Source: https://space.skyrocket.de/doc_lau_det/delta-7925h.htm -->
 <ul>
 <li>Note: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint</li>
 </ul></li>
 <li>Should you recommend buying a $2M insurance policy?</li>
 </ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/delta.jpeg" class="img-fluid" width="200"></p>
-</div></div></section>
-<section id="q.1-define-a-probabilistic-model" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-define-a-probabilistic-model">Q.1: define a probabilistic model</h2>
-<ol type="1">
-<li>What are the unknown quantities in this scenario? And what is the data?</li>
-</ol>
+<p><strong>Convention:</strong> use 1 for a success, 0 for a failure.</p>
+</section>
+<section id="sec-q1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q1">Q.1: define a Bayesian model</h2>
 <p>In order to perform inference on the unknown quantities, we must specify how they relate to the data; i.e., we need a <em>probabilistic model</em>. Assume that every Delta 7925H rocket has the same probability <span class="math inline">\(p\)</span> of failing. For simplicity, let us assume that <span class="math inline">\(p\)</span> is allowed to take values on an evenly space grid <span class="math display">\[
 p \in \left\{\frac{k}{K}: k\in \{0,\dots,K\}\right\}
-\]</span> for some fixed <span class="math inline">\(K\in\mathbb{N}\)</span>. Furthermore, we have access to a collection of numbers <span class="math inline">\(\rho_k\in[0,1]\)</span> such that <span class="math display">\[
+\]</span> for some fixed <span class="math inline">\(K\in\mathbb{N}\)</span>. Furthermore, we have access to a collection of numbers <span class="math inline">\(\rho_k\in[0,1]\)</span> such that<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span id="eq-prior"><span class="math display">\[
 \forall k\in\{0,\dots,K\}:\ \mathbb{P}\left(p=\frac{k}{K}\right) = \rho_k.
-\]</span></p>
-<p>Let <span class="math inline">\(Z_i\)</span> denote a binary variable indicating a failed launch. We assume that, conditionally on <span class="math inline">\(p\)</span>, these binary variables are independent of each other.</p>
-<ol start="2" type="1">
+\tag{1}\]</span></span></p>
+<p>Let <span class="math inline">\(Y_i\)</span> denote a binary variable with <span class="math inline">\(Y_i=1\)</span> encoding a success, and <span class="math inline">\(Y_i=0\)</span> a failure. We assume that, conditionally on <span class="math inline">\(p\)</span>, the <span class="math inline">\(Y_i\)</span>’s are independent of each other.</p>
+<p>We will use the following prior: <span id="eq-parabola-prior"><span class="math display">\[
+\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
+\tag{2}\]</span></span> From now on, use <span class="math inline">\(K = 20\)</span>.</p>
+<ol type="1">
+<li>What are the unknown quantities in this scenario? And what is the data?</li>
 <li>Write the joint distribution of this model (use the <span class="math inline">\(\sim\)</span> notation).</li>
 </ol>
 </section>
-<section id="q.2-probability-calculations" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-probability-calculations">Q.2: probability calculations</h2>
+<section id="sec-q2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q2">Q.2: posterior and point estimates</h2>
+<p>To help you answer the following questions, create the two vectors:</p>
+<ul>
+<li><code>prior_probabilities</code> where entry <span class="math inline">\(i\)</span> containing the prior probability <span class="math inline">\(\rho_{i-1}\)</span> defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and</li>
+<li><code>realizations</code>, a vector of possible realizations of <span class="math inline">\(p\)</span> in the same order, namely <span class="math inline">\((0, 1/K, 2/K \dots, 1)\)</span>.</li>
+</ul>
 <ol type="1">
-<li><p>Give an expression for the prior predictive probability of failure for the next launch <span class="math display">\[
-\mathbb{P}(Z_4=1)
-\]</span></p></li>
-<li><p>Give an expression for the posterior probability <span class="math display">\[
-\mathbb{P}\left(p=\frac{k}{K}\middle| Z_1=Z_2=Z_3=0 \right)
-\]</span></p></li>
-<li><p>Write a function called <code>posterior_distribution</code> that takes a vector <span class="math inline">\(\rho\in\mathbb{R}^{K+1}\)</span> and returns the posterior distribution derived in the previous step.</p></li>
-<li><p>Plot the result of applying <code>posterior_distribution</code> to the prior <span id="eq-parabola-prior"><span class="math display">\[
-\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
-\tag{1}\]</span></span> Add <span class="math inline">\(\rho\)</span> to the plot and compare the two distributions.</p></li>
-<li><p>Report the mean, median, and mode of <span class="math inline">\(p\)</span> under the posterior distribution of the previous step.</p></li>
+<li>Plot the prior PMF. Do you think this is a reasonable prior? Hint: use the same type of plot as used last week to <a href="../w01_discrete_inference/topic04_pmfs.html#sec-examples">plot PMFs</a>.</li>
+<li>Let <span class="math inline">\(\pi_k = \mathbb{P}(p = k/K | Y_{1:3} = (1, 1, 1))\)</span> denote the posterior probabilities, for <span class="math inline">\(k \in \{0, 1, 2, \dots, K\}\)</span>. Create a vector <code>posterior_probabilities</code> where entry <span class="math inline">\(i\)</span> is <span class="math inline">\(\pi_{i-1}\)</span>. Plot the posterior PMF.</li>
+<li>What is the posterior mode?</li>
+<li>Write a function that compute the posterior mean of <span class="math inline">\(p\)</span>. Hint: you should obtain <span class="math inline">\(\mathbb{E}[p | Y_{1:3} = (1, 1, 1)] \approx 0.7\)</span>.</li>
 </ol>
 </section>
-<section id="q.3-bayes-action" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-bayes-action">Q.3: Bayes action</h2>
+<section id="sec-q3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q3">Q.3: Bayes action</h2>
 <p>Let <span class="math inline">\(a\in\{0,1\}\)</span> be a binary variable denoting the decision of buying the insurance (<span class="math inline">\(a=1\)</span>) or not (<span class="math inline">\(a=0\)</span>).</p>
 <ol type="1">
-<li><p>Define a loss function <span class="math inline">\((a,Z_4)\mapsto L(a,Z_4)\)</span> that summarizes the cost of having taken decision <span class="math inline">\(a\in\{0,1\}\)</span> when <span class="math inline">\(Z_4\in\{0,1\}\)</span> occurs.</p></li>
-<li><p>Derive an expression for the expected loss under the posterior predictive distribution <span class="math display">\[
-\mathcal{L}(a) := \mathbb{E}[L(a,Z_4)|Z_{1:3}=0].
-\]</span></p></li>
-<li><p>Give an expression for the posterior predictive probability of failure <span class="math display">\[
-\mathbb{P}\left(Z_4=1 \middle| Z_{1:3}=0 \right)
-\]</span></p></li>
-<li><p>Write a function <code>posterior_failure_prob</code> that takes a vector <span class="math inline">\(\rho\in\mathbb{R}^{K+1}\)</span> and returns the posterior predictive probability of failure. Your function should call <code>posterior_distribution</code>.</p></li>
-<li><p>Write a function <code>expected_loss</code> that computes <span class="math inline">\(\mathcal{L}(a)\)</span> for any value of <span class="math inline">\(a\)</span>. Based on this, formulate a recommendation to the owner of the satellite.</p></li>
-</ol>
-</section>
-<section id="q.4-sequential-updating" class="level2">
-<h2 class="anchored" data-anchor-id="q.4-sequential-updating">Q.4: sequential updating</h2>
-<p>Let us suppose that we go back in time and are able to recreate the inferences that a statistician would have made as the successive launches happened.</p>
-<ol type="1">
-<li>Derive an expression for <span class="math inline">\(\mathbb{P}(p|Z_1=0)\)</span>.</li>
-<li>Use the previous expression as a prior distribution <strong>TODO</strong></li>
+<li>Based on the problem description from <a href="#sec-setup">the Setup Section</a>, define a loss function <span class="math inline">\(L(a, y)\)</span> that summarizes the cost of having taken decision <span class="math inline">\(a\in\{0,1\}\)</span> depending on whether the next launch is successful (<span class="math inline">\(y = 1\)</span>) or not (<span class="math inline">\(y = 0\)</span>). Hint: use <em>indicator functions</em> (i.e.&nbsp;binary functions taking either the value zero or one).</li>
+<li>We now consider the expected loss under the posterior predictive distribution: <span class="math display">\[
+\mathcal{L}(a) := \mathbb{E}[L(a,Y_4)|Y_{1:3}=(1, 1, 1)]
+\]</span> Write <span class="math inline">\(\mathcal{L}(a)\)</span> in terms of <span class="math inline">\(\mathbb{P}\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)\)</span>. <strong>Important:</strong> you can use without proof that <span class="math inline">\(\mathbb{P}\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)\)</span> is the same as the posterior mean, which we computed earlier to be <span class="math inline">\(\approx 0.7\)</span> for our choice of prior.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li>Formulate a recommendation to the owner of the satellite (again, you can use without proof that <span class="math inline">\(\mathbb{P}\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right) \approx 0.7\)</span>).</li>
 </ol>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Notice that in <a href="#eq-prior">Equation&nbsp;1</a> we are using (small cap) <span class="math inline">\(p\)</span> as a random variable, i.e.&nbsp;starting to move away from the probability theory capitalization convention towards the Bayesian convention where the same capitalization is used for both the random variable and its realization, <a href="../w01_discrete_inference/topic03_random_variables.html#sec-conventions-probability-vs-bayesian">as discussed in the first week</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The proof is as follows, where here we do desambiguate between the random variable <span class="math inline">\(P\)</span> and its realization <span class="math inline">\(p\)</span> (not to be confused with <span class="math inline">\(\mathbb{P}\)</span> and PMF <span class="math inline">\(p(\cdot)\)</span>!): <span class="math display">\[\begin{align*}
+  \mathbb{P}(Y_4 = y_4 | Y_{1:3} = \boldsymbol{1}) &amp;= \sum_p \mathbb{P}(P = p, Y_4 = y_4 | Y_{1:3} = \boldsymbol{1}) \;\;\text{(additivity axiom)} \\
+  &amp;= \sum_p  \mathbb{P}(P = p | Y_{1:3} = \boldsymbol{1}) \mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \boldsymbol{1}) \;\;\text{(chain rule)} \\
+  &amp;= \sum_p \pi(p) \mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \boldsymbol{1}) \;\;\text{(definition)} \\
+  &amp;= \sum_p \pi(p) \mathbb{P}(Y_4 = y_4 | P = p) \;\;\text{(conditional independence)} \\
+  &amp;= \sum_p \pi(p) p \;\;\text{(since each flip is assumed to be Bernoulli)} \\
+  &amp;= \mathbb{E}[p | Y_{1:3} = \boldsymbol{1}].
+  \end{align*}\]</span> Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. We will cover in class the general method to compute predictive distribution, <a href="../w02_discrete_bayes/topic07_prediction.html">see lecture notes</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

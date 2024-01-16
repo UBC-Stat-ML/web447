@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Schedule</title>
+<title>Bayes1@UBC - Decision theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -59,9 +59,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -73,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./schedule.html">Schedule</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic01_bayes_recipe.html">Bayes on a discrete model</a></li><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic06_decision.html">Decision theory</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -88,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bayes1@UBC</a> 
+      <a href="../">Bayes1@UBC</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -100,19 +105,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link active">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -128,31 +133,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A bit of history</span></a>
   </div>
 </li>
@@ -169,73 +174,73 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision trees</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chain rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex01.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -252,55 +257,55 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Bayesian recipe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Posterior distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Credible sets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Decision theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prediction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex02.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./challenges/ch02.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -312,14 +317,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#decision-theory-without-data" id="toc-decision-theory-without-data" class="nav-link" data-scroll-target="#decision-theory-without-data">Decision theory without data</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link" data-scroll-target="#mathematical-formulation">Mathematical formulation</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#decision-theory-with-data" id="toc-decision-theory-with-data" class="nav-link" data-scroll-target="#decision-theory-with-data">Decision theory with data</a>
+  <ul class="collapse">
+  <li><a href="#definition-the-bayes-estimator" id="toc-definition-the-bayes-estimator" class="nav-link" data-scroll-target="#definition-the-bayes-estimator">Definition: the Bayes estimator</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schedule</h1>
+<h1 class="title">Decision theory</h1>
 </div>
 
 
@@ -334,188 +359,181 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
-<table class="table-striped table-hover table">
-<caption></caption>
-<colgroup>
-<col style="width: 24%">
-<col style="width: 50%">
-<col style="width: 24%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Topics</th>
-<th>Readings</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tue, Jan 9</td>
-<td>Overview. Probabilistic inference on discrete spaces.</td>
-<td>BDA 1.1-1.10</td>
-</tr>
-<tr class="even">
-<td>Th, Jan 11</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 16</td>
-<td>A tour of Bayesian inference (on discrete spaces).</td>
-<td>BDA 2.1-2.5</td>
-</tr>
-<tr class="even">
-<td>Th, Jan 18</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 23</td>
-<td>Universal probabilistic inference via importance sampling.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Jan 25</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Jan 30</td>
-<td>Decision theory.</td>
-<td>BDA 9.1-9.5</td>
-</tr>
-<tr class="even">
-<td>Th, Feb 1</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 6</td>
-<td>Bayesian regression, GLMs, and beyond.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 8</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 13</td>
-<td>Hierarchical models.</td>
-<td>BDA 5.1-5.7</td>
-</tr>
-<tr class="even">
-<td>Th, Feb 15</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 20</td>
-<td><em>Reading week.</em></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 22</td>
-<td><em>Reading week.</em></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Feb 27</td>
-<td><strong>Quiz 1.</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Feb 29</td>
-<td>TBA</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Tue, Mar 5</td>
-<td>MCMC user guide (via Stan).</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Th, Mar 7</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Fri, Mar 8</td>
-<td><strong>Project proposal due.</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Mar 12</td>
-<td>Bayesian workflow.</td>
-<td>BDA 6.1-6.5</td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 14</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Mar 19</td>
-<td>Modelling techniques (selected from prior design, mixtures, imputation, complex data collection).</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 21</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, March 26</td>
-<td><strong>Quiz 2.</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Mar 28</td>
-<td>TBA</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Apr 2</td>
-<td>MCMC developer guide.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Apr 4</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Tue, Apr 9</td>
-<td>Variational inference.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Th, Apr 11</td>
-<td><em>Last lecture.</em></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Fri, Apr 19</td>
-<td><strong>Final project due.</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<!-- 
+tiny-shortex for Quarto
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   -->
+<!-- Min and max -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
+<!-- general purpose math -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Decision theory: making decision in the face of uncertainty.
+<ul>
+<li>First, without observed data.</li>
+<li>Second, incorporating observed data.</li>
+</ul></li>
+<li>Review of property of expectation useful for decision theory calculations.</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>We talked a lot about the “Bayesian recipe.” Here we formalize the last step of that recipe: using a posterior and a loss function to make a decision.</p>
+<p>Later, we will see that the point estimates and credible sets covered this week are actually special cases of the decision theoretic framework (i.e.&nbsp;they emerge when specific loss functions are selected).</p>
+</section>
+</section>
+<section id="decision-theory-without-data" class="level2">
+<h2 class="anchored" data-anchor-id="decision-theory-without-data">Decision theory without data</h2>
+<p>Your friend proposes the following game (a good model for lottery!):</p>
+<ul>
+<li>She flips a standard coin:
+<ul>
+<li>if it’s a “heads”: you give her $10</li>
+<li>if it’s a “tails”: she gives you $9.</li>
+</ul></li>
+<li>Your decision: to play or not to play?</li>
+</ul>
+<section id="mathematical-formulation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-formulation">Mathematical formulation</h3>
+<ul>
+<li>Set of <strong>actions</strong>: <span class="math inline">\(A = \{0, 1\}\)</span> (<span class="math inline">\(1 =\)</span> play, <span class="math inline">\(0 =\)</span> do not play).</li>
+<li>Probability model: <span class="math inline">\(X \sim {\mathrm{Bern}}(1/2)\)</span>.</li>
+<li>Loss function:
+<ul>
+<li><span class="math inline">\(L(a, x)\)</span>: how much do I lose if I pick action <span class="math inline">\(a \in A\)</span> and encounter realization <span class="math inline">\(X = x\)</span>?</li>
+</ul></li>
+<li>Mathematical solution: minimize over <span class="math inline">\(a \in A\)</span> the <strong>expected loss</strong> <span class="math display">\[L(a) = \mathbb{E}[L(a, X)].\]</span></li>
+</ul>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>Compute <span class="math inline">\(\min L(a)\)</span> and <span class="math inline">\(\operatorname{arg\,min}L(a)\)</span>.</p>
+<!-- 
+
+1.  $1$ and $1$
+2.  $1$ and $-1/2$
+3.  $1$ and $1/2$
+4.  $0$ and $0$
+5.  None of the above
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+The loss function is given by:
+
+|                 | Do not play ($a = 0$) | Play ($a = 1$) |
+|-----------------|-----------------------|----------------|
+| Heads ($x = 1$) | $0$                   | $-10$          |
+| Tails ($x = 0$) | $0$                   | $9$            |
+
+Therefore, the action that maximizes $L(a)$ is $a = 0$ (i.e., $a = 0$ is the "argmin") and gives value $L(0) = 0$.
+:::
+
+-->
+<p>It is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.</p>
+<p>Let us start by writing the loss function mathematically using <strong>indicator function</strong> defined as: <span class="math display">\[\mathbb{1}[\text{some condition}] = \left\{
+\begin{array}{ll}
+1 &amp; \text{if the condition is true,} \\
+0 &amp; \text{if the condition is false.}
+\end{array}
+\right.\]</span> This gives us: <span class="math display">\[L(a, x) = \mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, x = 0] \cdot (\$9) +  \mathbb{1}[a = 1, x = 1] \cdot (-\$10).\]</span></p>
+<p>Next, let us simplify the expected loss function: <span class="math display">\[\mathbb{E}[L(a, X)] = \mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, X = 0] \cdot (\$9) +  \mathbb{1}[a = 1, X = 1] \cdot (-\$10)].\]</span></p>
+<p>Next, use <strong>linearity of expectation</strong> which you will recall from probability theory tells us that for any random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, we have <span class="math inline">\(\mathbb{E}[X_1 + c X_2] = \mathbb{E}[X_1] + c \mathbb{E}[X_2]\)</span> for any constant <span class="math inline">\(c\)</span>.</p>
+<p>In our context, using linearity with <span class="math inline">\(c=1\)</span> allows us to simplify the above to: <span class="math display">\[\underbrace{\mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0)]}_0 + \mathbb{E}[\mathbb{1}[a = 1, X = 0] \cdot (\$9)] + \mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (-\$10)].\]</span></p>
+<p><strong>Trick 1:</strong> To deal with each remaining term, use that: <span class="math inline">\(\mathbb{1}[a = 1, X = 1] = \mathbb{1}[a = 1]\mathbb{1}[X = 1]\)</span> (check!), and then use linearity with <span class="math inline">\(c = - \$ 10 \cdot \mathbb{1}[a = 1]\)</span> to get: <span class="math display">\[\mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (-\$10)] = - \$ 10 \cdot \mathbb{1}[a = 1] \mathbb{E}[\mathbb{1}[X = 1]].\]</span></p>
+<p><strong>LOTUS:</strong> Finally, we have to compute <span class="math inline">\(\mathbb{E}[\mathbb{1}[X = 1]]\)</span>. From <a href="../w01_discrete_inference/topic10_expectations.html">our review of the Law of the Unconscious Statistician</a>, this is done as follows: <span class="math display">\[\mathbb{E}[\mathbb{1}[X = 1]] = \sum_x \mathbb{1}[x = 1] p_X(x) = 0 + 1 \cdot p_X(1) = 1/2.\]</span></p>
+<p><strong>Trick 2:</strong> you will often take expectation of indicator function, you will always find that <span class="math inline">\(\mathbb{E}[\mathbb{1}[\text{an event}]] = \mathbb{P}(\text{an event})\)</span>.</p>
+<p>Putting it all together: <span class="math display">\[L(a) = \mathbb{E}[L(a, X)] =  \$ 9 \cdot \mathbb{1}[a = 1] (1/2) - \$ 10 \cdot \mathbb{1}[a = 1] (1/2) = -\$0.5 \cdot \mathbb{1}[a = 1].\]</span></p>
+</section>
+</section>
+<section id="decision-theory-with-data" class="level2">
+<h2 class="anchored" data-anchor-id="decision-theory-with-data">Decision theory with data</h2>
+<ul>
+<li>We now consider the case where we have some data <span class="math inline">\(Y\)</span> that give us information about <span class="math inline">\(X\)</span>.</li>
+<li>The actions <span class="math inline">\(A\)</span> and loss <span class="math inline">\(L(a, x)\)</span> are the same as before.</li>
+</ul>
+<p><strong>How to modify the last section to take into account the data <span class="math inline">\(Y\)</span>?</strong></p>
+<ul>
+<li>Do everything the same, except:</li>
+<li>use the conditional PMF <span class="math inline">\(p_{X|Y}\)</span> instead of the PMF <span class="math inline">\(p_X\)</span>.</li>
+</ul>
+<section id="definition-the-bayes-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="definition-the-bayes-estimator">Definition: the Bayes estimator</h3>
+<p><strong>Mathematically:</strong> use an action <span class="math inline">\(a \in A\)</span> minimizing <span class="math display">\[\operatorname{arg\,min}\mathbb{E}[L(a, X) | Y = y].\]</span> where: <span class="math display">\[\mathbb{E}[L(a, X) | Y = y] = \sum_x L(a, x) p_{X|Y}(x|y).\]</span></p>
+</section>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<p>You will apply the Bayes estimator in <a href="../exercises/ex02.html#sec-q3">question 3 of this week’s exercises</a>.</p>
+<!--
+
+## Example: disease screening
+
+- "Screening policy": recommend to doctors to do a certain disease test 
+    every year for everyone in a group 
+      - e.g. mammograms for women over 40 to screen breast cancer.
+- Decision: a jurisdiction is deciding whether to enact a screening policy or not in a given group.
+- Factors:
+    - Early disease detection can prevent deaths.
+    - But false positives can lead to un-necessary impact to healthy people. 
+    
+Terminology:
+
+- "positive" / "positive": the test says "yes" / "no"
+- "false positive": the test says yes when the individual was healthy
+- "false negative": the test says no when the individual was sick.
 
 
+---
+editor: 
+  mode: source
+---
+
+
+:::{.column-page}
+
+:::{.cell fig-height="5"}
+
+:::{.cell-output-display}
+
+:::{}
+
+:::{}
+
+<pre class="mermaid mermaid-js">flowchart TD
+S__and__X_true -- 0.87 --&gt; S__and__X_true__and__Y_true[&quot;Y=true&quot;]
+S__and__X_false -- 0.9 --&gt; S__and__X_false__and__Y_false[&quot;Y=false&quot;]
+S__and__X_false -- 0.1 --&gt; S__and__X_false__and__Y_true[&quot;Y=true&quot;]
+S -- 0.01 --&gt; S__and__X_true[&quot;X=true&quot;]
+S -- 0.99 --&gt; S__and__X_false[&quot;X=false&quot;]
+S__and__X_true -- 0.13 --&gt; S__and__X_true__and__Y_false[&quot;Y=false&quot;]
+</pre>
+:::
+:::
+:::
+:::
+
+:::
+
+
+
+-->
+
+
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
