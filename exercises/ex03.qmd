@@ -6,20 +6,23 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
+{{< include ../_construction.qmd >}}
+
+
 ## Goals
 
 - Introduce Monte Carlo integration in continuous spaces.
 - Review the concept of importance sampling.
 
 
-## TODO
+## TODO (delete when finished!)
 
 - 1 - continuous MC on bounded space and uniform proposal✅
 - 2 - continuous IS on unbounded space and e.g. exponential proposal✅
 	-> bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?)
 	-> bonus/challenge question? or maybe in class instead?: questions on ESS?
 	-> bonus? an example where the expectation does not converge due to non-integrability
-- 3 - guided steps to universal PPL (providing scaffold code)
+- 3 - guided steps to universal PPL (providing scaffold code)✅
 	- test case: discrete model from last time (e.g. one for parameters posterior)
 	- extending to cover predictive?
 	- model with two variables? (can wait until regression)
@@ -102,7 +105,8 @@ able to perform Bayesian inference on a wide range of Bayesian models
 $$
 \pi(x|y) = \frac{\pi(x)L(y|x)}{Z}
 $$
-The inference engine of our program will be self-normalizing importance sampling.
+The inference engine of our program will be self-normalizing importance sampling
+(SNIS).
 We will assume that the prior of our model is proper and that we can draw i.i.d.
 samples from it.
 
@@ -110,6 +114,7 @@ In the following we will use the package `distr`, which allows us to work with
 distributions as objects---a necessary ingredient of every PPL. Load or install
 it using
 ```{r}
+#| include: false
 if (!require(distr)){
   install.packages("distr")
   require(distr)
@@ -144,16 +149,48 @@ current_log_likelihood = 0.0
 ```
 Now, **write** the `observe(value, dist)` function, which should accept two arguments:
     
-    i. a distribution object `dist` from the package `distr`---for example,
-    ```r
-    library(distr)
-    dist
-    ```
-    and
-    ii. a value $x$ that is in the support of the distribution $d$.
+    i. a distribution object `dist` from the package `distr`, and
+    ii. a value `x` that is in the ambient space of the distribution `dist`.
 
-Using these two inputs, your function should add the value of $\log(d(x))$ to the
-`current_log_likelihood` accumulator.
-3. 
-
-2. From now on we will focus on the [coin bag example from exercise 1](ex01.qmd).
+Your function should add the value of $\log(d(x))$ to the `current_log_likelihood` 
+accumulator. **Note**: it is much more numerically robust to use 
+`d(dist)(x, log = TRUE)` than to manually compute `log(d(dist)(x))`.
+3. Code your first PPL program for the [coin bag example from exercise 1](ex01.qmd).
+To achieve this, let us start by storing the data as a global variable
+```{r}
+coin_flips = rep(0, 4) # observe four heads
+```
+Now, write a function `my_first_probabilistic_program()` by completing the steps
+```{r}
+#| eval: false
+my_first_probabilistic_program = function(){
+  coin_index = FILL_ME        # Step 1: sample a coin index from the prior
+  for (i in seq_along(coin_flips)){
+    observe(FILL_ME, FILL_ME) # Step 2: accumulate the log-likelihood of each observation given the coin_index
+  }
+  return(FILL_ME)             # Step 3: return the query: is coin_index a fair coin?
+}
+```
+4. Write a function `posterior(f,n)` that takes a PPL program like
+`my_first_probabilistic_program` and a number `n`, and performs posterior
+inference via SNIS using `n` samples. Recall that the SNIS estimator is
+$$
+\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
+$$
+Now, fill in the missing steps in the following function skeleton
+```{r}
+#| eval: false
+posterior = function(f, n){
+  weights = FILL_ME # a vector of length n to store the weights
+  weighted_fs = FILL_ME # a vector of length n to store the summands w_i*f(x_i)
+  for (i in 1:n) {
+    current_log_likelihood = FILL_ME # reset the global accumulator
+    f_i = FILL_ME # run the program `f` and capture its output
+    weights[i] = FILL_ME # store the weight
+    weighted_fs[i] = FILL_ME # store the summand
+  }
+  # compute the SNIS estimator and return it
+}
+```
+5. Test your program by checking that you can approximate the posterior probability
+of the fair coin obtained in [exercise 1, Q.2](ex01.qmd#sec-q2).
