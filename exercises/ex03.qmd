@@ -95,7 +95,7 @@ true value.
 estimator is better?
 
 
-## A minimal universal probabilistic programming language
+## Q.3: A minimal universal probabilistic programming language (PPL)
 
 In this question we will write a very short program that will nonetheless be
 able to perform Bayesian inference on a wide range of Bayesian models
@@ -106,6 +106,54 @@ The inference engine of our program will be self-normalizing importance sampling
 We will assume that the prior of our model is proper and that we can draw i.i.d.
 samples from it.
 
+In the following we will use the package `distr`, which allows us to work with
+distributions as objects---a necessary ingredient of every PPL. Load or install
+it using
+```{r}
+if (!require(distr)){
+  install.packages("distr")
+  require(distr)
+}
+```
+
+**Example**: evaluating densities
+```{r}
+distUnif <- Unif(2,3)
+p(distUnif)(0.2) # evaluate the pdf of distUnif at 0.2 
+```
+Note that $0.2\notin[2,3]$ and therefore the answer is $0$. The fact that this
+returns $0$ instead of throwing an "out-of-bounds" error is crucial for a 
+well-functioning implementation of a PPL.
+
+**Example**: simulation
+```{r}
+distPoisson <- Pois(lambda = 3)
+v = r(distPoisson)(1000) # get 1000 iid samples from distPois
+head(v)
+```
+
 1. Show that the importance weight of targeting the posterior distribution with
 the prior as reference is proportional to the likelihood.
+2. One of the most important functions in a PPL is the `observe` statement. It is
+the only special statement needs to include in their functions when using the PPL.
+Its function is to accumulate likelihood in order to compute the IS weight for
+any given sample. To this end, the first step is to define a global variable that
+will be used throughout the program to contain the value of the weight:
+```{r}
+current_log_likelihood = 0.0
+```
+Now, **write** the `observe(value, dist)` function, which should accept two arguments:
+    
+    i. a distribution object `dist` from the package `distr`---for example,
+    ```r
+    library(distr)
+    dist
+    ```
+    and
+    ii. a value $x$ that is in the support of the distribution $d$.
+
+Using these two inputs, your function should add the value of $\log(d(x))$ to the
+`current_log_likelihood` accumulator.
+3. 
+
 2. From now on we will focus on the [coin bag example from exercise 1](ex01.qmd).
