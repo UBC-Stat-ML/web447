@@ -55,6 +55,39 @@ does not admit a closed-form expression. Estimate its value using `mc_estimate(f
 
 ## Q.2: function on unbounded intervals
 
+Self-normalizing importance sampling is a Monte Carlo scheme that allows us to
+estimate expectations of real-valued functions $f$ with respect to intractable
+distributions $\pi$ by using samples from a tractable reference distribution
+$q$. It is "self-normalizing" because it works even when normalzing constants are
+missing in either density function; i.e., if only we have access to $\gamam$ and
+$\nu$ such that
+$$
+\pi(x) = \frac{\gamma(x)}{Z_\pi} \qquad q(x) = \frac{\nu(x)}{Z_q}
+$$
+Let $\ex_\pi$ represent expectations with respect to $\pi$, and $\ex_\nu$ expectations
+w.r.t. $\nu$. The fundamental SNIS identity is
+$$
+\begin{aligned}
+\ex_\pi[f] &= \int f(x)\pi(x) \dee x \\
+&= \int f(x)\frac{\pi(x)}{q(x)}q(x) \dee x \\
+&= \ex_\nu\left[ f(x) \frac{\pi(x)}{q(x)} \right] \\
+&= \frac{Z_q}{Z_\pi} \ex_\nu\left[f(x) \frac{\gamma(x)}{\nu(x)} \right] \\
+\end{aligned}
+$$
+Using $f\equiv1$ in the above we see that
+$$
+\ex_\nu\left[\frac{\gamma(x)}{\nu(x)} \right] = \frac{Z_\pi}{Z_q}
+$$
+Hence
+$$
+\ex_\pi[f] = \frac{\ex_\nu\left[f(x) \frac{\gamma(x)}{\nu(x)} \right]}{\ex_\nu\left[ \frac{\gamma(x)}{\nu(x)} \right]}.
+$$
+Recall that the SNIS estimator is
+$$
+\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
+$$
+
+
 1. Write a function `is_exponential` that takes a function 
 $f:[0,\infty)\to\reals$ and a number $\lambda>0$, and outputs a Monte Carlo estimate of
 $\int_0^\infty f(x)\dee x$ using importance sampling with reference distribution
@@ -87,9 +120,8 @@ able to perform Bayesian inference on a wide range of Bayesian models
 $$
 \pi(x|y) = \frac{\pi(x)L(y|x)}{Z}
 $$
-The inference engine of our program will be self-normalizing importance sampling
-(SNIS).
-We will assume that the prior of our model is proper and that we can draw i.i.d.
+The inference engine of our PPL will be SNIS. For this, we will restrict our
+PPL to models in which the prior is proper and it is possible to draw i.i.d.
 samples from it.
 
 In the following we will use the package `distr`, which allows us to work with
@@ -158,10 +190,7 @@ my_first_probabilistic_program = function(){
 ```
 4. Write a function `posterior(f,n)` that takes a PPL program like
 `my_first_probabilistic_program` and a number `n`, and performs posterior
-inference via SNIS using `n` samples. Recall that the SNIS estimator is
-$$
-\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
-$$
+inference via SNIS using `n` samples. 
 Now, fill in the missing steps in the following function skeleton
 ```{r}
 #| eval: false
