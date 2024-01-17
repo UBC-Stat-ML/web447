@@ -39,38 +39,18 @@ independent samples from $\distUnif(0,1)$.
 $$
 f(x) = \frac{1}{\sqrt[3]{x^2(1-x)}}.
 $$
-Show that
+It is possible to show that
 $$
 \int_0^1 f(x)\dee x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
 $${#eq-integral}
-Hint: look at the expression for the 
-[density](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function) 
-of a $\distBeta(\alpha,\beta)$ distribution, and remember that it must integrate
-to one. Then use the fact that for any $\gamma\in(0,1)$, the 
-[Gamma function satisfies](https://en.wikipedia.org/wiki/Gamma_function#General)
-a reflection formula
-$$
-\Gamma(\gamma)\Gamma(1-\gamma) = \frac{\pi}{\sin\left(\gamma\pi\right)}.
-$$
-3. Test your implementation of `mc_estimate` by checking that it produces an
+Test your implementation of `mc_estimate` by checking that it produces an
 answer close to the value in @eq-integral.
-4. In order to quantify the uncertainty inherent in the output of the previous 
-step, we will construct a confidence interval[^1] for our Monte Carlo estimate
-    a. Approximate the standard error of the estimator by computing the standard
-       deviation of $K=30$ i.i.d. replications of `mc_estimate(f)`.
-    b. Use the Central Limit Theorem to provide an asymptotically exact
-       95% confidence interval.
-    
-[^1]: Yes, the frequentist concept! Monte Carlo simulation is one instance 
-      where the assumptions of frequentist inference hold by design.
-
-5. The following integral, known as the 
+4. The following integral, known as the 
 [sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral),
 $$
 \int_0^1 \frac{\sin(t)}{t} \dee t.
 $$
-does not admit a closed-form expression. Provide a 95% confidence interval for
-its value using `mc_estimate(f)`.
+does not admit a closed-form expression. Estimate its value using `mc_estimate(f)`.
 
 
 ## Q.2: function on unbounded intervals
