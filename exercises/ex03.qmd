@@ -71,9 +71,9 @@ its value using `mc_estimate(f)`.
 ## Q.2: function on unbounded intervals
 
 1. Write a function `is_exponential` that takes a function 
-$f:[0,\infty)\to\reals$ and outputs a Monte Carlo estimate of
-$\int_0^\infty f(x)\dee x$ using Importance Sampling with reference distribution
-$\distExp(1)$ and $n=10000$ i.i.d. samples.
+$f:[0,\infty)\to\reals$ and a number $\lambda>0$, and outputs a Monte Carlo estimate of
+$\int_0^\infty f(x)\dee x$ using importance sampling with reference distribution
+$\distExp(\lambda)$ and $n=10000$ i.i.d. samples.
 2. Show that the function $f:[0,\infty)\to[0,\infty)$ given by
 $$
 f(x) = \frac{\exp(-\pi^2/x)}{x^3\sqrt{x}}.
@@ -88,8 +88,24 @@ Then use [the fact that](https://en.wikipedia.org/wiki/Gamma_function#General) f
 $$
 \Gamma\left(\frac{1}{2}+n\right) = \frac{(2n)!}{4^nn!}\sqrt{\pi}.
 $$
-3. Test your implementation of `is_exponential` by constructing a 95% confidence
-interval for your estimate and checking that it contains the true value.
-4. Write a function `is_exponential_10` that is identical to `is_exponential`
-except that it uses $\distExp(10)$ as reference. Use it to build another 95%
-confidence interval and compare it to the one obtained using `is_exponential`.
+3. Test your implementation of `is_exponential` with $\lambda=1$ by constructing
+a 95% confidence interval for your estimate and checking that it contains the 
+true value.
+4. Re-do part 3 with $\lambda=20$ and compare both confidence intervals. Which
+estimator is better?
+
+
+## A minimal universal probabilistic programming language
+
+In this question we will write a very short program that will nonetheless be
+able to perform Bayesian inference on a wide range of Bayesian models
+$$
+\pi(x|y) = \frac{\pi(x)L(y|x)}{Z}
+$$
+The inference engine of our program will be self-normalizing importance sampling.
+We will assume that the prior of our model is proper and that we can draw i.i.d.
+samples from it.
+
+1. Show that the importance weight of targeting the posterior distribution with
+the prior as reference is proportional to the likelihood.
+2. From now on we will focus on the [coin bag example from exercise 1](ex01.qmd).
