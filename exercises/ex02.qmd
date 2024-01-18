@@ -25,7 +25,7 @@ This exercise is centered around the following scenario:
 
 In order to perform inference on the unknown quantities, we must specify how
 they relate to the data; i.e., we need a *probabilistic model*.
-Assume that every Delta 7925H rocket has the same probability $p$ of failing.
+Assume that every Delta 7925H rocket has the same probability $p$ of success.
 For simplicity, let us assume that $p$ is allowed to take values on an evenly space grid
 $$
 p \in \left\{\frac{k}{K}: k\in \{0,\dots,K\}\right\}

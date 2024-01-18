@@ -42,7 +42,7 @@ we have introduced Bayesian regression models.
 
 - Suppose we put zero prior mass to having a fair dice. What happens on the posterior?
 
-![](../images/all-in-one-killings.png){width="800"}
+![](../images/all-in-one-killings-bad-prior.png){width="800"}
 
 - If we put prior mass of zero to some realization $x$, say $\rho(x) = 0$ then the posterior probability on $x$ will always be zero, $\pi(x) = 0$, *no matter how many observations we get*
     - This could be disastrous! (e.g. ignoring extreme scenarios can have extreme consequences)

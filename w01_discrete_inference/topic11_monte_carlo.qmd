@@ -25,13 +25,13 @@ Simple Monte Carlo is the foundation for more complex Monte Carlo methods used b
 \newcommand\parm{{(m)}}
 
 - As before, we want to compute an expectation $\ex[g(X, Y)]$
-- But imagine a very large tree, but where most branches have very low probability and only few have large probability
+- Imagine a very large [decision tree](topic05_decision_diagrams.qmd), but where most branches have very low probability and only few have large probability
 - In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will *approximate* expectations using forward simulation (a method know as **simple Monte Carlo**)
 - This is done as follows:
-    - Call your forward simulator $M$ times
-    - Denote the output at iteration $m \in \{1, 2, \dots M\}$ by:
+    - Call your forward simulator $M$ times.
+        - Denote the output at iteration $m \in \{1, 2, \dots M\}$ by:
     $$(X^\parm, Y^\parm) \sim p_{X, Y}(\cdot)$$
-    - Compute $g$ on each, call each of the $M$ outputs $G^\parm$
+        - Compute $g$ on each, call each of the $M$ outputs $G^\parm$
     $$G^\parm = g(X^\parm, Y^\parm).$$
     - Return the average
     $$\hat G_M = \frac{1}{M} \sum_{m=1}^M G^\parm.$$
@@ -78,12 +78,12 @@ print(sum/n_iterations)
 **Proposition (Law of Large Numbers, LLN):** if $Z_1, Z_2, \dots$ are i.i.d. random variables with $\ex|Z_i| < \infty$, then[^1]
 $$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_i].$$
 
-[^1]: Here"$\to$" denotes a suitable notion of convergence of random variables 
+[^1]: Here"$\to$" denotes a suitable notion of convergence of random variables. 
     In STAT 302 you may have seen LLN with "convergence in probability", but this can 
     be strengthen to "convergence almost sure." 
     The difference between these notions of convergence will not matter in this course. 
 
 Picking $Z_m = G^\parm$ we arrive to the following formalization of $\approx$: 
 for any approximation error tolerence, we can find a number of iterations $M$ large enough 
-such that we will be within that error tolerence with high probability.
+such that we will be within that error tolerence with high probability after $M$ iterations.
 

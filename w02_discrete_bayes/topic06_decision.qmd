@@ -47,7 +47,7 @@ $$L(a) = \ex[L(a, X)].$$
 
 ### Example
 
-Compute $\min L(a)$ and $\argmin L(a)$. 
+Compute $\argmin L(a)$ and $\min L(a)$. 
 
 {{< include ../../clickers/w02/_c02.qmd >}}
 
