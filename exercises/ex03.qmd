@@ -6,8 +6,6 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
-
 
 ## Goals
 
@@ -15,19 +13,6 @@ editor:
 - Review the concept of importance sampling.
 - Build a universal probabilistic programming language in <30 lines of code.
 
-
-## TODO (delete when finished!)
-
-- 1 - continuous MC on bounded space and uniform proposal✅
-- 2 - continuous IS on unbounded space and e.g. exponential proposal✅
-	-> bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?)
-	-> bonus/challenge question? or maybe in class instead?: questions on ESS?
-	-> bonus? an example where the expectation does not converge due to non-integrability
-- 3 - guided steps to universal PPL (providing scaffold code)✅
-	- test case: discrete model from last time (e.g. one for parameters posterior)
-	- extending to cover predictive?
-	- model with two variables? (can wait until regression)
-	
 
 ## Q.1: functions on the unit interval
 
@@ -80,31 +65,52 @@ $$
 If $\{x_i\}_{i=1}^n\distiid q$ and we set $w_i=w(x_i)$, then
 $$
 \widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
-$$
+$${#eq-SNIS-estimator}
 is a consistent estimator of $\ex_\pi[f]$. Moreover,
 $$
 \frac{1}{n}\sum_{i=1}^n w_i
-$$
+$${#eq-SNIS-norm-const}
 is a consistent estimator of $\frac{Z_\pi}{Z_q}$.
 
 
-1. Write a function `snis_exponential` that takes a function 
-$f:[0,\infty)\to\reals$ and a number $\lambda>0$, and outputs a Monte Carlo estimate of
-$\int_0^\infty f(x)\dee x$ using importance sampling with reference distribution
-$\distExp(\lambda)$ and $n=10000$ i.i.d. samples.
-2. The function $f:[0,\infty)\to[0,\infty)$ given by
+### Exercises
+
+1. The pdf of a $\pi = \distNorm(0,\sigma^2)$ distribution is proportional to
 $$
-f(x) = \frac{\exp(-\pi^2/x)}{x^3\sqrt{x}}.
+\gamma(x) = \exp\left(-\frac{x^2}{2\sigma^2}\right)
 $$
-satisfies
+We know that its normalizing constant is
 $$
-\int_0^\infty f(x)\dee x = \frac{3}{4\pi^4\sqrt{\pi}}.
-$${#eq-integral-unbounded}
-Test your implementation of `is_exponential` with $\lambda=1$ by constructing
-a 95% confidence interval for your estimate and checking that it contains the 
-true value.
-3. Re-do part 3 with $\lambda=20$ and compare both confidence intervals. Which
-estimator is better?
+\int_{-\infty}^\infty \gamma(x)\dee x = \sigma\sqrt{2\pi}.
+$$
+Also, $\ex_\pi[x^2]=\sigma^2$. We will use SNIS to estimate both of these quantities,
+for $\sigma = 3$. As reference, use the 
+[Laplace distribution](https://en.wikipedia.org/wiki/Laplace_distribution) 
+$\distLap(0,3)$. It is implemented in the `extraDistr` package
+```{r}
+library(extraDistr)
+
+dlaplace(8, sigma = 3) # pdf at x=8 of Lap(0,3)
+rlaplace(1, sigma = 3) # random sample from Lap(0,3)
+```
+Fill in the blanks below to implement a function `snis(n)` that uses SNIS to
+estimate the above quantities (normalizing constant and $\ex_\pi[x^2]$)
+```{r}
+#| eval: false
+snis = function(n){
+  numerator = 0.0
+  denominator = 0.0
+  for (i in 1:n) {
+    xi = FIX_ME # sample from Laplace(0, 3)
+    f_xi = FIX_ME # compute target function at the sampled point xi
+    w_i = FIX_ME / dlaplace(xi, sigma = 3) # compute the weight
+    numerator = numerator + FIX_ME # update the accumulator for numerator
+    denominator = denominator + FIX_ME # update the accumulator for denominator
+  }
+  return(list(expectation = numerator/denominator, norm_const = denominator/n))
+}
+```
+2. Run `snis(10000)` and report the results comparing to the true values.
 
 
 ## Q.3: A minimal universal probabilistic programming language (PPL)
@@ -230,8 +236,6 @@ posterior = function(f, n){
   return(numerator/denominator)
 }
 ```
-
-
 
 5. Test your program by checking that you can approximate the posterior probability
 of the fair coin obtained in [exercise 1, Q.2](ex01.qmd#sec-q2).
