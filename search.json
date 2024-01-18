@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.\n\n\n\n\n\n\n\n\n\n\n\nDate\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\nUniversal probabilistic inference via importance sampling.\n\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\nDecision theory.\nBDA 9.1-9.5\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\nBayesian regression, GLMs, and beyond.\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week.\n\n\n\nTh, Feb 22\nReading week.\n\n\n\nTue, Feb 27\nQuiz 1.\n\n\n\nTh, Feb 29\nTBA\n\n\n\nTue, Mar 5\nMCMC user guide (via Stan).\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due.\n\n\n\nTue, Mar 12\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2.\n\n\n\nTh, Mar 28\nTBA\n\n\n\nTue, Apr 2\nMCMC developer guide.\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\nVariational inference.\n\n\n\nTh, Apr 11\nLast lecture.\n\n\n\nFri, Apr 19\nFinal project due."
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.\n\n\n\n\n\n\n\n\n\n\n\nDate\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\nBayesian regression, GLMs, and beyond.\n\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\nProperties of Bayesian models.\n\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week.\n\n\n\nTh, Feb 22\nReading week.\n\n\n\nTue, Feb 27\nQuiz 1.\n\n\n\nTh, Feb 29\nTBA\n\n\n\nTue, Mar 5\nMCMC user guide (via Stan).\n\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due.\n\n\n\nTue, Mar 12\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 14\n\n\n\n\nTue, Mar 19\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\n\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2.\n\n\n\nTh, Mar 28\nTBA\n\n\n\nTue, Apr 2\nMCMC developer guide.\n\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\nVariational inference.\n\n\n\nTh, Apr 11\nGuest lecture. (Last lecture)\n\n\n\nFri, Apr 19\nFinal project due."
   },
   {
     "objectID": "w00_intro/topic05_history.html",
@@ -95,7 +95,7 @@
     "href": "exercises/ex01.html#setup",
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "Setup",
-    "text": "Setup\nThis exercise is centered around the following scenario:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
+    "text": "Setup\nThis exercise is centered around the following scenario:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
   },
   {
     "objectID": "exercises/ex01.html#sec-q1",
@@ -231,312 +231,263 @@
     "text": "Footnotes\n\n\nif the unknown quantity is continuous, the prior will be expressed using a density. A term that captures both the continuous and discrete case is “distribution” i.e. “prior distribution”.↩︎"
   },
   {
-    "objectID": "w02_discrete_bayes/topic06_decision.html",
-    "href": "w02_discrete_bayes/topic06_decision.html",
-    "title": "Decision theory",
+    "objectID": "w02_discrete_bayes/topic05_credible.html",
+    "href": "w02_discrete_bayes/topic05_credible.html",
+    "title": "Credible sets",
     "section": "",
-    "text": "Decision theory: making decision in the face of uncertainty.\n\nFirst, without observed data.\nSecond, incorporating observed data.\n\nReview of property of expectation useful for decision theory calculations.\n\n\n\n\nWe talked a lot about the “Bayesian recipe.” Here we formalize the last step of that recipe: using a posterior and a loss function to make a decision.\nLater, we will see that the point estimates and credible sets covered this week are actually special cases of the decision theoretic framework (i.e. they emerge when specific loss functions are selected)."
+    "text": "Nominal coverage.\nCommon credible sets:\n\nQuantiles.\nHighest-density sets.\n\n\n\n\n\nAs we have seen at the beginning one motivation for Bayesian methods is that they allow us to quantify uncertainty in our predictions. Credible sets is one way to convey this uncertainty quantification."
   },
   {
-    "objectID": "w02_discrete_bayes/topic06_decision.html#outline",
-    "href": "w02_discrete_bayes/topic06_decision.html#outline",
-    "title": "Decision theory",
+    "objectID": "w02_discrete_bayes/topic05_credible.html#outline",
+    "href": "w02_discrete_bayes/topic05_credible.html#outline",
+    "title": "Credible sets",
     "section": "",
-    "text": "Decision theory: making decision in the face of uncertainty.\n\nFirst, without observed data.\nSecond, incorporating observed data.\n\nReview of property of expectation useful for decision theory calculations.\n\n\n\n\nWe talked a lot about the “Bayesian recipe.” Here we formalize the last step of that recipe: using a posterior and a loss function to make a decision.\nLater, we will see that the point estimates and credible sets covered this week are actually special cases of the decision theoretic framework (i.e. they emerge when specific loss functions are selected)."
+    "text": "Nominal coverage.\nCommon credible sets:\n\nQuantiles.\nHighest-density sets.\n\n\n\n\n\nAs we have seen at the beginning one motivation for Bayesian methods is that they allow us to quantify uncertainty in our predictions. Credible sets is one way to convey this uncertainty quantification."
   },
   {
-    "objectID": "w02_discrete_bayes/topic06_decision.html#decision-theory-without-data",
-    "href": "w02_discrete_bayes/topic06_decision.html#decision-theory-without-data",
-    "title": "Decision theory",
-    "section": "Decision theory without data",
-    "text": "Decision theory without data\nYour friend proposes the following game (a good model for lottery!):\n\nShe flips a standard coin:\n\nif it’s a “heads”: you give her $10\nif it’s a “tails”: she gives you $9.\n\nYour decision: to play or not to play?\n\n\nMathematical formulation\n\nSet of actions: \\(A = \\{0, 1\\}\\) (\\(1 =\\) play, \\(0 =\\) do not play).\nProbability model: \\(X \\sim {\\mathrm{Bern}}(1/2)\\).\nLoss function:\n\n\\(L(a, x)\\): how much do I lose if I pick action \\(a \\in A\\) and encounter realization \\(X = x\\)?\n\nMathematical solution: minimize over \\(a \\in A\\) the expected loss \\[L(a) = \\mathbb{E}[L(a, X)].\\]\n\n\n\nExample\nCompute \\(\\min L(a)\\) and \\(\\operatorname{arg\\,min}L(a)\\).\n\nIt is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.\nLet us start by writing the loss function mathematically using indicator function defined as: \\[\\mathbb{1}[\\text{some condition}] = \\left\\{\n\\begin{array}{ll}\n1 & \\text{if the condition is true,} \\\\\n0 & \\text{if the condition is false.}\n\\end{array}\n\\right.\\] This gives us: \\[L(a, x) = \\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, x = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, x = 1] \\cdot (\\$10).\\]\nLet us simplify the expected loss function, i.e. \\[\\mathbb{E}[L(a, X)] = \\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\] o do that simplification, first use linearity of expectation which you will recall from probability theory tells us that for any random variables \\(X_1\\) and \\(X_2\\), we have \\(\\mathbb{E}[X_1 + c X_2] = \\mathbb{E}[X_1] + c \\mathbb{E}[X_2]\\) for any constant \\(c\\).\nIn our context, using linearity with \\(c=1\\) allows us to simplify the above to: \\[\\underbrace{\\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0)]}_0 + \\mathbb{E}[\\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9)] + \\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\]\nTrick 1: To deal with each remaining term, use that: \\(\\mathbb{1}[a = 1, X = 1] = \\mathbb{1}[a = 1]\\mathbb{1}[X = 1]\\) (check!), and then use linearity with \\(c = \\$ 10 \\cdot \\mathbb{1}[a = 1]\\) to get: \\[\\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)] =  \\$ 10 \\cdot \\mathbb{1}[a = 1] \\mathbb{E}[\\mathbb{1}[X = 1]].\\]\nLOTUS: Finally, we have to compute \\(\\mathbb{E}[\\mathbb{1}[X = 1]]\\). From our review of the Law of the Unconscious Statistician, this is done as follows: \\[\\mathbb{E}[\\mathbb{1}[X = 1]] = \\sum_x \\mathbb{1}[x = 1] p_X(x) = 0 + 1 \\cdot p_X(1) = 1/2.\\]\nTrick 2: you will often take expectation of indicator function, you will always find that \\(\\mathbb{E}[\\mathbb{1}[\\text{an event}]] = \\mathbb{P}(\\text{an event})\\).\nPutting it all together: \\[L(a) = \\mathbb{E}[L(a, X)] =  -\\$ 9 \\cdot \\mathbb{1}[a = 1] (1/2) + \\$ 10 \\cdot \\mathbb{1}[a = 1] (1/2) = \\$0.5 \\cdot \\mathbb{1}[a = 1].\\]"
+    "objectID": "w02_discrete_bayes/topic05_credible.html#nominal-coverage",
+    "href": "w02_discrete_bayes/topic05_credible.html#nominal-coverage",
+    "title": "Credible sets",
+    "section": "Nominal coverage",
+    "text": "Nominal coverage\nThe “nominal coverage” is the basic property that we use to construct credible sets:\n\nYou are given a level, typically \\(95\\%\\) or \\(90\\%\\), denoted \\(1-\\alpha = 0.95\\) or \\(1-\\alpha = 0.9\\)\n\nIntuition: we want to find a set \\(T\\) such that we are \\(95\\%\\) sure that the true \\(x\\) is in \\(T\\).\n\nIdeally, we would want to find a set \\(T\\) such that \\(\\sum_{x \\in T} p(x) = 0.9\\)\n\nFor discrete distributions, there may not be a solution, but let us ignore that issue for now (suppose each probability is very small and replace \\(=\\) by \\(\\approx\\) up to an error bounded by the largest individual probability)\nFor continuous distributions that will not be an issue\n\nAnother problem: there are many solutions! Some of them might appear weird, e.g. include points of probability zero!\n\nExample: both sets shown in red contain \\(75\\%\\) of the mass."
   },
   {
-    "objectID": "w02_discrete_bayes/topic06_decision.html#decision-theory-with-data",
-    "href": "w02_discrete_bayes/topic06_decision.html#decision-theory-with-data",
-    "title": "Decision theory",
-    "section": "Decision theory with data",
-    "text": "Decision theory with data\n\nWe now consider the case where we have some data \\(Y\\) that give us information about \\(X\\).\nThe actions \\(A\\) and loss \\(L(a, x)\\) are the same as before.\n\nHow to modify the last section to take into account the data \\(Y\\)?\n\nDo everything the same, except:\nuse the conditional PMF \\(p_{X|Y}\\) instead of the PMF \\(p_X\\).\n\n\nDefinition: the Bayes estimator\nMathematically: use an action \\(a \\in A\\) minimizing the posterior expected loss, i.e. \\[\\operatorname{arg\\,min}\\mathbb{E}[L(a, X) | Y = y].\\] where: \\[\\mathbb{E}[L(a, X) | Y = y] = \\sum_x L(a, x) p_{X|Y}(x|y).\\]\n\n\nExample\nYou will apply the Bayes estimator in question 3 of this week’s exercises."
+    "objectID": "w02_discrete_bayes/topic05_credible.html#quantile-based-credible-interval",
+    "href": "w02_discrete_bayes/topic05_credible.html#quantile-based-credible-interval",
+    "title": "Credible sets",
+    "section": "Quantile-based credible interval",
+    "text": "Quantile-based credible interval\nThe simplest way of building credible intervals:\n\nsuppose you want a \\(90\\%\\) credible set\nwe will remove \\(10\\%/2 = 5\\%\\) on each side\nremove sticks from the very left moving to right\n\neach time you remove one, add its length to a counter…\nuntil that counter hits \\(5\\%\\).\n\nthen do the same from very right moving to the left\nthe sticks left form \\(T\\)."
   },
   {
-    "objectID": "w02_discrete_bayes/topic04_point.html",
-    "href": "w02_discrete_bayes/topic04_point.html",
-    "title": "Point estimates",
+    "objectID": "w02_discrete_bayes/topic05_credible.html#highest-density-set",
+    "href": "w02_discrete_bayes/topic05_credible.html#highest-density-set",
+    "title": "Credible sets",
+    "section": "Highest Density Set",
+    "text": "Highest Density Set\n\nHighest Density Set: pick a solution with the least number of points \\(|T|\\)\nTo handle discrete models: \\(\\text{argmin}\\{ |T| : \\sum_{x \\in T} p(x) \\ge 0.9\\}\\).\n\nStill not unique in some corner cases, but good enough\n\n\nExample:\n\nthe left one below is a highest density set\nnote the one on the right has more points in it, \\(5 &lt; 9\\).\n\n\nChallenge: implement a function taking as input a posterior PMF (as a vector), a level, and returns an HDI. Details here."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic05_credible.html#credible-interval",
+    "href": "w02_discrete_bayes/topic05_credible.html#credible-interval",
+    "title": "Credible sets",
+    "section": "Credible interval",
+    "text": "Credible interval\nWhen we move to continuous random variables, \\(T\\) will often be an interval, i.e. \\(T = [L, R]\\) for some left and right end points \\(L\\) and \\(R\\). In such case, \\(T\\) is called a credible interval."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic05_credible.html#high-density-interval",
+    "href": "w02_discrete_bayes/topic05_credible.html#high-density-interval",
+    "title": "Credible sets",
+    "section": "High Density Interval",
+    "text": "High Density Interval\nSimilarly, a High Density Interval (HDI) is a shortest interval (i.e. minimizing \\(R - L\\)) containing a prescribed probability mass."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic07_prediction.html",
+    "href": "w02_discrete_bayes/topic07_prediction.html",
+    "title": "Prediction",
     "section": "",
-    "text": "Common point estimates:\n\nPosterior mean.\nPosterior mode.\n\n\n\n\n\nIt is often necessary to summarize the posterior distribution with a single “best guess”, even though as we will see this hides important information namely our uncertainty about that guess."
+    "text": "Prediction using decision trees\nExample\n\n\n\n\nOften we do not care so much about “parameters” but instead about predicting future observations."
   },
   {
-    "objectID": "w02_discrete_bayes/topic04_point.html#outline",
-    "href": "w02_discrete_bayes/topic04_point.html#outline",
-    "title": "Point estimates",
+    "objectID": "w02_discrete_bayes/topic07_prediction.html#outline",
+    "href": "w02_discrete_bayes/topic07_prediction.html#outline",
+    "title": "Prediction",
     "section": "",
-    "text": "Common point estimates:\n\nPosterior mean.\nPosterior mode.\n\n\n\n\n\nIt is often necessary to summarize the posterior distribution with a single “best guess”, even though as we will see this hides important information namely our uncertainty about that guess."
+    "text": "Prediction using decision trees\nExample\n\n\n\n\nOften we do not care so much about “parameters” but instead about predicting future observations."
   },
   {
-    "objectID": "w02_discrete_bayes/topic04_point.html#definitions",
-    "href": "w02_discrete_bayes/topic04_point.html#definitions",
-    "title": "Point estimates",
-    "section": "Definitions",
-    "text": "Definitions\n\nLet \\(\\pi(x) = \\mathbb{P}(X = x | Y = y)\\) denote a posterior PMF.\nPoint estimate: Instead of plotting the full information in \\(\\pi\\), we can report a “location” summary such as the mean of the posterior \\(\\pi\\).\n\n\nPosterior mean\nRecall the mean is computed from a PMF via \\[\\sum_x x\\; \\pi(x),\\] where the sum is over \\(\\{x : \\pi(x) &gt; 0 \\}\\).\nNotation: the posterior mean is denoted \\(\\mathbb{E}[X | Y = y] = \\sum x\\ \\pi(x)\\).\n\n\nExample 1\nCompute \\(\\mathbb{E}[X | Y = (1, 1)]\\) in the bag of coin example.\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\n\n0.5\n1.8\n2.25\n3.5\nNone of the above\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nFirst, compute the unnormalized posterior \\(\\gamma \\propto \\pi\\): \\[\\gamma = (\\gamma(0), \\gamma(1), \\gamma(2)) = (1/3) (0^2, (1/2)^2, 1^2),\\] then normalize: \\[\\pi = \\gamma / Z =  (0, 1/5, 4/5).\\] Finally, compute the conditional expectation: \\[\\mathbb{E}[X | Y = (1, 1)] = \\sum x \\; \\pi(x) = (0, 1, 2) \\cdot (0, 1/5, 4/5) = 9/5 = 1.8.\\]\nCommon mistake: forgetting normalization step: \\[\\sum x \\; \\pi(x) \\neq \\sum x \\; \\gamma(x).\\]\n\nThis “common mistake” highlights that we really need \\(Z\\) to compute posterior expectations using the exact, exhaustive approach (i.e. the method we are using here).\nWhen we talk more about Monte Carlo methods, we will see that these methods allow us to approximate expecations without having to compute \\(Z\\)!\n\n\n\n\n\n\nPosterior mode\nThe mode is the location of the “tallest stick” in the PMF.\nNotation: \\(\\operatorname{arg\\,max}\\pi(x),\\) i.e. the point that achieves the maximum of \\(\\pi\\).\nIn the Bayesian context, the mode of a posterior PMF is also known as the Maximum A Posteriori (MAP) estimator.\n\n\nExample 2\nYou will practice computing the posterior mean/mode in question 2 of the exercises."
+    "objectID": "w02_discrete_bayes/topic07_prediction.html#example-coins-in-a-bag",
+    "href": "w02_discrete_bayes/topic07_prediction.html#example-coins-in-a-bag",
+    "title": "Prediction",
+    "section": "Example: coins in a bag",
+    "text": "Example: coins in a bag\nConsider the setup from last week with 3 coins and 3 flips with \\(Y = (1, 1, 1)\\) (in the following, let \\(\\boldsymbol{1}\\) denote a vector of 1’s).\nQuestion: given you have see 3 heads, what is the probability that the next one is also heads?\nMathematically: \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\). This is known as “prediction”."
   },
   {
-    "objectID": "challenges/ch02.html",
-    "href": "challenges/ch02.html",
-    "title": "Challenge questions",
+    "objectID": "w02_discrete_bayes/topic07_prediction.html#general-approach",
+    "href": "w02_discrete_bayes/topic07_prediction.html#general-approach",
+    "title": "Prediction",
+    "section": "General approach",
+    "text": "General approach\nKey message: In Bayesian statistics, prediction and parameter estimation are treated in the exact same way!\nIdea: Add \\(Y_4\\) to the unobserved random variables, i.e. set \\(\\tilde X = (X, Y_4)\\).\nThen, to compute \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\) use same techniques as last week (decision tree, chain rule, axioms of probability)."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic07_prediction.html#example-continued",
+    "href": "w02_discrete_bayes/topic07_prediction.html#example-continued",
+    "title": "Prediction",
+    "section": "Example, continued",
+    "text": "Example, continued\nUse the following picture to help you computing \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\)."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html",
+    "href": "w02_discrete_bayes/topic01_bayes_recipe.html",
+    "title": "The Bayesian recipe",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\)."
+    "text": "Introduce the Bayesian Recipe (synonym for the Bayes estimator)\nIllustrate it using this week’s running example\n\n\n\n\nThe Bayesian Recipe/Bayes estimator is the guide for all “full Bayesian” statistical analyses. This week we apply it to an example that builds on last week’s review."
   },
   {
-    "objectID": "drafts/ex03.html",
-    "href": "drafts/ex03.html",
-    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
+    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#outline",
+    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#outline",
+    "title": "The Bayesian recipe",
+    "section": "",
+    "text": "Introduce the Bayesian Recipe (synonym for the Bayes estimator)\nIllustrate it using this week’s running example\n\n\n\n\nThe Bayesian Recipe/Bayes estimator is the guide for all “full Bayesian” statistical analyses. This week we apply it to an example that builds on last week’s review."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#this-weeks-running-example",
+    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#this-weeks-running-example",
+    "title": "The Bayesian recipe",
+    "section": "This week’s running example",
+    "text": "This week’s running example\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#the-bayesian-recipe",
+    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#the-bayesian-recipe",
+    "title": "The Bayesian recipe",
+    "section": "The Bayesian recipe",
+    "text": "The Bayesian recipe\nThe goal this week is to undersand the 3 steps in the Bayesian recipe:\n\nConstruct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution (condition on the data)\nUse the posterior distribution to (decision theory):\n\nmake prediction (point estimate)\nestimate uncertainty (credible intervals)\nmake a decision"
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#plan",
+    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#plan",
+    "title": "The Bayesian recipe",
+    "section": "Plan",
+    "text": "Plan\n\nUnderstanding Step 1 (“construct a probability model”):\n\nwe reviewed probability models last week,\nin fact, the model we use for this week’s problem is the same as last week’s!\nWe will just need to add some Bayesian terminology: prior, likelihood.\n\nUnderstanding Step 2 (“condition on the data”):\n\nwe reviewed conditional probability last week,\nin fact, the conditional probability calculation for this week’s problem is the same as last week’s!\nWe just need to add some Bayesian terminology: posterior distributions.\n\nUnderstanding Step 3: this is where most of the new material will be for this week."
+  },
+  {
+    "objectID": "drafts/ex02.html",
+    "href": "drafts/ex02.html",
+    "title": "Exercise 2: Bayesian inference on discrete spaces",
     "section": "",
     "text": "Caution\n\n\n\nPage under construction: information on this page may change."
   },
   {
-    "objectID": "drafts/ex03.html#goals",
-    "href": "drafts/ex03.html#goals",
-    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
+    "objectID": "drafts/ex02.html#goals",
+    "href": "drafts/ex02.html#goals",
+    "title": "Exercise 2: Bayesian inference on discrete spaces",
     "section": "Goals",
-    "text": "Goals\n\nUnderstanding and implementing importance sampling\nIntroduction to probabilistic programming"
+    "text": "Goals\nA first contact with several Bayesian concepts. We use the same discrete model for all questions.\n\nNotions of priors, likelihood, posterior.\nPoint summary of posterior distribution: mean, median, mode.\nConstructing credible intervals.\nBasic decision theory.\nSequential update of posterior distribution."
   },
   {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html",
-    "title": "Monte Carlo",
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html",
+    "title": "Decision trees",
     "section": "",
-    "text": "Simple Monte Carlo method\nTheoretical guarantee from the Law of Large Numbers\n\n\n\n\nSimple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))"
+    "text": "Decision trees\nReview of more probability theory concepts, contextualized in decision trees: outcome, event, sample space, partitions, conditional probability\n\n\n\n\nWe will use decision trees to provide visualization for a bunch of complex concepts such as forward simulation, posterior inference, importance sampling, probabilistic programming, etc."
   },
   {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#outline",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#outline",
-    "title": "Monte Carlo",
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
+    "title": "Decision trees",
     "section": "",
-    "text": "Simple Monte Carlo method\nTheoretical guarantee from the Law of Large Numbers\n\n\n\n\nSimple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))"
+    "text": "Decision trees\nReview of more probability theory concepts, contextualized in decision trees: outcome, event, sample space, partitions, conditional probability\n\n\n\n\nWe will use decision trees to provide visualization for a bunch of complex concepts such as forward simulation, posterior inference, importance sampling, probabilistic programming, etc."
   },
   {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#approximation-of-expectations-using-forward-simulation",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#approximation-of-expectations-using-forward-simulation",
-    "title": "Monte Carlo",
-    "section": "Approximation of expectations using forward simulation",
-    "text": "Approximation of expectations using forward simulation\n\nAs before, we want to compute an expectation \\(\\mathbb{E}[g(X, Y)]\\)\nBut imagine a very large tree, but where most branches have very low probability and only few have large probability\nIn this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will approximate expectations using forward simulation (a method know as simple Monte Carlo)\nThis is done as follows:\n\nCall your forward simulator \\(M\\) times\nDenote the output at iteration \\(m \\in \\{1, 2, \\dots M\\}\\) by: \\[(X^{(m)}, Y^{(m)}) \\sim p_{X, Y}(\\cdot)\\]\nCompute \\(g\\) on each, call each of the \\(M\\) outputs \\(G^{(m)}\\) \\[G^{(m)}= g(X^{(m)}, Y^{(m)}).\\]\nReturn the average \\[\\hat G_M = \\frac{1}{M} \\sum_{m=1}^M G^{(m)}.\\]\n\n\nIntuitively, the output \\(\\hat G_M\\) has the nice property: \\[\\hat G_M \\approx \\mathbb{E}[g(X, Y)]. \\tag{1}\\]"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#example-1",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#example-1",
-    "title": "Monte Carlo",
-    "section": "Example 1",
-    "text": "Example 1\nQuestion 1.2 in the exercise."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#example-2",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#example-2",
-    "title": "Monte Carlo",
-    "section": "Example 2",
-    "text": "Example 2\nConsider the following model:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{1, 2, 3, 4\\} \\\\\nY | X &\\sim {\\mathrm{Unif}}\\{1, \\dots, X\\}.\n\\end{align*}\n\\]\n\n\n\nInterpretation: you roll a D&D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.\nLet us use Monte Carlo to estimate \\(\\mathbb{E}[X^Y]\\):\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\nset.seed(4)\n\n# Recall our forward simulation code from earlier:\nforward_simulate_roll_and_pick &lt;- function() {\n  x &lt;- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice\n  y &lt;- rdunif(1, min=1, max=x)\n  c(x, y) # return a vector with these two realizations\n}\n\nsum &lt;- 0.0\nn_iterations &lt;- 10000\nfor (iteration in 1:n_iterations) {\n  sample &lt;- forward_simulate_roll_and_pick()\n  sum &lt;- sum + sample[1]^sample[2]\n}\nprint(sum/n_iterations)\n\n[1] 25.7831"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#motivation-from-the-law-of-large-numbers",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#motivation-from-the-law-of-large-numbers",
-    "title": "Monte Carlo",
-    "section": "Motivation from the Law of Large Numbers",
-    "text": "Motivation from the Law of Large Numbers\nQuestion: How can we make \\(\\approx\\) more formal in Equation 1?\nProposition (Law of Large Numbers, LLN): if \\(Z_1, Z_2, \\dots\\) are i.i.d. random variables with \\(\\mathbb{E}|Z_i| &lt; \\infty\\), then1 \\[ \\frac{1}{M} \\sum_{m=1}^M Z_m \\to \\mathbb{E}[Z_i].\\]\nPicking \\(Z_m = G^{(m)}\\) we arrive to the following formalization of \\(\\approx\\): for any approximation error tolerence, we can find a number of iterations \\(M\\) large enough such that we will be within that error tolerence with high probability."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#footnotes",
-    "href": "w01_discrete_inference/topic11_monte_carlo.html#footnotes",
-    "title": "Monte Carlo",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nHere”\\(\\to\\)” denotes a suitable notion of convergence of random variables In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.↩︎"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic10_expectations.html",
-    "href": "w01_discrete_inference/topic10_expectations.html",
-    "title": "Expectations",
-    "section": "",
-    "text": "Expectation for discrete random models\nLaw of the Unconscious Statistician\n\n\n\n\nExpectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic10_expectations.html#outline",
-    "href": "w01_discrete_inference/topic10_expectations.html#outline",
-    "title": "Expectations",
-    "section": "",
-    "text": "Expectation for discrete random models\nLaw of the Unconscious Statistician\n\n\n\n\nExpectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-single-random-variable",
-    "href": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-single-random-variable",
-    "title": "Expectations",
-    "section": "Expectation of a single random variable",
-    "text": "Expectation of a single random variable\nRecall: \\[\\mathbb{E}[X] = \\sum_x x p_X(x),\\] where the sum is over the point masses of \\(X\\), i.e. \\(\\{x : p_X(x) &gt; 0\\}\\).\nTest yourself: compute \\(\\mathbb{E}[X]\\) if \\(X \\sim {\\mathrm{Bern}}(p)\\), with \\(p = 0.8\\).\n\n\n\n\n\n\nflowchart TD\nS -- 0.2 --&gt; S__and__X_false[\"X=false\"]\nS -- 0.8 --&gt; S__and__X_true[\"X=true\"]"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic10_expectations.html#law-of-the-unconscious-statistician",
-    "href": "w01_discrete_inference/topic10_expectations.html#law-of-the-unconscious-statistician",
-    "title": "Expectations",
-    "section": "Law of the Unconscious Statistician",
-    "text": "Law of the Unconscious Statistician\nProposition: if \\(g\\) is some function, \\[\\mathbb{E}[g(X)] = \\sum_x g(x) p_X(x).\\]\nTest yourself: compute \\(\\mathbb{E}[X^2]\\) if \\(X \\sim {\\mathrm{Bern}}(p)\\), and hence \\(\\operatorname{Var}[X] = \\mathbb{E}[X^2] - (\\mathbb{E}[X])^2\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-function-of-several-random-variables",
-    "href": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-function-of-several-random-variables",
-    "title": "Expectations",
-    "section": "Expectation of a function of several random variables",
-    "text": "Expectation of a function of several random variables\nLet us go back to our running example:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\nExample: computing \\(\\mathbb{E}[X (Y_1+1)]\\) (similar to what you will be doing in the exercise in question 1.1)\nNote: this is of the form \\(\\mathbb{E}[g(\\dots)]\\), so we can use the Law of the Unconscious Statistician.\nHow to do it:\n\nfirst, identify \\(g\\), here it is \\(g(x, y_1, \\dots, y_4) = x(y_1+1)\\) (in the exercise it is slightly different)\ndenote by \\(p\\) the joint PMF of all the random variables in the model\ncompute the expectation using \\[\\mathbb{E}[g(X, Y_1, \\dots, Y_4)] = \\sum_x \\sum_{y_1} \\sum_{y_2} \\dots \\sum_{y_4} g(x, y_1, \\dots, y_4)  p(x, y_1, y_2, y_3, y_4).\\]\nEach sum runs over the point mass of its PMF as before, e.g. \\(x \\in \\{0, 1, 2\\}\\).\nRecall: \\(p(x, y_1, y_2, y_3, y_4)\\) can be computed using the chain rule.\n\nRecall the decision tree, how to visualize the above equation?\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic01_outcomes.html",
-    "href": "w01_discrete_inference/topic01_outcomes.html",
-    "title": "Sample space, outcomes, events",
-    "section": "",
-    "text": "Review of basic probability theory concepts: outcome, event, sample space\nIntuition from the Bayesian perspective\n\n\n\n\n\nOne definition of Bayesian inference: applying probability theory to statistical inference problems\n\nTherefore, it is critical to understand probability to learn Bayesian inference\nThis week, we will help you “reload in memory” some of the most important bits of probability theory used in this course"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic01_outcomes.html#outline",
-    "href": "w01_discrete_inference/topic01_outcomes.html#outline",
-    "title": "Sample space, outcomes, events",
-    "section": "",
-    "text": "Review of basic probability theory concepts: outcome, event, sample space\nIntuition from the Bayesian perspective\n\n\n\n\n\nOne definition of Bayesian inference: applying probability theory to statistical inference problems\n\nTherefore, it is critical to understand probability to learn Bayesian inference\nThis week, we will help you “reload in memory” some of the most important bits of probability theory used in this course"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic01_outcomes.html#definitions",
-    "href": "w01_discrete_inference/topic01_outcomes.html#definitions",
-    "title": "Sample space, outcomes, events",
-    "section": "Definitions",
-    "text": "Definitions\n\nSample space, denoted \\(S\\), a set.\n\nExample: \\(S = \\{1, 2, 3, 4\\}\\) (see Figure).\n\nEach element \\(s\\) of \\(S\\) is called an outcome, \\(s \\in S\\).\n\nExample: each of the 4 points.\n\nA set of outcomes \\(E \\subset S\\) is called an event.\n\nExample: \\(E = \\{s \\in S : s \\text{ is odd}\\}\\) (red in the Figure)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic01_outcomes.html#intuition-bayesian-view",
-    "href": "w01_discrete_inference/topic01_outcomes.html#intuition-bayesian-view",
-    "title": "Sample space, outcomes, events",
-    "section": "Intuition: Bayesian view",
-    "text": "Intuition: Bayesian view\n\nIn Bayesian statistics, an outcome will describe the state of the world.\nWe do not know which outcome is the true state of the world.\nWe observe partial information on the state of the world/outcome.\nWe rule out the outcomes that are not consistent with the observation…\n…but there will be several outcomes left!\n\nWe will deal with this situation using probability theory."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic01_outcomes.html#intuition-randomized-algorithms",
-    "href": "w01_discrete_inference/topic01_outcomes.html#intuition-randomized-algorithms",
-    "title": "Sample space, outcomes, events",
-    "section": "Intuition: randomized algorithms",
-    "text": "Intuition: randomized algorithms\n\nAn algorithm is “randomized” if it has access to virtual dices/coins.\nIn practice this is done using pseudorandom number generators.\nIn this context an outcome is a random seed, i.e. the initialization of the pseudorandom number generator."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html",
-    "href": "w01_discrete_inference/topic03_random_variables.html",
-    "title": "Random variables",
-    "section": "",
-    "text": "Random variable as mathematical objects.\nNotation convention for observation/latent\n\n\n\n\nRandom variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#outline",
-    "href": "w01_discrete_inference/topic03_random_variables.html#outline",
-    "title": "Random variables",
-    "section": "",
-    "text": "Random variable as mathematical objects.\nNotation convention for observation/latent\n\n\n\n\nRandom variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#definition",
-    "href": "w01_discrete_inference/topic03_random_variables.html#definition",
-    "title": "Random variables",
-    "section": "Definition",
-    "text": "Definition\nA (real) random variable is a function from a sample space \\(S\\) to the reals, \\(X : S \\to \\mathbb{R}\\).\nExample:\n\nContinuing the example with \\(S = \\{1, 2, 3, 4\\}\\).\nConsider \\(X(s) = 1\\) if \\(s\\) is odd, and \\(X(s) = 0\\) otherwise."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#probabilists-notation",
-    "href": "w01_discrete_inference/topic03_random_variables.html#probabilists-notation",
-    "title": "Random variables",
-    "section": "Probabilist’s notation",
-    "text": "Probabilist’s notation\n\nLet \\(X\\) denote a random variable.\nThe notation \\((X = 1)\\) or \\((X \\in E)\\) is invalid in set theory.\nTherefore, probabilists “gave it a meaning” as follows:\n\n\\[(X = 1) = \\{s : X(s) = 1\\}.\\]\nExample: Consider \\(X(s) = 1\\) if \\(s\\) is odd, and \\(X(s) = 0\\) otherwise. Then \\((X = 1)\\) corresponds to the red circle."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#sec-conventions-probability-vs-bayesian",
-    "href": "w01_discrete_inference/topic03_random_variables.html#sec-conventions-probability-vs-bayesian",
-    "title": "Random variables",
-    "section": "Conventions: probability vs Bayesian",
-    "text": "Conventions: probability vs Bayesian\nProbability convention:\n\nRandom variables are denoted with capitals in probability theory\nThe same letter in small cap is used for a dummy variable holding the output of the random variable.\n\nNote: “A dummy variable holding the output of the random variable” is called a realization.\nExample: \\(X\\) for the random variable and \\(x\\) for its realization.\n\nWe will start off using this convention in the first few weeks.\n\nBayesian statistics convention:\n\nOften the capitalization convention is not used in the Bayesian statistics literature.\nHence we will eventually drop the probability theory capitalization convention."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#more-conventions",
-    "href": "w01_discrete_inference/topic03_random_variables.html#more-conventions",
-    "title": "Random variables",
-    "section": "More conventions",
-    "text": "More conventions\n\n\\(X\\): unobserved random variable\n\\(Y\\): observed random variable\n\nMore precisely:\n\n\\(Y\\) is the “mechanism of observation”..\nwhereas the actual observation is a realization \\(y\\) of \\(Y\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic03_random_variables.html#extension",
-    "href": "w01_discrete_inference/topic03_random_variables.html#extension",
-    "title": "Random variables",
-    "section": "Extension",
-    "text": "Extension\nA random vector is a function from a sample space to \\(\\mathbb{R}^n\\).\nExample in Bayesian statistics: the vector \\((X, Y)\\) containing both the unobserved and observed quantities."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html",
-    "title": "Forward sampling",
-    "section": "",
-    "text": "Notion of forward sampling (also known as forward simulation)\nHow to do it in practice\n\nUseful functions\nGraphical models\n\n\n\n\n\n\nSampling is the main way Bayesian inference is performed nowadays.\nWe introduce here the simplest flavour of sampling, forward sampling.\nBayesian inference mostly uses a more complicated type of sampling called posterior sampling which we will cover later.\nBut forward sampling is still helpful to help debug Bayesian inference software as we will see soon."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#outline",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html#outline",
-    "title": "Forward sampling",
-    "section": "",
-    "text": "Notion of forward sampling (also known as forward simulation)\nHow to do it in practice\n\nUseful functions\nGraphical models\n\n\n\n\n\n\nSampling is the main way Bayesian inference is performed nowadays.\nWe introduce here the simplest flavour of sampling, forward sampling.\nBayesian inference mostly uses a more complicated type of sampling called posterior sampling which we will cover later.\nBut forward sampling is still helpful to help debug Bayesian inference software as we will see soon."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-depth-first-traversal",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-depth-first-traversal",
-    "title": "Forward sampling",
-    "section": "Forward sampling as depth-first traversal",
-    "text": "Forward sampling as depth-first traversal\nRecall our recurring bag sampling example, with its corresponding decision tree:\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\n\n\n\n\n\n\n\nForward simulation is a type of tree traversal. I.e. moving from node to node in the tree.\nForward simulation is a recursive process initialized at the root of the decision tree (labelled \\(S\\)).\n\nWhen we are a node \\(v\\) in the tree, we pick one of \\(v\\)’s children at random.\n\nMore precisely, we use methods discussed in the previous section on simulation from PMFs\n\nWe recurse until we reach a leaf.\n\nFrom this leaf we obtain an outcome and hence a realization for all random variables, both “observed” and “unobserved.”"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-specifying-a-model",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-specifying-a-model",
-    "title": "Forward sampling",
-    "section": "Forward sampling as specifying a model",
-    "text": "Forward sampling as specifying a model\nWe have encountered that notation earlier:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2).\n\\end{align*}\n\\]\n\nThis notation is a recipe providing all the information required to perform forward sampling.\n\nSpecifically, the PMF to use at each recursion step.\nIn continuous models, it will be the same idea except that we will have a probability density instead of a PMF."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#example-1",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html#example-1",
-    "title": "Forward sampling",
-    "section": "Example 1",
-    "text": "Example 1\nYou will practice forward sampling in Ex1, Q1.1.2"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#example-2",
-    "href": "w01_discrete_inference/topic06_forward_sampling.html#example-2",
-    "title": "Forward sampling",
-    "section": "Example 2",
-    "text": "Example 2\nConsider the following model:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{1, 2, 3, 4\\} \\\\\nY | X &\\sim {\\mathrm{Unif}}\\{1, \\dots, X\\}.\n\\end{align*}\n\\]\n\n\n\nInterpretation: you roll a D&D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.\nExample of forward simulation code for the above “censored dice”:\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\nset.seed(4)\n\nforward_simulate_roll_and_pick &lt;- function() {\n  x &lt;- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice\n  y &lt;- rdunif(1, min=1, max=x)\n  c(x, y) # return a vector with these two realizations\n}\n\nforward_simulate_roll_and_pick()\n\n[1] 3 1\n\nforward_simulate_roll_and_pick()\n\n[1] 2 1\n\nforward_simulate_roll_and_pick()\n\n[1] 4 2"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic09_bayes.html",
-    "href": "w01_discrete_inference/topic09_bayes.html",
-    "title": "Bayes rule",
-    "section": "",
-    "text": "Bayes rule for discrete models\nVisual intuition\n\n\n\n\nFirst example of computing a posterior distribution, a key concept in Bayesian statistics."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic09_bayes.html#outline",
-    "href": "w01_discrete_inference/topic09_bayes.html#outline",
-    "title": "Bayes rule",
-    "section": "",
-    "text": "Bayes rule for discrete models\nVisual intuition\n\n\n\n\nFirst example of computing a posterior distribution, a key concept in Bayesian statistics."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic09_bayes.html#running-example",
-    "href": "w01_discrete_inference/topic09_bayes.html#running-example",
-    "title": "Bayes rule",
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
+    "title": "Decision trees",
     "section": "Running example",
-    "text": "Running example\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\nConsider the second question in the first exercise:\nSuppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = [0, 0, 0, 0]. Given that observation, what is the probability that you picked the standard coin (i.e., the one with \\(p = 1/2\\))?"
+    "text": "Running example\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
   },
   {
-    "objectID": "w01_discrete_inference/topic09_bayes.html#strategy",
-    "href": "w01_discrete_inference/topic09_bayes.html#strategy",
-    "title": "Bayes rule",
-    "section": "Strategy",
-    "text": "Strategy\nDenote the observation by \\(y_{1:4} = (0, 0, 0, 0)\\). In the rest of the argument we will always fix \\(y\\) to that value.\n\nAttack the more general problem \\(\\pi(x) = \\mathbb{P}(X = x | Y_{1:4} = y_{1:4})\\) for all hypotheses \\(x \\in \\{0, 1, 2\\}\\) instead of just the requested \\(x = 1\\) (corresponding to the “standard coin”).\nBy definition of conditioning: \\[\\pi(x) = \\frac{\\mathbb{P}(X = x, Y_{1:4} = y_{1:4})}{\\mathbb{P}(Y_{1:4} = y_{1:4})}.\\] Let us call the numerator \\[\\gamma(x) = \\mathbb{P}(X = x, Y_{1:4} = y_{1:4}),\\] and the denominator, \\[Z = \\mathbb{P}(Y_{1:4} = y_{1:4}).\\]\nStart by computing \\(\\gamma(x)\\) for all \\(x\\). (using chain rule)\nNote \\(Z = \\gamma(0) + \\gamma(1) + \\gamma(2)\\) (why?)."
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
+    "title": "Decision trees",
+    "section": "Decision tree",
+    "text": "Decision tree\n\nDecision tree: a recursive classification of all possible scenarios\nNodes in the tree are “groups of scenarios” which we call events\nChildren of a node partitions an event into an exhaustive set of sub-cases,\n\ni.e. \\(E_1, E_2, \\dots\\) is a partition of \\(E\\).\n\nIn the decision tree below, we partitioned events until we get events at the leaves each containing a single scenario\n\nWe call one individual scenario an outcome\nWe call the set of all outcomes the sample space, \\(S\\), and put it at the root of decision trees.\n\n\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
+    "title": "Decision trees",
+    "section": "Nodes and events",
+    "text": "Nodes and events\nTo describe the event corresponding to a node \\(v\\) in the tree:\n\ntrace the path from the node \\(v\\) to the root\ntake the intersection of all node labels\n\nExample: find the node in the above tree corresponding to the event \\((X = 1) \\cap (Y_1 = 0)\\).\nProbability notation review:\n\n\\((X = 1) = \\{s \\in S : X(s) = 1\\}\\)\n\\((X = 1, Y_1 = 0) = (X = 1) \\cap (Y_1 = 0)\\)"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
+    "href": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
+    "title": "Decision trees",
+    "section": "Edges and conditional probabilities",
+    "text": "Edges and conditional probabilities\nWhen there is an edge from events \\(E_1\\) to \\(E_2\\), we annotate it with \\(\\mathbb{P}(E_2 | E_1)\\).\nRecall: conditional probability of \\(E_2\\) given \\(E_1\\)\n\\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)}\\]\nExample:\n\ntake the edge from \\(E_1 = (X = 1)\\) to \\(E_2 = (X = 1, Y_1 = 0)\\). \\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)} = \\frac{\\mathbb{P}(E_2)}{\\mathbb{P}(E_1)} = \\mathbb{P}(Y_1 = 0 | X = 1)\\]\nTranslating \\(\\mathbb{P}(Y_1 = 0 | X = 1)\\) into words: “the probability that the first flip is ‘heads’ \\((Y_1 = 0)\\) given that you picked the standard coin \\((X = 1)\\).’’\nHence the edge from \\(E_1\\) to \\(E_2\\) is labelled \\(1/2\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic02_axioms.html",
+    "href": "w01_discrete_inference/topic02_axioms.html",
+    "title": "Axioms of probability",
+    "section": "",
+    "text": "Definition: \\(E_1, E_2, \\dots\\) is a partition of \\(E\\) if:\n\nthe \\(E_i\\)’s are disjoint, i.e., \\[E_i \\cap E_j = \\emptyset \\text{ when } i\\neq j,\\]\nand their union is \\(E\\), i.e., \\(\\cup_i E_i = E\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic02_axioms.html#partitions",
+    "href": "w01_discrete_inference/topic02_axioms.html#partitions",
+    "title": "Axioms of probability",
+    "section": "",
+    "text": "Definition: \\(E_1, E_2, \\dots\\) is a partition of \\(E\\) if:\n\nthe \\(E_i\\)’s are disjoint, i.e., \\[E_i \\cap E_j = \\emptyset \\text{ when } i\\neq j,\\]\nand their union is \\(E\\), i.e., \\(\\cup_i E_i = E\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic02_axioms.html#sec-axioms",
+    "href": "w01_discrete_inference/topic02_axioms.html#sec-axioms",
+    "title": "Axioms of probability",
+    "section": "Axioms of probability",
+    "text": "Axioms of probability\n\nA probability is a function \\(\\mathbb{P}\\) that satisfy the following constraints:\n\n\\(\\mathbb{P}\\) should take events as input and return a number between zero and one: \\[\\mathbb{P}(E) \\in [0, 1].\\]\nAdditivity axiom: if \\(E_1, E_2, \\dots\\) is a partition of \\(E\\), then \\[\\mathbb{P}(E) = \\sum_i \\mathbb{P}(E_i).\\]\n\\(\\mathbb{P}(S) = 1\\)\n\nThanks to the constraints, even if I only specify a few known probabilities I can recover many other ones mathematically/computationally."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic04_pmfs.html",
+    "href": "w01_discrete_inference/topic04_pmfs.html",
+    "title": "Probability mass functions",
+    "section": "",
+    "text": "Probability Mass Function (PMF):\n\ndenoted by \\(p\\) (not to be confused by \\(\\mathbb{P}\\)),\ndefined by: \\[p(x) = \\mathbb{P}(X = x).\\]\nIf there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,\n\n\\(p_X\\) for the PMF of the latent random variable,\n\\(p_Y\\) for the PMF of the observed random variable."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic04_pmfs.html#definition",
+    "href": "w01_discrete_inference/topic04_pmfs.html#definition",
+    "title": "Probability mass functions",
+    "section": "",
+    "text": "Probability Mass Function (PMF):\n\ndenoted by \\(p\\) (not to be confused by \\(\\mathbb{P}\\)),\ndefined by: \\[p(x) = \\mathbb{P}(X = x).\\]\nIf there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,\n\n\\(p_X\\) for the PMF of the latent random variable,\n\\(p_Y\\) for the PMF of the observed random variable."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
+    "href": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
+    "title": "Probability mass functions",
+    "section": "Simulation/sampling from a PMF",
+    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 1 1 1 1 0 0 1 0 1 1\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 3 3\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic04_pmfs.html#plotting-pmfs-in-r",
+    "href": "w01_discrete_inference/topic04_pmfs.html#plotting-pmfs-in-r",
+    "title": "Probability mass functions",
+    "section": "Plotting PMFs in R",
+    "text": "Plotting PMFs in R\nHere is an exampl of how to plot PMFs in R:\n\nrealizations &lt;- 0:20\n\nplot(realizations, dbinom(realizations, size=20, prob=.3), type='h')\n\n\n\n\nSome explanations:\n\nHere dbinom is the R function for the PMF of a binomial (R uses the prefix d___ for densities and PMFs).\nWe use the fact that many functions in R such as this one are vectorized, i.e. the normal PMF function takes a single point \\(x\\) and output \\(p(x)\\) where \\(p\\) is the PMF; the vectorized version takes vector \\((x_1, x_2, \\dots)\\) and returns \\((p(x_1), p(x_2), \\dots)\\).\nThe argument type = 'h' instructs the plot function to make the plot “histogram”-like."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html",
+    "href": "w01_discrete_inference/topic07_conditional.html",
+    "title": "Conditioning",
+    "section": "",
+    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#outline",
+    "href": "w01_discrete_inference/topic07_conditional.html#outline",
+    "title": "Conditioning",
+    "section": "",
+    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
+    "href": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
+    "title": "Conditioning",
+    "section": "Conditioning as belief update",
+    "text": "Conditioning as belief update\nKey concept: Bayesian methods use probabilities to encode beliefs.\n\nWe will explore this perspective in much more details next week."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
+    "href": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
+    "title": "Conditioning",
+    "section": "A conditional probability is a probability",
+    "text": "A conditional probability is a probability\nThe “updated belief” interpretation highlights the fact that we want the result of the conditioning procedure, \\(\\mathbb{P}(\\cdot | E)\\) to be a probability when viewed as a function of the first argument for any fixed \\(E\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
+    "href": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
+    "title": "Conditioning",
+    "section": "Intuition behind conditioning",
+    "text": "Intuition behind conditioning\n\n\n\n\n\n\n\nFor a query even \\(A\\), what should be the updated probability?\nWe want to remove from \\(A\\) all the outcomes that are not compatible with the new information \\(E\\). How?\n\nTake the intersection: \\(A \\cap E\\)\nWe also want: \\(\\mathbb{P}(S | E) = 1\\) (last section)\nHow? Renormalize: \\[\\mathbb{P}(A | E) = \\frac{\\mathbb{P}(A \\cap E)}{\\mathbb{P}(E)}\\]\nIntersection can also be denoted using a comma, for example \\(\\mathbb{P}(A \\cap E) = \\mathbb{P}(A, E)\\)"
   },
   {
     "objectID": "w01_discrete_inference/topic08_chain.html",
@@ -609,263 +560,340 @@
     "text": "Conditional independence\nThe model was specified as:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\] i.e. with \\(\\mathbb{P}(X = x)\\) and \\(\\mathbb{P}(Y_i = y | X = x)\\) for all \\(x\\) and \\(y\\).\nQuestion: how did we go from \\(\\mathbb{P}(Y_2 | X = 1, Y_1 = 1)\\) (in our chain rule computation) to \\(\\mathbb{P}(Y_2 | X = 1)\\) (model specification)?\nDefinition: \\(V\\) and \\(W\\) are conditionally independence given \\(Z\\) if \\[\\mathbb{P}(V = v, W = w | Z = z) = \\mathbb{P}(V = v | Z = z) \\mathbb{P}(W = w | Z = z).\\]\nExercise: show the above definition is equivalent to:\n\\[\\mathbb{P}(V = v | W = w, Z = z) = \\mathbb{P}(V = v | Z = z).\\]"
   },
   {
-    "objectID": "w01_discrete_inference/topic07_conditional.html",
-    "href": "w01_discrete_inference/topic07_conditional.html",
-    "title": "Conditioning",
+    "objectID": "w01_discrete_inference/topic09_bayes.html",
+    "href": "w01_discrete_inference/topic09_bayes.html",
+    "title": "Bayes rule",
     "section": "",
-    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
+    "text": "Bayes rule for discrete models\nVisual intuition\n\n\n\n\nFirst example of computing a posterior distribution, a key concept in Bayesian statistics."
   },
   {
-    "objectID": "w01_discrete_inference/topic07_conditional.html#outline",
-    "href": "w01_discrete_inference/topic07_conditional.html#outline",
-    "title": "Conditioning",
+    "objectID": "w01_discrete_inference/topic09_bayes.html#outline",
+    "href": "w01_discrete_inference/topic09_bayes.html#outline",
+    "title": "Bayes rule",
     "section": "",
-    "text": "Intuition on conditioning\nA conditional probability is a probability.\n\n\n\n\n\nConditioning is the workhorse of Bayesian inference!\n\nUsed to define models (as when we assigned probabilities to edges of a decision tree)\nAnd soon, to gain information on latent variables given observations."
+    "text": "Bayes rule for discrete models\nVisual intuition\n\n\n\n\nFirst example of computing a posterior distribution, a key concept in Bayesian statistics."
   },
   {
-    "objectID": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
-    "href": "w01_discrete_inference/topic07_conditional.html#conditioning-as-belief-update",
-    "title": "Conditioning",
-    "section": "Conditioning as belief update",
-    "text": "Conditioning as belief update\nKey concept: Bayesian methods use probabilities to encode beliefs.\n\nWe will explore this perspective in much more details next week."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
-    "href": "w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability",
-    "title": "Conditioning",
-    "section": "A conditional probability is a probability",
-    "text": "A conditional probability is a probability\nThe “updated belief” interpretation highlights the fact that we want the result of the conditioning procedure, \\(\\mathbb{P}(\\cdot | E)\\) to be a probability when viewed as a function of the first argument for any fixed \\(E\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
-    "href": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
-    "title": "Conditioning",
-    "section": "Intuition behind conditioning",
-    "text": "Intuition behind conditioning\n\n\n\n\n\n\n\nFor a query even \\(A\\), what should be the updated probability?\nWe want to remove from \\(A\\) all the outcomes that are not compatible with the new information \\(E\\). How?\n\nTake the intersection: \\(A \\cap E\\)\nWe also want: \\(\\mathbb{P}(S | E) = 1\\) (last section)\nHow? Renormalize: \\[\\mathbb{P}(A | E) = \\frac{\\mathbb{P}(A \\cap E)}{\\mathbb{P}(E)}\\]\nIntersection can also be denoted using a comma, for example \\(\\mathbb{P}(A \\cap E) = \\mathbb{P}(A, E)\\)"
-  },
-  {
-    "objectID": "w01_discrete_inference/topic04_pmfs.html",
-    "href": "w01_discrete_inference/topic04_pmfs.html",
-    "title": "Probability mass functions",
-    "section": "",
-    "text": "Probability Mass Function (PMF):\n\ndenoted by \\(p\\) (not to be confused by \\(\\mathbb{P}\\)),\ndefined by: \\[p(x) = \\mathbb{P}(X = x).\\]\nIf there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,\n\n\\(p_X\\) for the PMF of the latent random variable,\n\\(p_Y\\) for the PMF of the observed random variable."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic04_pmfs.html#definition",
-    "href": "w01_discrete_inference/topic04_pmfs.html#definition",
-    "title": "Probability mass functions",
-    "section": "",
-    "text": "Probability Mass Function (PMF):\n\ndenoted by \\(p\\) (not to be confused by \\(\\mathbb{P}\\)),\ndefined by: \\[p(x) = \\mathbb{P}(X = x).\\]\nIf there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,\n\n\\(p_X\\) for the PMF of the latent random variable,\n\\(p_Y\\) for the PMF of the observed random variable."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
-    "href": "w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf",
-    "title": "Probability mass functions",
-    "section": "Simulation/sampling from a PMF",
-    "text": "Simulation/sampling from a PMF\n\nIn R\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\n# 10 coin flips:\nrbern(10, prob=0.5)\n\n [1] 0 1 1 0 1 1 1 1 0 1\n\n# two dice rolls\nrdunif(2, min=1, max=6)\n\n[1] 6 3\n\n\n\n\nHow does it work?\n\nThink of the green lines in the uniform PMF as “sticks” with “labels.”\n\nThe “labels” are the different realization, e.g. 1, 2, 3, …, 6.\n\nPlace the six sticks in the interval \\([0, 1]\\) so that they do not overlap.\nSample a uniform real number in \\([0, 1]\\)\n\nin R: runif(1)\n\nThe uniform falls in exactly one of the sticks.\nReturn the label of that stick.\n\n\n\nMathematical explanation\nThe above “stick-based” algorithm can be implemented using the cumulative distribution function and a generalization of its inverse known as the quantile function.\nCumulative distribution function (CDF): \\(F(x) = \\mathbb{P}(X \\le x).\\)\nQuantile function: \\(F^{-1}(u) = \\inf\\{x \\in \\mathbb{R}: u \\le F(x)\\}\\).\nThen the “stick-based” algorithm can be written as:\n\n\\(U \\sim {\\mathrm{Unif}}[0, 1]\\)\nReturn \\(F^{-1}(U)\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic04_pmfs.html#plotting-pmfs-in-r",
-    "href": "w01_discrete_inference/topic04_pmfs.html#plotting-pmfs-in-r",
-    "title": "Probability mass functions",
-    "section": "Plotting PMFs in R",
-    "text": "Plotting PMFs in R\nHere is an exampl of how to plot PMFs in R:\n\nrealizations &lt;- 0:20\n\nplot(realizations, dbinom(realizations, size=20, prob=.3), type='h')\n\n\n\n\nSome explanations:\n\nHere dbinom is the R function for the PMF of a binomial (R uses the prefix d___ for densities and PMFs).\nWe use the fact that many functions in R such as this one are vectorized, i.e. the normal PMF function takes a single point \\(x\\) and output \\(p(x)\\) where \\(p\\) is the PMF; the vectorized version takes vector \\((x_1, x_2, \\dots)\\) and returns \\((p(x_1), p(x_2), \\dots)\\).\nThe argument type = 'h' instructs the plot function to make the plot “histogram”-like."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic02_axioms.html",
-    "href": "w01_discrete_inference/topic02_axioms.html",
-    "title": "Axioms of probability",
-    "section": "",
-    "text": "Definition: \\(E_1, E_2, \\dots\\) is a partition of \\(E\\) if:\n\nthe \\(E_i\\)’s are disjoint, i.e., \\[E_i \\cap E_j = \\emptyset \\text{ when } i\\neq j,\\]\nand their union is \\(E\\), i.e., \\(\\cup_i E_i = E\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic02_axioms.html#partitions",
-    "href": "w01_discrete_inference/topic02_axioms.html#partitions",
-    "title": "Axioms of probability",
-    "section": "",
-    "text": "Definition: \\(E_1, E_2, \\dots\\) is a partition of \\(E\\) if:\n\nthe \\(E_i\\)’s are disjoint, i.e., \\[E_i \\cap E_j = \\emptyset \\text{ when } i\\neq j,\\]\nand their union is \\(E\\), i.e., \\(\\cup_i E_i = E\\)."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic02_axioms.html#sec-axioms",
-    "href": "w01_discrete_inference/topic02_axioms.html#sec-axioms",
-    "title": "Axioms of probability",
-    "section": "Axioms of probability",
-    "text": "Axioms of probability\n\nA probability is a function \\(\\mathbb{P}\\) that satisfy the following constraints:\n\n\\(\\mathbb{P}\\) should take events as input and return a number between zero and one: \\[\\mathbb{P}(E) \\in [0, 1].\\]\nAdditivity axiom: if \\(E_1, E_2, \\dots\\) is a partition of \\(E\\), then \\[\\mathbb{P}(E) = \\sum_i \\mathbb{P}(E_i).\\]\n\\(\\mathbb{P}(S) = 1\\)\n\nThanks to the constraints, even if I only specify a few known probabilities I can recover many other ones mathematically/computationally."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html",
-    "title": "Decision trees",
-    "section": "",
-    "text": "Decision trees\nReview of more probability theory concepts, contextualized in decision trees: outcome, event, sample space, partitions, conditional probability\n\n\n\n\nWe will use decision trees to provide visualization for a bunch of complex concepts such as forward simulation, posterior inference, importance sampling, probabilistic programming, etc."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html#outline",
-    "title": "Decision trees",
-    "section": "",
-    "text": "Decision trees\nReview of more probability theory concepts, contextualized in decision trees: outcome, event, sample space, partitions, conditional probability\n\n\n\n\nWe will use decision trees to provide visualization for a bunch of complex concepts such as forward simulation, posterior inference, importance sampling, probabilistic programming, etc."
-  },
-  {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html#running-example",
-    "title": "Decision trees",
+    "objectID": "w01_discrete_inference/topic09_bayes.html#running-example",
+    "href": "w01_discrete_inference/topic09_bayes.html#running-example",
+    "title": "Bayes rule",
     "section": "Running example",
-    "text": "Running example\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “tails”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “heads”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]"
+    "text": "Running example\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\nConsider the second question in the first exercise:\nSuppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = [0, 0, 0, 0]. Given that observation, what is the probability that you picked the standard coin (i.e., the one with \\(p = 1/2\\))?"
   },
   {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html#decision-tree",
-    "title": "Decision trees",
-    "section": "Decision tree",
-    "text": "Decision tree\n\nDecision tree: a recursive classification of all possible scenarios\nNodes in the tree are “groups of scenarios” which we call events\nChildren of a node partitions an event into an exhaustive set of sub-cases,\n\ni.e. \\(E_1, E_2, \\dots\\) is a partition of \\(E\\).\n\nIn the decision tree below, we partitioned events until we get events at the leaves each containing a single scenario\n\nWe call one individual scenario an outcome\nWe call the set of all outcomes the sample space, \\(S\\), and put it at the root of decision trees.\n\n\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]"
+    "objectID": "w01_discrete_inference/topic09_bayes.html#strategy",
+    "href": "w01_discrete_inference/topic09_bayes.html#strategy",
+    "title": "Bayes rule",
+    "section": "Strategy",
+    "text": "Strategy\nDenote the observation by \\(y_{1:4} = (0, 0, 0, 0)\\). In the rest of the argument we will always fix \\(y\\) to that value.\n\nAttack the more general problem \\(\\pi(x) = \\mathbb{P}(X = x | Y_{1:4} = y_{1:4})\\) for all hypotheses \\(x \\in \\{0, 1, 2\\}\\) instead of just the requested \\(x = 1\\) (corresponding to the “standard coin”).\nBy definition of conditioning: \\[\\pi(x) = \\frac{\\mathbb{P}(X = x, Y_{1:4} = y_{1:4})}{\\mathbb{P}(Y_{1:4} = y_{1:4})}.\\] Let us call the numerator \\[\\gamma(x) = \\mathbb{P}(X = x, Y_{1:4} = y_{1:4}),\\] and the denominator, \\[Z = \\mathbb{P}(Y_{1:4} = y_{1:4}).\\]\nStart by computing \\(\\gamma(x)\\) for all \\(x\\). (using chain rule)\nNote \\(Z = \\gamma(0) + \\gamma(1) + \\gamma(2)\\) (why?)."
   },
   {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
-    "title": "Decision trees",
-    "section": "Nodes and events",
-    "text": "Nodes and events\nTo describe the event corresponding to a node \\(v\\) in the tree:\n\ntrace the path from the node \\(v\\) to the root\ntake the intersection of all node labels\n\nExample: find the node in the above tree corresponding to the event \\((X = 1) \\cap (Y_1 = 0)\\).\nProbability notation review:\n\n\\((X = 1) = \\{s \\in S : X(s) = 1\\}\\)\n\\((X = 1, Y_1 = 0) = (X = 1) \\cap (Y_1 = 0)\\)"
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html",
+    "title": "Forward sampling",
+    "section": "",
+    "text": "Notion of forward sampling (also known as forward simulation)\nHow to do it in practice\n\nUseful functions\nGraphical models\n\n\n\n\n\n\nSampling is the main way Bayesian inference is performed nowadays.\nWe introduce here the simplest flavour of sampling, forward sampling.\nBayesian inference mostly uses a more complicated type of sampling called posterior sampling which we will cover later.\nBut forward sampling is still helpful to help debug Bayesian inference software as we will see soon."
   },
   {
-    "objectID": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
-    "href": "w01_discrete_inference/topic05_decision_diagrams.html#edges-and-conditional-probabilities",
-    "title": "Decision trees",
-    "section": "Edges and conditional probabilities",
-    "text": "Edges and conditional probabilities\nWhen there is an edge from events \\(E_1\\) to \\(E_2\\), we annotate it with \\(\\mathbb{P}(E_2 | E_1)\\).\nRecall: conditional probability of \\(E_2\\) given \\(E_1\\)\n\\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)}\\]\nExample:\n\ntake the edge from \\(E_1 = (X = 1)\\) to \\(E_2 = (X = 1, Y_1 = 0)\\). \\[\\mathbb{P}(E_2 | E_1) = \\frac{\\mathbb{P}(E_1 \\cap E_2)}{\\mathbb{P}(E_1)} = \\frac{\\mathbb{P}(E_2)}{\\mathbb{P}(E_1)} = \\mathbb{P}(Y_1 = 0 | X = 1)\\]\nTranslating \\(\\mathbb{P}(Y_1 = 0 | X = 1)\\) into words: “the probability that the first flip is ‘heads’ \\((Y_1 = 0)\\) given that you picked the standard coin \\((X = 1)\\).’’\nHence the edge from \\(E_1\\) to \\(E_2\\) is labelled \\(1/2\\)."
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#outline",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html#outline",
+    "title": "Forward sampling",
+    "section": "",
+    "text": "Notion of forward sampling (also known as forward simulation)\nHow to do it in practice\n\nUseful functions\nGraphical models\n\n\n\n\n\n\nSampling is the main way Bayesian inference is performed nowadays.\nWe introduce here the simplest flavour of sampling, forward sampling.\nBayesian inference mostly uses a more complicated type of sampling called posterior sampling which we will cover later.\nBut forward sampling is still helpful to help debug Bayesian inference software as we will see soon."
   },
   {
-    "objectID": "drafts/ex02.html",
-    "href": "drafts/ex02.html",
-    "title": "Exercise 2: Bayesian inference on discrete spaces",
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-depth-first-traversal",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-depth-first-traversal",
+    "title": "Forward sampling",
+    "section": "Forward sampling as depth-first traversal",
+    "text": "Forward sampling as depth-first traversal\nRecall our recurring bag sampling example, with its corresponding decision tree:\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\n\n\n\n\n\n\n\nForward simulation is a type of tree traversal. I.e. moving from node to node in the tree.\nForward simulation is a recursive process initialized at the root of the decision tree (labelled \\(S\\)).\n\nWhen we are a node \\(v\\) in the tree, we pick one of \\(v\\)’s children at random.\n\nMore precisely, we use methods discussed in the previous section on simulation from PMFs\n\nWe recurse until we reach a leaf.\n\nFrom this leaf we obtain an outcome and hence a realization for all random variables, both “observed” and “unobserved.”"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-specifying-a-model",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html#forward-sampling-as-specifying-a-model",
+    "title": "Forward sampling",
+    "section": "Forward sampling as specifying a model",
+    "text": "Forward sampling as specifying a model\nWe have encountered that notation earlier:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2).\n\\end{align*}\n\\]\n\nThis notation is a recipe providing all the information required to perform forward sampling.\n\nSpecifically, the PMF to use at each recursion step.\nIn continuous models, it will be the same idea except that we will have a probability density instead of a PMF."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#example-1",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html#example-1",
+    "title": "Forward sampling",
+    "section": "Example 1",
+    "text": "Example 1\nYou will practice forward sampling in Ex1, Q1.1.2"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic06_forward_sampling.html#example-2",
+    "href": "w01_discrete_inference/topic06_forward_sampling.html#example-2",
+    "title": "Forward sampling",
+    "section": "Example 2",
+    "text": "Example 2\nConsider the following model:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{1, 2, 3, 4\\} \\\\\nY | X &\\sim {\\mathrm{Unif}}\\{1, \\dots, X\\}.\n\\end{align*}\n\\]\n\n\n\nInterpretation: you roll a D&D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.\nExample of forward simulation code for the above “censored dice”:\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\nset.seed(4)\n\nforward_simulate_roll_and_pick &lt;- function() {\n  x &lt;- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice\n  y &lt;- rdunif(1, min=1, max=x)\n  c(x, y) # return a vector with these two realizations\n}\n\nforward_simulate_roll_and_pick()\n\n[1] 3 1\n\nforward_simulate_roll_and_pick()\n\n[1] 2 1\n\nforward_simulate_roll_and_pick()\n\n[1] 4 2"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html",
+    "href": "w01_discrete_inference/topic03_random_variables.html",
+    "title": "Random variables",
+    "section": "",
+    "text": "Random variable as mathematical objects.\nNotation convention for observation/latent\n\n\n\n\nRandom variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#outline",
+    "href": "w01_discrete_inference/topic03_random_variables.html#outline",
+    "title": "Random variables",
+    "section": "",
+    "text": "Random variable as mathematical objects.\nNotation convention for observation/latent\n\n\n\n\nRandom variables are used as building blocks for two key uses in Bayesian stats: modelling “knowns” (observations) and “unknowns” (latent variables/parameters/prediction)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#definition",
+    "href": "w01_discrete_inference/topic03_random_variables.html#definition",
+    "title": "Random variables",
+    "section": "Definition",
+    "text": "Definition\nA (real) random variable is a function from a sample space \\(S\\) to the reals, \\(X : S \\to \\mathbb{R}\\).\nExample:\n\nContinuing the example with \\(S = \\{1, 2, 3, 4\\}\\).\nConsider \\(X(s) = 1\\) if \\(s\\) is odd, and \\(X(s) = 0\\) otherwise."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#probabilists-notation",
+    "href": "w01_discrete_inference/topic03_random_variables.html#probabilists-notation",
+    "title": "Random variables",
+    "section": "Probabilist’s notation",
+    "text": "Probabilist’s notation\n\nLet \\(X\\) denote a random variable.\nThe notation \\((X = 1)\\) or \\((X \\in E)\\) is invalid in set theory.\nTherefore, probabilists “gave it a meaning” as follows:\n\n\\[(X = 1) = \\{s : X(s) = 1\\}.\\]\nExample: Consider \\(X(s) = 1\\) if \\(s\\) is odd, and \\(X(s) = 0\\) otherwise. Then \\((X = 1)\\) corresponds to the red circle."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#sec-conventions-probability-vs-bayesian",
+    "href": "w01_discrete_inference/topic03_random_variables.html#sec-conventions-probability-vs-bayesian",
+    "title": "Random variables",
+    "section": "Conventions: probability vs Bayesian",
+    "text": "Conventions: probability vs Bayesian\nProbability convention:\n\nRandom variables are denoted with capitals in probability theory\nThe same letter in small cap is used for a dummy variable holding the output of the random variable.\n\nNote: “A dummy variable holding the output of the random variable” is called a realization.\nExample: \\(X\\) for the random variable and \\(x\\) for its realization.\n\nWe will start off using this convention in the first few weeks.\n\nBayesian statistics convention:\n\nOften the capitalization convention is not used in the Bayesian statistics literature.\nHence we will eventually drop the probability theory capitalization convention."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#more-conventions",
+    "href": "w01_discrete_inference/topic03_random_variables.html#more-conventions",
+    "title": "Random variables",
+    "section": "More conventions",
+    "text": "More conventions\n\n\\(X\\): unobserved random variable\n\\(Y\\): observed random variable\n\nMore precisely:\n\n\\(Y\\) is the “mechanism of observation”..\nwhereas the actual observation is a realization \\(y\\) of \\(Y\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic03_random_variables.html#extension",
+    "href": "w01_discrete_inference/topic03_random_variables.html#extension",
+    "title": "Random variables",
+    "section": "Extension",
+    "text": "Extension\nA random vector is a function from a sample space to \\(\\mathbb{R}^n\\).\nExample in Bayesian statistics: the vector \\((X, Y)\\) containing both the unobserved and observed quantities."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic01_outcomes.html",
+    "href": "w01_discrete_inference/topic01_outcomes.html",
+    "title": "Sample space, outcomes, events",
+    "section": "",
+    "text": "Review of basic probability theory concepts: outcome, event, sample space\nIntuition from the Bayesian perspective\n\n\n\n\n\nOne definition of Bayesian inference: applying probability theory to statistical inference problems\n\nTherefore, it is critical to understand probability to learn Bayesian inference\nThis week, we will help you “reload in memory” some of the most important bits of probability theory used in this course"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic01_outcomes.html#outline",
+    "href": "w01_discrete_inference/topic01_outcomes.html#outline",
+    "title": "Sample space, outcomes, events",
+    "section": "",
+    "text": "Review of basic probability theory concepts: outcome, event, sample space\nIntuition from the Bayesian perspective\n\n\n\n\n\nOne definition of Bayesian inference: applying probability theory to statistical inference problems\n\nTherefore, it is critical to understand probability to learn Bayesian inference\nThis week, we will help you “reload in memory” some of the most important bits of probability theory used in this course"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic01_outcomes.html#definitions",
+    "href": "w01_discrete_inference/topic01_outcomes.html#definitions",
+    "title": "Sample space, outcomes, events",
+    "section": "Definitions",
+    "text": "Definitions\n\nSample space, denoted \\(S\\), a set.\n\nExample: \\(S = \\{1, 2, 3, 4\\}\\) (see Figure).\n\nEach element \\(s\\) of \\(S\\) is called an outcome, \\(s \\in S\\).\n\nExample: each of the 4 points.\n\nA set of outcomes \\(E \\subset S\\) is called an event.\n\nExample: \\(E = \\{s \\in S : s \\text{ is odd}\\}\\) (red in the Figure)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic01_outcomes.html#intuition-bayesian-view",
+    "href": "w01_discrete_inference/topic01_outcomes.html#intuition-bayesian-view",
+    "title": "Sample space, outcomes, events",
+    "section": "Intuition: Bayesian view",
+    "text": "Intuition: Bayesian view\n\nIn Bayesian statistics, an outcome will describe the state of the world.\nWe do not know which outcome is the true state of the world.\nWe observe partial information on the state of the world/outcome.\nWe rule out the outcomes that are not consistent with the observation…\n…but there will be several outcomes left!\n\nWe will deal with this situation using probability theory."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic01_outcomes.html#intuition-randomized-algorithms",
+    "href": "w01_discrete_inference/topic01_outcomes.html#intuition-randomized-algorithms",
+    "title": "Sample space, outcomes, events",
+    "section": "Intuition: randomized algorithms",
+    "text": "Intuition: randomized algorithms\n\nAn algorithm is “randomized” if it has access to virtual dices/coins.\nIn practice this is done using pseudorandom number generators.\nIn this context an outcome is a random seed, i.e. the initialization of the pseudorandom number generator."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_expectations.html",
+    "href": "w01_discrete_inference/topic10_expectations.html",
+    "title": "Expectations",
+    "section": "",
+    "text": "Expectation for discrete random models\nLaw of the Unconscious Statistician\n\n\n\n\nExpectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_expectations.html#outline",
+    "href": "w01_discrete_inference/topic10_expectations.html#outline",
+    "title": "Expectations",
+    "section": "",
+    "text": "Expectation for discrete random models\nLaw of the Unconscious Statistician\n\n\n\n\nExpectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-single-random-variable",
+    "href": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-single-random-variable",
+    "title": "Expectations",
+    "section": "Expectation of a single random variable",
+    "text": "Expectation of a single random variable\nRecall: \\[\\mathbb{E}[X] = \\sum_x x p_X(x),\\] where the sum is over the point masses of \\(X\\), i.e. \\(\\{x : p_X(x) &gt; 0\\}\\).\nTest yourself: compute \\(\\mathbb{E}[X]\\) if \\(X \\sim {\\mathrm{Bern}}(p)\\), with \\(p = 0.8\\).\n\n\n\n\n\n\nflowchart TD\nS -- 0.2 --&gt; S__and__X_false[\"X=false\"]\nS -- 0.8 --&gt; S__and__X_true[\"X=true\"]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_expectations.html#law-of-the-unconscious-statistician",
+    "href": "w01_discrete_inference/topic10_expectations.html#law-of-the-unconscious-statistician",
+    "title": "Expectations",
+    "section": "Law of the Unconscious Statistician",
+    "text": "Law of the Unconscious Statistician\nProposition: if \\(g\\) is some function, \\[\\mathbb{E}[g(X)] = \\sum_x g(x) p_X(x).\\]\nTest yourself: compute \\(\\mathbb{E}[X^2]\\) if \\(X \\sim {\\mathrm{Bern}}(p)\\), and hence \\(\\operatorname{Var}[X] = \\mathbb{E}[X^2] - (\\mathbb{E}[X])^2\\)."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-function-of-several-random-variables",
+    "href": "w01_discrete_inference/topic10_expectations.html#expectation-of-a-function-of-several-random-variables",
+    "title": "Expectations",
+    "section": "Expectation of a function of several random variables",
+    "text": "Expectation of a function of several random variables\nLet us go back to our running example:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\nExample: computing \\(\\mathbb{E}[X (Y_1+1)]\\) (similar to what you will be doing in the exercise in question 1.1)\nNote: this is of the form \\(\\mathbb{E}[g(\\dots)]\\), so we can use the Law of the Unconscious Statistician.\nHow to do it:\n\nfirst, identify \\(g\\), here it is \\(g(x, y_1, \\dots, y_4) = x(y_1+1)\\) (in the exercise it is slightly different)\ndenote by \\(p\\) the joint PMF of all the random variables in the model\ncompute the expectation using \\[\\mathbb{E}[g(X, Y_1, \\dots, Y_4)] = \\sum_x \\sum_{y_1} \\sum_{y_2} \\dots \\sum_{y_4} g(x, y_1, \\dots, y_4)  p(x, y_1, y_2, y_3, y_4).\\]\nEach sum runs over the point mass of its PMF as before, e.g. \\(x \\in \\{0, 1, 2\\}\\).\nRecall: \\(p(x, y_1, y_2, y_3, y_4)\\) can be computed using the chain rule.\n\nRecall the decision tree, how to visualize the above equation?\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html",
+    "title": "Monte Carlo",
+    "section": "",
+    "text": "Simple Monte Carlo method\nTheoretical guarantee from the Law of Large Numbers\n\n\n\n\nSimple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#outline",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#outline",
+    "title": "Monte Carlo",
+    "section": "",
+    "text": "Simple Monte Carlo method\nTheoretical guarantee from the Law of Large Numbers\n\n\n\n\nSimple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#approximation-of-expectations-using-forward-simulation",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#approximation-of-expectations-using-forward-simulation",
+    "title": "Monte Carlo",
+    "section": "Approximation of expectations using forward simulation",
+    "text": "Approximation of expectations using forward simulation\n\nAs before, we want to compute an expectation \\(\\mathbb{E}[g(X, Y)]\\)\nBut imagine a very large tree, but where most branches have very low probability and only few have large probability\nIn this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will approximate expectations using forward simulation (a method know as simple Monte Carlo)\nThis is done as follows:\n\nCall your forward simulator \\(M\\) times\nDenote the output at iteration \\(m \\in \\{1, 2, \\dots M\\}\\) by: \\[(X^{(m)}, Y^{(m)}) \\sim p_{X, Y}(\\cdot)\\]\nCompute \\(g\\) on each, call each of the \\(M\\) outputs \\(G^{(m)}\\) \\[G^{(m)}= g(X^{(m)}, Y^{(m)}).\\]\nReturn the average \\[\\hat G_M = \\frac{1}{M} \\sum_{m=1}^M G^{(m)}.\\]\n\n\nIntuitively, the output \\(\\hat G_M\\) has the nice property: \\[\\hat G_M \\approx \\mathbb{E}[g(X, Y)]. \\tag{1}\\]"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#example-1",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#example-1",
+    "title": "Monte Carlo",
+    "section": "Example 1",
+    "text": "Example 1\nQuestion 1.2 in the exercise."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#example-2",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#example-2",
+    "title": "Monte Carlo",
+    "section": "Example 2",
+    "text": "Example 2\nConsider the following model:\n\\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{1, 2, 3, 4\\} \\\\\nY | X &\\sim {\\mathrm{Unif}}\\{1, \\dots, X\\}.\n\\end{align*}\n\\]\n\n\n\nInterpretation: you roll a D&D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.\nLet us use Monte Carlo to estimate \\(\\mathbb{E}[X^Y]\\):\n\nrequire(extraDistr)\n\nLoading required package: extraDistr\n\nset.seed(4)\n\n# Recall our forward simulation code from earlier:\nforward_simulate_roll_and_pick &lt;- function() {\n  x &lt;- rdunif(1, min=1, max=4) # 1 uniform between 1-6, i.e. a dice\n  y &lt;- rdunif(1, min=1, max=x)\n  c(x, y) # return a vector with these two realizations\n}\n\nsum &lt;- 0.0\nn_iterations &lt;- 10000\nfor (iteration in 1:n_iterations) {\n  sample &lt;- forward_simulate_roll_and_pick()\n  sum &lt;- sum + sample[1]^sample[2]\n}\nprint(sum/n_iterations)\n\n[1] 25.7831"
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#motivation-from-the-law-of-large-numbers",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#motivation-from-the-law-of-large-numbers",
+    "title": "Monte Carlo",
+    "section": "Motivation from the Law of Large Numbers",
+    "text": "Motivation from the Law of Large Numbers\nQuestion: How can we make \\(\\approx\\) more formal in Equation 1?\nProposition (Law of Large Numbers, LLN): if \\(Z_1, Z_2, \\dots\\) are i.i.d. random variables with \\(\\mathbb{E}|Z_i| &lt; \\infty\\), then1 \\[ \\frac{1}{M} \\sum_{m=1}^M Z_m \\to \\mathbb{E}[Z_i].\\]\nPicking \\(Z_m = G^{(m)}\\) we arrive to the following formalization of \\(\\approx\\): for any approximation error tolerence, we can find a number of iterations \\(M\\) large enough such that we will be within that error tolerence with high probability."
+  },
+  {
+    "objectID": "w01_discrete_inference/topic11_monte_carlo.html#footnotes",
+    "href": "w01_discrete_inference/topic11_monte_carlo.html#footnotes",
+    "title": "Monte Carlo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere”\\(\\to\\)” denotes a suitable notion of convergence of random variables In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.↩︎"
+  },
+  {
+    "objectID": "drafts/ex03.html",
+    "href": "drafts/ex03.html",
+    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
     "section": "",
     "text": "Caution\n\n\n\nPage under construction: information on this page may change."
   },
   {
-    "objectID": "drafts/ex02.html#goals",
-    "href": "drafts/ex02.html#goals",
-    "title": "Exercise 2: Bayesian inference on discrete spaces",
+    "objectID": "drafts/ex03.html#goals",
+    "href": "drafts/ex03.html#goals",
+    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
     "section": "Goals",
-    "text": "Goals\nA first contact with several Bayesian concepts. We use the same discrete model for all questions.\n\nNotions of priors, likelihood, posterior.\nPoint summary of posterior distribution: mean, median, mode.\nConstructing credible intervals.\nBasic decision theory.\nSequential update of posterior distribution."
+    "text": "Goals\n\nUnderstanding and implementing importance sampling\nIntroduction to probabilistic programming"
   },
   {
-    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html",
-    "href": "w02_discrete_bayes/topic01_bayes_recipe.html",
-    "title": "The Bayesian recipe",
+    "objectID": "challenges/ch02.html",
+    "href": "challenges/ch02.html",
+    "title": "Challenge questions",
     "section": "",
-    "text": "Introduce the Bayesian Recipe (synonym for the Bayes estimator)\nIllustrate it using this week’s running example\n\n\n\n\nThe Bayesian Recipe/Bayes estimator is the guide for all “full Bayesian” statistical analyses. This week we apply it to an example that builds on last week’s review."
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\)."
   },
   {
-    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#outline",
-    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#outline",
-    "title": "The Bayesian recipe",
+    "objectID": "w02_discrete_bayes/topic04_point.html",
+    "href": "w02_discrete_bayes/topic04_point.html",
+    "title": "Point estimates",
     "section": "",
-    "text": "Introduce the Bayesian Recipe (synonym for the Bayes estimator)\nIllustrate it using this week’s running example\n\n\n\n\nThe Bayesian Recipe/Bayes estimator is the guide for all “full Bayesian” statistical analyses. This week we apply it to an example that builds on last week’s review."
+    "text": "Common point estimates:\n\nPosterior mean.\nPosterior mode.\n\n\n\n\n\nIt is often necessary to summarize the posterior distribution with a single “best guess”, even though as we will see this hides important information namely our uncertainty about that guess."
   },
   {
-    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#this-weeks-running-example",
-    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#this-weeks-running-example",
-    "title": "The Bayesian recipe",
-    "section": "This week’s running example",
-    "text": "This week’s running example\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#the-bayesian-recipe",
-    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#the-bayesian-recipe",
-    "title": "The Bayesian recipe",
-    "section": "The Bayesian recipe",
-    "text": "The Bayesian recipe\nThe goal this week is to undersand the 3 steps in the Bayesian recipe:\n\nConstruct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution (condition on the data)\nUse the posterior distribution to (decision theory):\n\nmake prediction (point estimate)\nestimate uncertainty (credible intervals)\nmake a decision"
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic01_bayes_recipe.html#plan",
-    "href": "w02_discrete_bayes/topic01_bayes_recipe.html#plan",
-    "title": "The Bayesian recipe",
-    "section": "Plan",
-    "text": "Plan\n\nUnderstanding Step 1 (“construct a probability model”):\n\nwe reviewed probability models last week,\nin fact, the model we use for this week’s problem is the same as last week’s!\nWe will just need to add some Bayesian terminology: prior, likelihood.\n\nUnderstanding Step 2 (“condition on the data”):\n\nwe reviewed conditional probability last week,\nin fact, the conditional probability calculation for this week’s problem is the same as last week’s!\nWe just need to add some Bayesian terminology: posterior distributions.\n\nUnderstanding Step 3: this is where most of the new material will be for this week."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic07_prediction.html",
-    "href": "w02_discrete_bayes/topic07_prediction.html",
-    "title": "Prediction",
+    "objectID": "w02_discrete_bayes/topic04_point.html#outline",
+    "href": "w02_discrete_bayes/topic04_point.html#outline",
+    "title": "Point estimates",
     "section": "",
-    "text": "Prediction using decision trees\nExample\n\n\n\n\nOften we do not care so much about “parameters” but instead about predicting future observations."
+    "text": "Common point estimates:\n\nPosterior mean.\nPosterior mode.\n\n\n\n\n\nIt is often necessary to summarize the posterior distribution with a single “best guess”, even though as we will see this hides important information namely our uncertainty about that guess."
   },
   {
-    "objectID": "w02_discrete_bayes/topic07_prediction.html#outline",
-    "href": "w02_discrete_bayes/topic07_prediction.html#outline",
-    "title": "Prediction",
+    "objectID": "w02_discrete_bayes/topic04_point.html#definitions",
+    "href": "w02_discrete_bayes/topic04_point.html#definitions",
+    "title": "Point estimates",
+    "section": "Definitions",
+    "text": "Definitions\n\nLet \\(\\pi(x) = \\mathbb{P}(X = x | Y = y)\\) denote a posterior PMF.\nPoint estimate: Instead of plotting the full information in \\(\\pi\\), we can report a “location” summary such as the mean of the posterior \\(\\pi\\).\n\n\nPosterior mean\nRecall the mean is computed from a PMF via \\[\\sum_x x\\; \\pi(x),\\] where the sum is over \\(\\{x : \\pi(x) &gt; 0 \\}\\).\nNotation: the posterior mean is denoted \\(\\mathbb{E}[X | Y = y] = \\sum x\\ \\pi(x)\\).\n\n\nExample 1\nCompute \\(\\mathbb{E}[X | Y = (1, 1)]\\) in the bag of coin example.\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\n\n0.5\n1.8\n2.25\n3.5\nNone of the above\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nFirst, compute the unnormalized posterior \\(\\gamma \\propto \\pi\\): \\[\\gamma = (\\gamma(0), \\gamma(1), \\gamma(2)) = (1/3) (0^2, (1/2)^2, 1^2),\\] then normalize: \\[\\pi = \\gamma / Z =  (0, 1/5, 4/5).\\] Finally, compute the conditional expectation: \\[\\mathbb{E}[X | Y = (1, 1)] = \\sum x \\; \\pi(x) = (0, 1, 2) \\cdot (0, 1/5, 4/5) = 9/5 = 1.8.\\]\nCommon mistake: forgetting normalization step: \\[\\sum x \\; \\pi(x) \\neq \\sum x \\; \\gamma(x).\\]\n\nThis “common mistake” highlights that we really need \\(Z\\) to compute posterior expectations using the exact, exhaustive approach (i.e. the method we are using here).\nWhen we talk more about Monte Carlo methods, we will see that these methods allow us to approximate expecations without having to compute \\(Z\\)!\n\n\n\n\n\n\nPosterior mode\nThe mode is the location of the “tallest stick” in the PMF.\nNotation: \\(\\operatorname{arg\\,max}\\pi(x),\\) i.e. the point that achieves the maximum of \\(\\pi\\).\nIn the Bayesian context, the mode of a posterior PMF is also known as the Maximum A Posteriori (MAP) estimator.\n\n\nExample 2\nYou will practice computing the posterior mean/mode in question 2 of the exercises."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic06_decision.html",
+    "href": "w02_discrete_bayes/topic06_decision.html",
+    "title": "Decision theory",
     "section": "",
-    "text": "Prediction using decision trees\nExample\n\n\n\n\nOften we do not care so much about “parameters” but instead about predicting future observations."
+    "text": "Decision theory: making decision in the face of uncertainty.\n\nFirst, without observed data.\nSecond, incorporating observed data.\n\nReview of property of expectation useful for decision theory calculations.\n\n\n\n\nWe talked a lot about the “Bayesian recipe.” Here we formalize the last step of that recipe: using a posterior and a loss function to make a decision.\nLater, we will see that the point estimates and credible sets covered this week are actually special cases of the decision theoretic framework (i.e. they emerge when specific loss functions are selected)."
   },
   {
-    "objectID": "w02_discrete_bayes/topic07_prediction.html#example-coins-in-a-bag",
-    "href": "w02_discrete_bayes/topic07_prediction.html#example-coins-in-a-bag",
-    "title": "Prediction",
-    "section": "Example: coins in a bag",
-    "text": "Example: coins in a bag\nConsider the setup from last week with 3 coins and 3 flips with \\(Y = (1, 1, 1)\\) (in the following, let \\(\\boldsymbol{1}\\) denote a vector of 1’s).\nQuestion: given you have see 3 heads, what is the probability that the next one is also heads?\nMathematically: \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\). This is known as “prediction”."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic07_prediction.html#general-approach",
-    "href": "w02_discrete_bayes/topic07_prediction.html#general-approach",
-    "title": "Prediction",
-    "section": "General approach",
-    "text": "General approach\nKey message: In Bayesian statistics, prediction and parameter estimation are treated in the exact same way!\nIdea: Add \\(Y_4\\) to the unobserved random variables, i.e. set \\(\\tilde X = (X, Y_4)\\).\nThen, to compute \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\) use same techniques as last week (decision tree, chain rule, axioms of probability)."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic07_prediction.html#example-continued",
-    "href": "w02_discrete_bayes/topic07_prediction.html#example-continued",
-    "title": "Prediction",
-    "section": "Example, continued",
-    "text": "Example, continued\nUse the following picture to help you computing \\(\\mathbb{P}(Y_4 = 1 | Y_{1:3} = \\boldsymbol{1})\\)."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic05_credible.html",
-    "href": "w02_discrete_bayes/topic05_credible.html",
-    "title": "Credible sets",
+    "objectID": "w02_discrete_bayes/topic06_decision.html#outline",
+    "href": "w02_discrete_bayes/topic06_decision.html#outline",
+    "title": "Decision theory",
     "section": "",
-    "text": "Nominal coverage.\nCommon credible sets:\n\nQuantiles.\nHighest-density sets.\n\n\n\n\n\nAs we have seen at the beginning one motivation for Bayesian methods is that they allow us to quantify uncertainty in our predictions. Credible sets is one way to convey this uncertainty quantification."
+    "text": "Decision theory: making decision in the face of uncertainty.\n\nFirst, without observed data.\nSecond, incorporating observed data.\n\nReview of property of expectation useful for decision theory calculations.\n\n\n\n\nWe talked a lot about the “Bayesian recipe.” Here we formalize the last step of that recipe: using a posterior and a loss function to make a decision.\nLater, we will see that the point estimates and credible sets covered this week are actually special cases of the decision theoretic framework (i.e. they emerge when specific loss functions are selected)."
   },
   {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#outline",
-    "href": "w02_discrete_bayes/topic05_credible.html#outline",
-    "title": "Credible sets",
+    "objectID": "w02_discrete_bayes/topic06_decision.html#decision-theory-without-data",
+    "href": "w02_discrete_bayes/topic06_decision.html#decision-theory-without-data",
+    "title": "Decision theory",
+    "section": "Decision theory without data",
+    "text": "Decision theory without data\nYour friend proposes the following game (a good model for lottery!):\n\nShe flips a standard coin:\n\nif it’s a “heads”: you give her $10\nif it’s a “tails”: she gives you $9.\n\nYour decision: to play or not to play?\n\n\nMathematical formulation\n\nSet of actions: \\(A = \\{0, 1\\}\\) (\\(1 =\\) play, \\(0 =\\) do not play).\nProbability model: \\(X \\sim {\\mathrm{Bern}}(1/2)\\).\nLoss function:\n\n\\(L(a, x)\\): how much do I lose if I pick action \\(a \\in A\\) and encounter realization \\(X = x\\)?\n\nMathematical solution: minimize over \\(a \\in A\\) the expected loss \\[L(a) = \\mathbb{E}[L(a, X)].\\]\n\n\n\nExample\nCompute \\(\\min L(a)\\) and \\(\\operatorname{arg\\,min}L(a)\\).\n\nIt is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.\nLet us start by writing the loss function mathematically using indicator function defined as: \\[\\mathbb{1}[\\text{some condition}] = \\left\\{\n\\begin{array}{ll}\n1 & \\text{if the condition is true,} \\\\\n0 & \\text{if the condition is false.}\n\\end{array}\n\\right.\\] This gives us: \\[L(a, x) = \\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, x = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, x = 1] \\cdot (\\$10).\\]\nLet us simplify the expected loss function, i.e. \\[\\mathbb{E}[L(a, X)] = \\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\] o do that simplification, first use linearity of expectation which you will recall from probability theory tells us that for any random variables \\(X_1\\) and \\(X_2\\), we have \\(\\mathbb{E}[X_1 + c X_2] = \\mathbb{E}[X_1] + c \\mathbb{E}[X_2]\\) for any constant \\(c\\).\nIn our context, using linearity with \\(c=1\\) allows us to simplify the above to: \\[\\underbrace{\\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0)]}_0 + \\mathbb{E}[\\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9)] + \\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\]\nTrick 1: To deal with each remaining term, use that: \\(\\mathbb{1}[a = 1, X = 1] = \\mathbb{1}[a = 1]\\mathbb{1}[X = 1]\\) (check!), and then use linearity with \\(c = \\$ 10 \\cdot \\mathbb{1}[a = 1]\\) to get: \\[\\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)] =  \\$ 10 \\cdot \\mathbb{1}[a = 1] \\mathbb{E}[\\mathbb{1}[X = 1]].\\]\nLOTUS: Finally, we have to compute \\(\\mathbb{E}[\\mathbb{1}[X = 1]]\\). From our review of the Law of the Unconscious Statistician, this is done as follows: \\[\\mathbb{E}[\\mathbb{1}[X = 1]] = \\sum_x \\mathbb{1}[x = 1] p_X(x) = 0 + 1 \\cdot p_X(1) = 1/2.\\]\nTrick 2: you will often take expectation of indicator function, you will always find that \\(\\mathbb{E}[\\mathbb{1}[\\text{an event}]] = \\mathbb{P}(\\text{an event})\\).\nPutting it all together: \\[L(a) = \\mathbb{E}[L(a, X)] =  -\\$ 9 \\cdot \\mathbb{1}[a = 1] (1/2) + \\$ 10 \\cdot \\mathbb{1}[a = 1] (1/2) = \\$0.5 \\cdot \\mathbb{1}[a = 1].\\]"
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic06_decision.html#decision-theory-with-data",
+    "href": "w02_discrete_bayes/topic06_decision.html#decision-theory-with-data",
+    "title": "Decision theory",
+    "section": "Decision theory with data",
+    "text": "Decision theory with data\n\nWe now consider the case where we have some data \\(Y\\) that give us information about \\(X\\).\nThe actions \\(A\\) and loss \\(L(a, x)\\) are the same as before.\n\nHow to modify the last section to take into account the data \\(Y\\)?\n\nDo everything the same, except:\nuse the conditional PMF \\(p_{X|Y}\\) instead of the PMF \\(p_X\\).\n\n\nDefinition: the Bayes estimator\nMathematically: use an action \\(a \\in A\\) minimizing the posterior expected loss, i.e. \\[\\operatorname{arg\\,min}\\mathbb{E}[L(a, X) | Y = y].\\] where: \\[\\mathbb{E}[L(a, X) | Y = y] = \\sum_x L(a, x) p_{X|Y}(x|y).\\]\n\n\nExample\nYou will apply the Bayes estimator in question 3 of this week’s exercises."
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic08_criticism.html",
+    "href": "w02_discrete_bayes/topic08_criticism.html",
+    "title": "Intro to model criticism",
     "section": "",
-    "text": "Nominal coverage.\nCommon credible sets:\n\nQuantiles.\nHighest-density sets.\n\n\n\n\n\nAs we have seen at the beginning one motivation for Bayesian methods is that they allow us to quantify uncertainty in our predictions. Credible sets is one way to convey this uncertainty quantification."
+    "text": "What is a model mis-specification?\nWhat are the consequences?\nWhat to do about it.\n\n\n\n\nModel mis-specification (the model being “too wrong”) can lead to serious problems in all types of statistical models, but Bayesian models are often more seriously affected. As a result it is important to detect serious cases of mis-specification and to address them. This is just an introduction, we will go in more depth once we have introduced Bayesian regression models."
   },
   {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#nominal-coverage",
-    "href": "w02_discrete_bayes/topic05_credible.html#nominal-coverage",
-    "title": "Credible sets",
-    "section": "Nominal coverage",
-    "text": "Nominal coverage\nThe “nominal coverage” is the basic property that we use to construct credible sets:\n\nYou are given a level, typically \\(95\\%\\) or \\(90\\%\\), denoted \\(1-\\alpha = 0.95\\) or \\(1-\\alpha = 0.9\\)\n\nIntuition: we want to find a set \\(T\\) such that we are \\(95\\%\\) sure that the true \\(x\\) is in \\(T\\).\n\nIdeally, we would want to find a set \\(T\\) such that \\(\\sum_{x \\in T} p(x) = 0.9\\)\n\nFor discrete distributions, there may not be a solution, but let us ignore that issue for now (suppose each probability is very small and replace \\(=\\) by \\(\\approx\\) up to an error bounded by the largest individual probability)\nFor continuous distributions that will not be an issue\n\nAnother problem: there are many solutions! Some of them might appear weird, e.g. include points of probability zero!\n\nExample: both sets shown in red contain \\(75\\%\\) of the mass."
+    "objectID": "w02_discrete_bayes/topic08_criticism.html#outline",
+    "href": "w02_discrete_bayes/topic08_criticism.html#outline",
+    "title": "Intro to model criticism",
+    "section": "",
+    "text": "What is a model mis-specification?\nWhat are the consequences?\nWhat to do about it.\n\n\n\n\nModel mis-specification (the model being “too wrong”) can lead to serious problems in all types of statistical models, but Bayesian models are often more seriously affected. As a result it is important to detect serious cases of mis-specification and to address them. This is just an introduction, we will go in more depth once we have introduced Bayesian regression models."
   },
   {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#quantile-based-credible-interval",
-    "href": "w02_discrete_bayes/topic05_credible.html#quantile-based-credible-interval",
-    "title": "Credible sets",
-    "section": "Quantile-based credible interval",
-    "text": "Quantile-based credible interval\nThe simplest way of building credible intervals:\n\nsuppose you want a \\(90\\%\\) credible set\nwe will remove \\(10\\%/2 = 5\\%\\) on each side\nremove sticks from the very left moving to right\n\neach time you remove one, add its length to a counter…\nuntil that counter hits \\(5\\%\\).\n\nthen do the same from very right moving to the left\nthe sticks left form \\(T\\)."
+    "objectID": "w02_discrete_bayes/topic08_criticism.html#definitions",
+    "href": "w02_discrete_bayes/topic08_criticism.html#definitions",
+    "title": "Intro to model criticism",
+    "section": "Definitions",
+    "text": "Definitions\nModel mis-specification: when the model is “too wrong” (in the context of the famous quote by George Box).\nModel criticism: the task of trying to find mis-specification.\n\nIt can be done by reasoning and discussion with experts.\nIt can be done using data (goodness-of-fit)\n\n\nExample\nRecall our notation: \\(\\rho\\) prior PMF, \\(\\pi\\) posterior PMF.\n\nSuppose we put zero prior mass to having a fair dice. What happens on the posterior?\n\n\n\nIf we put prior mass of zero to some realization \\(x\\), say \\(\\rho(x) = 0\\) then the posterior probability on \\(x\\) will always be zero, \\(\\pi(x) = 0\\), no matter how many observations we get\n\nThis could be disastrous! (e.g. ignoring extreme scenarios can have extreme consequences)\n\nPrinciple to avoid this is known as Cromwell’s rule (Oliver Cromwell, 1650): “I beseech you, in the bowels of Christ, think it possible that you may be mistaken.”\n\nDiscussion: can you identify other issues with the model from Exercise 2?"
   },
   {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#highest-density-set",
-    "href": "w02_discrete_bayes/topic05_credible.html#highest-density-set",
-    "title": "Credible sets",
-    "section": "Highest Density Set",
-    "text": "Highest Density Set\n\nHighest Density Set: pick a solution with the least number of points \\(|T|\\)\nTo handle discrete models: \\(\\text{argmin}\\{ |T| : \\sum_{x \\in T} p(x) \\ge 0.9\\}\\).\n\nStill not unique in some corner cases, but good enough\n\n\nExample:\n\nthe left one below is a highest density set\nnote the one on the right has more points in it, \\(5 &lt; 9\\).\n\n\nChallenge: implement a function taking as input a posterior PMF (as a vector), a level, and returns an HDI. Details here."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#credible-interval",
-    "href": "w02_discrete_bayes/topic05_credible.html#credible-interval",
-    "title": "Credible sets",
-    "section": "Credible interval",
-    "text": "Credible interval\nWhen we move to continuous random variables, \\(T\\) will often be an interval, i.e. \\(T = [L, R]\\) for some left and right end points \\(L\\) and \\(R\\). In such case, \\(T\\) is called a credible interval."
-  },
-  {
-    "objectID": "w02_discrete_bayes/topic05_credible.html#high-density-interval",
-    "href": "w02_discrete_bayes/topic05_credible.html#high-density-interval",
-    "title": "Credible sets",
-    "section": "High Density Interval",
-    "text": "High Density Interval\nSimilarly, a High Density Interval (HDI) is a shortest interval (i.e. minimizing \\(R - L\\)) containing a prescribed probability mass."
+    "objectID": "w02_discrete_bayes/topic08_criticism.html#how-to-correct-mis-specification",
+    "href": "w02_discrete_bayes/topic08_criticism.html#how-to-correct-mis-specification",
+    "title": "Intro to model criticism",
+    "section": "How to correct mis-specification",
+    "text": "How to correct mis-specification\n\nImprove the model!\nThen iterate with more criticism and improve again if needed.\nIterative model improvement is part of the current “best practice” in Bayesian analysis."
   },
   {
     "objectID": "w02_discrete_bayes/topic03_posteriors.html",
@@ -914,28 +942,42 @@
     "href": "exercises/ex03.html",
     "title": "Exercise 3: inference on continuous spaces",
     "section": "",
-    "text": "Introduce Monte Carlo integration in continuous spaces.\nReview the concept of importance sampling."
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change."
   },
   {
     "objectID": "exercises/ex03.html#goals",
     "href": "exercises/ex03.html#goals",
     "title": "Exercise 3: inference on continuous spaces",
-    "section": "",
-    "text": "Introduce Monte Carlo integration in continuous spaces.\nReview the concept of importance sampling."
+    "section": "Goals",
+    "text": "Goals\n\nIntroduce Monte Carlo integration in continuous spaces.\nReview the concept of importance sampling.\nBuild a universal probabilistic programming language in &lt;30 lines of code."
   },
   {
-    "objectID": "exercises/ex03.html#todo",
-    "href": "exercises/ex03.html#todo",
+    "objectID": "exercises/ex03.html#todo-delete-when-finished",
+    "href": "exercises/ex03.html#todo-delete-when-finished",
     "title": "Exercise 3: inference on continuous spaces",
-    "section": "TODO",
-    "text": "TODO\n\n1 - continuous MC on bounded space and uniform proposal\n2 - continuous IS on unbounded space and e.g. exponential proposal -&gt; bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?) -&gt; bonus/challenge question? or maybe in class instead?: questions on ESS? -&gt; bonus? an example where the expectation does not converge due to non-integrability\n3 - guided steps to universal PPL (providing scaffold code)\n\ntest case: discrete model from last time (e.g. one for parameters posterior)\nextending to cover predictive?\nmodel with two variables? (can wait until regression)"
+    "section": "TODO (delete when finished!)",
+    "text": "TODO (delete when finished!)\n\n1 - continuous MC on bounded space and uniform proposal✅\n2 - continuous IS on unbounded space and e.g. exponential proposal✅ -&gt; bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?) -&gt; bonus/challenge question? or maybe in class instead?: questions on ESS? -&gt; bonus? an example where the expectation does not converge due to non-integrability\n3 - guided steps to universal PPL (providing scaffold code)✅\n\ntest case: discrete model from last time (e.g. one for parameters posterior)\nextending to cover predictive?\nmodel with two variables? (can wait until regression)"
   },
   {
     "objectID": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
     "href": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
     "title": "Exercise 3: inference on continuous spaces",
     "section": "Q.1: functions on the unit interval",
-    "text": "Q.1: functions on the unit interval\n\nWrite a function mc_estimate that takes a function \\(f:[0,1]\\to\\mathbb{R}\\) and outputs a Monte Carlo estimate of \\(\\int_0^1 f(x)\\mathrm{d}x\\) using \\(n=10000\\) independent samples from \\({\\mathrm{Unif}}(0,1)\\).\nConsider the function \\(f:[0,1]\\to[0,\\infty)\\) given by \\[\nf(x) = \\frac{x^{-1/3}}{\\sqrt{1-x}}.\n\\] Show that \\[\n\\int_0^1 f(x)\\mathrm{d}x = \\frac{\\pi}{\\sin\\left(\\frac{\\pi}{3}\\right)}.\n\\tag{1}\\]\nTest your implementation of mc_estimate by checking that it produces an answer close to the value in Equation 1.\nIn order to quantify the uncertainty inherent in the output of the previous step, we will construct a confidence interval1 for our Monte Carlo estimate\n\nApproximate the standard error of the estimator by computing the standard deviation of \\(K=30\\) i.i.d. replications of mc_estimate(f).\nUse the Central Limit Theorem to provide an asymptotically exact 95% confidence interval.\n\n\n\nThe following integral, known as the sine integral, does not have an analytic expression \\[\n\\int_0^1 \\frac{\\sin(t)}{t} \\mathrm{d}t.\n\\] Estimate its value using mc_estimate(f) and provide a 95% confidence interval."
+    "text": "Q.1: functions on the unit interval\n\nWrite a function mc_estimate that takes a function \\(f:[0,1]\\to\\mathbb{R}\\) and outputs a Monte Carlo estimate of \\(\\int_0^1 f(x)\\mathrm{d}x\\) using \\(n=10000\\) independent samples from \\({\\mathrm{Unif}}(0,1)\\).\nConsider the function \\(f:[0,1]\\to[0,\\infty)\\) given by \\[\nf(x) = \\frac{1}{\\sqrt[3]{x^2(1-x)}}.\n\\] Show that \\[\n\\int_0^1 f(x)\\mathrm{d}x = \\frac{\\pi}{\\sin\\left(\\frac{\\pi}{3}\\right)}.\n\\tag{1}\\] Hint: look at the expression for the density of a \\({\\mathrm{Beta}}(\\alpha,\\beta)\\) distribution, and remember that it must integrate to one. Then use the fact that for any \\(\\gamma\\in(0,1)\\), the Gamma function satisfies a reflection formula \\[\n\\Gamma(\\gamma)\\Gamma(1-\\gamma) = \\frac{\\pi}{\\sin\\left(\\gamma\\pi\\right)}.\n\\]\nTest your implementation of mc_estimate by checking that it produces an answer close to the value in Equation 1.\nIn order to quantify the uncertainty inherent in the output of the previous step, we will construct a confidence interval1 for our Monte Carlo estimate\n\nApproximate the standard error of the estimator by computing the standard deviation of \\(K=30\\) i.i.d. replications of mc_estimate(f).\nUse the Central Limit Theorem to provide an asymptotically exact 95% confidence interval.\n\n\n\nThe following integral, known as the [sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral), \\[\n\\int_0^1 \\frac{\\sin(t)}{t} \\mathrm{d}t.\n\\] does not admit a closed-form expression. Provide a 95% confidence interval for its value using mc_estimate(f)."
+  },
+  {
+    "objectID": "exercises/ex03.html#q.2-function-on-unbounded-intervals",
+    "href": "exercises/ex03.html#q.2-function-on-unbounded-intervals",
+    "title": "Exercise 3: inference on continuous spaces",
+    "section": "Q.2: function on unbounded intervals",
+    "text": "Q.2: function on unbounded intervals\n\nWrite a function is_exponential that takes a function \\(f:[0,\\infty)\\to\\mathbb{R}\\) and a number \\(\\lambda&gt;0\\), and outputs a Monte Carlo estimate of \\(\\int_0^\\infty f(x)\\mathrm{d}x\\) using importance sampling with reference distribution \\({\\mathrm{Exp}}(\\lambda)\\) and \\(n=10000\\) i.i.d. samples.\nShow that the function \\(f:[0,\\infty)\\to[0,\\infty)\\) given by \\[\nf(x) = \\frac{\\exp(-\\pi^2/x)}{x^3\\sqrt{x}}.\n\\] satisfies \\[\n\\int_0^\\infty f(x)\\mathrm{d}x = \\frac{3}{4\\pi^4\\sqrt{\\pi}}.\n\\tag{2}\\] Hint: look at the expression for the density of an Inverse Gamma distribution. Then use the fact that for \\(n\\in\\mathbb{N}\\) \\[\n\\Gamma\\left(\\frac{1}{2}+n\\right) = \\frac{(2n)!}{4^nn!}\\sqrt{\\pi}.\n\\]\nTest your implementation of is_exponential with \\(\\lambda=1\\) by constructing a 95% confidence interval for your estimate and checking that it contains the true value.\nRe-do part 3 with \\(\\lambda=20\\) and compare both confidence intervals. Which estimator is better?"
+  },
+  {
+    "objectID": "exercises/ex03.html#q.3-a-minimal-universal-probabilistic-programming-language-ppl",
+    "href": "exercises/ex03.html#q.3-a-minimal-universal-probabilistic-programming-language-ppl",
+    "title": "Exercise 3: inference on continuous spaces",
+    "section": "Q.3: A minimal universal probabilistic programming language (PPL)",
+    "text": "Q.3: A minimal universal probabilistic programming language (PPL)\nIn this question we will write a very short program that will nonetheless be able to perform Bayesian inference on a wide range of Bayesian models \\[\n\\pi(x|y) = \\frac{\\pi(x)L(y|x)}{Z}\n\\] The inference engine of our program will be self-normalizing importance sampling (SNIS). We will assume that the prior of our model is proper and that we can draw i.i.d. samples from it.\nIn the following we will use the package distr, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using\nExample: evaluating densities\n\ndistUnif &lt;- Unif(2,3)\np(distUnif)(0.2) # evaluate the pdf of distUnif at 0.2 \n\n[1] 0\n\n\nNote that \\(0.2\\notin[2,3]\\) and therefore the answer is \\(0\\). The fact that this returns \\(0\\) instead of throwing an “out-of-bounds” error is crucial for a well-functioning implementation of a PPL.\nExample: simulation\n\ndistPoisson &lt;- Pois(lambda = 3)\nv = r(distPoisson)(1000) # get 1000 iid samples from distPoisson\nhead(v)\n\n[1] 3 7 3 1 0 2\n\n\n\nShow that the importance weight of targeting the posterior distribution with the prior as reference is proportional to the likelihood.\nOne of the most important functions in a PPL is the observe statement. It is the only special statement needs to include in their functions when using the PPL. Its function is to accumulate likelihood in order to compute the IS weight for any given sample. To this end, the first step is to define a global variable that will be used throughout the program to contain the value of the weight:\n\n\ncurrent_log_likelihood = 0.0\n\nNow, write the observe(x, dist) function, which should accept two arguments:\ni. a distribution object `dist` from the package `distr`, and\nii. a value `x` that is in the ambient space of the distribution `dist`.\nAn example call would be observe(1.3, Norm(mean=-4,sd=3.5)). Your function should add the logpdf of x under dist to the current_log_likelihood accumulator. Note: it is much more numerically robust to use d(dist)(x, log = TRUE) than to manually compute log(d(dist)(x)), especially when the number of observations is large! 3. Code your first PPL program for the coin bag example from exercise 1. To achieve this, let us start by storing the data as a global variable\n\ncoin_flips = rep(0, 4) # observe four heads\n\nNow, write a function my_first_probabilistic_program() by completing the steps\n\nmy_first_probabilistic_program = function(){\n  coin_index = FILL_ME        # Step 1: sample a coin index from the prior\n  for (i in seq_along(coin_flips)){\n    observe(FILL_ME, FILL_ME) # Step 2: accumulate the log-likelihood of each observation given the coin_index\n  }\n  return(FILL_ME)             # Step 3: return the query: is coin_index a fair coin?\n}\n\n\nWrite a function posterior(f,n) that takes a PPL program like my_first_probabilistic_program and a number n, and performs posterior inference via SNIS using n samples. Recall that the SNIS estimator is \\[\n\\widehat{\\pi(f)} := \\frac{\\sum_{i=1}^n w_i f(x_i)}{\\sum_{i=1}^n w_i}\n\\] Now, fill in the missing steps in the following function skeleton\n\n\nposterior = function(f, n){\n  weights = FILL_ME # a vector of length n to store the weights\n  weighted_fs = FILL_ME # a vector of length n to store the summands w_i*f(x_i)\n  for (i in 1:n) {\n    current_log_likelihood = FILL_ME # reset the global accumulator\n    f_i = FILL_ME # run the program `f` and capture its output\n    weights[i] = FILL_ME # store the weight\n    weighted_fs[i] = FILL_ME # store the summand\n  }\n  # compute the SNIS estimator and return it\n}\n\n\nTest your program by checking that you can approximate the posterior probability of the fair coin obtained in exercise 1, Q.2."
   },
   {
     "objectID": "exercises/ex03.html#footnotes",

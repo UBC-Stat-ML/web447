@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - High-level picture</title>
+<title>Bayes1@UBC - Intro to model criticism</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w00_intro/topic01_why.html">Introduction</a></li><li class="breadcrumb-item"><a href="../w00_intro/topic03_high_level.html">High-level picture</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic01_bayes_recipe.html">Bayes on a discrete model</a></li><li class="breadcrumb-item"><a href="../w02_discrete_bayes/topic08_criticism.html">Intro to model criticism</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
@@ -296,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Intro to model criticism</span></a>
   </div>
 </li>
@@ -324,10 +324,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#bayesian-recipe-high-level-picture" id="toc-bayesian-recipe-high-level-picture" class="nav-link active" data-scroll-target="#bayesian-recipe-high-level-picture">“Bayesian Recipe”: high-level picture</a></li>
-  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
-  <li><a href="#first-step-of-the-recipe-constructing-a-probability-model" id="toc-first-step-of-the-recipe-constructing-a-probability-model" class="nav-link" data-scroll-target="#first-step-of-the-recipe-constructing-a-probability-model">First step of the Recipe: “constructing a probability model”</a></li>
-  <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link" data-scroll-target="#definitions">Definitions</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#how-to-correct-mis-specification" id="toc-how-to-correct-mis-specification" class="nav-link" data-scroll-target="#how-to-correct-mis-specification">How to correct mis-specification</a></li>
   </ul>
 </nav>
     </div>
@@ -336,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">High-level picture</h1>
+<h1 class="title">Intro to model criticism</h1>
 </div>
 
 
@@ -368,54 +374,52 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<section id="bayesian-recipe-high-level-picture" class="level2">
-<h2 class="anchored" data-anchor-id="bayesian-recipe-high-level-picture">“Bayesian Recipe”: high-level picture</h2>
-<ol type="1">
-<li>Construct a <strong>probability model</strong> including
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>random variables for what we will measure/observe</li>
-<li>random variables for the unknown quantities
-<ul>
-<li>those we are interested in (“parameters”, “predictions”)</li>
-<li>others that just help us formulate the problem (“nuisance”, “random effects”).</li>
-</ul></li>
-</ul></li>
-<li>Compute the <strong>posterior distribution</strong> (condition on the data)</li>
-<li>Use the posterior distribution to (<strong>decision theory</strong>):
-<ul>
-<li>make prediction (point estimate)</li>
-<li>estimate uncertainty (credible intervals)</li>
-<li>make a decision</li>
-</ul></li>
-</ol>
-</section>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
-<ul>
-<li>First week: probability essentials (foundations for steps 1 and 2 of the Bayesian Recipe)</li>
-<li>Second week: steps 1, 2, 3 for one specific discrete probability models</li>
-<li>Third week and beyond: step 1, 2, 3 for arbitrary models</li>
+<li>What is a model mis-specification?</li>
+<li>What are the consequences?</li>
+<li>What to do about it.</li>
 </ul>
 </section>
-<section id="first-step-of-the-recipe-constructing-a-probability-model" class="level2">
-<h2 class="anchored" data-anchor-id="first-step-of-the-recipe-constructing-a-probability-model">First step of the Recipe: “constructing a probability model”</h2>
-<ul>
-<li>What is a model?</li>
-<li>What is a probability model?</li>
-<li>Example (week 2): building a probability model for the rocket launch problem.</li>
-</ul>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Model mis-specification (the model being “too wrong”) can lead to serious problems in all types of statistical models, but Bayesian models are often more seriously affected. As a result it is important to detect serious cases of mis-specification and to address them. This is just an introduction, we will go in more depth once we have introduced Bayesian regression models.</p>
 </section>
-<section id="what-is-a-model" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
-<p><strong>(Scientific) model:</strong> A simplification of reality amenable to mathematical investigation.</p>
-<p><span class="math display">\[\text{Reality} \xrightarrow{\text{Art + Scientific method}} \text{Model} \xrightarrow{\text{Mathematics}} \text{Prediction}\]</span></p>
+</section>
+<section id="definitions" class="level2">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<p><strong>Model mis-specification:</strong> when the model is “too wrong” (in the context of <a href="https://en.wikipedia.org/wiki/All_models_are_wrong">the famous quote by George Box</a>).</p>
+<p><strong>Model criticism:</strong> the task of trying to find mis-specification.</p>
 <ul>
-<li>In this course “mathematics” will be Bayesian analysis/probability theory.</li>
-<li>Bayesian analysis/probability theory assume a model as starting point.
+<li>It can be done by reasoning and discussion with experts.</li>
+<li>It can be done using data (<strong>goodness-of-fit</strong>)</li>
+</ul>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p><strong>Recall our notation:</strong> <span class="math inline">\(\rho\)</span> prior PMF, <span class="math inline">\(\pi\)</span> posterior PMF.</p>
 <ul>
-<li>To create a first model is a bit of an art. It comes with data analysis experience.</li>
-<li>Then after we start with an initial model we can improve it by checking predictions against reality.</li>
+<li>Suppose we put zero prior mass to having a fair dice. What happens on the posterior?</li>
+</ul>
+<p><img src="../images/all-in-one-killings.png" class="img-fluid" width="800"></p>
+<ul>
+<li>If we put prior mass of zero to some realization <span class="math inline">\(x\)</span>, say <span class="math inline">\(\rho(x) = 0\)</span> then the posterior probability on <span class="math inline">\(x\)</span> will always be zero, <span class="math inline">\(\pi(x) = 0\)</span>, <em>no matter how many observations we get</em>
+<ul>
+<li>This could be disastrous! (e.g.&nbsp;ignoring extreme scenarios can have extreme consequences)</li>
 </ul></li>
+<li>Principle to avoid this is known as <strong>Cromwell’s rule</strong> (Oliver Cromwell, 1650): “I beseech you, in the bowels of Christ, think it possible that you may be mistaken.”</li>
+</ul>
+<p><strong>Discussion:</strong> can you identify other issues with the model from Exercise 2?</p>
+</section>
+</section>
+<section id="how-to-correct-mis-specification" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-correct-mis-specification">How to correct mis-specification</h2>
+<ul>
+<li>Improve the model!</li>
+<li>Then iterate with more criticism and improve again if needed.</li>
+<li>Iterative model improvement is part of the current “best practice” in Bayesian analysis.</li>
 </ul>
 
 
