@@ -361,10 +361,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
-  <li><a href="#todo-delete-when-finished" id="toc-todo-delete-when-finished" class="nav-link" data-scroll-target="#todo-delete-when-finished">TODO (delete when finished!)</a></li>
   <li><a href="#q.1-functions-on-the-unit-interval" id="toc-q.1-functions-on-the-unit-interval" class="nav-link" data-scroll-target="#q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</a></li>
-  <li><a href="#q.2-function-on-unbounded-intervals" id="toc-q.2-function-on-unbounded-intervals" class="nav-link" data-scroll-target="#q.2-function-on-unbounded-intervals">Q.2: function on unbounded intervals</a></li>
-  <li><a href="#q.3-a-minimal-universal-probabilistic-programming-language-ppl" id="toc-q.3-a-minimal-universal-probabilistic-programming-language-ppl" class="nav-link" data-scroll-target="#q.3-a-minimal-universal-probabilistic-programming-language-ppl">Q.3: A minimal universal probabilistic programming language (PPL)</a></li>
+  <li><a href="#q.2-function-on-unbounded-intervals" id="toc-q.2-function-on-unbounded-intervals" class="nav-link" data-scroll-target="#q.2-function-on-unbounded-intervals">Q.2: function on unbounded intervals</a>
+  <ul class="collapse">
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul></li>
+  <li><a href="#q.3-a-minimal-universal-probabilistic-programming-language-ppl" id="toc-q.3-a-minimal-universal-probabilistic-programming-language-ppl" class="nav-link" data-scroll-target="#q.3-a-minimal-universal-probabilistic-programming-language-ppl">Q.3: A minimal universal probabilistic programming language (PPL)</a>
+  <ul class="collapse">
+  <li><a href="#detour-the-distr-package" id="toc-detour-the-distr-package" class="nav-link" data-scroll-target="#detour-the-distr-package">Detour: the <code>distr</code> package</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -405,19 +411,6 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
 <section id="goals" class="level2">
 <h2 class="anchored" data-anchor-id="goals">Goals</h2>
 <ul>
@@ -426,123 +419,195 @@ Caution
 <li>Build a universal probabilistic programming language in &lt;30 lines of code.</li>
 </ul>
 </section>
-<section id="todo-delete-when-finished" class="level2">
-<h2 class="anchored" data-anchor-id="todo-delete-when-finished">TODO (delete when finished!)</h2>
-<ul>
-<li>1 - continuous MC on bounded space and uniform proposal✅</li>
-<li>2 - continuous IS on unbounded space and e.g.&nbsp;exponential proposal✅ -&gt; bonus: something about 100x more samples needed for 1 more digits using log-log plot (maybe done in class instead?) -&gt; bonus/challenge question? or maybe in class instead?: questions on ESS? -&gt; bonus? an example where the expectation does not converge due to non-integrability</li>
-<li>3 - guided steps to universal PPL (providing scaffold code)✅
-<ul>
-<li>test case: discrete model from last time (e.g.&nbsp;one for parameters posterior)</li>
-<li>extending to cover predictive?</li>
-<li>model with two variables? (can wait until regression)</li>
-</ul></li>
-</ul>
-</section>
 <section id="q.1-functions-on-the-unit-interval" class="level2">
 <h2 class="anchored" data-anchor-id="q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</h2>
 <ol type="1">
 <li><p>Write a function <code>mc_estimate</code> that takes a function <span class="math inline">\(f:[0,1]\to\mathbb{R}\)</span> and outputs a Monte Carlo estimate of <span class="math inline">\(\int_0^1 f(x)\mathrm{d}x\)</span> using <span class="math inline">\(n=10000\)</span> independent samples from <span class="math inline">\({\mathrm{Unif}}(0,1)\)</span>.</p></li>
 <li><p>Consider the function <span class="math inline">\(f:[0,1]\to[0,\infty)\)</span> given by <span class="math display">\[
 f(x) = \frac{1}{\sqrt[3]{x^2(1-x)}}.
-\]</span> Show that <span id="eq-integral"><span class="math display">\[
+\]</span> It is possible to show that <span id="eq-integral"><span class="math display">\[
 \int_0^1 f(x)\mathrm{d}x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
-\tag{1}\]</span></span> Hint: look at the expression for the <a href="https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function">density</a> of a <span class="math inline">\({\mathrm{Beta}}(\alpha,\beta)\)</span> distribution, and remember that it must integrate to one. Then use the fact that for any <span class="math inline">\(\gamma\in(0,1)\)</span>, the <a href="https://en.wikipedia.org/wiki/Gamma_function#General">Gamma function satisfies</a> a reflection formula <span class="math display">\[
-\Gamma(\gamma)\Gamma(1-\gamma) = \frac{\pi}{\sin\left(\gamma\pi\right)}.
-\]</span></p></li>
-<li><p>Test your implementation of <code>mc_estimate</code> by checking that it produces an answer close to the value in <a href="#eq-integral">Equation&nbsp;1</a>.</p></li>
-<li><p>In order to quantify the uncertainty inherent in the output of the previous step, we will construct a confidence interval<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for our Monte Carlo estimate</p>
-<ol type="a">
-<li>Approximate the standard error of the estimator by computing the standard deviation of <span class="math inline">\(K=30\)</span> i.i.d. replications of <code>mc_estimate(f)</code>.</li>
-<li>Use the Central Limit Theorem to provide an asymptotically exact 95% confidence interval.</li>
-</ol></li>
-</ol>
-<ol start="5" type="1">
-<li>The following integral, known as the [sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral), <span class="math display">\[
+\tag{1}\]</span></span> Test your implementation of <code>mc_estimate</code> by checking that it produces an answer close to the value in <a href="#eq-integral">Equation&nbsp;1</a>.</p></li>
+<li><p>The following integral, known as the [sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral), <span class="math display">\[
 \int_0^1 \frac{\sin(t)}{t} \mathrm{d}t.
-\]</span> does not admit a closed-form expression. Provide a 95% confidence interval for its value using <code>mc_estimate(f)</code>.</li>
+\]</span> does not admit a closed-form expression. Estimate its value using <code>mc_estimate(f)</code>.</p></li>
 </ol>
 </section>
 <section id="q.2-function-on-unbounded-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="q.2-function-on-unbounded-intervals">Q.2: function on unbounded intervals</h2>
+<p>In unbounded intervals, the uniform measure is not a probability measure, and therefore cannot be used to estimate integrals as in the previous section. Thus, we must rely on alternative computational tricks to achieve this task.</p>
+<p>Self-normalizing importance sampling is a Monte Carlo scheme that allows us to estimate expectations of real-valued functions <span class="math inline">\(f\)</span> with respect to intractable distributions <span class="math inline">\(\pi\)</span> by using samples from a tractable reference distribution <span class="math inline">\(q\)</span>. It is “self-normalizing” because it works even when normalzing constants are missing in either density function; i.e., if only we have access to <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\nu\)</span> such that <span class="math display">\[
+\pi(x) = \frac{\gamma(x)}{Z_\pi} \qquad q(x) = \frac{\nu(x)}{Z_q}
+\]</span> Let <span class="math inline">\(\mathbb{E}_\pi\)</span> represent expectations with respect to <span class="math inline">\(\pi\)</span>, and <span class="math inline">\(\mathbb{E}_\nu\)</span> expectations w.r.t. <span class="math inline">\(\nu\)</span>. The fundamental SNIS identity is <span class="math display">\[
+\mathbb{E}_\pi[f] = \frac{\mathbb{E}_\nu\left[f(x) w(x) \right]}{\mathbb{E}_\nu\left[ w(x) \right]},
+\]</span> where <span class="math display">\[
+w(x) := \frac{\gamma(x)}{\nu(x)}.
+\]</span> If <span class="math inline">\(\{x_i\}_{i=1}^n\overset{\text{iid}}{\sim}q\)</span> and we set <span class="math inline">\(w_i=w(x_i)\)</span>, then <span id="eq-SNIS-estimator"><span class="math display">\[
+\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
+\tag{2}\]</span></span> is a consistent estimator of <span class="math inline">\(\mathbb{E}_\pi[f]\)</span>. Moreover, <span id="eq-SNIS-norm-const"><span class="math display">\[
+\frac{1}{n}\sum_{i=1}^n w_i
+\tag{3}\]</span></span> is a consistent estimator of <span class="math inline">\(\frac{Z_\pi}{Z_q}\)</span>.</p>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
 <ol type="1">
-<li>Write a function <code>is_exponential</code> that takes a function <span class="math inline">\(f:[0,\infty)\to\mathbb{R}\)</span> and a number <span class="math inline">\(\lambda&gt;0\)</span>, and outputs a Monte Carlo estimate of <span class="math inline">\(\int_0^\infty f(x)\mathrm{d}x\)</span> using importance sampling with reference distribution <span class="math inline">\({\mathrm{Exp}}(\lambda)\)</span> and <span class="math inline">\(n=10000\)</span> i.i.d. samples.</li>
-<li>Show that the function <span class="math inline">\(f:[0,\infty)\to[0,\infty)\)</span> given by <span class="math display">\[
-f(x) = \frac{\exp(-\pi^2/x)}{x^3\sqrt{x}}.
-\]</span> satisfies <span id="eq-integral-unbounded"><span class="math display">\[
-\int_0^\infty f(x)\mathrm{d}x = \frac{3}{4\pi^4\sqrt{\pi}}.
-\tag{2}\]</span></span> Hint: look at the expression for the <a href="https://en.wikipedia.org/wiki/Inverse-gamma_distribution#Probability_density_function">density of an Inverse Gamma distribution</a>. Then use <a href="https://en.wikipedia.org/wiki/Gamma_function#General">the fact that</a> for <span class="math inline">\(n\in\mathbb{N}\)</span> <span class="math display">\[
-\Gamma\left(\frac{1}{2}+n\right) = \frac{(2n)!}{4^nn!}\sqrt{\pi}.
-\]</span></li>
-<li>Test your implementation of <code>is_exponential</code> with <span class="math inline">\(\lambda=1\)</span> by constructing a 95% confidence interval for your estimate and checking that it contains the true value.</li>
-<li>Re-do part 3 with <span class="math inline">\(\lambda=20\)</span> and compare both confidence intervals. Which estimator is better?</li>
+<li>The pdf of a <span class="math inline">\(\pi = \mathcal{N}(0,\sigma^2)\)</span> distribution is proportional to <span class="math display">\[
+\gamma(x) = \exp\left(-\frac{x^2}{2\sigma^2}\right)
+\]</span> We know that its normalizing constant is <span class="math display">\[
+\int_{-\infty}^\infty \gamma(x)\mathrm{d}x = \sigma\sqrt{2\pi}.
+\]</span> Also, <span class="math inline">\(\mathbb{E}_\pi[x^2]=\sigma^2\)</span>. We will use SNIS to estimate both of these quantities, for <span class="math inline">\(\sigma = 3\)</span>. As reference, use the <a href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace distribution</a> <span class="math inline">\({\mathrm{Lap}}(0,3)\)</span>. It is implemented in the <code>extraDistr</code> package</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extraDistr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dlaplace</span>(<span class="dv">8</span>, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># pdf at x=8 of Lap(0,3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01158058</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rlaplace</span>(<span class="dv">1</span>, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># random sample from Lap(0,3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5273795</code></pre>
+</div>
+</div>
+<p>Fill in the blanks below to implement a function <code>snis(n)</code> that uses SNIS to estimate the above quantities (normalizing constant and <span class="math inline">\(\mathbb{E}_\pi[x^2]\)</span>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>snis <span class="ot">=</span> <span class="cf">function</span>(n){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">=</span> FIX_ME <span class="co"># sample from Laplace(0, 3)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    f_xi <span class="ot">=</span> FIX_ME <span class="co"># compute target function at the sampled point xi</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    w_i <span class="ot">=</span> FIX_ME <span class="sc">/</span> <span class="fu">dlaplace</span>(xi, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># compute the weight</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    numerator <span class="ot">=</span> numerator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for numerator</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for denominator</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">expectation =</span> numerator<span class="sc">/</span>denominator, <span class="at">norm_const =</span> denominator<span class="sc">/</span>n))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Run <code>snis(10000)</code> and report the results comparing to the true values.</li>
+</ol>
+</section>
 </section>
 <section id="q.3-a-minimal-universal-probabilistic-programming-language-ppl" class="level2">
 <h2 class="anchored" data-anchor-id="q.3-a-minimal-universal-probabilistic-programming-language-ppl">Q.3: A minimal universal probabilistic programming language (PPL)</h2>
 <p>In this question we will write a very short program that will nonetheless be able to perform Bayesian inference on a wide range of Bayesian models <span class="math display">\[
 \pi(x|y) = \frac{\pi(x)L(y|x)}{Z}
-\]</span> The inference engine of our program will be self-normalizing importance sampling (SNIS). We will assume that the prior of our model is proper and that we can draw i.i.d. samples from it.</p>
+\]</span> The inference engine of our PPL will be SNIS, where the target is the posterior and the reference is the prior. Thus, we will restrict our PPL to models in which the prior is proper and it is possible to draw i.i.d. samples from it.</p>
+<section id="detour-the-distr-package" class="level3">
+<h3 class="anchored" data-anchor-id="detour-the-distr-package">Detour: the <code>distr</code> package</h3>
 <p>In the following we will use the package <code>distr</code>, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using</p>
-<p><strong>Example</strong>: evaluating densities</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>distUnif <span class="ot">&lt;-</span> <span class="fu">Unif</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p</span>(distUnif)(<span class="fl">0.2</span>) <span class="co"># evaluate the pdf of distUnif at 0.2 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(distr)){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"distr"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(distr)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- avoid the startup message using include: false -->
+<p><strong>Example</strong>: evaluating a distribution function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>distUnif <span class="ot">&lt;-</span> <span class="fu">Unif</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p</span>(distUnif)(<span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p>Note that <span class="math inline">\(0.2\notin[2,3]\)</span> and therefore the answer is <span class="math inline">\(0\)</span>. The fact that this returns <span class="math inline">\(0\)</span> instead of throwing an “out-of-bounds” error is crucial for a well-functioning implementation of a PPL.</p>
 <p><strong>Example</strong>: simulation</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>distPoisson <span class="ot">&lt;-</span> <span class="fu">Pois</span>(<span class="at">lambda =</span> <span class="dv">3</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">r</span>(distPoisson)(<span class="dv">1000</span>) <span class="co"># get 1000 iid samples from distPoisson</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>distPoisson <span class="ot">&lt;-</span> <span class="fu">Pois</span>(<span class="at">lambda =</span> <span class="dv">3</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">r</span>(distPoisson)(<span class="dv">1000</span>) <span class="co"># get 1000 iid samples from distPoisson</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3 7 3 1 0 2</code></pre>
+<pre><code>[1] 6 6 1 4 4 4</code></pre>
 </div>
 </div>
+<p>The <span class="math inline">\({\mathrm{Bern}}(p)\)</span> distribution is not available inside <code>distr</code>. Nevertheless, we can leverage the generic <code>DiscreteDistribution</code> object to create it</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Bern <span class="ot">=</span> <span class="cf">function</span>(prob){</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>prob, prob))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Example</strong>: evaluating mass/density functions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(<span class="fu">Bern</span>(<span class="fl">0.5</span>))(<span class="dv">1</span>) <span class="sc">==</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
 <ol type="1">
-<li>Show that the importance weight of targeting the posterior distribution with the prior as reference is proportional to the likelihood.</li>
-<li>One of the most important functions in a PPL is the <code>observe</code> statement. It is the only special statement needs to include in their functions when using the PPL. Its function is to accumulate likelihood in order to compute the IS weight for any given sample. To this end, the first step is to define a global variable that will be used throughout the program to contain the value of the weight:</li>
+<li>Show that the SNIS weight when the target is the posterior and the reference is <span class="math display">\[
+w(x) = L(y|x)
+\]</span></li>
+<li>One of the most important functions in a PPL is the <code>observe</code> statement. It is the only special statement needs to include in their functions when using the PPL. Its function is to accumulate likelihood in order to compute the SNIS weight for any given sample. To this end, the first step is to define a global variable that will be used throughout the program to contain the value of the weight:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>current_log_likelihood <span class="ot">=</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>current_log_likelihood <span class="ot">=</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, <strong>write</strong> the <code>observe(x, dist)</code> function, which should accept two arguments:</p>
-<pre><code>i. a distribution object `dist` from the package `distr`, and
-ii. a value `x` that is in the ambient space of the distribution `dist`.</code></pre>
-<p>An example call would be <code>observe(1.3, Norm(mean=-4,sd=3.5))</code>. Your function should add the logpdf of <code>x</code> under <code>dist</code> to the <code>current_log_likelihood</code> accumulator. <strong>Note</strong>: it is much more numerically robust to use <code>d(dist)(x, log = TRUE)</code> than to manually compute <code>log(d(dist)(x))</code>, especially when the number of observations is large! 3. Code your first PPL program for the <a href="../exercises/ex01.html">coin bag example from exercise 1</a>. To achieve this, let us start by storing the data as a global variable</p>
+<p>Now, <strong>write</strong> a function <code>observe(x, dist)</code> where <code>dist</code> is a distribution from the package <code>distr</code>, and <code>x</code> is a value in the ambient space of <code>dist</code>. Fill in the blank below</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>coin_flips <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>) <span class="co"># observe four heads</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>observe <span class="ot">=</span> <span class="cf">function</span>(x, dist){</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  current_log_likelihood <span class="ot">&lt;&lt;-</span> current_log_likelihood <span class="sc">+</span> FIX_ME</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The operator <code>&lt;&lt;-</code> in <code>R</code> lets us modify variables that live in the global scope from inside a function.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is <em>much</em> more numerically robust to use <code>d(dist)(x, log = TRUE)</code> than to manually compute <code>log(d(dist)(x))</code>.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Code your first PPL program for the <a href="../exercises/ex01.html">coin bag example from exercise 1</a>. To achieve this, let us start by storing the data as a global variable</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>coin_flips <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>) <span class="co"># observe four heads</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, write a function <code>my_first_probabilistic_program()</code> by completing the steps</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_first_probabilistic_program <span class="ot">=</span> <span class="cf">function</span>(){</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  coin_index <span class="ot">=</span> FILL_ME        <span class="co"># Step 1: sample a coin index from the prior</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(coin_flips)){</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(FILL_ME, FILL_ME) <span class="co"># Step 2: accumulate the log-likelihood of each observation given the coin_index</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(FILL_ME)             <span class="co"># Step 3: return the query: is coin_index a fair coin?</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_first_probabilistic_program <span class="ot">=</span> <span class="cf">function</span>(){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  coin_index <span class="ot">=</span> FIX_ME        <span class="co"># sample a coin index from the prior</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(coin_flips)){</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(FIX_ME, FIX_ME)  <span class="co"># accumulate the log-likelihood of each observation given the coin_index</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(FIX_ME)             <span class="co"># return the query: is coin_index a fair coin?</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
-<li>Write a function <code>posterior(f,n)</code> that takes a PPL program like <code>my_first_probabilistic_program</code> and a number <code>n</code>, and performs posterior inference via SNIS using <code>n</code> samples. Recall that the SNIS estimator is <span class="math display">\[
-\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
-\]</span> Now, fill in the missing steps in the following function skeleton</li>
+<li>Write a function <code>posterior(f,n)</code> that takes a PPL program like <code>my_first_probabilistic_program</code> and a number <code>n</code>, and performs posterior inference via SNIS using <code>n</code> samples. Use the following template</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(f, n){</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> FILL_ME <span class="co"># a vector of length n to store the weights</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  weighted_fs <span class="ot">=</span> FILL_ME <span class="co"># a vector of length n to store the summands w_i*f(x_i)</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    current_log_likelihood <span class="ot">=</span> FILL_ME <span class="co"># reset the global accumulator</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    f_i <span class="ot">=</span> FILL_ME <span class="co"># run the program `f` and capture its output</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    weights[i] <span class="ot">=</span> FILL_ME <span class="co"># store the weight</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    weighted_fs[i] <span class="ot">=</span> FILL_ME <span class="co"># store the summand</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># compute the SNIS estimator and return it</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(f, n){</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    current_log_likelihood <span class="ot">&lt;&lt;-</span> FIX_ME <span class="co"># reset the global accumulator</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    f_i <span class="ot">=</span> FIX_ME <span class="co"># run the program `f` and capture its output</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    numerator <span class="ot">=</span> numerator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for numerator</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for denominator</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
 <li>Test your program by checking that you can approximate the posterior probability of the fair coin obtained in <a href="../exercises/ex01.html#sec-q2">exercise 1, Q.2</a>.</li>
@@ -550,14 +615,9 @@ ii. a value `x` that is in the ambient space of the distribution `dist`.</code><
 
 
 </section>
+</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Yes, the frequentist concept! Monte Carlo simulation is one instance where the assumptions of frequentist inference hold by design.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
