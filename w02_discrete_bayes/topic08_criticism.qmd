@@ -1,0 +1,58 @@
+---
+title: "Intro to model criticism"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- What is a model mis-specification?
+- What are the consequences?
+- What to do about it. 
+
+
+### Rationale
+
+Model mis-specification (the model being "too wrong") can lead to serious problems 
+in all types of statistical models, 
+but Bayesian models are often more seriously affected. 
+As a result it is important to detect serious cases of mis-specification and to 
+address them. This is just an introduction, we will go in more depth once 
+we have introduced Bayesian regression models. 
+
+
+## Definitions
+
+**Model mis-specification:** when the model is "too wrong" (in the context of [the famous quote by George Box](https://en.wikipedia.org/wiki/All_models_are_wrong)).
+
+**Model criticism:** the task of trying to find mis-specification. 
+
+- It can be done by reasoning and discussion with experts. 
+- It can be done using data (**goodness-of-fit**)
+
+
+### Example 
+
+**Recall our notation:** $\rho$ prior PMF, $\pi$ posterior PMF. 
+
+- Suppose we put zero prior mass to having a fair dice. What happens on the posterior?
+
+![](../images/all-in-one-killings.png){width="800"}
+
+- If we put prior mass of zero to some realization $x$, say $\rho(x) = 0$ then the posterior probability on $x$ will always be zero, $\pi(x) = 0$, *no matter how many observations we get*
+    - This could be disastrous! (e.g. ignoring extreme scenarios can have extreme consequences)
+- Principle to avoid this is known as **Cromwell's rule** (Oliver Cromwell, 1650): "I beseech you, in the bowels of Christ, think it possible that you may be mistaken."
+
+**Discussion:** can you identify other issues with the model from Exercise 2?
+
+
+## How to correct mis-specification
+
+- Improve the model!
+- Then iterate with more criticism and improve again if needed.
+- Iterative model improvement is part of the current "best practice" in Bayesian analysis.
