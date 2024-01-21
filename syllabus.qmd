@@ -92,6 +92,10 @@ For each that you successfully solve, a week of participation activity will be w
 (it does not have to be the same week you submit the challenge question). 
 I will not post solutions for the challenge questions.*
 
+Added on Jan 21: *Since a few more people arrived in the second week, I will extend the Jan 10 waiver above to cover the 
+first two week, i.e. using $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...), \text{mean}(e_3, ...))$, so 
+you can still get full marks if you do not do exercises and/or participation/clicker in weeks 1 or 2.*
+
 
 
 ## Office hours
