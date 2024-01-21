@@ -425,13 +425,15 @@ https://github.com/trevorcampbell/shortex
 <h2 class="anchored" data-anchor-id="approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</h2>
 <ul>
 <li>As before, we want to compute an expectation <span class="math inline">\(\mathbb{E}[g(X, Y)]\)</span></li>
-<li>But imagine a very large tree, but where most branches have very low probability and only few have large probability</li>
+<li>Imagine a very large <a href="../w01_discrete_inference/topic05_decision_diagrams.html">decision tree</a>, but where most branches have very low probability and only few have large probability</li>
 <li>In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will <em>approximate</em> expectations using forward simulation (a method know as <strong>simple Monte Carlo</strong>)</li>
 <li>This is done as follows:
 <ul>
-<li>Call your forward simulator <span class="math inline">\(M\)</span> times</li>
+<li>Call your forward simulator <span class="math inline">\(M\)</span> times.
+<ul>
 <li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}, Y^{(m)}) \sim p_{X, Y}(\cdot)\]</span></li>
 <li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(G^{(m)}\)</span> <span class="math display">\[G^{(m)}= g(X^{(m)}, Y^{(m)}).\]</span></li>
+</ul></li>
 <li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M G^{(m)}.\]</span></li>
 </ul></li>
 </ul>
@@ -485,7 +487,7 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 <h2 class="anchored" data-anchor-id="motivation-from-the-law-of-large-numbers">Motivation from the Law of Large Numbers</h2>
 <p><strong>Question:</strong> How can we make <span class="math inline">\(\approx\)</span> more formal in <a href="#eq-mc">Equation&nbsp;1</a>?</p>
 <p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_i].\]</span></p>
-<p>Picking <span class="math inline">\(Z_m = G^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerence, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerence with high probability.</p>
+<p>Picking <span class="math inline">\(Z_m = G^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerence, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerence with high probability after <span class="math inline">\(M\)</span> iterations.</p>
 
 
 </section>
@@ -494,7 +496,7 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Here”<span class="math inline">\(\to\)</span>” denotes a suitable notion of convergence of random variables In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Here”<span class="math inline">\(\to\)</span>” denotes a suitable notion of convergence of random variables. In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
