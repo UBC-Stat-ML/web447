@@ -80,6 +80,8 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\distGeom}{\distNamed{Geom}}
 \newcommand{\distCauchy}{\distNamed{Cauchy}}
 \newcommand{\distVMF}{\distNamed{vMF}}
+\newcommand{\distDiscrete}{\distNamed{Discrete}}
+
 
 <!-- nonparametric distributions -->
 \newcommand{\distBeP}{\distNamed{BeP}}
