@@ -1,0 +1,25 @@
+---
+title: "Exercise 3: inference on continuous spaces"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+
+## TENTATIVE goals/ideas
+
+- Approximate a regression/classification posterior distribution using a PPL.
+    - use sequence of launch data? idea is that success pr will be increasing.. should be stark enough to see a trend in posterior
+    - for now, give them prior, model in mathematical notation that they have to translate
+- Using packages to visualize a 1d and 2d posterior distribution and interpreting these plots. 
+    - interpretation could be to 
+- Performing prediction using a PPL. 
+    - ask to do the insurance question again based on this new data and model
+    
+    
+ANYTHING ELSE?? Probably math questions will be better fit next week. Maybe enough?
+
+
+
+
