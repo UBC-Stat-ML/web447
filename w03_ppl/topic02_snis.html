@@ -371,6 +371,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continous models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -595,8 +601,8 @@ $$\hat G_M = \frac{(1/2)^3 + 2}{(1/2)^3 + 1} \approx 1.89.$$
 <section id="weight-simplification" class="level2">
 <h2 class="anchored" data-anchor-id="weight-simplification">Weight simplification</h2>
 <ul>
-<li>Recall from <a href="../w01_discrete_inference/topic08_chain.html">chain rule</a>: <span class="math inline">\(\gamma(x) = p(x, y) = p(x) p(y | x)\)</span>.</li>
-<li>Hence, since the proposal is the prior <span class="math inline">\(q(x) = p(x)\)</span>, the weight calculation simplifies to <span class="math display">\[w(x) = \frac{\gamma(x)}{q(x)} = \frac{p(x) p(y | x)}{p(x)} = p(y | x).\]</span></li>
+<li>Recall from <a href="../w01_discrete_inference/topic08_chain.html">chain rule</a>: <span class="math inline">\(\gamma(x) = p(x, y) = \rho(x) L(y | x)\)</span> where <span class="math inline">\(\rho\)</span> is the prior and <span class="math inline">\(L\)</span> the likelihood.</li>
+<li>Hence, since the proposal is the prior <span class="math inline">\(q(x) = p(x)\)</span>, the weight calculation simplifies to <span class="math display">\[w(x) = \frac{\gamma(x)}{q(x)} = \frac{\rho(x) L(y | x)}{\rho(x)} = L(y | x).\]</span></li>
 </ul>
 </section>
 <section id="theoretical-guarantees-of-snis" class="level2">
@@ -606,7 +612,7 @@ $$\hat G_M = \frac{(1/2)^3 + 2}{(1/2)^3 + 1} \approx 1.89.$$
 <li>Namely: <em>for any approximation error tolerance, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerance with high probability after <span class="math inline">\(M\)</span> iterations.</em></li>
 <li>Name for the above property: <em>consistency</em>.</li>
 </ul>
-<p><strong>Proposition:</strong> if <span class="math inline">\(\mathbb{E}_q[w(X)] &lt; \infty\)</span> and <span class="math inline">\(\mathbb{E}|w(X) g(X)| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[\hat G_M \to \mathbb{E}_\pi[g(X)],\]</span> as <span class="math inline">\(M\)</span> goes to <span class="math inline">\(\infty\)</span>.</p>
+<p><strong>Proposition:</strong> if <span class="math inline">\(\mathbb{E}_\pi|g(X)| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[\hat G_M \to \mathbb{E}_\pi[g(X)],\]</span> as <span class="math inline">\(M\)</span> goes to <span class="math inline">\(\infty\)</span>.</p>
 
 
 </section>

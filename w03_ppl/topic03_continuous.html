@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Exercise 3: Universal probabilistic inference via importance sampling</title>
+<title>Bayes1@UBC - Continous models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,11 +67,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -80,9 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic03_continuous.html">Continous models</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -344,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Continous models</span></a>
   </div>
 </li>
@@ -372,16 +399,30 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#densities" id="toc-densities" class="nav-link" data-scroll-target="#densities">Densities</a></li>
+  <li><a href="#joint-densities" id="toc-joint-densities" class="nav-link" data-scroll-target="#joint-densities">Joint densities</a></li>
+  <li><a href="#key-properties" id="toc-key-properties" class="nav-link" data-scroll-target="#key-properties">Key properties</a></li>
+  <li><a href="#example-doomsday-model" id="toc-example-doomsday-model" class="nav-link" data-scroll-target="#example-doomsday-model">Example: Doomsday model</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-description" id="toc-mathematical-description" class="nav-link" data-scroll-target="#mathematical-description">Mathematical description</a></li>
+  <li><a href="#aleatoric-interpretation" id="toc-aleatoric-interpretation" class="nav-link" data-scroll-target="#aleatoric-interpretation">Aleatoric interpretation</a></li>
+  <li><a href="#epistemic-interpretation" id="toc-epistemic-interpretation" class="nav-link" data-scroll-target="#epistemic-interpretation">Epistemic interpretation</a></li>
+  <li><a href="#computations-on-the-doomsday-model" id="toc-computations-on-the-doomsday-model" class="nav-link" data-scroll-target="#computations-on-the-doomsday-model">Computations on the Doomsday model</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic03_continuous.html">Continous models</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercise 3: Universal probabilistic inference via importance sampling</h1>
+<h1 class="title">Continous models</h1>
 </div>
 
 
@@ -417,27 +458,186 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
-<section id="goals" class="level2">
-<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Understanding and implementing importance sampling</li>
-<li>Introduction to probabilistic programming</li>
+<li>Review of key concepts for continuous random variables.
+<ul>
+<li>Density.</li>
+<li>Computing their expectation.</li>
+</ul></li>
+<li>Bayes rule with continuous random variables.</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Since the parameters of distributions families are continuous, it natural to use continuous random variables for them in Bayesian statistics. For example it lets us get rid of the artificial discretization <span class="math inline">\(K\)</span> we used in <a href="../exercises/ex02.html">last week’s exercise</a>.</p>
+<p>Today we will approach the calculations with both manual mathematic derivation and PPLs. Later we will increasingly rely only on PPLs. But it is still important to understand both methods.</p>
+</section>
+</section>
+<section id="densities" class="level2">
+<h2 class="anchored" data-anchor-id="densities">Densities</h2>
+<p><strong>Definition:</strong> <span class="math inline">\(X\)</span> has density <span class="math inline">\(f(x)\)</span> if <span class="math display">\[\mathbb{P}(X \in A) = \int_A f(x) \mathrm{d}x.\]</span></p>
+<p><strong>LOTUS:</strong> works the same as <a href="../w01_discrete_inference/topic10_expectations.html">with discrete models</a>: <span class="math display">\[\mathbb{E}[g(X)] = \int f(x) g(x) \mathrm{d}x.\]</span></p>
+</section>
+<section id="joint-densities" class="level2">
+<h2 class="anchored" data-anchor-id="joint-densities">Joint densities</h2>
+<p><strong>Definition:</strong> <span class="math inline">\((X, Y)\)</span> has joint density <span class="math inline">\(f(x, y)\)</span> if <span class="math display">\[\mathbb{P}((X, Y) \in A) = \int \int_A f(x, y) \mathrm{d}x.\]</span></p>
+</section>
+<section id="key-properties" class="level2">
+<h2 class="anchored" data-anchor-id="key-properties">Key properties</h2>
+<p>Note that in much of what follows, everything works the same as with <a href="../w01_discrete_inference/topic10_expectations.html">with discrete models</a> except we replace sums by integrals and PMFs <span class="math inline">\(p\)</span> by densities <span class="math inline">\(f\)</span>.</p>
+<p><strong>LOTUS:</strong> <span class="math display">\[\mathbb{E}[g(X, Y)] = \int f(x, y) g(x, y) \mathrm{d}x.\]</span></p>
+<p><strong>Marginalization:</strong> going from a joint density on <span class="math inline">\((X, Y)\)</span> to the density of <span class="math inline">\(X\)</span> only (the latter is called the marginal): <span class="math display">\[f_X(x) = \int f(x, y) \mathrm{d}y.\]</span></p>
+<p><strong>Chain rule:</strong> <span class="math display">\[f(x, y) = f_X(x) f_{Y|X}(y|x).\]</span></p>
+<p><strong>Bayes theorem:</strong> <span class="math display">\[f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)}.\]</span></p>
+</section>
+<section id="example-doomsday-model" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example-doomsday-model">Example: Doomsday model</h2>
+<section id="mathematical-description" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-description">Mathematical description</h3>
+<p>Consider the following joint density described using chain rule: <span class="math display">\[\begin{align*}
+X &amp;\sim {\mathrm{Unif}}(0, 5) \\
+Y | X &amp;\sim {\mathrm{Unif}}(0, X).
+\end{align*}\]</span></p>
+</section>
+<section id="aleatoric-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="aleatoric-interpretation">Aleatoric interpretation</h3>
+<ul>
+<li>I have a measuring tape, but you do not know how long is it.
+<ul>
+<li>Length of tape: <span class="math inline">\(X\)</span>.</li>
+<li>Let’s say we think it’s less than 5m.</li>
+</ul></li>
+<li>I go in a separate room, unroll it fully, and pick a number at random from the tape.
+<ul>
+<li>Random point on tape: <span class="math inline">\(Y\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Goal:</strong> from the <span class="math inline">\(Y\)</span>, trying to guess the full length of the tape.</p>
+</section>
+<section id="epistemic-interpretation" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="epistemic-interpretation">Epistemic interpretation</h3>
+<ul>
+<li><span class="math inline">\(X\)</span> is the total number of humans to ever live, future and past (in trillion).</li>
+<li><span class="math inline">\(Y\)</span> is the number of humans that were born before present (from archeological records, ~0.06 trillion).</li>
 </ul>
 
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/doomsday.png" class="img-fluid" width="200"></p>
+</div></div><p><strong>Goal:</strong> Can we guess (probabilistically) how many more human there will ever be in total?</p>
+<p>This is known as the <a href="http://en.wikipedia.org/wiki/Doomsday_argument">Doomsday argument</a></p>
+</section>
+<section id="computations-on-the-doomsday-model" class="level3">
+<h3 class="anchored" data-anchor-id="computations-on-the-doomsday-model">Computations on the Doomsday model</h3>
+<p><strong>Joint density:</strong> which of these is the joint density?</p>
+<!--
 
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\frac{\ind[y < x < 5]}{y - 5} \frac{\ind[0 < y < x]}{x}$
+1. $\frac{\ind[0 < y < 5]}{5} \frac{\ind[0 < x < y]}{y}$
+1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}$
+1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < 5]}{5}$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We have $$f_X(x) = \frac{\ind[0 < x < 5]}{5}$$ and 
+$$f_{Y|X}(y|x) =  \frac{\ind[0 < y < x]}{x},$$ therefore 
+$$f(x, y) = \frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}.$$
+:::
+
+-->
+<p><strong>Marginal density:</strong> compute the marginal <span class="math inline">\(f_Y(y)\)</span></p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\frac{1}{5} (\log 5 - \log y)$
+1. $\log 5 - \log y$
+1. $\frac{2}{y^2} - \frac{2}{25}$
+1. $\frac{1}{5} \left( \frac{2}{y^2} - \frac{2}{25} \right)$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+$$\begin{align*}
+f_Y(y) &= \frac{1}{5} \int \frac{ \ind[0 < x < 5] \ind[0 < y < x]}{x} \dee x \\
+&= \frac{1}{5} \int_y^5 \frac{\dee x}{x} \\
+&= \frac{1}{5} (\log 5 - \log y).
+\end{align*}$$
+:::
+
+-->
+<p><strong>Posterior density:</strong> from our marginal and Bayes’ theorem, we obtain <span class="math display">\[f_{X|Y}(x|y) = \frac{\mathbb{1}[0&lt;x&lt;5] \mathbb{1}[0 &lt; y &lt; x]}{x (\log 5 - \log y)}.\]</span></p>
+<p><strong>Posterior expectation:</strong> compute <span class="math inline">\(\mathbb{E}[X|Y = 0.06]\)</span></p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $1.5$
+1. $\approx 1.23$
+1. $\approx 1.117$
+1. $\approx 0.9714$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+$$\begin{align*}
+f_{X|Y}(x|y) &= \int_y^5 x f_{X|Y}(x|y) \dee x \\
+&= \frac{1}{\log 5 - \log y} \int_y^5 \dee x \\
+&= \frac{1}{\log 5 - \log y} (5 - y) \approx 1.117. \\
+\end{align*}$$
+:::
+
+-->
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Comparison with simPPLe
+Compare this to the simPPLe approximation
+
+
+::: {.cell}
+
+```{.r .cell-code}
+source("../exercises/ex03_scaffold.R")
+source("../../solutions/sol03_posterior.R")
+
+doomsday_model <- function() {
+  x = simulate(Unif(0, 5))
+  observe(0.06, Unif(0, x))
+  return(x)
+}
+
+posterior(doomsday_model, 1000)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1.063698
+```
+
+
+:::
+:::
+
+:::
+
+-->
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
