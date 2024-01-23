@@ -21,5 +21,19 @@ editor:
 ANYTHING ELSE?? Probably math questions will be better fit next week. Maybe enough?
 
 
+## Q.1: classification
 
+$$
+\begin{aligned}
+\alpha &\sim \distNorm(0,10^2) \\
+\beta &\sim \distNorm(0,10^2) \\
+y_t|\alpha,\beta &\distiid \distBern(\sigma(\alpha+\beta t))
+\end{aligned}
+$$
+where
+$$
+\sigma(x) = \frac{1}{1+e^{-x}}
+$$
+is the logistic function (aka the sigmoid function). In `R` you can compute it
+using `plogis(x)`.
 
