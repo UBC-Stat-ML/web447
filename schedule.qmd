@@ -1,5 +1,7 @@
 ---
 title: "Schedule"
+editor: 
+  mode: source
 ---
 
 {{< include _construction.qmd >}}
@@ -37,4 +39,4 @@ title: "Schedule"
 | Th, Apr 11    | Guest lecture. *(Last lecture)*                                                                   |                                                          |
 | Fri, Apr 19   | **Final project due.**                                                                            |                                                          |
 
-: {.striped .hover}
+: {.striped .hover tbl-colwidths="[15,65,20]"}

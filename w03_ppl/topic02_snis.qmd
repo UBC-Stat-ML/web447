@@ -114,9 +114,9 @@ to help you.
 
 ## Weight simplification
 
-- Recall from [chain rule](../w01_discrete_inference/topic08_chain.qmd): $\gamma(x) = p(x, y) = p(x) p(y | x)$.
+- Recall from [chain rule](../w01_discrete_inference/topic08_chain.qmd): $\gamma(x) = p(x, y) = \rho(x) L(y | x)$ where $\rho$ is the prior and $L$ the likelihood.
 - Hence, since the proposal is the prior $q(x) = p(x)$, the weight calculation simplifies to
-  $$w(x) = \frac{\gamma(x)}{q(x)} = \frac{p(x) p(y | x)}{p(x)} = p(y | x).$$ 
+  $$w(x) = \frac{\gamma(x)}{q(x)} = \frac{\rho(x) L(y | x)}{\rho(x)} = L(y | x).$$ 
 
 
 ## Theoretical guarantees of SNIS
@@ -126,7 +126,7 @@ to help you.
 such that we will be within that error tolerance with high probability after $M$ iterations.*
 - Name for the above property: *consistency*. 
 
-**Proposition:** if $\ex_q[w(X)] < \infty$ and $\ex|w(X) g(X)| < \infty$, then[^1]
+**Proposition:** if $\ex_\pi|g(X)| < \infty$, then[^1]
   $$\hat G_M \to \ex_\pi[g(X)],$$
   as $M$ goes to $\infty$. 
 

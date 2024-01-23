@@ -1,0 +1,138 @@
+---
+title: "Continous models"
+editor: 
+  mode: source
+  markdown: 
+    wrap: 72
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   Review of key concepts for continuous random variables. 
+    - Density. 
+    - Computing their expectation. 
+-   Bayes rule with continuous random variables. 
+
+### Rationale
+
+Since the parameters of distributions families are continuous, it 
+natural to use continuous random variables for them in Bayesian statistics. 
+For example it lets us get rid of the artificial discretization $K$ 
+we used in [last week's exercise](../exercises/ex02.qmd). 
+
+Today we will approach the calculations with both manual mathematic 
+derivation and PPLs. Later we will increasingly rely only on PPLs. 
+But it is still important to understand both methods. 
+
+
+## Densities
+
+**Definition:** $X$ has density $f(x)$ if 
+  $$\pr(X \in A) = \int_A f(x) \dee x.$$ 
+  
+**LOTUS:** works the same as [with discrete models](../w01_discrete_inference/topic10_expectations.qmd):
+  $$\ex[g(X)] = \int f(x) g(x) \dee x.$$ 
+  
+  
+## Joint densities 
+
+**Definition:** $(X, Y)$ has joint density $f(x, y)$ if 
+  $$\pr((X, Y) \in A) = \int \int_A f(x, y) \dee x.$$ 
+
+## Key properties
+
+Note that in much of what follows, everything works the same as with 
+[with discrete models](../w01_discrete_inference/topic10_expectations.qmd) 
+except we replace sums by integrals and PMFs $p$ by densities $f$.
+
+**LOTUS:** 
+  $$\ex[g(X, Y)] = \int f(x, y) g(x, y) \dee x.$$ 
+
+**Marginalization:** going from a joint density on $(X, Y)$ to the density of $X$ only (the latter is called the marginal):
+  $$f_X(x) = \int f(x, y) \dee y.$$
+  
+**Chain rule:** 
+  $$f(x, y) = f_X(x) f_{Y|X}(y|x).$$
+
+**Bayes theorem:**
+  $$f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)}.$$
+  
+  
+## Example: Doomsday model
+
+### Mathematical description
+
+Consider the following joint density described using chain rule:
+$$\begin{align*}
+X &\sim \distUnif(0, 5) \\
+Y | X &\sim \distUnif(0, X).
+\end{align*}$$
+
+
+### Aleatoric interpretation
+
+- I have a measuring tape, but you do not know how long is it.
+  - Length of tape: $X$.
+  - Let's say we think it’s less than 5m.
+- I go in a separate room, unroll it fully, and pick a number at random from the tape.
+  - Random point on tape: $Y$
+  
+**Goal:** from the $Y$, trying to guess the full length of the tape.  
+
+
+### Epistemic interpretation
+
+- $X$ is the total number of humans to ever live, future and past (in trillion). 
+- $Y$ is the number of humans that were born before present (from archeological records, ~0.06 trillion). 
+
+::: column-margin
+![](../images/doomsday.png){width="200"}
+:::
+
+**Goal:** Can we guess (probabilistically) how many more human there will ever be in total? 
+
+This is known as the [Doomsday argument](http://en.wikipedia.org/wiki/Doomsday_argument)
+
+
+### Computations on the Doomsday model
+
+**Joint density:** which of these is the joint density?  
+
+{{< include ../../clickers/w03/_c03.qmd >}}
+
+**Marginal density:** compute the marginal $f_Y(y)$ 
+
+{{< include ../../clickers/w03/_c04.qmd >}}
+
+**Posterior density:** from our marginal and Bayes' theorem, we obtain
+  $$f_{X|Y}(x|y) = \frac{\ind[0<x<5] \ind[0 < y < x]}{x (\log 5 - \log y)}.$$
+
+**Posterior expectation:** compute $\ex[X|Y = 0.06]$
+
+{{< include ../../clickers/w03/_c05.qmd >}}
+
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Comparison with simPPLe
+Compare this to the simPPLe approximation
+
+```{r}
+source("../exercises/ex03_scaffold.R")
+source("../../solutions/sol03_posterior.R")
+
+doomsday_model <- function() {
+  x = simulate(Unif(0, 5))
+  observe(0.06, Unif(0, x))
+  return(x)
+}
+
+posterior(doomsday_model, 1000)
+```
+:::
+
+-->
