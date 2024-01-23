@@ -443,6 +443,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#mathematical-description" id="toc-mathematical-description" class="nav-link" data-scroll-target="#mathematical-description">Mathematical description</a></li>
   <li><a href="#ppl-description-of-the-same-model" id="toc-ppl-description-of-the-same-model" class="nav-link" data-scroll-target="#ppl-description-of-the-same-model">PPL description of the same model</a></li>
+  <li><a href="#extension-predicting-the-next-draw" id="toc-extension-predicting-the-next-draw" class="nav-link" data-scroll-target="#extension-predicting-the-next-draw">Extension: predicting the next draw</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -566,7 +567,29 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(my_first_probabilistic_program, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08788599</code></pre>
+<pre><code>[1] 0.06341463</code></pre>
+</div>
+</div>
+</section>
+<section id="extension-predicting-the-next-draw" class="level3">
+<h3 class="anchored" data-anchor-id="extension-predicting-the-next-draw">Extension: predicting the next draw</h3>
+<p>Recall the painful calculation <a href="../w02_discrete_bayes/topic07_prediction.html">we did last week to get the predictive</a>.</p>
+<p>Here is how to do it in simPPLe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>predict_next_flip <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  coin_index <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  prob_heads <span class="ot">=</span> coin_index<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(coin_flips)) { </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(coin_flips[i], <span class="fu">Bern</span>(<span class="dv">1</span> <span class="sc">-</span> prob_heads)) </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  next_flip <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Bern</span>(<span class="dv">1</span> <span class="sc">-</span> prob_heads))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  same_as_observed <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> next_flip</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(same_as_observed)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(predict_next_flip, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.969573</code></pre>
 </div>
 </div>
 
