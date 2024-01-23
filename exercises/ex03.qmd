@@ -56,8 +56,10 @@ if (!require(distr)){
   require(distr)
 }
 ```
-2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to submit for this item.
-3. Read the "scaffold code", and use `distr` and two of the functions below to create a fair coin, flip it, and to compute the probability of that flip:
+2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to 
+submit for this item.
+3. Read the "scaffold code", and use `distr` and two of the functions below to 
+create a fair coin, flip it, and to compute the probability of that flip:
 ```r {shortcodes=true, filename="ex03_scaffold.R"}
 {{< include ex03_scaffold.R >}}
 ```
