@@ -1,0 +1,135 @@
+---
+title: "Importance sampling"
+editor: 
+  mode: source
+  markdown: 
+    wrap: 72
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   What Self-Normalizing Importance Sampling (SNIS) does.
+-   Intuition on how SNIS does it.
+-   SNIS pseudo-code.
+
+### Rationale
+
+Since SNIS is the "inference algorithm" used by simPPLe, you will need a
+basic understanding of SNIS to complete this week's exercise.
+
+## Goal
+
+-   Our goal is to compute $\ex[g(X) | Y = y]$.
+-   SNIS will allow us to approximate this conditional expectation.
+-   How is this different than [the Simple Monte Carlo
+    method](../w01_discrete_inference/topic11_monte_carlo.qmd) that we
+    used in [Ex1.Q.1.3](../exercises/ex01.qmd#sec-q1)?
+
+## Problem formulation
+
+SNIS is used to solve the following type of problems:
+
+-   **Input:** You are given an unnormalized distribution $\gamma(x)$
+    -   Example: the numerator in [Bayes
+        rule](../w01_discrete_inference/topic09_bayes.qmd).
+-   **Output:** You want to approximate an expectation...
+    -   ...under the **renormalized** distribution
+        $\pi(x) = \gamma(x) / Z$.
+    -   Mathematically: SNIS provides an approximation to
+        $\ex_\pi[g(X)] = \sum \pi(x) g(x)$.
+
+**Terminology:** $g$ is called a **test function**. Think about it as
+specifying a **query.**
+
+**Examples:** of test functions
+
+-   Let's say you want to approximate $\pr(X = 1 | Y = y)$.
+    -   We can do this with SNIS by picking the right $g$!
+    -   From [last week's "trick
+        2"](../w02_discrete_bayes/topic06_decision.qmd), if we take
+        $g(x) = \ind[X = 1]$, $\pi(x) = p(x | y)$,
+        $$\ex_\pi[g(X)] = \sum \pi(x) g(x) = \ex[\ind[X = 1] | Y = y] = \pr(X = 1 | Y = y).$$
+-   What function $g(x)$ would you take to compute a [posterior
+    mean](../w02_discrete_bayes/topic04_point.qmd)?
+
+{{< include ../../clickers/w03/_c01.qmd >}}
+
+-   How would you proceed to compute $\var[X | Y = y]$?
+
+## SNIS' extra ingredient: the proposal
+
+In addition to the unnormalized distribution $\gamma$ and test function
+$f$, SNIS requires a **proposal** $q(x)$.
+
+-   The proposal will help SNIS explore the space of possible values
+    that $X$ can take.
+-   This week, we will use the prior as the proposal, $q(x) = \rho(x)$.
+    -   It can be generalized to any PMF $q(x)$ such that
+        $q(x) = 0 \Longrightarrow \pi(x) = 0$.
+
+## Intuition: decision tree
+
+-   Recall the `forward_sample` function from [the first exercise,
+    Q.1.3](../exercises/ex01.qmd#sec-q1).
+-   SNIS follows the same general approach ([Monte
+    Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd)),
+    -   traverse the decision tree several times to get "samples"
+    -   the key difference is that these samples will not be equally
+        weighted in SNIS in contrast to Q.1.3.
+-   At each iteration, just as [forward
+    sampling](../w01_discrete_inference/topic06_forward_sampling.qmd),
+    SNIS goes down the decision tree...
+    -   ...but for some decision points, the choice is made for us---by
+        the data!
+        -   Call these "forced choices."
+    -   We keep track of the probability of the "forced choices",
+        -   the product of these probability will be the un-normalized
+            weight of the sample.
+
+![](../images/all-in-one-killings.png){width="800"}
+
+## Algorithm
+
+-   Call the proposal $M$ times.
+    -   Denote the output at iteration $m \in \{1, 2, \dots M\}$ by:
+        $$(X^\parm) \sim q(\cdot)$$
+    -   Compute $g$ on each, call each of the $M$ outputs $G^\parm$
+        $$G^\parm = g(X^\parm).$$
+    -   Compute also an un-normalized weight for each of the $M$
+        outputs: $$W^\parm = w(X^\parm) = \frac{\gamma(X^\parm)}{q(X^\parm)}.$$
+            - Here $w(x)$ is a weighing function.
+-   Return the ratio
+    $$\hat G_M = \frac{\sum_{m=1}^M W^\parm G^\parm}{\sum_{m=1}^M W^\parm} .$$
+
+**Example:** compute $\hat G_M$ in the bag of coin example if
+$g(x) = x$, $X^{(1)} = 1$, $X^{(2)} = 2$. Use the decision tree above
+to help you. 
+
+{{< include ../../clickers/w03/_c02.qmd >}}
+
+
+## Weight simplification
+
+- Recall from [chain rule](../w01_discrete_inference/topic08_chain.qmd): $\gamma(x) = p(x, y) = p(x) p(y | x)$.
+- Hence, since the proposal is the prior $q(x) = p(x)$, the weight calculation simplifies to
+  $$w(x) = \frac{\gamma(x)}{q(x)} = \frac{p(x) p(y | x)}{p(x)} = p(y | x).$$ 
+
+
+## Theoretical guarantees of SNIS
+
+- We have the same type of result as we encountered in [Simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd#sec-lln)
+- Namely: *for any approximation error tolerance, we can find a number of iterations $M$ large enough 
+such that we will be within that error tolerance with high probability after $M$ iterations.*
+- Name for the above property: *consistency*. 
+
+**Proposition:** if $\ex_q[w(X)] < \infty$ and $\ex|w(X) g(X)| < \infty$, then[^1]
+  $$\hat G_M \to \ex_\pi[g(X)],$$
+  as $M$ goes to $\infty$. 
+
+[^1]: Here "$\to$" can be taken to be "convergence in probability", or this can 
+    be strengthen to "convergence almost sure." 
+

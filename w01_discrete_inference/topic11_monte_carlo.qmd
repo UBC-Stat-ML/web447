@@ -1,5 +1,5 @@
 ---
-title: "Monte Carlo"
+title: "Simple Monte Carlo"
 editor: 
   mode: source
 ---
@@ -22,7 +22,6 @@ Simple Monte Carlo is the foundation for more complex Monte Carlo methods used b
 
 ## Approximation of expectations using forward simulation
 
-\newcommand\parm{{(m)}}
 
 - As before, we want to compute an expectation $\ex[g(X, Y)]$
 - Imagine a very large [decision tree](topic05_decision_diagrams.qmd), but where most branches have very low probability and only few have large probability
@@ -71,19 +70,19 @@ print(sum/n_iterations)
 ```
 
 
-## Motivation from the Law of Large Numbers
+## Guarantees from the Law of Large Numbers {#sec-lln}
 
 **Question:** How can we make $\approx$ more formal in @eq-mc?
 
 **Proposition (Law of Large Numbers, LLN):** if $Z_1, Z_2, \dots$ are i.i.d. random variables with $\ex|Z_i| < \infty$, then[^1]
 $$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_i].$$
 
-[^1]: Here"$\to$" denotes a suitable notion of convergence of random variables. 
+[^1]: Here "$\to$" denotes a suitable notion of convergence of random variables. 
     In STAT 302 you may have seen LLN with "convergence in probability", but this can 
     be strengthen to "convergence almost sure." 
     The difference between these notions of convergence will not matter in this course. 
 
 Picking $Z_m = G^\parm$ we arrive to the following formalization of $\approx$: 
-for any approximation error tolerence, we can find a number of iterations $M$ large enough 
-such that we will be within that error tolerence with high probability after $M$ iterations.
+for any approximation error tolerance, we can find a number of iterations $M$ large enough 
+such that we will be within that error tolerance with high probability after $M$ iterations.
 

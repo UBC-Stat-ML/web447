@@ -3,8 +3,15 @@ editor:
   mode: source
 ---
 
+<!-- First, some macros specific to this course -->
+
+\newcommand\parm{{(m)}}
+
+
+<!-- -->
+
 <!-- 
-tiny-shortex for Quarto
+Second, tiny-shortex for Quarto
 restricted to macros supported by MathJax
 https://github.com/trevorcampbell/shortex
 -->

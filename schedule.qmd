@@ -5,7 +5,7 @@ title: "Schedule"
 {{< include _construction.qmd >}}
 
 | Date          | Topics                                                                                            | Readings                                                 |
-|------------------|-----------------------------------|------------------|
+|---------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | Tue, Jan 9    | Overview. Probabilistic inference on discrete spaces.                                             | BDA 1.1-1.10                                             |
 | Th, Jan 11    |                                                                                                   |                                                          |
 | Tue, Jan 16   | A tour of Bayesian inference (on discrete spaces).                                                | BDA 2.1-2.5                                              |

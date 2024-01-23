@@ -25,6 +25,13 @@ website:
             file: exercises/ex02.qmd
           - text: "Challenge"
             file: challenges/ch02.qmd
+      - section: "A first look at PPLs"
+        contents: 
+          - auto: "w03_ppl/*"
+          - text: "Exercises"
+            file: exercises/ex03.qmd
+          - text: "Challenge"
+            file: challenges/ch03.qmd
 
 
 format:

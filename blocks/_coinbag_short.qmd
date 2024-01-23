@@ -1,0 +1,15 @@
+---
+editor: 
+  mode: source
+---
+
+::: column-margin
+![](../images/coinbag.png){width="200"}
+:::
+
+$$
+\begin{align*}
+X &\sim \distUnif\{0, 1, 2\} \\
+Y_i | X &\sim \distBern(X/2)
+\end{align*}
+$$ {#eq-coin-joint}

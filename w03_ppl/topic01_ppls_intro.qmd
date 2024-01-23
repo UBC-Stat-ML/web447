@@ -1,0 +1,71 @@
+---
+title: "What is a PPL?"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- What is a Probabilistic Programming Language (PPL)?
+- How to use a PPL. 
+
+### Rationale
+
+PPLs is the main way you will compute posterior distributions in this course. 
+This week you will write your own! This will give you insight on the 
+strengths and limitation of these approaches. 
+
+
+## PPL in a nutshell
+
+- It is often easier to do [forward sampling](../w01_discrete_inference/topic06_forward_sampling.qmd) than to [compute a posterior](../w02_discrete_bayes/topic03_posteriors.qmd):
+    - Forward sampling: just go down a single path in the decision tree.
+    - Computing a posterior: need to sum over all paths compatible with observed data.
+- PPLs allow you to:
+    - code your model as if you were going to do forward sampling, 
+    - and the PPL will magically figure out how to approximate the posterior!
+    
+    
+## PPL: an example using *simPPLe*
+
+We created possibly the simplest possible PPL for this course. 
+Let's call it `simPPLe`. 
+The exercise this week will be to understand *simPPLe* by filling-in a couple 
+of key lines of code.
+
+First I will show you what simPPLe can do.
+
+Let us start with something we are familiar with: our bag of coin problem...
+
+
+### Mathematical description
+
+Recall our "bag of coins" model can be written as:
+
+{{< include ../blocks/_coinbag_short.qmd >}}
+
+
+### PPL description of the same model
+
+Here is how to code up the "bag of coin" model in simPPLe for the purpose of computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
+
+```r {shortcodes=true, filename="ex03_ppl.R"}
+{{< include ../exercises/ex03_ppl.R >}}
+```
+
+After solving this week's exercise, you will be able to compute this probability as follows:
+
+```{r}
+source("../exercises/ex03_scaffold.R")
+source("../exercises/ex03_ppl.R")
+source("../../solutions/sol03_posterior.R")
+
+posterior(my_first_probabilistic_program, 100)
+```
+
+

@@ -1,0 +1,39 @@
+---
+editor: 
+  mode: source
+---
+
+Here are the functionalities in `distr` you will need for the exercise 
+
+Loading the package without annoying prompt:
+
+```{r}
+suppressPackageStartupMessages(require(distr))
+```
+
+
+## Creating a distribution object
+
+Let's create a Poisson with parameter $\lambda = 3.2$, which we will use in the following
+to demonstrate the functionalities in `distr` you will need for the exercise 
+
+```{r}
+distPoisson <- Pois(lambda = 3.2)
+```
+
+## Sampling from it 
+
+Here, we sample from our Poisson distribution 1 time:
+
+```{r}
+r(distPoisson)(1)
+```
+
+
+## Evaluating the PMF or density
+
+Here we compute the PMF of a poisson at the realization $x = 4$:
+
+```{r}
+d(distPoisson)(4)
+```

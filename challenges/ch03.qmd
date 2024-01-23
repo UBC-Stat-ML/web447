@@ -1,0 +1,11 @@
+---
+title: "Challenge questions"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+{{< include ../blocks/_challenge_header.qmd >}}
+
+{{< include ../_construction.qmd >}}
