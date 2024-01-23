@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.547">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -79,7 +79,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,6 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -96,6 +103,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -106,14 +140,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../exercises/ex03.html">Exercises</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -123,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Bayes1@UBC</a> 
@@ -268,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Monte Carlo</span></a>
+ <span class="menu-text">Simple Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -350,10 +382,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">A first look at PPLs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What is a PPL?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Importance sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -362,22 +429,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
   <li><a href="#q.1-functions-on-the-unit-interval" id="toc-q.1-functions-on-the-unit-interval" class="nav-link" data-scroll-target="#q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</a></li>
-  <li><a href="#q.2-function-on-unbounded-intervals" id="toc-q.2-function-on-unbounded-intervals" class="nav-link" data-scroll-target="#q.2-function-on-unbounded-intervals">Q.2: function on unbounded intervals</a>
-  <ul class="collapse">
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  </ul></li>
-  <li><a href="#q.3-a-minimal-universal-probabilistic-programming-language-ppl" id="toc-q.3-a-minimal-universal-probabilistic-programming-language-ppl" class="nav-link" data-scroll-target="#q.3-a-minimal-universal-probabilistic-programming-language-ppl">Q.3: A minimal universal probabilistic programming language (PPL)</a>
-  <ul class="collapse">
-  <li><a href="#detour-the-distr-package" id="toc-detour-the-distr-package" class="nav-link" data-scroll-target="#detour-the-distr-package">Detour: the <code>distr</code> package</a></li>
-  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
-  </ul></li>
+  <li><a href="#q.2-implementing-snis-for-simpple" id="toc-q.2-implementing-snis-for-simpple" class="nav-link" data-scroll-target="#q.2-implementing-snis-for-simpple">Q.2: implementing SNIS for simPPLe</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../exercises/ex03.html">Exercises</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Exercise 3: inference on continuous spaces</h1>
 </div>
@@ -392,10 +451,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
 
+
+<!-- First, some macros specific to this course -->
+<!-- -->
 <!-- 
-tiny-shortex for Quarto
+Second, tiny-shortex for Quarto
 restricted to macros supported by MathJax
 https://github.com/trevorcampbell/shortex
 -->
@@ -415,206 +478,87 @@ https://github.com/trevorcampbell/shortex
 <h2 class="anchored" data-anchor-id="goals">Goals</h2>
 <ul>
 <li>Introduce Monte Carlo integration in continuous spaces.</li>
-<li>Review the concept of importance sampling.</li>
+<li>Implement importance sampling.</li>
 <li>Build a universal probabilistic programming language in &lt;30 lines of code.</li>
 </ul>
 </section>
 <section id="q.1-functions-on-the-unit-interval" class="level2">
 <h2 class="anchored" data-anchor-id="q.1-functions-on-the-unit-interval">Q.1: functions on the unit interval</h2>
+<p>For this question, use <a href="../w01_discrete_inference/topic11_monte_carlo.html">Simple Monte Carlo</a>. The main twist compared to week one is that you will use a continuous random variable.</p>
 <ol type="1">
-<li><p>Write a function <code>mc_estimate</code> that takes a function <span class="math inline">\(f:[0,1]\to\mathbb{R}\)</span> and outputs a Monte Carlo estimate of <span class="math inline">\(\int_0^1 f(x)\mathrm{d}x\)</span> using <span class="math inline">\(n=10000\)</span> independent samples from <span class="math inline">\({\mathrm{Unif}}(0,1)\)</span>.</p></li>
-<li><p>Consider the function <span class="math inline">\(f:[0,1]\to[0,\infty)\)</span> given by <span class="math display">\[
+<li>Write a function <code>mc_estimate</code> that takes a function <span class="math inline">\(f:[0,1]\to\mathbb{R}\)</span> and outputs a Monte Carlo estimate of <span class="math inline">\(\int_0^1 f(x)\mathrm{d}x\)</span> using <span class="math inline">\(n=10000\)</span> independent samples from <span class="math inline">\({\mathrm{Unif}}(0,1)\)</span>.</li>
+<li>Consider the function <span class="math inline">\(f:[0,1]\to[0,\infty)\)</span> given by <span class="math display">\[
 f(x) = \frac{1}{\sqrt[3]{x^2(1-x)}}.
 \]</span> It is possible to show that <span id="eq-integral"><span class="math display">\[
 \int_0^1 f(x)\mathrm{d}x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
-\tag{1}\]</span></span> Test your implementation of <code>mc_estimate</code> by checking that it produces an answer close to the value in <a href="#eq-integral">Equation&nbsp;1</a>.</p></li>
-<li><p>The following integral, known as the [sine integral])(https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral), <span class="math display">\[
+\tag{1}\]</span></span> Test your implementation of <code>mc_estimate</code> by checking that it produces an answer close to the value in <a href="#eq-integral" class="quarto-xref">Equation&nbsp;1</a>.</li>
+<li>The following integral, known as the <a href="https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral">sine integral</a>, <span class="math display">\[
 \int_0^1 \frac{\sin(t)}{t} \mathrm{d}t.
-\]</span> does not admit a closed-form expression. Estimate its value using <code>mc_estimate(f)</code>.</p></li>
+\]</span> does not admit a closed-form expression. Estimate its value using <code>mc_estimate(f)</code>.</li>
 </ol>
 </section>
-<section id="q.2-function-on-unbounded-intervals" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-function-on-unbounded-intervals">Q.2: function on unbounded intervals</h2>
-<p>In unbounded intervals, the uniform measure is not a probability measure, and therefore cannot be used to estimate integrals as in the previous section. Thus, we must rely on alternative computational tricks to achieve this task.</p>
-<p>Self-normalizing importance sampling is a Monte Carlo scheme that allows us to estimate expectations of real-valued functions <span class="math inline">\(f\)</span> with respect to intractable distributions <span class="math inline">\(\pi\)</span> by using samples from a tractable reference distribution <span class="math inline">\(q\)</span>. It is “self-normalizing” because it works even when normalzing constants are missing in either density function; i.e., if only we have access to <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\nu\)</span> such that <span class="math display">\[
-\pi(x) = \frac{\gamma(x)}{Z_\pi} \qquad q(x) = \frac{\nu(x)}{Z_q}
-\]</span> Let <span class="math inline">\(\mathbb{E}_\pi\)</span> represent expectations with respect to <span class="math inline">\(\pi\)</span>, and <span class="math inline">\(\mathbb{E}_\nu\)</span> expectations w.r.t. <span class="math inline">\(\nu\)</span>. The fundamental SNIS identity is <span class="math display">\[
-\mathbb{E}_\pi[f] = \frac{\mathbb{E}_\nu\left[f(x) w(x) \right]}{\mathbb{E}_\nu\left[ w(x) \right]},
-\]</span> where <span class="math display">\[
-w(x) := \frac{\gamma(x)}{\nu(x)}.
-\]</span> If <span class="math inline">\(\{x_i\}_{i=1}^n\overset{\text{iid}}{\sim}q\)</span> and we set <span class="math inline">\(w_i=w(x_i)\)</span>, then <span id="eq-SNIS-estimator"><span class="math display">\[
-\widehat{\pi(f)} := \frac{\sum_{i=1}^n w_i f(x_i)}{\sum_{i=1}^n w_i}
-\tag{2}\]</span></span> is a consistent estimator of <span class="math inline">\(\mathbb{E}_\pi[f]\)</span>. Moreover, <span id="eq-SNIS-norm-const"><span class="math display">\[
-\frac{1}{n}\sum_{i=1}^n w_i
-\tag{3}\]</span></span> is a consistent estimator of <span class="math inline">\(\frac{Z_\pi}{Z_q}\)</span>.</p>
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<section id="q.2-implementing-snis-for-simpple" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-implementing-snis-for-simpple">Q.2: implementing SNIS for simPPLe</h2>
+<p>In this question, you will write the function <code>posterior</code> that we used in <a href="../w03_ppl/topic01_ppls_intro.html">the PPL introduction</a>.</p>
 <ol type="1">
-<li>The pdf of a <span class="math inline">\(\pi = \mathcal{N}(0,\sigma^2)\)</span> distribution is proportional to <span class="math display">\[
-\gamma(x) = \exp\left(-\frac{x^2}{2\sigma^2}\right)
-\]</span> We know that its normalizing constant is <span class="math display">\[
-\int_{-\infty}^\infty \gamma(x)\mathrm{d}x = \sigma\sqrt{2\pi}.
-\]</span> Also, <span class="math inline">\(\mathbb{E}_\pi[x^2]=\sigma^2\)</span>. We will use SNIS to estimate both of these quantities, for <span class="math inline">\(\sigma = 3\)</span>. As reference, use the <a href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace distribution</a> <span class="math inline">\({\mathrm{Lap}}(0,3)\)</span>. It is implemented in the <code>extraDistr</code> package</li>
+<li>First, install the package <code>distr</code>, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extraDistr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dlaplace</span>(<span class="dv">8</span>, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># pdf at x=8 of Lap(0,3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01158058</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rlaplace</span>(<span class="dv">1</span>, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># random sample from Lap(0,3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.912255</code></pre>
-</div>
-</div>
-<p>Fill in the blanks below to implement a function <code>snis(n)</code> that uses SNIS to estimate the above quantities (normalizing constant and <span class="math inline">\(\mathbb{E}_\pi[x^2]\)</span>)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>snis <span class="ot">=</span> <span class="cf">function</span>(n){</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">=</span> FIX_ME <span class="co"># sample from Laplace(0, 3)</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    f_xi <span class="ot">=</span> FIX_ME <span class="co"># compute target function at the sampled point xi</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    w_i <span class="ot">=</span> FIX_ME <span class="sc">/</span> <span class="fu">dlaplace</span>(xi, <span class="at">sigma =</span> <span class="dv">3</span>) <span class="co"># compute the weight</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    numerator <span class="ot">=</span> numerator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for numerator</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for denominator</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">expectation =</span> numerator<span class="sc">/</span>denominator, <span class="at">norm_const =</span> denominator<span class="sc">/</span>n))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(distr)){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"distr"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(distr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li>Run <code>snis(10000)</code> and report the results comparing to the true values.</li>
+<li>Read <a href="../exercises/ex03_distr_tutorial.html">this short tutorial on distr</a>. Nothing to submit for this item.</li>
+<li>Read the “scaffold code”, and use <code>distr</code> and two of the functions below to create a fair coin, flip it, and to compute the probability of that flip:</li>
 </ol>
-</section>
-</section>
-<section id="q.3-a-minimal-universal-probabilistic-programming-language-ppl" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-a-minimal-universal-probabilistic-programming-language-ppl">Q.3: A minimal universal probabilistic programming language (PPL)</h2>
-<p>In this question we will write a very short program that will nonetheless be able to perform Bayesian inference on a wide range of Bayesian models <span class="math display">\[
-\pi(x|y) = \frac{\pi(x)L(y|x)}{Z}
-\]</span> The inference engine of our PPL will be SNIS, where the target is the posterior and the reference is the prior. Thus, we will restrict our PPL to models in which the prior is proper and it is possible to draw i.i.d. samples from it.</p>
-<section id="detour-the-distr-package" class="level3">
-<h3 class="anchored" data-anchor-id="detour-the-distr-package">Detour: the <code>distr</code> package</h3>
-<p>In the following we will use the package <code>distr</code>, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(distr)){</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"distr"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(distr)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>ex03_scaffold.R</strong></pre>
 </div>
-<!-- avoid the startup message using include: false -->
-<p><strong>Example</strong>: evaluating a distribution function</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>distUnif <span class="ot">&lt;-</span> <span class="fu">Unif</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p</span>(distUnif)(<span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-</div>
-<p><strong>Example</strong>: simulation</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>distPoisson <span class="ot">&lt;-</span> <span class="fu">Pois</span>(<span class="at">lambda =</span> <span class="dv">3</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">r</span>(distPoisson)(<span class="dv">1000</span>) <span class="co"># get 1000 iid samples from distPoisson</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 3 5 3 3 1</code></pre>
-</div>
-</div>
-<p>The <span class="math inline">\({\mathrm{Bern}}(p)\)</span> distribution is not available inside <code>distr</code>. Nevertheless, we can leverage the generic <code>DiscreteDistribution</code> object to create it</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Bern <span class="ot">=</span> <span class="cf">function</span>(prob){</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>prob, prob))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Example</strong>: evaluating mass/density functions</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">d</span>(<span class="fu">Bern</span>(<span class="fl">0.5</span>))(<span class="dv">1</span>) <span class="sc">==</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-</section>
-<section id="exercises-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
-<ol type="1">
-<li>Show that the SNIS weight when the target is the posterior and the reference is <span class="math display">\[
-w(x) = L(y|x)
-\]</span></li>
-<li>One of the most important functions in a PPL is the <code>observe</code> statement. It is the only special statement needs to include in their functions when using the PPL. Its function is to accumulate likelihood in order to compute the SNIS weight for any given sample. To this end, the first step is to define a global variable that will be used throughout the program to contain the value of the weight:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>current_log_likelihood <span class="ot">=</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now, <strong>write</strong> a function <code>observe(x, dist)</code> where <code>dist</code> is a distribution from the package <code>distr</code>, and <code>x</code> is a value in the ambient space of <code>dist</code>. Fill in the blank below</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>observe <span class="ot">=</span> <span class="cf">function</span>(x, dist){</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  current_log_likelihood <span class="ot">&lt;&lt;-</span> current_log_likelihood <span class="sc">+</span> FIX_ME</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The operator <code>&lt;&lt;-</code> in <code>R</code> lets us modify variables that live in the global scope from inside a function.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It is <em>much</em> more numerically robust to use <code>d(dist)(x, log = TRUE)</code> than to manually compute <code>log(d(dist)(x))</code>.</p>
-</div>
-</div>
-<ol start="3" type="1">
-<li>Code your first PPL program for the <a href="../exercises/ex01.html">coin bag example from exercise 1</a>. To achieve this, let us start by storing the data as a global variable</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>coin_flips <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>) <span class="co"># observe four heads</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now, write a function <code>my_first_probabilistic_program()</code> by completing the steps</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_first_probabilistic_program <span class="ot">=</span> <span class="cf">function</span>(){</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  coin_index <span class="ot">=</span> FIX_ME        <span class="co"># sample a coin index from the prior</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(coin_flips)){</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(FIX_ME, FIX_ME)  <span class="co"># accumulate the log-likelihood of each observation given the coin_index</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(FIX_ME)             <span class="co"># return the query: is coin_index a fair coin?</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="true," data-filename="ex03_scaffold.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(distr))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Utilities to make the distr library a bit nicer to use</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution, realization) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d</span>(distribution)(realization) <span class="co"># return the PMF or density </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Bern <span class="ot">=</span> <span class="cf">function</span>(probability_to_get_one) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>probability_to_get_one, probability_to_get_one))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Key functions called by simPPLe programs</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Use simulate(distribution) for unobserved random variables</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>simulate <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution) {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">r</span>(distribution)(<span class="dv">1</span>) <span class="co"># sample once from the given distribution</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Use observe(realization, distribution) for observed random variables</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>observe <span class="ot">=</span> <span class="cf">function</span>(realization, distribution) {</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  weight <span class="ot">&lt;&lt;-</span> weight <span class="sc">*</span> <span class="fu">p</span>(distribution, realization) </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
-<li>Write a function <code>posterior(f,n)</code> that takes a PPL program like <code>my_first_probabilistic_program</code> and a number <code>n</code>, and performs posterior inference via SNIS using <code>n</code> samples. Use the following template</li>
+<li>Complete the implementation of the function <code>posterior</code>:</li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(f, n){</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    current_log_likelihood <span class="ot">&lt;&lt;-</span> FIX_ME <span class="co"># reset the global accumulator</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    f_i <span class="ot">=</span> FIX_ME <span class="co"># run the program `f` and capture its output</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    numerator <span class="ot">=</span> numerator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for numerator</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> FIX_ME <span class="co"># update the accumulator for denominator</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># update numerator and denominator</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="5" type="1">
 <li>Test your program by checking that you can approximate the posterior probability of the fair coin obtained in <a href="../exercises/ex01.html#sec-q2">exercise 1, Q.2</a>.</li>
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -697,10 +641,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -710,8 +653,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -724,6 +676,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -767,6 +838,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -792,6 +864,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -852,6 +950,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
