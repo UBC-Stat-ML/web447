@@ -41,7 +41,7 @@ does not admit a closed-form expression. Estimate its value using `mc_estimate(f
 
 
 
-## Q.2: implementing SNIS for simPPLe
+## Q.2: implementing SNIS for simPPLe {#sec-simPPLe}
 
 In this question, you will write the function `posterior` that we used in 
 [the PPL introduction](../w03_ppl/topic01_ppls_intro.qmd). 
