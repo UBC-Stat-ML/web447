@@ -41,5 +41,5 @@ format:
     toc: true
     linkcolor: black
 
-editor: visual
+editor: source
 
