@@ -69,3 +69,24 @@ posterior(my_first_probabilistic_program, 100)
 ```
 
 
+
+### Extension: predicting the next draw
+
+Recall the painful calculation [we did last week to get the predictive](../w02_discrete_bayes/topic07_prediction.qmd). 
+
+Here is how to do it in simPPLe:
+
+```{r}
+predict_next_flip <- function() {
+  coin_index = simulate(DiscreteDistribution(supp = 0:2))
+  prob_heads = coin_index/2
+  for (i in seq_along(coin_flips)) { 
+    observe(coin_flips[i], Bern(1 - prob_heads)) 
+  }
+  next_flip = simulate(Bern(1 - prob_heads))
+  same_as_observed = 1 - next_flip
+  return(same_as_observed)
+}
+
+posterior(predict_next_flip, 1000)
+```

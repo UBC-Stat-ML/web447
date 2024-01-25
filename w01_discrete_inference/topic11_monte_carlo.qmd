@@ -75,7 +75,7 @@ print(sum/n_iterations)
 **Question:** How can we make $\approx$ more formal in @eq-mc?
 
 **Proposition (Law of Large Numbers, LLN):** if $Z_1, Z_2, \dots$ are i.i.d. random variables with $\ex|Z_i| < \infty$, then[^1]
-$$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_i].$$
+$$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_1].$$
 
 [^1]: Here "$\to$" denotes a suitable notion of convergence of random variables. 
     In STAT 302 you may have seen LLN with "convergence in probability", but this can 

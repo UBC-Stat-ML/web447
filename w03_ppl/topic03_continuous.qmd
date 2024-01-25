@@ -115,24 +115,4 @@ This is known as the [Doomsday argument](http://en.wikipedia.org/wiki/Doomsday_a
 
 {{< include ../../clickers/w03/_c05.qmd >}}
 
-<!--
 
-::: {.callout-caution collapse="true"} 
-## Comparison with simPPLe
-Compare this to the simPPLe approximation
-
-```{r}
-source("../exercises/ex03_scaffold.R")
-source("../../solutions/sol03_posterior.R")
-
-doomsday_model <- function() {
-  x = simulate(Unif(0, 5))
-  observe(0.06, Unif(0, x))
-  return(x)
-}
-
-posterior(doomsday_model, 1000)
-```
-:::
-
--->

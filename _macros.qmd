@@ -6,6 +6,12 @@ editor:
 <!-- First, some macros specific to this course -->
 
 \newcommand\parm{{(m)}}
+\newcommand\expl[1]{\;\;\text{(#1)}}
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\sd}{\operatorname{SD}}
+\newcommand{\mse}{\operatorname{MSE}}
+\newcommand{\rmse}{\operatorname{RMSE}}
+\newcommand{\bias}{\operatorname{Bias}}
 
 
 <!-- -->

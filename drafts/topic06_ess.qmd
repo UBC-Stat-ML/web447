@@ -1,0 +1,33 @@
+---
+title: "Effective sample size"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO
+
+
+## TODO
+
+
+TODO: look up bound in Chopin
+
+TODO: link up with rates plot - intuition of the MCSE
+
+
+
+TODO: more readings on SNIS
+
+- Chopin
+- Owen
+- Pareto stuffs

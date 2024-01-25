@@ -1,0 +1,70 @@
+---
+title: "SNIS consistency"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Recap of SNIS' consistency guarantee. 
+- Proof of consistency.
+
+### Rationale
+
+We go over this proof as it demystifies the form of SNIS' weights. 
+
+
+## Notation and setup
+
+See [page on SNIS](topic02_snis.qmd). 
+
+
+## Consistency
+
+**Proposition:** if $\ex_\pi|g(X)| < \infty$, then[^1]
+  $$\hat G_M \to \ex_\pi[g(X)],$$
+  as $M$ goes to $\infty$. 
+
+[^1]: As usual, "$\to$" will be taken to be "convergence in probability", or this can 
+    be strengthen to "convergence almost sure." 
+    
+**Proof:** first, divide both numerator and denominator by $\red{M}$:
+$$\begin{align*}
+\hat G_M &= \frac{\sum_{m=1}^M W^\parm G^\parm}{\sum_{m=1}^M W^\parm} \\
+&= \frac{\red{\frac{1}{M}} \sum_{m=1}^M W^\parm G^\parm}{\red{\frac{1}{M}} \sum_{m=1}^M W^\parm}.
+\end{align*}$$
+
+We will analyze the numerator and denominator separately. Let's start with the numerator.
+
+**Question:** use the [Law of large number](../w01_discrete_inference/topic11_monte_carlo.qmd#sec-lln) to find the limit: 
+$$\frac{1}{M} \sum_{m=1}^M W^\parm G^\parm \to\; ?$$
+ 
+{{< include ../../clickers/w03/_c06.qmd >}}
+
+Now we can simplify the above limit:
+
+$$\begin{align*}
+\ex_q[W^{(1)} G^{(1)}] &= \int ( w(x) g(x) ) q(x) \dee x \expl{by LOTUS} \\
+&= \int \left( \frac{\gamma(x)}{\red{q(x)}} g(x) \right) \red{q(x)} \dee x \expl{definition of $w$} \\
+&= \int \gamma(x) g(x)  \dee x.
+\end{align*}$$
+
+Now the denominator is just a special case where $g(x) = 1$, hence by the same argument we just did:
+$$\frac{1}{M} \sum_{m=1}^M W^\parm \to \int \gamma(x) \dee x = Z.$$
+
+Now to combine the convergence of numerator and denominator in one, we use this proposition from probability theory:
+
+**Proposition:** if $S_i \to S$ and $T_i \to T$ then $S_i / T_i \to S / T$.[^2]
+
+[^2]: This is true in probability and almost sure. In the case of almost sure the proof is trivial but outside of the scope of this course. 
+
+Now applying that proposition, we get:
+$$\begin{align*}
+\hat G_M &= \frac{\frac{1}{M} \sum_{m=1}^M W^\parm G^\parm}{\frac{1}{M} \sum_{m=1}^M W^\parm} \\
+&\to \frac{\int \gamma(x) g(x)  \dee x}{Z} \\
+&= \int \frac{\gamma(x)}{Z} g(x) \dee x = \ex_\pi[g(X)].
+\end{align*}$$

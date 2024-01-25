@@ -1,0 +1,205 @@
+---
+title: "Monte Carlo convergence rate"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+
+### Topics
+
+- Convergence rate of Monte Carlo methods. 
+- Empirical scaling laws using physicist's log-log plot trick. 
+- Mathematical underpinnings.
+
+### Rationale
+
+When using Monte Carlo methods, you need to specify the number of iterations 
+(also known as number of samples). 
+
+**How to set the number of iterations?**
+
+We cover here a heuristic, forming the foundation for more principled methods. 
+
+
+## Setup
+
+**Important:** we go back to [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) here, 
+  to make the argument simpler. However our findings will apply equally to SNIS (and later, to MCMC). 
+
+
+## Motivating example
+
+Let us revisit [Q.1.3 in the first exercise](../exercises/ex01.qmd). 
+We will use it to explore tricks to set the number of Monte Carlo iterations. 
+
+**Setup:** coin bag with a single flip (where we write $Y = Y_1$)
+
+::: column-margin
+![](../images/coinbag.png){width="200"}
+:::
+
+$$
+\begin{align*}
+X &\sim \distUnif\{0, 1, 2\} \\
+Y | X &\sim \distBern(X/2)
+\end{align*}
+$$ {#eq-coin-joint}
+
+**Plan:** We will use our forward simulator and the law of large numbers to approximate $\ex[(1 + Y)^X]$. 
+
+**Recall from the exercise 1 solutions (simplified a bit here):**
+
+```{r}
+truth = 1/3 * (1 + 1/2 + 1 + 4)
+truth
+
+set.seed(1)
+suppressMessages(require(extraDistr))
+
+forward_sample = function() {
+  x = rdunif(1, min=0, max=2)
+  y = rbern(1, x/2)
+  return(c(x, y))
+}
+
+simple_monte_carlo = function(n_iterations) {
+  sum = 0.0
+  for (iteration in 1:n_iterations) {
+    sample = forward_sample()
+    sum = sum + (1+sample[2])^sample[1]
+  }
+  return(sum/n_iterations)
+}
+```
+
+Let's run the simulator with 10 iterations:
+
+```{r}
+simple_monte_carlo(10)
+```
+
+Is this reliable? Let's run it two more times:
+
+```{r}
+simple_monte_carlo(10)
+simple_monte_carlo(10)
+```
+
+- OK.. the first digit seems "stabilized" but not the second digit. 
+- Suppose I want one more digit of accuracy... 
+
+**By how much should I increase the number of iteration to get one more digit of accuracy?**
+
+{{< include ../../clickers/w03/_c07.qmd >}}
+
+
+## Empirical scaling
+
+Continuing on the same example (where we know the truth!), we will now:
+
+- vary the number of iterations ($10^1, 10^{1.5}, 10^2, 10^{2.5}, 10^3$),
+    - for each number of iteration `n_iterations`, we run `simple_monte_carlo(n_iterations)` 500 times,
+    - and plot the errors in log-log scale.
+    
+First, a function to compute the approximation error of one call to `simple_monte_carlo(n_iterations)`:
+
+```{r}
+approximate_error = function(n_iterations) {
+  mc = simple_monte_carlo(n_iterations)
+  error = abs(mc - truth)
+  return(error)
+}
+```
+
+Second, running `approximate_error` on the different numbers of iterations, each 500 times:
+
+```{r}
+
+
+df <- data.frame("n_iterations" = rep(c(10, 32, 100, 316, 1000), each=500))
+df$errors <- sapply(df$n_iterations, approximate_error)
+```
+
+Finally, plotting the errors in log-log scale (each of the $500 \cdot 5$ points is the error of one Monte Carlo run):
+
+
+```{r}
+require(ggplot2)
+ggplot(data=df, aes(x=n_iterations, y=errors)) +
+  stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
+  scale_x_log10() +  # Show result in log-log scale
+  scale_y_log10() +
+  theme_minimal() +
+  geom_point()
+```
+
+- Good news: error goes to zero
+    - Recall this property is known as consistency. 
+    - This confirms the theory covered on the [previous page](topic04_consistency.qmd).
+    - But here we are interested in the **rate** (how fast does it go to zero?)
+    
+- Result suggests a linear fit in the log-log scale $\underbrace{\log_{10}(\text{error})}_{y} = a\; \underbrace{\log_{10}(\text{number of iterations})}_{x} + b$
+
+- **Questions:**
+    - Eyeball the coefficient $a = \Delta x / \Delta y$. 
+    - What can you this coefficient tell you about the scaling of the error?
+
+{{< include ../../clickers/w03/_c08.qmd >}}
+
+Based on this extra information, let's try revisit our initial question:
+
+{{< include ../../clickers/w03/_c09.qmd >}}
+
+
+## Mathematical underpinnings
+
+**Notation:** recall $\hat G_M$ is the estimator. Let us denote the truth by $g^* = \ex[g(X, Y)]$. 
+
+**Core of the argument:** use that for independent random variables $V_1, V_2$, $\var[V_1 + V_2] = \var[V_1] + \var[V_2]$! This gives us:
+
+$$\sd(\hat G_M) = \sqrt{\var \frac{1}{M} \sum_{i=1}^M G^\parm} = \sqrt{\frac{M \var G^{(1)}}{M^2}} = \frac{\text{constant}}{\sqrt{M}}$$
+
+In the following, I will explain why analyzing the standard deviation makes sense...
+
+
+**Surrogate error measure:** Mathematically analyzing the error as we define in our code, $\ex|\hat G_M - g^*|$, is tricky; it is easier to look instead at the Root Mean Squared Error (RMSE):
+    $$\rmse = \sqrt{\mse} = \sqrt{ \ex[ (\hat G_M - g^*)^2 ]}.$$
+*Sanity check:* Note that the units are OK, i.e. the error measured in RMSE and with the more intuitive $\ex|\hat G_M - g^*|$ has the same units, e.g. meters, or grams or whatever, as the estimator $\hat G_M$ and truth $g^*$.
+
+
+**It's enough to study the standard deviation:**
+
+- Recall that the MSE is the sum of variance and bias squared (see [wikipedia for proof](https://en.wikipedia.org/wiki/Mean_squared_error))
+    $$\begin{align*}
+    \mse &= \var[\hat G_M] + (\bias(\hat G_M, g^*))^2 \\
+    \bias(\hat G_M, g^*) &= (\ex[\hat G_M] - g^*)^2.
+    \end{align*}$$
+- For simple Monte Carlo, the bias is zero by linearity of expectation:[^1]
+  $$\ex[\hat G_M] = \ex\left[\frac{1}{M} \sum_{m=1}^M G^{(m)}\right] = \frac{1}{M} \sum_{m=1}^M \ex[G^{(m)}] = \ex[G^{(m)}] = g^*.$$
+
+[^1]: For SNIS, the bias is not zero (because we have a ratio), but the squared bias decays faster than the variance term as $M \to \infty$ so 
+  the argument is essentially the same as simple Monte Carlo.
+  
+- The bias of zero gives a simpler expression for RMSE:
+  $$\rmse = \sqrt{\var[\hat G_M] + 0} = \sd[\hat G_M]$$
+- Hence for simple Monte Carlo, analyzing the scaling of the standard deviation (SD) is the same as analyzing the RMSE. 
+
+
+## Contextualizing the error rate of Monte Carlo
+
+- Numerical methods such as the [trapezoidal rule](https://en.wikipedia.org/wiki/Trapezoidal_rule) converge **much faster** in terms of $M$:
+    $$\text{error} = \frac{\text{constant}}{M^2},$$
+    i.e. 10 times more iterations gives **two digits** of extra accuracy (here $M$ is the number of grid points used in a 1d numerical integral)!
+- So why do we use Monte Carlo?
+    - The constants in the analysis of numerical integration blow up exponentially in the dimensionality of the problem!
+    - Many Monte Carlo methods can avoid this exponential blow up in the dimensionality[^2] 
+    - And good scalability in the dimensionality of the problem often more important than scalability in number of digits of accuracy
+        - ...can't trust 10th digit anyways because the model almost always has some slight mis-specification.
+
+[^2]: In particular, Simple Monte Carlo and MCMC can often avoid the curse of dimensionality. But not SNIS! Why are we spending time on SNIS then?
+    Because it can be used to approximate arbitrary posterior distribution, while simple Monte Carlo cannot, and it is much simpler than MCMC, so 
+    a good starting point pedagogically. However we will jump to MCMC later in this course. 
