@@ -411,6 +411,18 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SNIS consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Monte Carlo convergence rate</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -565,7 +577,7 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 <section id="sec-lln" class="level2">
 <h2 class="anchored" data-anchor-id="sec-lln">Guarantees from the Law of Large Numbers</h2>
 <p><strong>Question:</strong> How can we make <span class="math inline">\(\approx\)</span> more formal in <a href="#eq-mc" class="quarto-xref">Equation&nbsp;1</a>?</p>
-<p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_i].\]</span></p>
+<p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_1].\]</span></p>
 <p>Picking <span class="math inline">\(Z_m = G^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerance, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerance with high probability after <span class="math inline">\(M\)</span> iterations.</p>
 
 

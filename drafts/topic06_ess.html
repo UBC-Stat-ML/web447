@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Final project</title>
+<title>Bayes1@UBC - Effective sample size</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -80,7 +80,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project.html">Final project</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -95,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Bayes1@UBC</a> 
+      <a href="../">Bayes1@UBC</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -107,19 +109,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link active">
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -135,31 +137,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A bit of history</span></a>
   </div>
 </li>
@@ -176,73 +178,73 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision trees</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chain rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simple Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex01.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -259,61 +261,61 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Bayesian recipe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Posterior distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Credible sets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prediction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to model criticism</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex02.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./challenges/ch02.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -330,43 +332,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What is a PPL?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Importance sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continous models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SNIS consistency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo convergence rate</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/ex03.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./challenges/ch03.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -382,13 +384,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#logistics" id="toc-logistics" class="nav-link" data-scroll-target="#logistics">Logistics</a></li>
-  <li><a href="#project-timeline" id="toc-project-timeline" class="nav-link" data-scroll-target="#project-timeline">Project timeline</a></li>
-  <li><a href="#core-guideline" id="toc-core-guideline" class="nav-link" data-scroll-target="#core-guideline">Core guideline</a></li>
-  <li><a href="#menu-of-project-themes" id="toc-menu-of-project-themes" class="nav-link" data-scroll-target="#menu-of-project-themes">Menu of project themes</a></li>
-  <li><a href="#rubric-for-the-project-proposal" id="toc-rubric-for-the-project-proposal" class="nav-link" data-scroll-target="#rubric-for-the-project-proposal">Rubric for the project proposal</a></li>
-  <li><a href="#rubric-for-the-final-report" id="toc-rubric-for-the-final-report" class="nav-link" data-scroll-target="#rubric-for-the-final-report">Rubric for the final report</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">TODO</a></li>
   </ul>
 </nav>
     </div>
@@ -397,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Final project</h1>
+<h1 class="title">Effective sample size</h1>
 </div>
 
 
@@ -414,133 +415,46 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.</p>
+<!-- First, some macros specific to this course -->
+<!-- -->
+<!-- 
+Second, tiny-shortex for Quarto
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   -->
+<!-- Min and max -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
+<!-- general purpose math -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<p>TODO</p>
 </section>
-<section id="logistics" class="level2">
-<h2 class="anchored" data-anchor-id="logistics">Logistics</h2>
-<ul>
-<li>Teams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.</li>
-<li>Submit on canvas, a pdf document of maximum 5 pages/person (i.e.&nbsp;max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.</li>
-</ul>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>TODO</p>
 </section>
-<section id="project-timeline" class="level2">
-<h2 class="anchored" data-anchor-id="project-timeline">Project timeline</h2>
-<ul>
-<li><strong>Friday, Mar 8</strong>: prepare proposal, freeze teams, each team sends a 1 page abstract submitted on Canvas.</li>
-<li><strong>Friday, April 19</strong>: due date for the reports.</li>
-</ul>
 </section>
-<section id="core-guideline" class="level2">
-<h2 class="anchored" data-anchor-id="core-guideline">Core guideline</h2>
-<p>Every project should contain a component where Bayesian inference is applied to a real problem and a real dataset.</p>
-<p>In addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).</p>
-<p>After selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.</p>
-<p>Some resources:</p>
+<section id="todo" class="level2">
+<h2 class="anchored" data-anchor-id="todo">TODO</h2>
+<p>TODO: look up bound in Chopin</p>
+<p>TODO: link up with rates plot - intuition of the MCSE</p>
+<p>TODO: more readings on SNIS</p>
 <ul>
-<li><a href="https://hbiostat.org/data/">Vanderbilt Biostatistics datasets</a></li>
-<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
-<li><a href="https://www.icpsr.umich.edu/web/pages/ICPSR/index.html">Inter-university Consortium for Political and Social Research</a></li>
-<li><a href="https://platform.who.int/mortality/themes/theme-details/topics/indicator-groups/indicator-group-details/MDB/road-traffic-accidents">WHO mortality data</a></li>
-<li><a href="https://data.worldbank.org/">The World Bank Data</a></li>
-<li><a href="https://github.com/awesomedata/awesome-public-datasets">More…</a></li>
+<li>Chopin</li>
+<li>Owen</li>
+<li>Pareto stuffs</li>
 </ul>
-<p>You should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.</p>
-</section>
-<section id="menu-of-project-themes" class="level2">
-<h2 class="anchored" data-anchor-id="menu-of-project-themes">Menu of project themes</h2>
-<p>Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal).</p>
-<ul>
-<li>Going further on… (more details can be provided upon request)
-<ul>
-<li>Bayesian regression and classification (e.g.&nbsp;sparsity, hierarchical structure, etc)</li>
-<li>model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)</li>
-<li>time series and state-space models</li>
-<li>spatial models</li>
-<li>cross-effect models</li>
-<li>Bayesian non-parametric models</li>
-<li>deep generative models</li>
-<li>topics models</li>
-<li>variational inference</li>
-</ul></li>
-<li>A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
-<ul>
-<li>Bayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …</li>
-<li>Is there some structure that can be exploited (e.g.&nbsp;informed by the data types for the covariates/features, groups of related features i.e.&nbsp;feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?</li>
-</ul></li>
-<li>A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
-<ul>
-<li>Types of graphs such as matchings</li>
-<li>Phylogenetic trees or networks</li>
-<li>Multiple sequence alignments</li>
-<li>Clustering or feature matrices</li>
-</ul></li>
-<li>Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.</li>
-</ul>
-</section>
-<section id="rubric-for-the-project-proposal" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-the-project-proposal">Rubric for the project proposal</h2>
-<ul>
-<li>Basic requirements
-<ul>
-<li>Team is identified.</li>
-<li>The proposal identifies which of the project themes it will address.</li>
-</ul></li>
-<li>Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g.&nbsp;a URL, showing the structure or <code>head</code> of a dataframe).</li>
-<li>A short summary of potential approaches to tackle the project theme.</li>
-<li>If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.</li>
-</ul>
-<p>As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e.&nbsp;before April 1st ideally and certainly before the last lecture.</p>
-<p><strong>Total: 5%</strong></p>
-</section>
-<section id="rubric-for-the-final-report" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-the-final-report">Rubric for the final report</h2>
-<ul>
-<li>Basic requirements (5%)
-<ul>
-<li>The report fits within the prescribed page limits.</li>
-<li>The report follows best practices of technical writing.</li>
-<li>If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.</li>
-</ul></li>
-<li>Problem formulation. (15%) The report clearly describes:
-<ul>
-<li>a real-world inference task/problem,</li>
-<li>succinct but sufficient context (e.g.&nbsp;biological terminology) needed to understand the problem,</li>
-<li>the key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.</li>
-</ul></li>
-<li>The report contains a literature review: (10%) relevant literature is cited and properly summarized.</li>
-<li>Data analysis (40%)
-<ul>
-<li>A Bayesian model is precisely described (e.g.&nbsp;using the <code>.. ~ ..</code> notation)</li>
-<li>Implementation code in the appendix (e.g.&nbsp;using Stan)</li>
-<li>Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.</li>
-<li>Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.</li>
-</ul></li>
-<li>Project theme: methodological/theoretical aspect of the project (20%)
-<ul>
-<li>Is the approach sound?</li>
-<li>Creative?</li>
-</ul></li>
-<li>Discussion (5%)
-<ul>
-<li>Does the report describe key limitations?</li>
-</ul></li>
-</ul>
-<p><strong>Total: 95%</strong></p>
 
 
 </section>
