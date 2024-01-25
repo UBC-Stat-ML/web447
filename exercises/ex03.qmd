@@ -41,7 +41,7 @@ does not admit a closed-form expression. Estimate its value using `mc_estimate(f
 
 
 
-## Q.2: implementing SNIS for simPPLe
+## Q.2: implementing SNIS for simPPLe {#sec-simPPLe}
 
 In this question, you will write the function `posterior` that we used in 
 [the PPL introduction](../w03_ppl/topic01_ppls_intro.qmd). 
@@ -56,8 +56,10 @@ if (!require(distr)){
   require(distr)
 }
 ```
-2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to submit for this item.
-3. Read the "scaffold code", and use `distr` and two of the functions below to create a fair coin, flip it, and to compute the probability of that flip:
+2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to 
+submit for this item.
+3. Read the "scaffold code", and use `distr` and two of the functions below to 
+create a fair coin, flip it, and to compute the probability of that flip:
 ```r {shortcodes=true, filename="ex03_scaffold.R"}
 {{< include ex03_scaffold.R >}}
 ```

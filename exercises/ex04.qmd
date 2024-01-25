@@ -23,17 +23,58 @@ ANYTHING ELSE?? Probably math questions will be better fit next week. Maybe enou
 
 ## Q.1: classification
 
+Recall the rocket launch example, where we observed $Y_{1:3}=(1,1,1)$ successful
+launches, and where tasked to predict the outcome of the fourth launch $Y_4$.
+We will now take a different approach at modelling this situation. We will 
+assume that the reliability of the rocket changes in time. This will allow us to
+incorporate, for example, the fact that engineering teams implement fixes based
+on past launches and therefore the probability of success should increase.
+
+A simple way to encapsulate the behavior described above in a model is via a
+Bayesian logistic regression. Given an intercept $\alpha$ and slope $\beta$, the
+outcomes $Y_{1:4}$ are conditionally independent and distributed as
 $$
-\begin{aligned}
-\alpha &\sim \distNorm(0,10^2) \\
-\beta &\sim \distNorm(0,10^2) \\
-y_t|\alpha,\beta &\distiid \distBern(\sigma(\alpha+\beta t))
-\end{aligned}
+y_i|\alpha,\beta \sim \distBern(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
 $$
 where
 $$
 \sigma(x) = \frac{1}{1+e^{-x}}
 $$
-is the logistic function (aka the sigmoid function). In `R` you can compute it
-using `plogis(x)`.
+is the logistic or sigmoid function. In `R` you can compute it using `plogis(x)`.
+A fully specified joint distribution requires us to set priors on $(\alpha,\beta)$.
+We use independent Gaussians with high variance, so that the joint distribution
+becomes
+$$
+\begin{aligned}
+\alpha,\beta &\distiid \distNorm(0,10^2) \\
+y_i|\alpha,\beta &\sim \distBern(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
+\end{aligned}
+$${#eq-logistic-regression}
 
+We will use `simPPLe` to perform inference on $(\alpha,\beta, Y_4)$ given the data.
+To do this in one call to `posterior`, we will modify this function to collect 
+and return all the simulated outcomes from a given PPL function, as well as all 
+their corresponding weights. This will allow us to obtain an empirical distribution
+approximating the posterior.
+
+1. Start by loading the scaffold code from [Exercise 3, part 2](ex03.qmd#sec-simPPLe)
+Nothing to submit for this item.
+2.  achieve
+this,
+```{r}
+posterior = function(ppl_function, number_of_iterations) {
+  dimension = length(ppl_function())
+  samples = matrix(0, nrow = number_of_iterations, ncol = dimension)
+  for (i in 1:number_of_iterations) {
+    weight <<- 1.0       # reset the weight accumulator
+    val = ppl_function() # run the forward simulator and store the query value
+    numerator   = numerator + weight*val
+    denominator = denominator + weight
+  }
+  return(numerator/denominator)
+}
+```
+3. Implement a PPL program called `logistic_regression` that forward-simulates 
+the model in @eq-logistic-regression while using `observe` to feed the data to 
+the PPL. The output of this 
+The test function or query in this case should be the entire vector of simulated

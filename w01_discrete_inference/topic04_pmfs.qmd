@@ -76,17 +76,16 @@ The above "stick-based" algorithm can be implemented using the cumulative distri
 
 **Cumulative distribution function (CDF):** $F(x) = \pr(X \le x).$
 
-**Quantile function:** $F^{-1}(u) = \inf\{x \in \reals: u \le F(x)\}$. 
+**Quantile function:** $Q(u) = \inf\{x \in \reals: u \le F(x)\}$. 
 
 Then the "stick-based" algorithm can be written as:
 
 1. $U \sim \distUnif[0, 1]$ 
-2. Return $F^{-1}(U)$. 
-
+2. Return $Q(U)$. 
 
 ## Plotting PMFs in R
 
-Here is an exampl of how to plot PMFs in R:
+Here is an example of how to plot PMFs in R:
 
 ```{r}
 realizations <- 0:20
