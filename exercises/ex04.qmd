@@ -49,7 +49,7 @@ $$
 \alpha,\beta &\distiid \distNorm(0,10^2) \\
 y_i|\alpha,\beta &\sim \distBern(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
 \end{aligned}
-$${#eq-logistic-regression}
+$${#eq-logistic}
 
 We will use `simPPLe` to perform inference on $(\alpha,\beta, Y_4)$ given the data.
 To do this in one call to `posterior`, we will need to modify this function to collect 
@@ -57,13 +57,13 @@ and return all the simulated outcomes from a given PPL function, as well as all
 their corresponding weights. This will allow us to obtain a weighted discrete
 distribution approximating the posterior.
 
-1. Start by loading the scaffold code from [Exercise 3, part 2](ex03.qmd#sec-simPPLe)
+1. Copy-paste and run the code for simPPLe available [here](../w03_ppl/xtra01_simPPLe_code.qmd).
 Nothing to submit for this item.
-2. Define the global variables: a `weight` variable for the PPL and `launch_outcomes`
-containing the observed data (3 successful launches).
+2. Define a global variable `launch_outcomes` containing the observed data 
+(3 successful launches).
 3. Complete the code below to implement the changes to `posterior`. Note that
-we store the samples in a matrix of size `number_of_iterations x dimension`, and
-we infer the dimension by peeking at the outcome of `ppl_function`. 
+we store the samples in a matrix with `number_of_iterations` rows and `dimension`
+columns. We infer the dimension by peeking at the outcome of `ppl_function`. 
 ```{r}
 #| eval: false
 posterior = function(ppl_function, number_of_iterations) {
@@ -72,27 +72,29 @@ posterior = function(ppl_function, number_of_iterations) {
   weights = rep(0, number_of_iterations)
   for (i in 1:number_of_iterations) {
     weight <<- 1.0       # reset the weight accumulator
-    # TODO: run the forward simulator and store the sample it returns
-    # TODO: store the weight of the sample
+    # TODO: run `ppl_function` and store its output in the i-th column of `samples`
+    # TODO: store the weight corresponding to this sample in the vector `weights`
   }
   return(list(samples=samples, weights=weights))
 }
 ```
 4. Implement a PPL program called `logistic_regression` that forward-simulates 
-the model in @eq-logistic-regression while using `observe` to feed the data to 
-the PPL. The output of this 
+the model in @eq-logistic while using `observe` to feed the data to the PPL. 
+Note that `logistic_regression` returns all the values simulated during
+its execution, which correspond to the unobserved variables in the model of 
+Equation @eq-logistic.
 ```{r}
 #| eval: false
 logistic_regression = function(){
-  intercept = simulate(XYZ) # TODO: sample an intercept
-  slope     = simulate(XYZ) # TODO: sample a slope
+  intercept = simulate(FIX_ME) # TODO: sample an intercept
+  slope     = simulate(FIX_ME) # TODO: sample a slope
   for (i in seq_along(launch_outcomes)){
     prob_success = # TODO: compute the success probability for the i-th launch
-    observe(launch_outcomes[i], XYZ) # TODO: complete the observe statement
+    observe(launch_outcomes[i], FIX_ME) # TODO: complete the observe statement
   }
   # predict the next launch
   prob_success = # TODO: compute the success probability for the next launch
-  next_launch = simulate(XYZ) # TODO: sample the next launch
+  next_launch = simulate(FIX_ME) # TODO: sample the next launch
   return(c(intercept, slope, next_launch))
 }
 ```
