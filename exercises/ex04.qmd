@@ -98,4 +98,8 @@ logistic_regression = function(){
   return(c(intercept, slope, next_launch))
 }
 ```
-5. 
+5. Run `posterior` on `logistic_regression` with $10000$ iterations and store
+the output in a variable called `inference_results`.
+6. Compute and report the [effective sample size](../drafts/topic06_ess.qmd) of 
+the approximation.
+
