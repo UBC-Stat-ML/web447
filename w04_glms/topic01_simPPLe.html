@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Monte Carlo convergence rate</title>
+<title>Bayes1@UBC - simPPLe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic05_mc_rates.html">Monte Carlo convergence rate</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">simPPLe</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -417,7 +417,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo convergence rate</span></a>
   </div>
 </li>
@@ -446,7 +446,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">simPPLe</span></a>
   </div>
 </li>
@@ -467,20 +467,18 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link" data-scroll-target="#motivating-example">Motivating example</a></li>
-  <li><a href="#empirical-scaling" id="toc-empirical-scaling" class="nav-link" data-scroll-target="#empirical-scaling">Empirical scaling</a></li>
-  <li><a href="#mathematical-underpinnings" id="toc-mathematical-underpinnings" class="nav-link" data-scroll-target="#mathematical-underpinnings">Mathematical underpinnings</a></li>
-  <li><a href="#contextualizing-the-error-rate-of-monte-carlo" id="toc-contextualizing-the-error-rate-of-monte-carlo" class="nav-link" data-scroll-target="#contextualizing-the-error-rate-of-monte-carlo">Contextualizing the error rate of Monte Carlo</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#setting-up-simpple-on-your-computer" id="toc-setting-up-simpple-on-your-computer" class="nav-link" data-scroll-target="#setting-up-simpple-on-your-computer">Setting up simPPLe on your computer</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic05_mc_rates.html">Monte Carlo convergence rate</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">simPPLe</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Monte Carlo convergence rate</h1>
+<h1 class="title">simPPLe</h1>
 </div>
 
 
@@ -521,84 +519,102 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Convergence rate of Monte Carlo methods.</li>
-<li>Empirical scaling laws using physicist’s log-log plot trick.</li>
-<li>Mathematical underpinnings.</li>
+<li>Last week’s <a href="../exercises/ex03.html">Q2 exercise solution</a>.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>When using Monte Carlo methods, you need to specify the number of iterations (also known as number of samples).</p>
-<p><strong>How to set the number of iterations?</strong></p>
-<p>We cover here a heuristic, forming the foundation for more principled methods.</p>
+<p>We will use simPPLe this week to do probabilistic modelling.</p>
 </section>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p><strong>Important:</strong> we go back to <a href="../w01_discrete_inference/topic11_monte_carlo.html">simple Monte Carlo</a> here, to make the argument simpler. However our findings will apply equally to SNIS (and later, to MCMC).</p>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>If you missed Tuesday’s lecture last week, make sure to read <a href="../w03_ppl/topic01_ppls_intro.html">the introduction to PPLs</a>.</p>
 </section>
-<section id="motivating-example" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="motivating-example">Motivating example</h2>
-<p>Let us revisit <a href="../exercises/ex01.html">Q.1.3 in the first exercise</a>. We will use it to explore tricks to set the number of Monte Carlo iterations.</p>
-<p><strong>Setup:</strong> coin bag with a single flip (where we write <span class="math inline">\(Y = Y_1\)</span>)</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/coinbag.png" class="img-fluid" width="200"></p>
-</div></div><p><span id="eq-coin-joint"><span class="math display">\[
-\begin{align*}
-X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
-Y | X &amp;\sim {\mathrm{Bern}}(X/2)
-\end{align*}
-\tag{1}\]</span></span></p>
-<p><strong>Plan:</strong> We will use our forward simulator and the law of large numbers to approximate <span class="math inline">\(\mathbb{E}[(1 + Y)^X]\)</span>.</p>
-<p><strong>Recall from the exercise 1 solutions (simplified a bit here):</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>truth <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>truth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.166667</code></pre>
+<section id="setting-up-simpple-on-your-computer" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-simpple-on-your-computer">Setting up simPPLe on your computer</h2>
+<ul>
+<li>Let us combine the “scaffold” files and the answer of last week’s Q2 into one file. Copy paste the code below into a file called <code>simple.R</code>:</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>simple.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">require</span>(extraDistr))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>forward_sample <span class="ot">=</span> <span class="cf">function</span>() {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">2</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">rbern</span>(<span class="dv">1</span>, x<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(x, y))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>simple_monte_carlo <span class="ot">=</span> <span class="cf">function</span>(n_iterations) {</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (iteration <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iterations) {</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">forward_sample</span>()</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    sum <span class="ot">=</span> sum <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span>sample[<span class="dv">2</span>])<span class="sc">^</span>sample[<span class="dv">1</span>]</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sum<span class="sc">/</span>n_iterations)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Let’s run the simulator with 10 iterations:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_monte_carlo</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.3</code></pre>
-</div>
-</div>
-<p>Is this reliable? Let’s run it two more times:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_monte_carlo</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.7</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simple_monte_carlo</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.1</code></pre>
-</div>
+<div class="sourceCode" id="cb1" data-shortcodes="true," data-filename="simple.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">###### solution</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  numerator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  denominator <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    g_i <span class="ot">=</span> <span class="fu">ppl_function</span>()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    numerator <span class="ot">=</span> numerator <span class="sc">+</span> weight <span class="sc">*</span> g_i</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> weight</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">###### contents of the scaffold</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(distr))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Utilities to make the distr library a bit nicer to use</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution, realization) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d</span>(distribution)(realization) <span class="co"># return the PMF or density </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Bern <span class="ot">=</span> <span class="cf">function</span>(probability_to_get_one) {</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>probability_to_get_one, probability_to_get_one))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Key functions called by simPPLe programs</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Use simulate(distribution) for unobserved random variables</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>simulate <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution) {</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">r</span>(distribution)(<span class="dv">1</span>) <span class="co"># sample once from the given distribution</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Use observe(realization, distribution) for observed random variables</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>observe <span class="ot">=</span> <span class="cf">function</span>(realization, distribution) {</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  weight <span class="ot">&lt;&lt;-</span> weight <span class="sc">*</span> <span class="fu">p</span>(distribution, realization) </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>OK.. the first digit seems “stabilized” but not the second digit.</li>
-<li>Suppose I want one more digit of accuracy…</li>
+<li>This way, you can now load simPPLe by loading <code>simple.R</code> into your session:</li>
 </ul>
-<p><strong>By how much should I increase the number of iteration to get one more digit of accuracy?</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define your model as a function, e.g. my_function</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># call: posterior(my_function, 100) to approximate posterior E[my_function | observations]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="testing" class="level2">
+<h2 class="anchored" data-anchor-id="testing">Testing</h2>
+<p>I will start this Tuesday’s lecture with the following simPPLe test (a continuous version of the rocket model):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">4</span>) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># simPPLe's description of our "bag of coins" example</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>beta_binomial <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Similar to forward sampling, but use 'observe' when the variable is observed</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Beta</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(data)) { </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(data[i], <span class="fu">Bern</span>(p)) </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the test function, here the parameter p</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(beta_binomial, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- show in advance the question (but not solution) so they can prep for this one! -->
+<p><strong>What is the output?</strong></p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -612,171 +628,27 @@ Click for choices
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>10 times more iterations</li>
-<li>100 times more iterations</li>
-<li>1000 times more iterations</li>
-<li>there is no way to answer this questions</li>
+<li><span class="math inline">\(0.0010394\)</span></li>
+<li><span class="math inline">\(0.0194394\)</span></li>
+<li><span class="math inline">\(0.0826293\)</span></li>
+<li><span class="math inline">\(0.1728016\)</span></li>
 <li>None of the above</li>
 </ol>
 </div>
 </div>
 </div>
-</section>
-<section id="empirical-scaling" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-scaling">Empirical scaling</h2>
-<p>Continuing on the same example (where we know the truth!), we will now:</p>
-<ul>
-<li>vary the number of iterations (<span class="math inline">\(10^1, 10^{1.5}, 10^2, 10^{2.5}, 10^3\)</span>),
-<ul>
-<li>for each number of iteration <code>n_iterations</code>, we run <code>simple_monte_carlo(n_iterations)</code> 500 times,</li>
-<li>and plot the errors in log-log scale.</li>
-</ul></li>
-</ul>
-<p>First, a function to compute the approximation error of one call to <code>simple_monte_carlo(n_iterations)</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>approximate_error <span class="ot">=</span> <span class="cf">function</span>(n_iterations) {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  mc <span class="ot">=</span> <span class="fu">simple_monte_carlo</span>(n_iterations)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  error <span class="ot">=</span> <span class="fu">abs</span>(mc <span class="sc">-</span> truth)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(error)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Second, running <code>approximate_error</code> on the different numbers of iterations, each 500 times:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"n_iterations"</span> <span class="ot">=</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">32</span>, <span class="dv">100</span>, <span class="dv">316</span>, <span class="dv">1000</span>), <span class="at">each=</span><span class="dv">500</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>errors <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df<span class="sc">$</span>n_iterations, approximate_error)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Finally, plotting the errors in log-log scale (each of the <span class="math inline">\(500 \cdot 5\)</span> points is the error of one Monte Carlo run):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>n_iterations, <span class="at">y=</span>errors)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom=</span><span class="st">"line"</span>) <span class="sc">+</span> <span class="co"># Line averages over 1000 replicates</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span>  <span class="co"># Show result in log-log scale</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="topic05_mc_rates_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li><p>Good news: error goes to zero</p>
-<ul>
-<li>Recall this property is known as consistency.</li>
-<li>This confirms the theory covered on the <a href="../w03_ppl/topic04_consistency.html">previous page</a>.</li>
-<li>But here we are interested in the <strong>rate</strong> (how fast does it go to zero?)</li>
-</ul></li>
-<li><p>Result suggests a linear fit in the log-log scale <span class="math inline">\(\underbrace{\log_{10}(\text{error})}_{y} = a\; \underbrace{\log_{10}(\text{number of iterations})}_{x} + b\)</span></p></li>
-<li><p><strong>Questions:</strong></p>
-<ul>
-<li>Eyeball the coefficient <span class="math inline">\(a = \Delta x / \Delta y\)</span>.</li>
-<li>What can you this coefficient tell you about the scaling of the error?</li>
-</ul></li>
-</ul>
-<!-- 
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $2$
-1. $1/2$
-1. $1$
-1. $-1/2$
-1. $-2$
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-- Get $a \approx -1/2$
-
-- Hence taking power on each side of 
-
-$\underbrace{\log_{10}(\text{error})}_{y} = a \underbrace{\log_{10}(\text{number of iterations})}_{x} + b$
-
-- we get that the error will scale like 
-$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
-:::
-
--->
-<p>Based on this extra information, let’s try revisit our initial question:</p>
 <!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. 10 times more iterations
-1. 100 times more iterations
-1. 1000 times more iterations
-1. there is no way to answer this questions
-1. None of the above
-:::
-
-
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-- since we now know that the error will scale like 
-$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
-
-- ... if we want to reduce it by factor 10 (i.e. "gain one significant digit"), we need 100x more iterations
-- To gain 2 more significant digits: need 10,000x more iterations, etc
-
-- What we did here is an example of an (empirical) **asymptotic analysis**.
+$0.1728016$. 
 :::
-
 -->
-</section>
-<section id="mathematical-underpinnings" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>
-<p><strong>Notation:</strong> recall <span class="math inline">\(\hat G_M\)</span> is the estimator. Let us denote the truth by <span class="math inline">\(g^* = \mathbb{E}[g(X, Y)]\)</span>.</p>
-<p><strong>Core of the argument:</strong> use that for independent random variables <span class="math inline">\(V_1, V_2\)</span>, <span class="math inline">\(\operatorname{Var}[V_1 + V_2] = \operatorname{Var}[V_1] + \operatorname{Var}[V_2]\)</span>! This gives us:</p>
-<p><span class="math display">\[\operatorname{SD}(\hat G_M) = \sqrt{\operatorname{Var}\frac{1}{M} \sum_{i=1}^M G^{(m)}} = \sqrt{\frac{M \operatorname{Var}G^{(1)}}{M^2}} = \frac{\text{constant}}{\sqrt{M}}\]</span></p>
-<p>In the following, I will explain why analyzing the standard deviation makes sense…</p>
-<p><strong>Surrogate error measure:</strong> Mathematically analyzing the error as we define in our code, <span class="math inline">\(\mathbb{E}|\hat G_M - g^*|\)</span>, is tricky; it is easier to look instead at the Root Mean Squared Error (RMSE): <span class="math display">\[\operatorname{RMSE}= \sqrt{\operatorname{MSE}} = \sqrt{ \mathbb{E}[ (\hat G_M - g^*)^2 ]}.\]</span> <em>Sanity check:</em> Note that the units are OK, i.e.&nbsp;the error measured in RMSE and with the more intuitive <span class="math inline">\(\mathbb{E}|\hat G_M - g^*|\)</span> has the same units, e.g.&nbsp;meters, or grams or whatever, as the estimator <span class="math inline">\(\hat G_M\)</span> and truth <span class="math inline">\(g^*\)</span>.</p>
-<p><strong>It’s enough to study the standard deviation:</strong></p>
-<ul>
-<li>Recall that the MSE is the sum of variance and bias squared (see <a href="https://en.wikipedia.org/wiki/Mean_squared_error">wikipedia for proof</a>) <span class="math display">\[\begin{align*}
-  \operatorname{MSE}&amp;= \operatorname{Var}[\hat G_M] + (\operatorname{Bias}(\hat G_M, g^*))^2 \\
-  \operatorname{Bias}(\hat G_M, g^*) &amp;= (\mathbb{E}[\hat G_M] - g^*)^2.
-  \end{align*}\]</span></li>
-<li>For simple Monte Carlo, the bias is zero by linearity of expectation:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[\mathbb{E}[\hat G_M] = \mathbb{E}\left[\frac{1}{M} \sum_{m=1}^M G^{(m)}\right] = \frac{1}{M} \sum_{m=1}^M \mathbb{E}[G^{(m)}] = \mathbb{E}[G^{(m)}] = g^*.\]</span></li>
-</ul>
-<ul>
-<li>The bias of zero gives a simpler expression for RMSE: <span class="math display">\[\operatorname{RMSE}= \sqrt{\operatorname{Var}[\hat G_M] + 0} = \operatorname{SD}[\hat G_M]\]</span></li>
-<li>Hence for simple Monte Carlo, analyzing the scaling of the standard deviation (SD) is the same as analyzing the RMSE.</li>
-</ul>
-</section>
-<section id="contextualizing-the-error-rate-of-monte-carlo" class="level2">
-<h2 class="anchored" data-anchor-id="contextualizing-the-error-rate-of-monte-carlo">Contextualizing the error rate of Monte Carlo</h2>
-<ul>
-<li>Numerical methods such as the <a href="https://en.wikipedia.org/wiki/Trapezoidal_rule">trapezoidal rule</a> converge <strong>much faster</strong> in terms of <span class="math inline">\(M\)</span>: <span class="math display">\[\text{error} = \frac{\text{constant}}{M^2},\]</span> i.e.&nbsp;10 times more iterations gives <strong>two digits</strong> of extra accuracy (here <span class="math inline">\(M\)</span> is the number of grid points used in a 1d numerical integral)!</li>
-<li>So why do we use Monte Carlo?
-<ul>
-<li>The constants in the analysis of numerical integration blow up exponentially in the dimensionality of the problem!</li>
-<li>Many Monte Carlo methods can avoid this exponential blow up in the dimensionality<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
-<li>And good scalability in the dimensionality of the problem often more important than scalability in number of digits of accuracy
-<ul>
-<li>…can’t trust 10th digit anyways because the model almost always has some slight mis-specification.</li>
-</ul></li>
-</ul></li>
-</ul>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>For SNIS, the bias is not zero (because we have a ratio), but the squared bias decays faster than the variance term as <span class="math inline">\(M \to \infty\)</span> so the argument is essentially the same as simple Monte Carlo.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>In particular, Simple Monte Carlo and MCMC can often avoid the curse of dimensionality. But not SNIS! Why are we spending time on SNIS then? Because it can be used to approximate arbitrary posterior distribution, while simple Monte Carlo cannot, and it is much simpler than MCMC, so a good starting point pedagogically. However we will jump to MCMC later in this course.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

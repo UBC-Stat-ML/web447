@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Exercise 3: inference on continuous spaces</title>
+<title>Bayes1@UBC - Exercise 4: inference on continuous spaces</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -437,6 +437,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">The joy of probabilistic modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">simPPLe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -457,7 +474,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise 3: inference on continuous spaces</h1>
+<h1 class="title">Exercise 4: inference on continuous spaces</h1>
 </div>
 
 
@@ -519,32 +536,50 @@ https://github.com/trevorcampbell/shortex
 y_i|\alpha,\beta \sim {\mathrm{Bern}}(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
 \]</span> where <span class="math display">\[
 \sigma(x) = \frac{1}{1+e^{-x}}
-\]</span> is the logistic or sigmoid function. In <code>R</code> you can compute it using <code>plogis(x)</code>. A fully specified joint distribution requires us to set priors on <span class="math inline">\((\alpha,\beta)\)</span>. We use independent Gaussians with high variance, so that the joint distribution becomes <span id="eq-logistic-regression"><span class="math display">\[
+\]</span> is the logistic or sigmoid function. In <code>R</code> you can compute it using <code>plogis(x)</code>. A fully specified joint distribution requires us to set priors on <span class="math inline">\((\alpha,\beta)\)</span>. We use independent Gaussians with high variance, so that the joint distribution becomes <span id="eq-logistic"><span class="math display">\[
 \begin{aligned}
 \alpha,\beta &amp;\overset{\text{iid}}{\sim}\mathcal{N}(0,10^2) \\
 y_i|\alpha,\beta &amp;\sim {\mathrm{Bern}}(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
 \end{aligned}
 \tag{1}\]</span></span></p>
-<p>We will use <code>simPPLe</code> to perform inference on <span class="math inline">\((\alpha,\beta, Y_4)\)</span> given the data. To do this in one call to <code>posterior</code>, we will modify this function to collect and return all the simulated outcomes from a given PPL function, as well as all their corresponding weights. This will allow us to obtain an empirical distribution approximating the posterior.</p>
+<p>We will use <code>simPPLe</code> to perform inference on <span class="math inline">\((\alpha,\beta, Y_4)\)</span> given the data. To do this in one call to <code>posterior</code>, we will need to modify this function to collect and return all the simulated outcomes from a given PPL function, as well as all their corresponding weights. This will allow us to obtain a weighted discrete distribution approximating the posterior.</p>
 <ol type="1">
-<li>Start by loading the scaffold code from <a href="../exercises/ex03.html#sec-simPPLe">Exercise 3, part 2</a> Nothing to submit for this item.</li>
-<li>achieve this,</li>
+<li>Copy-paste and run the code for simPPLe available <a href="../w03_ppl/xtra01_simPPLe_code.qmd">here</a>. Nothing to submit for this item.</li>
+<li>Define a global variable <code>launch_outcomes</code> containing the observed data (3 successful launches).</li>
+<li>Complete the code below to implement the changes to <code>posterior</code>. Note that we store the samples in a matrix with <code>number_of_iterations</code> rows and <code>dimension</code> columns. We infer the dimension by peeking at the outcome of <code>ppl_function</code>.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">ppl_function</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">ppl_function</span>()) </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> number_of_iterations, <span class="at">ncol =</span> dimension)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">=</span> <span class="fu">ppl_function</span>() <span class="co"># run the forward simulator and store the query value</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    numerator   <span class="ot">=</span> numerator <span class="sc">+</span> weight<span class="sc">*</span>val</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    denominator <span class="ot">=</span> denominator <span class="sc">+</span> weight</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, number_of_iterations)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: run `ppl_function` and store its output in the i-th column of `samples`</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: store the weight corresponding to this sample in the vector `weights`</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">samples=</span>samples, <span class="at">weights=</span>weights))</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="3" type="1">
-<li>Implement a PPL program called <code>logistic_regression</code> that forward-simulates the model in <a href="#eq-logistic-regression" class="quarto-xref">Equation&nbsp;1</a> while using <code>observe</code> to feed the data to the PPL. The output of this The test function or query in this case should be the entire vector of simulated</li>
+<ol start="4" type="1">
+<li>Implement a PPL program called <code>logistic_regression</code> that forward-simulates the model in <a href="#eq-logistic" class="quarto-xref">Equation&nbsp;1</a> while using <code>observe</code> to feed the data to the PPL. Note that <code>logistic_regression</code> returns all the values simulated during its execution, which correspond to the unobserved variables in the model of Equation <a href="#eq-logistic" class="quarto-xref">Equation&nbsp;1</a>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logistic_regression <span class="ot">=</span> <span class="cf">function</span>(){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  intercept <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample an intercept</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample a slope</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(launch_outcomes)){</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    prob_success <span class="ot">=</span> <span class="co"># </span><span class="al">TODO</span><span class="co">: compute the success probability for the i-th launch</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(launch_outcomes[i], FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: complete the observe statement</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predict the next launch</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  prob_success <span class="ot">=</span> <span class="co"># </span><span class="al">TODO</span><span class="co">: compute the success probability for the next launch</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  next_launch <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample the next launch</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(intercept, slope, next_launch))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="1">
+<li></li>
 </ol>
 
 
