@@ -63,4 +63,3 @@ called `simple_utils.R`. We have demonstrated the use of these functions
 {{< include ../blocks/simple_utils.R >}}
 ```
 
-
