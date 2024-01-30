@@ -50,7 +50,7 @@ Note that in much of what follows, everything works the same as with
 except we replace sums by integrals and PMFs $p$ by densities $f$.
 
 **LOTUS:** 
-  $$\ex[g(X, Y)] = \int f(x, y) g(x, y) \dee x.$$ 
+  $$\ex[g(X, Y)] = \int \int f(x, y) g(x, y) \dee x \dee y.$$ 
 
 **Marginalization:** going from a joint density on $(X, Y)$ to the density of $X$ only (the latter is called the marginal):
   $$f_X(x) = \int f(x, y) \dee y.$$
