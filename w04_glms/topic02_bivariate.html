@@ -608,26 +608,44 @@ y_j | p_j &amp;\sim {\mathrm{Binom}}(n_j, p_j),
 <li>“Would you rather get strapped to…”</li>
 <li>“Should you show A or B?”</li>
 </ul>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\pr(p_A = 1)$
-1. $\pr(p_A = 1 | Y = y)$
-1. $\pr(p_A > p_B)$
-1. $\pr(p_A > p_B | Y = y)$
-1. None of the above
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-$\pr(p_A > p_B | Y = y)$: in words, is the chance of success of A greater than B?
-:::
-
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\mathbb{P}(p_A = 1)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(p_A = 1 | Y = y)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(p_A &gt; p_B)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(p_A &gt; p_B | Y = y)\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\mathbb{P}(p_A &gt; p_B | Y = y)\)</span>: in words, is the chance of success of A greater than B?</p>
+</div>
+</div>
+</div>
 <p><strong>Modify the code below to approximate that probability.</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -642,61 +660,44 @@ $\pr(p_A > p_B | Y = y)$: in words, is the chance of success of A greater than B
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  return <span class="co"># what is the "test function"?</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(bivariate, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\approx 0.1$
-1. $\approx 0.3$
-1. $\approx 0.6$
-1. $\approx 0.9$
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-::: {.cell}
-
-```{.r .cell-code}
-source("../../solutions/simple.R")
-set.seed(1)
-
-bivariate = function() {
-  
-  p_A = simulate(Beta(1, 1))
-  observe(1, Binom(size = 1, prob = p_A)) 
-  
-  p_B = simulate(Beta(1, 1))
-  observe(98, Binom(size = 100, prob = p_B)) 
-  
-  return(ifelse(p_A > p_B, 1, 0))
-}
-posterior(bivariate, 10000)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 0.06909026
-```
-
-
-:::
-:::
-:::
-
--->
-</section>
-<section id="visualization-of-a-bivariate-joint-posterior" class="level2">
-<h2 class="anchored" data-anchor-id="visualization-of-a-bivariate-joint-posterior">Visualization of a bivariate joint posterior</h2>
-<p>Let us get more insight on <strong>joint</strong> posterior distributions (posterior over two variables).</p>
-<p>To do so, we use visualizations where the x-axis is the first parameter (here <span class="math inline">\(p_A\)</span>) and the y-axis is the second parameter (here <span class="math inline">\(p_B\)</span>).</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\approx 0.1\)</span></li>
+<li><span class="math inline">\(\approx 0.3\)</span></li>
+<li><span class="math inline">\(\approx 0.6\)</span></li>
+<li><span class="math inline">\(\approx 0.9\)</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This contains useful functions to visualize the output of simPPLe:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/simple_utils.R"</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bivariate_pair <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bivariate <span class="ot">=</span> <span class="cf">function</span>() {</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  p_A <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Beta</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="dv">1</span>, <span class="fu">Binom</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p_A)) </span>
@@ -704,19 +705,46 @@ posterior(bivariate, 10000)
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  p_B <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Beta</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="dv">98</span>, <span class="fu">Binom</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> p_B)) </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We modify the above to return a vector containing both parameters</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(p_A, p_B)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># To compute the plot, we need the list of samples and weights ("particles"), i.e. more details compared to posterior()</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># This is what posterior_particles accomplishes</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>particles <span class="ot">=</span> <span class="fu">posterior_particles</span>(bivariate_pair, <span class="dv">10000</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we use these to create the plot below</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted_scatter_plot</span>(particles, <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"p_A"</span>, <span class="at">ylab=</span><span class="st">"p_B"</span>))</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>xaxis <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xaxis, xaxis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">ifelse</span>(p_A <span class="sc">&gt;</span> p_B, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(bivariate, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06909026</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualization-of-a-bivariate-joint-posterior" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-of-a-bivariate-joint-posterior">Visualization of a bivariate joint posterior</h2>
+<p>Let us get more insight on <strong>joint</strong> posterior distributions (posterior over two variables).</p>
+<p>To do so, we use visualizations where the x-axis is the first parameter (here <span class="math inline">\(p_A\)</span>) and the y-axis is the second parameter (here <span class="math inline">\(p_B\)</span>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This contains useful functions to visualize the output of simPPLe:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/simple_utils.R"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bivariate_pair <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  p_A <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Beta</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="dv">1</span>, <span class="fu">Binom</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p_A)) </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  p_B <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Beta</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="dv">98</span>, <span class="fu">Binom</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> p_B)) </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We modify the above to return a vector containing both parameters</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(p_A, p_B)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># To compute the plot, we need the list of samples and weights ("particles"), i.e. more details compared to posterior()</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># This is what posterior_particles accomplishes</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>particles <span class="ot">=</span> <span class="fu">posterior_particles</span>(bivariate_pair, <span class="dv">10000</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we use these to create the plot below</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted_scatter_plot</span>(particles, <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"p_A"</span>, <span class="at">ylab=</span><span class="st">"p_B"</span>))</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>xaxis <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xaxis, xaxis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -730,24 +758,43 @@ posterior(bivariate, 10000)
 <li>We encode its associated weight <span class="math inline">\(w^{(m)}\)</span> by the transparency (<code>alpha</code>) of the point.</li>
 </ul>
 <p><strong>Question:</strong> What region of integration should you use to compute <span class="math inline">\(\mathbb{P}(p_A &gt; p_B | Y = y)\)</span>?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. ◤
-1. ◥
-1. ◢
-1. ◣
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-◢
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>◤</li>
+<li>◥</li>
+<li>◢</li>
+<li>◣</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>◢</p>
+</div>
+</div>
+</div>
 <!-- TODO: marginals + some high level description -->
 <!-- TODO: KDE + some high level description -->
 
