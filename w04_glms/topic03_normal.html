@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Appendix: Code for simPPLe</title>
+<title>Bayes1@UBC - Normal distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,6 +67,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -114,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/xtra01_simPPLe_code.html">Appendix: Code for simPPLe</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../w04_glms/topic03_normal.html">Normal distributions</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -377,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Continous models</span></a>
+ <span class="menu-text">Continuous models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -390,12 +385,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo convergence rate</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/xtra01_simPPLe_code.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Appendix: Code for simPPLe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -423,6 +412,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">simPPLe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate posteriors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Normal distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bernoulli regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -441,14 +454,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#examples-of-normal-densities" id="toc-examples-of-normal-densities" class="nav-link" data-scroll-target="#examples-of-normal-densities">Examples of normal densities</a></li>
+  <li><a href="#parameterizations" id="toc-parameterizations" class="nav-link" data-scroll-target="#parameterizations">Parameterizations</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/xtra01_simPPLe_code.html">Appendix: Code for simPPLe</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../w04_glms/topic03_normal.html">Normal distributions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix: Code for simPPLe</h1>
+<h1 class="title">Normal distributions</h1>
 </div>
 
 
@@ -484,39 +509,43 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(distr))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Utilities to make the distr library a bit nicer to use</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution, realization) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">d</span>(distribution)(realization) <span class="co"># return the PMF or density </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Bern <span class="ot">=</span> <span class="cf">function</span>(probability_to_get_one) {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DiscreteDistribution</span>(<span class="at">supp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>probability_to_get_one, probability_to_get_one))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Global variables required by simPPLe</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Accumulator for the SNIS weight</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Key functions called by simPPLe programs</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Use simulate(distribution) for unobserved random variables</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>simulate <span class="ot">&lt;-</span> <span class="cf">function</span>(distribution) {</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">r</span>(distribution)(<span class="dv">1</span>) <span class="co"># sample once from the given distribution</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Use observe(realization, distribution) for observed random variables</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>observe <span class="ot">=</span> <span class="cf">function</span>(realization, distribution) {</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  weight <span class="ot">&lt;&lt;-</span> weight <span class="sc">*</span> <span class="fu">p</span>(distribution, realization) </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Quick review of the normal distribution.</li>
+<li>Different parameterizations.</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>The normal distribution is often used in Bayesian analysis when one needs a prior over an unknown <span class="math inline">\(x\)</span> such that <span class="math inline">\(x \in (-\infty, \infty) = \mathbb{R}\)</span>.</p>
+</section>
+</section>
+<section id="examples-of-normal-densities" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-normal-densities">Examples of normal densities</h2>
+<p><img src="../images/Normal_Distribution_PDF.svg" class="img-fluid" width="600"></p>
+</section>
+<section id="parameterizations" class="level2">
+<h2 class="anchored" data-anchor-id="parameterizations">Parameterizations</h2>
+<ul>
+<li>There are <strong>different conventions</strong> to measure the spread.
+<ul>
+<li>Standard deviation <span class="math inline">\(\sigma\)</span>.</li>
+<li>Variance, <span class="math inline">\(\sigma^2\)</span>.</li>
+<li>Precision, <span class="math inline">\(\tau = 1/\sigma^2\)</span>.</li>
+</ul></li>
+<li><strong>Keep that in mind</strong> as different languages will use different conventions!</li>
+<li>Standard deviation is the most intuitive:
+<ul>
+<li>it is the width of the bell,</li>
+<li>the only one that has the same units as <span class="math inline">\(x\)</span> (e.g.&nbsp;if <span class="math inline">\(x\)</span> is in meters, so is <span class="math inline">\(\sigma\)</span>).</li>
+</ul></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

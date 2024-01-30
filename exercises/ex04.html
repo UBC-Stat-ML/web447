@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Exercise 4: inference on continuous spaces</title>
+<title>Bayes1@UBC - Exercise 4: the joy of probabilistic inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,9 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../exercises/ex04.html">Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -408,7 +406,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Continous models</span></a>
+ <span class="menu-text">Continuous models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -452,6 +450,36 @@ window.Quarto = {
  <span class="menu-text">simPPLe</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate posteriors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normal distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bernoulli regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -464,17 +492,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tentative-goalsideas" id="toc-tentative-goalsideas" class="nav-link active" data-scroll-target="#tentative-goalsideas">TENTATIVE goals/ideas</a></li>
-  <li><a href="#q.1-classification" id="toc-q.1-classification" class="nav-link" data-scroll-target="#q.1-classification">Q.1: classification</a></li>
+  <li><a href="#q.1-logistic-rocket-improvement" id="toc-q.1-logistic-rocket-improvement" class="nav-link active" data-scroll-target="#q.1-logistic-rocket-improvement">Q.1: logistic rocket improvement</a></li>
+  <li><a href="#q.2-choosing-a-model" id="toc-q.2-choosing-a-model" class="nav-link" data-scroll-target="#q.2-choosing-a-model">Q.2: choosing a model</a></li>
+  <li><a href="#sec-utils" id="toc-sec-utils" class="nav-link" data-scroll-target="#sec-utils">Appendix</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../exercises/ex04.html">Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercise 4: inference on continuous spaces</h1>
+<h1 class="title">Exercise 4: the joy of probabilistic inference</h1>
 </div>
 
 
@@ -510,77 +539,99 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<section id="tentative-goalsideas" class="level2">
-<h2 class="anchored" data-anchor-id="tentative-goalsideas">TENTATIVE goals/ideas</h2>
-<ul>
-<li>Approximate a regression/classification posterior distribution using a PPL.
-<ul>
-<li>use sequence of launch data? idea is that success pr will be increasing.. should be stark enough to see a trend in posterior</li>
-<li>for now, give them prior, model in mathematical notation that they have to translate</li>
-</ul></li>
-<li>Using packages to visualize a 1d and 2d posterior distribution and interpreting these plots.
-<ul>
-<li>interpretation could be to</li>
-</ul></li>
-<li>Performing prediction using a PPL.
-<ul>
-<li>ask to do the insurance question again based on this new data and model</li>
-</ul></li>
-</ul>
-<p>ANYTHING ELSE?? Probably math questions will be better fit next week. Maybe enough?</p>
-</section>
-<section id="q.1-classification" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-classification">Q.1: classification</h2>
-<p>Recall the rocket launch example, where we observed <span class="math inline">\(Y_{1:3}=(1,1,1)\)</span> successful launches, and where tasked to predict the outcome of the fourth launch <span class="math inline">\(Y_4\)</span>. We will now take a different approach at modelling this situation. We will assume that the reliability of the rocket changes in time. This will allow us to incorporate, for example, the fact that engineering teams implement fixes based on past launches and therefore the probability of success should increase.</p>
-<p>A simple way to encapsulate the behavior described above in a model is via a Bayesian logistic regression. Given an intercept <span class="math inline">\(\alpha\)</span> and slope <span class="math inline">\(\beta\)</span>, the outcomes <span class="math inline">\(Y_{1:4}\)</span> are conditionally independent and distributed as <span class="math display">\[
-y_i|\alpha,\beta \sim {\mathrm{Bern}}(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
-\]</span> where <span class="math display">\[
-\sigma(x) = \frac{1}{1+e^{-x}}
-\]</span> is the logistic or sigmoid function. In <code>R</code> you can compute it using <code>plogis(x)</code>. A fully specified joint distribution requires us to set priors on <span class="math inline">\((\alpha,\beta)\)</span>. We use independent Gaussians with high variance, so that the joint distribution becomes <span id="eq-logistic"><span class="math display">\[
-\begin{aligned}
-\alpha,\beta &amp;\overset{\text{iid}}{\sim}\mathcal{N}(0,10^2) \\
-y_i|\alpha,\beta &amp;\sim {\mathrm{Bern}}(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
-\end{aligned}
-\tag{1}\]</span></span></p>
-<p>We will use <code>simPPLe</code> to perform inference on <span class="math inline">\((\alpha,\beta, Y_4)\)</span> given the data. To do this in one call to <code>posterior</code>, we will need to modify this function to collect and return all the simulated outcomes from a given PPL function, as well as all their corresponding weights. This will allow us to obtain a weighted discrete distribution approximating the posterior.</p>
+<p>Make sure to read the <a href="../w04_glms/topic01_simPPLe.html">simPPLe setup page</a> before you begin.</p>
+<section id="q.1-logistic-rocket-improvement" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-logistic-rocket-improvement">Q.1: logistic rocket improvement</h2>
+<p>Consider the <a href="../w04_glms/topic04_classification.html#sec-data">Ariane 1 data we used this week</a>,</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>success_indicators <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and the <a href="../w04_glms/topic04_classification.html#sec-model">model described in the same page</a>.</p>
+<p>Recall that we discussed a model where the reliability of the rocket changes in time. This will allow us to incorporate, for example, the fact that engineering teams implement fixes based on past launches and therefore the probability of success should increase.</p>
 <ol type="1">
-<li>Copy-paste and run the code for simPPLe available <a href="../w03_ppl/xtra01_simPPLe_code.qmd">here</a>. Nothing to submit for this item.</li>
-<li>Define a global variable <code>launch_outcomes</code> containing the observed data (3 successful launches).</li>
-<li>Complete the code below to implement the changes to <code>posterior</code>. Note that we store the samples in a matrix with <code>number_of_iterations</code> rows and <code>dimension</code> columns. We infer the dimension by peeking at the outcome of <code>ppl_function</code>.</li>
+<li>Write a function called <code>logistic_regression</code> containing a <a href="../w04_glms/topic01_simPPLe.html">simPPLe</a> probabilistic programming description of <a href="../w04_glms/topic04_classification.html#sec-model">the model described in class</a>. Your function should return a vector containing 3 elements in the following order:
+<ol type="1">
+<li>the intercept (<span class="math inline">\(\in \mathbb{R}\)</span>),</li>
+<li>the slope (<span class="math inline">\(\in \mathbb{R}\)</span>),</li>
+<li>a prediction if one more launch would have been successful (1) or a failure (0) (<span class="math inline">\(\in \{0, 1\}\)</span>).</li>
+</ol></li>
+<li>Follow the instructions in <a href="#sec-utils">the appendix below</a> to get some helper functions. Use these functions to reproduce the lecture’s bivariate posterior plot over the intercept and slope parameters.</li>
+<li>Estimate the probability that the next launch is a success given the data under the <strong>logistic model</strong>.</li>
+<li>Create a variant of the same model but where the slope is set to zero. Estimate the probability that the next launch is a success given the data under this <strong>simplified model</strong>.</li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">ppl_function</span>()) </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> number_of_iterations, <span class="at">ncol =</span> dimension)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, number_of_iterations)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: run `ppl_function` and store its output in the i-th column of `samples`</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: store the weight corresponding to this sample in the vector `weights`</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">samples=</span>samples, <span class="at">weights=</span>weights))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="q.2-choosing-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-choosing-a-model">Q.2: choosing a model</h2>
+<p>You debate with your friend whether the logistic model or the simplified model (with slope equals to zero) should be preferred. To stop that debate, write a <strong>unified model</strong> which gives probability 1/2 to the simplified model, and 1/2 to the logistic model. Estimate the posterior probability that the logistic model is preferred under the unified model given the same data as in Q.1.</p>
+<!--
+## Q.2: change-point improvement
+
+Consider an alternative approach where instead of logistic function, we use a [step function](https://en.wikipedia.org/wiki/Step_function) 
+with 2 steps (think of a mini stair case with two steps). 
+
+Estimate the probability that the next launch is a success given the data under the change point model. 
+-->
+</section>
+<section id="sec-utils" class="level2">
+<h2 class="anchored" data-anchor-id="sec-utils">Appendix</h2>
+<p>For Q.1.2, you will need to copy the following code and paste it in a file called <code>simple_utils.R</code>. We have demonstrated the use of these functions <a href="../w04_glms/topic02_bivariate.html">in the lectures</a>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>simple_utils.R</strong></pre>
 </div>
-<ol start="4" type="1">
-<li>Implement a PPL program called <code>logistic_regression</code> that forward-simulates the model in <a href="#eq-logistic" class="quarto-xref">Equation&nbsp;1</a> while using <code>observe</code> to feed the data to the PPL. Note that <code>logistic_regression</code> returns all the values simulated during its execution, which correspond to the unobserved variables in the model of Equation <a href="#eq-logistic" class="quarto-xref">Equation&nbsp;1</a>.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logistic_regression <span class="ot">=</span> <span class="cf">function</span>(){</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  intercept <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample an intercept</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample a slope</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(launch_outcomes)){</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    prob_success <span class="ot">=</span> <span class="co"># </span><span class="al">TODO</span><span class="co">: compute the success probability for the i-th launch</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(launch_outcomes[i], FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: complete the observe statement</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predict the next launch</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  prob_success <span class="ot">=</span> <span class="co"># </span><span class="al">TODO</span><span class="co">: compute the success probability for the next launch</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  next_launch <span class="ot">=</span> <span class="fu">simulate</span>(FIX_ME) <span class="co"># </span><span class="al">TODO</span><span class="co">: sample the next launch</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(intercept, slope, next_launch))</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="true," data-filename="simple_utils.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>posterior_particles <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">ppl_function</span>()) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> number_of_iterations, <span class="at">ncol =</span> dimension)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, number_of_iterations)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">ppl_function</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    samples[i,] <span class="ot">=</span> sample</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    weights[i]  <span class="ot">=</span> weight</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">samples=</span>samples, <span class="at">weights=</span>weights))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ess <span class="ot">=</span> <span class="cf">function</span>(particles){</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">=</span> particles<span class="sc">$</span>weights</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">effective_sample_size</span>(w))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>effective_sample_size <span class="ot">=</span> <span class="cf">function</span>(w){</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sum</span>(w)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(w<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>representative_sample <span class="ot">=</span> <span class="cf">function</span>(snis_output, <span class="at">percentile=</span><span class="fl">0.9999</span>){</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  ess <span class="ot">=</span> <span class="fu">effective_sample_size</span>(snis_output<span class="sc">$</span>weights)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  idx_ordered_weights <span class="ot">=</span> <span class="fu">order</span>(snis_output<span class="sc">$</span>weights, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  acc_norm_weights <span class="ot">=</span> <span class="fu">cumsum</span>(snis_output<span class="sc">$</span>weights[idx_ordered_weights])<span class="sc">/</span><span class="fu">sum</span>(snis_output<span class="sc">$</span>weights)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  reduced_sample_size <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">round</span>(ess), <span class="fu">max</span>(<span class="fu">which</span>(acc_norm_weights <span class="sc">&lt;</span> percentile)))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  idx_subset <span class="ot">=</span> idx_ordered_weights[<span class="dv">1</span><span class="sc">:</span>reduced_sample_size]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">samples =</span> snis_output<span class="sc">$</span>samples[idx_subset,], <span class="at">weights =</span> snis_output<span class="sc">$</span>weights[idx_subset])</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>weighted_scatter_plot <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    snis_output, </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">base_color_hex =</span> <span class="fu">hcl.colors</span>(<span class="dv">1</span>, <span class="at">palette =</span> <span class="st">"viridis"</span>),</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"Param 1"</span>, <span class="at">ylab=</span><span class="st">"Param 2"</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>){</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  base_color <span class="ot">=</span> <span class="fu">col2rgb</span>(base_color_hex)<span class="sc">/</span><span class="dv">255</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find the subset with almost all the mass</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  snis_subset <span class="ot">=</span> <span class="fu">representative_sample</span>(snis_output)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># linear transform of weights to [0,1]</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  extreme_weights <span class="ot">=</span> <span class="fu">range</span>(snis_subset<span class="sc">$</span>weights, <span class="at">na.rm =</span> T)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  alphas <span class="ot">=</span> (snis_subset<span class="sc">$</span>weights<span class="sc">-</span>extreme_weights[<span class="dv">1</span>])<span class="sc">/</span><span class="fu">diff</span>(extreme_weights)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create colors with transparencies and plot</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  points_color_alphas <span class="ot">=</span> <span class="fu">rgb</span>(base_color[<span class="dv">1</span>],base_color[<span class="dv">2</span>],base_color[<span class="dv">3</span>], alphas)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  call_args<span class="ot">=</span><span class="fu">c</span>(</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">x=</span>snis_subset<span class="sc">$</span>samples[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col=</span>points_color_alphas), </span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    plot_options</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(plot, call_args)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="5" type="1">
-<li></li>
-</ol>
 
 
 </section>
