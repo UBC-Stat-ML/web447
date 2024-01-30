@@ -7,3 +7,5 @@ _site
 _coinbag.html
 blocks/_coinbag_files
 .Rhistory
+*_cache*
+*_files*

@@ -1,0 +1,36 @@
+---
+title: "Normal distributions"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Quick review of the normal distribution.
+- Different parameterizations. 
+
+
+### Rationale
+
+The normal distribution is often used in Bayesian analysis when one needs a prior over an unknown $x$ such that $x \in (-\infty, \infty) = \reals$. 
+
+
+## Examples of normal densities
+
+![](../images/Normal_Distribution_PDF.svg){width="600"}
+
+## Parameterizations
+
+- There are **different conventions** to measure the spread. 
+    - Standard deviation $\sigma$.
+    - Variance, $\sigma^2$.
+    - Precision, $\tau = 1/\sigma^2$. 
+- **Keep that in mind** as different languages will use different conventions!
+- Standard deviation is the most intuitive:
+    - it is the width of the bell,
+    - the only one that has the same units as $x$ (e.g. if $x$ is in meters, so is $\sigma$). 

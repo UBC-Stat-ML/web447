@@ -1,0 +1,78 @@
+---
+title: "simPPLe"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Last week's [Q2 exercise solution](../exercises/ex03.qmd). 
+
+### Rationale
+
+We will use simPPLe this week to do probabilistic modelling. 
+
+
+## Background
+
+If you missed Tuesday's lecture last week, make 
+sure to read [the introduction to PPLs](../w03_ppl/topic01_ppls_intro.qmd). 
+    
+    
+## Setting up simPPLe on your computer
+
+- Let us combine the "scaffold" files and the answer of last week's Q2 into one 
+file. Copy paste the code below into a file called `simple.R`: 
+
+```r {shortcodes=true, filename="simple.R"}
+{{< include ../../solutions/simple.R >}}
+```
+
+- This way, you can now load simPPLe by loading `simple.R` into your session 
+(**note:** in the code below replace `../../solutions/` by the path to the file you just created)
+
+```r
+source("../../solutions/simple.R")
+
+# define your model as a function, e.g. my_function
+
+# call: posterior(my_function, 100) to approximate posterior E[my_function | observations]
+```
+
+
+## Testing
+
+I will start this Tuesday's lecture with the following simPPLe test (a continuous version of the rocket model):
+(**note:** in the code below replace `../../solutions/` by the path to the file you just created)
+
+
+```r
+source("../../solutions/simple.R")
+
+set.seed(1)
+
+data = rep(0, 4) 
+
+# simPPLe's description of our "bag of coins" example
+beta_binomial = function() {
+  
+  # Similar to forward sampling, but use 'observe' when the variable is observed
+  p = simulate(Beta(1, 1))
+  for (i in seq_along(data)) { 
+    observe(data[i], Bern(p)) 
+  }
+  
+  # return the test function, here the parameter p
+  return(p)
+}
+
+posterior(beta_binomial, 100)
+```
+
+{{< include ../../clickers/w04/_c01.qmd >}}
+

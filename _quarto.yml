@@ -32,7 +32,13 @@ website:
             file: exercises/ex03.qmd
           - text: "Challenge"
             file: challenges/ch03.qmd
-
+      - section: "The joy of probabilistic modelling"
+        contents: 
+          - auto: "w04_glms/*"
+          - text: "Exercises"
+            file: exercises/ex04.qmd
+          - text: "Challenge"
+            file: challenges/ch04.qmd
 
 format:
   html:
@@ -43,3 +49,5 @@ format:
 
 editor: source
 
+execute: 
+  cache: true

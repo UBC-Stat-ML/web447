@@ -1,5 +1,5 @@
 ---
-title: "Exercise 4: inference on continuous spaces"
+title: "Exercise 4: the joy of probabilistic inference"
 editor: 
   mode: source
 ---
@@ -7,99 +7,60 @@ editor:
 {{< include ../_macros.qmd >}}
 
 
-## TENTATIVE goals/ideas
 
-- Approximate a regression/classification posterior distribution using a PPL.
-    - use sequence of launch data? idea is that success pr will be increasing.. should be stark enough to see a trend in posterior
-    - for now, give them prior, model in mathematical notation that they have to translate
-- Using packages to visualize a 1d and 2d posterior distribution and interpreting these plots. 
-    - interpretation could be to 
-- Performing prediction using a PPL. 
-    - ask to do the insurance question again based on this new data and model
-    
-    
-ANYTHING ELSE?? Probably math questions will be better fit next week. Maybe enough?
+Make sure to read the [simPPLe setup page](../w04_glms/topic01_simPPLe.qmd) before you begin. 
 
 
-## Q.1: classification
+## Q.1: logistic rocket improvement
 
-Recall the rocket launch example, where we observed $Y_{1:3}=(1,1,1)$ successful
-launches, and where tasked to predict the outcome of the fourth launch $Y_4$.
-We will now take a different approach at modelling this situation. We will 
-assume that the reliability of the rocket changes in time. This will allow us to
+Consider the [Ariane 1 data we used this week](../w04_glms/topic04_classification.qmd#sec-data), 
+```r
+success_indicators = c(1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1)
+```
+and the [model described in the same page](../w04_glms/topic04_classification.qmd#sec-model). 
+
+Recall that we discussed a model where the reliability of the rocket changes in time. This will allow us to
 incorporate, for example, the fact that engineering teams implement fixes based
 on past launches and therefore the probability of success should increase.
 
-A simple way to encapsulate the behavior described above in a model is via a
-Bayesian logistic regression. Given an intercept $\alpha$ and slope $\beta$, the
-outcomes $Y_{1:4}$ are conditionally independent and distributed as
-$$
-y_i|\alpha,\beta \sim \distBern(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
-$$
-where
-$$
-\sigma(x) = \frac{1}{1+e^{-x}}
-$$
-is the logistic or sigmoid function. In `R` you can compute it using `plogis(x)`.
-A fully specified joint distribution requires us to set priors on $(\alpha,\beta)$.
-We use independent Gaussians with high variance, so that the joint distribution
-becomes
-$$
-\begin{aligned}
-\alpha,\beta &\distiid \distNorm(0,10^2) \\
-y_i|\alpha,\beta &\sim \distBern(\sigma(\alpha+\beta i)), \quad i\in\{1,\dots,4\}
-\end{aligned}
-$${#eq-logistic}
+1. Write a function called `logistic_regression` containing a [simPPLe](../w04_glms/topic01_simPPLe.qmd) 
+  probabilistic programming description 
+  of [the model described in class](../w04_glms/topic04_classification.qmd#sec-model). 
+  Your function should return a vector containing 3 elements in the following order:
+    1. the intercept ($\in \reals$),
+    2. the slope ($\in \reals$),
+    3. a prediction if one more launch would have been successful (1) or a failure (0) ($\in \{0, 1\}$).
+2. Follow the instructions in [the appendix below](#sec-utils) to get some helper functions. 
+    Use these functions to reproduce the lecture's bivariate posterior plot over the intercept and slope parameters. 
+3. Estimate the probability that the next launch is a success given the data under the **logistic model**. 
+4. Create a variant of the same model but where the slope is set to zero. 
+    Estimate the probability that the next launch is a success given the data under this **simplified model**. 
+    
+    
+## Q.2: choosing a model
 
-We will use `simPPLe` to perform inference on $(\alpha,\beta, Y_4)$ given the data.
-To do this in one call to `posterior`, we will need to modify this function to collect 
-and return all the simulated outcomes from a given PPL function, as well as all 
-their corresponding weights. This will allow us to obtain a weighted discrete
-distribution approximating the posterior.
+You debate with your friend whether the logistic model or the simplified model (with slope equals to zero) should be preferred. 
+To stop that debate, write a **unified model** which gives probability 1/2 to the simplified model, and 1/2 to the logistic model. 
+Estimate the posterior probability that the logistic model is preferred under the unified model given the same data as in Q.1.
 
-1. Copy-paste and run the code for simPPLe available [here](../w03_ppl/xtra01_simPPLe_code.qmd).
-Nothing to submit for this item.
-2. Define a global variable `launch_outcomes` containing the observed data 
-(3 successful launches).
-3. Complete the code below to implement the changes to `posterior`. Note that
-we store the samples in a matrix with `number_of_iterations` rows and `dimension`
-columns. We infer the dimension by peeking at the outcome of `ppl_function`. 
-```{r}
-#| eval: false
-posterior = function(ppl_function, number_of_iterations) {
-  dimension = length(ppl_function()) 
-  samples = matrix(0, nrow = number_of_iterations, ncol = dimension)
-  weights = rep(0, number_of_iterations)
-  for (i in 1:number_of_iterations) {
-    weight <<- 1.0       # reset the weight accumulator
-    # TODO: run `ppl_function` and store its output in the i-th column of `samples`
-    # TODO: store the weight corresponding to this sample in the vector `weights`
-  }
-  return(list(samples=samples, weights=weights))
-}
+<!--
+## Q.2: change-point improvement
+
+Consider an alternative approach where instead of logistic function, we use a [step function](https://en.wikipedia.org/wiki/Step_function) 
+with 2 steps (think of a mini stair case with two steps). 
+
+Estimate the probability that the next launch is a success given the data under the change point model. 
+-->
+
+
+## Appendix {#sec-utils}
+
+For Q.1.2, you will need to copy the following code and paste it in a file 
+called `simple_utils.R`. We have demonstrated the use of these functions 
+[in the lectures](../w04_glms/topic02_bivariate.qmd).
+
+```r {shortcodes=true, filename="simple_utils.R"}
+{{< include ../blocks/simple_utils.R >}}
 ```
-4. Implement a PPL program called `logistic_regression` that forward-simulates 
-the model in @eq-logistic while using `observe` to feed the data to the PPL. 
-Note that `logistic_regression` returns all the values simulated during
-its execution, which correspond to the unobserved variables in the model of 
-Equation @eq-logistic.
-```{r}
-#| eval: false
-logistic_regression = function(){
-  intercept = simulate(FIX_ME) # TODO: sample an intercept
-  slope     = simulate(FIX_ME) # TODO: sample a slope
-  for (i in seq_along(launch_outcomes)){
-    prob_success = # TODO: compute the success probability for the i-th launch
-    observe(launch_outcomes[i], FIX_ME) # TODO: complete the observe statement
-  }
-  # predict the next launch
-  prob_success = # TODO: compute the success probability for the next launch
-  next_launch = simulate(FIX_ME) # TODO: sample the next launch
-  return(c(intercept, slope, next_launch))
-}
-```
-5. Run `posterior` on `logistic_regression` with $10000$ iterations and store
-the output in a variable called `inference_results`.
-6. Compute and report the [effective sample size](../drafts/topic06_ess.qmd) of 
-the approximation.
+
 

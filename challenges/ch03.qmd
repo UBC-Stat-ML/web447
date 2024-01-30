@@ -8,4 +8,12 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-{{< include ../_construction.qmd >}}
+Recall the [decision tree visualization we introduced in the first week](../w01_discrete_inference/topic05_decision_diagrams.qmd).
+
+Create a variant of simPPLe which draws decision trees automatically. 
+
+Specifically, your code should include a function `decision_tree` which takes as input a simPPLe 
+probabilistic program, and output a [mermaid string which can be rendered 
+in your browser as a diagram](https://mermaid.live/).
+
+Demonstrate your code on two examples: one in class, and one not from the class.

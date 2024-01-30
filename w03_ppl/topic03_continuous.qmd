@@ -1,5 +1,5 @@
 ---
-title: "Continous models"
+title: "Continuous models"
 editor: 
   mode: source
   markdown: 
