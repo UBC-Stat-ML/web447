@@ -9,3 +9,4 @@ blocks/_coinbag_files
 .Rhistory
 *_cache*
 *_files*
+.~lock.hubble-1.csv#

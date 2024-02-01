@@ -1,0 +1,31 @@
+---
+title: "Bayesian GLMs"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Summary so far
+
+We have seen two models that share the same general structure:
+
+- "Bernoulli regression" for binary observations
+- "Normal regression" for continuous observations.
+
+
+## Generalization of these two special cases
+
+- Look at the data type of the output variable, this will guide the choice of likelihood model
+- Are you trying to predict..
+    - a real number? us a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)
+    - an integer? Replace Bernoulli by Poisson (or Negative Binomial, or other integer valued distribution)
+    - etc
+- General pattern: 
+
+$$\text{output} | \text{inputs}, \text{parameters} \sim \text{SuitableDistribution}(f(\text{parameters},  \text{inputs}))$$
+
+- $f$ should map to the range of parameters permitted by your "SuitableDistribution"
+- known in the GLM literature as the inverse of the **link function**
+- often a composition of a linear function with a non-linear "squashing" function if the output is constrained.
