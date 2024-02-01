@@ -12,15 +12,18 @@ editor:
 ### Topics
 
 - A second example of a Bayesian model based on a linear model, this time with a normal likelihood. 
-- More examples of prior: handling the positive real line.
+- Priors on the positive real line.
+- Homoscedasticity and heteroscedasticity. 
+- Marginal posterior.
 
 ### Rationale
 
-Together with classification (previous page), regression is the other major statistical task frequently encountered. 
+Together with classification ([previous page](../w04_glms/topic04_classification.qmd)), 
+regression is the other major statistical task frequently encountered. 
 
 We see here that the same approach as we took for classification can be easily modified to do regression. 
 
-This provides us with a second example of Bayesian GLMs. 
+This provides us with a second example of [Bayesian GLMs](../w04_glms/topic06_glms.qmd). 
 
 
 ## Example
@@ -32,6 +35,7 @@ This provides us with a second example of Bayesian GLMs.
     - You are one of the ants...
     - ...and you notice that all the others ants are moving away from you...
         - ...and the further the neighbor ant, the faster it looks like it is moving away from you.
+        
 - In 1929 the astronomer Edwin Hubble published a paper[^1] on the relationship between distance and velocity of galaxies relative to us. 
 - It is now called [Hubble's law](http://en.wikipedia.org/wiki/Hubble's_law). 
 - The estimated slope of the relationship, known as Hubble's constant, leads to an estimate of the age of the universe.
@@ -45,8 +49,13 @@ This provides us with a second example of Bayesian GLMs.
 
 ### Data 
 
-- We will estimate Hubble's constant using data from the [original data used by Edwin Hubble](https://quarknet.fnal.gov/fnal-uc/eeu/hubblediagram/hubble-1.xls).
-- Here is some EDA on that dataset: 
+- We will estimate Hubble's constant using data from the [original data used by Edwin Hubble (in CSV)](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv).
+- To make the numbers less extreme in the following, I will divide the velocities by 1000
+
+**Instructions:**
+
+1. download the [CVS](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv)
+2. copy paste the code below and run it on your computer (after changing the path "`../data`" to the path on your computer)
 
 ```{r}
 suppressPackageStartupMessages(require("dplyr"))
@@ -57,7 +66,8 @@ df$velocity = df$velocity/1000
 rmarkdown::paged_table(df)
 ```
 
-- To make the numbers less extreme in the following, I will divide the velocities by 1000
+- Here is some EDA on that dataset:  
+
 
 ```{r}
 plot(df$distance, df$velocity, xlab = "distance", ylab = "velocity")
@@ -76,7 +86,6 @@ To achieve our goal, we will complete the gap in the following code:
 
 ```r
 source("../../solutions/simple.R")
-source("../blocks/simple_utils.R")
 
 regression = function() {
   # priors will be defined here
@@ -131,6 +140,36 @@ for (i in 1:nrow(samples)) {
 }
 ```
 
+Here since the scientific question only concerns one parameter, the slope, 
+it is useful to look at the **marginal posterior distribution**. 
+
+- In mathematical expressions, obtained by [marginalization](../w03_ppl/topic03_continuous.qmd):
+  $$p(x_1 | y) = \int p(x_1, x_2 | y) \dee x_2.$$
+- In Monte Carlo methods, much simpler: 
+    - each sample is a pair $x^\parm = (x_1^\parm, x_2^\parm)$
+    - if you are interested in $x_1$ only, *just ignore $x_2$!*
+    
+Here is an example of creating a histogram for the marginal posterior:
+
+```{r}
+#| warning: false
+
+library("ggplot2")
+posterior.as.df <- data.frame(slopes = samples[,1], norm_weights)
+ggplot(posterior.as.df, aes(x = slopes, weight = norm_weights)) + 
+  geom_histogram(binwidth = 0.02) + 
+  xlim(0.2, 0.6) +
+  xlab("slope parameter") + 
+  ylab("probability") +
+  theme_minimal()
+```
+
+**Question:** if you were to use an integral instead of Monte Carlo to create this histogram, 
+  what region of integration in the scatter plot above (the first plot in this subsection) 
+  would be used to compute the height of one histogram bin?
+
+{{< include ../../clickers/w04/_c10.qmd >}}
+
 
 ## Model criticism
 
@@ -140,5 +179,4 @@ The modern estimate based on state-of-the-art measurements (space telescopes, ad
 an estimate that is about 10x smaller.
 
 **Discussion:** What went wrong?
-
 
