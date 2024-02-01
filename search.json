@@ -405,7 +405,7 @@
     "href": "w03_ppl/topic03_continuous.html#key-properties",
     "title": "Continuous models",
     "section": "Key properties",
-    "text": "Key properties\nNote that in much of what follows, everything works the same as with with discrete models except we replace sums by integrals and PMFs \\(p\\) by densities \\(f\\).\nLOTUS: \\[\\mathbb{E}[g(X, Y)] = \\int f(x, y) g(x, y) \\mathrm{d}x.\\]\nMarginalization: going from a joint density on \\((X, Y)\\) to the density of \\(X\\) only (the latter is called the marginal): \\[f_X(x) = \\int f(x, y) \\mathrm{d}y.\\]\nChain rule: \\[f(x, y) = f_X(x) f_{Y|X}(y|x).\\]\nBayes theorem: \\[f_{X|Y}(x|y) = \\frac{f(x, y)}{f_Y(y)}.\\]",
+    "text": "Key properties\nNote that in much of what follows, everything works the same as with with discrete models except we replace sums by integrals and PMFs \\(p\\) by densities \\(f\\).\nLOTUS: \\[\\mathbb{E}[g(X, Y)] = \\int \\int f(x, y) g(x, y) \\mathrm{d}x \\mathrm{d}y.\\]\nMarginalization: going from a joint density on \\((X, Y)\\) to the density of \\(X\\) only (the latter is called the marginal): \\[f_X(x) = \\int f(x, y) \\mathrm{d}y.\\]\nChain rule: \\[f(x, y) = f_X(x) f_{Y|X}(y|x).\\]\nBayes theorem: \\[f_{X|Y}(x|y) = \\frac{f(x, y)}{f_Y(y)}.\\]",
     "crumbs": [
       "A first look at PPLs",
       "Continuous models"
@@ -1096,6 +1096,39 @@
     ]
   },
   {
+    "objectID": "w04_glms/topic06_glms.html",
+    "href": "w04_glms/topic06_glms.html",
+    "title": "Bayesian GLMs",
+    "section": "",
+    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic06_glms.html#summary-so-far",
+    "href": "w04_glms/topic06_glms.html#summary-so-far",
+    "title": "Bayesian GLMs",
+    "section": "",
+    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
+    "href": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
+    "title": "Bayesian GLMs",
+    "section": "Generalization of these two special cases",
+    "text": "Generalization of these two special cases\n\nLook at the data type of the output variable, this will guide the choice of likelihood model\nAre you trying to predict..\n\na real number? us a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)\nan integer? Replace Bernoulli by Poisson (or Negative Binomial, or other integer valued distribution)\netc\n\nGeneral pattern:\n\n\\[\\text{output} | \\text{inputs}, \\text{parameters} \\sim \\text{SuitableDistribution}(f(\\text{parameters},  \\text{inputs}))\\]\n\n\\(f\\) should map to the range of parameters permitted by your “SuitableDistribution”\nknown in the GLM literature as the inverse of the link function\noften a composition of a linear function with a non-linear “squashing” function if the output is constrained.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
+    ]
+  },
+  {
     "objectID": "w04_glms/topic01_simPPLe.html",
     "href": "w04_glms/topic01_simPPLe.html",
     "title": "simPPLe",
@@ -1148,6 +1181,83 @@
     "crumbs": [
       "The joy of probabilistic modelling",
       "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html",
+    "href": "w04_glms/topic05_regression.html",
+    "title": "(Normal) regression",
+    "section": "",
+    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nMore examples of prior: handling the positive real line.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#outline",
+    "href": "w04_glms/topic05_regression.html#outline",
+    "title": "(Normal) regression",
+    "section": "",
+    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nMore examples of prior: handling the positive real line.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#example",
+    "href": "w04_glms/topic05_regression.html#example",
+    "title": "(Normal) regression",
+    "section": "Example",
+    "text": "Example\n\nIn the early 20th century, astronomers made the startling observation that pretty much all galaxies are moving away from ours. Why?\nWe now know this is because the universe is expanding.\nHere is a metaphor to help understand this:\n\nImagine ants on an inflating balloon.\nYou are one of the ants…\n…and you notice that all the others ants are moving away from you…\n\n…and the further the neighbor ant, the faster it looks like it is moving away from you.\n\n\nIn 1929 the astronomer Edwin Hubble published a paper1 on the relationship between distance and velocity of galaxies relative to us.\nIt is now called Hubble’s law.\nThe estimated slope of the relationship, known as Hubble’s constant, leads to an estimate of the age of the universe.\n\n\n\n\n\nData\n\nWe will estimate Hubble’s constant using data from the original data used by Edwin Hubble.\nHere is some EDA on that dataset:\n\n\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"../data/hubble-1.csv\") %&gt;%\n    rename(distance = R..Mpc.) %&gt;%\n    rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\nrmarkdown::paged_table(df)\n\n\n  \n\n\n\n\nTo make the numbers less extreme in the following, I will divide the velocities by 1000\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
+    "href": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
+    "title": "(Normal) regression",
+    "section": "Building a Bayesian regression model",
+    "text": "Building a Bayesian regression model\nGoal:\n\ndesigning a model containing a “slope” parameter,\nfrom which we will compute \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\nTo achieve our goal, we will complete the gap in the following code:\nsource(\"../../solutions/simple.R\")\nsource(\"../blocks/simple_utils.R\")\n\nregression = function() {\n  # priors will be defined here\n  # ...\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    # likelihood will be defined here\n  }\n  return(slope)\n}\n\nposterior(regression, 1000)\n\nRecall: to build a model, start with the observations.\nSpecifically, let us build a model for the observed velocity first.\n\nQuestion: what would be a reasonable likelihood for the velocity?\n\nvelocity \\(\\sim\\) Exponential(…)\nvelocity \\(\\sim\\) Uniform(…)\nvelocity \\(\\sim\\) t(…)\nvelocity \\(\\sim\\) Normal(…)\nNone of the above.\n\n\n\n\n\nQuestion: complete the code and approximate \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
+    "href": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
+    "title": "(Normal) regression",
+    "section": "Visualization of the posterior distribution",
+    "text": "Visualization of the posterior distribution\n\nposterior = posterior_particles(regression, 10000)\nweighted_scatter_plot(posterior, plot_options = list(xlab=\"slope parameter\", ylab=\"sd parameter\"))\n\n\n\n\n\n\n\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")\n\nxs = seq(0, 2, 0.01)\nsamples = posterior$samples \nnorm_weights = posterior$weights / sum(posterior$weights)\n\nfor (i in 1:nrow(samples)) {\n  slope     = samples[i, 1]\n  pr = norm_weights[i]\n  lines(xs, slope * xs, col = rgb(red = 0, green = 0, blue = 0, alpha = pr*20))\n}",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#model-criticism",
+    "href": "w04_glms/topic05_regression.html#model-criticism",
+    "title": "(Normal) regression",
+    "section": "Model criticism",
+    "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#footnotes",
+    "href": "w04_glms/topic05_regression.html#footnotes",
+    "title": "(Normal) regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nProceedings of the National Academy of Sciences, Vol. 15, pp. 168–173.↩︎",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
     ]
   },
   {

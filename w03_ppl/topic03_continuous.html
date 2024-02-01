@@ -470,6 +470,18 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(Normal) regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -582,7 +594,7 @@ https://github.com/trevorcampbell/shortex
 <section id="key-properties" class="level2">
 <h2 class="anchored" data-anchor-id="key-properties">Key properties</h2>
 <p>Note that in much of what follows, everything works the same as with <a href="../w01_discrete_inference/topic10_expectations.html">with discrete models</a> except we replace sums by integrals and PMFs <span class="math inline">\(p\)</span> by densities <span class="math inline">\(f\)</span>.</p>
-<p><strong>LOTUS:</strong> <span class="math display">\[\mathbb{E}[g(X, Y)] = \int f(x, y) g(x, y) \mathrm{d}x.\]</span></p>
+<p><strong>LOTUS:</strong> <span class="math display">\[\mathbb{E}[g(X, Y)] = \int \int f(x, y) g(x, y) \mathrm{d}x \mathrm{d}y.\]</span></p>
 <p><strong>Marginalization:</strong> going from a joint density on <span class="math inline">\((X, Y)\)</span> to the density of <span class="math inline">\(X\)</span> only (the latter is called the marginal): <span class="math display">\[f_X(x) = \int f(x, y) \mathrm{d}y.\]</span></p>
 <p><strong>Chain rule:</strong> <span class="math display">\[f(x, y) = f_X(x) f_{Y|X}(y|x).\]</span></p>
 <p><strong>Bayes theorem:</strong> <span class="math display">\[f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)}.\]</span></p>
