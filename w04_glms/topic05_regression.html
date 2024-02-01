@@ -605,8 +605,13 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <ul>
 <li>We will estimate Hubble’s constant using data from the <a href="https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv">original data used by Edwin Hubble (in CSV)</a>.</li>
-<li>Here is some EDA on that dataset:</li>
+<li>To make the numbers less extreme in the following, I will divide the velocities by 1000</li>
 </ul>
+<p><strong>Instructions:</strong></p>
+<ol type="1">
+<li>download the <a href="https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv">CVS</a></li>
+<li>copy paste the code below and run it on your computer (after changing the path “<code>../data</code>” to the path on your computer)</li>
+</ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"dplyr"</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../data/hubble-1.csv"</span>) <span class="sc">%&gt;%</span></span>
@@ -623,7 +628,7 @@ https://github.com/trevorcampbell/shortex
 </div>
 </div>
 <ul>
-<li>To make the numbers less extreme in the following, I will divide the velocities by 1000</li>
+<li>Here is some EDA on that dataset:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>distance, df<span class="sc">$</span>velocity, <span class="at">xlab =</span> <span class="st">"distance"</span>, <span class="at">ylab =</span> <span class="st">"velocity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -685,7 +690,8 @@ Click for answer
 <div class="callout-body-container callout-body">
 <p>We have that velocity <span class="math inline">\(\in \mathbb{R}\)</span>, so the exponential (<span class="math inline">\(\in (0, \infty)\)</span>) and the uniform (<span class="math inline">\(\in [a, b]\)</span>) are not great choices.</p>
 <p>Both the normal and the t-distribution are reasonable.</p>
-<p>The t-distribution can have fatter tails, so if the data has outliers this may be preferable but we will stick with the simpler normal choice today.</p>
+<p>The t-distribution can have fatter tails, so if the data has <a href="https://en.wikipedia.org/wiki/Outlier">outliers</a> this may be preferable but we will stick with the simpler normal choice today.</p>
+<p><strong>Erratum:</strong> I said in class it might be reasonable to use a uniform distribution where the bounds are the speed of light. It turns out to be incorrect: <a href="https://en.wikipedia.org/wiki/Faster-than-light">galaxies can recede from us faster than the speed of light!</a></p>
 </div>
 </div>
 </div>
@@ -938,7 +944,7 @@ Click for answer
 </div>
 </div>
 </div>
-<p><strong>Question:</strong> if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration would be used to compute the height of one histogram bin?</p>
+<p><strong>Question:</strong> if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration in the scatter plot above (the first plot in this subsection) would be used to compute the height of one histogram bin?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
