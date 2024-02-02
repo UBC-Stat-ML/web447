@@ -9,43 +9,27 @@ editor:
 
 ## Q.1: sequential updating
 
-Recall the general coin bag example[^0] we discussed in [exercise 1 Q5](ex01.qmd#sec-q5).
-In there, we derived the general form of the posterior distribution for the model
+Consider a joint probabilistic model given by
 $$
 \begin{aligned}
-p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
-y_n|p &\distiid \distBern(p), \quad n\in\{1,\dots,n_\text{obs}\}
+\theta &\sim \mu \\
+x_t|\theta &\distiid \nu_\theta
 \end{aligned}
 $$
-where $\rho$ is a non-negative vector. Indeed, we found
-$$
-\pr(p=i/K|y_{1:n_\text{obs}}) \propto \rho_i \distBinom(n_\text{heads}; n_\text{obs}, i/K).
-$$ {#eq-posterior-full}
-where[^1] $n_\text{heads} := \sum_n y_n$.
+where $\mu$ is a prior distribution for the unknown parameter $\theta$, and
+$\{x_t\}_{t=1}^T$ is a sequence of observations. 
 
-[^0]: To avoid confusion, here we will use the convention that "heads" corresponds
-to $y=1$, as in [this lecture](../w02_discrete_bayes/topic07_prediction.qmd).
-
-[^1]: The notation 
-$$
-\text{Distribution(observation; parameters)}
-$$
-denotes the pdf or pmf of a *distribution* evaluated at an *observation* 
-given its *parameters*.
-
-The above reflects the analysis that a statistician would carry out after all flips
-have occurred. We can imagine instead that the statistician updated its model 
-each time a flip was drawn. By *updating*, we mean using the posterior $p|y_{1:i}$ 
-obtained after the $i$-th flip as the prior for predicting $y_{i+1}$.
-
-1. Show that the posterior in @eq-posterior-full is equivalent to the one obtained
-by sequential updating after seeing $n_\text{obs}$ observations.
+1. Write down the posterior distribution of $\theta$ given $\{x_t\}_{t=1}^T$.
+2. Suppose now we get an additional data point $x_{T+1}$ with the same conditional
+distribution $\nu_\theta$. Show that using the posterior from part 1 as *prior* 
+and data equal to just $x_{T+1}$ gives *the same* posterior distribution as
+redoing part 1 with the $T+1$ data points.
 
 
 
-## Q.2: Doob's consistency
+## Q.2: Bayesian inference in the limit of increasing data
 
-We will use the tractability of coin bag example to explore the behavior of the
+We will use the tractability of the coin bag example to explore the behavior of the
 posterior distribution as the number of observations goes to infinity.
 
 1. Load the following code to compute the posterior in @eq-posterior-full. 
