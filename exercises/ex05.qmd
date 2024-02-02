@@ -1,5 +1,5 @@
 ---
-title: "Exercise 5: consistency"
+title: "Exercise 5: Bayesian theory"
 editor: 
   mode: source
 ---
@@ -14,14 +14,14 @@ In there, we derived the general form of the posterior distribution for the mode
 $$
 \begin{aligned}
 p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
-y_i|p &\distiid \distBern(p), \quad i\in\{1,\dots,n_\text{obs}\}
+y_n|p &\distiid \distBern(p), \quad n\in\{1,\dots,n_\text{obs}\}
 \end{aligned}
 $$
 where $\rho$ is a non-negative vector that sums to 1. Indeed, we found
 $$
 \pr(p=i/K|y_{1:n_\text{obs}}) \propto \rho_i \distBinom(n_\text{heads}; n_\text{obs}, i/K).
-$$
-where[^1] $n_\text{heads} := \sum_i y_i$.
+$$ {#eq-posterior-full}
+where[^1] $n_\text{heads} := \sum_n y_n$.
 
 [^1]: The notation 
 $$
@@ -35,11 +35,9 @@ have occurred. We can imagine instead that the statistician updated its model
 each time a flip was drawn. By *updating*, we mean using the posterior $p|y_{1:i}$ 
 obtained after the $i$-th flip as the prior for predicting $y_{i+1}$.
 
-1. Show that the posterior in the all-at-once scenario is
-$$
-$$
+1. Show that the posterior in @eq-posterior-full is equivalent to the one obtained
+by sequential updating after seeing $n_\text{obs}$ observations.
 
 
 
-distribution derived via sequential updating coincides
-with the one from [question 1](#sec-q1).
+## Q.2: consistency
