@@ -17,7 +17,7 @@ p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
 y_n|p &\distiid \distBern(p), \quad n\in\{1,\dots,n_\text{obs}\}
 \end{aligned}
 $$
-where $\rho$ is a non-negative vector that sums to 1. Indeed, we found
+where $\rho$ is a non-negative vector. Indeed, we found
 $$
 \pr(p=i/K|y_{1:n_\text{obs}}) \propto \rho_i \distBinom(n_\text{heads}; n_\text{obs}, i/K).
 $$ {#eq-posterior-full}
@@ -72,11 +72,25 @@ c. call `posterior_distribution` using $\rho_\text{prior}$ and the simulated dat
 d. compute the posterior mean $\ex[p|y_{1:n_\text{obs}}]$
 e. return the absolute error between $p_\text{true}$ and the posterior mean
 
-4. Run `simulate_posterior_mean_error` with
+4. Using
 ```r
-rho_true = rho_prior = rep(1/(K+1), K+1)
+rho_true = rho_prior = rep(1, K+1)
 ```
-using $K=20$, for all the values `n_observations` given by
+and $K=20$, run `simulate_posterior_mean_error` for all `n_observations` values in
 ```r
 n_obs_vector <- round(10 ^ seq(0, 3, by=0.5))
 ```
+Repeat each case 1000 times. Store the error values in a dataframe that has 
+columns `(n_observations, replication, error)`, with `replication` ranging from 
+1 to 1000. Show the output of `head` for your dataframe.
+
+5. Visualize the above data using a log-log plot of error versus number of 
+observations similar to the one used 
+[in this lecture](../w03_ppl/topic05_mc_rates.qmd#empirical-scaling).
+
+6. Repeat parts 4 and 5 but now using
+```r
+rho_true = rep(1, K+1)
+rho_prior = 1:(K+1)
+```
+Compare the plots and comment on their similarities and differences.
