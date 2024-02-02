@@ -9,7 +9,7 @@ editor:
 
 ## Q.1: sequential updating
 
-Recall the general coin bag example we discussed in [exercise 1 Q5](ex01.qmd#sec-q5).
+Recall the general coin bag example[^0] we discussed in [exercise 1 Q5](ex01.qmd#sec-q5).
 In there, we derived the general form of the posterior distribution for the model
 $$
 \begin{aligned}
@@ -22,6 +22,9 @@ $$
 \pr(p=i/K|y_{1:n_\text{obs}}) \propto \rho_i \distBinom(n_\text{heads}; n_\text{obs}, i/K).
 $$ {#eq-posterior-full}
 where[^1] $n_\text{heads} := \sum_n y_n$.
+
+[^0]: To avoid confusion, here we will use the convention that "heads" corresponds
+to $y=1$, as in [this lecture](../w02_discrete_bayes/topic07_prediction.qmd).
 
 [^1]: The notation 
 $$
@@ -40,4 +43,40 @@ by sequential updating after seeing $n_\text{obs}$ observations.
 
 
 
-## Q.2: consistency
+## Q.2: Doob's consistency
+
+We will use the tractability of coin bag example to explore the behavior of the
+posterior distribution as the number of observations goes to infinity.
+
+1. Load the following code to compute the posterior in @eq-posterior-full. 
+Nothing to submit for this item.
+```{r}
+posterior_distribution = function(rho, n_heads, n_observations) {
+  K = length(rho) - 1
+  gamma = rho * dbinom(n_tails, n_observations, (0:K)/K)
+  normalizing_constant = sum(gamma)
+  gamma/normalizing_constant
+}
+```
+2. Write a function `posterior_mean` that computes the posterior mean given the
+output of `posterior_distribution`.
+3. Write another function with signature
+```r
+simulate_posterior_mean_error = function(rho_true, rho_prior, n_observations){...}
+```
+that performs the following
+
+a. sample $p_\text{true} \sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho_\text{true})$
+b. sample the data $y_{1:n_\text{obs}}$ conditional on $p_\text{true}$
+c. call `posterior_distribution` using $\rho_\text{prior}$ and the simulated data
+d. compute the posterior mean $\ex[p|y_{1:n_\text{obs}}]$
+e. return the absolute error between $p_\text{true}$ and the posterior mean
+
+4. Run `simulate_posterior_mean_error` with
+```r
+rho_true = rho_prior = rep(1/(K+1), K+1)
+```
+using $K=20$, for all the values `n_observations` given by
+```r
+n_obs_vector <- round(10 ^ seq(0, 3, by=0.5))
+```
