@@ -4,6 +4,7 @@ project:
 website:
   title: "Bayes1@UBC"
   sidebar:
+    collapse-level: 1
     contents:
       - text: "Syllabus"
         file: syllabus.qmd
