@@ -1,0 +1,45 @@
+---
+title: "Exercise 5: consistency"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+
+## Q.1: sequential updating
+
+Recall the general coin bag example we discussed in [exercise 1 Q5](ex01.qmd#sec-q5).
+In there, we derived the general form of the posterior distribution for the model
+$$
+\begin{aligned}
+p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
+y_i|p &\distiid \distBern(p), \quad i\in\{1,\dots,n_\text{obs}\}
+\end{aligned}
+$$
+where $\rho$ is a non-negative vector that sums to 1. Indeed, we found
+$$
+\pr(p=i/K|y_{1:n_\text{obs}}) \propto \rho_i \distBinom(n_\text{heads}; n_\text{obs}, i/K).
+$$
+where[^1] $n_\text{heads} := \sum_i y_i$.
+
+[^1]: The notation 
+$$
+\text{Distribution(observation; parameters)}
+$$
+denotes the pdf or pmf of a *distribution* evaluated at an *observation* 
+given its *parameters*.
+
+The above reflects the analysis that a statistician would carry out after all flips
+have occurred. We can imagine instead that the statistician updated its model 
+each time a flip was drawn. By *updating*, we mean using the posterior $p|y_{1:i}$ 
+obtained after the $i$-th flip as the prior for predicting $y_{i+1}$.
+
+1. Show that the posterior in the all-at-once scenario is
+$$
+$$
+
+
+
+distribution derived via sequential updating coincides
+with the one from [question 1](#sec-q1).
