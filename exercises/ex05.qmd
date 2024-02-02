@@ -13,11 +13,12 @@ Consider a joint probabilistic model given by
 $$
 \begin{aligned}
 \theta &\sim \mu \\
-x_t|\theta &\distiid \nu_\theta
+x_t|\theta &\distiid \nu_\theta, \quad t\in\{1,\dots,T\}
 \end{aligned}
 $$
 where $\mu$ is a prior distribution for the unknown parameter $\theta$, and
-$\{x_t\}_{t=1}^T$ is a sequence of observations. 
+$\{x_t\}_{t=1}^T$ is a sequence of observations with conditional distribution
+$\nu_\theta$.
 
 1. Write down the posterior distribution of $\theta$ given $\{x_t\}_{t=1}^T$.
 2. Suppose now we get an additional data point $x_{T+1}$ with the same conditional
@@ -30,7 +31,15 @@ redoing part 1 with the $T+1$ data points.
 ## Q.2: Bayesian inference in the limit of increasing data
 
 We will use the tractability of the coin bag example to explore the behavior of the
-posterior distribution as the number of observations goes to infinity.
+posterior distribution as the number of observations goes to infinity. Recall
+that its joint distribution is
+$$
+\begin{aligned}
+p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
+y_n|p &\distiid \distBern(p), \quad n\in\{1,\dots,n_\text{obs}\}
+\end{aligned}
+$$ {#eq-posterior-full}
+and we use the convention that $y=1$ is "heads".
 
 1. Load the following code to compute the posterior in @eq-posterior-full. 
 Nothing to submit for this item.
