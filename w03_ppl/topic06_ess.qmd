@@ -1,0 +1,101 @@
+---
+title: "SNIS Effective Sample Size"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Estimating the SNIS' error based on running it only once. 
+- Underlying theoretical guarantee. 
+
+### Rationale
+
+So far we relied on heuristics to determine the number of Monte Carlo iterations. 
+Here we describe a better approach when the test function is an indicator function. 
+
+
+
+## Example
+
+**Important:** we are back again to SNIS!
+
+Recall our "bag of coins" model can be written as:
+
+{{< include ../blocks/_coinbag_short.qmd >}}
+
+And using our simPPLe implementation for computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
+
+
+```{r}
+source("../exercises/ex03_scaffold.R")
+source("../exercises/ex03_ppl.R")
+source("../../solutions/sol03_posterior.R")
+set.seed(123)
+
+n_mc_iterations = 10000
+
+posterior(my_first_probabilistic_program, n_mc_iterations)
+posterior(my_first_probabilistic_program, n_mc_iterations)
+posterior(my_first_probabilistic_program, n_mc_iterations)
+```
+
+From the above it looks like the error is in the third digit after the dot, roughly.
+
+One way to assess the variability of our Monte Carlo estimator without having to run 
+it several times is to estimate the **effective sample size** (ESS):
+
+```{r}
+source("../blocks/simple_utils.R")
+ess_estimate = ess(posterior_particles(my_first_probabilistic_program, n_mc_iterations))
+ess_estimate
+```
+
+Then from an ESS estimate, we can approximate the root means squared error as follows:
+
+```{r}
+rmse_estimate = 2 / sqrt(ess_estimate)
+rmse_estimate
+```
+
+As you can see, this is **pessimistic**, i.e. the actually error seems lower than the estimate 
+derived from the formula $2/\sqrt{\text{ESS}}$. 
+
+
+## Underlying theory
+
+**Theorem:** From [Theorem 2.1 in Agapiou et al. (2017)](http://arxiv.org/abs/1511.06196): if $g$ is such that $|g(x)| \le 1$ 
+(for example, and indicator function),
+$$\text{RMSE} = \sqrt{\ex (G_M - g^*)^2} \le 2 \sqrt{\frac{\ex[W^2]}{M (\ex W)^2}},$$
+where $W$ is the un-normalized SNIS weight random variable. 
+
+**Estimating SNIS ESS:** The quantity inside the parenthesis is the effective sample size. It is estimated by computing 
+the average weight and the average squared weights: 
+$$\begin{align*}
+\text{SNIS ESS} = \frac{\ex[W^2]}{M (\ex W)^2} &\approx \text{SNIS ESS estimator} \\
+&= \frac{\frac{1}{M} \sum_{m=1}^M (W^\parm)^2}{M (\frac{1}{M} \sum_{m=1}^M W^\parm)^2} \\
+&= \frac{\sum_{m=1}^M (W^\parm)^2}{(\sum_{m=1}^M W^\parm)^2}.
+\end{align*}$$
+
+That's exactly what our `ess` function does:
+
+```r
+effective_sample_size = function(w) {
+  (sum(w)^2)/sum(w^2)
+}
+```
+
+The **intuition behind ESS** is: 
+
+- if I were able to sample iid from the posterior and use simple Monte Carlo on those, 
+- how many simple Monte Carlo samples would give similar variability as my present SNIS estimator?
+
+**Note:**
+
+- later, when we talk about MCMC, we will use a different estimator for the ESS...
+- ... however, both share the same underlying intuition described above.

@@ -40,6 +40,17 @@ website:
             file: exercises/ex04.qmd
           - text: "Challenge"
             file: challenges/ch04.qmd
+      - section: "Key properties"
+        contents: 
+          - auto: "w05_properties/*"
+          - text: "Exercises"
+            file: exercises/ex05.qmd
+          - text: "Challenge"
+            file: challenges/ch05.qmd
+      - section: "Quiz 1"
+        contents: 
+          - auto: "w07_quiz1/*"
+
 
 format:
   html:

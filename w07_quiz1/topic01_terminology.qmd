@@ -1,0 +1,111 @@
+---
+title: "Terminology review"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Review of key terminology covered so far.  
+
+### Rationale
+
+Part of quiz 1 involves knowing these terms 
+without having to look them up. 
+
+While in reality you can look things up, to attain mastery 
+of a subject you need a critical mass of concepts in memory. 
+Too much google look-ups  prevent thinking  
+at the speed of thought.
+
+
+## Probability essentials
+
+- Probability vs PMF vs density
+- Event vs outcome
+- Random variable
+- Realization
+- Probability and conditional probability
+- Expectation vs probability
+- Indicator function
+
+
+## Common distributions (PMFs and densities)
+
+Knowing the **support** (no need to memorize other details)
+
+- Bernoulli
+- Binomial
+- Uniform (discrete and continuous)
+- Categorical
+- Normal
+- Exponential
+- Beta
+
+
+## Basic Bayesian terms
+
+- Prior distribution (PMF/density)
+- Likelihood
+- Posterior distribution (PMF/density)
+- Joint distribution
+- Joint vs marginal posterior
+- Predictive distribution
+
+
+## Sampling
+
+- Sample
+- Forward vs posterior sampling
+- Simple Monte Carlo vs SNIS
+- Test function
+
+
+## Decision theory
+
+- Loss function
+- Bayes estimator
+
+
+## Posterior summaries 
+
+- Point estimate vs credible regions
+
+
+## Point estimation
+
+- Posterior mean
+- Posterior mode
+
+
+## Credible regions
+
+- Nominal coverage
+- Quantile-based credible interval
+- Highest Density Set
+
+
+## Model criticism
+
+- Model mis-specification
+- Cromwell's rule
+
+
+## PPLs
+
+- PPL
+- Consistency
+- Rate of convergence
+- (Importance) weights (normalized vs un-normalized)
+
+
+## Model terminology
+
+- Classification vs regression
+- Input/output/covariate
+

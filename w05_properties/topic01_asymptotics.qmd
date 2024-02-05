@@ -1,0 +1,54 @@
+---
+title: "Asymptotics"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- The notion of asymptotic analysis.
+- The two asymptotic regimes considered in this class. 
+
+### Rationale
+
+In statistics, asymptotic analysis is an important tool to understand any estimator, 
+including Bayesian estimators and Monte Carlo methods. 
+
+
+## A first type of asymptotics: consistency of Monte Carlo methods
+
+**Example:** suppose you are trying to estimate the slope parameter in 
+  [last week's regression model](../w04_glms/topic05_regression.qmd). 
+  
+::: column-margin
+![](../images/hubble.jpg){width="200"}
+:::
+
+- Typical situation:
+    - Fix one Bayesian model and one dataset.
+    - You are interested in $g^* = \ex[g(X) | Y = y]$
+        - e.g., $g(\text{slope}, \text{sd}) = \text{slope}$ in last week's regression example.
+    - You try simPPLe with $M = 100$ iterations, get a Monte Carlo approximation $\hat G_{M} \approx \ex[g(X) | Y = y]$
+    - Then you try $M = 1000$ iterations to gauge the quality of the Monte Carlo approximation $\hat G_{M}$.
+    - Then you try $M = 10 000$, etc.
+- Mathematical guarantee: [we proved (Monte Carlo) consistency,](../w03_ppl/topic04_consistency.qmd)
+    - i.e. that $\hat G_{M}$ can get arbitrarily close to $g^*$. 
+
+**Monte Carlo consistency:** the limit $M\to\infty$ gives us a first example of asymptotic regime: "infinite computation."
+    
+
+## A second type of asymptotics: "big data"
+
+**Question:** even after $M \to \infty$, can there still be an error in the "infinite compute" limit $g^*$?
+
+{{< include ../../clickers/w05/_c01.qmd >}}
+
+You will explore this question in [this week's exercises](../exercises/ex05.qmd).
+To help you preparing for this exercise, we will first go back to the first type 
+of asymptotics (Monte Carlo consistency) [in more depth](../w03_ppl/topic05_mc_rates.qmd).
+
