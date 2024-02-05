@@ -13,18 +13,18 @@ Consider a joint probabilistic model given by
 $$
 \begin{aligned}
 \theta &\sim \mu \\
-x_t|\theta &\distiid \nu_\theta, \quad t\in\{1,\dots,T\}
+x_i|\theta &\distiid \nu_\theta, \quad i\in\{1,\dots,n\}
 \end{aligned}
 $$
 where $\mu$ is a prior distribution for the unknown parameter $\theta$, and
-$\{x_t\}_{t=1}^T$ is a sequence of observations with conditional distribution
+$\{x_i\}_{i=1}^n$ is a sequence of observations with conditional distribution
 $\nu_\theta$.
 
-1. Write down the posterior distribution of $\theta$ given $\{x_t\}_{t=1}^T$.
-2. Suppose now we get an additional data point $x_{T+1}$ with the same conditional
+1. Write down the posterior distribution of $\theta$ given $\{x_i\}_{n=1}^T$.
+2. Suppose now we get an additional data point $x_{n+1}$ with the same conditional
 distribution $\nu_\theta$. Show that using the posterior from part 1 as *prior* 
-and data equal to just $x_{T+1}$ gives *the same* posterior distribution as
-redoing part 1 with the $T+1$ data points.
+and data equal to just $x_{n+1}$ gives *the same* posterior distribution as
+redoing part 1 with the $n+1$ data points.
 
 
 
@@ -46,7 +46,7 @@ Nothing to submit for this item.
 ```{r}
 posterior_distribution = function(rho, n_heads, n_observations) {
   K = length(rho) - 1
-  gamma = rho * dbinom(n_tails, n_observations, (0:K)/K)
+  gamma = rho * dbinom(n_heads, n_observations, (0:K)/K)
   normalizing_constant = sum(gamma)
   gamma/normalizing_constant
 }
@@ -71,15 +71,24 @@ rho_true = rho_prior = rep(1, K+1)
 ```
 and $K=20$, run `simulate_posterior_mean_error` for all `n_observations` values in
 ```r
-n_obs_vector <- round(10 ^ seq(0, 3, by=0.5))
+n_obs_vector <- 2^(0:6)
 ```
 Repeat each case 1000 times. Store the error values in a dataframe that has 
 columns `(n_observations, replication, error)`, with `replication` ranging from 
-1 to 1000. Show the output of `head` for your dataframe.
+1 to 1000. Show the output of `head` and the output of `tail` for your dataframe.
 
-5. Visualize the above data using a log-log plot of error versus number of 
-observations similar to the one used 
-[in this lecture](../w03_ppl/topic05_mc_rates.qmd#empirical-scaling).
+5. Visualize the above data using a log-log plot using the following code
+```r
+ggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0)
+  stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
+  scale_x_log10() +  # Show result in log-log scale
+  scale_y_log10() +
+  coord_cartesian(ylim = c(1e-3, 1)) +
+  theme_minimal() +
+  geom_point() +
+  labs(x = "Number of observations",
+       y = "Absolute error of the posterior mean")
+```
 
 6. Repeat parts 4 and 5 but now using
 ```r
