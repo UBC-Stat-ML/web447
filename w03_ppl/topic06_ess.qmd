@@ -70,16 +70,16 @@ derived from the formula $2/\sqrt{\text{ESS}}$.
 ## Underlying theory
 
 **Theorem:** From [Theorem 2.1 in Agapiou et al. (2017)](http://arxiv.org/abs/1511.06196): if $g$ is such that $|g(x)| \le 1$ 
-(for example, and indicator function),
-$$\text{RMSE} = \sqrt{\ex (G_M - g^*)^2} \le 2 \sqrt{\frac{\ex[W^2]}{M (\ex W)^2}},$$
+(for example, an indicator function),
+$$\text{RMSE} := \sqrt{\ex (G_M - g^*)^2} \le 2 \sqrt{\frac{\ex[W^2]}{M (\ex W)^2}} =: \frac{2}{\sqrt{\text{ESS}}},$$
 where $W$ is the un-normalized SNIS weight random variable. 
 
-**Estimating SNIS ESS:** The quantity inside the parenthesis is the effective sample size. It is estimated by computing 
+**Estimating SNIS ESS:** compute
 the average weight and the average squared weights: 
 $$\begin{align*}
-\text{SNIS ESS} = \frac{\ex[W^2]}{M (\ex W)^2} &\approx \text{SNIS ESS estimator} \\
-&= \frac{\frac{1}{M} \sum_{m=1}^M (W^\parm)^2}{M (\frac{1}{M} \sum_{m=1}^M W^\parm)^2} \\
-&= \frac{\sum_{m=1}^M (W^\parm)^2}{(\sum_{m=1}^M W^\parm)^2}.
+\text{SNIS ESS} = \frac{M (\ex W)^2}{\ex[W^2]} &\approx \text{SNIS ESS estimator} \\
+&= \frac{M (\frac{1}{M} \sum_{m=1}^M W^\parm)^2}{\frac{1}{M} \sum_{m=1}^M (W^\parm)^2} \\
+&= \frac{(\sum_{m=1}^M W^\parm)^2}{\sum_{m=1}^M (W^\parm)^2}.
 \end{align*}$$
 
 That's exactly what our `ess` function does:

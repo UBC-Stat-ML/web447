@@ -40,7 +40,7 @@ We go back to the [decision theoretic setup from week 2](../w02_discrete_bayes/t
 
 ## Optimality: motivation
 
-**Consider the following situation**---you are watching a talk, where the presenter explain they did the following:
+**Consider the following situation**---you are watching a talk, where the presenter explains they did the following:
 
 - Let $\best$ denote the Bayes estimator, and $\oest$, another estimator, say based on a sophisticated deep neural network.
 - To compare the two estimators, the presenter generated a large number of synthetic datasets $(X^\parm, Y^\parm)$ by [forward simulation from the model](../w01_discrete_inference/topic06_forward_sampling.qmd)
@@ -73,7 +73,7 @@ $$\E[L(\best(Y), X)] \le \E[L(\oest(Y), X)]$${#eq-opt}
 **Proof:** by the law of total expectation: $\E[L(\best(Y), X)] = \E[ \red{\E[L(\best(Y), X) | Y]}]$. 
 We will start by rewriting the part in red. 
 
-To do so, denote the objective being minimized in the Bayes estimator by: 
+To do so, denote the objective being minimized in [the Bayes estimator](../w02_discrete_bayes/topic06_decision.qmd#sec-bayes-est) by: 
 $$\Oscr(a) = \E[L(a, X) | Y].$$
 
 Note: by definition, we can rewrite our Bayes estimator by:
