@@ -12,15 +12,15 @@ editor:
 Consider a joint probabilistic model given by
 $$
 \begin{aligned}
-\theta &\sim \mu \\
+\theta &\sim \rho \\
 x_i|\theta &\distiid \nu_\theta, \quad i\in\{1,\dots,n\}
 \end{aligned}
 $$
-where $\mu$ is a prior distribution for the unknown parameter $\theta$, and
+where $\rho$ is a prior distribution for the unknown parameter $\theta$, and
 $\{x_i\}_{i=1}^n$ is a sequence of observations with conditional distribution
 $\nu_\theta$.
 
-1. Write down the posterior distribution of $\theta$ given $\{x_i\}_{n=1}^T$.
+1. Write down the posterior distribution of $\theta$ given $\{x_i\}_{i=1}^n$.
 2. Suppose now we get an additional data point $x_{n+1}$ with the same conditional
 distribution $\nu_\theta$. Show that using the posterior from part 1 as *prior* 
 and data equal to just $x_{n+1}$ gives *the same* posterior distribution as
@@ -36,7 +36,7 @@ that its joint distribution is
 $$
 \begin{aligned}
 p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
-y_n|p &\distiid \distBern(p), \quad n\in\{1,\dots,n_\text{obs}\}
+y_i|p &\distiid \distBern(p), \quad i\in\{1,\dots,n\}
 \end{aligned}
 $$ {#eq-posterior-full}
 and we use the convention that $y=1$ is "heads".
@@ -73,7 +73,8 @@ and $K=20$, run `simulate_posterior_mean_error` for all `n_observations` values 
 ```r
 n_obs_vector <- 2^(0:6)
 ```
-Repeat each case 1000 times. Store the error values in a dataframe that has 
+Repeat each case 1000 times. Store the error values in a dataframe 
+`experiment_results` that has 
 columns `(n_observations, replication, error)`, with `replication` ranging from 
 1 to 1000. Show the output of `head` and the output of `tail` for your dataframe.
 
@@ -82,7 +83,7 @@ columns `(n_observations, replication, error)`, with `replication` ranging from
 ggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0)
   stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
   scale_x_log10() +  # Show result in log-log scale
-  scale_y_log10() +
+  scale_y_log10(n.breaks=16) +
   coord_cartesian(ylim = c(1e-3, 1)) +
   theme_minimal() +
   geom_point() +
@@ -90,9 +91,38 @@ ggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0
        y = "Absolute error of the posterior mean")
 ```
 
-6. Repeat parts 4 and 5 but now using
+6. Do a quick estimate of the slope at the rightmost end of the graph via
+$$
+\frac{y_7-y_5}{x_7-x_5}
+$$
+where $x$ is $\log_{10}(n)$, $y$ is $\log_{10}(n)$, and the subscript indicates
+the column of points from left to right. What can you deduce about the scaling 
+law of the error?
+
+7. Repeat part 4 but now using
 ```r
 rho_true = rep(1, K+1)
 rho_prior = 1:(K+1)
 ```
-Compare the plots and comment on their similarities and differences.
+Store the results in a dataframe called `new_results`. Use the following code to
+plot both sets of results
+```r
+ggplot(all_results, aes(x=n_observations, y=errors+1e-9, # avoid log(0) 
+                        color=prior_type, shape=prior_type)) + 
+  stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
+  scale_x_log10() +  # Show result in log-log scale
+  scale_y_log10(n.breaks=16) +
+  coord_cartesian(ylim = c(1e-3, 1)) +
+  theme_minimal() +
+  geom_point() +
+  labs(x = "Number of observations",
+       y = "Absolute error of the posterior mean")
+```
+where the dataframe `all_results` must be created by 
+
+a. Adding a column `prior_type` to `experiment_results` with constant value
+equal to `Match`
+b. Adding the same column to `new_results` with the value `Different`
+c. Finally, use `rbind` to join both dataframes into one.
+
+Comment on the visual differences between the two sets of results.
