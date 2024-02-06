@@ -69,7 +69,7 @@ e. return the absolute error between $p_\text{true}$ and the posterior mean
 ```r
 rho_true = rho_prior = rep(1, K+1)
 ```
-and $K=20$, run `simulate_posterior_mean_error` for all `n_observations` values in
+and $K=100$, run `simulate_posterior_mean_error` for all `n_observations` values in
 ```r
 n_obs_vector <- 2^(0:6)
 ```
@@ -95,7 +95,7 @@ ggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0
 $$
 \frac{y_7-y_5}{x_7-x_5}
 $$
-where $x$ is $\log_{10}(n)$, $y$ is $\log_{10}(n)$, and the subscript indicates
+where $x$ is $\log_{10}(n)$, $y$ is $\log_{10}(\text{error})$, and the subscript indicates
 the column of points from left to right. What can you deduce about the scaling 
 law of the error?
 
