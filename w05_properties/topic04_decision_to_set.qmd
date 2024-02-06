@@ -1,0 +1,70 @@
+---
+title: "Decision theoretic set estimation"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Deriving a set estimate from decision theory.
+
+### Rationale
+
+We have seen [in week 2](../w02_discrete_bayes/topic05_credible.qmd) some 
+examples of set estimates (quantile based, highest density set). 
+
+These are actually special cases of [decision theory](../w02_discrete_bayes/topic06_decision.qmd)
+with specific choices of loss functions.
+
+This provides a general framework to answer the question: 
+"how to summarize the posterior distribution?"
+
+
+## Context
+
+- The weakness of point estimates is that they do not capture the uncertainty around the value
+- **Idea:** instead of returning a single point, return a set of points
+    - usually an interval, 
+    - but this can be generalized
+- Bayesian terminology: **credible interval** ($\neq$ frequentist *confidence intervals*)
+- Goals:
+    - We would like the credible interval to contain a fixed fraction of the posterior mass (e.g. 95\%)
+    - At the same time, we would like this credible interval to be as short as possible given that posterior mass constraint
+    
+    
+## Bayes estimator formalization
+
+**Pick:**
+
+- $A = \{[c, d] : c < d\}$,
+- consider the loss function given by 
+$$
+L([c, d], x) = \ind\{x \notin [c, d]\} + k (d - c)
+$$
+for some tuning parameter $k$ to be determined later. 
+
+**We get:**
+
+$$
+\begin{aligned}
+\best(Y) &= \argmin \{ \E[L(a, X) | Y] : a \in A \} \\
+&=  \argmin \{ \Pr[X \notin [c, d] | Y] + k(d - c) : [c,d] \in A \} \\
+&=  \argmin \{ \Pr[X < c|Y] + \Pr[X > d |Y] + k(d - c) : [c,d] \in A \}  \\
+&=  \argmin \{ \Pr[X \le c|Y] - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \}
+\end{aligned} 
+$$
+
+Assuming the posterior has a continuous density $f$ to change $<$ into $\le$. Again we take the derivative with respect to $c$ and set to zero; then will do the same thing for $d$. Notice that $\Pr[X \le c|Y]$ is the posterior CDF, so taking the derivative with respect to $c$ yields a density:
+
+$$
+f_{X|Y}(c) - k = 0,
+$$
+
+so we see the optimum will be the smallest interval $[c, d]$ such that $f(c) = f(d) = k$. 
+
+Finally, set $k$ to capture say 95\% of the mass.   

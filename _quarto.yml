@@ -40,7 +40,7 @@ website:
             file: exercises/ex04.qmd
           - text: "Challenge"
             file: challenges/ch04.qmd
-      - section: "Key properties"
+      - section: "Some theory"
         contents: 
           - auto: "w05_properties/*"
           - text: "Exercises"

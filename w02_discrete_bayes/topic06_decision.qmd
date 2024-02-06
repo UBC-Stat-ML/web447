@@ -96,7 +96,7 @@ $$L(a) = \ex[L(a, X)] =  -\$ 9 \cdot \ind[a = 1] (1/2) + \$ 10 \cdot \ind[a = 1]
 - use the conditional PMF $p_{X|Y}$ instead of the PMF $p_X$. 
 
 
-### Definition: the Bayes estimator 
+### Definition: the Bayes estimator {#sec-bayes-est}
 
 **Mathematically:** use an action $a \in A$ minimizing the posterior expected loss, i.e.
 $$\argmin \ex[L(a, X) | Y = y].$$

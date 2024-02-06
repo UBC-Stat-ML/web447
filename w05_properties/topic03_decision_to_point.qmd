@@ -1,0 +1,47 @@
+---
+title: "Decision theoretic point estimation"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Deriving a point estimate from decision theory.
+
+### Rationale
+
+We have seen [in week 2](../w02_discrete_bayes/topic04_point.qmd) some 
+examples of point estimates (posterior mean, posterior mode). 
+
+These are actually special cases of [decision theory](../w02_discrete_bayes/topic06_decision.qmd)
+with specific choices of loss functions.
+
+This provides a general framework to answer the question: 
+"how to summarize the posterior distribution?"
+
+
+## Example
+
+**Assume:** a *square loss,* $A = \reals$, $L(a, p) = (a - p)^2$.
+
+**Some initial simplification**: on the objective function... 
+
+$$
+\begin{aligned}
+\best(Y) &= \argmin \{ \E[L(a, X) | Y] : a \in A \} \\
+&=  \argmin \{ \E[(X - a)^2 | Y] : a \in A \} \\
+&=  \argmin \{ \E[X^2 | Y] - 2a\E[X | Y]] + a^2 : a \in A \} \\
+&=  \argmin \{ - 2a\E[X | Y]] + a^2 : a \in A \}
+\end{aligned}
+$$
+
+**Question:** under a square loss, $\best$ can be simplified to...
+
+{{< include ../../clickers/w05/_c04.qmd >}}
+
+
