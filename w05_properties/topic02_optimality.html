@@ -625,7 +625,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="optimality-motivation" class="level2">
 <h2 class="anchored" data-anchor-id="optimality-motivation">Optimality: motivation</h2>
-<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explain they did the following:</p>
+<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explains they did the following:</p>
 <ul>
 <li>Let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, another estimator, say based on a sophisticated deep neural network.</li>
 <li>To compare the two estimators, the presenter generated a large number of synthetic datasets <span class="math inline">\((X^{(m)}, Y^{(m)})\)</span> by <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation from the model</a></li>
@@ -661,7 +661,7 @@ https://github.com/trevorcampbell/shortex
 <h1>Optimality of Bayesian estimators: theorem</h1>
 <p><strong>Theorem:</strong> let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, any other estimator. Then: <span id="eq-opt"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)] \tag{1}\]</span></span></p>
 <p><strong>Proof:</strong> by the law of total expectation: <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] = \mathbb{E}[ {\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]}]\)</span>. We will start by rewriting the part in red.</p>
-<p>To do so, denote the objective being minimized in the Bayes estimator by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
+<p>To do so, denote the objective being minimized in <a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a> by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
 <p>Note: by definition, we can rewrite our Bayes estimator by: <span class="math display">\[\delta_{\text{B}}= \operatorname{arg\,min}_a \mathcal{O}(a),\]</span> and hence: <span class="math display">\[{\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]} = \mathcal{O}(\delta_{\text{B}}) = \mathcal{O}(\operatorname{arg\,min}_a \mathcal{O}(a)),\]</span> so that we can rewrite the left-hand side of <a href="#eq-opt" class="quarto-xref">Equation&nbsp;1</a> as follows:</p>
 <p><span class="math display">\[\mathbb{E}[ \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]] = \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))].\]</span></p>
 <p>Now note that for all <span class="math inline">\(a'\)</span>, <span class="math inline">\(\mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a)) \le \mathcal{O}(a')\)</span>, hence:</p>
