@@ -1,0 +1,103 @@
+---
+title: "Optimality"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Average loss optimality of Bayes estimators
+- Limitations of this notion of optimality.
+
+### Rationale
+
+Formalize and justify one of the motivation for Bayesian methods 
+covered in the [first lecture](../w00_intro/topic01_why.qmd).
+
+
+## Setup
+
+We go back to the [decision theoretic setup from week 2](../w02_discrete_bayes/topic06_decision.qmd).
+
+
+## Estimator
+
+**Definition:** an estimator is a function $\delta$ such that:
+
+- $\delta$ takes a dataset as input, $\delta(y)$, and
+- returns an action. 
+
+**Examples:**
+
+- the Bayes estimator,
+- maximum likelihood estimator (when the action is a parameter you are trying to estimate).
+
+
+## Optimality: motivation
+
+\newcommand{\best}{\delta_{\text{B}}}
+\newcommand{\oest}{\delta_{\text{o}}}
+
+**Consider the following situation**---you are watching a talk, where the presenter explain they did the following:
+
+- Let $\best$ denote the Bayes estimator, and $\oest$, another estimator, say based on a sophisticated deep neural network.
+- To compare the two estimators, the presenter generated a large number of synthetic datasets $(X_i, Y_i)$ by [forward simulation from the model](../w01_discrete_inference/topic06_forward_sampling.qmd)
+- They evaluated the performance of the Bayes estimator as follows::
+    - apply the estimators: $a_i = \best(Y_i)$, 
+    - compute the losses $L(a_i, X_i)$, and average them.
+- Then, they did the same with the other estimator, $\oest$. 
+- Suppose that the presenter reported a lower loss for the other estimator, $\oest$
+
+
+**Poll:** Which of these statements is true?
+
+1. The deep neural network can perform better because it involves more parameters (over-parameterization)
+1. The deep neural network can perform better because of a combination of lucky initialization and noisy gradients
+1. The deep neural network can perform better because of some other reason 
+1. This cannot happen unless the loss function is non-convex
+1. This cannot happen because of some other reason 
+
+{{< include ../../clickers/w05/_c02.qmd >}}
+
+    
+# Optimality of Bayesian estimators: theorem
+
+\newcommand{\Oscr}{\mathcal{O}}
+
+**Theorem:** $\E[L(\best(Y), X)] \le \E[L(\oest(Y), X)]$
+
+**Proof:** by the law of total expectation: $\E[L(\best(Y), X)] = \E[ \red{\E[L(\best(Y), X) | Y]}]$. 
+We will start by rewriting the part in red. 
+
+To do so, denote the objective being minimized in the Bayes estimator by: 
+$$\Oscr(a) = \E[L(a, X) | Y].$$
+
+Note: by definition, we can rewrite our Bayes estimator by:
+$$\best = \argmin_a \Oscr(a),$$
+and hence:
+$$\red{\E[L(\best(Y), X) | Y]} = \Oscr(\best) = \Oscr(\argmin_a \Oscr(a)),$$
+so that we can rewrite the above with:
+
+$$\E[ \E[L(\best(Y), X) | Y]] = \E[ \Oscr( \argmin_a \Oscr(a))]$$
+
+Now note that for all $a'$, $\Oscr( \argmin_a \Oscr(a)) \le \Oscr(a')$, hence:
+
+$$
+\begin{align*}
+\E[L(\best(Y), X)] &= \E[ \Oscr( \argmin_a \Oscr(a))] \\
+&\le \E[ \Oscr( \oest(Y))] \\
+&= \E[L(\oest(Y), X)].
+\end{align*}
+$$
+
+**Discussion:** Why do you think the presenter observed a lower loss expected for $\oest$ in their experiment?
+
+
+
+
+
