@@ -1,8 +1,10 @@
 
 posterior_particles = function(ppl_function, number_of_iterations) {
   weight <<- 1.0
-  dimension = length(ppl_function()) 
-  samples = matrix(0, nrow = number_of_iterations, ncol = dimension)
+  sample = ppl_function()
+  dimension = length(sample) 
+  samples = matrix(0, nrow = number_of_iterations, ncol = dimension, 
+                   dimnames = list(1:number_of_iterations, names(sample)))
   weights = rep(0, number_of_iterations)
   for (i in 1:number_of_iterations) {
     weight <<- 1.0       # reset the weight accumulator
@@ -31,7 +33,8 @@ representative_sample = function(snis_output, percentile=0.9999){
   list(samples = snis_output$samples[idx_subset,], weights = snis_output$weights[idx_subset])
 }
 weighted_scatter_plot = function(
-    snis_output, 
+    snis_output,
+    plot_idxs = 1:2,
     base_color_hex = hcl.colors(1, palette = "viridis"),
     plot_options = list(xlab="Param 1", ylab="Param 2")
 ){
@@ -47,7 +50,7 @@ weighted_scatter_plot = function(
   # create colors with transparencies and plot
   points_color_alphas = rgb(base_color[1],base_color[2],base_color[3], alphas)
   call_args=c(
-    list(x=snis_subset$samples[,1:2], col=points_color_alphas), 
+    list(x=snis_subset$samples[, plot_idxs], col=points_color_alphas), 
     plot_options
   )
   do.call(plot, call_args)
