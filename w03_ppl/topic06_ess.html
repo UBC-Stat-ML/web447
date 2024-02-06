@@ -696,7 +696,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <section id="underlying-theory" class="level2">
 <h2 class="anchored" data-anchor-id="underlying-theory">Underlying theory</h2>
 <p><strong>Theorem:</strong> From <a href="http://arxiv.org/abs/1511.06196">Theorem 2.1 in Agapiou et al.&nbsp;(2017)</a>: if <span class="math inline">\(g\)</span> is such that <span class="math inline">\(|g(x)| \le 1\)</span> (for example, an indicator function), <span class="math display">\[\text{RMSE} := \sqrt{\mathbb{E}(G_M - g^*)^2} \le 2 \sqrt{\frac{\mathbb{E}[W^2]}{M (\mathbb{E}W)^2}} =: \frac{2}{\sqrt{\text{ESS}}},\]</span> where <span class="math inline">\(W\)</span> is the un-normalized SNIS weight random variable.</p>
-<p><strong>Estimating SNIS ESS:</strong> The quantity inside the parenthesis is the effective sample size. It is estimated by computing the average weight and the average squared weights: <span class="math display">\[\begin{align*}
+<p><strong>Estimating SNIS ESS:</strong> compute the average weight and the average squared weights: <span class="math display">\[\begin{align*}
 \text{SNIS ESS} = \frac{M (\mathbb{E}W)^2}{\mathbb{E}[W^2]} &amp;\approx \text{SNIS ESS estimator} \\
 &amp;= \frac{M (\frac{1}{M} \sum_{m=1}^M W^{(m)})^2}{\frac{1}{M} \sum_{m=1}^M (W^{(m)})^2} \\
 &amp;= \frac{(\sum_{m=1}^M W^{(m)})^2}{\sum_{m=1}^M (W^{(m)})^2}.
