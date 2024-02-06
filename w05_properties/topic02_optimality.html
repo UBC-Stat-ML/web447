@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Challenge questions</title>
+<title>Bayes1@UBC - Optimality</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -380,13 +409,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
  <span class="menu-text">The joy of probabilistic modelling</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
@@ -431,7 +460,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -439,13 +468,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Some theory</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
@@ -454,7 +483,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
@@ -511,17 +540,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#q.1-modelling" id="toc-q.1-modelling" class="nav-link active" data-scroll-target="#q.1-modelling">Q.1 Modelling</a></li>
-  <li><a href="#q.2-posterior-computation" id="toc-q.2-posterior-computation" class="nav-link" data-scroll-target="#q.2-posterior-computation">Q.2 Posterior computation</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#estimator" id="toc-estimator" class="nav-link" data-scroll-target="#estimator">Estimator</a></li>
+  <li><a href="#optimality-motivation" id="toc-optimality-motivation" class="nav-link" data-scroll-target="#optimality-motivation">Optimality: motivation</a></li>
+  <li><a href="#optimality-of-bayesian-estimators-theorem" id="toc-optimality-of-bayesian-estimators-theorem" class="nav-link" data-scroll-target="#optimality-of-bayesian-estimators-theorem">Optimality of Bayesian estimators: theorem</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Challenge questions</h1>
+<h1 class="title">Optimality</h1>
 </div>
 
 
@@ -556,36 +592,108 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Not for grades!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
-</div>
-</div>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>You are collecting <a href="https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints/materials-and-techniques/printmaking/lithograph">lithographs</a> from a series.</li>
-<li>Each one has a unique serial number, but contrary to standard practice, the artist did not specify the total number of copies in circulation.</li>
-<li>You possess serial numbers <code>1, 3, 15</code>.</li>
+<li>Average loss optimality of Bayes estimators</li>
+<li>Limitations of this notion of optimality.</li>
 </ul>
-<section id="q.1-modelling" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-modelling">Q.1 Modelling</h2>
-<p>Design a Bayesian modelling to try inferring the total number of copies in circulation. Motivate all choices you make.</p>
 </section>
-<section id="q.2-posterior-computation" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-posterior-computation">Q.2 Posterior computation</h2>
-<p>Approximate the posterior distribution and produce:</p>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Formalize and justify one of the motivation for Bayesian methods covered in the <a href="../w00_intro/topic01_why.html">first lecture</a>.</p>
+</section>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>We go back to the <a href="../w02_discrete_bayes/topic06_decision.html">decision theoretic setup from week 2</a>.</p>
+</section>
+<section id="estimator" class="level2">
+<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
+<p><strong>Definition:</strong> an estimator is a function <span class="math inline">\(\delta\)</span> such that:</p>
+<ul>
+<li><span class="math inline">\(\delta\)</span> takes a dataset as input, <span class="math inline">\(\delta(y)\)</span>, and</li>
+<li>returns an action.</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li><a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a>,</li>
+<li>maximum likelihood estimator (when the action is a parameter you are trying to estimate).</li>
+</ul>
+</section>
+<section id="optimality-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="optimality-motivation">Optimality: motivation</h2>
+<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explain they did the following:</p>
+<ul>
+<li>Let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, another estimator, say based on a sophisticated deep neural network.</li>
+<li>To compare the two estimators, the presenter generated a large number of synthetic datasets <span class="math inline">\((X^{(m)}, Y^{(m)})\)</span> by <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation from the model</a></li>
+<li>They evaluated the performance of the Bayes estimator as follows::
+<ul>
+<li>apply the estimators: <span class="math inline">\(a^{(m)}= \delta_{\text{B}}(Y^{(m)})\)</span>,</li>
+<li>compute the losses <span class="math inline">\(l^{(m)}= L(a^{(m)}, X^{(m)})\)</span>, and</li>
+<li>return the average loss as the measure of performance: <span class="math inline">\(\frac{1}{M} \sum l^{(m)}\)</span>.</li>
+</ul></li>
+<li>Then, they did the same with the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span>.</li>
+<li>Suppose that the presenter reported a lower loss for the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span></li>
+</ul>
+<p><strong>Poll:</strong> Which of these statements is true?</p>
 <ol type="1">
-<li>A posterior PMF.</li>
-<li>A point estimate.</li>
-<li>A 95% highest probability set.</li>
+<li>The deep neural network can perform better because it involves more parameters (over-parameterization)</li>
+<li>The deep neural network can perform better because of a combination of lucky initialization and noisy gradients</li>
+<li>The deep neural network can perform better because of some other reason</li>
+<li>This cannot happen unless the loss function is non-convex</li>
+<li>This cannot happen because of some other reason</li>
 </ol>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+- Correct answer is: "This cannot happen because of some other reason"
+- We can state this because of another optimality property enjoyed by Bayes estimators
+:::
+
+-->
+</section>
+<section id="optimality-of-bayesian-estimators-theorem" class="level1">
+<h1>Optimality of Bayesian estimators: theorem</h1>
+<p><strong>Theorem:</strong> let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, any other estimator. Then: <span id="eq-opt"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)] \tag{1}\]</span></span></p>
+<p><strong>Proof:</strong> by the law of total expectation: <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] = \mathbb{E}[ {\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]}]\)</span>. We will start by rewriting the part in red.</p>
+<p>To do so, denote the objective being minimized in the Bayes estimator by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
+<p>Note: by definition, we can rewrite our Bayes estimator by: <span class="math display">\[\delta_{\text{B}}= \operatorname{arg\,min}_a \mathcal{O}(a),\]</span> and hence: <span class="math display">\[{\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]} = \mathcal{O}(\delta_{\text{B}}) = \mathcal{O}(\operatorname{arg\,min}_a \mathcal{O}(a)),\]</span> so that we can rewrite the left-hand side of <a href="#eq-opt" class="quarto-xref">Equation&nbsp;1</a> as follows:</p>
+<p><span class="math display">\[\mathbb{E}[ \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]] = \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))].\]</span></p>
+<p>Now note that for all <span class="math inline">\(a'\)</span>, <span class="math inline">\(\mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a)) \le \mathcal{O}(a')\)</span>, hence:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathbb{E}[L(\delta_{\text{B}}(Y), X)] &amp;= \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))] \\
+&amp;\le \mathbb{E}[ \mathcal{O}( \delta_{\text{o}}(Y))] \\
+&amp;= \mathbb{E}[L(\delta_{\text{o}}(Y), X)].
+\end{align*}
+\]</span></p>
+<p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for possible answers
+
+A key factor to take into account:
+
+- If the estimator $\best$ is based on an approximation of the posterior (e.g. SNIS), 
+    then the optimality property may not hold!
+
+Some other more "practical" factors to keep in mind:
+
+- Software defects (more frequent than you may think---we will talk more about them later).
+- [Publication bias](https://en.wikipedia.org/wiki/Publication_bias) or even, academic dishonesty (e.g. repeating simulation until a desired result is obtained).
+
+Also, keep in mind this page implicitly assumes the model is well-specified 
+(since we generate data from the joint distribution). The situation is more 
+complex in mis-specified models (asymptotics become critical in that case).
+:::
+
+-->
 
 
 </section>

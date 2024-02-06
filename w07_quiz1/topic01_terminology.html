@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Challenge questions</title>
+<title>Bayes1@UBC - Terminology review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -380,13 +380,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
  <span class="menu-text">The joy of probabilistic modelling</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
@@ -431,7 +431,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -486,16 +486,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
  <span class="menu-text">Quiz 1</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Terminology review</span></a>
   </div>
 </li>
@@ -511,17 +511,31 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#q.1-modelling" id="toc-q.1-modelling" class="nav-link active" data-scroll-target="#q.1-modelling">Q.1 Modelling</a></li>
-  <li><a href="#q.2-posterior-computation" id="toc-q.2-posterior-computation" class="nav-link" data-scroll-target="#q.2-posterior-computation">Q.2 Posterior computation</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#probability-essentials" id="toc-probability-essentials" class="nav-link" data-scroll-target="#probability-essentials">Probability essentials</a></li>
+  <li><a href="#common-distributions-pmfs-and-densities" id="toc-common-distributions-pmfs-and-densities" class="nav-link" data-scroll-target="#common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</a></li>
+  <li><a href="#basic-bayesian-terms" id="toc-basic-bayesian-terms" class="nav-link" data-scroll-target="#basic-bayesian-terms">Basic Bayesian terms</a></li>
+  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling">Sampling</a></li>
+  <li><a href="#decision-theory" id="toc-decision-theory" class="nav-link" data-scroll-target="#decision-theory">Decision theory</a></li>
+  <li><a href="#posterior-summaries" id="toc-posterior-summaries" class="nav-link" data-scroll-target="#posterior-summaries">Posterior summaries</a></li>
+  <li><a href="#point-estimation" id="toc-point-estimation" class="nav-link" data-scroll-target="#point-estimation">Point estimation</a></li>
+  <li><a href="#credible-regions" id="toc-credible-regions" class="nav-link" data-scroll-target="#credible-regions">Credible regions</a></li>
+  <li><a href="#model-criticism" id="toc-model-criticism" class="nav-link" data-scroll-target="#model-criticism">Model criticism</a></li>
+  <li><a href="#ppls" id="toc-ppls" class="nav-link" data-scroll-target="#ppls">PPLs</a></li>
+  <li><a href="#model-terminology" id="toc-model-terminology" class="nav-link" data-scroll-target="#model-terminology">Model terminology</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Challenge questions</h1>
+<h1 class="title">Terminology review</h1>
 </div>
 
 
@@ -556,36 +570,116 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Not for grades!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
-</div>
-</div>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>You are collecting <a href="https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints/materials-and-techniques/printmaking/lithograph">lithographs</a> from a series.</li>
-<li>Each one has a unique serial number, but contrary to standard practice, the artist did not specify the total number of copies in circulation.</li>
-<li>You possess serial numbers <code>1, 3, 15</code>.</li>
+<li>Review of key terminology covered so far.</li>
 </ul>
-<section id="q.1-modelling" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-modelling">Q.1 Modelling</h2>
-<p>Design a Bayesian modelling to try inferring the total number of copies in circulation. Motivate all choices you make.</p>
 </section>
-<section id="q.2-posterior-computation" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-posterior-computation">Q.2 Posterior computation</h2>
-<p>Approximate the posterior distribution and produce:</p>
-<ol type="1">
-<li>A posterior PMF.</li>
-<li>A point estimate.</li>
-<li>A 95% highest probability set.</li>
-</ol>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Part of quiz 1 involves knowing these terms without having to look them up.</p>
+<p>While in “the real world” you can look things up, to attain mastery of a subject you need a critical mass of concepts in memory. Too much google look-ups prevent thinking<br>
+at the speed of thought.</p>
+</section>
+</section>
+<section id="probability-essentials" class="level2">
+<h2 class="anchored" data-anchor-id="probability-essentials">Probability essentials</h2>
+<ul>
+<li>Probability vs PMF vs density</li>
+<li>Event vs outcome</li>
+<li>Random variable</li>
+<li>Realization</li>
+<li>Probability and conditional probability</li>
+<li>Expectation vs probability</li>
+<li>Indicator function</li>
+</ul>
+</section>
+<section id="common-distributions-pmfs-and-densities" class="level2">
+<h2 class="anchored" data-anchor-id="common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</h2>
+<p>Knowing the <strong>support</strong> (no need to memorize other details)</p>
+<ul>
+<li>Bernoulli</li>
+<li>Binomial</li>
+<li>Uniform (discrete and continuous)</li>
+<li>Categorical</li>
+<li>Normal</li>
+<li>Exponential</li>
+<li>Beta</li>
+</ul>
+</section>
+<section id="basic-bayesian-terms" class="level2">
+<h2 class="anchored" data-anchor-id="basic-bayesian-terms">Basic Bayesian terms</h2>
+<ul>
+<li>Prior distribution (PMF/density)</li>
+<li>Likelihood</li>
+<li>Posterior distribution (PMF/density)</li>
+<li>Joint distribution</li>
+<li>Joint vs marginal posterior</li>
+<li>Predictive distribution</li>
+</ul>
+</section>
+<section id="sampling" class="level2">
+<h2 class="anchored" data-anchor-id="sampling">Sampling</h2>
+<ul>
+<li>Sample</li>
+<li>Forward vs posterior sampling</li>
+<li>Simple Monte Carlo vs SNIS</li>
+<li>Test function</li>
+</ul>
+</section>
+<section id="decision-theory" class="level2">
+<h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
+<ul>
+<li>Loss function</li>
+<li>Bayes estimator</li>
+</ul>
+</section>
+<section id="posterior-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="posterior-summaries">Posterior summaries</h2>
+<ul>
+<li>Point estimate vs credible regions</li>
+</ul>
+</section>
+<section id="point-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimation">Point estimation</h2>
+<ul>
+<li>Posterior mean</li>
+<li>Posterior mode</li>
+</ul>
+</section>
+<section id="credible-regions" class="level2">
+<h2 class="anchored" data-anchor-id="credible-regions">Credible regions</h2>
+<ul>
+<li>Nominal coverage</li>
+<li>Quantile-based credible interval</li>
+<li>Highest Density Set</li>
+</ul>
+</section>
+<section id="model-criticism" class="level2">
+<h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
+<ul>
+<li>Model mis-specification</li>
+<li>Cromwell’s rule</li>
+</ul>
+</section>
+<section id="ppls" class="level2">
+<h2 class="anchored" data-anchor-id="ppls">PPLs</h2>
+<ul>
+<li>PPL</li>
+<li>Consistency</li>
+<li>Rate of convergence</li>
+<li>(Importance) weights (normalized vs un-normalized)</li>
+</ul>
+</section>
+<section id="model-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="model-terminology">Model terminology</h2>
+<ul>
+<li>Classification vs regression</li>
+<li>Input/output/covariate</li>
+</ul>
 
 
 </section>

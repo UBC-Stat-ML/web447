@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Challenge questions</title>
+<title>Bayes1@UBC - Exercise 5: Bayesian theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -80,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../exercises/ex05.html">Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -380,13 +443,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
  <span class="menu-text">The joy of probabilistic modelling</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
@@ -431,7 +494,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link active">
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -439,13 +502,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">Some theory</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
@@ -472,7 +535,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -511,17 +574,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#q.1-modelling" id="toc-q.1-modelling" class="nav-link active" data-scroll-target="#q.1-modelling">Q.1 Modelling</a></li>
-  <li><a href="#q.2-posterior-computation" id="toc-q.2-posterior-computation" class="nav-link" data-scroll-target="#q.2-posterior-computation">Q.2 Posterior computation</a></li>
+  <li><a href="#q.1-sequential-updating" id="toc-q.1-sequential-updating" class="nav-link active" data-scroll-target="#q.1-sequential-updating">Q.1: sequential updating</a></li>
+  <li><a href="#q.2-bayesian-inference-in-the-limit-of-increasing-data" id="toc-q.2-bayesian-inference-in-the-limit-of-increasing-data" class="nav-link" data-scroll-target="#q.2-bayesian-inference-in-the-limit-of-increasing-data">Q.2: Bayesian inference in the limit of increasing data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w04_glms/topic01_simPPLe.html">The joy of probabilistic modelling</a></li><li class="breadcrumb-item"><a href="../challenges/ch04.html">Challenge</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../exercises/ex05.html">Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Challenge questions</h1>
+<h1 class="title">Exercise 5: Bayesian theory</h1>
 </div>
 
 
@@ -556,36 +619,96 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Not for grades!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
-</div>
-</div>
-<ul>
-<li>You are collecting <a href="https://www.metmuseum.org/about-the-met/collection-areas/drawings-and-prints/materials-and-techniques/printmaking/lithograph">lithographs</a> from a series.</li>
-<li>Each one has a unique serial number, but contrary to standard practice, the artist did not specify the total number of copies in circulation.</li>
-<li>You possess serial numbers <code>1, 3, 15</code>.</li>
-</ul>
-<section id="q.1-modelling" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-modelling">Q.1 Modelling</h2>
-<p>Design a Bayesian modelling to try inferring the total number of copies in circulation. Motivate all choices you make.</p>
-</section>
-<section id="q.2-posterior-computation" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-posterior-computation">Q.2 Posterior computation</h2>
-<p>Approximate the posterior distribution and produce:</p>
+<section id="q.1-sequential-updating" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-sequential-updating">Q.1: sequential updating</h2>
+<p>Consider a joint probabilistic model given by <span class="math display">\[
+\begin{aligned}
+\theta &amp;\sim \rho \\
+x_i|\theta &amp;\overset{\text{iid}}{\sim}\nu_\theta, \quad i\in\{1,\dots,n\}
+\end{aligned}
+\]</span> where <span class="math inline">\(\rho\)</span> is a prior distribution for the unknown parameter <span class="math inline">\(\theta\)</span>, and <span class="math inline">\(\{x_i\}_{i=1}^n\)</span> is a sequence of observations with conditional distribution <span class="math inline">\(\nu_\theta\)</span>.</p>
 <ol type="1">
-<li>A posterior PMF.</li>
-<li>A point estimate.</li>
-<li>A 95% highest probability set.</li>
+<li>Write down the posterior distribution of <span class="math inline">\(\theta\)</span> given <span class="math inline">\(\{x_i\}_{i=1}^n\)</span>.</li>
+<li>Suppose now we get an additional data point <span class="math inline">\(x_{n+1}\)</span> with the same conditional distribution <span class="math inline">\(\nu_\theta\)</span>. Show that using the posterior from part 1 as <em>prior</em> and data equal to just <span class="math inline">\(x_{n+1}\)</span> gives <em>the same</em> posterior distribution as redoing part 1 with the <span class="math inline">\(n+1\)</span> data points.</li>
 </ol>
+</section>
+<section id="q.2-bayesian-inference-in-the-limit-of-increasing-data" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-bayesian-inference-in-the-limit-of-increasing-data">Q.2: Bayesian inference in the limit of increasing data</h2>
+<p>We will use the tractability of the coin bag example to explore the behavior of the posterior distribution as the number of observations goes to infinity. Recall that its joint distribution is <span id="eq-posterior-full"><span class="math display">\[
+\begin{aligned}
+p &amp;\sim {\mathrm{Discrete}}(\{0,1/K,2/K,\dots,1\},\rho) \\
+y_i|p &amp;\overset{\text{iid}}{\sim}{\mathrm{Bern}}(p), \quad i\in\{1,\dots,n\}
+\end{aligned}
+\tag{1}\]</span></span> and we use the convention that <span class="math inline">\(y=1\)</span> is “heads”.</p>
+<ol type="1">
+<li>Load the following code to compute the posterior in <a href="#eq-posterior-full" class="quarto-xref">Equation&nbsp;1</a>. Nothing to submit for this item.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>posterior_distribution <span class="ot">=</span> <span class="cf">function</span>(rho, n_heads, n_observations) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  K <span class="ot">=</span> <span class="fu">length</span>(rho) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  gamma <span class="ot">=</span> rho <span class="sc">*</span> <span class="fu">dbinom</span>(n_heads, n_observations, (<span class="dv">0</span><span class="sc">:</span>K)<span class="sc">/</span>K)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  normalizing_constant <span class="ot">=</span> <span class="fu">sum</span>(gamma)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  gamma<span class="sc">/</span>normalizing_constant</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Write a function <code>posterior_mean</code> that computes the posterior mean given the output of <code>posterior_distribution</code>.</li>
+<li>Write another function with signature</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>simulate_posterior_mean_error <span class="ot">=</span> <span class="cf">function</span>(rho_true, rho_prior, n_observations){...}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>that performs the following</p>
+<ol type="a">
+<li>sample <span class="math inline">\(p_\text{true} \sim {\mathrm{Discrete}}(\{0,1/K,2/K,\dots,1\},\rho_\text{true})\)</span></li>
+<li>sample the data <span class="math inline">\(y_{1:n_\text{obs}}\)</span> conditional on <span class="math inline">\(p_\text{true}\)</span></li>
+<li>call <code>posterior_distribution</code> using <span class="math inline">\(\rho_\text{prior}\)</span> and the simulated data</li>
+<li>compute the posterior mean <span class="math inline">\(\mathbb{E}[p|y_{1:n_\text{obs}}]\)</span></li>
+<li>return the absolute error between <span class="math inline">\(p_\text{true}\)</span> and the posterior mean</li>
+</ol>
+<ol start="4" type="1">
+<li>Using</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rho_true <span class="ot">=</span> rho_prior <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>, K<span class="sc">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and <span class="math inline">\(K=100\)</span>, run <code>simulate_posterior_mean_error</code> for all <code>n_observations</code> values in</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n_obs_vector <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">^</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Repeat each case 1000 times. Store the error values in a dataframe <code>experiment_results</code> that has columns <code>(n_observations, replication, error)</code>, with <code>replication</code> ranging from 1 to 1000. Show the output of <code>head</code> and the output of <code>tail</code> for your dataframe.</p>
+<ol start="5" type="1">
+<li>Visualize the above data using a log-log plot using the following code</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(experiment_results, <span class="fu">aes</span>(<span class="at">x=</span>n_observations, <span class="at">y=</span>errors<span class="fl">+1e-9</span>)) <span class="sc">+</span> <span class="co"># avoid log(0)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom=</span><span class="st">"line"</span>) <span class="sc">+</span> <span class="co"># Line averages over 1000 replicates</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span>  <span class="co"># Show result in log-log scale</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">n.breaks=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">1e-3</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of observations"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Absolute error of the posterior mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="6" type="1">
+<li><p>Do a quick estimate of the slope at the rightmost end of the graph via <span class="math display">\[
+\frac{y_7-y_5}{x_7-x_5}
+\]</span> where <span class="math inline">\(x\)</span> is <span class="math inline">\(\log_{10}(n)\)</span>, <span class="math inline">\(y\)</span> is <span class="math inline">\(\log_{10}(\text{error})\)</span>, and the subscript indicates the column of points from left to right. What can you deduce about the scaling law of the error?</p></li>
+<li><p>Repeat part 4 but now using</p></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rho_true <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>, K<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rho_prior <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>(K<span class="sc">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Store the results in a dataframe called <code>new_results</code>. Use the following code to plot both sets of results</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all_results, <span class="fu">aes</span>(<span class="at">x=</span>n_observations, <span class="at">y=</span>errors<span class="fl">+1e-9</span>, <span class="co"># avoid log(0) </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color=</span>prior_type, <span class="at">shape=</span>prior_type)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom=</span><span class="st">"line"</span>) <span class="sc">+</span> <span class="co"># Line averages over 1000 replicates</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span>  <span class="co"># Show result in log-log scale</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">n.breaks=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">1e-3</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of observations"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Absolute error of the posterior mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where the dataframe <code>all_results</code> must be created by</p>
+<ol type="a">
+<li>Adding a column <code>prior_type</code> to <code>experiment_results</code> with constant value equal to <code>Match</code></li>
+<li>Adding the same column to <code>new_results</code> with the value <code>Different</code></li>
+<li>Finally, use <code>rbind</code> to join both dataframes into one.</li>
+</ol>
+<p>Comment on the visual differences between the two sets of results.</p>
 
 
 </section>
