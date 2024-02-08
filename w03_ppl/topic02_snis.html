@@ -501,6 +501,24 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: well-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -615,8 +633,25 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>Our goal is to compute <span class="math inline">\(\mathbb{E}[g(X) | Y = y]\)</span>.</li>
 <li>SNIS will allow us to approximate this conditional expectation.</li>
-<li>How is this different than <a href="../w01_discrete_inference/topic11_monte_carlo.html">the Simple Monte Carlo method</a> that we used in <a href="../exercises/ex01.html#sec-q1">Ex1.Q.1.3</a>?</li>
 </ul>
+<p>How is this different than <a href="../w01_discrete_inference/topic11_monte_carlo.html">the simple Monte Carlo method</a> that we used in <a href="../exercises/ex01.html#sec-q1">Ex1.Q.1.3</a>?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We used simple Monte Carlo to compute an expectation <strong>without</strong> conditioning on <span class="math inline">\(Y = y\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbb{E}[g(X)]\)</span>.</p>
+<p>SNIS allows us to take into account observed data.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="problem-formulation" class="level2">
 <h2 class="anchored" data-anchor-id="problem-formulation">Problem formulation</h2>
@@ -643,7 +678,7 @@ https://github.com/trevorcampbell/shortex
 <li>What function <span class="math inline">\(g(x)\)</span> would you take to compute a <a href="../w02_discrete_bayes/topic04_point.html">posterior mean</a>?</li>
 </ul>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -652,7 +687,7 @@ Click for choices
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><span class="math inline">\(g(x) = \mathbb{1}[X = x]\)</span></li>
@@ -665,7 +700,7 @@ Click for choices
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -674,7 +709,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>If we set <span class="math inline">\(g(x) = x\)</span>, then <span class="math inline">\(\sum x \pi(x) = \mathbb{E}[X | Y = y]\)</span>.</p>
 </div>
@@ -731,7 +766,7 @@ Click for answer
 </ul>
 <p><strong>Example:</strong> compute <span class="math inline">\(\hat G_M\)</span> in the bag of coin example if <span class="math inline">\(g(x) = x\)</span>, <span class="math inline">\(X^{(1)} = 1\)</span>, <span class="math inline">\(X^{(2)} = 2\)</span>. Use the decision tree above to help you.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -740,7 +775,7 @@ Click for choices
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><span class="math inline">\(0\)</span></li>
@@ -753,7 +788,7 @@ Click for choices
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -762,7 +797,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We have:</p>
 <table class="table">

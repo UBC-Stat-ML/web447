@@ -535,6 +535,24 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: well-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -908,10 +926,10 @@ Click for answer
 <li>So why do we use Monte Carlo?
 <ul>
 <li>The constants in the analysis of numerical integration blow up exponentially in the dimensionality of the problem!</li>
-<li>Many Monte Carlo methods can avoid this exponential blow up in the dimensionality<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li>Many Monte Carlo methods can avoid this exponential blow up in the dimensionality.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li>And good scalability in the dimensionality of the problem often more important than scalability in number of digits of accuracy
 <ul>
-<li>…can’t trust 10th digit anyways because the model almost always has some slight mis-specification.</li>
+<li>…can’t trust 10th digit anyways because the model almost always has some amount of <a href="../w02_discrete_bayes/topic08_criticism.html">mis-specification</a>.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -924,7 +942,7 @@ Click for answer
 
 <ol>
 <li id="fn1"><p>For SNIS, the bias is not zero (because we have a ratio), but the squared bias decays faster than the variance term as <span class="math inline">\(M \to \infty\)</span> so the argument is essentially the same as simple Monte Carlo.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>In particular, Simple Monte Carlo and MCMC can often avoid the curse of dimensionality. But not SNIS! Why are we spending time on SNIS then? Because it can be used to approximate arbitrary posterior distribution, while simple Monte Carlo cannot, and it is much simpler than MCMC, so a good starting point pedagogically. However we will jump to MCMC later in this course.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In particular, Simple Monte Carlo and MCMC can often avoid <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">the curse of dimensionality</a>. But not SNIS! Why are we spending time on SNIS then? Because it can be used to approximate arbitrary posterior distribution, while simple Monte Carlo cannot, and it is much simpler than MCMC, so a good starting point pedagogically. However we will jump to MCMC later in this course.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

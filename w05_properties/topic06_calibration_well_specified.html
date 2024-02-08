@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Optimality</title>
+<title>Bayes1@UBC - Bayesian calibration: well-specified case</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -100,7 +134,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic06_calibration_well_specified.html">Bayesian calibration: well-specified case</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -483,7 +517,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
@@ -507,7 +541,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bayesian calibration: well-specified case</span></a>
   </div>
 </li>
@@ -563,19 +597,19 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#estimator" id="toc-estimator" class="nav-link" data-scroll-target="#estimator">Estimator</a></li>
-  <li><a href="#optimality-motivation" id="toc-optimality-motivation" class="nav-link" data-scroll-target="#optimality-motivation">Optimality: motivation</a></li>
-  <li><a href="#optimality-of-bayesian-estimators-theorem" id="toc-optimality-of-bayesian-estimators-theorem" class="nav-link" data-scroll-target="#optimality-of-bayesian-estimators-theorem">Optimality of Bayesian estimators: theorem</a></li>
+  <li><a href="#bayesian-calibration" id="toc-bayesian-calibration" class="nav-link" data-scroll-target="#bayesian-calibration">Bayesian calibration</a></li>
+  <li><a href="#well-specified-vs-misspecified-models" id="toc-well-specified-vs-misspecified-models" class="nav-link" data-scroll-target="#well-specified-vs-misspecified-models">Well specified vs misspecified models</a></li>
+  <li><a href="#numerical-exploration" id="toc-numerical-exploration" class="nav-link" data-scroll-target="#numerical-exploration">Numerical exploration</a></li>
+  <li><a href="#mathematical-underpinnings" id="toc-mathematical-underpinnings" class="nav-link" data-scroll-target="#mathematical-underpinnings">Mathematical underpinnings</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic06_calibration_well_specified.html">Bayesian calibration: well-specified case</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Optimality</h1>
+<h1 class="title">Bayesian calibration: well-specified case</h1>
 </div>
 
 
@@ -615,103 +649,191 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Average loss optimality of Bayes estimators</li>
-<li>Limitations of this notion of optimality.</li>
+<li>Bayesian calibration.</li>
+<li>Guarantees when the model is well-specified.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Formalize and justify one of the motivation for Bayesian methods covered in the <a href="../w00_intro/topic01_why.html">first lecture</a>.</p>
+<p>We introduced in the previous page the important notion of <a href="../w05_properties/topic05_calibration.html">calibration</a>.</p>
+<p>The question we consider now: <strong>are <a href="../w02_discrete_bayes/topic05_credible.html">credible interval</a> calibrated?</strong></p>
+<p>We will give a two-part answer: first, answering the above question for well-specified models (this page), then, for mis-specified models (<a href="../w05_properties/topic07_calibration_mis_specified.html">next page</a>).</p>
 </section>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We go back to the <a href="../w02_discrete_bayes/topic06_decision.html">decision theoretic setup from week 2</a>.</p>
-</section>
-<section id="estimator" class="level2">
-<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
-<p><strong>Definition:</strong> an estimator is a function <span class="math inline">\(\delta\)</span> such that:</p>
+<section id="bayesian-calibration" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-calibration">Bayesian calibration</h2>
+<p><strong>Thought experiment</strong>: what if a certain Bayesian inference method is used many times?</p>
 <ul>
-<li><span class="math inline">\(\delta\)</span> takes a dataset as input, <span class="math inline">\(\delta(y)\)</span>, and</li>
-<li>returns an action.</li>
+<li>For example, different labs, each studying similar but different datasets,</li>
+<li>i.e., they are replicating an “experiment.”</li>
+<li>This leads to frequentist analysis of Bayesian procedures—a very useful thing to do!</li>
 </ul>
-<p><strong>Examples:</strong></p>
+<p><strong>Calibration of credible intervals</strong>: 90% credible interval is calibrated if it contains the true parameter <strong>90% of the time</strong>.</p>
+<p><strong>What do we mean by “true parameter”?</strong></p>
 <ul>
-<li><a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a>,</li>
-<li>maximum likelihood estimator (when the action is a parameter you are trying to estimate).</li>
+<li>Start with a joint distribution, <span class="math inline">\(p^\star(x, y)\)</span>, which we will call “nature.”</li>
+<li>For each “experiment”: use <span class="math inline">\(p^\star\)</span> to simulate both a true parameter, <span class="math inline">\(x^\star\)</span>, and an associated dataset <span class="math inline">\(y^\star\)</span>: <span class="math inline">\((x^\star, y^\star) \sim p^\star\)</span>. (<span class="math inline">\(=\)</span> notion of <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation</a>).</li>
 </ul>
-</section>
-<section id="optimality-motivation" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-motivation">Optimality: motivation</h2>
-<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explains they did the following:</p>
+<p><strong>What do we mean by “90% credible interval”?</strong> a function <span class="math inline">\(C(y) = [L(y), R(y)]\)</span> which (1) computes the posterior <span class="math inline">\(\pi(\cdot | y)\)</span>, and (2), selects left and right end points, <span class="math inline">\(l\)</span>, <span class="math inline">\(r\)</span> such that <span class="math inline">\(\int_l^r \pi(x | y) \mathrm{d}x = 0.9\)</span>.</p>
+<p>Recall an examples of credible interval we discussed: <a href="../w02_discrete_bayes/topic05_credible.html">quantile-based intervals</a>.</p>
+<p><strong>What do we mean by “90% of the time”?</strong></p>
 <ul>
-<li>Let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, another estimator, say based on a sophisticated deep neural network.</li>
-<li>To compare the two estimators, the presenter generated a large number of synthetic datasets <span class="math inline">\((X^{(m)}, Y^{(m)})\)</span> by <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation from the model</a></li>
-<li>They evaluated the performance of the Bayes estimator as follows::
+<li>Loop over <span class="math inline">\(1, 2, \dots,\)</span> numberOfExperiments
 <ul>
-<li>apply the estimators: <span class="math inline">\(a^{(m)}= \delta_{\text{B}}(Y^{(m)})\)</span>,</li>
-<li>compute the losses <span class="math inline">\(l^{(m)}= L(a^{(m)}, X^{(m)})\)</span>, and</li>
-<li>return the average loss as the measure of performance: <span class="math inline">\(\frac{1}{M} \sum l^{(m)}\)</span>.</li>
+<li>generate synthetic data <span class="math inline">\((x^\star, y^\star) \sim p^\star\)</span></li>
+<li>compute the credible <span class="math inline">\(C(y^\star)\)</span></li>
+<li>record if the true parameter is in the interval, i.e.&nbsp;if <span class="math inline">\(x^\star \in C(y^\star)\)</span></li>
 </ul></li>
-<li>Then, they did the same with the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span>.</li>
-<li>Suppose that the presenter reported a lower loss for the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span></li>
+<li>Consider the limit, as numberOfExperiments <span class="math inline">\(\to \infty\)</span>, of the fraction of times the true parameter is in the interval
+<ul>
+<li>If the limit is equal to 0.9 we say the credible interval is calibrated (great!)</li>
+<li>If the limit is close to 0.9 we say the credible interval is approximately calibrated (that’s not too bad)</li>
+<li>If the limit is higher than 0.9, we say the credible interval is over-conservative (that’s not too bad)</li>
+<li>If the limit is lower than 0.9, we say the credible interval is anti-conservative (bad!)</li>
+</ul></li>
 </ul>
-<p><strong>Poll:</strong> Which of these statements is true?</p>
+</section>
+<section id="well-specified-vs-misspecified-models" class="level2">
+<h2 class="anchored" data-anchor-id="well-specified-vs-misspecified-models">Well specified vs misspecified models</h2>
+<ul>
+<li>There are two joint distributions involved in the thought experiment
+<ul>
+<li><span class="math inline">\(p^*\)</span>, used to generate data</li>
+<li><span class="math inline">\(p\)</span>, used internally by the credible interval procedure to define a posterior <span class="math inline">\(\pi(x | y) \propto p(x, y)\)</span></li>
+</ul></li>
+<li>We can consider the following setups
+<ul>
+<li>Well-specified setup <span class="math inline">\(p^* = p\)</span></li>
+<li>Misspecified, <span class="math inline">\(p^* \neq p\)</span></li>
+</ul></li>
+<li>For now: focus on the well-specified setup.</li>
+</ul>
+</section>
+<section id="numerical-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-exploration">Numerical exploration</h2>
+<p>Using the discrete model for Delta launches from <a href="../exercises/ex02.html">Exercise 2</a>, we will now run the algorithm described above under “What do we mean by”90% of the time”?“…</p>
+<p><strong>What do you expect?</strong></p>
 <ol type="1">
-<li>The deep neural network can perform better because it involves more parameters (over-parameterization)</li>
-<li>The deep neural network can perform better because of a combination of lucky initialization and noisy gradients</li>
-<li>The deep neural network can perform better because of some other reason</li>
-<li>This cannot happen unless the loss function is non-convex</li>
-<li>This cannot happen because of some other reason</li>
+<li>calibrated for small data, calibrated for large data</li>
+<li>not calibrated for small data, calibrated for large data</li>
+<li>only approximately calibrated for both small and large data</li>
+<li>none of the above</li>
 </ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"tidyr"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>high_density_intervals <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, posterior_probs){</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ordered_probs <span class="ot">=</span> posterior_probs[,<span class="fu">order</span>(posterior_probs[<span class="dv">2</span>,], <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  cumulative_probs <span class="ot">=</span> <span class="fu">cumsum</span>(ordered_probs[<span class="dv">2</span>,])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">=</span> <span class="fu">which.max</span>(cumulative_probs <span class="sc">&gt;=</span> (<span class="dv">1</span><span class="sc">-</span>alpha))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ordered_probs[,<span class="dv">1</span><span class="sc">:</span>index, <span class="at">drop=</span><span class="cn">FALSE</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>rdunif <span class="ot">&lt;-</span> <span class="cf">function</span>(max) { <span class="fu">return</span>(<span class="fu">ceiling</span>(max<span class="sc">*</span><span class="fu">runif</span>(<span class="dv">1</span>))) } <span class="co"># unif 1, 2, .., max</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>posterior_distribution <span class="ot">&lt;-</span> <span class="cf">function</span>(prior_probs, n_successes, n_trials){         </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  K <span class="ot">&lt;-</span> <span class="fu">length</span>(prior_probs)<span class="sc">-</span><span class="dv">1</span> <span class="co"># K+1 values that your p can assume</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  n_fails <span class="ot">&lt;-</span> n_trials <span class="sc">-</span> n_successes</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span><span class="sc">/</span>K)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  posterior_probs <span class="ot">&lt;-</span>                                       <span class="co"># 1. this computes gamma(i)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    prior_probs <span class="sc">*</span>                                          <span class="co">#    - pr. for picking coin (prior) (=1/3 in picture)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    p<span class="sc">^</span>n_successes <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>n_fails                          <span class="co">#    - conditional for the flips </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  posterior_probs <span class="ot">&lt;-</span> posterior_probs<span class="sc">/</span><span class="fu">sum</span>(posterior_probs)  <span class="co"># 2. normalize gamma(i)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  post_prob <span class="ot">&lt;-</span> <span class="fu">rbind</span>(p, posterior_probs)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(post_prob)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>prior_used_for_computing_posterior <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>(K<span class="sc">+</span><span class="dv">1</span>), K<span class="sc">+</span><span class="dv">1</span>) <span class="co"># Use same prior for simulation and posterior computation</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>n_repeats <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>hdi_coverage_pr <span class="ot">&lt;-</span> <span class="cf">function</span>(n_datapoints) {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  n_inclusions <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (repetition <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n_repeats)) {</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(K <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># Always generate the data using a uniform prior</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    true_p <span class="ot">&lt;-</span> i<span class="sc">/</span>K</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, n_datapoints, true_p)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    post <span class="ot">&lt;-</span> <span class="fu">posterior_distribution</span>(prior_used_for_computing_posterior, x, n_datapoints)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This if is just a hacky way to check if true parameter is in the HDI credible interval</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">sum</span>(<span class="fu">abs</span>(true_p <span class="sc">-</span> <span class="fu">high_density_intervals</span>(alpha, post)[<span class="dv">1</span>,]) <span class="sc">&lt;</span> <span class="fl">10e-10</span>) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>      n_inclusions <span class="ot">&lt;-</span> n_inclusions <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(n_inclusions<span class="sc">/</span>n_repeats) <span class="co"># Fraction of simulation where the true parameter was in interval</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"n_observations"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>))</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>coverage_pr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df<span class="sc">$</span>n_observations, hdi_coverage_pr)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>n_observations, <span class="at">y=</span>coverage_pr)) <span class="sc">+</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Number of observations"</span>) <span class="sc">+</span> </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Actual coverage"</span>) <span class="sc">+</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span><span class="sc">-</span>alpha, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic06_calibration_well_specified_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <!--
+
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-- Correct answer is: "This cannot happen because of some other reason"
-- We can state this because of another optimality property enjoyed by Bayes estimators
+Suprise!!: **in a Bayesian well-specified context, calibration holds for all dataset sizes!**
+
+- Contrast this with typical frequentist intervals, where approximate calibration is only achieved for large enough dataset size.
+- This is because frequentist intervals need to rely on asymptotics to be computable (Central Limit Theorem).
 :::
+
+
 
 -->
 </section>
-<section id="optimality-of-bayesian-estimators-theorem" class="level1">
-<h1>Optimality of Bayesian estimators: theorem</h1>
-<p><strong>Theorem:</strong> let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, any other estimator. Then: <span id="eq-opt"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)] \tag{1}\]</span></span></p>
-<p><strong>Proof:</strong> by the law of total expectation: <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] = \mathbb{E}[ {\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]}]\)</span>. We will start by rewriting the part in red.</p>
-<p>To do so, denote the objective being minimized in <a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a> by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
-<p>Note: by definition, we can rewrite our Bayes estimator by: <span class="math display">\[\delta_{\text{B}}= \operatorname{arg\,min}_a \mathcal{O}(a),\]</span> and hence: <span class="math display">\[{\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]} = \mathcal{O}(\delta_{\text{B}}) = \mathcal{O}(\operatorname{arg\,min}_a \mathcal{O}(a)),\]</span> so that we can rewrite the left-hand side of <a href="#eq-opt" class="quarto-xref">Equation&nbsp;1</a> as follows:</p>
-<p><span class="math display">\[\mathbb{E}[ \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]] = \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))].\]</span></p>
-<p>Now note that for all <span class="math inline">\(a'\)</span>, <span class="math inline">\(\mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a)) \le \mathcal{O}(a')\)</span>, hence:</p>
-<p><span class="math display">\[
-\begin{align*}
-\mathbb{E}[L(\delta_{\text{B}}(Y), X)] &amp;= \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))] \\
-&amp;\le \mathbb{E}[ \mathcal{O}( \delta_{\text{o}}(Y))] \\
-&amp;= \mathbb{E}[L(\delta_{\text{o}}(Y), X)].
-\end{align*}
-\]</span></p>
-<p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
-<!--
+<section id="mathematical-underpinnings" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>
+<ul>
+<li>Denote the data by <span class="math inline">\(Y\)</span>.</li>
+<li>Parameter of interest: <span class="math inline">\(X\)</span>.</li>
+<li>Denote the credible interval obtained from <span class="math inline">\(y\)</span> by <span class="math inline">\(C(y)\)</span>.</li>
+<li>We want to show <span class="math inline">\(\mathbb{P}^*(X \in C(Y)) = 0.9\)</span>.</li>
+<li>By construction, the interval <span class="math inline">\(C(y)\)</span> satisfies, for all observed data <span class="math inline">\(y\)</span>, <span class="math inline">\(\mathbb{P}(X \in C(y) | Y = y) = 0.9\)</span>.</li>
+</ul>
 
-::: {.callout-caution collapse="true"} 
-## Click for possible answers
-
-A key factor to take into account:
-
-- If the estimator $\best$ is based on an approximation of the posterior (e.g. SNIS), 
-    then the optimality property may not hold!
-
-Some other more "practical" factors to keep in mind:
-
-- Software defects (more frequent than you may think---we will talk more about them later).
-- [Publication bias](https://en.wikipedia.org/wiki/Publication_bias) or even, academic dishonesty (e.g. repeating simulation until a desired result is obtained).
-
-Also, keep in mind this page implicitly assumes the model is well-specified 
-(since we generate data from the joint distribution). The situation is more 
-complex in mis-specified models (asymptotics become critical in that case).
-:::
-
--->
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/partition.png" class="img-fluid" width="100"></p>
+</div></div><ul>
+<li>Recall the law of total probability:
+<ul>
+<li>for any <a href="../w01_discrete_inference/topic02_axioms.html">partition</a> <span class="math inline">\(E_i\)</span> of the sample space,</li>
+<li>we have <span class="math inline">\(\mathbb{P}(A) = \sum_i \mathbb{P}(A, E_i)\)</span>.</li>
+</ul></li>
+<li>Here: <span class="math inline">\(A = (X \in C(Y))\)</span>, <span class="math inline">\(E_i = (Y = y_i)\)</span>
+<ul>
+<li>where <span class="math inline">\(\{y_i\}\)</span> denotes the possible values the data can potentially take across all possible simulated experiments.</li>
+</ul></li>
+<li>Putting it all together and applying chain rule: <span class="math display">\[\begin{align*}
+\mathbb{P}^*(X \in C(Y)) &amp;= \sum_i \mathbb{P}^*(X \in C(Y), Y = y_i) \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}^*(X \in C(y_i) | Y = y_i) \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) 0.9 \\
+&amp;= 0.9 \sum_i \mathbb{P}^*(Y = y_i) = 0.9.
+\end{align*}\]</span></li>
+</ul>
 
 
 </section>

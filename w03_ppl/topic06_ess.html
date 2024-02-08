@@ -535,6 +535,24 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: well-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -629,13 +647,13 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Estimating the SNIS’ error based on running it only once.</li>
+<li>Estimating SNIS’ error based on running it only once.</li>
 <li>Underlying theoretical guarantee.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>So far we relied on heuristics to determine the number of Monte Carlo iterations. Here we describe a better approach when the test function is an indicator function.</p>
+<p>So far we have relied on heuristics to determine the number of Monte Carlo iterations. Here we describe a better approach.</p>
 </section>
 </section>
 <section id="example" class="level2 page-columns page-full">
@@ -651,7 +669,7 @@ X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
 Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 \end{align*}
 \tag{1}\]</span></span></p>
-<p>And using our simPPLe implementation for computing <span class="math inline">\(\mathbb{P}(X = 1 | Y = (0, 0, 0, 0))\)</span>:</p>
+<p>and using our simPPLe implementation for computing <span class="math inline">\(\mathbb{P}(X = 1 | Y = (0, 0, 0, 0))\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_scaffold.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_ppl.R"</span>)</span>
@@ -691,7 +709,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <pre><code>[1] 0.03226313</code></pre>
 </div>
 </div>
-<p>As you can see, this is <strong>pessimistic</strong>, i.e.&nbsp;the actually error seems lower than the estimate derived from the formula <span class="math inline">\(2/\sqrt{\text{ESS}}\)</span>.</p>
+<p>As you can see, this is <strong>pessimistic</strong>, i.e.&nbsp;the actually error (roughly estimated from our 3 independent runs) seems lower than the estimate derived from the formula <span class="math inline">\(2/\sqrt{\text{ESS}}\)</span>.</p>
 </section>
 <section id="underlying-theory" class="level2">
 <h2 class="anchored" data-anchor-id="underlying-theory">Underlying theory</h2>
