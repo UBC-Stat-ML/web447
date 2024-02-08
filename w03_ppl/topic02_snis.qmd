@@ -25,9 +25,19 @@ basic understanding of SNIS to complete this week's exercise.
 
 -   Our goal is to compute $\ex[g(X) | Y = y]$.
 -   SNIS will allow us to approximate this conditional expectation.
--   How is this different than [the Simple Monte Carlo
+
+How is this different than [the simple Monte Carlo
     method](../w01_discrete_inference/topic11_monte_carlo.qmd) that we
     used in [Ex1.Q.1.3](../exercises/ex01.qmd#sec-q1)?
+    
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We used simple Monte Carlo to compute an expectation **without** conditioning on $Y = y$, i.e. $\ex[g(X)]$. 
+
+SNIS allows us to take into account observed data. 
+:::
+
 
 ## Problem formulation
 

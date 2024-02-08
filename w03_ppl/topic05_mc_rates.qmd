@@ -197,10 +197,11 @@ In the following, I will explain why analyzing the standard deviation makes sens
     i.e. 10 times more iterations gives **two digits** of extra accuracy (here $M$ is the number of grid points used in a 1d numerical integral)!
 - So why do we use Monte Carlo?
     - The constants in the analysis of numerical integration blow up exponentially in the dimensionality of the problem!
-    - Many Monte Carlo methods can avoid this exponential blow up in the dimensionality[^2] 
+    - Many Monte Carlo methods can avoid this exponential blow up in the dimensionality.[^2] 
     - And good scalability in the dimensionality of the problem often more important than scalability in number of digits of accuracy
-        - ...can't trust 10th digit anyways because the model almost always has some slight mis-specification.
+        - ...can't trust 10th digit anyways because the model almost always has some amount of [mis-specification](../w02_discrete_bayes/topic08_criticism.qmd).
 
-[^2]: In particular, Simple Monte Carlo and MCMC can often avoid the curse of dimensionality. But not SNIS! Why are we spending time on SNIS then?
+[^2]: In particular, Simple Monte Carlo and MCMC can often avoid [the curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality). 
+    But not SNIS! Why are we spending time on SNIS then?
     Because it can be used to approximate arbitrary posterior distribution, while simple Monte Carlo cannot, and it is much simpler than MCMC, so 
     a good starting point pedagogically. However we will jump to MCMC later in this course. 

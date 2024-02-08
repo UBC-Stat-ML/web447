@@ -6,37 +6,37 @@ editor:
 
 {{< include _construction.qmd >}}
 
-| Date          | Topics                                                                                            | Readings                                                 |
-|---------------|-------------------------------------|---------------------|
-| Tue, Jan 9    | Overview. Probabilistic inference on discrete spaces.                                             | BDA 1.1-1.10                                             |
-| Th, Jan 11    |                                                                                                   |                                                          |
-| Tue, Jan 16   | A tour of Bayesian inference (on discrete spaces).                                                | BDA 2.1-2.5                                              |
-| Th, Jan 18    |                                                                                                   |                                                          |
-| Tue, Jan 23   | Universal probabilistic inference via importance sampling.                                        | BDA 10.4. BDA 9.1-9.5 (going further on Decision Theory) |
-| Th, Jan 25    |                                                                                                   |                                                          |
-| Tue, Jan 30   | Bayesian classification, regression, GLMs, and beyond.                                            | BDA 14.1-14.5                                            |
-| Th, Feb 1     |                                                                                                   |                                                          |
-| Tue, Feb 6    | Properties of Bayesian models.                                                                    | BDA 4.1-4.5                                              |
-| Th, Feb 8     |                                                                                                   |                                                          |
-| Tue, Feb 13   | Hierarchical models.                                                                              | BDA 5.1-5.7                                              |
-| Th, Feb 15    |                                                                                                   |                                                          |
-| Tue, Feb 20   | *Reading week.*                                                                                   | BDA 16.1-16.7                                            |
-| Th, Feb 22    | *Reading week.*                                                                                   |                                                          |
-| Tue, Feb 27   | **Quiz 1.**                                                                                       |                                                          |
-| Th, Feb 29    | TBA                                                                                               |                                                          |
-| Tue, Mar 5    | MCMC user guide (via Stan).                                                                       | BDA 11.1-11.6                                            |
-| Th, Mar 7     |                                                                                                   |                                                          |
-| Fri, Mar 8    | **Project proposal due.**                                                                         |                                                          |
-| Tue, Mar 12   | Bayesian workflow.                                                                                | BDA 6.1-6.5                                              |
-| Th, Mar 14    |                                                                                                   |                                                          |
-| Tue, Mar 19   | Modelling techniques (selected from prior design, mixtures, imputation, complex data collection). | BDA 8.1-8.7                                              |
-| Th, Mar 21    |                                                                                                   |                                                          |
-| Tue, March 26 | **Quiz 2.**                                                                                       |                                                          |
-| Th, Mar 28    | TBA                                                                                               |                                                          |
-| Tue, Apr 2    | MCMC developer guide.                                                                             | BDA 12.1-12.6                                            |
-| Th, Apr 4     |                                                                                                   |                                                          |
-| Tue, Apr 9    | Variational inference.                                                                            | BDA 13.7                                                 |
-| Th, Apr 11    | Guest lecture. *(Last lecture)*                                                                   |                                                          |
-| Fri, Apr 19   | **Final project due.**                                                                            |                                                          |
+| Date          | Topics                                                                                            | Readings                                       |
+|-----------------|-----------------------------------|--------------------|
+| Tue, Jan 9    | Overview. Probabilistic inference on discrete spaces.                                             | BDA 1.1-1.10                                   |
+| Th, Jan 11    |                                                                                                   |                                                |
+| Tue, Jan 16   | A tour of Bayesian inference (on discrete spaces).                                                | BDA 2.1-2.5                                    |
+| Th, Jan 18    |                                                                                                   |                                                |
+| Tue, Jan 23   | Universal probabilistic inference via importance sampling.                                        | BDA 9.1-9.5 (going further on Decision Theory) |
+| Th, Jan 25    |                                                                                                   |                                                |
+| Tue, Jan 30   | Bayesian classification, regression, GLMs, and beyond.                                            | BDA 14.1-14.5                                  |
+| Th, Feb 1     |                                                                                                   |                                                |
+| Tue, Feb 6    | Properties of Bayesian models.                                                                    | BDA 4.1-4.5                                    |
+| Th, Feb 8     |                                                                                                   |                                                |
+| Tue, Feb 13   | Hierarchical models.                                                                              | BDA 5.1-5.7                                    |
+| Th, Feb 15    |                                                                                                   |                                                |
+| Tue, Feb 20   | *Reading week.*                                                                                   | BDA 16.1-16.7                                  |
+| Th, Feb 22    | *Reading week.*                                                                                   |                                                |
+| Tue, Feb 27   | **Quiz 1.**                                                                                       |                                                |
+| Th, Feb 29    | TBA                                                                                               |                                                |
+| Tue, Mar 5    | MCMC user guide (via Stan).                                                                       | BDA 11.1-11.6                                  |
+| Th, Mar 7     |                                                                                                   |                                                |
+| Fri, Mar 8    | **Project proposal due.**                                                                         |                                                |
+| Tue, Mar 12   | Bayesian workflow.                                                                                | BDA 6.1-6.5                                    |
+| Th, Mar 14    |                                                                                                   |                                                |
+| Tue, Mar 19   | Modelling techniques (selected from prior design, mixtures, imputation, complex data collection). | BDA 8.1-8.7                                    |
+| Th, Mar 21    |                                                                                                   |                                                |
+| Tue, March 26 | **Quiz 2.**                                                                                       |                                                |
+| Th, Mar 28    | TBA                                                                                               |                                                |
+| Tue, Apr 2    | MCMC developer guide.                                                                             | BDA 12.1-12.6                                  |
+| Th, Apr 4     |                                                                                                   |                                                |
+| Tue, Apr 9    | Variational inference.                                                                            | BDA 13.7                                       |
+| Th, Apr 11    | Guest lecture. *(Last lecture)*                                                                   |                                                |
+| Fri, Apr 19   | **Final project due.**                                                                            |                                                |
 
 : {.striped .hover tbl-colwidths="\[15,65,20\]"}

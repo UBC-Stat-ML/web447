@@ -1,0 +1,132 @@
+---
+title: "Bayesian calibration: mis-specified case"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Guarantees when the model is mis-specified.
+- The Bernstein-von Mises theorem.
+
+### Rationale
+
+Model mis-specification is the norm. What happen to calibration in that case?
+
+
+## Misspecified models and calibration
+
+**What to do if your model is misspecified?**
+
+One obvious possibility is to make the model better. But in the following we show that under certain conditions, another possibility is to collect more data. 
+
+- Now suppose we are using the "wrong prior", i.e. data generation uses uniform prior but we base or posterior computation on a different, non-uniform prior.
+
+- Similarly to the last page, let's do it for small (10 launches), medium (100), and large datasets (1000), plotting the **nominal coverage** (dashed) against the **actual coverage** (solid line)
+
+```{r}
+#| code-fold: true
+
+suppressPackageStartupMessages(require("ggplot2"))
+suppressPackageStartupMessages(require("dplyr"))
+suppressPackageStartupMessages(require("tidyr"))
+theme_set(theme_bw())
+
+ # Using now the same non-uniform prior as before for posterior calculation
+K <- 1000
+
+rdunif <- function(max) { return(ceiling(max*runif(1))) }
+
+posterior_distribution <- function(prior_probs, n_successes, n_trials){         
+  K <- length(prior_probs)-1 # K+1 values that your p can assume
+  n_fails <- n_trials - n_successes
+  p <- seq(0, 1, 1/K)
+  posterior_probs <-                                       # 1. this computes gamma(i)
+    prior_probs *                                          #    - prior
+    p^n_successes * (1-p)^n_fails                          #    - likelihood 
+  posterior_probs <- posterior_probs/sum(posterior_probs)  # 2. normalize gamma(i)
+  post_prob <- rbind(p, posterior_probs)
+  return(post_prob)
+}
+
+high_density_intervals <- function(alpha, posterior_probs){
+  ordered_probs = posterior_probs[,order(posterior_probs[2,], decreasing = TRUE)]
+  cumulative_probs = cumsum(ordered_probs[2,])
+  index = which.max(cumulative_probs >= (1-alpha))
+  return(ordered_probs[,1:index, drop=FALSE])
+}
+
+hdi_coverage_pr <- function(n_datapoints) {
+  n_inclusions <- 0
+  for (repetition in seq(1:n_repeats)) {
+    i <- rdunif(K + 1) - 1  # Always generate the data using a uniform prior
+    true_p <- i/K
+    x <- rbinom(1, n_datapoints, true_p)
+    post <- posterior_distribution(prior_used_for_computing_posterior, x, n_datapoints)
+    
+    # This if is just a hacky way to check if true parameter is in the HDI credible interval
+    if (sum(abs(true_p - high_density_intervals(alpha, post)[1,]) < 10e-10) == 1) {
+      n_inclusions <- n_inclusions + 1
+    }
+  }
+  return(n_inclusions/n_repeats) # Fraction of simulation where the true parameter was in interval
+}
+
+prior_used_for_computing_posterior <- dnorm(seq(0, 1, 1/K),mean = 0.2, sd=0.2)
+prior_used_for_computing_posterior <- prior_used_for_computing_posterior / sum(prior_used_for_computing_posterior)
+
+set.seed(1)
+
+n_repeats <- 1000
+alpha <- 0.1
+
+df <- data.frame("n_observations" = c(10, 100, 1000))
+df$coverage_pr <- sapply(df$n_observations, hdi_coverage_pr)
+
+ggplot(data=df, aes(x=n_observations, y=coverage_pr)) +
+  ylim(0, 1) +
+  xlab("Number of observations") + 
+  ylab("Actual coverage") +
+  geom_hline(yintercept=1-alpha, linetype="dashed", color = "black") +
+  geom_line()
+```
+
+- Bad news: for small datasets we are no longer calibrated, in the worst possible way
+    - Higher than dash line: would have meant inference is being **conservative**, i.e. more right than it actually claimed. That's not too bad.
+    - Lower than dash line: we are being **overconfident** or **anti-conservative**, which in some case can be reckless
+- Good news: this gets quickly corrected as dataset gets larger. Why?
+
+# Asymptotic calibration under certain misspecification
+
+- There is no general calibration theory for misspecified models, only special cases (outside of that, use simulation studies or cross-validation techniques)
+- Setup in which we have a theorem: when the data points $y_i$ are iid given the parameters $x$. 
+
+**Bernstein-von Mises:** under certain conditions, even when the prior is misspecified, the actual coverage of credible intervals converges to the nominal coverage. 
+
+Conditions include, but are not limited to:
+
+1. $x$ needs to live in a continuous rather than discrete space! I.e.: $x \subset \reals^d$
+    - Intuition: Bernstein-von Mises actually proves something stronger: convergence of the rescaled, centered posterior to a normal distribution, which is a continuous distribution (can you guess the scaling?)
+    - "Bayesian Central Limit Theorem"
+2. $p(x)$ (the **prior**) is a **density**, 
+    - we assume it is non-zero in a neighborhood of the true parameter
+3. we assume the posterior mean is **consistent**
+    - recall: that means the error goes to zero as number of data points increases (something you will explore in this week's exercise)
+4. we assume the model is **parametric**:
+    - $\theta$ is allowed to be a vector, but you are not allowed to make it bigger as the number of observations increases.
+    
+  
+**Practical consequence:** 
+
+- for large datasets, and under certain condition, the prior is "washed away" by the likelihood.
+    - The conditions are not crazy and hold in some situations of interest.
+    - But there are also simple practical situations where the conditions do not hold (e.g. prior assigning zero mass to important regions).
+    
+
+
+

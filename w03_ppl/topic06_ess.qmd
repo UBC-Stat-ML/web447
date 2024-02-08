@@ -11,13 +11,13 @@ editor:
 
 ### Topics
 
-- Estimating the SNIS' error based on running it only once. 
+- Estimating SNIS' error based on running it only once. 
 - Underlying theoretical guarantee. 
 
 ### Rationale
 
-So far we relied on heuristics to determine the number of Monte Carlo iterations. 
-Here we describe a better approach when the test function is an indicator function. 
+So far we have relied on heuristics to determine the number of Monte Carlo iterations. 
+Here we describe a better approach. 
 
 
 
@@ -29,7 +29,7 @@ Recall our "bag of coins" model can be written as:
 
 {{< include ../blocks/_coinbag_short.qmd >}}
 
-And using our simPPLe implementation for computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
+and using our simPPLe implementation for computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
 
 
 ```{r}
@@ -63,7 +63,7 @@ rmse_estimate = 2 / sqrt(ess_estimate)
 rmse_estimate
 ```
 
-As you can see, this is **pessimistic**, i.e. the actually error seems lower than the estimate 
+As you can see, this is **pessimistic**, i.e. the actually error (roughly estimated from our 3 independent runs) seems lower than the estimate 
 derived from the formula $2/\sqrt{\text{ESS}}$. 
 
 

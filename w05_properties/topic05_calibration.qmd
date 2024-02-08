@@ -1,0 +1,44 @@
+---
+title: "Calibration"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Notion of calibration.
+- Nominal versus actual coverage.
+
+
+### Rationale
+
+Returning a [credible region](../w02_discrete_bayes/topic05_credible.qmd) is 
+helpful as it conveys how much certain or uncertain we are about our answer. 
+
+However, these estimates of uncertainty can be misleading if they are 
+too confident or too hesitant. The notion of calibration formalizes this 
+intuition.
+
+
+## Example
+
+- Familiar in Vancouver: "Tomorrow: 90% chance of rain"
+    - here, "90%" is an example of [nominal coverage](../w02_discrete_bayes/topic05_credible.qmd).
+- Of those days where the forecast says "Tomorrow: 90% chance of rain"...
+    - what **fraction of those days** did it rain?
+    - That fraction is an example of **actual coverage.**
+    
+**Definition:** a measure of uncertainty is calibrated if its nominal coverage 
+  matches its actual coverage.
+
+![](../images/calibration.png){width="600"}
+
+**Question:** which weather source(s), if any, provide reasonably calibrated rain uncertainty estimates?
+
+{{< include ../../clickers/w05/_c05.qmd >}}
+
