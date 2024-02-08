@@ -598,7 +598,7 @@ window.Quarto = {
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#bayesian-calibration" id="toc-bayesian-calibration" class="nav-link" data-scroll-target="#bayesian-calibration">Bayesian calibration</a></li>
-  <li><a href="#well-specified-vs-misspecified-models" id="toc-well-specified-vs-misspecified-models" class="nav-link" data-scroll-target="#well-specified-vs-misspecified-models">Well specified vs misspecified models</a></li>
+  <li><a href="#well-specified-vs-mis-specified-models" id="toc-well-specified-vs-mis-specified-models" class="nav-link" data-scroll-target="#well-specified-vs-mis-specified-models">Well-specified vs mis-specified models</a></li>
   <li><a href="#numerical-exploration" id="toc-numerical-exploration" class="nav-link" data-scroll-target="#numerical-exploration">Numerical exploration</a></li>
   <li><a href="#mathematical-underpinnings" id="toc-mathematical-underpinnings" class="nav-link" data-scroll-target="#mathematical-underpinnings">Mathematical underpinnings</a></li>
   </ul>
@@ -666,15 +666,19 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>For example, different labs, each studying similar but different datasets,</li>
 <li>i.e., they are replicating an “experiment.”</li>
-<li>This leads to frequentist analysis of Bayesian procedures—a very useful thing to do!</li>
+<li>This leads to a <em>frequentist analysis of Bayesian procedures</em>—a very useful thing to do!</li>
 </ul>
-<p><strong>Calibration of credible intervals</strong>: 90% credible interval is calibrated if it contains the true parameter <strong>90% of the time</strong>.</p>
+<p><strong>Calibration of credible intervals</strong>: a 90% credible interval is <strong>calibrated</strong> if it contains the true parameter <strong>90% of the time</strong>.</p>
 <p><strong>What do we mean by “true parameter”?</strong></p>
 <ul>
 <li>Start with a joint distribution, <span class="math inline">\(p^\star(x, y)\)</span>, which we will call “nature.”</li>
-<li>For each “experiment”: use <span class="math inline">\(p^\star\)</span> to simulate both a true parameter, <span class="math inline">\(x^\star\)</span>, and an associated dataset <span class="math inline">\(y^\star\)</span>: <span class="math inline">\((x^\star, y^\star) \sim p^\star\)</span>. (<span class="math inline">\(=\)</span> notion of <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation</a>).</li>
+<li>For each “experiment”: use <span class="math inline">\(p^\star\)</span> to simulate both a true parameter, <span class="math inline">\(x^\star\)</span>, and an associated dataset <span class="math inline">\(y^\star\)</span>: <span class="math inline">\((x^\star, y^\star) \sim p^\star\)</span>. (<span class="math inline">\(=\)</span> perform <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation</a>).</li>
 </ul>
-<p><strong>What do we mean by “90% credible interval”?</strong> a function <span class="math inline">\(C(y) = [L(y), R(y)]\)</span> which (1) computes the posterior <span class="math inline">\(\pi(\cdot | y)\)</span>, and (2), selects left and right end points, <span class="math inline">\(l\)</span>, <span class="math inline">\(r\)</span> such that <span class="math inline">\(\int_l^r \pi(x | y) \mathrm{d}x = 0.9\)</span>.</p>
+<p><strong>What do we mean by “90% credible interval”?</strong> A function <span class="math inline">\(C(y) = [L(y), R(y)]\)</span> which:</p>
+<ol type="1">
+<li>computes the posterior <span class="math inline">\(\pi(\cdot | y)\)</span>, and</li>
+<li>selects left and right end points, <span class="math inline">\(l\)</span>, <span class="math inline">\(r\)</span> such that <span class="math inline">\(\int_l^r \pi(x | y) \mathrm{d}x = 0.9\)</span>.</li>
+</ol>
 <p>Recall an examples of credible interval we discussed: <a href="../w02_discrete_bayes/topic05_credible.html">quantile-based intervals</a>.</p>
 <p><strong>What do we mean by “90% of the time”?</strong></p>
 <ul>
@@ -693,8 +697,8 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 </ul>
 </section>
-<section id="well-specified-vs-misspecified-models" class="level2">
-<h2 class="anchored" data-anchor-id="well-specified-vs-misspecified-models">Well specified vs misspecified models</h2>
+<section id="well-specified-vs-mis-specified-models" class="level2">
+<h2 class="anchored" data-anchor-id="well-specified-vs-mis-specified-models">Well-specified vs mis-specified models</h2>
 <ul>
 <li>There are two joint distributions involved in the thought experiment
 <ul>
@@ -704,14 +708,14 @@ https://github.com/trevorcampbell/shortex
 <li>We can consider the following setups
 <ul>
 <li>Well-specified setup <span class="math inline">\(p^* = p\)</span></li>
-<li>Misspecified, <span class="math inline">\(p^* \neq p\)</span></li>
+<li>Mis-specified, <span class="math inline">\(p^* \neq p\)</span></li>
 </ul></li>
 <li>For now: focus on the well-specified setup.</li>
 </ul>
 </section>
 <section id="numerical-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="numerical-exploration">Numerical exploration</h2>
-<p>Using the discrete model for Delta launches from <a href="../exercises/ex02.html">Exercise 2</a>, we will now run the algorithm described above under “What do we mean by”90% of the time”?“…</p>
+<p>Using the discrete model for Delta launches from <a href="../exercises/ex02.html">Exercise 2</a>, we will now implement and run the algorithm described above under “What do we mean by”90% of the time?“…</p>
 <p><strong>What do you expect?</strong></p>
 <ol type="1">
 <li>calibrated for small data, calibrated for large data</li>
@@ -799,8 +803,6 @@ Suprise!!: **in a Bayesian well-specified context, calibration holds for all dat
 - Contrast this with typical frequentist intervals, where approximate calibration is only achieved for large enough dataset size.
 - This is because frequentist intervals need to rely on asymptotics to be computable (Central Limit Theorem).
 :::
-
-
 
 -->
 </section>

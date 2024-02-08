@@ -100,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -569,7 +569,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic04_decision_to_set.html">Decision theoretic set estimation</a></li></ol></nav>
 <div class="quarto-title">
@@ -618,15 +618,15 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>We have seen <a href="../w02_discrete_bayes/topic05_credible.html">in week 2</a> some examples of set estimates (quantile based, highest density set).</p>
+<p>We have seen in week 2 some <a href="../w02_discrete_bayes/topic05_credible.html">examples of set estimates</a> (quantile based, highest density set).</p>
 <p>These are actually special cases of <a href="../w02_discrete_bayes/topic06_decision.html">decision theory</a> with specific choices of loss functions.</p>
-<p>This provides a general framework to answer the question: “how to summarize the posterior distribution?”</p>
+<p>This page provides a general framework to answer the question: “how to summarize a posterior distribution with one <strong>set</strong>?”</p>
 </section>
 </section>
 <section id="context" class="level2">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
 <ul>
-<li>The weakness of point estimates is that they do not capture the uncertainty around the value</li>
+<li>The weakness of point estimates is that they do not capture the uncertainty around the value.</li>
 <li><strong>Idea:</strong> instead of returning a single point, return a set of points
 <ul>
 <li>usually an interval,</li>
@@ -640,7 +640,7 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 </ul>
 </section>
-<section id="bayes-estimator-formalization" class="level2">
+<section id="bayes-estimator-formalization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="bayes-estimator-formalization">Bayes estimator formalization</h2>
 <p><strong>Pick:</strong></p>
 <ul>
@@ -658,17 +658,29 @@ L([c, d], x) = \mathbb{1}\{x \notin [c, d]\} + k (d - c)
 &amp;=  \operatorname{arg\,min}\{ \mathbb{P}[X \le c|Y] - \mathbb{P}[X \le d |Y] + k(d - c) : [c,d] \in A \}
 \end{aligned}
 \]</span></p>
-<p>Assuming the posterior has a continuous density <span class="math inline">\(f\)</span> to change <span class="math inline">\(&lt;\)</span> into <span class="math inline">\(\le\)</span>. Again we take the derivative with respect to <span class="math inline">\(c\)</span> and set to zero; then will do the same thing for <span class="math inline">\(d\)</span>. Notice that <span class="math inline">\(\mathbb{P}[X \le c|Y]\)</span> is the posterior CDF, so taking the derivative with respect to <span class="math inline">\(c\)</span> yields a density:</p>
+<p>Here we assume the posterior has a continuous density <span class="math inline">\(f\)</span> to change <span class="math inline">\(&lt;\)</span> into <span class="math inline">\(\le\)</span>.</p>
+<p>As we did with <a href="../w05_properties/topic03_decision_to_point.html">point estimation</a>, we take the derivative with respect to <span class="math inline">\(c\)</span> and set to zero (then will do the same thing for <span class="math inline">\(d\)</span>).</p>
+<p>Notice that <span class="math inline">\(\mathbb{P}[X \le c|Y]\)</span> is the posterior cumulative distribution function (CDF)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so taking the derivative with respect to <span class="math inline">\(c\)</span> yields a density:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><span class="math display">\[
 f_{X|Y}(c) - k = 0,
 \]</span></p>
-<p>so we see the optimum will be the smallest interval <span class="math inline">\([c, d]\)</span> such that <span class="math inline">\(f(c) = f(d) = k\)</span>.</p>
-<p>Finally, set <span class="math inline">\(k\)</span> to capture say 95% of the mass.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/credible-derivation.png" class="img-fluid" width="300"></p>
+</div></div><p>so we see the optimum will be the smallest interval <span class="math inline">\([c, d]\)</span> such that <span class="math inline">\(f(c) = f(d) = k\)</span>.</p>
+<p>Finally, set <span class="math inline">\(k\)</span> to capture say 95% of the mass (area in red in the figure shows a 50% example, we would lower <span class="math inline">\(k\)</span> to get to 95%).</p>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Recall that a CDF is defined as <span class="math inline">\(F(x) = \mathbb{P}(X \le x)\)</span>. So a posterior CDF is just <span class="math inline">\(\mathbb{P}(X \le x | Y)\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Let us review the argument why “taking the derivative … yields a density”. Let <span class="math inline">\(f\)</span> denote a density and <span class="math inline">\(F\)</span>, the CDF of the same random variable. From the definition of a density, <span class="math inline">\(F(x) = \int_{-\infty}^x f(x') \mathrm{d}x'\)</span> (i.e., take <span class="math inline">\(A = [-\infty, x]\)</span> in the <a href="../w03_ppl/topic03_continuous.html">definition of a density</a>). Hence by the <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus">Fundamental theorem of calculus</a> (i.e.&nbsp;the fact that an integral is an “anti-derivative”), we have that <span class="math display">\[f(x) = \frac{\mathrm{d}F(x)}{\mathrm{d}x},\]</span> when the derivative exists.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

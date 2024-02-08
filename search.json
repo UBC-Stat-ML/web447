@@ -465,7 +465,7 @@
     "href": "w05_properties/topic03_decision_to_point.html",
     "title": "Decision theoretic point estimation",
     "section": "",
-    "text": "Deriving a point estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of point estimates (posterior mean, posterior mode).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis provides a general framework to answer the question: “how to summarize the posterior distribution?”",
+    "text": "Deriving a point estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of point estimates (posterior mean, posterior mode).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis page provides a general framework to answer the question: “how to summarize a posterior distribution with one point?”",
     "crumbs": [
       "Some theory",
       "Decision theoretic point estimation"
@@ -476,7 +476,18 @@
     "href": "w05_properties/topic03_decision_to_point.html#outline",
     "title": "Decision theoretic point estimation",
     "section": "",
-    "text": "Deriving a point estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of point estimates (posterior mean, posterior mode).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis provides a general framework to answer the question: “how to summarize the posterior distribution?”",
+    "text": "Deriving a point estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of point estimates (posterior mean, posterior mode).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis page provides a general framework to answer the question: “how to summarize a posterior distribution with one point?”",
+    "crumbs": [
+      "Some theory",
+      "Decision theoretic point estimation"
+    ]
+  },
+  {
+    "objectID": "w05_properties/topic03_decision_to_point.html#setup",
+    "href": "w05_properties/topic03_decision_to_point.html#setup",
+    "title": "Decision theoretic point estimation",
+    "section": "Setup",
+    "text": "Setup\nThe decision theoretic setup from week 2.",
     "crumbs": [
       "Some theory",
       "Decision theoretic point estimation"
@@ -487,7 +498,7 @@
     "href": "w05_properties/topic03_decision_to_point.html#example",
     "title": "Decision theoretic point estimation",
     "section": "Example",
-    "text": "Example\nAssume: a square loss, \\(A = \\mathbb{R}\\), \\(L(a, p) = (a - p)^2\\).\nSome initial simplification: on the objective function…\n\\[\n\\begin{aligned}\n\\delta_{\\text{B}}(Y) &= \\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{E}[(X - a)^2 | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{E}[X^2 | Y] - 2a\\mathbb{E}[X | Y]] + a^2 : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ - 2a\\mathbb{E}[X | Y]] + a^2 : a \\in A \\}\n\\end{aligned}\n\\]\nQuestion: under a square loss, \\(\\delta_{\\text{B}}\\) can be simplified to…",
+    "text": "Example\nAssume: a square loss, \\(L(a, p) = (a - p)^2\\), where \\(a \\in A = \\mathbb{R}\\).\nSome initial simplification: on the objective function…\n\\[\n\\begin{aligned}\n\\delta_{\\text{B}}(Y) &= \\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{E}[(X - a)^2 | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{E}[X^2 | Y] - 2a\\mathbb{E}[X | Y]] + a^2 : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ - 2a\\mathbb{E}[X | Y]] + a^2 : a \\in A \\}\n\\end{aligned}\n\\]\nQuestion: under a square loss, \\(\\delta_{\\text{B}}\\) can be simplified to…\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\int x f(x|y) \\mathrm{d}x\\)\n\\(\\operatorname{arg\\,max}\\{ f(x|y) : x \\in \\mathbb{R}\\}\\)\n\\(\\int y f(x|y) \\mathrm{d}y\\)\n\\(\\operatorname{arg\\,max}\\{ f(x|y) : y \\in \\mathbb{R}\\}\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nIdea: think of \\(\\mathbb{E}[X|Y]\\) as a constant that you get from the posterior. To minimize the bottom expression, take derivative with respect to \\(a\\), equate to zero:\n\\[\n\\begin{aligned}\n-2 \\mathbb{E}[X|Y] + 2a = 0\n\\end{aligned}\n\\] Hence: here the Bayes estimator is the posterior mean, \\(\\delta_{\\text{B}}(Y) = \\mathbb{E}[X|Y] = \\int x f(x|Y) \\mathrm{d}x\\).",
     "crumbs": [
       "Some theory",
       "Decision theoretic point estimation"
@@ -520,18 +531,18 @@
     "href": "w05_properties/topic06_calibration_well_specified.html#bayesian-calibration",
     "title": "Bayesian calibration: well-specified case",
     "section": "Bayesian calibration",
-    "text": "Bayesian calibration\nThought experiment: what if a certain Bayesian inference method is used many times?\n\nFor example, different labs, each studying similar but different datasets,\ni.e., they are replicating an “experiment.”\nThis leads to frequentist analysis of Bayesian procedures—a very useful thing to do!\n\nCalibration of credible intervals: 90% credible interval is calibrated if it contains the true parameter 90% of the time.\nWhat do we mean by “true parameter”?\n\nStart with a joint distribution, \\(p^\\star(x, y)\\), which we will call “nature.”\nFor each “experiment”: use \\(p^\\star\\) to simulate both a true parameter, \\(x^\\star\\), and an associated dataset \\(y^\\star\\): \\((x^\\star, y^\\star) \\sim p^\\star\\). (\\(=\\) notion of forward simulation).\n\nWhat do we mean by “90% credible interval”? a function \\(C(y) = [L(y), R(y)]\\) which (1) computes the posterior \\(\\pi(\\cdot | y)\\), and (2), selects left and right end points, \\(l\\), \\(r\\) such that \\(\\int_l^r \\pi(x | y) \\mathrm{d}x = 0.9\\).\nRecall an examples of credible interval we discussed: quantile-based intervals.\nWhat do we mean by “90% of the time”?\n\nLoop over \\(1, 2, \\dots,\\) numberOfExperiments\n\ngenerate synthetic data \\((x^\\star, y^\\star) \\sim p^\\star\\)\ncompute the credible \\(C(y^\\star)\\)\nrecord if the true parameter is in the interval, i.e. if \\(x^\\star \\in C(y^\\star)\\)\n\nConsider the limit, as numberOfExperiments \\(\\to \\infty\\), of the fraction of times the true parameter is in the interval\n\nIf the limit is equal to 0.9 we say the credible interval is calibrated (great!)\nIf the limit is close to 0.9 we say the credible interval is approximately calibrated (that’s not too bad)\nIf the limit is higher than 0.9, we say the credible interval is over-conservative (that’s not too bad)\nIf the limit is lower than 0.9, we say the credible interval is anti-conservative (bad!)",
+    "text": "Bayesian calibration\nThought experiment: what if a certain Bayesian inference method is used many times?\n\nFor example, different labs, each studying similar but different datasets,\ni.e., they are replicating an “experiment.”\nThis leads to a frequentist analysis of Bayesian procedures—a very useful thing to do!\n\nCalibration of credible intervals: a 90% credible interval is calibrated if it contains the true parameter 90% of the time.\nWhat do we mean by “true parameter”?\n\nStart with a joint distribution, \\(p^\\star(x, y)\\), which we will call “nature.”\nFor each “experiment”: use \\(p^\\star\\) to simulate both a true parameter, \\(x^\\star\\), and an associated dataset \\(y^\\star\\): \\((x^\\star, y^\\star) \\sim p^\\star\\). (\\(=\\) perform forward simulation).\n\nWhat do we mean by “90% credible interval”? A function \\(C(y) = [L(y), R(y)]\\) which:\n\ncomputes the posterior \\(\\pi(\\cdot | y)\\), and\nselects left and right end points, \\(l\\), \\(r\\) such that \\(\\int_l^r \\pi(x | y) \\mathrm{d}x = 0.9\\).\n\nRecall an examples of credible interval we discussed: quantile-based intervals.\nWhat do we mean by “90% of the time”?\n\nLoop over \\(1, 2, \\dots,\\) numberOfExperiments\n\ngenerate synthetic data \\((x^\\star, y^\\star) \\sim p^\\star\\)\ncompute the credible \\(C(y^\\star)\\)\nrecord if the true parameter is in the interval, i.e. if \\(x^\\star \\in C(y^\\star)\\)\n\nConsider the limit, as numberOfExperiments \\(\\to \\infty\\), of the fraction of times the true parameter is in the interval\n\nIf the limit is equal to 0.9 we say the credible interval is calibrated (great!)\nIf the limit is close to 0.9 we say the credible interval is approximately calibrated (that’s not too bad)\nIf the limit is higher than 0.9, we say the credible interval is over-conservative (that’s not too bad)\nIf the limit is lower than 0.9, we say the credible interval is anti-conservative (bad!)",
     "crumbs": [
       "Some theory",
       "Bayesian calibration: well-specified case"
     ]
   },
   {
-    "objectID": "w05_properties/topic06_calibration_well_specified.html#well-specified-vs-misspecified-models",
-    "href": "w05_properties/topic06_calibration_well_specified.html#well-specified-vs-misspecified-models",
+    "objectID": "w05_properties/topic06_calibration_well_specified.html#well-specified-vs-mis-specified-models",
+    "href": "w05_properties/topic06_calibration_well_specified.html#well-specified-vs-mis-specified-models",
     "title": "Bayesian calibration: well-specified case",
-    "section": "Well specified vs misspecified models",
-    "text": "Well specified vs misspecified models\n\nThere are two joint distributions involved in the thought experiment\n\n\\(p^*\\), used to generate data\n\\(p\\), used internally by the credible interval procedure to define a posterior \\(\\pi(x | y) \\propto p(x, y)\\)\n\nWe can consider the following setups\n\nWell-specified setup \\(p^* = p\\)\nMisspecified, \\(p^* \\neq p\\)\n\nFor now: focus on the well-specified setup.",
+    "section": "Well-specified vs mis-specified models",
+    "text": "Well-specified vs mis-specified models\n\nThere are two joint distributions involved in the thought experiment\n\n\\(p^*\\), used to generate data\n\\(p\\), used internally by the credible interval procedure to define a posterior \\(\\pi(x | y) \\propto p(x, y)\\)\n\nWe can consider the following setups\n\nWell-specified setup \\(p^* = p\\)\nMis-specified, \\(p^* \\neq p\\)\n\nFor now: focus on the well-specified setup.",
     "crumbs": [
       "Some theory",
       "Bayesian calibration: well-specified case"
@@ -542,7 +553,7 @@
     "href": "w05_properties/topic06_calibration_well_specified.html#numerical-exploration",
     "title": "Bayesian calibration: well-specified case",
     "section": "Numerical exploration",
-    "text": "Numerical exploration\nUsing the discrete model for Delta launches from Exercise 2, we will now run the algorithm described above under “What do we mean by”90% of the time”?“…\nWhat do you expect?\n\ncalibrated for small data, calibrated for large data\nnot calibrated for small data, calibrated for large data\nonly approximately calibrated for both small and large data\nnone of the above\n\n\n\nCode\nsuppressPackageStartupMessages(require(\"ggplot2\"))\nsuppressPackageStartupMessages(require(\"dplyr\"))\nsuppressPackageStartupMessages(require(\"tidyr\"))\ntheme_set(theme_bw())\n\nhigh_density_intervals &lt;- function(alpha, posterior_probs){\n  ordered_probs = posterior_probs[,order(posterior_probs[2,], decreasing = TRUE)]\n  cumulative_probs = cumsum(ordered_probs[2,])\n  index = which.max(cumulative_probs &gt;= (1-alpha))\n  return(ordered_probs[,1:index, drop=FALSE])\n}\n\nrdunif &lt;- function(max) { return(ceiling(max*runif(1))) } # unif 1, 2, .., max\n\nposterior_distribution &lt;- function(prior_probs, n_successes, n_trials){         \n  K &lt;- length(prior_probs)-1 # K+1 values that your p can assume\n  n_fails &lt;- n_trials - n_successes\n  p &lt;- seq(0, 1, 1/K)\n  posterior_probs &lt;-                                       # 1. this computes gamma(i)\n    prior_probs *                                          #    - pr. for picking coin (prior) (=1/3 in picture)\n    p^n_successes * (1-p)^n_fails                          #    - conditional for the flips \n  posterior_probs &lt;- posterior_probs/sum(posterior_probs)  # 2. normalize gamma(i)\n  post_prob &lt;- rbind(p, posterior_probs)\n  return(post_prob)\n}\n\nset.seed(1)\nK &lt;- 1000\nprior_used_for_computing_posterior &lt;- rep(1/(K+1), K+1) # Use same prior for simulation and posterior computation\nn_repeats &lt;- 1000\nalpha &lt;- 0.1\n\nhdi_coverage_pr &lt;- function(n_datapoints) {\n  n_inclusions &lt;- 0\n  for (repetition in seq(1:n_repeats)) {\n    i &lt;- rdunif(K + 1) - 1  # Always generate the data using a uniform prior\n    true_p &lt;- i/K\n    x &lt;- rbinom(1, n_datapoints, true_p)\n    post &lt;- posterior_distribution(prior_used_for_computing_posterior, x, n_datapoints)\n    \n    # This if is just a hacky way to check if true parameter is in the HDI credible interval\n    if (sum(abs(true_p - high_density_intervals(alpha, post)[1,]) &lt; 10e-10) == 1) {\n      n_inclusions &lt;- n_inclusions + 1\n    }\n  }\n  return(n_inclusions/n_repeats) # Fraction of simulation where the true parameter was in interval\n}\n\ndf &lt;- data.frame(\"n_observations\" = c(10, 100, 1000))\ndf$coverage_pr &lt;- sapply(df$n_observations, hdi_coverage_pr)\n\nggplot(data=df, aes(x=n_observations, y=coverage_pr)) +\n  ylim(0, 1) +\n  xlab(\"Number of observations\") + \n  ylab(\"Actual coverage\") +\n  geom_hline(yintercept=1-alpha, linetype=\"dashed\", color = \"black\") +\n  geom_line()",
+    "text": "Numerical exploration\nUsing the discrete model for Delta launches from Exercise 2, we will now implement and run the algorithm described above under “What do we mean by”90% of the time?“…\nWhat do you expect?\n\ncalibrated for small data, calibrated for large data\nnot calibrated for small data, calibrated for large data\nonly approximately calibrated for both small and large data\nnone of the above\n\n\n\nCode\nsuppressPackageStartupMessages(require(\"ggplot2\"))\nsuppressPackageStartupMessages(require(\"dplyr\"))\nsuppressPackageStartupMessages(require(\"tidyr\"))\ntheme_set(theme_bw())\n\nhigh_density_intervals &lt;- function(alpha, posterior_probs){\n  ordered_probs = posterior_probs[,order(posterior_probs[2,], decreasing = TRUE)]\n  cumulative_probs = cumsum(ordered_probs[2,])\n  index = which.max(cumulative_probs &gt;= (1-alpha))\n  return(ordered_probs[,1:index, drop=FALSE])\n}\n\nrdunif &lt;- function(max) { return(ceiling(max*runif(1))) } # unif 1, 2, .., max\n\nposterior_distribution &lt;- function(prior_probs, n_successes, n_trials){         \n  K &lt;- length(prior_probs)-1 # K+1 values that your p can assume\n  n_fails &lt;- n_trials - n_successes\n  p &lt;- seq(0, 1, 1/K)\n  posterior_probs &lt;-                                       # 1. this computes gamma(i)\n    prior_probs *                                          #    - pr. for picking coin (prior) (=1/3 in picture)\n    p^n_successes * (1-p)^n_fails                          #    - conditional for the flips \n  posterior_probs &lt;- posterior_probs/sum(posterior_probs)  # 2. normalize gamma(i)\n  post_prob &lt;- rbind(p, posterior_probs)\n  return(post_prob)\n}\n\nset.seed(1)\nK &lt;- 1000\nprior_used_for_computing_posterior &lt;- rep(1/(K+1), K+1) # Use same prior for simulation and posterior computation\nn_repeats &lt;- 1000\nalpha &lt;- 0.1\n\nhdi_coverage_pr &lt;- function(n_datapoints) {\n  n_inclusions &lt;- 0\n  for (repetition in seq(1:n_repeats)) {\n    i &lt;- rdunif(K + 1) - 1  # Always generate the data using a uniform prior\n    true_p &lt;- i/K\n    x &lt;- rbinom(1, n_datapoints, true_p)\n    post &lt;- posterior_distribution(prior_used_for_computing_posterior, x, n_datapoints)\n    \n    # This if is just a hacky way to check if true parameter is in the HDI credible interval\n    if (sum(abs(true_p - high_density_intervals(alpha, post)[1,]) &lt; 10e-10) == 1) {\n      n_inclusions &lt;- n_inclusions + 1\n    }\n  }\n  return(n_inclusions/n_repeats) # Fraction of simulation where the true parameter was in interval\n}\n\ndf &lt;- data.frame(\"n_observations\" = c(10, 100, 1000))\ndf$coverage_pr &lt;- sapply(df$n_observations, hdi_coverage_pr)\n\nggplot(data=df, aes(x=n_observations, y=coverage_pr)) +\n  ylim(0, 1) +\n  xlab(\"Number of observations\") + \n  ylab(\"Actual coverage\") +\n  geom_hline(yintercept=1-alpha, linetype=\"dashed\", color = \"black\") +\n  geom_line()",
     "crumbs": [
       "Some theory",
       "Bayesian calibration: well-specified case"
@@ -564,7 +575,7 @@
     "href": "w05_properties/topic02_optimality.html",
     "title": "Optimality",
     "section": "",
-    "text": "Average loss optimality of Bayes estimators\nLimitations of this notion of optimality.\n\n\n\n\nFormalize and justify one of the motivation for Bayesian methods covered in the first lecture.",
+    "text": "Average loss optimality of Bayes estimators\nLimitations of this notion of optimality.\n\n\n\n\nFormalize and justify one of the motivations for Bayesian methods covered in the first lecture.",
     "crumbs": [
       "Some theory",
       "Optimality"
@@ -575,7 +586,7 @@
     "href": "w05_properties/topic02_optimality.html#outline",
     "title": "Optimality",
     "section": "",
-    "text": "Average loss optimality of Bayes estimators\nLimitations of this notion of optimality.\n\n\n\n\nFormalize and justify one of the motivation for Bayesian methods covered in the first lecture.",
+    "text": "Average loss optimality of Bayes estimators\nLimitations of this notion of optimality.\n\n\n\n\nFormalize and justify one of the motivations for Bayesian methods covered in the first lecture.",
     "crumbs": [
       "Some theory",
       "Optimality"
@@ -597,7 +608,7 @@
     "href": "w05_properties/topic02_optimality.html#estimator",
     "title": "Optimality",
     "section": "Estimator",
-    "text": "Estimator\nDefinition: an estimator is a function \\(\\delta\\) such that:\n\n\\(\\delta\\) takes a dataset as input, \\(\\delta(y)\\), and\nreturns an action.\n\nExamples:\n\nthe Bayes estimator,\nmaximum likelihood estimator (when the action is a parameter you are trying to estimate).",
+    "text": "Estimator\nDefinition: an estimator is a function \\(\\delta\\) such that:\n\n\\(\\delta\\) takes a dataset \\(y\\) as input (i.e. the observations), \\(\\delta(y)\\), and\nreturns an action, i.e., \\(\\delta(y) \\in A\\).\n\nExamples:\n\nthe Bayes estimator,\nmaximum likelihood estimator (when the action is a parameter you are trying to estimate).",
     "crumbs": [
       "Some theory",
       "Optimality"
@@ -608,7 +619,7 @@
     "href": "w05_properties/topic02_optimality.html#optimality-motivation",
     "title": "Optimality",
     "section": "Optimality: motivation",
-    "text": "Optimality: motivation\nConsider the following situation—you are watching a talk, where the presenter explains they did the following:\n\nLet \\(\\delta_{\\text{B}}\\) denote the Bayes estimator, and \\(\\delta_{\\text{o}}\\), another estimator, say based on a sophisticated deep neural network.\nTo compare the two estimators, the presenter generated a large number of synthetic datasets \\((X^{(m)}, Y^{(m)})\\) by forward simulation from the model\nThey evaluated the performance of the Bayes estimator as follows::\n\napply the estimators: \\(a^{(m)}= \\delta_{\\text{B}}(Y^{(m)})\\),\ncompute the losses \\(l^{(m)}= L(a^{(m)}, X^{(m)})\\), and\nreturn the average loss as the measure of performance: \\(\\frac{1}{M} \\sum l^{(m)}\\).\n\nThen, they did the same with the other estimator, \\(\\delta_{\\text{o}}\\).\nSuppose that the presenter reported a lower loss for the other estimator, \\(\\delta_{\\text{o}}\\)\n\nPoll: Which of these statements is true?\n\nThe deep neural network can perform better because it involves more parameters (over-parameterization)\nThe deep neural network can perform better because of a combination of lucky initialization and noisy gradients\nThe deep neural network can perform better because of some other reason\nThis cannot happen unless the loss function is non-convex\nThis cannot happen because of some other reason",
+    "text": "Optimality: motivation\nConsider the following situation—you are watching a talk, where the presenter explains they did the following:\n\nLet:\n\n\\(\\delta_{\\text{B}}\\) denote the Bayes estimator, and\n\\(\\delta_{\\text{o}}\\), another estimator, say based on a sophisticated deep neural network.\n\nTo compare the two estimators, the presenter generated a large number of synthetic datasets \\((X^{(m)}, Y^{(m)})\\) by forward simulation from the model.\nThey evaluated the performance of the Bayes estimator as follows:\n\napply the estimator: \\(a^{(m)}= \\delta_{\\text{B}}(Y^{(m)})\\),\ncompute the loss: \\(l^{(m)}= L(a^{(m)}, X^{(m)})\\), and\nreturn the average loss as the measure of performance: \\[\\text{average loss} = \\frac{1}{M} \\sum l^{(m)}.\\]\n\nThen, they did the same with the other estimator, \\(\\delta_{\\text{o}}\\).\nSuppose that the presenter reported a lower average loss for the other estimator, \\(\\delta_{\\text{o}}\\)\n\nPoll: Which of these statements is true?\n\nThe deep neural network can perform better because it involves more parameters (over-parameterization)\nThe deep neural network can perform better because of a combination of lucky initialization and noisy gradients\nThe deep neural network can perform better because of some other reason\nThis cannot happen unless the loss function is non-convex\nThis cannot happen because of some other reason\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nCorrect answer is: “This cannot happen because of some other reason.”\nIntuition: Bayes estimator is designed to minimize the average loss. So you cannot beat Bayes at its game!",
     "crumbs": [
       "Some theory",
       "Optimality"
@@ -2648,7 +2659,7 @@
     "href": "w05_properties/topic04_decision_to_set.html",
     "title": "Decision theoretic set estimation",
     "section": "",
-    "text": "Deriving a set estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of set estimates (quantile based, highest density set).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis provides a general framework to answer the question: “how to summarize the posterior distribution?”",
+    "text": "Deriving a set estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of set estimates (quantile based, highest density set).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis page provides a general framework to answer the question: “how to summarize a posterior distribution with one set?”",
     "crumbs": [
       "Some theory",
       "Decision theoretic set estimation"
@@ -2659,7 +2670,7 @@
     "href": "w05_properties/topic04_decision_to_set.html#outline",
     "title": "Decision theoretic set estimation",
     "section": "",
-    "text": "Deriving a set estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of set estimates (quantile based, highest density set).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis provides a general framework to answer the question: “how to summarize the posterior distribution?”",
+    "text": "Deriving a set estimate from decision theory.\n\n\n\n\nWe have seen in week 2 some examples of set estimates (quantile based, highest density set).\nThese are actually special cases of decision theory with specific choices of loss functions.\nThis page provides a general framework to answer the question: “how to summarize a posterior distribution with one set?”",
     "crumbs": [
       "Some theory",
       "Decision theoretic set estimation"
@@ -2670,7 +2681,7 @@
     "href": "w05_properties/topic04_decision_to_set.html#context",
     "title": "Decision theoretic set estimation",
     "section": "Context",
-    "text": "Context\n\nThe weakness of point estimates is that they do not capture the uncertainty around the value\nIdea: instead of returning a single point, return a set of points\n\nusually an interval,\nbut this can be generalized\n\nBayesian terminology: credible interval (\\(\\neq\\) frequentist confidence intervals)\nGoals:\n\nWe would like the credible interval to contain a fixed fraction of the posterior mass (e.g. 95%)\nAt the same time, we would like this credible interval to be as short as possible given that posterior mass constraint",
+    "text": "Context\n\nThe weakness of point estimates is that they do not capture the uncertainty around the value.\nIdea: instead of returning a single point, return a set of points\n\nusually an interval,\nbut this can be generalized\n\nBayesian terminology: credible interval (\\(\\neq\\) frequentist confidence intervals)\nGoals:\n\nWe would like the credible interval to contain a fixed fraction of the posterior mass (e.g. 95%)\nAt the same time, we would like this credible interval to be as short as possible given that posterior mass constraint",
     "crumbs": [
       "Some theory",
       "Decision theoretic set estimation"
@@ -2681,7 +2692,18 @@
     "href": "w05_properties/topic04_decision_to_set.html#bayes-estimator-formalization",
     "title": "Decision theoretic set estimation",
     "section": "Bayes estimator formalization",
-    "text": "Bayes estimator formalization\nPick:\n\n\\(A = \\{[c, d] : c &lt; d\\}\\),\nconsider the loss function given by \\[\nL([c, d], x) = \\mathbb{1}\\{x \\notin [c, d]\\} + k (d - c)\n\\] for some tuning parameter \\(k\\) to be determined later.\n\nWe get:\n\\[\n\\begin{aligned}\n\\delta_{\\text{B}}(Y) &= \\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X \\notin [c, d] | Y] + k(d - c) : [c,d] \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X &lt; c|Y] + \\mathbb{P}[X &gt; d |Y] + k(d - c) : [c,d] \\in A \\}  \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X \\le c|Y] - \\mathbb{P}[X \\le d |Y] + k(d - c) : [c,d] \\in A \\}\n\\end{aligned}\n\\]\nAssuming the posterior has a continuous density \\(f\\) to change \\(&lt;\\) into \\(\\le\\). Again we take the derivative with respect to \\(c\\) and set to zero; then will do the same thing for \\(d\\). Notice that \\(\\mathbb{P}[X \\le c|Y]\\) is the posterior CDF, so taking the derivative with respect to \\(c\\) yields a density:\n\\[\nf_{X|Y}(c) - k = 0,\n\\]\nso we see the optimum will be the smallest interval \\([c, d]\\) such that \\(f(c) = f(d) = k\\).\nFinally, set \\(k\\) to capture say 95% of the mass.",
+    "text": "Bayes estimator formalization\nPick:\n\n\\(A = \\{[c, d] : c &lt; d\\}\\),\nconsider the loss function given by \\[\nL([c, d], x) = \\mathbb{1}\\{x \\notin [c, d]\\} + k (d - c)\n\\] for some tuning parameter \\(k\\) to be determined later.\n\nWe get:\n\\[\n\\begin{aligned}\n\\delta_{\\text{B}}(Y) &= \\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X \\notin [c, d] | Y] + k(d - c) : [c,d] \\in A \\} \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X &lt; c|Y] + \\mathbb{P}[X &gt; d |Y] + k(d - c) : [c,d] \\in A \\}  \\\\\n&=  \\operatorname{arg\\,min}\\{ \\mathbb{P}[X \\le c|Y] - \\mathbb{P}[X \\le d |Y] + k(d - c) : [c,d] \\in A \\}\n\\end{aligned}\n\\]\nHere we assume the posterior has a continuous density \\(f\\) to change \\(&lt;\\) into \\(\\le\\).\nAs we did with point estimation, we take the derivative with respect to \\(c\\) and set to zero (then will do the same thing for \\(d\\)).\nNotice that \\(\\mathbb{P}[X \\le c|Y]\\) is the posterior cumulative distribution function (CDF)1, so taking the derivative with respect to \\(c\\) yields a density:2\n\\[\nf_{X|Y}(c) - k = 0,\n\\]\n\n\n\nso we see the optimum will be the smallest interval \\([c, d]\\) such that \\(f(c) = f(d) = k\\).\nFinally, set \\(k\\) to capture say 95% of the mass (area in red in the figure shows a 50% example, we would lower \\(k\\) to get to 95%).",
+    "crumbs": [
+      "Some theory",
+      "Decision theoretic set estimation"
+    ]
+  },
+  {
+    "objectID": "w05_properties/topic04_decision_to_set.html#footnotes",
+    "href": "w05_properties/topic04_decision_to_set.html#footnotes",
+    "title": "Decision theoretic set estimation",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nRecall that a CDF is defined as \\(F(x) = \\mathbb{P}(X \\le x)\\). So a posterior CDF is just \\(\\mathbb{P}(X \\le x | Y)\\).↩︎\nLet us review the argument why “taking the derivative … yields a density”. Let \\(f\\) denote a density and \\(F\\), the CDF of the same random variable. From the definition of a density, \\(F(x) = \\int_{-\\infty}^x f(x') \\mathrm{d}x'\\) (i.e., take \\(A = [-\\infty, x]\\) in the definition of a density). Hence by the Fundamental theorem of calculus (i.e. the fact that an integral is an “anti-derivative”), we have that \\[f(x) = \\frac{\\mathrm{d}F(x)}{\\mathrm{d}x},\\] when the derivative exists.↩︎",
     "crumbs": [
       "Some theory",
       "Decision theoretic set estimation"
@@ -2714,7 +2736,7 @@
     "href": "w05_properties/topic05_calibration.html#example",
     "title": "Calibration",
     "section": "Example",
-    "text": "Example\n\nFamiliar in Vancouver: “Tomorrow: 90% chance of rain”\n\nhere, “90%” is an example of nominal coverage.\n\nOf those days where the forecast says “Tomorrow: 90% chance of rain”…\n\nwhat fraction of those days did it rain?\nThat fraction is an example of actual coverage.\n\n\nDefinition: a measure of uncertainty is calibrated if its nominal coverage matches its actual coverage.\n\nQuestion: which weather source(s), if any, provide reasonably calibrated rain uncertainty estimates?",
+    "text": "Example\n\nFamiliar in Vancouver: “Tomorrow: 90% chance of rain,”\n\nhere, “90%” is an example of nominal coverage.\n\nOf those days where the forecast says “Tomorrow: 90% chance of rain”…\n\nwhat fraction of those days did it actually rain?\nThat fraction is an example of actual coverage.\n\n\nDefinition: a measure of uncertainty is calibrated if its nominal coverage matches its actual coverage.\n\nQuestion: which weather source(s), if any, provide reasonably calibrated rain uncertainty estimates?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\nThe local TV meteorologist.\nThe Weather Channel.\nNational Weather Channel.\nThe Weather Channel and National Weather Channel.\nNone of them.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe Weather Channel and National Weather Channel are markedly more calibrated than the local TV.\nTo see why, note that “nominal coverage matching the actual coverage” corresponds to “hugging” the black diagonal line (i.e. the function \\(y = x\\)).\nThe local TV is clearly “pessimistic” in its forecasts. For example, of the days it predicts “100% chance of rain”, rain occurs only about 70% of the time.\nThis is almost certainly a form of expectation manipulation, i.e. people are more happy when rain is predicted and it does not rain than the other way around.",
     "crumbs": [
       "Some theory",
       "Calibration"
