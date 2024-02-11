@@ -15,19 +15,24 @@ editor:
 
 ### Rationale
 
-We have seen [in week 2](../w02_discrete_bayes/topic04_point.qmd) some 
-examples of point estimates (posterior mean, posterior mode). 
+We have seen in week 2 some 
+[examples of point estimates](../w02_discrete_bayes/topic04_point.qmd) (posterior mean, posterior mode). 
 
 These are actually special cases of [decision theory](../w02_discrete_bayes/topic06_decision.qmd)
 with specific choices of loss functions.
 
-This provides a general framework to answer the question: 
-"how to summarize the posterior distribution?"
+This page provides a general framework to answer the question: 
+"how to summarize a posterior distribution with one point?"
+
+
+## Setup
+
+The [decision theoretic setup from week 2](../w02_discrete_bayes/topic06_decision.qmd).
 
 
 ## Example
 
-**Assume:** a *square loss,* $A = \reals$, $L(a, p) = (a - p)^2$.
+**Assume:** a *square loss,* $L(a, p) = (a - p)^2$, where $a \in A = \reals$.
 
 **Some initial simplification**: on the objective function... 
 
@@ -40,7 +45,7 @@ $$
 \end{aligned}
 $$
 
-**Question:** under a square loss, $\best$ can be simplified to...
+**Question:** under a square loss, $\best$ can be simplified to... 
 
 {{< include ../../clickers/w05/_c04.qmd >}}
 

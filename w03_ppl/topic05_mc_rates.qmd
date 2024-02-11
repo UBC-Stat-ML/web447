@@ -152,6 +152,7 @@ ggplot(data=df, aes(x=n_iterations, y=errors)) +
 {{< include ../../clickers/w03/_c08.qmd >}}
 
 Based on this extra information, let's try revisit our initial question:
+**By how much should I increase the number of iteration to get one more digit of accuracy?**
 
 {{< include ../../clickers/w03/_c09.qmd >}}
 

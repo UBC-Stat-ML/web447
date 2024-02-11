@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-Formalize and justify one of the motivation for Bayesian methods 
+Formalize and justify one of the motivations for Bayesian methods 
 covered in the [first lecture](../w00_intro/topic01_why.qmd).
 
 
@@ -29,8 +29,8 @@ We go back to the [decision theoretic setup from week 2](../w02_discrete_bayes/t
 
 **Definition:** an estimator is a function $\delta$ such that:
 
-- $\delta$ takes a dataset as input, $\delta(y)$, and 
-- returns an action. 
+- $\delta$ takes a dataset $y$ as input (i.e. the observations), $\delta(y)$, and 
+- returns an action, i.e., $\delta(y) \in A$. 
 
 **Examples:**
 
@@ -42,14 +42,17 @@ We go back to the [decision theoretic setup from week 2](../w02_discrete_bayes/t
 
 **Consider the following situation**---you are watching a talk, where the presenter explains they did the following:
 
-- Let $\best$ denote the Bayes estimator, and $\oest$, another estimator, say based on a sophisticated deep neural network.
-- To compare the two estimators, the presenter generated a large number of synthetic datasets $(X^\parm, Y^\parm)$ by [forward simulation from the model](../w01_discrete_inference/topic06_forward_sampling.qmd)
-- They evaluated the performance of the Bayes estimator as follows::
-    - apply the estimators: $a^\parm = \best(Y^\parm)$, 
-    - compute the losses $l^\parm = L(a^\parm, X^\parm)$, and 
-    - return the average loss as the measure of performance: $\frac{1}{M} \sum l^\parm$.
+- Let:
+    - $\best$ denote the Bayes estimator, and 
+    - $\oest$, another estimator, say based on a sophisticated deep neural network.
+- To compare the two estimators, the presenter generated a large number of synthetic datasets $(X^\parm, Y^\parm)$ by [forward simulation from the model.](../w01_discrete_inference/topic06_forward_sampling.qmd)
+- They evaluated the performance of the Bayes estimator as follows:
+    - apply the estimator: $a^\parm = \best(Y^\parm)$, 
+    - compute the loss: $l^\parm = L(a^\parm, X^\parm)$, and 
+    - return the average loss as the measure of performance: 
+      $$\text{average loss} = \frac{1}{M} \sum l^\parm.$$
 - Then, they did the same with the other estimator, $\oest$. 
-- Suppose that the presenter reported a lower loss for the other estimator, $\oest$
+- Suppose that the presenter reported a lower average loss for the other estimator, $\oest$
 
 
 **Poll:** Which of these statements is true?
@@ -68,9 +71,10 @@ We go back to the [decision theoretic setup from week 2](../w02_discrete_bayes/t
 \newcommand{\Oscr}{\mathcal{O}}
 
 **Theorem:** let $\best$ denote the Bayes estimator, and $\oest$, any other estimator. Then: 
-$$\E[L(\best(Y), X)] \le \E[L(\oest(Y), X)]$${#eq-opt}
+$$\E[L(\best(Y), X)] \le \E[L(\oest(Y), X)].$${#eq-opt}
 
-**Proof:** by the law of total expectation: $\E[L(\best(Y), X)] = \E[ \red{\E[L(\best(Y), X) | Y]}]$. 
+**Proof:** by the law of total expectation, we can rewrite the left hand side of @eq-opt as: 
+$$\E[L(\best(Y), X)] = \E[ \red{\E[L(\best(Y), X) | Y]}].$$ {#eq-lte} 
 We will start by rewriting the part in red. 
 
 To do so, denote the objective being minimized in [the Bayes estimator](../w02_discrete_bayes/topic06_decision.qmd#sec-bayes-est) by: 
@@ -79,12 +83,12 @@ $$\Oscr(a) = \E[L(a, X) | Y].$$
 Note: by definition, we can rewrite our Bayes estimator by:
 $$\best = \argmin_a \Oscr(a),$$
 and hence:
-$$\red{\E[L(\best(Y), X) | Y]} = \Oscr(\best) = \Oscr(\argmin_a \Oscr(a)),$$
-so that we can rewrite the left-hand side of @eq-opt as follows:
+$$\red{\E[L(\best(Y), X) | Y]} = \Oscr(\best) = \Oscr(\argmin_a \Oscr(a)).$${#eq-rewrite}
+Plugging-in @eq-rewrite into @eq-lte, we get:
 
 $$\E[ \E[L(\best(Y), X) | Y]] = \E[ \Oscr( \argmin_a \Oscr(a))].$$
 
-Now note that for all $a'$, $\Oscr( \argmin_a \Oscr(a)) \le \Oscr(a')$, hence:
+Now note that for all $a' \in A$, $\Oscr( \argmin_a \Oscr(a)) \le \Oscr(a')$, in particular, this is true for $a' = \oest(y)$, hence:
 
 $$
 \begin{align*}

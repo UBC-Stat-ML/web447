@@ -31,16 +31,19 @@ then, for mis-specified models ([next page](../w05_properties/topic07_calibratio
 
 - For example, different labs, each studying similar but different datasets, 
 - i.e., they are replicating an "experiment."
-- This leads to frequentist analysis of Bayesian procedures---a very useful thing to do!
+- This leads to a *frequentist analysis of Bayesian procedures*---a very useful thing to do!
 
-**Calibration of credible intervals**: 90% credible interval is calibrated if it contains the true parameter **90% of the time**.
+**Calibration of credible intervals**: a 90% credible interval is **calibrated** if it contains the true parameter **90% of the time**.
 
 **What do we mean by "true parameter"?** 
 
 - Start with a joint distribution, $p^\star(x, y)$, which we will call "nature."
-- For each "experiment": use $p^\star$ to simulate both a true parameter, $x^\star$, and an associated dataset $y^\star$: $(x^\star, y^\star) \sim p^\star$. ($=$ notion of [forward simulation](../w01_discrete_inference/topic06_forward_sampling.qmd)).
+- For each "experiment": use $p^\star$ to simulate both a true parameter, $x^\star$, and an associated dataset $y^\star$: $(x^\star, y^\star) \sim p^\star$. ($=$ perform [forward simulation](../w01_discrete_inference/topic06_forward_sampling.qmd)).
 
-**What do we mean by "90% credible interval"?** a function $C(y) = [L(y), R(y)]$ which (1) computes the posterior $\pi(\cdot | y)$, and (2), selects left and right end points, $l$, $r$ such that $\int_l^r \pi(x | y) \dee x = 0.9$. 
+**What do we mean by "90% credible interval"?** A function $C(y) = [L(y), R(y)]$ which: 
+
+1. computes the posterior $\pi(\cdot | y)$, and 
+2. selects left and right end points, $l$, $r$ such that $\int_l^r \pi(x | y) \dee x = 0.9$. 
 
 Recall an examples of credible interval we discussed: [quantile-based intervals](../w02_discrete_bayes/topic05_credible.qmd).
 
@@ -57,21 +60,21 @@ Recall an examples of credible interval we discussed: [quantile-based intervals]
     - If the limit is lower than 0.9, we say the credible interval is anti-conservative (bad!)
     
 
-## Well specified vs misspecified models     
+## Well-specified vs mis-specified models     
 
 - There are two joint distributions involved in the thought experiment
     - $p^*$, used to generate data
     - $p$, used internally by the credible interval procedure to define a posterior $\pi(x | y) \propto p(x, y)$
 - We can consider the following setups
     - Well-specified setup $p^* = p$ 
-    - Misspecified, $p^* \neq p$
+    - Mis-specified, $p^* \neq p$
 - For now: focus on the well-specified setup.
 
 
 ## Numerical exploration
 
 Using the discrete model for Delta launches from [Exercise 2](../exercises/ex02.qmd), 
-we will now run the algorithm described above under "What do we mean by "90% of the time"?"...
+we will now implement and run the algorithm described above under "What do we mean by "90% of the time?"...
 
 
 **What do you expect?**

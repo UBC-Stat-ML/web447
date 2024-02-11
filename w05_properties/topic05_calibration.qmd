@@ -27,13 +27,13 @@ intuition.
 
 ## Example
 
-- Familiar in Vancouver: "Tomorrow: 90% chance of rain"
+- Familiar in Vancouver: "Tomorrow: 90% chance of rain,"
     - here, "90%" is an example of [nominal coverage](../w02_discrete_bayes/topic05_credible.qmd).
 - Of those days where the forecast says "Tomorrow: 90% chance of rain"...
-    - what **fraction of those days** did it rain?
+    - what **fraction of those days** did it actually rain?
     - That fraction is an example of **actual coverage.**
     
-**Definition:** a measure of uncertainty is calibrated if its nominal coverage 
+**Definition:** a measure of uncertainty is **calibrated** if its nominal coverage 
   matches its actual coverage.
 
 ![](../images/calibration.png){width="600"}

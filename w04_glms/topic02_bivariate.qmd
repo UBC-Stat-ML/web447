@@ -31,7 +31,7 @@ We will revisit the rocket comparison problem from the first week:
 ![](../images/spaceman.jpeg){width="300"}
 :::
 
-- If you are sick of hearing about rocket, here is an alternative interpretation:
+- If you are sick of hearing about rockets, here is an alternative interpretation:
     - Imagine you work for Google and serve website ad banners. 
     - A client gives you two designs for the ad banner: **A** and **B**. 
     - You will serve them to web visitors and the objective is to maximize the number of clicks. 

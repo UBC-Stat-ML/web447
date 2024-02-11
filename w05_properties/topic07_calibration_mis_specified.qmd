@@ -118,7 +118,7 @@ Conditions include, but are not limited to:
 3. we assume the posterior mean is **consistent**
     - recall: that means the error goes to zero as number of data points increases (something you will explore in this week's exercise)
 4. we assume the model is **parametric**:
-    - $\theta$ is allowed to be a vector, but you are not allowed to make it bigger as the number of observations increases.
+    - $x$ is allowed to be a vector, but you are not allowed to make it bigger as the number of observations increases.
     
   
 **Practical consequence:** 
