@@ -41,13 +41,15 @@ n_v|p_e,p_i &\sim \distBinom(N_v, p_i(1-p_e))
 \end{aligned}
 $$ {#eq-model-one-vac}
 
-**Note**: when $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
+::: {.callout-note}
+When $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
 the statement
 $$
 f(X) \sim \pi
 $$
 means that $X$ is drawn by first sampling $Y\sim\pi$ and then transforming 
-$X = f^{-1}(Y)$
+$X = f^{-1}(Y)$.
+:::
 
 ```{r}
 #| echo: false
