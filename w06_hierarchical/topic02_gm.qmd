@@ -1,0 +1,99 @@
+---
+title: "Graphical models"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Directed graphical models. 
+
+### Rationale
+
+Graphical models help understanding complex models such as hierarchical models. 
+
+
+## Directed graphical model
+
+A graphical model is a discrete graph showing the dependencies involved in 
+  [forward sampling description of a model](../w01_discrete_inference/topic06_forward_sampling.qmd#sec-model).
+
+**Definition:** a directed graphical model is a discrete graph such that:
+
+- the set of vertices is the set of random variables,
+- there is an edge $X_1 \to X_2$ if the forward sampling step producing $X_2$ requires knowing $X_1$. 
+
+
+
+
+
+## Examples
+
+### Exchangeable observations
+
+Many simples models can be written as:
+
+::: column-margin
+![](../images/naive-bayes.png){width="200"}
+:::
+
+$$\begin{align*}
+\theta &\sim \text{SomePrior} \\
+y_i | \theta &\sim \text{SomeLikelihood}(\theta).
+\end{align*}$$
+
+Most of the models we have encountered so far have this form. 
+
+
+### Hidden Markov model
+
+Time series are often modelled as follows:
+
+::: column-margin
+![](../images/hmm.png){width="200"}
+:::
+
+- there is an unobserved state $x_t$ changing at each time step $t \in \{1, 2, \dots\}$
+    - e.g. true location of a plane,
+- we have noisy observations $y_t$ from this true position,
+    - e.g. information from a radar. 
+    
+Simplest HMM example:
+
+$$\begin{align*}
+x_i | x_{i-1} &\sim \distNorm(x_{i-1}, \sigma_1) \\
+y_i | x_i &\sim \distNorm(x_{i}, \sigma_2),
+\end{align*}$$
+
+where $\sigma_1$ controls the amount of variability in the dynamics, and $\sigma_2$, in the measurement. 
+
+
+## Conditioning
+
+Shaded nodes in a directed graphical models indicate what we condition on (i.e. what we observe). 
+
+![](../images/conditioning-gm.png){width="500"}
+
+
+## Plates
+
+::: column-margin
+![](../images/plate.png){height="200"}
+:::
+
+**Plate:** When there are too many vertices to draw in a graphical model, use a square ("plate") to indicate a group of nodes that are repeated several times. 
+In other words, a graphical "for loop."
+
+
+## Further pointers on graphical models
+
+Directed graphical models are also useful to identify conditional independence relationships (recall, $A$ is conditionally independent of $B$ give $C$ if $\Pr(A|C) \Pr(B|C) = \Pr(A \cap B | C)$). 
+
+If you are curious, watch this [video](https://www.youtube.com/watch?v=i0CGsHhjISU) to see how this is done, or [read the original paper](https://arxiv.org/pdf/1301.7412.pdf).
+
+

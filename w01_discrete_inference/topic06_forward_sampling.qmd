@@ -40,7 +40,7 @@ Recall our recurring bag sampling example, with its corresponding decision tree:
         - From this leaf we obtain an outcome and hence a realization for all random variables, both "observed" and "unobserved." 
 
 
-## Forward sampling as specifying a model
+## Forward sampling as specifying a model {#sec-model}
 
 We have encountered that notation earlier:
 

@@ -47,6 +47,11 @@ website:
             file: exercises/ex05.qmd
           - text: "Challenge"
             file: challenges/ch05.qmd
+      - section: "Hierarchical models"
+        contents: 
+          - auto: "w06_hierarchical/*"
+          - text: "Exercises"
+            file: exercises/ex06.qmd
       - section: "Quiz 1"
         contents: 
           - auto: "w07_quiz1/*"

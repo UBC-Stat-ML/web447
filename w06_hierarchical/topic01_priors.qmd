@@ -1,0 +1,95 @@
+---
+title: "Prior choice"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Strategies for constructing priors. 
+- Situations where choosing the prior matters. 
+- Informative vs non-informative priors.
+
+### Rationale
+
+Selection of priors is a necessary step in the construction of Bayesian models. 
+Difficulties that can be encountered in prior choice motivate hierarchical models, 
+introduced this week. 
+
+
+## Example
+
+Selecting a prior for a parameter defined on $[0, 1]$, e.g. in the 
+basic rocket launch success probability example (iid, continuous):
+$$\begin{align*}
+p &\sim \;\text{???} \\
+y | p &\sim \distBinom(n, p).
+\end{align*}$$
+
+## General approach
+
+Often, the choice of prior is approached in two stages
+
+- First, pick a distribution **family** 
+    - in our example: let us pick say Beta$(\cdot, \cdot)$, 
+          - a common starting point for distribution with support $[0, 1]$
+          - but not the only choice, e.g., an alternative is the [Kumaraswamy distribution](https://en.wikipedia.org/wiki/Kumaraswamy_distribution).
+- Then, pick one member of this family  
+    - e.g. Beta$(1, 2)$, but how to pick these "magic" numbers?
+    
+ 
+## When does the choice of prior matter?  
+      
+- When **data is large**, posterior tends to be **less sensitive** to specification of the prior 
+    - Theoretical reason: the "Bayesian central limit theorem" (Bernstein von-Mises theorem).
+    - Not always true (e.g. weakly identifiable model).
+- When **data is small**, posterior tends to be **more sensitive** to specification of the prior 
+    - Extreme example: 
+        - consider a rocket maiden flight, 
+        - i.e. there is no observation available yet,
+        - what will be the posterior?
+        
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Where there is no observations, the posterior is equal to the prior.
+
+This shows an extreme example of the posterior being sensitive to the choice of prior!
+:::
+
+## Strategies for constructing priors
+
+- "Informative priors": use expert knowledge
+    - e.g.: when we build rockets, there is a lot of quality control, so it would be surprising to see very low values for the success probability parameter $p$
+    - many techniques developed, see [Petrus et al, 2021](http://arxiv.org/abs/2112.01380) for a recent review,
+    - but the state of that literature not completely satisfactory. 
+- "Non-informative priors": use properties of the likelihood to determine prior 
+    - more advanced, see [Robert, Sections 3.5](../syllabus.qmd),
+    - not automated, case-by-case mathematical derivation often intractable
+    - automating this into PPLs is an open problem.
+- **Today:** side-step these issues thanks to **Hierarchical models**
+    - We will not remove the need for prior choice, instead we will decrease sensitivity of the posterior to these choices
+ 
+    
+## Example, continued
+
+Suppose we picked a Beta, so we now have to pick a member of the Beta family. 
+
+$$\begin{align*}
+p &\sim \distBeta(?, ?) \\
+y | p &\sim \distBinom(n, p).
+\end{align*}$$
+
+The numbers to fill in the "?" are known as **hyper-parameters**, i.e., 
+  an hyper-parameter is a parameter of a prior. 
+  
+**Expert elicitation:**
+
+- find a rocket expert,
+- ask the expert what they think is a reasonable range of values for $p$, e.g. upper and lower quartiles $Q_1, Q_3$
+- use numerical method to fit $\alpha, \beta$ such that a Beta($\alpha, \beta$) matches the reported quartiles $Q_1, Q_3$.

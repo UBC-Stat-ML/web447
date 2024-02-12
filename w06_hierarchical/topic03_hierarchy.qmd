@@ -1,0 +1,26 @@
+---
+title: "Intro to hierarchical models"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Hierarchical models. 
+
+### Rationale
+
+Hierarchical models, a crowning achievement of Bayesian inference, can be used 
+to decrease prior sensitivity even when the dataset of interest is of limited size.
+
+
+## Key idea
+
+Use "**side data**" to inform the prior...
+
+
