@@ -47,7 +47,7 @@ https://github.com/trevorcampbell/shortex
 <!-- unary functions -->
 \newcommand{\pr}{\mathbb{P}}  
 \newcommand{\ex}{\mathbb{E}}
-\newcommand{\Pr}{\mathbb{P}}   
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\law}{\mathcal{L}} 
 \newcommand{\var}{\operatorname{Var}}
