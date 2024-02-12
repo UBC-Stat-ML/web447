@@ -78,5 +78,8 @@ vaccines = read.csv("vaccines.csv")
 vaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code
 ```
 4. Run your model in [simPPLe](../w04_glms/topic01_simPPLe.qmd) using `posterior`
-(not `posterior_particles`) and report the estimated posterior probability that 
-Moderna is more effective than Pfizer.
+(not `posterior_particles`) with 20,000 iterations, and report the estimated 
+posterior probability that Moderna is more effective than Pfizer.
+Is there strong evidence for this claim?
+**Note**: it takes a couple of minutes to run 20,000 iterations. Therefore, for
+prototyping it may be easier to test your implementation with fewer iterations.
