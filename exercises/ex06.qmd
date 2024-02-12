@@ -41,6 +41,14 @@ n_v|p_e,p_i &\sim \distBinom(N_v, p_i(1-p_e))
 \end{aligned}
 $$ {#eq-model-one-vac}
 
+**Note**: when $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
+the statement
+$$
+f(X) \sim \pi
+$$
+means that $X$ is drawn by first sampling $Y\sim\pi$ and then transforming 
+$X = f^{-1}(Y)$
+
 ```{r}
 #| echo: false
 dta = read.csv("ex06_assets/vaccines.csv")
@@ -61,6 +69,12 @@ pair.
 2. Implement the model from part 1 in [simPPLe](../w04_glms/topic01_simPPLe.qmd).
 Your PPL function should return the indicator that Moderna is more effective than
 Pfizer.
-3. Run your model using `posterior` (not `posterior_particles`) with the 
-[provided data](ex06_assets/vaccines.csv) and report the estimated posterior
-probability that Moderna is more effective than Pfizer.
+3. Download the [data](ex06_assets/vaccines.csv) and load it using the following
+(no points for this part)
+```r
+vaccines = read.csv("vaccines.csv")
+vaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code
+```
+4. Run your model in [simPPLe](../w04_glms/topic01_simPPLe.qmd) using `posterior`
+(not `posterior_particles`) and report the estimated posterior probability that 
+Moderna is more effective than Pfizer.
