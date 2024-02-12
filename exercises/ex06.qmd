@@ -58,12 +58,9 @@ rmarkdown::paged_table(dta)
 both vaccines. The parameters $(\alpha_e,\alpha_i,\beta_e,\beta_i)$ must be 
 shared across vaccines. In contrast, each vaccine must have its own $(p_e,p_i)$ 
 pair.
-2. Implement the model from part 1 in simPPLe. Your PPL function should return 
-the indicator that Moderna is more effective than Pfizer.
+2. Implement the model from part 1 in [simPPLe](../w04_glms/topic01_simPPLe.qmd).
+Your PPL function should return the indicator that Moderna is more effective than
+Pfizer.
 3. Run your model using `posterior` (not `posterior_particles`) with the 
 [provided data](ex06_assets/vaccines.csv) and report the estimated posterior
 probability that Moderna is more effective than Pfizer.
-
-
-
-
