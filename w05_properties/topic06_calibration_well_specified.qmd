@@ -155,8 +155,8 @@ ggplot(data=df, aes(x=n_observations, y=coverage_pr)) +
 - Denote the data by $Y$.
 - Parameter of interest: $X$.
 - Denote the credible interval obtained from $y$ by $C(y)$.
-- We want to show $\Pr^*(X \in C(Y)) = 0.9$.
-- By construction, the interval $C(y)$ satisfies, for all observed data $y$, $\Pr(X \in C(y) | Y = y) = 0.9$.
+- We want to show $\pr^*(X \in C(Y)) = 0.9$.
+- By construction, the interval $C(y)$ satisfies, for all observed data $y$, $\pr(X \in C(y) | Y = y) = 0.9$.
 
 
 ::: column-margin
@@ -165,14 +165,14 @@ ggplot(data=df, aes(x=n_observations, y=coverage_pr)) +
 
 - Recall the law of total probability: 
     - for any [partition](../w01_discrete_inference/topic02_axioms.qmd) $E_i$ of the sample space, 
-    - we have $\Pr(A) = \sum_i \Pr(A, E_i)$.
+    - we have $\pr(A) = \sum_i \pr(A, E_i)$.
 - Here: $A = (X \in C(Y))$, $E_i = (Y = y_i)$ 
     - where $\{y_i\}$ denotes the possible values the data can potentially take across all possible simulated experiments.
 - Putting it all together and applying chain rule:
 $$\begin{align*}
-\Pr^*(X \in C(Y)) &= \sum_i \Pr^*(X \in C(Y), Y = y_i) \\
-&= \sum_i \Pr^*(Y = y_i) \Pr^*(X \in C(y_i) | Y = y_i) \\
-&= \sum_i \Pr^*(Y = y_i) \Pr(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
-&= \sum_i \Pr^*(Y = y_i) 0.9 \\
-&= 0.9 \sum_i \Pr^*(Y = y_i) = 0.9.
+\pr^*(X \in C(Y)) &= \sum_i \pr^*(X \in C(Y), Y = y_i) \\
+&= \sum_i \pr^*(Y = y_i) \pr^*(X \in C(y_i) | Y = y_i) \\
+&= \sum_i \pr^*(Y = y_i) \pr(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
+&= \sum_i \pr^*(Y = y_i) 0.9 \\
+&= 0.9 \sum_i \pr^*(Y = y_i) = 0.9.
 \end{align*}$$
