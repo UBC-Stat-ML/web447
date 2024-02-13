@@ -15,21 +15,19 @@ editor:
 
 ### Rationale
 
-Graphical models help understanding complex models such as hierarchical models. 
+Graphical models help understanding complex models such as hierarchical ones 
 
 
 ## Directed graphical model
 
-A graphical model is a discrete graph showing the dependencies involved in 
+A graphical model is a discrete graph showing the dependencies involved in a 
   [forward sampling description of a model](../w01_discrete_inference/topic06_forward_sampling.qmd#sec-model).
+  Specifically:
 
 **Definition:** a directed graphical model is a discrete graph such that:
 
-- the set of vertices is the set of random variables,
+- the set of vertices is a set of random variables,
 - there is an edge $X_1 \to X_2$ if the forward sampling step producing $X_2$ requires knowing $X_1$. 
-
-
-
 
 
 ## Examples
@@ -92,7 +90,7 @@ In other words, a graphical "for loop."
 
 ## Further pointers on graphical models
 
-Directed graphical models are also useful to identify conditional independence relationships (recall, $A$ is conditionally independent of $B$ give $C$ if $\Pr(A|C) \Pr(B|C) = \Pr(A \cap B | C)$). 
+Directed graphical models are also useful to identify conditional independence relationships (recall, $A$ is conditionally independent of $B$ given $C$ if $\Pr(A|C) \Pr(B|C) = \Pr(A \cap B | C)$). 
 
 If you are curious, watch this [video](https://www.youtube.com/watch?v=i0CGsHhjISU) to see how this is done, or [read the original paper](https://arxiv.org/pdf/1301.7412.pdf).
 

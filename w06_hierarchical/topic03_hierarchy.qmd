@@ -12,6 +12,7 @@ editor:
 ### Topics
 
 - Hierarchical models. 
+- Intuition why they decrease prior sensitivity. 
 
 ### Rationale
 
@@ -25,13 +26,13 @@ to decrease prior sensitivity even when the dataset of interest is of limited si
 ![](../images/delta.jpeg){width="200"}
 :::
 
-**Example:** predicting the probability of failure of the next Delta 7925H launch (so far, observed has been launched 3 times, with
-0 failed launches) .
+**Example:** predicting the probability of failure of the next Delta 7925H launch (so far, we observed this type of rocket has been launched 3 times, with
+0 failed launches).
 
 **Key idea:** use "**side data**" to inform the prior...
 
-- For example: success/fail launch data from other **other types** of rockets.
-- Can we use the full rocket launch data provided to inform prediction for a single rocket type of interest?
+- For example: success/failure launch data from other **other types** of rockets.
+- Can we use the following rocket launch dataset to inform prediction for a single rocket type of interest?
 
 
 ```{r}
@@ -49,14 +50,13 @@ Then we will cover hierarchical models in the next section, showing how they add
 
 ### First try (do not use this one!)
 
-- Merge all the data?
+- Merge all the data into one type?
 - I.e. just sum the columns in the data:
 
 
 ```{r}
 sum(df$numberOfLaunches)
 sum(df$numberOfFailures)
-sum(df$numberOfFailures) / sum(df$numberOfLaunches)
 ```
 
 **Why merging everything is a bad idea?**
@@ -67,30 +67,35 @@ sum(df$numberOfFailures) / sum(df$numberOfLaunches)
 Some of these types of rockets are very different than the one under study (Delta 7925H). 
 For example some of them are very old, made by different space agencies, etc. 
 
+An indeed, the aggregated failure rate is high compared to what you would expect from modern "workhorse" rockets (<1%):
+
+```{r}
+sum(df$numberOfFailures) / sum(df$numberOfLaunches)
+```
+
 We want to consider the different types of rockets as a **population** and model the variability within that population. 
 :::
 
 
 ### Towards an improved way to use side data
 
-- Background: "mean--pseudo-sample-size" reparameterization of the [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution)
-    - A reparametrization is a different labelling of a family such that you can go back and forth between the two labellings
+- Background: "mean--pseudo-sample-size" reparameterization of the [Beta distribution](https://en.wikipedia.org/wiki/Beta_distribution).
+    - A reparametrization is a different labelling of a family such that you can go back and forth between the two labellings.
     - Consider $$\alpha  = \mu s, \;\; \beta = (1 - \mu) s$$ where $\mu \in (0, 1)$, $s > 0$.
     
 - Interpretation:
     - $\mu$: mean of the Beta
-    - $s$: measure of "peakiness" of the density, higher $s$ corresponds to more peaked; roughly, $s \sim$ number of data points that would make the posterior peaked like that. 
+    - $s$: measure of "peakiness" of the density, higher $s$ corresponds to more peaked; roughly, $s \approx$ number of data points that would make the posterior peaked like that. 
 
 - Why we did this reparameterization? 
-    - Now it should be more intuitive how we could go about using **side data** to inform at least $\mu$. 
-    - Ideas?
+    - $\to$ it should now be more intuitive how we can use "side data" to inform $\mu$...
 
 
 ### Second try (still suboptimal, but not as bad)
 
 - Estimate a failure probability $\hat p_i$ for each type of rocket $i$. 
-- Fit a distribution on those $\{\hat p_i\}$. 
-- Second try: use this distribution as the prior on $\mu$?
+- Fit a distribution $p(\mu)$ on those $\{\hat p_i\}$. 
+- Use this distribution $p(\mu)$ as the prior on $\mu$?
 
 
 ```{r message=F, warning=F}
@@ -99,27 +104,27 @@ suppressPackageStartupMessages(require("latex2exp"))
 
 ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
   geom_histogram() + 
-  xlab(TeX("$\\hat{p}_i = \\text{numberOfFailures}_i / \\text{numberOfLaunches}_i$")) +
+  xlab(TeX("$\\hat{p}_i = \\textrm{numberOfFailures}_i / \\textrm{numberOfLaunches}_i$")) +
   geom_rug(alpha = 0.1)
 ```
 
-**Question:** what are the weaknesses of this method?
+**Question:** what are the weaknesses of using a prior fitted on this histogram?
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-- First, notice the bumps at 1/2 and 1...
-    - Most of those are types of rockets with only 1 or 2 launch datapoints (e.g. 1 failure out of 2 launches). 
-    - But if you fit a curve to this data, these bumps will have a large undesirable effects. 
+- First, notice the "bumps" at 1/2 (and 1, 1/4, etc)...
+    - Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!
+    - But if you fit a curve to this data, these "bumps" will have a large undesirable effects. 
     - More broadly, we want to take into account uncertainty in each of these $\hat p_i$'s. 
-- Also: less clear how to do this with the pseudo-sample-size $s$. 
+- Also: less clear how to generalize this method to handle the pseudo-sample-size $s$. 
 :::
 
 ## Hierarchical models: a better way to use side data
 
 **Solution:** go fully Bayesian!
 
-**Recall:** [our Bayesian recipe,](../w02_discrete_bayes/topic01_bayes_recipe.qmd)
+**Recall:** [our Bayesian recipe...](../w02_discrete_bayes/topic01_bayes_recipe.qmd)
 
 1. Construct a probability model including
     - random variables for what we will measure/observe
@@ -130,6 +135,8 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
 3. Use the posterior distribution to make a decision
 
 **What it means here:** we model the launcher type's population parameters ($\mu, s$) as random variables. 
+  We are not interested in these other launcher types, but they help us inform inference about the type 
+  of rocket we are interested in (i.e., "nuisance" parameters). 
 
 
 ### Graphical model
@@ -142,26 +149,36 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
 - Share these two "population parameters" across all launch types 
 $$p_i | \mu, s \sim \distBeta(\mu s, (1 - \mu) s)$$
 - Likelihood same as before: $F_i | p_i \sim \distBern(n_i, p_i).$
-- We still need to put prior on $\mu$ and $s$
-    - But you should expect this prior choice to be less sensitive. Why? Hint: look at the number of outgoing edges in the graphical model. Compare with number of outgoing edges for the "maiden flight" (see next slide)
-    - Example: $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$ (why such a small value? Hint: mean vs. rate parameter)
+- We still need to put prior on $\mu$ and $s$...
+    - ...but as we'll discuss next, you should expect this prior choice to be less sensitive. 
+    - Example: $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$ 
+    
+PS: why we pick such a small value, $1/10000$? 
+
+- Recall the parameter of an exponential is a rate which is 1/mean.
+- So a mean of 10000 encodes we put significant mass to values up to $O(10000)$.
+- This is sometimes described as a "vague prior". 
     
     
 ### Decrease prior choice sensitivity
 
-It seems we have introduced new problems as now we again have hyperparameters, namely those for the priors on $\mu$ and $s$. Here we picked $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$
+It seems we have introduced new problems as now we again have hyper-parameters, namely those for the priors on $\mu$ and $s$!
 
-**Key point:** yes, but now we are less sensitive to these choices!
+**Key point:** yes, but now we are less sensitive to these choices! Why?
 
-Why? Heuristic: say you have a random variable connected to some hyper-parameters (grey squares) and random variables connected to data (circles)
+**Heuristic:** look at the node $n$ connected to the hyper-parameters...
 
-- If most of the connections are hyper-parameters: will probably be sensitive.
-- If there are many more connections to random variables compared to hyper-parameters: will probably be insensitive.
+- If most of $n$'s edges link to hyper-parameters: posterior more sensitive to hyper-parameters. 
+- If most of $n$'s edges link to random variables connected to data: posterior will probably be less sensitive.
 
 **Before going hierarchical:** for maiden/early flights we had
 
 ![](../images/hierarchical-gm-before.jpg){height="200"}
 
+Note: $p$ is connected to only a small number of observations. 
+
 **After going hierarchical:**
 
 ![](../images/hierarchical-gm-after.jpg){height="250"}
+
+Note: $\mu, s$ is connected to a large population of $p_i$'s, each linked with data. 

@@ -18,7 +18,7 @@ editor:
 
 We introduced in the previous page the important notion of [calibration](../w05_properties/topic05_calibration.qmd). 
 
-The question we consider now: **are [credible interval](../w02_discrete_bayes/topic05_credible.qmd) 
+The question we consider now: **are [credible intervals](../w02_discrete_bayes/topic05_credible.qmd) 
 calibrated?**
 
 We will give a two-part answer: first, answering the above question for well-specified models (this page), 
@@ -27,7 +27,7 @@ then, for mis-specified models ([next page](../w05_properties/topic07_calibratio
 
 ## Bayesian calibration
 
-**Thought experiment**: what if a certain Bayesian inference method is used many times? 
+**Thought experiment**: what if a certain Bayesian inference method was used many times? 
 
 - For example, different labs, each studying similar but different datasets, 
 - i.e., they are replicating an "experiment."
