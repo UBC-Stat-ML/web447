@@ -848,8 +848,8 @@ Suprise!!: **in a Bayesian well-specified context, calibration holds for all dat
 <li>Denote the data by <span class="math inline">\(Y\)</span>.</li>
 <li>Parameter of interest: <span class="math inline">\(X\)</span>.</li>
 <li>Denote the credible interval obtained from <span class="math inline">\(y\)</span> by <span class="math inline">\(C(y)\)</span>.</li>
-<li>We want to show <span class="math inline">\(\Pr^*(X \in C(Y)) = 0.9\)</span>.</li>
-<li>By construction, the interval <span class="math inline">\(C(y)\)</span> satisfies, for all observed data <span class="math inline">\(y\)</span>, <span class="math inline">\(\Pr(X \in C(y) | Y = y) = 0.9\)</span>.</li>
+<li>We want to show <span class="math inline">\(\mathbb{P}^*(X \in C(Y)) = 0.9\)</span>.</li>
+<li>By construction, the interval <span class="math inline">\(C(y)\)</span> satisfies, for all observed data <span class="math inline">\(y\)</span>, <span class="math inline">\(\mathbb{P}(X \in C(y) | Y = y) = 0.9\)</span>.</li>
 </ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -858,18 +858,18 @@ Suprise!!: **in a Bayesian well-specified context, calibration holds for all dat
 <li>Recall the law of total probability:
 <ul>
 <li>for any <a href="../w01_discrete_inference/topic02_axioms.html">partition</a> <span class="math inline">\(E_i\)</span> of the sample space,</li>
-<li>we have <span class="math inline">\(\Pr(A) = \sum_i \Pr(A, E_i)\)</span>.</li>
+<li>we have <span class="math inline">\(\mathbb{P}(A) = \sum_i \mathbb{P}(A, E_i)\)</span>.</li>
 </ul></li>
 <li>Here: <span class="math inline">\(A = (X \in C(Y))\)</span>, <span class="math inline">\(E_i = (Y = y_i)\)</span>
 <ul>
 <li>where <span class="math inline">\(\{y_i\}\)</span> denotes the possible values the data can potentially take across all possible simulated experiments.</li>
 </ul></li>
 <li>Putting it all together and applying chain rule: <span class="math display">\[\begin{align*}
-\Pr^*(X \in C(Y)) &amp;= \sum_i \Pr^*(X \in C(Y), Y = y_i) \\
-&amp;= \sum_i \Pr^*(Y = y_i) \Pr^*(X \in C(y_i) | Y = y_i) \\
-&amp;= \sum_i \Pr^*(Y = y_i) \Pr(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
-&amp;= \sum_i \Pr^*(Y = y_i) 0.9 \\
-&amp;= 0.9 \sum_i \Pr^*(Y = y_i) = 0.9.
+\mathbb{P}^*(X \in C(Y)) &amp;= \sum_i \mathbb{P}^*(X \in C(Y), Y = y_i) \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}^*(X \in C(y_i) | Y = y_i) \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
+&amp;= \sum_i \mathbb{P}^*(Y = y_i) 0.9 \\
+&amp;= 0.9 \sum_i \mathbb{P}^*(Y = y_i) = 0.9.
 \end{align*}\]</span></li>
 </ul>
 
