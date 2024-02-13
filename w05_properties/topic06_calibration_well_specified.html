@@ -568,12 +568,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Quiz 1</span></a>
+ <span class="menu-text">Hierarchical models</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prior choice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to hierarchical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Quiz 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
@@ -637,6 +672,7 @@ https://github.com/trevorcampbell/shortex
 <!-- text shortcuts -->
 <!-- convergence -->
 <!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
 <!-- Min and max -->
 <!-- binary operators -->
 <!-- independence -->
@@ -812,8 +848,8 @@ Suprise!!: **in a Bayesian well-specified context, calibration holds for all dat
 <li>Denote the data by <span class="math inline">\(Y\)</span>.</li>
 <li>Parameter of interest: <span class="math inline">\(X\)</span>.</li>
 <li>Denote the credible interval obtained from <span class="math inline">\(y\)</span> by <span class="math inline">\(C(y)\)</span>.</li>
-<li>We want to show <span class="math inline">\(\mathbb{P}^*(X \in C(Y)) = 0.9\)</span>.</li>
-<li>By construction, the interval <span class="math inline">\(C(y)\)</span> satisfies, for all observed data <span class="math inline">\(y\)</span>, <span class="math inline">\(\mathbb{P}(X \in C(y) | Y = y) = 0.9\)</span>.</li>
+<li>We want to show <span class="math inline">\(\Pr^*(X \in C(Y)) = 0.9\)</span>.</li>
+<li>By construction, the interval <span class="math inline">\(C(y)\)</span> satisfies, for all observed data <span class="math inline">\(y\)</span>, <span class="math inline">\(\Pr(X \in C(y) | Y = y) = 0.9\)</span>.</li>
 </ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -822,18 +858,18 @@ Suprise!!: **in a Bayesian well-specified context, calibration holds for all dat
 <li>Recall the law of total probability:
 <ul>
 <li>for any <a href="../w01_discrete_inference/topic02_axioms.html">partition</a> <span class="math inline">\(E_i\)</span> of the sample space,</li>
-<li>we have <span class="math inline">\(\mathbb{P}(A) = \sum_i \mathbb{P}(A, E_i)\)</span>.</li>
+<li>we have <span class="math inline">\(\Pr(A) = \sum_i \Pr(A, E_i)\)</span>.</li>
 </ul></li>
 <li>Here: <span class="math inline">\(A = (X \in C(Y))\)</span>, <span class="math inline">\(E_i = (Y = y_i)\)</span>
 <ul>
 <li>where <span class="math inline">\(\{y_i\}\)</span> denotes the possible values the data can potentially take across all possible simulated experiments.</li>
 </ul></li>
 <li>Putting it all together and applying chain rule: <span class="math display">\[\begin{align*}
-\mathbb{P}^*(X \in C(Y)) &amp;= \sum_i \mathbb{P}^*(X \in C(Y), Y = y_i) \\
-&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}^*(X \in C(y_i) | Y = y_i) \\
-&amp;= \sum_i \mathbb{P}^*(Y = y_i) \mathbb{P}(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
-&amp;= \sum_i \mathbb{P}^*(Y = y_i) 0.9 \\
-&amp;= 0.9 \sum_i \mathbb{P}^*(Y = y_i) = 0.9.
+\Pr^*(X \in C(Y)) &amp;= \sum_i \Pr^*(X \in C(Y), Y = y_i) \\
+&amp;= \sum_i \Pr^*(Y = y_i) \Pr^*(X \in C(y_i) | Y = y_i) \\
+&amp;= \sum_i \Pr^*(Y = y_i) \Pr(X \in C(y_i) | Y = y_i) \quad\quad \text{(assuming model is well-specified)} \\
+&amp;= \sum_i \Pr^*(Y = y_i) 0.9 \\
+&amp;= 0.9 \sum_i \Pr^*(Y = y_i) = 0.9.
 \end{align*}\]</span></li>
 </ul>
 

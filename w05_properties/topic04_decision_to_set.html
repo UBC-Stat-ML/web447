@@ -534,12 +534,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Quiz 1</span></a>
+ <span class="menu-text">Hierarchical models</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prior choice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to hierarchical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Quiz 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
@@ -601,6 +636,7 @@ https://github.com/trevorcampbell/shortex
 <!-- text shortcuts -->
 <!-- convergence -->
 <!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
 <!-- Min and max -->
 <!-- binary operators -->
 <!-- independence -->
@@ -653,14 +689,14 @@ L([c, d], x) = \mathbb{1}\{x \notin [c, d]\} + k (d - c)
 <p><span class="math display">\[
 \begin{aligned}
 \delta_{\text{B}}(Y) &amp;= \operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \} \\
-&amp;=  \operatorname{arg\,min}\{ \mathbb{P}[X \notin [c, d] | Y] + k(d - c) : [c,d] \in A \} \\
-&amp;=  \operatorname{arg\,min}\{ \mathbb{P}[X &lt; c|Y] + \mathbb{P}[X &gt; d |Y] + k(d - c) : [c,d] \in A \}  \\
-&amp;=  \operatorname{arg\,min}\{ \mathbb{P}[X \le c|Y] - \mathbb{P}[X \le d |Y] + k(d - c) : [c,d] \in A \}
+&amp;=  \operatorname{arg\,min}\{ \Pr[X \notin [c, d] | Y] + k(d - c) : [c,d] \in A \} \\
+&amp;=  \operatorname{arg\,min}\{ \Pr[X &lt; c|Y] + \Pr[X &gt; d |Y] + k(d - c) : [c,d] \in A \}  \\
+&amp;=  \operatorname{arg\,min}\{ \Pr[X \le c|Y] - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \}
 \end{aligned}
 \]</span></p>
 <p>Here we assume the posterior has a continuous density <span class="math inline">\(f\)</span> to change <span class="math inline">\(&lt;\)</span> into <span class="math inline">\(\le\)</span>.</p>
 <p>As we did with <a href="../w05_properties/topic03_decision_to_point.html">point estimation</a>, we take the derivative with respect to <span class="math inline">\(c\)</span> and set to zero (then will do the same thing for <span class="math inline">\(d\)</span>).</p>
-<p>Notice that <span class="math inline">\(\mathbb{P}[X \le c|Y]\)</span> is the posterior cumulative distribution function (CDF)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so taking the derivative with respect to <span class="math inline">\(c\)</span> yields a density:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Notice that <span class="math inline">\(\Pr[X \le c|Y]\)</span> is the posterior cumulative distribution function (CDF)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so taking the derivative with respect to <span class="math inline">\(c\)</span> yields a density:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><span class="math display">\[
 f_{X|Y}(c) - k = 0,
 \]</span></p>

@@ -571,12 +571,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Quiz 1</span></a>
+ <span class="menu-text">Hierarchical models</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prior choice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to hierarchical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Quiz 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
@@ -601,7 +636,7 @@ window.Quarto = {
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#forward-sampling-as-depth-first-traversal" id="toc-forward-sampling-as-depth-first-traversal" class="nav-link" data-scroll-target="#forward-sampling-as-depth-first-traversal">Forward sampling as depth-first traversal</a></li>
-  <li><a href="#forward-sampling-as-specifying-a-model" id="toc-forward-sampling-as-specifying-a-model" class="nav-link" data-scroll-target="#forward-sampling-as-specifying-a-model">Forward sampling as specifying a model</a></li>
+  <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model">Forward sampling as specifying a model</a></li>
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
   <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
   </ul>
@@ -640,6 +675,7 @@ https://github.com/trevorcampbell/shortex
 <!-- text shortcuts -->
 <!-- convergence -->
 <!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
 <!-- Min and max -->
 <!-- binary operators -->
 <!-- independence -->
@@ -743,8 +779,8 @@ S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_fal
 </ul></li>
 </ul>
 </section>
-<section id="forward-sampling-as-specifying-a-model" class="level2">
-<h2 class="anchored" data-anchor-id="forward-sampling-as-specifying-a-model">Forward sampling as specifying a model</h2>
+<section id="sec-model" class="level2">
+<h2 class="anchored" data-anchor-id="sec-model">Forward sampling as specifying a model</h2>
 <p>We have encountered that notation earlier:</p>
 <p><span class="math display">\[
 \begin{align*}

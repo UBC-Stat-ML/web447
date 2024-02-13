@@ -568,12 +568,47 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
- <span class="menu-text">Quiz 1</span></a>
+ <span class="menu-text">Hierarchical models</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prior choice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to hierarchical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Quiz 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
@@ -631,6 +666,7 @@ https://github.com/trevorcampbell/shortex
 <!-- text shortcuts -->
 <!-- convergence -->
 <!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
 <!-- Min and max -->
 <!-- binary operators -->
 <!-- independence -->
@@ -679,57 +715,60 @@ Estimate the probability that the next launch is a success given the data under 
 <div class="sourceCode" id="cb2" data-shortcodes="true," data-filename="simple_utils.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>posterior_particles <span class="ot">=</span> <span class="cf">function</span>(ppl_function, number_of_iterations) {</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">ppl_function</span>()) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> number_of_iterations, <span class="at">ncol =</span> dimension)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, number_of_iterations)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">ppl_function</span>()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    samples[i,] <span class="ot">=</span> sample</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    weights[i]  <span class="ot">=</span> weight</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">samples=</span>samples, <span class="at">weights=</span>weights))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ess <span class="ot">=</span> <span class="cf">function</span>(particles){</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">=</span> particles<span class="sc">$</span>weights</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">effective_sample_size</span>(w))</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>effective_sample_size <span class="ot">=</span> <span class="cf">function</span>(w){</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sum</span>(w)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(w<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>representative_sample <span class="ot">=</span> <span class="cf">function</span>(snis_output, <span class="at">percentile=</span><span class="fl">0.9999</span>){</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  ess <span class="ot">=</span> <span class="fu">effective_sample_size</span>(snis_output<span class="sc">$</span>weights)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  idx_ordered_weights <span class="ot">=</span> <span class="fu">order</span>(snis_output<span class="sc">$</span>weights, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  acc_norm_weights <span class="ot">=</span> <span class="fu">cumsum</span>(snis_output<span class="sc">$</span>weights[idx_ordered_weights])<span class="sc">/</span><span class="fu">sum</span>(snis_output<span class="sc">$</span>weights)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  reduced_sample_size <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">round</span>(ess), <span class="fu">max</span>(<span class="fu">which</span>(acc_norm_weights <span class="sc">&lt;</span> percentile)))</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  idx_subset <span class="ot">=</span> idx_ordered_weights[<span class="dv">1</span><span class="sc">:</span>reduced_sample_size]</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">samples =</span> snis_output<span class="sc">$</span>samples[idx_subset,], <span class="at">weights =</span> snis_output<span class="sc">$</span>weights[idx_subset])</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>weighted_scatter_plot <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    snis_output, </span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">base_color_hex =</span> <span class="fu">hcl.colors</span>(<span class="dv">1</span>, <span class="at">palette =</span> <span class="st">"viridis"</span>),</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"Param 1"</span>, <span class="at">ylab=</span><span class="st">"Param 2"</span>)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>){</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  base_color <span class="ot">=</span> <span class="fu">col2rgb</span>(base_color_hex)<span class="sc">/</span><span class="dv">255</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find the subset with almost all the mass</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  snis_subset <span class="ot">=</span> <span class="fu">representative_sample</span>(snis_output)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">=</span> <span class="fu">ppl_function</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  dimension <span class="ot">=</span> <span class="fu">length</span>(sample) </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> number_of_iterations, <span class="at">ncol =</span> dimension, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span>number_of_iterations, <span class="fu">names</span>(sample)))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, number_of_iterations)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>number_of_iterations) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    weight <span class="ot">&lt;&lt;-</span> <span class="fl">1.0</span>       <span class="co"># reset the weight accumulator</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">ppl_function</span>()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    samples[i,] <span class="ot">=</span> sample</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    weights[i]  <span class="ot">=</span> weight</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">samples=</span>samples, <span class="at">weights=</span>weights))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ess <span class="ot">=</span> <span class="cf">function</span>(particles){</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">=</span> particles<span class="sc">$</span>weights</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">effective_sample_size</span>(w))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>effective_sample_size <span class="ot">=</span> <span class="cf">function</span>(w){</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sum</span>(w)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(w<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>representative_sample <span class="ot">=</span> <span class="cf">function</span>(snis_output, <span class="at">percentile=</span><span class="fl">0.9999</span>){</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  ess <span class="ot">=</span> <span class="fu">effective_sample_size</span>(snis_output<span class="sc">$</span>weights)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  idx_ordered_weights <span class="ot">=</span> <span class="fu">order</span>(snis_output<span class="sc">$</span>weights, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  acc_norm_weights <span class="ot">=</span> <span class="fu">cumsum</span>(snis_output<span class="sc">$</span>weights[idx_ordered_weights])<span class="sc">/</span><span class="fu">sum</span>(snis_output<span class="sc">$</span>weights)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  reduced_sample_size <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">round</span>(ess), <span class="fu">max</span>(<span class="fu">which</span>(acc_norm_weights <span class="sc">&lt;</span> percentile)))</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  idx_subset <span class="ot">=</span> idx_ordered_weights[<span class="dv">1</span><span class="sc">:</span>reduced_sample_size]</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">samples =</span> snis_output<span class="sc">$</span>samples[idx_subset,], <span class="at">weights =</span> snis_output<span class="sc">$</span>weights[idx_subset])</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>weighted_scatter_plot <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    snis_output,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot_idxs =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">base_color_hex =</span> <span class="fu">hcl.colors</span>(<span class="dv">1</span>, <span class="at">palette =</span> <span class="st">"viridis"</span>),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"Param 1"</span>, <span class="at">ylab=</span><span class="st">"Param 2"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>){</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  base_color <span class="ot">=</span> <span class="fu">col2rgb</span>(base_color_hex)<span class="sc">/</span><span class="dv">255</span></span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># linear transform of weights to [0,1]</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  extreme_weights <span class="ot">=</span> <span class="fu">range</span>(snis_subset<span class="sc">$</span>weights, <span class="at">na.rm =</span> T)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  alphas <span class="ot">=</span> (snis_subset<span class="sc">$</span>weights<span class="sc">-</span>extreme_weights[<span class="dv">1</span>])<span class="sc">/</span><span class="fu">diff</span>(extreme_weights)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create colors with transparencies and plot</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  points_color_alphas <span class="ot">=</span> <span class="fu">rgb</span>(base_color[<span class="dv">1</span>],base_color[<span class="dv">2</span>],base_color[<span class="dv">3</span>], alphas)</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  call_args<span class="ot">=</span><span class="fu">c</span>(</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">x=</span>snis_subset<span class="sc">$</span>samples[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col=</span>points_color_alphas), </span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    plot_options</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(plot, call_args)</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find the subset with almost all the mass</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  snis_subset <span class="ot">=</span> <span class="fu">representative_sample</span>(snis_output)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># linear transform of weights to [0,1]</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  extreme_weights <span class="ot">=</span> <span class="fu">range</span>(snis_subset<span class="sc">$</span>weights, <span class="at">na.rm =</span> T)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  alphas <span class="ot">=</span> (snis_subset<span class="sc">$</span>weights<span class="sc">-</span>extreme_weights[<span class="dv">1</span>])<span class="sc">/</span><span class="fu">diff</span>(extreme_weights)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create colors with transparencies and plot</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  points_color_alphas <span class="ot">=</span> <span class="fu">rgb</span>(base_color[<span class="dv">1</span>],base_color[<span class="dv">2</span>],base_color[<span class="dv">3</span>], alphas)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  call_args<span class="ot">=</span><span class="fu">c</span>(</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">x=</span>snis_subset<span class="sc">$</span>samples[, plot_idxs], <span class="at">col=</span>points_color_alphas), </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    plot_options</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(plot, call_args)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

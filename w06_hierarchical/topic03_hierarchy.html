@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.547">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Bayes1@UBC - Intro to hierarchical models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w06_hierarchical/topic01_priors.html">Hierarchical models</a></li><li class="breadcrumb-item"><a href="../w06_hierarchical/topic03_hierarchy.html">Intro to hierarchical models</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bayes1@UBC</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final project</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Why?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High-level picture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A bit of history</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Probability essentials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample space, outcomes, events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Axioms of probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability mass functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Forward sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditioning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chain rule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayes rule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Expectations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simple Monte Carlo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Bayes on a discrete model</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The Bayesian recipe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Posterior distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point estimates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Credible sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to model criticism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">A first look at PPLs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What is a PPL?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Importance sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Continuous models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SNIS consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Monte Carlo convergence rate</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03_ppl/topic06_ess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SNIS Effective Sample Size</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">The joy of probabilistic modelling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">simPPLe</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bivariate posteriors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Normal distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bernoulli regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(Normal) regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Some theory</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asymptotics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic03_decision_to_point.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision theoretic point estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic04_decision_to_set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Decision theoretic set estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: well-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../challenges/ch05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Hierarchical models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prior choice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Graphical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Intro to hierarchical models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Quiz 1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminology review</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#how-to-use-side-data-two-suboptimal-approaches" id="toc-how-to-use-side-data-two-suboptimal-approaches" class="nav-link" data-scroll-target="#how-to-use-side-data-two-suboptimal-approaches">How to use “side data”? Two suboptimal approaches</a>
+  <ul class="collapse">
+  <li><a href="#first-try-do-not-use-this-one" id="toc-first-try-do-not-use-this-one" class="nav-link" data-scroll-target="#first-try-do-not-use-this-one">First try (do not use this one!)</a></li>
+  <li><a href="#towards-an-improved-way-to-use-side-data" id="toc-towards-an-improved-way-to-use-side-data" class="nav-link" data-scroll-target="#towards-an-improved-way-to-use-side-data">Towards an improved way to use side data</a></li>
+  <li><a href="#second-try-still-suboptimal-but-not-as-bad" id="toc-second-try-still-suboptimal-but-not-as-bad" class="nav-link" data-scroll-target="#second-try-still-suboptimal-but-not-as-bad">Second try (still suboptimal, but not as bad)</a></li>
+  </ul></li>
+  <li><a href="#hierarchical-models-a-better-way-to-use-side-data" id="toc-hierarchical-models-a-better-way-to-use-side-data" class="nav-link" data-scroll-target="#hierarchical-models-a-better-way-to-use-side-data">Hierarchical models: a better way to use side data</a>
+  <ul class="collapse">
+  <li><a href="#graphical-model" id="toc-graphical-model" class="nav-link" data-scroll-target="#graphical-model">Graphical model</a></li>
+  <li><a href="#mathematical-description" id="toc-mathematical-description" class="nav-link" data-scroll-target="#mathematical-description">Mathematical description</a></li>
+  <li><a href="#decrease-prior-choice-sensitivity" id="toc-decrease-prior-choice-sensitivity" class="nav-link" data-scroll-target="#decrease-prior-choice-sensitivity">Decrease prior choice sensitivity</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w06_hierarchical/topic01_priors.html">Hierarchical models</a></li><li class="breadcrumb-item"><a href="../w06_hierarchical/topic03_hierarchy.html">Intro to hierarchical models</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Intro to hierarchical models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- First, some macros specific to this course -->
+<!-- -->
+<!-- 
+Second, tiny-shortex for Quarto
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
+<!-- Min and max -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
+<!-- general purpose math -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Hierarchical models.</li>
+<li>Intuition why they decrease prior sensitivity.</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Hierarchical models, a crowning achievement of Bayesian inference, can be used to decrease prior sensitivity even when the dataset of interest is of limited size.</p>
+</section>
+</section>
+<section id="example" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/delta.jpeg" class="img-fluid" width="200"></p>
+</div></div><p><strong>Example:</strong> predicting the probability of failure of the next Delta 7925H launch (so far, we observed this type of rocket has been launched 3 times, with 0 failed launches).</p>
+<p><strong>Key idea:</strong> use “<strong>side data</strong>” to inform the prior…</p>
+<ul>
+<li>For example: success/failure launch data from other <strong>other types</strong> of rockets.</li>
+<li>Can we use the following rocket launch dataset to inform prediction for a single rocket type of interest?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../data/failure_counts.csv"</span>) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["LV.Type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["numberOfLaunches"],"name":[2],"type":["int"],"align":["right"]},{"label":["numberOfFailures"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Aerobee","2":"1","3":"0"},{"1":"Angara A5","2":"1","3":"0"},{"1":"Antares 110","2":"2","3":"0"},{"1":"Antares 120","2":"2","3":"0"},{"1":"Antares 130","2":"1","3":"1"},{"1":"Antares 230","2":"1","3":"0"},{"1":"Ariane 1","2":"11","3":"2"},{"1":"Ariane 2","2":"6","3":"1"},{"1":"Ariane 3","2":"11","3":"1"},{"1":"Ariane 40","2":"7","3":"0"},{"1":"Ariane 42L","2":"13","3":"0"},{"1":"Ariane 42P","2":"15","3":"1"},{"1":"Ariane 44L","2":"40","3":"1"},{"1":"Ariane 44LP","2":"26","3":"1"},{"1":"Ariane 44P","2":"15","3":"0"},{"1":"Ariane 5ECA","2":"61","3":"1"},{"1":"Ariane 5ES","2":"1","3":"0"},{"1":"Ariane 5ES/ATV","2":"5","3":"0"},{"1":"Ariane 5G","2":"16","3":"3"},{"1":"Ariane 5G+","2":"3","3":"0"},{"1":"Ariane 5GS","2":"6","3":"0"},{"1":"ARPA Taurus","2":"2","3":"0"},{"1":"ASLV","2":"4","3":"2"},{"1":"Athena-1","2":"2","3":"0"},{"1":"Athena-2","2":"3","3":"1"},{"1":"Atlas 3A","2":"2","3":"0"},{"1":"Atlas 3B","2":"4","3":"0"},{"1":"Atlas Able","2":"3","3":"3"},{"1":"Atlas Agena A","2":"4","3":"2"},{"1":"Atlas Agena B","2":"28","3":"5"},{"1":"Atlas Agena D","2":"15","3":"0"},{"1":"Atlas B","2":"1","3":"0"},{"1":"Atlas Burner 2","2":"2","3":"1"},{"1":"Atlas Centaur","2":"4","3":"2"},{"1":"Atlas Centaur D","2":"7","3":"0"},{"1":"Atlas D","2":"16","3":"4"},{"1":"Atlas E","2":"15","3":"0"},{"1":"Atlas E Altair","2":"1","3":"0"},{"1":"Atlas E/MSD","2":"1","3":"1"},{"1":"Atlas E/OIS","2":"1","3":"0"},{"1":"Atlas E/SGS-2","2":"4","3":"0"},{"1":"Atlas E/SVS","2":"1","3":"1"},{"1":"Atlas F","2":"9","3":"1"},{"1":"Atlas F/Agena D","2":"1","3":"0"},{"1":"Atlas F/MSD","2":"3","3":"0"},{"1":"Atlas F/OIS","2":"1","3":"0"},{"1":"Atlas F/PTS","2":"1","3":"0"},{"1":"Atlas F/SVS","2":"7","3":"0"},{"1":"Atlas G Centaur","2":"7","3":"1"},{"1":"Atlas H","2":"5","3":"0"},{"1":"Atlas I","2":"11","3":"2"},{"1":"Atlas II","2":"10","3":"0"},{"1":"Atlas IIA","2":"23","3":"0"},{"1":"Atlas IIAS","2":"30","3":"0"},{"1":"Atlas SLV-3","2":"4","3":"0"},{"1":"Atlas SLV-3 Agena B","2":"1","3":"0"},{"1":"Atlas SLV-3 Agena D","2":"48","3":"4"},{"1":"Atlas SLV-3A Agena D","2":"12","3":"1"},{"1":"Atlas SLV-3C Centaur","2":"17","3":"2"},{"1":"Atlas SLV-3D Centaur","2":"32","3":"2"},{"1":"Atlas V 401","2":"36","3":"1"},{"1":"Atlas V 411","2":"4","3":"0"},{"1":"Atlas V 421","2":"6","3":"0"},{"1":"Atlas V 431","2":"3","3":"0"},{"1":"Atlas V 501","2":"6","3":"0"},{"1":"Atlas V 521","2":"2","3":"0"},{"1":"Atlas V 531","2":"3","3":"0"},{"1":"Atlas V 541","2":"4","3":"0"},{"1":"Atlas V 551","2":"7","3":"0"},{"1":"Black Arrow","2":"2","3":"1"},{"1":"Blue Scout II","2":"1","3":"1"},{"1":"Blue Scout Jr","2":"8","3":"0"},{"1":"Chang Zheng 1","2":"2","3":"0"},{"1":"Chang Zheng 11","2":"2","3":"0"},{"1":"Chang Zheng 2","2":"1","3":"1"},{"1":"Chang Zheng 2C","2":"37","3":"1"},{"1":"Chang Zheng 2C-III/SD","2":"7","3":"0"},{"1":"Chang Zheng 2D","2":"32","3":"0"},{"1":"Chang Zheng 2E","2":"7","3":"2"},{"1":"Chang Zheng 2F","2":"12","3":"0"},{"1":"Chang Zheng 2FT1","2":"1","3":"0"},{"1":"Chang Zheng 3","2":"13","3":"1"},{"1":"Chang Zheng 3A","2":"25","3":"0"},{"1":"Chang Zheng 3B","2":"38","3":"2"},{"1":"Chang Zheng 3B/YZ-1","2":"1","3":"0"},{"1":"Chang Zheng 3C","2":"13","3":"0"},{"1":"Chang Zheng 3C/YZ-1","2":"2","3":"0"},{"1":"Chang Zheng 4","2":"2","3":"0"},{"1":"Chang Zheng 4B","2":"28","3":"1"},{"1":"Chang Zheng 4C","2":"20","3":"1"},{"1":"Chang Zheng 5/YZ-2","2":"1","3":"0"},{"1":"Chang Zheng 6","2":"1","3":"0"},{"1":"Chang Zheng 7","2":"1","3":"0"},{"1":"Chang Zheng 7/YZ-1A","2":"1","3":"0"},{"1":"Commercial Titan 3","2":"4","3":"0"},{"1":"Conestoga 1620","2":"1","3":"1"},{"1":"Delta 0300","2":"3","3":"1"},{"1":"Delta 0900","2":"2","3":"0"},{"1":"Delta 1410","2":"1","3":"0"},{"1":"Delta 1604","2":"2","3":"0"},{"1":"Delta 1900","2":"1","3":"0"},{"1":"Delta 1910","2":"1","3":"0"},{"1":"Delta 1913","2":"1","3":"0"},{"1":"Delta 1914","2":"2","3":"0"},{"1":"Delta 2310","2":"3","3":"0"},{"1":"Delta 2313","2":"3","3":"1"},{"1":"Delta 2910","2":"6","3":"0"},{"1":"Delta 2913","2":"2","3":"0"},{"1":"Delta 2914","2":"30","3":"2"},{"1":"Delta 3910","2":"3","3":"0"},{"1":"Delta 3910/PAM","2":"7","3":"0"},{"1":"Delta 3913","2":"1","3":"0"},{"1":"Delta 3914","2":"12","3":"2"},{"1":"Delta 3920","2":"3","3":"0"},{"1":"Delta 3920-8","2":"1","3":"0"},{"1":"Delta 3920/PAM","2":"6","3":"0"},{"1":"Delta 3924","2":"5","3":"0"},{"1":"Delta 4925-8","2":"2","3":"0"},{"1":"Delta 4H","2":"9","3":"1"},{"1":"Delta 4M","2":"3","3":"0"},{"1":"Delta 4M+(4,2)","2":"14","3":"0"},{"1":"Delta 4M+(5,2)","2":"2","3":"0"},{"1":"Delta 4M+(5,4)","2":"7","3":"0"},{"1":"Delta 5920-8","2":"1","3":"0"},{"1":"Delta 6920-10","2":"2","3":"0"},{"1":"Delta 6920-8","2":"1","3":"0"},{"1":"Delta 6925","2":"13","3":"0"},{"1":"Delta 6925-8","2":"1","3":"0"},{"1":"Delta 7320-10","2":"4","3":"0"},{"1":"Delta 7320-10C","2":"8","3":"0"},{"1":"Delta 7326-9.5","2":"3","3":"0"},{"1":"Delta 7420-10C","2":"13","3":"0"},{"1":"Delta 7425-10","2":"1","3":"0"},{"1":"Delta 7425-9.5","2":"3","3":"0"},{"1":"Delta 7426-9.5","2":"1","3":"0"},{"1":"Delta 7920-10","2":"6","3":"0"},{"1":"Delta 7920-10C","2":"19","3":"0"},{"1":"Delta 7920-10L","2":"2","3":"0"},{"1":"Delta 7920-8","2":"1","3":"0"},{"1":"Delta 7920H","2":"3","3":"0"},{"1":"Delta 7925","2":"34","3":"2"},{"1":"Delta 7925-10","2":"2","3":"0"},{"1":"Delta 7925-10C","2":"1","3":"0"},{"1":"Delta 7925-10L","2":"2","3":"0"},{"1":"Delta 7925-8","2":"2","3":"0"},{"1":"Delta 7925-9.5","2":"28","3":"0"},{"1":"Delta 7925H","2":"3","3":"0"},{"1":"Delta 8930","2":"3","3":"2"},{"1":"DF-21","2":"1","3":"0"},{"1":"Diamant A","2":"4","3":"0"},{"1":"Diamant B","2":"5","3":"2"},{"1":"Diamant BP.4","2":"3","3":"0"},{"1":"Dnepr","2":"22","3":"1"},{"1":"Energiya","2":"1","3":"1"},{"1":"Energiya/Buran","2":"1","3":"0"},{"1":"Epsilon","2":"2","3":"0"},{"1":"Europa I","2":"3","3":"3"},{"1":"Europa II","2":"1","3":"1"},{"1":"Falcon 1","2":"5","3":"3"},{"1":"Falcon 9","2":"34","3":"1"},{"1":"Feng Bao 1","2":"8","3":"4"},{"1":"GSLV Mk I","2":"6","3":"3"},{"1":"GSLV Mk II","2":"5","3":"1"},{"1":"H-1","2":"9","3":"0"},{"1":"H-II","2":"7","3":"1"},{"1":"H-IIA 202","2":"20","3":"0"},{"1":"H-IIA 2022","2":"3","3":"0"},{"1":"H-IIA 2024","2":"7","3":"1"},{"1":"H-IIA 204","2":"3","3":"0"},{"1":"H-IIB","2":"6","3":"0"},{"1":"Juno II","2":"10","3":"5"},{"1":"Jupiter C","2":"6","3":"3"},{"1":"K65M-RB","2":"4","3":"0"},{"1":"Kosmos 11K63","2":"126","3":"8"},{"1":"Kosmos 11K65","2":"4","3":"2"},{"1":"Kosmos 11K65M","2":"445","3":"22"},{"1":"Kosmos 63S1","2":"38","3":"12"},{"1":"Kosmos 65S3","2":"8","3":"1"},{"1":"KT-1","2":"3","3":"3"},{"1":"KT-2","2":"1","3":"0"},{"1":"Kuaizhou","2":"2","3":"0"},{"1":"Kuaizhou-1A","2":"1","3":"0"},{"1":"Kwangmyongsong","2":"1","3":"0"},{"1":"Lambda 4S","2":"5","3":"4"},{"1":"LLV-1","2":"1","3":"1"},{"1":"LMLV-1","2":"1","3":"0"},{"1":"M-V","2":"7","3":"1"},{"1":"Minotaur 1","2":"11","3":"0"},{"1":"Minotaur IV","2":"2","3":"0"},{"1":"Minotaur IV+","2":"1","3":"0"},{"1":"Minotaur V","2":"1","3":"0"},{"1":"Molniya 8K78","2":"40","3":"20"},{"1":"Molniya 8K78M","2":"272","3":"13"},{"1":"Molniya 8K78M-PVB","2":"8","3":"0"},{"1":"Mu-3C","2":"4","3":"1"},{"1":"Mu-3H","2":"3","3":"0"},{"1":"Mu-3S","2":"4","3":"0"},{"1":"Mu-3S-II","2":"8","3":"1"},{"1":"Mu-4S","2":"4","3":"1"},{"1":"N-1","2":"7","3":"1"},{"1":"N-1 11A52","2":"4","3":"4"},{"1":"N-2","2":"8","3":"0"},{"1":"Naro-1","2":"3","3":"2"},{"1":"Nike Cajun","2":"4","3":"0"},{"1":"Paektusan 1","2":"1","3":"1"},{"1":"Pegasus","2":"4","3":"0"},{"1":"Pegasus H","2":"4","3":"0"},{"1":"Pegasus XL","2":"27","3":"3"},{"1":"Pegasus XL/HAPS","2":"6","3":"0"},{"1":"Pegasus/HAPS","2":"2","3":"1"},{"1":"Project Pilot","2":"6","3":"6"},{"1":"Proton-K","2":"29","3":"3"},{"1":"Proton-K/17S40","2":"6","3":"0"},{"1":"Proton-K/Briz-M","2":"4","3":"1"},{"1":"Proton-K/D","2":"37","3":"14"},{"1":"Proton-K/D-1","2":"12","3":"1"},{"1":"Proton-K/D-2","2":"3","3":"0"},{"1":"Proton-K/DM","2":"66","3":"5"},{"1":"Proton-K/DM-2","2":"110","3":"7"},{"1":"Proton-K/DM-2M","2":"41","3":"2"},{"1":"Proton-M/Briz-M","2":"89","3":"8"},{"1":"Proton-M/DM-2","2":"6","3":"0"},{"1":"Proton-M/DM-3","2":"3","3":"2"},{"1":"PSLV","2":"23","3":"2"},{"1":"PSLV-XL","2":"16","3":"0"},{"1":"R-36O 8K69","2":"21","3":"1"},{"1":"R-36O 8K69M","2":"2","3":"0"},{"1":"Rokot","2":"27","3":"3"},{"1":"Safir","2":"7","3":"3"},{"1":"Saturn I","2":"6","3":"0"},{"1":"Saturn IB","2":"7","3":"0"},{"1":"Saturn V","2":"13","3":"0"},{"1":"Scout A","2":"11","3":"0"},{"1":"Scout A-1","2":"1","3":"0"},{"1":"Scout B","2":"23","3":"2"},{"1":"Scout B-1","2":"5","3":"0"},{"1":"Scout D-1","2":"16","3":"0"},{"1":"Scout E-1","2":"1","3":"0"},{"1":"Scout F-1","2":"2","3":"1"},{"1":"Scout G-1","2":"17","3":"0"},{"1":"Scout X-1","2":"6","3":"2"},{"1":"Scout X-2","2":"2","3":"1"},{"1":"Scout X-2B","2":"1","3":"1"},{"1":"Scout X-2M","2":"3","3":"2"},{"1":"Scout X-3","2":"5","3":"1"},{"1":"Scout X-3A","2":"1","3":"0"},{"1":"Scout X-3M","2":"1","3":"0"},{"1":"Scout X-4","2":"12","3":"1"},{"1":"Scout X-4A","2":"2","3":"0"},{"1":"Shaviyt","2":"2","3":"0"},{"1":"Shaviyt 1","2":"8","3":"2"},{"1":"Shtil'-1","2":"2","3":"0"},{"1":"SLV-3","2":"4","3":"1"},{"1":"Soyuz 11A510","2":"2","3":"0"},{"1":"Soyuz 11A511","2":"32","3":"2"},{"1":"Soyuz 11A511L","2":"3","3":"0"},{"1":"Soyuz 11A511M","2":"8","3":"0"},{"1":"Soyuz-2-1A","2":"24","3":"2"},{"1":"Soyuz-2-1B","2":"22","3":"1"},{"1":"Soyuz-2-1V","2":"2","3":"1"},{"1":"Soyuz-FG","2":"59","3":"0"},{"1":"Soyuz-ST-A","2":"5","3":"0"},{"1":"Soyuz-ST-B","2":"12","3":"1"},{"1":"Soyuz-U","2":"633","3":"18"},{"1":"Soyuz-U-PVB","2":"154","3":"4"},{"1":"Soyuz-U2","2":"72","3":"0"},{"1":"Space Shuttle","2":"135","3":"1"},{"1":"SPARTA","2":"1","3":"0"},{"1":"Sputnik 11A59","2":"2","3":"0"},{"1":"Sputnik 8A91","2":"2","3":"1"},{"1":"Sputnik 8K71PS","2":"2","3":"0"},{"1":"SS-520","2":"1","3":"1"},{"1":"Start","2":"1","3":"1"},{"1":"Start-1","2":"5","3":"0"},{"1":"Start-1.2","2":"1","3":"0"},{"1":"Strela","2":"3","3":"0"},{"1":"Super Strypi","2":"1","3":"1"},{"1":"Taurus 1110","2":"1","3":"0"},{"1":"Taurus 2110","2":"2","3":"1"},{"1":"Taurus 2210","2":"1","3":"0"},{"1":"Taurus 3110","2":"2","3":"2"},{"1":"Taurus 3210","2":"1","3":"0"},{"1":"Thor Able I","2":"3","3":"2"},{"1":"Thor Able II","2":"2","3":"1"},{"1":"Thor Able III","2":"1","3":"0"},{"1":"Thor Able IV","2":"1","3":"0"},{"1":"Thor Ablestar","2":"19","3":"5"},{"1":"Thor Agena A","2":"15","3":"6"},{"1":"Thor Agena B","2":"40","3":"7"},{"1":"Thor Agena D","2":"13","3":"2"},{"1":"Thor Burner 1","2":"4","3":"1"},{"1":"Thor Burner 2","2":"12","3":"0"},{"1":"Thor Burner 2A","2":"8","3":"0"},{"1":"Thor Delta","2":"12","3":"1"},{"1":"Thor Delta A","2":"2","3":"0"},{"1":"Thor Delta B","2":"9","3":"1"},{"1":"Thor Delta C","2":"10","3":"2"},{"1":"Thor Delta C1","2":"3","3":"0"},{"1":"Thor Delta D","2":"2","3":"0"},{"1":"Thor Delta E","2":"6","3":"0"},{"1":"Thor Delta E1","2":"17","3":"1"},{"1":"Thor Delta G","2":"2","3":"0"},{"1":"Thor Delta J","2":"1","3":"0"},{"1":"Thor Delta L","2":"2","3":"1"},{"1":"Thor Delta M","2":"12","3":"2"},{"1":"Thor Delta M6","2":"1","3":"0"},{"1":"Thor Delta N","2":"6","3":"1"},{"1":"Thor Delta N6","2":"3","3":"1"},{"1":"Thor DSV-2U","2":"5","3":"1"},{"1":"Thor MG-18","2":"2","3":"0"},{"1":"Thor SLV-2 Agena B","2":"3","3":"0"},{"1":"Thor SLV-2 Agena D","2":"8","3":"2"},{"1":"Thor SLV-2A Agena B","2":"2","3":"0"},{"1":"Thor SLV-2A Agena D","2":"61","3":"4"},{"1":"Thorad SLV-2G Agena D","2":"30","3":"1"},{"1":"Thorad SLV-2H Agena D","2":"13","3":"1"},{"1":"Titan 23B","2":"9","3":"0"},{"1":"Titan 24B","2":"23","3":"2"},{"1":"Titan 33B","2":"3","3":"1"},{"1":"Titan 34B","2":"11","3":"0"},{"1":"Titan 34D","2":"7","3":"2"},{"1":"Titan 34D/IUS","2":"1","3":"0"},{"1":"Titan 34D/Transtage","2":"7","3":"0"},{"1":"Titan 401A/Centaur","2":"9","3":"1"},{"1":"Titan 401B/Centaur","2":"7","3":"1"},{"1":"Titan 402A/IUS","2":"3","3":"0"},{"1":"Titan 402B/IUS","2":"5","3":"1"},{"1":"Titan 403A","2":"5","3":"1"},{"1":"Titan 403B","2":"1","3":"0"},{"1":"Titan 404A","2":"3","3":"0"},{"1":"Titan 404B","2":"3","3":"0"},{"1":"Titan 405A","2":"2","3":"0"},{"1":"Titan 405B","2":"1","3":"0"},{"1":"Titan II GLV","2":"12","3":"0"},{"1":"Titan II SLV","2":"13","3":"1"},{"1":"Titan IIIA","2":"4","3":"1"},{"1":"Titan IIIB","2":"22","3":"1"},{"1":"Titan IIIC","2":"36","3":"2"},{"1":"Titan IIID","2":"22","3":"0"},{"1":"Titan IIIE","2":"7","3":"1"},{"1":"Trailblazer 1","2":"1","3":"0"},{"1":"Trailblazer 2","2":"3","3":"0"},{"1":"Tsiklon-2","2":"105","3":"2"},{"1":"Tsiklon-2A","2":"8","3":"1"},{"1":"Tsiklon-3","2":"122","3":"7"},{"1":"Unha-2","2":"1","3":"1"},{"1":"Unha-3","2":"2","3":"1"},{"1":"Uprated Saturn I","2":"2","3":"0"},{"1":"UR-500","2":"4","3":"1"},{"1":"UR-500K/Blok D","2":"1","3":"0"},{"1":"Vanguard","2":"11","3":"8"},{"1":"Vega","2":"9","3":"0"},{"1":"VLS-1","2":"2","3":"2"},{"1":"Volna","2":"1","3":"1"},{"1":"Voskhod 11A57","2":"299","3":"13"},{"1":"Vostok 8A92","2":"44","3":"4"},{"1":"Vostok 8A92M","2":"93","3":"1"},{"1":"Vostok 8K72","2":"4","3":"1"},{"1":"Vostok 8K72K","2":"13","3":"2"},{"1":"Vostok-L 8K72","2":"9","3":"6"},{"1":"Zenit-2","2":"35","3":"6"},{"1":"Zenit-2 11K77.05","2":"1","3":"1"},{"1":"Zenit-2M","2":"1","3":"0"},{"1":"Zenit-2SB","2":"1","3":"0"},{"1":"Zenit-3SL","2":"36","3":"3"},{"1":"Zenit-3SLB","2":"6","3":"0"},{"1":"Zenit-3SLBF","2":"3","3":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-use-side-data-two-suboptimal-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-side-data-two-suboptimal-approaches">How to use “side data”? Two suboptimal approaches</h2>
+<p>For pedagogy, we will first cover two simple heuristics to incorporate “side data” and describe their limitations.</p>
+<p>Then we will cover hierarchical models in the next section, showing how they address the limitations of simpler methods.</p>
+<section id="first-try-do-not-use-this-one" class="level3">
+<h3 class="anchored" data-anchor-id="first-try-do-not-use-this-one">First try (do not use this one!)</h3>
+<ul>
+<li>Merge all the data into one type?</li>
+<li>I.e. just sum the columns in the data:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 431</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures) <span class="sc">/</span> <span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07605435</code></pre>
+</div>
+</div>
+<p><strong>Why merging everything is a bad idea?</strong></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Some of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.</p>
+<p>We want to consider the different types of rockets as a <strong>population</strong> and model the variability within that population.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="towards-an-improved-way-to-use-side-data" class="level3">
+<h3 class="anchored" data-anchor-id="towards-an-improved-way-to-use-side-data">Towards an improved way to use side data</h3>
+<ul>
+<li>Background: “mean–pseudo-sample-size” reparameterization of the <a href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution</a>.
+<ul>
+<li>A reparametrization is a different labelling of a family such that you can go back and forth between the two labellings.</li>
+<li>Consider <span class="math display">\[\alpha  = \mu s, \;\; \beta = (1 - \mu) s\]</span> where <span class="math inline">\(\mu \in (0, 1)\)</span>, <span class="math inline">\(s &gt; 0\)</span>.</li>
+</ul></li>
+<li>Interpretation:
+<ul>
+<li><span class="math inline">\(\mu\)</span>: mean of the Beta</li>
+<li><span class="math inline">\(s\)</span>: measure of “peakiness” of the density, higher <span class="math inline">\(s\)</span> corresponds to more peaked; roughly, <span class="math inline">\(s \approx\)</span> number of data points that would make the posterior peaked like that.</li>
+</ul></li>
+<li>Why we did this reparameterization?
+<ul>
+<li>Now it should be more intuitive how we could go about using <strong>side data</strong> to inform at least <span class="math inline">\(\mu\)</span>.</li>
+<li>Ideas?</li>
+</ul></li>
+</ul>
+</section>
+<section id="second-try-still-suboptimal-but-not-as-bad" class="level3">
+<h3 class="anchored" data-anchor-id="second-try-still-suboptimal-but-not-as-bad">Second try (still suboptimal, but not as bad)</h3>
+<ul>
+<li>Estimate a failure probability <span class="math inline">\(\hat p_i\)</span> for each type of rocket <span class="math inline">\(i\)</span>.</li>
+<li>Fit a distribution on those <span class="math inline">\(\{\hat p_i\}\)</span>.</li>
+<li>Second try: use this distribution as the prior on <span class="math inline">\(\mu\)</span>?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"latex2exp"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">text{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">text{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic03_hierarchy_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> what are the weaknesses of this method?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>First, notice the bumps at 1/2 and 1…
+<ul>
+<li>Most of those are types of rockets with only 1 or 2 launch datapoints (e.g.&nbsp;1 failure out of 2 launches).</li>
+<li>But if you fit a curve to this data, these bumps will have a large undesirable effects.</li>
+<li>More broadly, we want to take into account uncertainty in each of these <span class="math inline">\(\hat p_i\)</span>’s.</li>
+</ul></li>
+<li>Also: less clear how to do this with the pseudo-sample-size <span class="math inline">\(s\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hierarchical-models-a-better-way-to-use-side-data" class="level2">
+<h2 class="anchored" data-anchor-id="hierarchical-models-a-better-way-to-use-side-data">Hierarchical models: a better way to use side data</h2>
+<p><strong>Solution:</strong> go fully Bayesian!</p>
+<p><strong>Recall:</strong> <a href="../w02_discrete_bayes/topic01_bayes_recipe.html">our Bayesian recipe,</a></p>
+<ol type="1">
+<li>Construct a probability model including
+<ul>
+<li>random variables for what we will measure/observe</li>
+<li><strong>random variables for the unknown quantities</strong>
+<ul>
+<li>those we are interested in (“parameters”, “predictions”)</li>
+<li><strong>others that just help us formulate the problem</strong> (“nuisance”, “random effects”).</li>
+</ul></li>
+</ul></li>
+<li>Compute the posterior distribution conditionally on the actual data at hand</li>
+<li>Use the posterior distribution to make a decision</li>
+</ol>
+<p><strong>What it means here:</strong> we model the launcher type’s population parameters (<span class="math inline">\(\mu, s\)</span>) as random variables.</p>
+<section id="graphical-model" class="level3">
+<h3 class="anchored" data-anchor-id="graphical-model">Graphical model</h3>
+<p><img src="../images/hierarchical-gm.png" class="img-fluid" width="500"></p>
+</section>
+<section id="mathematical-description" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-description">Mathematical description</h3>
+<ul>
+<li>Share these two “population parameters” across all launch types <span class="math display">\[p_i | \mu, s \sim {\mathrm{Beta}}(\mu s, (1 - \mu) s)\]</span></li>
+<li>Likelihood same as before: <span class="math inline">\(F_i | p_i \sim {\mathrm{Bern}}(n_i, p_i).\)</span></li>
+<li>We still need to put prior on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>
+<ul>
+<li>But you should expect this prior choice to be less sensitive. Why? Hint: look at the number of outgoing edges in the graphical model. Compare with number of outgoing edges for the “maiden flight” (see next slide)</li>
+<li>Example: <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span> (why such a small value? Hint: mean vs.&nbsp;rate parameter)</li>
+</ul></li>
+</ul>
+</section>
+<section id="decrease-prior-choice-sensitivity" class="level3">
+<h3 class="anchored" data-anchor-id="decrease-prior-choice-sensitivity">Decrease prior choice sensitivity</h3>
+<p>It seems we have introduced new problems as now we again have hyperparameters, namely those for the priors on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>. Here we picked <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span></p>
+<p><strong>Key point:</strong> yes, but now we are less sensitive to these choices!</p>
+<p>Why? Heuristic: say you have a random variable connected to some hyper-parameters (grey squares) and random variables connected to data (circles)</p>
+<ul>
+<li>If most of the connections are hyper-parameters: will probably be sensitive.</li>
+<li>If there are many more connections to random variables compared to hyper-parameters: will probably be insensitive.</li>
+</ul>
+<p><strong>Before going hierarchical:</strong> for maiden/early flights we had</p>
+<p><img src="../images/hierarchical-gm-before.jpg" height="200"></p>
+<p><strong>After going hierarchical:</strong></p>
+<p><img src="../images/hierarchical-gm-after.jpg" height="250"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
