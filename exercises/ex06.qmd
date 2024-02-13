@@ -25,22 +25,32 @@ a. Incidence $p_i$: the probability that a patient in the trial
 will become infected without being treated with the vaccine.
 a. Effectiveness $p_e$: the decrease in incidence that the vaccine provides.
 
-We put a beta prior on both parameters. Finally, we put log-uniform priors on
-the parameters of these beta distributions, leading to the following joint
-distribution
+We put a beta prior on both parameters. Since the parameters of the
+$\distBeta(\alpha,\beta)$ distribution are not very interpretable, we will
+work with a re-parametrized version $\distNamed{BetaMP}(\mu,\lambda)$ where 
+$\mu\in[0,1]$ is the *mean* and $\lambda>0$ is a *precision* parameter. The
+bijection is given by
+$$
+\mu = \frac{\alpha}{\alpha+\beta} \quad \lambda=\alpha+\beta \qquad\iff\qquad
+\alpha = \mu \lambda \quad \beta = (1-\mu)\lambda
+$$
+
+Finally, we put priors on the parameters of these beta distributions to complete
+the model as follows
 $$
 \begin{aligned}
-\log_{10}(\alpha_e) &\sim \distUnif(0,3) \\
-\log_{10}(\beta_e) &\sim \distUnif(-1,2) \\
-\log_{10}(\alpha_i) &\sim \distUnif(-1,2) \\
-\log_{10}(\beta_i) &\sim \distUnif(1,4) \\
-p_e|\alpha_e,\beta_e &\sim \distBeta(\alpha_e,\beta_e) \\
-p_i|\alpha_i,\beta_i &\sim \distBeta(\alpha_i,\beta_i) \\
+\mu_e &\sim \distUnif(0,1) && (\text{diffuse prior})\\
+\lambda_e &\sim \distExp(0.001) && (\text{diffuse prior})\\
+\mu_i &\sim \distNamed{BetaMP}(0.1, 10) && (\text{incidence is usually low})\\
+\lambda_i &\sim \distExp(0.001) && (\text{diffuse prior})\\
+p_e|\mu_e,\lambda_e &\sim \distNamed{BetaMP}(\mu_e, \lambda_e) \\
+p_i|\mu_i,\lambda_i &\sim \distNamed{BetaMP}(\mu_i, \lambda_i) \\
 n_c|p_i &\sim \distBinom(N_c, p_i) \\
 n_v|p_e,p_i &\sim \distBinom(N_v, p_i(1-p_e))
 \end{aligned}
 $$ {#eq-model-one-vac}
 
+<!-- 
 ::: {.callout-note}
 When $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
 the statement
@@ -50,6 +60,7 @@ $$
 means that $X$ is drawn by first sampling $Y\sim\pi$ and then transforming 
 $X = f^{-1}(Y)$.
 :::
+-->
 
 ```{r}
 #| echo: false
@@ -65,12 +76,17 @@ rmarkdown::paged_table(dta)
 ```
 
 1. Expand the model in @eq-model-one-vac into a hierarchical model that covers 
-both vaccines. The parameters $(\alpha_e,\alpha_i,\beta_e,\beta_i)$ must be 
+both vaccines. The parameters $(\mu_e,\lambda_e,\mu_i,\lambda_i)$ must be 
 shared across vaccines. In contrast, each vaccine must have its own $(p_e,p_i)$ 
 pair.
 2. Implement the model from part 1 in [simPPLe](../w04_glms/topic01_simPPLe.qmd).
 Your PPL function should return the indicator that Moderna is more effective than
-Pfizer.
+Pfizer. Use this code to define $\distNamed{BetaMP}(\mu, \lambda)$
+```r
+BetaMP = function(mean, precision){
+  Beta(mean*precision, (1-mean)*precision)
+}
+```
 3. Download the [data](ex06_assets/vaccines.csv) and load it using the following
 (no points for this part)
 ```r
@@ -78,8 +94,7 @@ vaccines = read.csv("vaccines.csv")
 vaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code
 ```
 4. Run your model in [simPPLe](../w04_glms/topic01_simPPLe.qmd) using `posterior`
-(not `posterior_particles`) with 20,000 iterations, and report the estimated 
-posterior probability that Moderna is more effective than Pfizer.
-Is there strong evidence for this claim?
+with 20,000 iterations, and report the estimated posterior probability that 
+Moderna is more effective than Pfizer. Is there strong evidence for this claim?
 **Note**: it takes a couple of minutes to run 20,000 iterations. Therefore, for
 prototyping it may be easier to test your implementation with fewer iterations.
