@@ -748,10 +748,6 @@ https://github.com/trevorcampbell/shortex
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 431</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures) <span class="sc">/</span> <span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07605435</code></pre>
-</div>
 </div>
 <p><strong>Why merging everything is a bad idea?</strong></p>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -767,6 +763,13 @@ Click for answer
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Some of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.</p>
+<p>An indeed, the aggregated failure rate is high compared to what you would expect from modern “workhorse” rockets (&lt;1%):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures) <span class="sc">/</span> <span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07605435</code></pre>
+</div>
+</div>
 <p>We want to consider the different types of rockets as a <strong>population</strong> and model the variability within that population.</p>
 </div>
 </div>
@@ -787,8 +790,7 @@ Click for answer
 </ul></li>
 <li>Why we did this reparameterization?
 <ul>
-<li>Now it should be more intuitive how we could go about using <strong>side data</strong> to inform at least <span class="math inline">\(\mu\)</span>.</li>
-<li>Ideas?</li>
+<li><span class="math inline">\(\to\)</span> it should now be more intuitive how we can use “side data” to inform <span class="math inline">\(\mu\)</span>…</li>
 </ul></li>
 </ul>
 </section>
@@ -796,8 +798,8 @@ Click for answer
 <h3 class="anchored" data-anchor-id="second-try-still-suboptimal-but-not-as-bad">Second try (still suboptimal, but not as bad)</h3>
 <ul>
 <li>Estimate a failure probability <span class="math inline">\(\hat p_i\)</span> for each type of rocket <span class="math inline">\(i\)</span>.</li>
-<li>Fit a distribution on those <span class="math inline">\(\{\hat p_i\}\)</span>.</li>
-<li>Second try: use this distribution as the prior on <span class="math inline">\(\mu\)</span>?</li>
+<li>Fit a distribution <span class="math inline">\(p(\mu)\)</span> on those <span class="math inline">\(\{\hat p_i\}\)</span>.</li>
+<li>Use this distribution <span class="math inline">\(p(\mu)\)</span> as the prior on <span class="math inline">\(\mu\)</span>?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
@@ -805,17 +807,17 @@ Click for answer
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">text{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">text{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">textrm{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">textrm{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic03_hierarchy_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic03_hierarchy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>Question:</strong> what are the weaknesses of this method?</p>
+<p><strong>Question:</strong> what are the weaknesses of using a prior fitted on this histogram?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -829,13 +831,13 @@ Click for answer
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>First, notice the bumps at 1/2 and 1…
+<li>First, notice the “bumps” at 1/2 (and 1, 1/4, etc)…
 <ul>
-<li>Most of those are types of rockets with only 1 or 2 launch datapoints (e.g.&nbsp;1 failure out of 2 launches).</li>
-<li>But if you fit a curve to this data, these bumps will have a large undesirable effects.</li>
+<li>Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!</li>
+<li>But if you fit a curve to this data, these “bumps” will have a large undesirable effects.</li>
 <li>More broadly, we want to take into account uncertainty in each of these <span class="math inline">\(\hat p_i\)</span>’s.</li>
 </ul></li>
-<li>Also: less clear how to do this with the pseudo-sample-size <span class="math inline">\(s\)</span>.</li>
+<li>Also: less clear how to generalize this method to handle the pseudo-sample-size <span class="math inline">\(s\)</span>.</li>
 </ul>
 </div>
 </div>
@@ -845,7 +847,7 @@ Click for answer
 <section id="hierarchical-models-a-better-way-to-use-side-data" class="level2">
 <h2 class="anchored" data-anchor-id="hierarchical-models-a-better-way-to-use-side-data">Hierarchical models: a better way to use side data</h2>
 <p><strong>Solution:</strong> go fully Bayesian!</p>
-<p><strong>Recall:</strong> <a href="../w02_discrete_bayes/topic01_bayes_recipe.html">our Bayesian recipe,</a></p>
+<p><strong>Recall:</strong> <a href="../w02_discrete_bayes/topic01_bayes_recipe.html">our Bayesian recipe…</a></p>
 <ol type="1">
 <li>Construct a probability model including
 <ul>
@@ -859,7 +861,7 @@ Click for answer
 <li>Compute the posterior distribution conditionally on the actual data at hand</li>
 <li>Use the posterior distribution to make a decision</li>
 </ol>
-<p><strong>What it means here:</strong> we model the launcher type’s population parameters (<span class="math inline">\(\mu, s\)</span>) as random variables.</p>
+<p><strong>What it means here:</strong> we model the launcher type’s population parameters (<span class="math inline">\(\mu, s\)</span>) as random variables. We are not interested in these other launcher types, but they help us inform inference about the type of rocket we are interested in (i.e., “nuisance” parameters).</p>
 <section id="graphical-model" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-model">Graphical model</h3>
 <p><img src="../images/hierarchical-gm.png" class="img-fluid" width="500"></p>
@@ -869,26 +871,34 @@ Click for answer
 <ul>
 <li>Share these two “population parameters” across all launch types <span class="math display">\[p_i | \mu, s \sim {\mathrm{Beta}}(\mu s, (1 - \mu) s)\]</span></li>
 <li>Likelihood same as before: <span class="math inline">\(F_i | p_i \sim {\mathrm{Bern}}(n_i, p_i).\)</span></li>
-<li>We still need to put prior on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>
+<li>We still need to put prior on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>…
 <ul>
-<li>But you should expect this prior choice to be less sensitive. Why? Hint: look at the number of outgoing edges in the graphical model. Compare with number of outgoing edges for the “maiden flight” (see next slide)</li>
-<li>Example: <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span> (why such a small value? Hint: mean vs.&nbsp;rate parameter)</li>
+<li>…but as we’ll discuss next, you should expect this prior choice to be less sensitive.</li>
+<li>Example: <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span></li>
 </ul></li>
+</ul>
+<p>PS: why we pick such a small value, <span class="math inline">\(1/10000\)</span>?</p>
+<ul>
+<li>Recall the parameter of an exponential is a rate which is 1/mean.</li>
+<li>So a mean of 10000 encodes we put significant mass to values up to <span class="math inline">\(O(10000)\)</span>.</li>
+<li>This is sometimes described as a “vague prior”.</li>
 </ul>
 </section>
 <section id="decrease-prior-choice-sensitivity" class="level3">
 <h3 class="anchored" data-anchor-id="decrease-prior-choice-sensitivity">Decrease prior choice sensitivity</h3>
-<p>It seems we have introduced new problems as now we again have hyperparameters, namely those for the priors on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>. Here we picked <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span></p>
-<p><strong>Key point:</strong> yes, but now we are less sensitive to these choices!</p>
-<p>Why? Heuristic: say you have a random variable connected to some hyper-parameters (grey squares) and random variables connected to data (circles)</p>
+<p>It seems we have introduced new problems as now we again have hyper-parameters, namely those for the priors on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>!</p>
+<p><strong>Key point:</strong> yes, but now we are less sensitive to these choices! Why?</p>
+<p><strong>Heuristic:</strong> look at the node <span class="math inline">\(n\)</span> connected to the hyper-parameters…</p>
 <ul>
-<li>If most of the connections are hyper-parameters: will probably be sensitive.</li>
-<li>If there are many more connections to random variables compared to hyper-parameters: will probably be insensitive.</li>
+<li>If most of <span class="math inline">\(n\)</span>’s edges link to hyper-parameters: posterior more sensitive to hyper-parameters.</li>
+<li>If most of <span class="math inline">\(n\)</span>’s edges link to random variables connected to data: posterior will probably be less sensitive.</li>
 </ul>
 <p><strong>Before going hierarchical:</strong> for maiden/early flights we had</p>
 <p><img src="../images/hierarchical-gm-before.jpg" height="200"></p>
+<p>Note: <span class="math inline">\(p\)</span> is connected to only a small number of observations.</p>
 <p><strong>After going hierarchical:</strong></p>
 <p><img src="../images/hierarchical-gm-after.jpg" height="250"></p>
+<p>Note: <span class="math inline">\(\mu, s\)</span> is connected to a large population of <span class="math inline">\(p_i\)</span>’s, each linked with data.</p>
 
 
 </section>
