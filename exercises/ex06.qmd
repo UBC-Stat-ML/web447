@@ -14,16 +14,16 @@ trials data.
 Each trial consists of two *arms*: *vaccinated* (i.e., *treated*) and *control*
 (i.e., *not* treated). For a typical trial we know
 
-a. The total number of patients in each arm: $N_v$ (vaccinated), $N_c$ (control).
+a. The total number of patients in each arm: $t_\text{v}$ (vaccinated), $t_\text{c}$ (control).
 b. The number of patients that got infected with the SARS-CoV-2 virus in each
-arm: $n_v$, $n_c$.
+arm: $n_\text{v}$, $n_\text{c}$.
 
-We model $n_v$ and $n_c$ as Binomial random variables. The unknown parameter for
+We model $n_\text{v}$ and $n_\text{c}$ as Binomial random variables. The unknown parameter for
 these distributions will depend on two numbers in $[0,1]$
 
-a. Incidence $p_i$: the probability that a patient in the trial
+a. Incidence $p$: the probability that a patient in the trial
 will become infected without being treated with the vaccine.
-a. Effectiveness $p_e$: the decrease in incidence that the vaccine provides.
+a. Effectiveness $e$: the decrease in incidence that the vaccine provides.
 
 We put a beta prior on both parameters. Since the parameters of the
 $\distBeta(\alpha,\beta)$ distribution are not very interpretable, we will
@@ -39,14 +39,14 @@ Finally, we put priors on the parameters of these beta distributions to complete
 the model as follows
 $$
 \begin{aligned}
-\mu_e &\sim \distUnif(0,1) && (\text{diffuse prior})\\
-\lambda_e &\sim \distExp(0.001) && (\text{diffuse prior})\\
-\mu_i &\sim \distNamed{BetaMP}(0.1, 10) && (\text{incidence is usually low})\\
-\lambda_i &\sim \distExp(0.001) && (\text{diffuse prior})\\
-p_e|\mu_e,\lambda_e &\sim \distNamed{BetaMP}(\mu_e, \lambda_e) \\
-p_i|\mu_i,\lambda_i &\sim \distNamed{BetaMP}(\mu_i, \lambda_i) \\
-n_c|p_i &\sim \distBinom(N_c, p_i) \\
-n_v|p_e,p_i &\sim \distBinom(N_v, p_i(1-p_e))
+\mu_\text{e} &\sim \distUnif(0,1) && (\text{diffuse prior})\\
+\lambda_\text{e} &\sim \distExp(0.001) && (\text{diffuse prior})\\
+\mu_\text{p} &\sim \distNamed{BetaMP}(0.1, 10) && (\text{incidence is usually low})\\
+\lambda_\text{p} &\sim \distExp(0.001) && (\text{diffuse prior})\\
+e|\mu_\text{e},\lambda_\text{e} &\sim \distNamed{BetaMP}(\mu_\text{e}, \lambda_\text{e}) \\
+p|\mu_\text{p},\lambda_\text{p} &\sim \distNamed{BetaMP}(\mu_\text{p}, \lambda_\text{p}) \\
+n_\text{c}|p &\sim \distBinom(t_\text{c}, p) \\
+n_\text{v}|e,p &\sim \distBinom(t_\text{v}, p(1-e))
 \end{aligned}
 $$ {#eq-model-one-vac}
 
@@ -76,8 +76,8 @@ rmarkdown::paged_table(dta)
 ```
 
 1. Expand the model in @eq-model-one-vac into a hierarchical model that covers 
-both vaccines. The parameters $(\mu_e,\lambda_e,\mu_i,\lambda_i)$ must be 
-shared across vaccines. In contrast, each vaccine must have its own $(p_e,p_i)$ 
+both vaccines. The parameters $(\mu_\text{e},\lambda_\text{e},\mu_\text{p},\lambda_\text{p})$ must be 
+shared across vaccines. In contrast, each vaccine must have its own $(e,p)$ 
 pair.
 2. Implement the model from part 1 in [simPPLe](../w04_glms/topic01_simPPLe.qmd).
 Your PPL function should return the indicator that Moderna is more effective than
