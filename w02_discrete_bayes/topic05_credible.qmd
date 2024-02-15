@@ -74,6 +74,6 @@ When we move to continuous random variables, $T$ will often be an interval, i.e.
 In such case, $T$ is called a credible interval. 
 
 
-## High Density Interval
+## Highest Density Interval
 
-Similarly, a High Density Interval (HDI) is a shortest interval (i.e. minimizing $R - L$) containing a prescribed probability mass. 
+Similarly, a Highest Density Interval (HDI) is a shortest interval (i.e. minimizing $R - L$) containing a prescribed probability mass. 

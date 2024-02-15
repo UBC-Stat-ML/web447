@@ -85,7 +85,7 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\distGEV}{\distNamed{GEV}}
 \newcommand{\distCat}{\distNamed{Categorical}}
 \newcommand{\distInvGam}{\distNamed{InvGam}}
-\newcommand{\distPoiss}{\distNamed{Poiss}}
+\newcommand{\distPoiss}{\distNamed{Poisson}}
 \newcommand{\distExp}{\distNamed{Exp}}
 \newcommand{\distBeta}{\distNamed{Beta}}
 \newcommand{\distBetaPrime}{\distNamed{Beta}'}

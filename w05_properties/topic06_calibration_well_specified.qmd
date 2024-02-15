@@ -74,7 +74,7 @@ Recall an examples of credible interval we discussed: [quantile-based intervals]
 ## Numerical exploration
 
 Using the discrete model for Delta launches from [Exercise 2](../exercises/ex02.qmd), 
-we will now implement and run the algorithm described above under "What do we mean by "90% of the time?"...
+we will now implement and run the algorithm described above under "What do we mean by 90% of the time?"...
 
 
 **What do you expect?**
