@@ -952,7 +952,7 @@ Click for answer
 <ul>
 <li>Recall that the MSE is the sum of variance and bias squared (see <a href="https://en.wikipedia.org/wiki/Mean_squared_error">wikipedia for proof</a>) <span class="math display">\[\begin{align*}
   \operatorname{MSE}&amp;= \operatorname{Var}[\hat G_M] + (\operatorname{Bias}(\hat G_M, g^*))^2 \\
-  \operatorname{Bias}(\hat G_M, g^*) &amp;= (\mathbb{E}[\hat G_M] - g^*)^2.
+  \operatorname{Bias}(\hat G_M, g^*) &amp;= \mathbb{E}[\hat G_M] - g^*.
   \end{align*}\]</span></li>
 <li>For simple Monte Carlo, the bias is zero by linearity of expectation:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[\mathbb{E}[\hat G_M] = \mathbb{E}\left[\frac{1}{M} \sum_{m=1}^M G^{(m)}\right] = \frac{1}{M} \sum_{m=1}^M \mathbb{E}[G^{(m)}] = \mathbb{E}[G^{(m)}] = g^*.\]</span></li>
 </ul>
