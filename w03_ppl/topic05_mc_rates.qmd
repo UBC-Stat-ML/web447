@@ -178,7 +178,7 @@ In the following, I will explain why analyzing the standard deviation makes sens
 - Recall that the MSE is the sum of variance and bias squared (see [wikipedia for proof](https://en.wikipedia.org/wiki/Mean_squared_error))
     $$\begin{align*}
     \mse &= \var[\hat G_M] + (\bias(\hat G_M, g^*))^2 \\
-    \bias(\hat G_M, g^*) &= (\ex[\hat G_M] - g^*)^2.
+    \bias(\hat G_M, g^*) &= \ex[\hat G_M] - g^*.
     \end{align*}$$
 - For simple Monte Carlo, the bias is zero by linearity of expectation:[^1]
   $$\ex[\hat G_M] = \ex\left[\frac{1}{M} \sum_{m=1}^M G^{(m)}\right] = \frac{1}{M} \sum_{m=1}^M \ex[G^{(m)}] = \ex[G^{(m)}] = g^*.$$

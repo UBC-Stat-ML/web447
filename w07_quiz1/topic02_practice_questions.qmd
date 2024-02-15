@@ -363,7 +363,7 @@ $\alpha' = 1 + 3 = 4$ and $\beta' = 2 + (3-3) = 2$.
 
 You computed two credible intervals based on the same continuous, unimodal posterior distribution: 
 one is a 90% quantile-based interval, the other, a highest density interval (HDI). 
-Which interval of the intervals is shortest?
+Which of the intervals is shortest?
 
 
 
@@ -586,6 +586,8 @@ Which one has the smallest bias?
 
 ::: {.callout-caution collapse="true"}
 ## Click for answer
+
+The bias is defined as $\hat G_M - g^*$.
 
 From our discussion on [Monte Carlo convergence rate](../w03_ppl/topic05_mc_rates.qmd), 
 simple Monte Carlo has a bias of zero, while SNIS is biased. 
