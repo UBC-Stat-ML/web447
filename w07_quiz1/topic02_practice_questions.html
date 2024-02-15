@@ -726,27 +726,45 @@ https://github.com/trevorcampbell/shortex
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(numerator<span class="sc">/</span>denominator)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>What is the missing line, <code>???????????????</code>?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  `denominator = denominator + g_i`
-2.  `denominator = denominator + g_i^2`
-3.  `denominator = denominator + weight`
-4.  `denominator = denominator + weight^2`
-5.  None of the above.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-`denominator = denominator + weight`
-
-See [exercise 3](../exercises/ex03_ppl.R) and the [page on simPPLe](../w04_glms/topic01_simPPLe.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><code>denominator = denominator + g_i</code></li>
+<li><code>denominator = denominator + g_i^2</code></li>
+<li><code>denominator = denominator + weight</code></li>
+<li><code>denominator = denominator + weight^2</code></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>denominator = denominator + weight</code></p>
+<p>See <a href="../exercises/ex03_ppl.R">exercise 3</a> and the <a href="../w04_glms/topic01_simPPLe.html">page on simPPLe</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="comparing-two-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-two-parameters">Comparing two parameters</h2>
@@ -757,52 +775,88 @@ y_i | \theta_i &amp;\sim {\mathrm{Beta}}(p_i).
 \end{align*}\]</span></p>
 <p>You would like to answer the question: is <span class="math inline">\(\theta_1\)</span> “clearly different” than <span class="math inline">\(\theta_2\)</span>? To be concrete, let’s say that “clearly different” means their value differs by at least <span class="math inline">\(0.1\)</span>.</p>
 <p>How would you provide a Bayesian answer to the above question?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  Compute $\pr(|\theta_1 - \theta_2| > 0.1 | y_1, y_2)$.
-2.  Compute $\ex[\theta_1 | y_1]$ and $\ex[\theta_2 | y_2]$, and check if they differ by more than 0.1.
-3.  Compute the MAP of $\theta_1 | y_1$ and of $\theta_2 | y_2$, and check if they differ by more than 0.1.
-4.  Compute the posterior median of $\theta_1 | y_1$ and of $\theta_2 | y_2$, and check if they differ by more than 0.1.
-5.  None of the above
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Compute $\pr(|\theta_1 - \theta_2| > 0.1 | y_1, y_2)$.
-
-[See the page on bivariate posteriors](../w04_glms/topic02_bivariate.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Compute <span class="math inline">\(\mathbb{P}(|\theta_1 - \theta_2| &gt; 0.1 | y_1, y_2)\)</span>.</li>
+<li>Compute <span class="math inline">\(\mathbb{E}[\theta_1 | y_1]\)</span> and <span class="math inline">\(\mathbb{E}[\theta_2 | y_2]\)</span>, and check if they differ by more than 0.1.</li>
+<li>Compute the MAP of <span class="math inline">\(\theta_1 | y_1\)</span> and of <span class="math inline">\(\theta_2 | y_2\)</span>, and check if they differ by more than 0.1.</li>
+<li>Compute the posterior median of <span class="math inline">\(\theta_1 | y_1\)</span> and of <span class="math inline">\(\theta_2 | y_2\)</span>, and check if they differ by more than 0.1.</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Compute <span class="math inline">\(\mathbb{P}(|\theta_1 - \theta_2| &gt; 0.1 | y_1, y_2)\)</span>.</p>
+<p><a href="../w04_glms/topic02_bivariate.html">See the page on bivariate posteriors</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="normal-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="normal-distributions">Normal distributions</h2>
 <p>The variability of the normal can be parameterized with the standard derivation, variance, or precision.</p>
 <p>Which of the three has the same units of measurement as the mean parameter?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  Standard deviation.
-2.  Variance.
-3.  Precision.
-4.  None of them.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-The standard deviation.
-
-[See the page on normal distributions](../w04_glms/topic03_normal.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Standard deviation.</li>
+<li>Variance.</li>
+<li>Precision.</li>
+<li>None of them.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The standard deviation.</p>
+<p><a href="../w04_glms/topic03_normal.html">See the page on normal distributions</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="discrete-inference" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="discrete-inference">Discrete inference</h2>
@@ -816,30 +870,45 @@ X_2 | X_1 &amp;\sim {\mathrm{Bern}}((2/3)X_1 + (1/3)(1-X_1)) \\
 Y_i | X_i &amp;\sim {\mathrm{Bern}}((2/3)X_i + (1/3)(1-X_i)).
 \end{align*}\]</span></p>
 <p>Compute <span class="math inline">\(\mathbb{P}(X_2 = 0 | Y_1 = 0, Y_2 = 0)\)</span>.</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  $1/7$
-2.  $2/7$
-3.  $3/7$ 
-4.  $5/7$
-5.  Pick either $a=1$ or $a=0$ as they incur the same loss.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Listing the state pairs in the order $(x_1, x_2) \in ((0, 0), (0, 1), (1, 0), (1, 1))$
-We have $\gamma \propto (2^3, 2, 2, 2)$, hence 
-$\pi = (8/14, 2/14, 2/14, 2/14)$ so $\pr(X_2 = 0 | Y_1 = 0, Y_2 = 0) = 4/7 + 1/7 = 5/7$. 
-
-See [exercise 1](../exercises/ex01.qmd), [Bayes rule](../w01_discrete_inference/topic09_bayes.qmd) and 
-[detailed derivation of last clicker question in the predictive inference page](../w02_discrete_bayes/topic07_prediction.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(1/7\)</span></li>
+<li><span class="math inline">\(2/7\)</span></li>
+<li><span class="math inline">\(3/7\)</span></li>
+<li><span class="math inline">\(5/7\)</span></li>
+<li><span class="math inline">\(8/9\)</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Listing the state pairs in the order <span class="math inline">\((x_1, x_2) \in ((0, 0), (0, 1), (1, 0), (1, 1))\)</span> We have <span class="math inline">\(\gamma \propto (2^3, 2, 2, 2)\)</span>, hence <span class="math inline">\(\pi = (8/14, 2/14, 2/14, 2/14)\)</span> so <span class="math inline">\(\mathbb{P}(X_2 = 0 | Y_1 = 0, Y_2 = 0) = 4/7 + 1/7 = 5/7\)</span>.</p>
+<p>See <a href="../exercises/ex01.html">exercise 1</a>, <a href="../w01_discrete_inference/topic09_bayes.html">Bayes rule</a> and <a href="../w02_discrete_bayes/topic07_prediction.html">detailed derivation of last clicker question in the predictive inference page</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="model-construction" class="level2">
 <h2 class="anchored" data-anchor-id="model-construction">Model construction</h2>
@@ -917,34 +986,36 @@ See [exercise 1](../exercises/ex01.qmd), [Bayes rule](../w01_discrete_inference/
 </tbody>
 </table>
 <p>Also describe at least one potential source of model mis-specification.</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Several possible answers are possible, here is an example:
-
-$$\begin{align*}
-\theta_1 &\sim \distExp(1/1000) \\
-\theta_2 &\sim \distExp(1/1000) \\
-\theta_3 &\sim \distUnif(0, 2\pi) \\
-y_i | \theta &\sim \distPoiss(\theta_1 (\sin(\theta_2 i + \theta_3)))
-\end{align*}$$
-
-Some things we look at:
-
--   The distribution for each variable matches the variable's datatype.
--   The datatype of the distribution parameter is adequate.
--   The model is sufficiently flexible to capture the pattern observed in EDA.
-
-[See the page on the step-by-step construction of a GLM](../w04_glms/topic05_regression.qmd).
-
-Many answers possible for [model mis-specification](../w02_discrete_bayes/topic08_criticism.qmd). 
-For example, the Poisson distribution 
-will force the mean and variance to be equal, which often does not hold in practice. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Several possible answers are possible, here is an example:</p>
+<p><span class="math display">\[\begin{align*}
+\theta_1 &amp;\sim {\mathrm{Exp}}(1/1000) \\
+\theta_2 &amp;\sim {\mathrm{Exp}}(1/1000) \\
+\theta_3 &amp;\sim {\mathrm{Unif}}(0, 2\pi) \\
+y_i | \theta &amp;\sim {\mathrm{Poisson}}(\theta_1 (\sin(\theta_2 i + \theta_3)))
+\end{align*}\]</span></p>
+<p>Some things we look at:</p>
+<ul>
+<li>The distribution’s support for each variable matches the variable’s datatype.</li>
+<li>The datatype of each distribution parameter is adequate (for example, here <span class="math inline">\(\theta_1 (\sin(\theta_2 i + \theta_3)) \ge 0\)</span>).</li>
+<li>The model is sufficiently flexible to capture the pattern observed in EDA.</li>
+</ul>
+<p><a href="../w04_glms/topic05_regression.html">See the page on the step-by-step construction of a GLM</a>.</p>
+<p>Many answers possible for <a href="../w02_discrete_bayes/topic08_criticism.html">model mis-specification</a>. For example, the Poisson distribution will force the mean and variance to be equal, which often does not hold in practice.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ppl-based-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="ppl-based-prediction">PPL-based prediction</h2>
@@ -962,52 +1033,88 @@ will force the mean and variance to be equal, which often does not hold in pract
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(regression, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>How would you modify this code to predict the velocity of a galaxy at distance 1.5?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  Change the line `c(slope, sd)` to `observe(Norm(1.5 * slope, sd))`
-2.  Change the line `c(slope, sd)` to `observe(Norm(1.5, sd))`
-3.  Change the line `c(slope, sd)` to `simulate(Norm(1.5 * slope, sd))`
-4.  Change the line `c(slope, sd)` to `simulate(Norm(1.5, sd))`
-5.  None of the above.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Change the line `c(slope, sd)` to `simulate(Norm(1.5 * slope, sd))`
-
-[See exercise 4](../exercises/ex04.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Change the line <code>c(slope, sd)</code> to <code>observe(Norm(1.5 * slope, sd))</code></li>
+<li>Change the line <code>c(slope, sd)</code> to <code>observe(Norm(1.5, sd))</code></li>
+<li>Change the line <code>c(slope, sd)</code> to <code>simulate(Norm(1.5 * slope, sd))</code></li>
+<li>Change the line <code>c(slope, sd)</code> to <code>simulate(Norm(1.5, sd))</code></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Change the line <code>c(slope, sd)</code> to <code>simulate(Norm(1.5 * slope, sd))</code></p>
+<p><a href="../exercises/ex04.html">See exercise 4</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="asymptotics" class="level2">
 <h2 class="anchored" data-anchor-id="asymptotics">Asymptotics</h2>
 <p>Let <span class="math inline">\(x\)</span> denote a parameter of interest. The true value is <span class="math inline">\(x^*\)</span>. We have a Bayesian model with <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and we approximate the posterior mean using SNIS. Let <span class="math inline">\(\hat G_M\)</span> denote the output of SNIS with test function <span class="math inline">\(g(x) = x\)</span> and <span class="math inline">\(M\)</span> iterations.</p>
 <p>Where does the following limit converge to? <span class="math display">\[\lim_{M\to\infty} \hat G_M = \;?\]</span></p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1. $x^*$
-2. $\ex[X]$ 
-3. $\ex[X | Y = y]$ 
-4. $0$
-5. None of the above. 
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-As discussed in [the convergence of SNIS](../w03_ppl/topic04_consistency.qmd), 
-the correct answer is $\ex[X | Y = y]$. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(x^*\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[X]\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[X | Y = y]\)</span></li>
+<li><span class="math inline">\(0\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As discussed in <a href="../w03_ppl/topic04_consistency.html">the convergence of SNIS</a>, the correct answer is <span class="math inline">\(\mathbb{E}[X | Y = y]\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="beta-binomial-conjugacy" class="level2">
 <h2 class="anchored" data-anchor-id="beta-binomial-conjugacy">Beta-binomial conjugacy</h2>
@@ -1015,61 +1122,92 @@ the correct answer is $\ex[X | Y = y]$.
 <p>We place a Beta prior on <span class="math inline">\(\theta\)</span>, with hyper-parameters <span class="math inline">\(\alpha = 1\)</span> and <span class="math inline">\(\beta = 2\)</span>. Recall that beta densities have the following form: <span class="math display">\[b_{\alpha, \beta}(\theta) = \frac{1}{Z(\alpha, \beta)} \theta^{\alpha - 1} (1-\theta)^{\beta - 1},\]</span> where <span class="math inline">\(Z(\alpha, \beta)\)</span> is a normalization constant (i.e.&nbsp;<span class="math inline">\(Z(\alpha, \beta)\)</span> depends on <span class="math inline">\(\alpha, \beta\)</span> but not <span class="math inline">\(\theta\)</span>).</p>
 <p>Show that the posterior on <span class="math inline">\(\theta\)</span> given that we observed 3 successful launches out of 3 (<span class="math inline">\(y = 3, n = 3\)</span>) has a beta density, i.e., that <span class="math display">\[f_{\theta|Y = 3}(\theta) = b_{\alpha', \beta'}(\theta),\]</span> for some <span class="math inline">\(\alpha', \beta'\)</span>.</p>
 <p>What is <span class="math inline">\(\alpha'\)</span> and <span class="math inline">\(\beta'\)</span>?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  $\alpha' = 2, \beta' = 4$ 
-2.  $\alpha' = 3, \beta' = 0$
-3.  $\alpha' = 3, \beta' = 2$
-4.  $\alpha' = 4, \beta' = 2$
-5.  None of the above.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-[We use the same technique as in Exercise 5, Q1,](../exercises/ex05.qmd) 
-which is that it is enough to show that $f_{\theta|Y}(\theta) \propto b_{\alpha', \beta'}(\theta)$ 
-as this will imply they are equal. 
-
-By [Bayes rule](../w03_ppl/topic03_continuous.qmd):
-$$\begin{align*}
-f_{\theta|Y}(\theta) &\propto b_{\alpha, \beta}(\theta) p(y | \theta) \\
-&= \left( \frac{1}{Z(\alpha, \beta)} \theta^{\alpha - 1} (1-\theta)^{\beta - 1} \right)  \left(\binom{n}{y} \theta^y (1-\theta)^{n-y}\right) \\
-&\propto \theta^{(\alpha + y) - 1} (1-\theta)^{(\beta + n - y) - 1} \\
-&= b_{\alpha + y, \beta + n-y},
-\end{align*}$$
-hence $\alpha' = \alpha + y$ and $\beta' = \beta + (n-y)$. 
-
-In our example here, $\alpha = 1$, $\beta = 2$, $y = 3, n = 3$, so 
-$\alpha' = 1 + 3 = 4$ and $\beta' = 2 + (3-3) = 2$. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\alpha' = 2, \beta' = 4\)</span></li>
+<li><span class="math inline">\(\alpha' = 3, \beta' = 0\)</span></li>
+<li><span class="math inline">\(\alpha' = 3, \beta' = 2\)</span></li>
+<li><span class="math inline">\(\alpha' = 4, \beta' = 2\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="../exercises/ex05.html">We use the same technique as in Exercise 5, Q1,</a> which is that it is enough to show that <span class="math inline">\(f_{\theta|Y}(\theta) \propto b_{\alpha', \beta'}(\theta)\)</span> as this will imply they are equal.</p>
+<p>By <a href="../w03_ppl/topic03_continuous.html">Bayes rule</a>: <span class="math display">\[\begin{align*}
+f_{\theta|Y}(\theta) &amp;\propto b_{\alpha, \beta}(\theta) p(y | \theta) \\
+&amp;= \left( \frac{1}{Z(\alpha, \beta)} \theta^{\alpha - 1} (1-\theta)^{\beta - 1} \right)  \left(\binom{n}{y} \theta^y (1-\theta)^{n-y}\right) \\
+&amp;\propto \theta^{(\alpha + y) - 1} (1-\theta)^{(\beta + n - y) - 1} \\
+&amp;= b_{\alpha + y, \beta + n-y},
+\end{align*}\]</span> hence <span class="math inline">\(\alpha' = \alpha + y\)</span> and <span class="math inline">\(\beta' = \beta + (n-y)\)</span>.</p>
+<p>In our example here, <span class="math inline">\(\alpha = 1\)</span>, <span class="math inline">\(\beta = 2\)</span>, <span class="math inline">\(y = 3, n = 3\)</span>, so <span class="math inline">\(\alpha' = 1 + 3 = 4\)</span> and <span class="math inline">\(\beta' = 2 + (3-3) = 2\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="credible-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="credible-intervals">Credible intervals</h2>
 <p>You computed two credible intervals based on the same continuous, unimodal posterior distribution: one is a 90% quantile-based interval, the other, a highest density interval (HDI). Which interval of the intervals is shortest?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  The quantile-based interval.
-2.  The HDI interval.
-3.  It cannot be established with more information. 
-4.  They will always be of equal length.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-The HDI interval, [by definition](../w02_discrete_bayes/topic05_credible.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The quantile-based interval.</li>
+<li>The HDI interval.</li>
+<li>It cannot be established with more information.</li>
+<li>They will always be of equal length.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The HDI interval, <a href="../w02_discrete_bayes/topic05_credible.html">by definition</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="decision-theory" class="level2">
 <h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
@@ -1080,104 +1218,164 @@ The HDI interval, [by definition](../w02_discrete_bayes/topic05_credible.qmd).
 </ul>
 <p>Let <span class="math inline">\(D\)</span> denote the indicator function on the disease, and <span class="math inline">\(Y\)</span>, data from diagnostic. You posterior gives <span class="math inline">\(\mathbb{E}[D | Y = y] = 0.2\)</span>.</p>
 <p>What would a Bayesian recommend?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  Pick $a=1$ with probability 0.2. 
-2.  Pick $a=0$ with probability 0.2. 
-3.  Pick $a=1$. 
-4.  Pick $a=0$. 
-5.  Pick either $a=1$ or $a=0$ as they incur the same loss.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Let $a$ denote the indicator that the treatment is used. We get the following losses:
-
-|         | $a = 0$ | $a = 1$ |
-|---------|---------|---------|
-| $d = 0$ | $0$     | $-1M$   |
-| $d = 1$ | $-10M$  | $-1M$   |
-
-We compute the expected losses for the two possible actions:
-
-$$\ex[L(0, D) | Y = y] = (0.2) (-10M) = -2M$$
-
-and
-
-$$\ex[L(1, D) | Y = y] = -1M$$
-
-Hence the action that minimizes the loss is $a = 1$, i.e. to use the treatment. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Pick <span class="math inline">\(a=1\)</span> with probability 0.2.</li>
+<li>Pick <span class="math inline">\(a=0\)</span> with probability 0.2.</li>
+<li>Pick <span class="math inline">\(a=1\)</span>.</li>
+<li>Pick <span class="math inline">\(a=0\)</span>.</li>
+<li>Pick either <span class="math inline">\(a=1\)</span> or <span class="math inline">\(a=0\)</span> as they incur the same loss.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(a\)</span> denote the indicator that the treatment is used. We get the following losses:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(a = 0\)</span></th>
+<th><span class="math inline">\(a = 1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(d = 0\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(-1M\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(d = 1\)</span></td>
+<td><span class="math inline">\(-10M\)</span></td>
+<td><span class="math inline">\(-1M\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We compute the expected losses for the two possible actions:</p>
+<p><span class="math display">\[\mathbb{E}[L(0, D) | Y = y] = (0.2) (-10M) = -2M\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\mathbb{E}[L(1, D) | Y = y] = -1M\]</span></p>
+<p>Hence the action that minimizes the loss is <span class="math inline">\(a = 1\)</span>, i.e.&nbsp;to use the treatment.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="posterior-expectation" class="level2">
 <h2 class="anchored" data-anchor-id="posterior-expectation">Posterior expectation</h2>
 <p>A discrete random variable <span class="math inline">\(X\)</span> can take values <span class="math inline">\(-1, 2, 5\)</span>. Suppose its posterior PMF given <span class="math inline">\(Y\)</span> is proportional to: <span class="math display">\[\gamma \propto (0.2, 0.1, 0.2).\]</span> Compute <span class="math inline">\(\mathbb{E}[X^2 | Y]\)</span>.</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  56/5 = 11.2
-1.  23/25 = 0.92
-1.  19/25 = 0.76
-1.  17/25 = 0.68
-1.  None of the above.
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-We first compute $\pi$ by normalization:
-$$\pi = \frac{\gamma}{0.2 + 0.1 + 0.2} = (2/5, 1/5, 2/5).$$
-
-We can then compute the conditional expectation using LOTUS:
-$$\ex[X^2 | Y] = (-1)^2 (2/5) + 2^2 (1/5) + 5^2 (2/5) = 56/5.$$
-
-See [Exercise 1](../exercises/ex01.qmd) and [expectations review](../w01_discrete_inference/topic10_expectations.qmd).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>56/5 = 11.2</li>
+<li>23/25 = 0.92</li>
+<li>19/25 = 0.76</li>
+<li>17/25 = 0.68</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We first compute <span class="math inline">\(\pi\)</span> by normalization: <span class="math display">\[\pi = \frac{\gamma}{0.2 + 0.1 + 0.2} = (2/5, 1/5, 2/5).\]</span></p>
+<p>We can then compute the conditional expectation using LOTUS: <span class="math display">\[\mathbb{E}[X^2 | Y] = (-1)^2 (2/5) + 2^2 (1/5) + 5^2 (2/5) = 56/5.\]</span></p>
+<p>See <a href="../exercises/ex01.html">Exercise 1</a> and <a href="../w01_discrete_inference/topic10_expectations.html">expectations review</a>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="non-standard-loss-minimization" class="level2">
 <h2 class="anchored" data-anchor-id="non-standard-loss-minimization">Non-standard loss minimization</h2>
 <p>Derive the Bayes estimator for the loss <span class="math inline">\(L(a, x) = x^2 - 10ax + a^2\)</span>. The posterior mean is <span class="math inline">\(\mathbb{E}[X | Y = y] = 1\)</span> and <span class="math inline">\(\operatorname{Var}[X | Y = y] = 1\)</span>.</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  1
-2.  5
-3.  10
-4.  15 
-5.  None of the above 
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-We proceed as in [the square loss example](../w05_properties/topic03_decision_to_point.qmd):
-
-$$
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>1</li>
+<li>5</li>
+<li>10</li>
+<li>15</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We proceed as in <a href="../w05_properties/topic03_decision_to_point.html">the square loss example</a>:</p>
+<p><span class="math display">\[
 \begin{aligned}
-\best(Y) &= \argmin \{ \E[L(a, X) | Y] : a \in A \} \\
-&=  \argmin \{ \E[ X^2 - 10aX + a^2 | Y] : a \in A \} \\
-&=  \argmin \{ - 10 a\E[X | Y] + a^2: a \in A \}.
+\delta_{\text{B}}(Y) &amp;= \operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \} \\
+&amp;=  \operatorname{arg\,min}\{ \mathbb{E}[ X^2 - 10aX + a^2 | Y] : a \in A \} \\
+&amp;=  \operatorname{arg\,min}\{ - 10 a\mathbb{E}[X | Y] + a^2: a \in A \}.
 \end{aligned}
-$$
-
-Computing the derivative with respect to $a$ and setting to zero:
-$$-10 \E[X | Y] + 2a = 0,$$
-hence the Bayes estimate or Bayes action is $a = 10\E[X | Y] / 2 = 5$.
-:::
-
--->
+\]</span></p>
+<p>Computing the derivative with respect to <span class="math inline">\(a\)</span> and setting to zero: <span class="math display">\[-10 \mathbb{E}[X | Y] + 2a = 0,\]</span> hence the Bayes estimate or Bayes action is <span class="math inline">\(a = 10\mathbb{E}[X | Y] / 2 = 5\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="notation" class="level2">
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
@@ -1190,77 +1388,132 @@ hence the Bayes estimate or Bayes action is $a = 10\E[X | Y] / 2 = 5$.
 <li><span class="math inline">\(\mathbb{E}[X + x] = \mathbb{E}[X] + x\)</span>, where <span class="math inline">\(x\)</span> is a realization</li>
 <li><span class="math inline">\(f(x) \in [0, 1]\)</span>, where <span class="math inline">\(f\)</span> is a density.</li>
 </ol>
-<!-- 
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1. d, e, f
-1. a, b, d, e, f
-1. a, b, d, e
-1. b, d, e
-1. None of the above. 
-
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Correct choice is: b, d, e
-
-- a, c are incorrect since $\pr$ takes events as input, and $\pr$ is not a PMF but a probability function.
-- f is incorrect since a density can be greater than one. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>d, e, f</li>
+<li>a, b, d, e, f</li>
+<li>a, b, d, e</li>
+<li>b, d, e</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct choice is: b, d, e</p>
+<ul>
+<li>a, c are incorrect since <span class="math inline">\(\mathbb{P}\)</span> takes events as input, and <span class="math inline">\(\mathbb{P}\)</span> is not a PMF but a probability function.</li>
+<li>f is incorrect since a density can be greater than one.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="optimality-of-bayes-estimator" class="level2">
 <h2 class="anchored" data-anchor-id="optimality-of-bayes-estimator">Optimality of Bayes estimator</h2>
 <p>State the theoretical guarantee that a Bayes estimator <span class="math inline">\(\delta_{\text{B}}\)</span> has compared to another estimator <span class="math inline">\(\delta_{\text{o}}\)</span> in terms of average loss.</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  $\best \le \oest$
-1.  $\ex[\best] \le \ex[\best]$
-1.  $\ex[L(\best(Y), X) | Y] \le \ex[L(\oest(Y), X) | Y]$
-1.  $\ex[L(\best(Y), X) | Y] \le 0$
-1.  None of the above. 
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-None of the above. The correct inequality is:
-$$\ex[L(\best(Y), X)] \le \ex[L(\oest(Y), X)].$$
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\delta_{\text{B}}\le \delta_{\text{o}}\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[\delta_{\text{B}}] \le \mathbb{E}[\delta_{\text{B}}]\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X) | Y]\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y] \le 0\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>None of the above. The correct inequality is: <span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)].\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="bias-of-mc-methods" class="level2">
 <h2 class="anchored" data-anchor-id="bias-of-mc-methods">Bias of MC methods</h2>
 <p>Define formally the notion of bias of a Monte Carlo method.</p>
 <p>We have covered two Monte Carlo methods: simple Monte Carlo and SNIS. Which one has the smallest bias?</p>
-<!--
-
-::: {.callout-caution collapse="true"}
-## Click for choices
-
-1.  SNIS has smaller bias.
-1.  Simple Monte Carlo has smaller bias.
-1.  They cannot be compared in general.
-1.  Always equal. 
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-From our discussion on [Monte Carlo convergence rate](../w03_ppl/topic05_mc_rates.qmd), 
-simple Monte Carlo has a bias of zero, while SNIS is biased. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>SNIS has smaller bias.</li>
+<li>Simple Monte Carlo has smaller bias.</li>
+<li>They cannot be compared in general.</li>
+<li>Always equal.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From our discussion on <a href="../w03_ppl/topic05_mc_rates.html">Monte Carlo convergence rate</a>, simple Monte Carlo has a bias of zero, while SNIS is biased.</p>
+</div>
+</div>
+</div>
 
 
 </section>
