@@ -2313,7 +2313,7 @@
     "href": "challenges/ch04.html#q.1-modelling",
     "title": "Challenge questions",
     "section": "Q.1 Modelling",
-    "text": "Q.1 Modelling\nDesign a Bayesian modelling to try inferring the total number of copies in circulation. Motivate all choices you make.",
+    "text": "Q.1 Modelling\nDesign a Bayesian model to infer the total number of copies in circulation. Motivate all choices you make.",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Challenge"
@@ -3160,7 +3160,7 @@
     "href": "w07_quiz1/topic02_practice_questions.html#comparing-two-parameters",
     "title": "Practice questions",
     "section": "Comparing two parameters",
-    "text": "Comparing two parameters\nConsider the Bayesian model: for \\(i \\in \\{1, 2\\}\\),\n\\[\\begin{align*}\n\\theta_i &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_i | \\theta_i &\\sim {\\mathrm{Beta}}(p_i).\n\\end{align*}\\]\nYou would like to answer the question: is \\(\\theta_1\\) “clearly different” than \\(\\theta_2\\)? To be concrete, let’s say that “clearly different” means their value differs by at least \\(0.1\\).\nHow would you provide a Bayesian answer to the above question?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\nCompute \\(\\mathbb{P}(|\\theta_1 - \\theta_2| &gt; 0.1 | y_1, y_2)\\).\nCompute \\(\\mathbb{E}[\\theta_1 | y_1]\\) and \\(\\mathbb{E}[\\theta_2 | y_2]\\), and check if they differ by more than 0.1.\nCompute the MAP of \\(\\theta_1 | y_1\\) and of \\(\\theta_2 | y_2\\), and check if they differ by more than 0.1.\nCompute the posterior median of \\(\\theta_1 | y_1\\) and of \\(\\theta_2 | y_2\\), and check if they differ by more than 0.1.\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nCompute \\(\\mathbb{P}(|\\theta_1 - \\theta_2| &gt; 0.1 | y_1, y_2)\\).\nSee the page on bivariate posteriors.",
+    "text": "Comparing two parameters\nConsider the Bayesian model: for \\(i \\in \\{1, 2\\}\\),\n\\[\\begin{align*}\n\\theta_i &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_i | \\theta_i &\\sim {\\mathrm{Beta}}(\\theta_i).\n\\end{align*}\\]\nYou would like to answer the question: is \\(\\theta_1\\) “clearly different” than \\(\\theta_2\\)? To be concrete, let’s say that “clearly different” means their value differs by at least \\(0.1\\).\nHow would you provide a Bayesian answer to the above question?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\nCompute \\(\\mathbb{P}(|\\theta_1 - \\theta_2| &gt; 0.1 | y_1, y_2)\\).\nCompute \\(\\mathbb{E}[\\theta_1 | y_1]\\) and \\(\\mathbb{E}[\\theta_2 | y_2]\\), and check if they differ by more than 0.1.\nCompute the MAP of \\(\\theta_1 | y_1\\) and of \\(\\theta_2 | y_2\\), and check if they differ by more than 0.1.\nCompute the posterior median of \\(\\theta_1 | y_1\\) and of \\(\\theta_2 | y_2\\), and check if they differ by more than 0.1.\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nCompute \\(\\mathbb{P}(|\\theta_1 - \\theta_2| &gt; 0.1 | y_1, y_2)\\).\nSee the page on bivariate posteriors.",
     "crumbs": [
       "Quiz 1",
       "Practice questions"
