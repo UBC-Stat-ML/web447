@@ -15,7 +15,7 @@ editor:
 
 ## Q.1 Modelling
 
-Design a Bayesian modelling to try inferring the total number of copies in circulation.
+Design a Bayesian model to infer the total number of copies in circulation.
 Motivate all choices you make. 
 
 

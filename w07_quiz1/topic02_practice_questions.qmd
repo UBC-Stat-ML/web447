@@ -67,7 +67,7 @@ Consider the Bayesian model: for $i \in \{1, 2\}$,
 
 $$\begin{align*}
 \theta_i &\sim \distUnif(0, 1) \\
-y_i | \theta_i &\sim \distBeta(p_i).
+y_i | \theta_i &\sim \distBeta(\theta_i).
 \end{align*}$$
 
 You would like to answer the question: is $\theta_1$ "clearly different" than $\theta_2$? To be concrete, let's say that "clearly different" means their value differs by at least $0.1$.

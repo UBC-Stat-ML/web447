@@ -34,8 +34,8 @@ strengths and limitation of these approaches.
 ## PPL: an example using *simPPLe*
 
 We created possibly the simplest possible PPL for this course. 
-Let's call it `simPPLe`. 
-The exercise this week will be to understand *simPPLe* by filling-in a couple 
+Let's call it *simPPLe*. 
+The exercise this week will be to understand simPPLe by filling-in a couple 
 of key lines of code.
 
 First I will show you what simPPLe can do.
