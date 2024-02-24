@@ -215,13 +215,13 @@ $$\begin{align*}
 \theta_1 &\sim \distExp(1/1000) \\
 \theta_2 &\sim \distExp(1/1000) \\
 \theta_3 &\sim \distUnif(0, 2\pi) \\
-y_i | \theta &\sim \distPoiss(\theta_1 (\sin(\theta_2 i + \theta_3)))
+y_i | \theta &\sim \distPoiss(\theta_1 (\sin(\theta_2 i + \theta_3) + 1))
 \end{align*}$$
 
 Some things we look at:
 
 -   The distribution's support for each variable matches the variable's datatype.
--   The datatype of each distribution parameter is adequate (for example, here $\theta_1 (\sin(\theta_2 i + \theta_3)) \ge 0$).
+-   The datatype of each distribution parameter is adequate (for example, here $\theta_1 (\sin(\theta_2 i + \theta_3) + 1) \ge 0$).
 -   The model is sufficiently flexible to capture the pattern observed in EDA.
 
 [See the page on the step-by-step construction of a GLM](../w04_glms/topic05_regression.qmd).
