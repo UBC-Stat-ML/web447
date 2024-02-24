@@ -1003,12 +1003,12 @@ Click for answer
 \theta_1 &amp;\sim {\mathrm{Exp}}(1/1000) \\
 \theta_2 &amp;\sim {\mathrm{Exp}}(1/1000) \\
 \theta_3 &amp;\sim {\mathrm{Unif}}(0, 2\pi) \\
-y_i | \theta &amp;\sim {\mathrm{Poisson}}(\theta_1 (\sin(\theta_2 i + \theta_3)))
+y_i | \theta &amp;\sim {\mathrm{Poisson}}(\theta_1 (\sin(\theta_2 i + \theta_3) + 1))
 \end{align*}\]</span></p>
 <p>Some things we look at:</p>
 <ul>
 <li>The distribution’s support for each variable matches the variable’s datatype.</li>
-<li>The datatype of each distribution parameter is adequate (for example, here <span class="math inline">\(\theta_1 (\sin(\theta_2 i + \theta_3)) \ge 0\)</span>).</li>
+<li>The datatype of each distribution parameter is adequate (for example, here <span class="math inline">\(\theta_1 (\sin(\theta_2 i + \theta_3) + 1) \ge 0\)</span>).</li>
 <li>The model is sufficiently flexible to capture the pattern observed in EDA.</li>
 </ul>
 <p><a href="../w04_glms/topic05_regression.html">See the page on the step-by-step construction of a GLM</a>.</p>
