@@ -1,0 +1,42 @@
+---
+title: "Logistics"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+
+
+
+## What to bring?
+
+- You only need pencil, eraser, student or government id. 
+- The quiz is closed book (in particular, no electronics, including simple calculator permitted). 
+
+
+## Time
+
+We will start promptly at 9:30 (please arrive in time) and end at 10:45 (75 minutes). 
+
+
+## Distribution reference
+
+The cover page of the exam will have the following table.
+Note that compared to last week's practice, I have added 3 rows, providing 
+two additional parameterizations for the normal, and one additional parameterization 
+for the beta. 
+
+
+| Name        | Abbreviation               | Parameters                                                         |
+|-------------------|-------------------|------------------------------------|
+| Bernoulli   | $\distBern(p)$             | Success probability $p \in [0, 1]$                                 |
+| Binomial    | $\distBinom(n, p)$         | Number of trials $n \in \nats$, success probability $p \in [0, 1]$ |
+| Uniform     | $\distUnif(a, b)$          | Left and right bounds, $a < b$                                     |
+| Normal      | $\distNorm(\mu, \sigma)$   | Mean $\mu \in \reals$ and standard deviation $\sigma > 0$          |
+|             | $\distNorm(\mu, \sigma^2)$ | Mean $\mu \in \reals$ and variance $\sigma^2 > 0$                  |
+|             | $\distNorm(\mu, \tau)$     | Mean $\mu \in \reals$ and precision $\tau = 1/\sigma^2 > 0$        |
+| Exponential | $\distExp(\lambda)$        | Rate $\lambda$ ($=1/$mean)                                         |
+| Beta        | $\distBeta(\alpha, \beta)$ | Shape parameters $\alpha > 0$ and $\beta > 0$                      |
+|             | $\distBeta(\mu, s)$        | Mean parameter $\mu \in (0, 1)$ and concentration $s>0$            |

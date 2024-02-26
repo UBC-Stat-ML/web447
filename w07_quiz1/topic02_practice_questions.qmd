@@ -415,16 +415,16 @@ Let $a$ denote the indicator that the treatment is used. We get the following lo
 
 |         | $a = 0$ | $a = 1$ |
 |---------|---------|---------|
-| $d = 0$ | $0$     | $-1M$   |
-| $d = 1$ | $-10M$  | $-1M$   |
+| $d = 0$ | $0$     | $1M$   |
+| $d = 1$ | $10M$  | $1M$   |
 
 We compute the expected losses for the two possible actions:
 
-$$\ex[L(0, D) | Y = y] = (0.2) (-10M) = -2M$$
+$$\ex[L(0, D) | Y = y] = (0.2) (10M) = 2M$$
 
 and
 
-$$\ex[L(1, D) | Y = y] = -1M$$
+$$\ex[L(1, D) | Y = y] = 1M$$
 
 Hence the action that minimizes the loss is $a = 1$, i.e. to use the treatment. 
 :::
