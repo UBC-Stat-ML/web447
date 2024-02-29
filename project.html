@@ -606,6 +606,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#menu-of-project-themes" id="toc-menu-of-project-themes" class="nav-link" data-scroll-target="#menu-of-project-themes">Menu of project themes</a></li>
   <li><a href="#rubric-for-the-project-proposal" id="toc-rubric-for-the-project-proposal" class="nav-link" data-scroll-target="#rubric-for-the-project-proposal">Rubric for the project proposal</a></li>
   <li><a href="#rubric-for-the-final-report" id="toc-rubric-for-the-final-report" class="nav-link" data-scroll-target="#rubric-for-the-final-report">Rubric for the final report</a></li>
+  <li><a href="#projects-showcase" id="toc-projects-showcase" class="nav-link" data-scroll-target="#projects-showcase">Projects showcase</a></li>
   </ul>
 </nav>
     </div>
@@ -631,19 +632,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.</p>
@@ -653,6 +641,7 @@ Caution
 <ul>
 <li>Teams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.</li>
 <li>Submit on canvas, a pdf document of maximum 5 pages/person (i.e.&nbsp;max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.</li>
+<li>Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.</li>
 </ul>
 </section>
 <section id="project-timeline" class="level2">
@@ -680,33 +669,34 @@ Caution
 </section>
 <section id="menu-of-project-themes" class="level2">
 <h2 class="anchored" data-anchor-id="menu-of-project-themes">Menu of project themes</h2>
-<p>Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal).</p>
+<p>Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶’s.</p>
 <ul>
-<li>Going further on… (more details can be provided upon request)
+<li>A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
+<ul>
+<li>Applying a simple model and an improved one on a dataset.</li>
+<li>Bayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …</li>
+<li>Is there some structure that can be exploited (e.g.&nbsp;informed by the data types for the covariates/features, groups of related features i.e.&nbsp;feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?</li>
+</ul></li>
+<li>Going further on one of… (more details can be provided upon request)
 <ul>
 <li>Bayesian regression and classification (e.g.&nbsp;sparsity, hierarchical structure, etc)</li>
 <li>model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)</li>
 <li>time series and state-space models</li>
-<li>spatial models</li>
-<li>cross-effect models</li>
-<li>Bayesian non-parametric models</li>
-<li>deep generative models</li>
-<li>topics models</li>
-<li>variational inference</li>
+<li>🌶 spatial models</li>
+<li>🌶 cross-effect models</li>
+<li>🌶🌶 Bayesian non-parametric models</li>
+<li>🌶🌶 deep generative models</li>
+<li>🌶🌶 topics models</li>
+<li>🌶🌶 variational inference</li>
 </ul></li>
-<li>A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
-<ul>
-<li>Bayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …</li>
-<li>Is there some structure that can be exploited (e.g.&nbsp;informed by the data types for the covariates/features, groups of related features i.e.&nbsp;feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?</li>
-</ul></li>
-<li>A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
+<li>🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
 <ul>
 <li>Types of graphs such as matchings</li>
 <li>Phylogenetic trees or networks</li>
 <li>Multiple sequence alignments</li>
 <li>Clustering or feature matrices</li>
 </ul></li>
-<li>Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.</li>
+<li>🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.</li>
 </ul>
 </section>
 <section id="rubric-for-the-project-proposal" class="level2">
@@ -716,12 +706,13 @@ Caution
 <ul>
 <li>Team is identified.</li>
 <li>The proposal identifies which of the project themes it will address.</li>
+<li>There is a working link to a public repo containing commits from all team members.</li>
 </ul></li>
 <li>Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g.&nbsp;a URL, showing the structure or <code>head</code> of a dataframe).</li>
 <li>A short summary of potential approaches to tackle the project theme.</li>
 <li>If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.</li>
 </ul>
-<p>As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e.&nbsp;before April 1st ideally and certainly before the last lecture.</p>
+<p>As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e.&nbsp;before April 1st ideally and certainly before the last lecture.</p>
 <p><strong>Total: 5%</strong></p>
 </section>
 <section id="rubric-for-the-final-report" class="level2">
@@ -730,6 +721,7 @@ Caution
 <li>Basic requirements (5%)
 <ul>
 <li>The report fits within the prescribed page limits.</li>
+<li>There is a working link to a public repo containing commits from all team members.</li>
 <li>The report follows best practices of technical writing.</li>
 <li>If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.</li>
 </ul></li>
@@ -758,6 +750,10 @@ Caution
 </ul></li>
 </ul>
 <p><strong>Total: 95%</strong></p>
+</section>
+<section id="projects-showcase" class="level2">
+<h2 class="anchored" data-anchor-id="projects-showcase">Projects showcase</h2>
+<p>Projects of exceptional quality will be offered the option to be showcased on the public course webpage.</p>
 
 
 </section>
