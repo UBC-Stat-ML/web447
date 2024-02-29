@@ -1530,6 +1530,72 @@
     ]
   },
   {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html",
+    "href": "w08_mcmc1/topic01_installing_stan.html",
+    "title": "Installing and running Stan",
+    "section": "",
+    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#outline",
+    "href": "w08_mcmc1/topic01_installing_stan.html#outline",
+    "title": "Installing and running Stan",
+    "section": "",
+    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
+    "href": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
+    "title": "Installing and running Stan",
+    "section": "What is Stan?",
+    "text": "What is Stan?\n\nStan is the most popular PPL as of 2024.\nReview the notes on “what is a PPL.”\nStan uses Markov chain Monte Carlo (MCMC) to approximate the posterior distribution.\n\nThink of MCMC has a drop-in replacement for SNIS.\nWe will talk about it in more detail soon.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
+    "href": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
+    "title": "Installing and running Stan",
+    "section": "Installing Stan",
+    "text": "Installing Stan\nYou will need Stan installed to complete next week’s exercise. Don’t wait until next week, install it today!\nThere are two main steps to install Stan:\n\nConfiguring a C++ Toolchains\nInstalling RStan\n\nLet us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#running",
+    "href": "w08_mcmc1/topic01_installing_stan.html#running",
+    "title": "Installing and running Stan",
+    "section": "Running Stan",
+    "text": "Running Stan\nWe present two methods for running Stan in the next two section: either from an R script, or from a R Markdown document.\n\nFrom a R script\nFirst, copy and paste the following code into a file called beta_binomial.stan:\n\n\nbeta_binomial.stan\n\ndata {\n  int&lt;lower=0&gt; n;         // number of trials\n  int&lt;lower=0,upper=n&gt; k; // number of successes\n}\n\nparameters {\n  real&lt;lower=0,upper=1&gt; p;\n}\n\nmodel {\n  // prior\n  p ~ beta(1,1);\n\n  // likelihood\n  k ~ binomial(n, p);\n}\n\nSecond, run Stan as follows:\nrequire(rstan)\n\nfit = stan(\n  seed = 123,\n  file = \"beta_binomial.stan\",  # Stan program\n  data = list(n=3, k=3),        # named list of data\n  iter = 1000                   # number of samples to draw\n)\nThe first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:\nfit\n\n\nFrom a R Markdown document\nTo see an example of how to integrate Stan code inside R Markdown, see the source code used for the next page in the notes, available on github.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#footnotes",
+    "href": "w08_mcmc1/topic01_installing_stan.html#footnotes",
+    "title": "Installing and running Stan",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFor example, for the model used in the exercise on hierarchical models, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!↩︎\nFor example, Stan does not support latent integer-value random variables, whereas simPPLe does.↩︎\nsimPPLe is a few dozen lines of codes, whereas Stan has millions of lines of code.↩︎",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
     "objectID": "w04_glms/topic04_classification.html",
     "href": "w04_glms/topic04_classification.html",
     "title": "Bernoulli regression",
@@ -2066,6 +2132,72 @@
     "crumbs": [
       "The joy of probabilistic modelling",
       "Normal distributions"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html",
+    "href": "w08_mcmc1/topic02_stan_basics.html",
+    "title": "Stan basics",
+    "section": "",
+    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#outline",
+    "href": "w08_mcmc1/topic02_stan_basics.html#outline",
+    "title": "Stan basics",
+    "section": "",
+    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#example",
+    "href": "w08_mcmc1/topic02_stan_basics.html#example",
+    "title": "Stan basics",
+    "section": "Example",
+    "text": "Example\nLet us revisit the Doomsday model, which we wrote in simPPLe as follows:\n\nsource(\"../../solutions/simple.R\")\n\ndoomsday_model &lt;- function() {\n  x = simulate(Unif(0, 5))\n  observe(0.06, Unif(0, x))\n  return(x)\n}\n\nposterior(doomsday_model, 100000)\n\n[1] 1.103447\n\n\nRecall the analytic answer that we computed in clicker questions was: \\(\\approx 1.117\\).\nToday we will re-write this model in Stan instead of simPPLe. The main difference is that:\n\nboth simulate and observe will be denoted by ~in Stan,\n\nto differentiate between observed and latent, Stan instead uses variable declarations (as data or parameters).\n\nFirst, load rstan:\n\nsuppressPackageStartupMessages(require(rstan))\n\nThen, as you did to test your install put the following code into a .stan file:\n\n1data {\n  real y; \n}\n\n2parameters {\n  real x;\n}\n\nmodel {\n3  x ~ uniform(0, 5);\n4  y ~ uniform(0, x);\n}\n\n\n1\n\nVariables introduced in a data block will be treated as observed.\n\n2\n\nVariables introduced in a parameters block will be treated as latent, i.e., unobserved.\n\n\n3\n\nSince x is declared latent (i.e., inside a parameters block), Stan will know to treat this as the counterpart of simPPLe’s x = simulate(Unif(0, 5)).\n\n4\n\nSince y is declared observed (i.e., inside a data block), Stan will know to treat this as the counterpart of simPPLe’s observe(0.06, Unif(0, x)).\n\n\n\n\nQuestion: How does Stan gets the actual observed value \\(y = 0.06\\)?\nAnswer: When Stan gets called in R:1\n\nfit = sampling(\n  doomsday,         \n  data = list(y = 0.06), \n  show_messages = FALSE,\n  open_progress = FALSE, \n  iter = 2000       \n)\n\nWe can now compare the approximation provided by Stan:\n\nfit\n\nInference for Stan model: anon_model.\n4 chains, each with iter=2000; warmup=1000; thin=1; \npost-warmup draws per chain=1000, total post-warmup draws=4000.\n\n     mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat\nx    1.11    0.11 1.21  0.07  0.19 0.58 1.66  4.25   129 1.05\nlp__ 0.59    0.18 1.28 -1.45 -0.50 0.54 1.65  2.71    50 1.09\n\nSamples were drawn using NUTS(diag_e) at Wed Feb 28 22:53:49 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
+    "href": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
+    "title": "Stan basics",
+    "section": "Tips and tricks",
+    "text": "Tips and tricks\n\nNotice statements in Stan have to end in semicolumns, ;\nTo find out Stan’s name for distributions, see Stan’s documentation,\n\ne.g., this is the documentation for uniform.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
+    "href": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
+    "title": "Stan basics",
+    "section": "Interpreting the output",
+    "text": "Interpreting the output\n\nJust as simple Monte Carlo and SNIS, the output of Stan/MCMC is a list of samples\nIn contrast to SNIS, the samples are equally weighted, i.e., their structure is the same as samples from simple Monte Carlo.\n\nTo access the samples from a “fit” object use:\n\nsamples = extract(fit)\n\nhead(samples$x)\n\n[1] 0.07802865 4.31297676 0.06059216 0.93406232 3.86181820 4.09976419\n\n\nSince the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:\n\nhist(samples$x)\n\n\n\n\n\n\n\n\nYou can also use the bayesplot package which will be handy to create more complex plots from MCMC runs:\n\nsuppressPackageStartupMessages(require(bayesplot))\nmcmc_hist(fit, pars = c(\"x\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#footnotes",
+    "href": "w08_mcmc1/topic02_stan_basics.html#footnotes",
+    "title": "Stan basics",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nwhen calling Stan from an R script, use stan(file = ...), but when calling Stan from R Markdown (as we do here), use sampling(name, ...), where the first argument, name matches the code block argument output.var = \"name\" (see the source of this page for an example).↩︎",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
     ]
   },
   {
