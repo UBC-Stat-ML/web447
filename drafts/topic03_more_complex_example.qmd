@@ -28,23 +28,19 @@ data {
   int N; # <1>
   vector<lower=0, upper=1>[N] y;
 }
-
 parameters { # <2>
   real<lower=0> concentration;
   real slope;
   real intercept;
 }
-
+transformed parameters {
+  vector[N] mu = inv_logit(intercept + slope*linspaced_vector(N,0,1));
+}
 model {
-  real eps = 1e-5;
   concentration ~ exponential(1);
   slope ~ normal(0, 1);
   intercept ~ normal(0, 1);
-  
-  for (n in 1:N) {
-    real mu = inv_logit(n/N * slope + intercept);
-    y[n] ~ beta(mu * concentration + eps, (1-mu) * concentration + eps);
-  }
+  y ~ beta_proportion(mu, concentration);
 }
 
 ```
@@ -54,7 +50,7 @@ model {
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 fit = sampling(
   omicron,         
-  data = list(y = df$percentage/100, N = length(df$percentage)), 
+  data = list(y = pmax(pmin(df$percentage/100,0.999),0.001), N = length(df$percentage)), 
   show_messages = FALSE,
   open_progress = FALSE, 
   chains = 1,
