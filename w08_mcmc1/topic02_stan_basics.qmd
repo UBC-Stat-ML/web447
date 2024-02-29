@@ -72,10 +72,12 @@ model {
 
 **Question:** How does Stan gets the actual observed value $y = 0.06$? 
 
-**Answer:** When Stan gets called in R:
+**Answer:** When Stan gets called in R:[^1]
+
+[^1]: when calling Stan from an R script, use `stan(file = ...)`, but when calling Stan from R Markdown (as we do here), use `sampling(name, ...)`, where the first argument, `name` matches the code block argument `output.var = "name"` (see the [source of this page](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd) for an example).
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
-fit1 = sampling(
+fit = sampling(
   doomsday,         
   data = list(y = 0.06), 
   show_messages = FALSE,
@@ -87,12 +89,40 @@ fit1 = sampling(
 We can now compare the approximation provided by Stan:
 
 ```{r}
-fit1
+fit
 ```
 
-<!--
+
 ## Tips and tricks
 
-- Semicolumns. 
-- References for distributions. 
--->
+- Notice statements in Stan have to end in semicolumns, `;` 
+- To find out Stan's name for distributions, see [Stan's documentation](https://mc-stan.org/docs/functions-reference/index.html), 
+    - e.g., [this is the documentation](https://mc-stan.org/docs/functions-reference/uniform-distribution.html) for `uniform`. 
+    
+    
+## Interpreting the output
+
+- Just as [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) and [SNIS](../w03_ppl/topic02_snis.qmd), the output of Stan/MCMC is a list of *samples* 
+- In contrast to SNIS, the samples are equally weighted, i.e., their structure is the same as samples from simple Monte Carlo.
+
+To access the samples from a "fit" object use:
+
+```{r}
+samples = extract(fit)
+
+head(samples$x)
+```
+
+Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:
+
+```{r}
+hist(samples$x)
+```
+
+You can also use the `bayesplot` package which will be handy to create more complex plots from MCMC runs:
+
+```{r}
+suppressPackageStartupMessages(require(bayesplot))
+mcmc_hist(fit, pars = c("x"))
+```
+

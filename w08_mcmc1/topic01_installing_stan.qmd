@@ -62,6 +62,12 @@ Next week, our priority will be replying questions about the material.
 
 ## Running Stan {#running}
 
+We present two methods for running Stan in the next two section: either from an R script, 
+or from a R Markdown document.
+
+
+### From a R script
+
 First, copy and paste the following code into a file called `beta_binomial.stan`:
 
 ```stan {shortcodes=true, filename="beta_binomial.stan"}
@@ -73,7 +79,7 @@ Second, run Stan as follows:
 ```r
 require(rstan)
 
-samples = stan(
+fit = stan(
   seed = 123,
   file = "beta_binomial.stan",  # Stan program
   data = list(n=3, k=3),        # named list of data
@@ -85,5 +91,11 @@ The first question of next week's exercise will be to report the posterior media
 which can be obtained under the column "50%" of the output of the following R command:
 
 ```r
-samples
+fit
 ```
+
+### From a R Markdown document
+
+To see an example of how to integrate Stan code inside R Markdown, see the source code used for the next page in the notes, [available on github](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd).
+
+
