@@ -65,7 +65,7 @@ Then $(X = 1)$ corresponds to the red circle.
 
 ## More conventions
 
-- $X$: unobserved random variable 
+- $X$: unobserved random variable (synonym of "unobserved": **latent**)
 - $Y$: observed random variable
 
 More precisely:

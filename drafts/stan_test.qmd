@@ -1,0 +1,41 @@
+---
+title: "Test Stan"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+
+```{stan output.var = "test"}
+parameters {
+  real w;
+}
+model {
+  w ~ std_normal();
+}
+```
+
+
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  test,         
+  data = list(), 
+  show_messages = FALSE,
+  open_progress = FALSE, 
+  chains = 1,
+  iter = 10000       # <2>
+)
+```
+
+
+```{r}
+fit
+```
+

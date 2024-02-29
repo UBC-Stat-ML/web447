@@ -76,7 +76,8 @@ model {
 
 [^1]: when calling Stan from an R script, use `stan(file = ...)`, but when calling Stan from R Markdown (as we do here), use `sampling(name, ...)`, where the first argument, `name` matches the code block argument `output.var = "name"` (see the [source of this page](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd) for an example).
 
-```{r message=FALSE, warning=FALSE, results=FALSE}
+<!-- Note: dependson=knitr::dep_prev() needed as otherwise updates in the model will not invalidate the knitr cache properly -->
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(
   doomsday,         
   data = list(y = 0.06), # <1>
