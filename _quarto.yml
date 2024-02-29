@@ -55,6 +55,9 @@ website:
       - section: "Quiz 1"
         contents: 
           - auto: "w07_quiz1/*"
+      - section: "Intro to MCMC"
+        contents: 
+          - auto: "w08_mcmc1/*"
 
 
 format:

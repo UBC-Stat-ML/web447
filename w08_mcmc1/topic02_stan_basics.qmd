@@ -1,0 +1,98 @@
+---
+title: "Stan basics"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   Anatomy of a simple Stan program. 
+-   Interpreting the output of Stan. 
+
+### Rationale
+
+We will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.
+
+
+## Example
+
+Let us revisit the [Doomsday model](../w03_ppl/topic03_continuous.qmd), which we wrote in simPPLe as follows:
+
+```{r}
+source("../../solutions/simple.R")
+
+doomsday_model <- function() {
+  x = simulate(Unif(0, 5))
+  observe(0.06, Unif(0, x))
+  return(x)
+}
+
+posterior(doomsday_model, 100000)
+```
+
+
+Recall the analytic answer [that we computed in clicker questions](../w03_ppl/topic03_continuous.qmd) was: $\approx 1.117$.
+
+Today we will re-write this model in Stan instead of simPPLe. The main difference is that:
+
+- both `simulate` and `observe` will be denoted by `~`in Stan,  
+- to differentiate between observed and latent, Stan instead uses variable declarations (as `data` or `parameters`). 
+
+First, load `rstan`:
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+Then, [as you did to test your install](topic01_installing_stan.qmd#running) put the following code into a `.stan` file:
+
+```{stan output.var = "doomsday"}
+data { # <1>
+  real y; 
+}
+
+parameters { # <2>
+  real x;
+}
+
+model {
+  x ~ uniform(0, 5); # <3>
+  y ~ uniform(0, x); # <4>
+}
+
+```
+1. Variables introduced in a `data` block will be treated as observed. 
+2. Variables introduced in a `parameters` block will be treated as latent, i.e., unobserved.   
+3. Since `x` is declared latent (i.e., inside a `parameters` block), Stan will know to treat this as the counterpart of simPPLe's `x = simulate(Unif(0, 5))`.
+4. Since `y` is declared observed (i.e., inside a `data` block), Stan will know to treat this as the counterpart of simPPLe's `observe(0.06, Unif(0, x))`.
+
+**Question:** How does Stan gets the actual observed value $y = 0.06$? 
+
+**Answer:** When Stan gets called in R:
+
+```{r message=FALSE, warning=FALSE, results=FALSE}
+fit1 = sampling(
+  doomsday,         
+  data = list(y = 0.06), 
+  show_messages = FALSE,
+  open_progress = FALSE, 
+  iter = 2000       
+)
+```
+
+We can now compare the approximation provided by Stan:
+
+```{r}
+fit1
+```
+
+<!--
+## Tips and tricks
+
+- Semicolumns. 
+- References for distributions. 
+-->
