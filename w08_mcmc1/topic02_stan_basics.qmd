@@ -79,12 +79,15 @@ model {
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 fit = sampling(
   doomsday,         
-  data = list(y = 0.06), 
+  data = list(y = 0.06), # <1>
   show_messages = FALSE,
   open_progress = FALSE, 
-  iter = 2000       
+  chains = 1,
+  iter = 2000       # <2>
 )
 ```
+1. Pass in the values taken by the observed random variables. 
+2. The number of samples to compute (equivalent to $M$ in our [Monte Carlo notation](../w01_discrete_inference/topic11_monte_carlo.qmd))
 
 We can now compare the approximation provided by Stan:
 
