@@ -2,7 +2,6 @@
 title: "Final project"
 ---
 
-{{< include _construction.qmd >}}
 
 ## Overview
 
@@ -11,7 +10,8 @@ The course project involves independent work on a topic selected from a menu of 
 ## Logistics
 
 -   Teams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.
--   Submit on canvas, a pdf document of maximum 5 pages/person (i.e. max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.
+-   Submit on canvas, a pdf document of maximum 5 pages/person (i.e. max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading. 
+-   Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.
 
 ## Project timeline
 
@@ -39,38 +39,40 @@ You should not pick a dataset that has already been analyzed using the same appr
 
 ## Menu of project themes
 
-Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal).
+Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶's. 
 
--   Going further on... (more details can be provided upon request)
+-   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
+    -   Applying a simple model and an improved one on a dataset.
+    -   Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
+    -   Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?
+-   Going further on one of... (more details can be provided upon request)
     -   Bayesian regression and classification (e.g. sparsity, hierarchical structure, etc)
     -   model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)
     -   time series and state-space models
-    -   spatial models
-    -   cross-effect models
-    -   Bayesian non-parametric models
-    -   deep generative models
-    -   topics models
-    -   variational inference
--   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
-    -   Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
-    -   Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?
--   A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
+    -   🌶 spatial models
+    -   🌶 cross-effect models
+    -   🌶🌶 Bayesian non-parametric models
+    -   🌶🌶 deep generative models
+    -   🌶🌶 topics models
+    -   🌶🌶 variational inference
+-   🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
     -   Types of graphs such as matchings
     -   Phylogenetic trees or networks
     -   Multiple sequence alignments
     -   Clustering or feature matrices
--   Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.
+-   🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.
 
 ## Rubric for the project proposal
 
 -   Basic requirements
     -   Team is identified.
     -   The proposal identifies which of the project themes it will address.
+    -   There is a working link to a public repo containing commits from all team members. 
 -   Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or `head` of a dataframe).
 -   A short summary of potential approaches to tackle the project theme.
 -   If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.
 
-As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). Late submission within 2 days will receive 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.
+As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.
 
 **Total: 5%**
 
@@ -78,6 +80,7 @@ As long as the team submits a reasonable project proposal, I will give full grad
 
 -   Basic requirements (5%)
     -   The report fits within the prescribed page limits.
+    -   There is a working link to a public repo containing commits from all team members. 
     -   The report follows best practices of technical writing.
     -   If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.
 -   Problem formulation. (15%) The report clearly describes:
@@ -97,3 +100,8 @@ As long as the team submits a reasonable project proposal, I will give full grad
     -   Does the report describe key limitations?
 
 **Total: 95%**
+
+
+## Projects showcase 
+
+Projects of exceptional quality will be offered the option to be showcased on the public course webpage. 
