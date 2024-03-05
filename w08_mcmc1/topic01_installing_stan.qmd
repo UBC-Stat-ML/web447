@@ -91,7 +91,7 @@ The first question of next week's exercise will be to report the posterior media
 which can be obtained under the column "50%" of the output of the following R command:
 
 ```r
-fit
+print(fit)
 ```
 
 ### From a R Markdown document

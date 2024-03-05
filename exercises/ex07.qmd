@@ -16,7 +16,7 @@ the [mini Stan exercise from the notes](../w08_mcmc1/topic01_installing_stan.qmd
 
 In this question, you will analyze the 
 [Hubble data we encountered earlier in the course](../w04_glms/topic05_regression.qmd) 
-but using different priors and Stan. 
+but using different priors, and with Stan instead of simPPLe. 
 
 First, access the data as follows:
 
@@ -66,6 +66,6 @@ Use this function to compute the posterior mean of the model encoded in `gamma_b
 
 Compute the posterior mean of $p$ using:
 
-- 1000 iterations of MCMC
-- analytic computations based on [the practice quiz 1 question](../w07_quiz1/topic02_practice_questions.qmd).
+1. 1000 iterations of MCMC,
+2. analytic computations based on [the practice quiz 1 question](../w07_quiz1/topic02_practice_questions.qmd).
 

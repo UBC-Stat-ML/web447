@@ -1,0 +1,156 @@
+---
+title: "Stan: going further"
+editor: 
+  mode: source
+execute: 
+  cache: false
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   More complex types in Stan (vectors, constraints) 
+-   Loops and vectorization
+-   Feeding complex data into Stan
+
+### Rationale
+
+We review here the constructs needed to write more complex models such as 
+[Q2 in the current exercise](../exercises/ex07.qmd), more similar exercises coming in the 
+next weeks, and the second quiz. 
+
+
+## Example 
+
+We revisit the omicron modelling question from quiz 1. 
+
+*The data consists, for each day in December 2021,
+of the **percentage** of sequenced COVID-19 samples that are of the
+Omicron variant.*
+
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(dplyr))
+
+# data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data
+df = read.csv("../../quizzes/q1/covid19_variants.csv")
+df$date = as.Date(df$date,format="%Y-%m-%d")
+
+df = df %>% filter(date > "2021-12-01" & date < "2021-12-31") %>% filter(variant_name == "Omicron")
+
+df %>% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + theme_minimal()
+```
+
+
+## Model (mathematical notation)
+
+Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters):
+
+\begin{align*}
+\theta_0 &\sim \distExp(1) \\
+\theta_1 &\sim \distNorm(0, \sigma = 1000) \\
+\theta_2 &\sim \distNorm(0, \sigma = 1000) \\
+\mu_i &= \text{logistic}(i \theta_1 + \theta_2) \\
+y_i &\sim \distBeta(\mu_i, \theta_0) \\
+\end{align*}
+
+
+## Model (in Stan)
+
+Let us translate the mathematical notation into Stan:
+
+```{stan output.var = "omicron"}
+
+// comments in Stan use '//' not '#'
+
+data { 
+  // Here `N` is the number of days considered. 
+  int N; 
+  
+  // meaning: `y` is a vector of length `N` where each entry is between zero and one.
+  vector<lower=0, upper=1>[N] y; 
+}
+
+// As before, we declare in `parameters` the types of the unobserved (latent) random variables. 
+parameters { 
+  real<lower=0> concentration; 
+  real slope;
+  real intercept;
+}
+
+transformed parameters { # <1>
+  // inv_logit is Stan's name for the logistic function
+  // linspaced_vector(N,0,1) creates a vector of N equispace points between 0 and 1
+  //    (we normalize the dates to be between zero and one)
+  // functions in Stan are typically vectorized, this is the case for example with inv_logit
+  vector[N] mu = 
+    inv_logit(intercept + slope*linspaced_vector(N,0,1));
+}
+
+model { # <2>
+  concentration ~ exponential(1);
+  slope ~ normal(0, 1000);
+  intercept ~ normal(0, 1000);
+  
+  for (i in 1:N) { // Stan is 1-indexed
+    y[i] ~ beta_proportion(mu[i], concentration); # <3>
+  }
+  
+  // Here is another example of vectorization---the line below will produce the same 
+  // output as the loop above, but slightly faster:
+  //   y ~ beta_proportion(mu, concentration);
+}
+
+```
+1. Whenever in the mathematical notation a latent random variable is defined using an **equality** ("$=$"), input it in the `transformed parameters` block.
+2. Whenever in the mathematical notation a latent random variable is defined using a **distribution statement** ("$\sim$"), input it in the `model` block.
+3. Here, `beta_proportion` corresponds to the mean-concentration parameterization we discussed [in the lecture on hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd).
+
+Running the model is done as before:[^1] 
+
+[^1]: note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  omicron,         
+  data = list(y = pmax(pmin(df$percentage/100,0.999),0.001), N = length(df$percentage)), 
+  show_messages = FALSE,
+  open_progress = FALSE, 
+  chains = 1,
+  iter = 10000       
+)
+```
+
+
+## Posterior visualization
+
+We can extract samples as follows:
+
+```{r}
+samples = extract(fit)$mu
+data = df$percentage
+n_samples = nrow(samples)
+```
+
+and plot the posterior distribution over the beta's mean functions:
+
+```{r}
+xs = 1:length(data) / length(df$percentage)
+plot(xs, data/100)
+
+mus = samples
+for (i in 1:n_samples) {
+  lines(xs, samples[i,], col = rgb(red = 0, green = 0, blue = 0, alpha = 0.01))
+}
+```
+
+## Model criticism 
+
+What are potential weakness(es) of the model?
+
+{{< include ../../clickers/w07/_c02.qmd >}}

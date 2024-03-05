@@ -20,7 +20,13 @@ We will write many Stan models in the coming weeks, so we will cover here the ke
 
 ## Example
 
+### Review: code in simPPLe and analytic answer
+
 Let us revisit the [Doomsday model](../w03_ppl/topic03_continuous.qmd), which we wrote in simPPLe as follows:
+
+::: column-margin
+![](../images/doomsday.png){width="200"}
+:::
 
 ```{r}
 source("../../solutions/simple.R")
@@ -35,7 +41,10 @@ posterior(doomsday_model, 100000)
 ```
 
 
-Recall the analytic answer [that we computed in clicker questions](../w03_ppl/topic03_continuous.qmd) was: $\approx 1.117$.
+Recall the **analytic answer** [that we computed in clicker questions](../w03_ppl/topic03_continuous.qmd) was: $\approx 1.117$.
+
+
+### Code in Stan
 
 Today we will re-write this model in Stan instead of simPPLe. The main difference is that:
 
@@ -81,10 +90,8 @@ model {
 fit = sampling(
   doomsday,         
   data = list(y = 0.06), # <1>
-  show_messages = FALSE,
-  open_progress = FALSE, 
   chains = 1,
-  iter = 2000       # <2>
+  iter = 100000       # <2>
 )
 ```
 1. Pass in the values taken by the observed random variables. 
@@ -107,15 +114,25 @@ fit
 ## Interpreting the output
 
 - Just as [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) and [SNIS](../w03_ppl/topic02_snis.qmd), the output of Stan/MCMC is a list of *samples* 
-- In contrast to SNIS, the samples are equally weighted, i.e., their structure is the same as samples from simple Monte Carlo.
-
-To access the samples from a "fit" object use:
+- In contrast to SNIS, the samples are **equally weighted**, 
+    - in other words, for MCMC we have $W^\parm = 1/M$,
+    - i.e., their structure is the same as samples from [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd)!
+    
+To access the samples from a "fit" object when calling Stan, use:
 
 ```{r}
 samples = extract(fit)
 
 head(samples$x)
 ```
+
+**Question:** denote the samples output from Stan by $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. What formula should you use to approximate 
+$\ex[g(X) | Y = y]$ based on the Stan output?
+    
+{{< include ../../clickers/w07/_c01.qmd >}}
+
+
+### Plotting histograms
 
 Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:
 
