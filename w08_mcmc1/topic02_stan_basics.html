@@ -134,7 +134,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -650,6 +650,18 @@ window.Quarto = {
  <span class="menu-text">Stan basics</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic03_more_complex_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stan: going further</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -667,14 +679,21 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
+  <ul class="collapse">
+  <li><a href="#review-code-in-simpple-and-analytic-answer" id="toc-review-code-in-simpple-and-analytic-answer" class="nav-link" data-scroll-target="#review-code-in-simpple-and-analytic-answer">Review: code in simPPLe and analytic answer</a></li>
+  <li><a href="#code-in-stan" id="toc-code-in-stan" class="nav-link" data-scroll-target="#code-in-stan">Code in Stan</a></li>
+  </ul></li>
   <li><a href="#tips-and-tricks" id="toc-tips-and-tricks" class="nav-link" data-scroll-target="#tips-and-tricks">Tips and tricks</a></li>
-  <li><a href="#interpreting-the-output" id="toc-interpreting-the-output" class="nav-link" data-scroll-target="#interpreting-the-output">Interpreting the output</a></li>
+  <li><a href="#interpreting-the-output" id="toc-interpreting-the-output" class="nav-link" data-scroll-target="#interpreting-the-output">Interpreting the output</a>
+  <ul class="collapse">
+  <li><a href="#plotting-histograms" id="toc-plotting-histograms" class="nav-link" data-scroll-target="#plotting-histograms">Plotting histograms</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic02_stan_basics.html">Stan basics</a></li></ol></nav>
 <div class="quarto-title">
@@ -728,10 +747,15 @@ https://github.com/trevorcampbell/shortex
 <p>We will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.</p>
 </section>
 </section>
-<section id="example" class="level2">
+<section id="example" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="review-code-in-simpple-and-analytic-answer" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="review-code-in-simpple-and-analytic-answer">Review: code in simPPLe and analytic answer</h3>
 <p>Let us revisit the <a href="../w03_ppl/topic03_continuous.html">Doomsday model</a>, which we wrote in simPPLe as follows:</p>
-<div class="cell">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/doomsday.png" class="img-fluid" width="200"></p>
+</div></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>doomsday_model <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
@@ -745,7 +769,10 @@ https://github.com/trevorcampbell/shortex
 <pre><code>[1] 1.103447</code></pre>
 </div>
 </div>
-<p>Recall the analytic answer <a href="../w03_ppl/topic03_continuous.html">that we computed in clicker questions</a> was: <span class="math inline">\(\approx 1.117\)</span>.</p>
+<p>Recall the <strong>analytic answer</strong> <a href="../w03_ppl/topic03_continuous.html">that we computed in clicker questions</a> was: <span class="math inline">\(\approx 1.117\)</span>.</p>
+</section>
+<section id="code-in-stan" class="level3">
+<h3 class="anchored" data-anchor-id="code-in-stan">Code in Stan</h3>
 <p>Today we will re-write this model in Stan instead of simPPLe. The main difference is that:</p>
 <ul>
 <li>both <code>simulate</code> and <code>observe</code> will be denoted by <code>~</code>in Stan,<br>
@@ -794,15 +821,14 @@ https://github.com/trevorcampbell/shortex
 </div>
 <p><strong>Question:</strong> How does Stan gets the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
 <p><strong>Answer:</strong> When Stan gets called in R:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<!-- Note: dependson=knitr::dep_prev() needed as otherwise updates in the model will not invalidate the knitr cache properly -->
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>  doomsday,         </span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>),</span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_messages =</span> <span class="cn">FALSE</span>,</span>
-<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">open_progress =</span> <span class="cn">FALSE</span>, </span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">2000</span></span>
-<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">100000</span></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
@@ -811,7 +837,7 @@ https://github.com/trevorcampbell/shortex
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="2">The number of samples to compute (equivalent to <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2">The number of samples to compute (equivalent to <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
 </dd>
 </dl>
 </div>
@@ -822,27 +848,27 @@ Chain 1: Rejecting initial value:
 Chain 1:   Error evaluating the log probability at the initial value.
 Chain 1: Exception: uniform_lpdf: Upper bound parameter is -1.58474, but must be greater than 0.000000 (in 'anon_model', line 9, column 2 to column 20)
 Chain 1: 
-Chain 1: Gradient evaluation took 1e-06 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.01 seconds.
+Chain 1: Gradient evaluation took 3e-06 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: Iteration:     1 / 100000 [  0%]  (Warmup)
+Chain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)
+Chain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)
+Chain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)
+Chain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)
+Chain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)
+Chain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)
+Chain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)
+Chain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)
+Chain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)
+Chain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)
+Chain 1: Iteration: 100000 / 100000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.239 seconds (Warm-up)
-Chain 1:                0.41 seconds (Sampling)
-Chain 1:                0.649 seconds (Total)
+Chain 1:  Elapsed Time: 10.363 seconds (Warm-up)
+Chain 1:                3.196 seconds (Sampling)
+Chain 1:                13.559 seconds (Total)
 Chain 1: </code></pre>
 </div>
 </div>
@@ -851,19 +877,20 @@ Chain 1: </code></pre>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Inference for Stan model: anon_model.
-4 chains, each with iter=2000; warmup=1000; thin=1; 
-post-warmup draws per chain=1000, total post-warmup draws=4000.
+1 chains, each with iter=1e+05; warmup=50000; thin=1; 
+post-warmup draws per chain=50000, total post-warmup draws=50000.
 
      mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat
-x    1.11    0.11 1.21  0.07  0.19 0.58 1.66  4.25   129 1.05
-lp__ 0.59    0.18 1.28 -1.45 -0.50 0.54 1.65  2.71    50 1.09
+x    1.15    0.03 1.30  0.07  0.18 0.56 1.72  4.56  1403    1
+lp__ 0.58    0.04 1.29 -1.52 -0.54 0.58 1.69  2.70  1092    1
 
-Samples were drawn using NUTS(diag_e) at Wed Feb 28 22:53:49 2024.
+Samples were drawn using NUTS(diag_e) at Mon Mar  4 21:07:38 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</code></pre>
 </div>
 </div>
+</section>
 </section>
 <section id="tips-and-tricks" class="level2">
 <h2 class="anchored" data-anchor-id="tips-and-tricks">Tips and tricks</h2>
@@ -879,17 +906,43 @@ convergence, Rhat=1).</code></pre>
 <h2 class="anchored" data-anchor-id="interpreting-the-output">Interpreting the output</h2>
 <ul>
 <li>Just as <a href="../w01_discrete_inference/topic11_monte_carlo.html">simple Monte Carlo</a> and <a href="../w03_ppl/topic02_snis.html">SNIS</a>, the output of Stan/MCMC is a list of <em>samples</em></li>
-<li>In contrast to SNIS, the samples are equally weighted, i.e., their structure is the same as samples from simple Monte Carlo.</li>
+<li>In contrast to SNIS, the samples are <strong>equally weighted</strong>,
+<ul>
+<li>in other words, for MCMC we have <span class="math inline">\(W^{(m)}= 1/M\)</span>,</li>
+<li>i.e., their structure is the same as samples from <a href="../w01_discrete_inference/topic11_monte_carlo.html">simple Monte Carlo</a>!</li>
+</ul></li>
 </ul>
-<p>To access the samples from a “fit” object use:</p>
+<p>To access the samples from a “fit” object when calling Stan, use:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">extract</span>(fit)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07802865 4.31297676 0.06059216 0.93406232 3.86181820 4.09976419</code></pre>
+<pre><code>[1] 1.1564924 2.1603994 0.1596580 0.1776573 4.1258671 1.0702292</code></pre>
 </div>
 </div>
+<p><strong>Question:</strong> denote the samples output from Stan by <span class="math inline">\(X^{(1)}, X^{(2)}, \dots, X^{(M)}\)</span>. What formula should you use to approximate <span class="math inline">\(\mathbb{E}[g(X) | Y = y]\)</span> based on the Stan output?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\sum_x p(x) g(x)$ 
+1. $\sum_x f(x) g(x)$ 
+1. $\frac{1}{M} \sum_{m=1}^M g(X^\parm)$ 
+1. $\frac{1}{M} \sum_{m=1}^M f(X^\parm) g(X^\parm)$ 
+1. None of the above
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+As in simple Monte Carlo, use $\frac{1}{M} \sum_{m=1}^M g(X^\parm)$.
+:::
+
+-->
+<section id="plotting-histograms" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-histograms">Plotting histograms</h3>
 <p>Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -918,6 +971,7 @@ convergence, Rhat=1).</code></pre>
 </div>
 
 
+</section>
 </section>
 
 
