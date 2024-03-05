@@ -35,7 +35,7 @@ Run stan for 2000 iterations and
 report a histogram on the quantity of interest, i.e., the slope parameter.
 
 
-## Q.3: a simple MCMC algorithm
+## Q.3: a simple MCMC algorithm {#sec-q3}
 
 In this question, you will implement a random-walk Metropolis algorithm with a 
 standard normal proposal. 

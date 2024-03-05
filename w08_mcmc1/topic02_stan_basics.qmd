@@ -65,7 +65,7 @@ data { # <1>
 }
 
 parameters { # <2>
-  real x;
+  real<lower=0, upper=5> x;
 }
 
 model {
@@ -111,7 +111,7 @@ fit
     - e.g., [this is the documentation](https://mc-stan.org/docs/functions-reference/uniform-distribution.html) for `uniform`. 
     
     
-## Interpreting the output
+## Interpreting the output 
 
 - Just as [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) and [SNIS](../w03_ppl/topic02_snis.qmd), the output of Stan/MCMC is a list of *samples* 
 - In contrast to SNIS, the samples are **equally weighted**, 
@@ -124,6 +124,12 @@ To access the samples from a "fit" object when calling Stan, use:
 samples = extract(fit)
 
 head(samples$x)
+```
+
+As a sanity check, let's make sure all the samples are greater than the observed lower bound of $0.06$:
+
+```{r}
+min(samples$x)
 ```
 
 **Question:** denote the samples output from Stan by $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. What formula should you use to approximate 

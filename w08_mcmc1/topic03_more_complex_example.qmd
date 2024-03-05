@@ -2,8 +2,6 @@
 title: "Stan: going further"
 editor: 
   mode: source
-execute: 
-  cache: false
 ---
 
 {{< include ../_macros.qmd >}}
@@ -64,7 +62,7 @@ y_i &\sim \distBeta(\mu_i, \theta_0) \\
 
 Let us translate the mathematical notation into Stan:
 
-```{stan output.var = "omicron"}
+```{stan output.var = "omicron_first_attempt"}
 
 // comments in Stan use '//' not '#'
 
@@ -83,11 +81,50 @@ parameters {
   real intercept;
 }
 
+model {
+  concentration ~ exponential(1);
+  slope ~ normal(0, 1000);
+  intercept ~ normal(0, 1000);
+  
+  for (i in 1:N) { // Stan is 1-indexed
+    // inv_logit is Stan's name for the logistic function
+    y[i] ~ beta_proportion( # <1>
+              inv_logit(intercept + slope * (i/N)), 
+              concentration); 
+  }
+}
+
+```
+1. Here, `beta_proportion` corresponds to the [mean-concentration parameterization](https://mc-stan.org/docs/functions-reference/continuous_distributions_on_0_1.html#beta-proportion-distribution) we discussed [in the lecture on hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd).
+
+
+## Improving our model with generated parameters
+
+- The code in the last section will not print out $\mu_i$ 
+- The code below show how to fix this
+    - $\mu_i$ is handled differently than $\theta_k$, $y_i$...
+    - ... because $\mu_i$ is defined with $=$ instead of $\sim$
+
+
+```{stan output.var = "omicron"}
+
+data { 
+  int N; 
+  vector<lower=0, upper=1>[N] y; 
+}
+
+parameters { 
+  real<lower=0> concentration; 
+  real slope;
+  real intercept;
+}
+
 transformed parameters { # <1>
-  // inv_logit is Stan's name for the logistic function
-  // linspaced_vector(N,0,1) creates a vector of N equispace points between 0 and 1
+  // linspaced_vector(N,0,1) creates a vector 
+  //    of N equispace points between 0 and 1
   //    (we normalize the dates to be between zero and one)
-  // functions in Stan are typically vectorized, this is the case for example with inv_logit
+  // functions in Stan are typically vectorized, 
+  //    this is the case for example with inv_logit
   vector[N] mu = 
     inv_logit(intercept + slope*linspaced_vector(N,0,1));
 }
@@ -97,34 +134,36 @@ model { # <2>
   slope ~ normal(0, 1000);
   intercept ~ normal(0, 1000);
   
-  for (i in 1:N) { // Stan is 1-indexed
-    y[i] ~ beta_proportion(mu[i], concentration); # <3>
-  }
-  
-  // Here is another example of vectorization---the line below will produce the same 
-  // output as the loop above, but slightly faster:
-  //   y ~ beta_proportion(mu, concentration);
+  // Another example of vectorization---the line below will produce the same 
+  // output as the loop in the previous version, but slightly faster:
+  y ~ beta_proportion(mu, concentration);
 }
 
 ```
 1. Whenever in the mathematical notation a latent random variable is defined using an **equality** ("$=$"), input it in the `transformed parameters` block.
-2. Whenever in the mathematical notation a latent random variable is defined using a **distribution statement** ("$\sim$"), input it in the `model` block.
-3. Here, `beta_proportion` corresponds to the mean-concentration parameterization we discussed [in the lecture on hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd).
+2. Whenever in the mathematical notation a latent random variable is defined using a **distribution statement** ("$\sim$"), input it in the `model` block. 
 
-Running the model is done as before:[^1] 
+
+## Running MCMC
+
+Running MCMC on the model is done as before:[^1] 
 
 [^1]: note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
 
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+```{r dependson=knitr::dep_prev()}
+data_without_zeros = pmax(pmin(df$percentage/100,0.999),0.001)
+
 fit = sampling(
-  omicron,         
-  data = list(y = pmax(pmin(df$percentage/100,0.999),0.001), N = length(df$percentage)), 
-  show_messages = FALSE,
-  open_progress = FALSE, 
+  omicron, 
+  data = list( # <1>
+          y = data_without_zeros, 
+          N = length(data_without_zeros)
+        ), 
   chains = 1,
   iter = 10000       
 )
 ```
+1. each variable in Stan's `data` block needs to be fed a value when called from R.
 
 
 ## Posterior visualization
