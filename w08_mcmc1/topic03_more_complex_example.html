@@ -820,17 +820,12 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <span id="annotated-cell-2-27"><a href="#annotated-cell-2-27" aria-hidden="true" tabindex="-1"></a>              inv_logit(intercept + slope * (i/N)), </span>
 <span id="annotated-cell-2-28"><a href="#annotated-cell-2-28" aria-hidden="true" tabindex="-1"></a>              concentration); </span>
 <span id="annotated-cell-2-29"><a href="#annotated-cell-2-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="annotated-cell-2-30"><a href="#annotated-cell-2-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="annotated-cell-2-31"><a href="#annotated-cell-2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Stan supports vectorization---the line below will produce the same </span></span>
-<span id="annotated-cell-2-32"><a href="#annotated-cell-2-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// output as the loop above, but slightly faster:</span></span>
-<span id="annotated-cell-2-33"><a href="#annotated-cell-2-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="annotated-cell-2-34"><a href="#annotated-cell-2-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">//   y ~ beta_proportion(mu, concentration);</span></span>
-<span id="annotated-cell-2-35"><a href="#annotated-cell-2-35" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-2-30"><a href="#annotated-cell-2-30" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="26" data-code-annotation="1">Here, <code>beta_proportion</code> corresponds to the mean-concentration parameterization we discussed <a href="../w06_hierarchical/topic03_hierarchy.html">in the lecture on hierarchical models</a>.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="26" data-code-annotation="1">Here, <code>beta_proportion</code> corresponds to the <a href="https://mc-stan.org/docs/functions-reference/continuous_distributions_on_0_1.html#beta-proportion-distribution">mean-concentration parameterization</a> we discussed <a href="../w06_hierarchical/topic03_hierarchy.html">in the lecture on hierarchical models</a>.</span>
 </dd>
 </dl>
 </div>
@@ -874,8 +869,10 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <span id="annotated-cell-3-25"><a href="#annotated-cell-3-25" aria-hidden="true" tabindex="-1"></a>  slope ~ normal(<span class="dv">0</span>, <span class="dv">1000</span>);</span>
 <span id="annotated-cell-3-26"><a href="#annotated-cell-3-26" aria-hidden="true" tabindex="-1"></a>  intercept ~ normal(<span class="dv">0</span>, <span class="dv">1000</span>);</span>
 <span id="annotated-cell-3-27"><a href="#annotated-cell-3-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28" aria-hidden="true" tabindex="-1"></a>  y ~ beta_proportion(mu, concentration);</span>
-<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Another example of vectorization---the line below will produce the same </span></span>
+<span id="annotated-cell-3-29"><a href="#annotated-cell-3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// output as the loop in the previous version, but slightly faster:</span></span>
+<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30" aria-hidden="true" tabindex="-1"></a>  y ~ beta_proportion(mu, concentration);</span>
+<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -917,8 +914,8 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 3.1e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.31 seconds.
+Chain 1: Gradient evaluation took 2.7e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -935,9 +932,9 @@ Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
 Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
 Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.171 seconds (Warm-up)
-Chain 1:                0.2 seconds (Sampling)
-Chain 1:                0.371 seconds (Total)
+Chain 1:  Elapsed Time: 0.142 seconds (Warm-up)
+Chain 1:                0.175 seconds (Sampling)
+Chain 1:                0.317 seconds (Total)
 Chain 1: </code></pre>
 </div>
 </div>
@@ -971,19 +968,22 @@ Chain 1: </code></pre>
 <section id="model-criticism" class="level2">
 <h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
 <p>What are potential weakness(es) of the model?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Many answers possible. For example, the systematic errors in the residuals
-(i.e., many points in a row are smaller at the beginning, and the 
-reversed trend at the end)
-suggest that the logistic function is not quite rich enough to capture the 
-details of the observed curve. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Many answers possible. For example, the systematic errors in the residuals (i.e., many points in a row are smaller at the beginning, and the reversed trend at the end) suggest that the logistic function is not quite rich enough to capture the details of the observed curve.</p>
+</div>
+</div>
+</div>
 
 
 </section>

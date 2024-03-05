@@ -835,14 +835,18 @@ where $\pi(x) = p(x | y)$.
 <li>Intuition:
 <ul>
 <li>Once we find a “good neighborhood”, i.e., a region where the posterior density is high,</li>
-<li>having <span class="math inline">\(q(\cdot|x)\)</span> depend on current value allows us to stay for a while in that good neighborhood</li>
+<li>having <span class="math inline">\(q(\cdot|x)\)</span> depend on current value allows us to stay for a while in that good neighborhood.</li>
 </ul></li>
 </ul>
-<p><strong>Today:</strong> we assume <span class="math inline">\(q\)</span> is symmetric, i.e., <span class="math inline">\(q(x | x') = q(x' | x)\)</span>. We will relax this later.</p>
+<p><strong>Today:</strong></p>
+<ul>
+<li>we assume <span class="math inline">\(q\)</span> is symmetric, i.e., <span class="math inline">\(q(x | x') = q(x' | x)\)</span>.</li>
+<li>We will relax this later.</li>
+</ul>
 </section>
 <section id="symmetric-proposal-mh-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="symmetric-proposal-mh-algorithm">Symmetric proposal MH algorithm</h2>
-<p><strong>Inputs:</strong> <span class="math inline">\(\gamma\)</span>, <span class="math inline">\(q\)</span>, <span class="math inline">\(M\)</span>.</p>
+<p><strong>Inputs:</strong> unnormalized target <span class="math inline">\(\gamma\)</span>, proposal <span class="math inline">\(q\)</span>, number of iterations <span class="math inline">\(M\)</span>.</p>
 <p><strong>Algorithm:</strong></p>
 <ul>
 <li>Initialize <span class="math inline">\(X^{(0)}\)</span> arbitrarily</li>
@@ -882,7 +886,7 @@ where $\pi(x) = p(x | y)$.
 <section id="visualization" class="level2">
 <h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
 <p>In the exercise this week, you will <a href="../exercises/ex07.html#sec-q3">implement this simple version MH</a> (i.e., symmetric proposal).</p>
-<p>Once the code is executed you will be able to call your function as follows:</p>
+<p>Once your exercise is complete you will be able to call your function as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex07_scaffold.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/sol07_mh.R"</span>)</span>
