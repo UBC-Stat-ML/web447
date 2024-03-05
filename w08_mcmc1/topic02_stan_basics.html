@@ -796,7 +796,7 @@ https://github.com/trevorcampbell/shortex
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> x;</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">5</span>&gt; x;</span>
 <span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
@@ -850,12 +850,9 @@ https://github.com/trevorcampbell/shortex
 <div class="cell-output cell-output-stdout">
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
-Chain 1: Rejecting initial value:
-Chain 1:   Error evaluating the log probability at the initial value.
-Chain 1: Exception: uniform_lpdf: Upper bound parameter is -1.58474, but must be greater than 0.000000 (in 'anon_model', line 9, column 2 to column 20)
 Chain 1: 
-Chain 1: Gradient evaluation took 3e-06 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
+Chain 1: Gradient evaluation took 4e-06 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -872,9 +869,9 @@ Chain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)
 Chain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)
 Chain 1: Iteration: 100000 / 100000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 10.363 seconds (Warm-up)
-Chain 1:                3.196 seconds (Sampling)
-Chain 1:                13.559 seconds (Total)
+Chain 1:  Elapsed Time: 0.253 seconds (Warm-up)
+Chain 1:                0.157 seconds (Sampling)
+Chain 1:                0.41 seconds (Total)
 Chain 1: </code></pre>
 </div>
 </div>
@@ -886,11 +883,11 @@ Chain 1: </code></pre>
 1 chains, each with iter=1e+05; warmup=50000; thin=1; 
 post-warmup draws per chain=50000, total post-warmup draws=50000.
 
-     mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat
-x    1.15    0.03 1.30  0.07  0.18 0.56 1.72  4.56  1403    1
-lp__ 0.58    0.04 1.29 -1.52 -0.54 0.58 1.69  2.70  1092    1
+      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+x     1.12    0.01 1.25  0.07  0.19  0.55  1.68  4.45 10585    1
+lp__ -0.37    0.01 0.63 -2.21 -0.41 -0.12 -0.04 -0.01  9987    1
 
-Samples were drawn using NUTS(diag_e) at Mon Mar  4 21:07:38 2024.
+Samples were drawn using NUTS(diag_e) at Tue Mar  5 11:45:15 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</code></pre>
@@ -924,7 +921,14 @@ convergence, Rhat=1).</code></pre>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1564924 2.1603994 0.1596580 0.1776573 4.1258671 1.0702292</code></pre>
+<pre><code>[1] 0.7224132 3.7228678 2.2768091 1.0077302 4.9788992 0.6378141</code></pre>
+</div>
+</div>
+<p>As a sanity check, let’s make sure all the samples are greater than the observed lower bound of <span class="math inline">\(0.06\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06000474</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> denote the samples output from Stan by <span class="math inline">\(X^{(1)}, X^{(2)}, \dots, X^{(M)}\)</span>. What formula should you use to approximate <span class="math inline">\(\mathbb{E}[g(X) | Y = y]\)</span> based on the Stan output?</p>
@@ -970,26 +974,26 @@ Click for answer
 <h3 class="anchored" data-anchor-id="plotting-histograms">Plotting histograms</h3>
 <p>Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You can also use the <code>bayesplot</code> package which will be handy to create more complex plots from MCMC runs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(fit, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(fit, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
