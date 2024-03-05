@@ -10,5 +10,4 @@ plot_traces_and_hist = function(samples) {
   plot(samples, axes = TRUE, type = "o", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
   xhist <- hist(samples, plot = FALSE)
   barplot(xhist$counts, axes = TRUE, space = 0, horiz=TRUE)
-  return(NULL)
 }

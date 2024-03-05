@@ -1,0 +1,71 @@
+---
+title: "Exercise 7: Intro to MCMC"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+## Q.1: installing and running Stan
+
+Report the posterior median in 
+the [mini Stan exercise from the notes](../w08_mcmc1/topic01_installing_stan.qmd#running). 
+
+
+## Q.2: regression in Stan
+
+In this question, you will analyze the 
+[Hubble data we encountered earlier in the course](../w04_glms/topic05_regression.qmd) 
+but using different priors and Stan. 
+
+First, access the data as follows:
+
+```r {shortcodes=true, filename="ex07_import_hubble.R"}
+{{< include ex07_import_hubble.R >}}
+```
+
+Second, write a Stan model following the same structure as the model from 
+[last time we analyzed this data](../w04_glms/topic05_regression.qmd) 
+**except** that the following priors should be used:
+
+- for the slope parameter, `student_t(3, 0, 100)`
+- for the standard deviation parameter and exponential with rate `0.001`
+
+Run stan for 2000 iterations and 
+report a histogram on the quantity of interest, i.e., the slope parameter.
+
+
+## Q.3: a simple MCMC algorithm
+
+In this question, you will implement a random-walk Metropolis algorithm with a 
+standard normal proposal. 
+
+Start with the following scaffold code that encodes the posterior distribution of interest. 
+More specifically, this encodes an un-normalized distribution $\gamma(p)$ given by 
+prior times likelihood. 
+
+```r {shortcodes=true, filename="ex07_scaffold.R"}
+{{< include ex07_scaffold.R >}}
+```
+
+Complete the blanks in the following:
+
+```r
+# simple Metropolis-Hastings algorithm (normal proposal)
+simple_mh = function(gamma, initial_point, n_iters) {
+  samples = numeric(n_iters) 
+  dim = length(initial_point)
+  
+  # TODO
+  
+  return(samples)
+}
+```
+
+Use this function to compute the posterior mean of the model encoded in `gamma_beta_binomial`. 
+
+Compute the posterior mean of $p$ using:
+
+- 1000 iterations of MCMC
+- analytic computations based on [the practice quiz 1 question](../w07_quiz1/topic02_practice_questions.qmd).
+
