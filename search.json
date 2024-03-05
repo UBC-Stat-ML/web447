@@ -1428,619 +1428,157 @@
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html",
-    "href": "w08_mcmc1/topic03_more_complex_example.html",
-    "title": "Stan: going further",
+    "objectID": "w08_mcmc1/topic04_mh.html",
+    "href": "w08_mcmc1/topic04_mh.html",
+    "title": "Metropolis-Hastings",
     "section": "",
-    "text": "More complex types in Stan (vectors, constraints)\nLoops and vectorization\nFeeding complex data into Stan\n\n\n\n\nWe review here the constructs needed to write more complex models such as Q2 in the current exercise, more similar exercises coming in the next weeks, and the second quiz.",
+    "text": "Metropolis-Hastings (MH) algorithm with symmetric proposal\nTrace plots from MH\nHistograms from MH\n\n\n\n\nThe vast majority of MCMC algorithms are based on the Metropolis-Hastings (MH) algorithm.\nLearning MH is the first step towards understanding why MCMC algorithms such as Stan work. Some knowledge of how MCMC works is useful to identify when it fails (“MCMC diagnostic”). There are also situations where you will have to write your own MCMC algorithm (something we will practice more in the last weeks of the course).",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#outline",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#outline",
-    "title": "Stan: going further",
+    "objectID": "w08_mcmc1/topic04_mh.html#outline",
+    "href": "w08_mcmc1/topic04_mh.html#outline",
+    "title": "Metropolis-Hastings",
     "section": "",
-    "text": "More complex types in Stan (vectors, constraints)\nLoops and vectorization\nFeeding complex data into Stan\n\n\n\n\nWe review here the constructs needed to write more complex models such as Q2 in the current exercise, more similar exercises coming in the next weeks, and the second quiz.",
+    "text": "Metropolis-Hastings (MH) algorithm with symmetric proposal\nTrace plots from MH\nHistograms from MH\n\n\n\n\nThe vast majority of MCMC algorithms are based on the Metropolis-Hastings (MH) algorithm.\nLearning MH is the first step towards understanding why MCMC algorithms such as Stan work. Some knowledge of how MCMC works is useful to identify when it fails (“MCMC diagnostic”). There are also situations where you will have to write your own MCMC algorithm (something we will practice more in the last weeks of the course).",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#example",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#example",
-    "title": "Stan: going further",
-    "section": "Example",
-    "text": "Example\nWe revisit the omicron modelling question from quiz 1.\nThe data consists, for each day in December 2021, of the percentage of sequenced COVID-19 samples that are of the Omicron variant.\n\nsuppressPackageStartupMessages(require(rstan))\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\n# data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data\ndf = read.csv(\"../../quizzes/q1/covid19_variants.csv\")\ndf$date = as.Date(df$date,format=\"%Y-%m-%d\")\n\ndf = df %&gt;% filter(date &gt; \"2021-12-01\" & date &lt; \"2021-12-31\") %&gt;% filter(variant_name == \"Omicron\")\n\ndf %&gt;% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + theme_minimal()",
+    "objectID": "w08_mcmc1/topic04_mh.html#goal",
+    "href": "w08_mcmc1/topic04_mh.html#goal",
+    "title": "Metropolis-Hastings",
+    "section": "Goal",
+    "text": "Goal\n\nJust as SNIS, our goal is to compute \\(\\mathbb{E}[g(X) | Y = y]\\).\nMH will allow us to approximate this conditional expectation.\n\nHow is this different than the simple Monte Carlo method that we used in Ex1.Q.1.3?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe used simple Monte Carlo to compute an expectation without conditioning on \\(Y = y\\), i.e. \\(\\mathbb{E}[g(X)]\\).\nMH, just like SNIS, allows us to take into account observed data.",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-mathematical-notation",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#model-mathematical-notation",
-    "title": "Stan: going further",
-    "section": "Model (mathematical notation)",
-    "text": "Model (mathematical notation)\nRecall one possible model we discussed after the quiz (with slightly different prior hyper-parameters):\n\\[\\begin{align*}\n\\theta_0 &\\sim {\\mathrm{Exp}}(1) \\\\\n\\theta_1 &\\sim \\mathcal{N}(0, \\sigma = 1000) \\\\\n\\theta_2 &\\sim \\mathcal{N}(0, \\sigma = 1000) \\\\\n\\mu_i &= \\text{logistic}(i \\theta_1 + \\theta_2) \\\\\ny_i &\\sim {\\mathrm{Beta}}(\\mu_i, \\theta_0) \\\\\n\\end{align*}\\]",
+    "objectID": "w08_mcmc1/topic04_mh.html#problem-formulation",
+    "href": "w08_mcmc1/topic04_mh.html#problem-formulation",
+    "title": "Metropolis-Hastings",
+    "section": "Problem formulation",
+    "text": "Problem formulation\nMH is used to solve the following type of problems:\n\nInput: You are given an unnormalized distribution \\(\\gamma(x)\\)\n\nExample: the numerator in Bayes rule.\n\nOutput: You want to approximate an expectation…\n\n…under the renormalized distribution \\(\\pi(x) = \\gamma(x) / Z\\).\nMathematically: MH provides an approximation to \\(\\mathbb{E}_\\pi[g(X)] = \\sum \\pi(x) g(x)\\).\n\n\nTerminology review: \\(g\\) is called a test function. Think about it as specifying a query.\nExamples: of test functions\n\nTo compute \\(\\mathbb{E}[X | Y = y]\\), use \\(g(x) = x\\).\nLet’s say you want to approximate \\(\\mathbb{P}(X = 1 | Y = y)\\)…\n\n…what function \\(g(x)\\) would you take?",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-in-stan",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#model-in-stan",
-    "title": "Stan: going further",
-    "section": "Model (in Stan)",
-    "text": "Model (in Stan)\nLet us translate the mathematical notation into Stan:\n\n\n// comments in Stan use '//' not '#'\n\ndata { \n  // Here `N` is the number of days considered. \n  int N; \n  \n  // meaning: `y` is a vector of length `N` where each entry is between zero and one.\n  vector&lt;lower=0, upper=1&gt;[N] y; \n}\n\n// As before, we declare in `parameters` the types of the unobserved (latent) random variables. \nparameters { \n  real&lt;lower=0&gt; concentration; \n  real slope;\n  real intercept;\n}\n\n1transformed parameters {\n  // inv_logit is Stan's name for the logistic function\n  // linspaced_vector(N,0,1) creates a vector of N equispace points between 0 and 1\n  //    (we normalize the dates to be between zero and one)\n  // functions in Stan are typically vectorized, this is the case for example with inv_logit\n  vector[N] mu = \n    inv_logit(intercept + slope*linspaced_vector(N,0,1));\n}\n\n2model {\n  concentration ~ exponential(1);\n  slope ~ normal(0, 1000);\n  intercept ~ normal(0, 1000);\n  \n  for (i in 1:N) { // Stan is 1-indexed\n3    y[i] ~ beta_proportion(mu[i], concentration);\n  }\n  \n  // Here is another example of vectorization---the line below will produce the same \n  // output as the loop above, but slightly faster:\n  //   y ~ beta_proportion(mu, concentration);\n}\n\n\n1\n\nWhenever in the mathematical notation a latent random variable is defined using an equality (“\\(=\\)”), input it in the transformed parameters block.\n\n2\n\nWhenever in the mathematical notation a latent random variable is defined using a distribution statement (“\\(\\sim\\)”), input it in the model block.\n\n3\n\nHere, beta_proportion corresponds to the mean-concentration parameterization we discussed in the lecture on hierarchical models.\n\n\n\n\nRunning the model is done as before:1\n\nfit = sampling(\n  omicron,         \n  data = list(y = pmax(pmin(df$percentage/100,0.999),0.001), N = length(df$percentage)), \n  show_messages = FALSE,\n  open_progress = FALSE, \n  chains = 1,\n  iter = 10000       \n)",
+    "objectID": "w08_mcmc1/topic04_mh.html#mhs-extra-ingredient-the-proposal",
+    "href": "w08_mcmc1/topic04_mh.html#mhs-extra-ingredient-the-proposal",
+    "title": "Metropolis-Hastings",
+    "section": "MH’s extra ingredient: the proposal",
+    "text": "MH’s extra ingredient: the proposal\nIn addition to the unnormalized distribution \\(\\gamma\\) and test function \\(f\\), MH requires a proposal \\(q(x' | x)\\).\nExample: standard normal centered at the current point, \\[q(x' | x) \\propto \\exp\\left(- \\frac{1}{2} (x - x')^2 \\right).\\]\n\nThe proposal will help MH explore the space of possible values that \\(X\\) can take.\nKey difference compared to SNIS: the proposal can depend on the current value \\(x\\)\nIntuition:\n\nOnce we find a “good neighborhood”, i.e., a region where the posterior density is high,\nhaving \\(q(\\cdot|x)\\) depend on current value allows us to stay for a while in that good neighborhood\n\n\nToday: we assume \\(q\\) is symmetric, i.e., \\(q(x | x') = q(x' | x)\\). We will relax this later.",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#posterior-visualization",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#posterior-visualization",
-    "title": "Stan: going further",
-    "section": "Posterior visualization",
-    "text": "Posterior visualization\nWe can extract samples as follows:\n\nsamples = extract(fit)$mu\ndata = df$percentage\nn_samples = nrow(samples)\n\nand plot the posterior distribution over the beta’s mean functions:\n\nxs = 1:length(data) / length(df$percentage)\nplot(xs, data/100)\n\nmus = samples\nfor (i in 1:n_samples) {\n  lines(xs, samples[i,], col = rgb(red = 0, green = 0, blue = 0, alpha = 0.01))\n}",
+    "objectID": "w08_mcmc1/topic04_mh.html#symmetric-proposal-mh-algorithm",
+    "href": "w08_mcmc1/topic04_mh.html#symmetric-proposal-mh-algorithm",
+    "title": "Metropolis-Hastings",
+    "section": "Symmetric proposal MH algorithm",
+    "text": "Symmetric proposal MH algorithm\nInputs: \\(\\gamma\\), \\(q\\), \\(M\\).\nAlgorithm:\n\nInitialize \\(X^{(0)}\\) arbitrarily\nFor \\(m = 1, 2, \\dots, M\\) do:\n\nDenote the proposal at iteration \\(m \\in \\{1, 2, \\dots, M\\}\\) by: \\[\\tilde X^{(m)}\\sim q(\\cdot | X^{(m-1)}).\\]\nCompute the MH ratio: \\[R^{(m)}= \\frac{\\gamma(\\tilde X^{(m)})}{\\gamma(X^{(m-1)})}.\\]\nSample an acceptance Bernoulli: \\[A^{(m)}\\sim {\\mathrm{Bern}}(\\min(1, R^{(m)})).\\]\n\nIf \\(A^{(m)}= 1\\), we accept the proposed sample: \\[X^{(m)}= \\tilde X^{(m)},\\]\nElse, \\(A^{(m)}= 0\\), and we reject the proposed sample and stay at previous position: \\[X^{(m)}= \\tilde X^{(m-1)}.\\]\n\n\n\nOutput: equally weighted samples \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\).",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
-    "title": "Stan: going further",
-    "section": "Model criticism",
-    "text": "Model criticism\nWhat are potential weakness(es) of the model?",
+    "objectID": "w08_mcmc1/topic04_mh.html#intuition",
+    "href": "w08_mcmc1/topic04_mh.html#intuition",
+    "title": "Metropolis-Hastings",
+    "section": "Intuition",
+    "text": "Intuition\n\nWhen proposing to a higher point under the posterior density, we have:\n\n\\(\\gamma(\\tilde X^{(m)}) &gt; \\gamma(X^{(m-1)})\\)\nhence \\(R^{(m)}&gt; 1\\),\nso \\(\\min(1, R^{(m)}) = 1\\),\nand \\(A^{(m)}\\) is always one, i.e. always accepted!\n\nWhen proposing to a lower point under the posterior density, we have:\n\n\\(\\gamma(\\tilde X^{(m)}) &lt; \\gamma(X^{(m-1)})\\)\nhence \\(R^{(m)}&lt; 1\\),\nso \\(\\min(1, R^{(m)}) = R^{(m)}\\),\n\\(A^{(m)}\\sim {\\mathrm{Bern}}(\\gamma(\\tilde X^{(m)})/\\gamma(X^{(m-1)}))\\),\ni.e., acceptance probability is a ratio of posterior densities at two points (proposed vs previous).",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
+      "Metropolis-Hastings"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
-    "title": "Stan: going further",
+    "objectID": "w08_mcmc1/topic04_mh.html#visualization",
+    "href": "w08_mcmc1/topic04_mh.html#visualization",
+    "title": "Metropolis-Hastings",
+    "section": "Visualization",
+    "text": "Visualization\nIn the exercise this week, you will implement this simple version MH (i.e., symmetric proposal).\nOnce the code is executed you will be able to call your function as follows:\n\nsource(\"../exercises/ex07_scaffold.R\")\nsource(\"../../solutions/sol07_mh.R\")\n\nsamples = simple_mh(gamma_beta_binomial, 0.5, 1000)\n\n\nTrace plot\nLet us visualize the first 100 samples:\n\nplot(samples[1:100], type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\nQuestion: Notice that many points take exactly the same value, why is that?\n\nTerminology: the above plot (sample as a function of MCMC iteration) is called a trace plot.\nFull trace plot:\n\nplot(samples, type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\n\n\nHistogram\nAs with Stan (another MCMC algorithm we saw earlier this week), we can use a histogram to summarize the posterior:\n\nhist(samples)\n\n\n\n\n\n\n\n\nTo connect the two pictures, it is useful to visualize the histogram rotated as follows:\n\nsource(\"../blocks/plot_traces_and_hist.R\")\n\nplot_traces_and_hist(samples)",
+    "crumbs": [
+      "Intro to MCMC",
+      "Metropolis-Hastings"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html",
+    "href": "w08_mcmc1/topic01_installing_stan.html",
+    "title": "Installing and running Stan",
+    "section": "",
+    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#outline",
+    "href": "w08_mcmc1/topic01_installing_stan.html#outline",
+    "title": "Installing and running Stan",
+    "section": "",
+    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
+    "href": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
+    "title": "Installing and running Stan",
+    "section": "What is Stan?",
+    "text": "What is Stan?\n\nStan is the most popular PPL as of 2024.\nReview the notes on “what is a PPL.”\nStan uses Markov chain Monte Carlo (MCMC) to approximate the posterior distribution.\n\nThink of MCMC has a drop-in replacement for SNIS.\nWe will talk about it in more detail soon.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
+    "href": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
+    "title": "Installing and running Stan",
+    "section": "Installing Stan",
+    "text": "Installing Stan\nYou will need Stan installed to complete next week’s exercise. Don’t wait until next week, install it today!\nThere are two main steps to install Stan:\n\nConfiguring a C++ Toolchains\nInstalling RStan\n\nLet us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#running",
+    "href": "w08_mcmc1/topic01_installing_stan.html#running",
+    "title": "Installing and running Stan",
+    "section": "Running Stan",
+    "text": "Running Stan\nWe present two methods for running Stan in the next two section: either from an R script, or from a R Markdown document.\n\nFrom a R script\nFirst, copy and paste the following code into a file called beta_binomial.stan:\n\n\nbeta_binomial.stan\n\ndata {\n  int&lt;lower=0&gt; n;         // number of trials\n  int&lt;lower=0,upper=n&gt; k; // number of successes\n}\n\nparameters {\n  real&lt;lower=0,upper=1&gt; p;\n}\n\nmodel {\n  // prior\n  p ~ beta(1,1);\n\n  // likelihood\n  k ~ binomial(n, p);\n}\n\nSecond, run Stan as follows:\nrequire(rstan)\n\nfit = stan(\n  seed = 123,\n  file = \"beta_binomial.stan\",  # Stan program\n  data = list(n=3, k=3),        # named list of data\n  iter = 1000                   # number of samples to draw\n)\nThe first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:\nprint(fit)\n\n\nFrom a R Markdown document\nTo see an example of how to integrate Stan code inside R Markdown, see the source code used for the next page in the notes, available on github.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Installing and running Stan"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic01_installing_stan.html#footnotes",
+    "href": "w08_mcmc1/topic01_installing_stan.html#footnotes",
+    "title": "Installing and running Stan",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nnote we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.↩︎",
+    "text": "Footnotes\n\n\nFor example, for the model used in the exercise on hierarchical models, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!↩︎\nFor example, Stan does not support latent integer-value random variables, whereas simPPLe does.↩︎\nsimPPLe is a few dozen lines of codes, whereas Stan has millions of lines of code.↩︎",
     "crumbs": [
       "Intro to MCMC",
-      "Stan: going further"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html",
-    "href": "w08_mcmc1/topic02_stan_basics.html",
-    "title": "Stan basics",
-    "section": "",
-    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html#outline",
-    "href": "w08_mcmc1/topic02_stan_basics.html#outline",
-    "title": "Stan basics",
-    "section": "",
-    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html#example",
-    "href": "w08_mcmc1/topic02_stan_basics.html#example",
-    "title": "Stan basics",
-    "section": "Example",
-    "text": "Example\n\nReview: code in simPPLe and analytic answer\nLet us revisit the Doomsday model, which we wrote in simPPLe as follows:\n\n\n\n\nsource(\"../../solutions/simple.R\")\n\ndoomsday_model &lt;- function() {\n  x = simulate(Unif(0, 5))\n  observe(0.06, Unif(0, x))\n  return(x)\n}\n\nposterior(doomsday_model, 100000)\n\n[1] 1.103447\n\n\nRecall the analytic answer that we computed in clicker questions was: \\(\\approx 1.117\\).\n\n\nCode in Stan\nToday we will re-write this model in Stan instead of simPPLe. The main difference is that:\n\nboth simulate and observe will be denoted by ~in Stan,\n\nto differentiate between observed and latent, Stan instead uses variable declarations (as data or parameters).\n\nFirst, load rstan:\n\nsuppressPackageStartupMessages(require(rstan))\n\nThen, as you did to test your install put the following code into a .stan file:\n\n1data {\n  real y; \n}\n\n2parameters {\n  real x;\n}\n\nmodel {\n3  x ~ uniform(0, 5);\n4  y ~ uniform(0, x);\n}\n\n\n1\n\nVariables introduced in a data block will be treated as observed.\n\n2\n\nVariables introduced in a parameters block will be treated as latent, i.e., unobserved.\n\n\n3\n\nSince x is declared latent (i.e., inside a parameters block), Stan will know to treat this as the counterpart of simPPLe’s x = simulate(Unif(0, 5)).\n\n4\n\nSince y is declared observed (i.e., inside a data block), Stan will know to treat this as the counterpart of simPPLe’s observe(0.06, Unif(0, x)).\n\n\n\n\nQuestion: How does Stan gets the actual observed value \\(y = 0.06\\)?\nAnswer: When Stan gets called in R:1\n\n\nfit = sampling(\n  doomsday,         \n1  data = list(y = 0.06),\n  chains = 1,\n2  iter = 100000\n)\n\n\n1\n\nPass in the values taken by the observed random variables.\n\n2\n\nThe number of samples to compute (equivalent to \\(M\\) in our Monte Carlo notation)\n\n\n\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: Rejecting initial value:\nChain 1:   Error evaluating the log probability at the initial value.\nChain 1: Exception: uniform_lpdf: Upper bound parameter is -1.58474, but must be greater than 0.000000 (in 'anon_model', line 9, column 2 to column 20)\nChain 1: \nChain 1: Gradient evaluation took 3e-06 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 10.363 seconds (Warm-up)\nChain 1:                3.196 seconds (Sampling)\nChain 1:                13.559 seconds (Total)\nChain 1: \n\n\nWe can now compare the approximation provided by Stan:\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n     mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat\nx    1.15    0.03 1.30  0.07  0.18 0.56 1.72  4.56  1403    1\nlp__ 0.58    0.04 1.29 -1.52 -0.54 0.58 1.69  2.70  1092    1\n\nSamples were drawn using NUTS(diag_e) at Mon Mar  4 21:07:38 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
-    "href": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
-    "title": "Stan basics",
-    "section": "Tips and tricks",
-    "text": "Tips and tricks\n\nNotice statements in Stan have to end in semicolumns, ;\nTo find out Stan’s name for distributions, see Stan’s documentation,\n\ne.g., this is the documentation for uniform.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
-    "href": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
-    "title": "Stan basics",
-    "section": "Interpreting the output",
-    "text": "Interpreting the output\n\nJust as simple Monte Carlo and SNIS, the output of Stan/MCMC is a list of samples\nIn contrast to SNIS, the samples are equally weighted,\n\nin other words, for MCMC we have \\(W^{(m)}= 1/M\\),\ni.e., their structure is the same as samples from simple Monte Carlo!\n\n\nTo access the samples from a “fit” object when calling Stan, use:\n\nsamples = extract(fit)\n\nhead(samples$x)\n\n[1] 1.1564924 2.1603994 0.1596580 0.1776573 4.1258671 1.0702292\n\n\nQuestion: denote the samples output from Stan by \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\). What formula should you use to approximate \\(\\mathbb{E}[g(X) | Y = y]\\) based on the Stan output?\n\n\nPlotting histograms\nSince the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:\n\nhist(samples$x)\n\n\n\n\n\n\n\n\nYou can also use the bayesplot package which will be handy to create more complex plots from MCMC runs:\n\nsuppressPackageStartupMessages(require(bayesplot))\nmcmc_hist(fit, pars = c(\"x\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w08_mcmc1/topic02_stan_basics.html#footnotes",
-    "href": "w08_mcmc1/topic02_stan_basics.html#footnotes",
-    "title": "Stan basics",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nwhen calling Stan from an R script, use stan(file = ...), but when calling Stan from R Markdown (as we do here), use sampling(name, ...), where the first argument, name matches the code block argument output.var = \"name\" (see the source of this page for an example).↩︎",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan basics"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic03_normal.html",
-    "href": "w04_glms/topic03_normal.html",
-    "title": "Normal distributions",
-    "section": "",
-    "text": "Quick review of the normal distribution.\nDifferent parameterizations.\n\n\n\n\nThe normal distribution is often used in Bayesian analysis when one needs a prior over an unknown \\(x\\) such that \\(x \\in (-\\infty, \\infty) = \\mathbb{R}\\).",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Normal distributions"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic03_normal.html#outline",
-    "href": "w04_glms/topic03_normal.html#outline",
-    "title": "Normal distributions",
-    "section": "",
-    "text": "Quick review of the normal distribution.\nDifferent parameterizations.\n\n\n\n\nThe normal distribution is often used in Bayesian analysis when one needs a prior over an unknown \\(x\\) such that \\(x \\in (-\\infty, \\infty) = \\mathbb{R}\\).",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Normal distributions"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic03_normal.html#examples-of-normal-densities",
-    "href": "w04_glms/topic03_normal.html#examples-of-normal-densities",
-    "title": "Normal distributions",
-    "section": "Examples of normal densities",
-    "text": "Examples of normal densities",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Normal distributions"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic03_normal.html#parameterizations",
-    "href": "w04_glms/topic03_normal.html#parameterizations",
-    "title": "Normal distributions",
-    "section": "Parameterizations",
-    "text": "Parameterizations\n\nThere are different conventions to measure the spread.\n\nStandard deviation \\(\\sigma\\).\nVariance, \\(\\sigma^2\\).\nPrecision, \\(\\tau = 1/\\sigma^2\\).\n\nKeep that in mind as different languages will use different conventions!\nStandard deviation is the most intuitive:\n\nit is the width of the bell,\nthe only one that has the same units as \\(x\\) (e.g. if \\(x\\) is in meters, so is \\(\\sigma\\)).",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Normal distributions"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html",
-    "href": "w04_glms/topic05_regression.html",
-    "title": "(Normal) regression",
-    "section": "",
-    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nPriors on the positive real line.\nHomoscedasticity and heteroscedasticity.\nMarginal posterior.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#outline",
-    "href": "w04_glms/topic05_regression.html#outline",
-    "title": "(Normal) regression",
-    "section": "",
-    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nPriors on the positive real line.\nHomoscedasticity and heteroscedasticity.\nMarginal posterior.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#example",
-    "href": "w04_glms/topic05_regression.html#example",
-    "title": "(Normal) regression",
-    "section": "Example",
-    "text": "Example\n\nIn the early 20th century, astronomers made the startling observation that pretty much all galaxies are moving away from ours. Why?\nWe now know this is because the universe is expanding.\nHere is a metaphor to help understand this:\n\nImagine ants on an inflating balloon.\nYou are one of the ants…\n…and you notice that all the others ants are moving away from you…\n\n…and the further the neighbor ant, the faster it looks like it is moving away from you.\n\n\nIn 1929 the astronomer Edwin Hubble published a paper1 on the relationship between distance and velocity of galaxies relative to us.\nIt is now called Hubble’s law.\nThe estimated slope of the relationship, known as Hubble’s constant, leads to an estimate of the age of the universe.\n\n\n\n\n\nData\n\nWe will estimate Hubble’s constant using data from the original data used by Edwin Hubble (in CSV).\nTo make the numbers less extreme in the following, I will divide the velocities by 1000\n\nInstructions:\n\ndownload the CVS\ncopy paste the code below and run it on your computer (after changing the path “../data” to the path on your computer)\n\n\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"../data/hubble-1.csv\") %&gt;%\n    rename(distance = R..Mpc.) %&gt;%\n    rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\nrmarkdown::paged_table(df)\n\n\n  \n\n\n\n\nHere is some EDA on that dataset:\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
-    "href": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
-    "title": "(Normal) regression",
-    "section": "Building a Bayesian regression model",
-    "text": "Building a Bayesian regression model\nGoal:\n\ndesigning a model containing a “slope” parameter,\nfrom which we will compute \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\nTo achieve our goal, we will complete the gap in the following code:\nsource(\"../../solutions/simple.R\")\n\nregression = function() {\n  # priors will be defined here\n  # ...\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    # likelihood will be defined here\n  }\n  return(slope)\n}\n\nposterior(regression, 1000)\n\nRecall: to build a model, start with the observations.\nSpecifically, let us build a model for the observed velocity first.\n\nQuestion: what would be a reasonable likelihood for the velocity?\n\nvelocity \\(\\sim\\) Exponential(…)\nvelocity \\(\\sim\\) Uniform(…)\nvelocity \\(\\sim\\) t(…)\nvelocity \\(\\sim\\) Normal(…)\nNone of the above.\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe have that velocity \\(\\in \\mathbb{R}\\), so the exponential (\\(\\in (0, \\infty)\\)) and the uniform (\\(\\in [a, b]\\)) are not great choices.\nBoth the normal and the t-distribution are reasonable.\nThe t-distribution can have fatter tails, so if the data has outliers this may be preferable but we will stick with the simpler normal choice today.\nErratum: I said in class it might be reasonable to use a uniform distribution where the bounds are the speed of light. It turns out to be incorrect: galaxies can recede from us faster than the speed of light!\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: What should we use as the mean parameter of the normal likelihood?\nUse the fact that the scientific question is “to find a linear relationship of the velocity as a function of the distance.”\n\nvelocity \\(\\sim\\) Normal(0, …)\nvelocity \\(\\sim\\) Normal(distance, …)\nvelocity \\(\\sim\\) Normal(distance * slope, …)\nvelocity \\(\\sim\\) Normal(distance * slope + intercept, …)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nHere the best answer is:\nvelocity \\(\\sim\\) Normal(distance * slope, …).\nWe do not need an intercept, because we know that by definition, our velocity relative to ourself is zero.\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: What should we use as the standard deviation parameter of the normal likelihood?\n\nvelocity \\(\\sim\\) Normal(…, some constant)\nvelocity \\(\\sim\\) Normal(…, some random variable)\nvelocity \\(\\sim\\) Normal(…, some random variable * distance)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nUsing a constant standard deviation is not ideal as the model will be sensitive to that choice.\nThe other choices are a priori reasonable and more domain knowledge would be needed to pick one. The choice:\nvelocity \\(\\sim\\) Normal(…, some random variable * distance)\nmeans that we expect that the variability of the galaxy velocities increase for galaxies that are further away. This could happen for example if the variability is dominated by measurement error for a measurement technique where errors increase linearly with distance.\nThe choice:\nvelocity \\(\\sim\\) Normal(…, some random variable)\nwould be more reasonable if the measurement error is negligible and the variability comes from other phenomena affecting the velocity of galaxies which are not expected to behave differently for close vs far galaxies (in our metaphor, think of ants walking in random directions at the same time as the balloon is expanding).\nThese are examples of heteroscedasticity (variability changes with input variable) and homoscedasticity (variability is invariant to input).\nLet us pick an homoscedasticity model. To summarize what we have so far:\nvelocity \\(\\sim\\) Normal(distance * slope, sd).\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: Pick priors for the “slope” and “sd” parameters\n\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Normal(…)\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Exponential(…)\nslope \\(\\sim\\) Exponential(…), sd \\(\\sim\\) Exponential(…)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe do not want a normal for the standard deviation (sd) parameter, because negative sd’s are not allowed.\nUsing an exponential for the slope would violate Cromwell’s rule.\nHence the best choice here is:\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Exponential(…).\n\n\n\nQuestion: complete the code and approximate \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\nPick the closest:\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.5\\)\n\\(\\approx 1\\)\n\\(\\approx 2\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nsource(\"../blocks/simple_utils.R\")\n\nregression = function() {\n  slope = simulate(Norm(0, 1))\n  sd = simulate(Exp(10))\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    observe(velocity, Norm(distance * slope, sd))\n  }\n  c(slope, sd)\n}\n\nposterior(regression, 1000)\n\n[1] 0.3938742 0.2411316",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
-    "href": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
-    "title": "(Normal) regression",
-    "section": "Visualization of the posterior distribution",
-    "text": "Visualization of the posterior distribution\n\nposterior = posterior_particles(regression, 10000)\nweighted_scatter_plot(posterior, plot_options = list(xlab=\"slope parameter\", ylab=\"sd parameter\"))\n\n\n\n\n\n\n\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")\n\nxs = seq(0, 2, 0.01)\nsamples = posterior$samples \nnorm_weights = posterior$weights / sum(posterior$weights)\n\nfor (i in 1:nrow(samples)) {\n  slope     = samples[i, 1]\n  pr = norm_weights[i]\n  lines(xs, slope * xs, col = rgb(red = 0, green = 0, blue = 0, alpha = pr*20))\n}\n\n\n\n\n\n\n\n\nHere since the scientific question only concerns one parameter, the slope, it is useful to look at the marginal posterior distribution.\n\nIn mathematical expressions, obtained by marginalization: \\[p(x_1 | y) = \\int p(x_1, x_2 | y) \\mathrm{d}x_2.\\]\nIn Monte Carlo methods, much simpler:\n\neach sample is a pair \\(x^{(m)}= (x_1^{(m)}, x_2^{(m)})\\)\nif you are interested in \\(x_1\\) only, just ignore \\(x_2\\)!\n\n\nHere is an example of creating a histogram for the marginal posterior:\n\nlibrary(\"ggplot2\")\nposterior.as.df &lt;- data.frame(slopes = samples[,1], norm_weights)\nggplot(posterior.as.df, aes(x = slopes, weight = norm_weights)) + \n  geom_histogram(binwidth = 0.02) + \n  xlim(0.2, 0.6) +\n  xlab(\"slope parameter\") + \n  ylab(\"probability\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nQuestion: if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration in the scatter plot above (the first plot in this subsection) would be used to compute the height of one histogram bin?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n“—”\n“|”\n“◤”\n“◢”\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe answer is “|”.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#model-criticism",
-    "href": "w04_glms/topic05_regression.html#model-criticism",
-    "title": "(Normal) regression",
-    "section": "Model criticism",
-    "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?\n\n\n\n\n\n\nClick for discussion\n\n\n\n\n\nIn summary: it is very hard to estimate distance of distant objects.\nNot only the model explored today lacks an error model on the distances, but moreover, Hubble’s distance estimates had systematic errors (i.e. were all offset by a constant), hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results.\nIn fact, even with modern data and statistical methods, systematic errors are still suspected, this is known as the “Hubble tension.”",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic05_regression.html#footnotes",
-    "href": "w04_glms/topic05_regression.html#footnotes",
-    "title": "(Normal) regression",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nProceedings of the National Academy of Sciences, Vol. 15, pp. 168–173.↩︎",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "(Normal) regression"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic01_simPPLe.html",
-    "href": "w04_glms/topic01_simPPLe.html",
-    "title": "simPPLe",
-    "section": "",
-    "text": "Last week’s Q2 exercise solution.\n\n\n\n\nWe will use simPPLe this week to do probabilistic modelling.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "simPPLe"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic01_simPPLe.html#outline",
-    "href": "w04_glms/topic01_simPPLe.html#outline",
-    "title": "simPPLe",
-    "section": "",
-    "text": "Last week’s Q2 exercise solution.\n\n\n\n\nWe will use simPPLe this week to do probabilistic modelling.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "simPPLe"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic01_simPPLe.html#background",
-    "href": "w04_glms/topic01_simPPLe.html#background",
-    "title": "simPPLe",
-    "section": "Background",
-    "text": "Background\nIf you missed Tuesday’s lecture last week, make sure to read the introduction to PPLs.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "simPPLe"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic01_simPPLe.html#setting-up-simpple-on-your-computer",
-    "href": "w04_glms/topic01_simPPLe.html#setting-up-simpple-on-your-computer",
-    "title": "simPPLe",
-    "section": "Setting up simPPLe on your computer",
-    "text": "Setting up simPPLe on your computer\n\nLet us combine the “scaffold” files and the answer of last week’s Q2 into one file. Copy paste the code below into a file called simple.R:\n\n\n\nsimple.R\n\n###### solution\n\nposterior = function(ppl_function, number_of_iterations) {\n  numerator = 0.0\n  denominator = 0.0\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0\n    g_i = ppl_function()\n    numerator = numerator + weight * g_i\n    denominator = denominator + weight\n  }\n  return(numerator/denominator)\n}\n\n###### contents of the scaffold\n\nsuppressPackageStartupMessages(library(distr))\n\n## Utilities to make the distr library a bit nicer to use\n\np &lt;- function(distribution, realization) {\n  d(distribution)(realization) # return the PMF or density \n}\n\nBern = function(probability_to_get_one) {\n  DiscreteDistribution(supp = 0:1, prob = c(1-probability_to_get_one, probability_to_get_one))\n}\n\n## Key functions called by simPPLe programs\n\n# Use simulate(distribution) for unobserved random variables\nsimulate &lt;- function(distribution) {\n  r(distribution)(1) # sample once from the given distribution\n}\n\n# Use observe(realization, distribution) for observed random variables\nobserve = function(realization, distribution) {\n  # `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function\n  weight &lt;&lt;- weight * p(distribution, realization) \n}\n\n\nThis way, you can now load simPPLe by loading simple.R into your session (note: in the code below replace ../../solutions/ by the path to the file you just created)\n\nsource(\"../../solutions/simple.R\")\n\n# define your model as a function, e.g. my_function\n\n# call: posterior(my_function, 100) to approximate posterior E[my_function | observations]",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "simPPLe"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic01_simPPLe.html#testing",
-    "href": "w04_glms/topic01_simPPLe.html#testing",
-    "title": "simPPLe",
-    "section": "Testing",
-    "text": "Testing\nI will start this Tuesday’s lecture with the following simPPLe test (a continuous version of the rocket model): (note: in the code below replace ../../solutions/ by the path to the file you just created)\nsource(\"../../solutions/simple.R\")\n\nset.seed(1)\n\ndata = rep(0, 4) \n\n# simPPLe's description of our \"bag of coins\" example\nbeta_binomial = function() {\n  \n  # Similar to forward sampling, but use 'observe' when the variable is observed\n  p = simulate(Beta(1, 1))\n  for (i in seq_along(data)) { \n    observe(data[i], Bern(p)) \n  }\n  \n  # return the test function, here the parameter p\n  return(p)\n}\n\nposterior(beta_binomial, 100)\n\nWhat is the output?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(0.0010394\\)\n\\(0.0194394\\)\n\\(0.0826293\\)\n\\(0.1728016\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(0.1728016\\).",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "simPPLe"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html",
-    "href": "w06_hierarchical/topic02_gm.html",
-    "title": "Graphical models",
-    "section": "",
-    "text": "Directed graphical models.\n\n\n\n\nGraphical models help understanding complex models such as hierarchical ones",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#outline",
-    "href": "w06_hierarchical/topic02_gm.html#outline",
-    "title": "Graphical models",
-    "section": "",
-    "text": "Directed graphical models.\n\n\n\n\nGraphical models help understanding complex models such as hierarchical ones",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#directed-graphical-model",
-    "href": "w06_hierarchical/topic02_gm.html#directed-graphical-model",
-    "title": "Graphical models",
-    "section": "Directed graphical model",
-    "text": "Directed graphical model\nA graphical model is a discrete graph showing the dependencies involved in a forward sampling description of a model. Specifically:\nDefinition: a directed graphical model is a discrete graph such that:\n\nthe set of vertices is a set of random variables,\nthere is an edge \\(X_1 \\to X_2\\) if the forward sampling step producing \\(X_2\\) requires knowing \\(X_1\\).",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#examples",
-    "href": "w06_hierarchical/topic02_gm.html#examples",
-    "title": "Graphical models",
-    "section": "Examples",
-    "text": "Examples\n\nExchangeable observations\nMany simples models can be written as:\n\n\n\n\\[\\begin{align*}\n\\theta &\\sim \\text{SomePrior} \\\\\ny_i | \\theta &\\sim \\text{SomeLikelihood}(\\theta).\n\\end{align*}\\]\nMost of the models we have encountered so far have this form.\n\n\nHidden Markov model\nTime series are often modelled as follows:\n\n\n\n\nthere is an unobserved state \\(x_t\\) changing at each time step \\(t \\in \\{1, 2, \\dots\\}\\)\n\ne.g. true location of a plane,\n\nwe have noisy observations \\(y_t\\) from this true position,\n\ne.g. information from a radar.\n\n\nSimplest HMM example:\n\\[\\begin{align*}\nx_i | x_{i-1} &\\sim \\mathcal{N}(x_{i-1}, \\sigma_1) \\\\\ny_i | x_i &\\sim \\mathcal{N}(x_{i}, \\sigma_2),\n\\end{align*}\\]\nwhere \\(\\sigma_1\\) controls the amount of variability in the dynamics, and \\(\\sigma_2\\), in the measurement.",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#conditioning",
-    "href": "w06_hierarchical/topic02_gm.html#conditioning",
-    "title": "Graphical models",
-    "section": "Conditioning",
-    "text": "Conditioning\nShaded nodes in a directed graphical models indicate what we condition on (i.e. what we observe).",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#plates",
-    "href": "w06_hierarchical/topic02_gm.html#plates",
-    "title": "Graphical models",
-    "section": "Plates",
-    "text": "Plates\n\n\n\nPlate: When there are too many vertices to draw in a graphical model, use a square (“plate”) to indicate a group of nodes that are repeated several times. In other words, a graphical “for loop.”",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic02_gm.html#further-pointers-on-graphical-models",
-    "href": "w06_hierarchical/topic02_gm.html#further-pointers-on-graphical-models",
-    "title": "Graphical models",
-    "section": "Further pointers on graphical models",
-    "text": "Further pointers on graphical models\nDirected graphical models are also useful to identify conditional independence relationships (recall, \\(A\\) is conditionally independent of \\(B\\) given \\(C\\) if \\(\\Pr(A|C) \\Pr(B|C) = \\Pr(A \\cap B | C)\\)).\nIf you are curious, watch this video to see how this is done, or read the original paper.",
-    "crumbs": [
-      "Hierarchical models",
-      "Graphical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic03_hierarchy.html",
-    "href": "w06_hierarchical/topic03_hierarchy.html",
-    "title": "Intro to hierarchical models",
-    "section": "",
-    "text": "Hierarchical models.\nIntuition why they decrease prior sensitivity.\n\n\n\n\nHierarchical models, a crowning achievement of Bayesian inference, can be used to decrease prior sensitivity even when the dataset of interest is of limited size.",
-    "crumbs": [
-      "Hierarchical models",
-      "Intro to hierarchical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic03_hierarchy.html#outline",
-    "href": "w06_hierarchical/topic03_hierarchy.html#outline",
-    "title": "Intro to hierarchical models",
-    "section": "",
-    "text": "Hierarchical models.\nIntuition why they decrease prior sensitivity.\n\n\n\n\nHierarchical models, a crowning achievement of Bayesian inference, can be used to decrease prior sensitivity even when the dataset of interest is of limited size.",
-    "crumbs": [
-      "Hierarchical models",
-      "Intro to hierarchical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic03_hierarchy.html#example",
-    "href": "w06_hierarchical/topic03_hierarchy.html#example",
-    "title": "Intro to hierarchical models",
-    "section": "Example",
-    "text": "Example\n\n\n\nExample: predicting the probability of failure of the next Delta 7925H launch (so far, we observed this type of rocket has been launched 3 times, with 0 failed launches).\nKey idea: use “side data” to inform the prior…\n\nFor example: success/failure launch data from other other types of rockets.\nCan we use the following rocket launch dataset to inform prediction for a single rocket type of interest?\n\n\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"../data/failure_counts.csv\") \nrmarkdown::paged_table(df)",
-    "crumbs": [
-      "Hierarchical models",
-      "Intro to hierarchical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic03_hierarchy.html#how-to-use-side-data-two-suboptimal-approaches",
-    "href": "w06_hierarchical/topic03_hierarchy.html#how-to-use-side-data-two-suboptimal-approaches",
-    "title": "Intro to hierarchical models",
-    "section": "How to use “side data”? Two suboptimal approaches",
-    "text": "How to use “side data”? Two suboptimal approaches\nFor pedagogy, we will first cover two simple heuristics to incorporate “side data” and describe their limitations.\nThen we will cover hierarchical models in the next section, showing how they address the limitations of simpler methods.\n\nFirst try (do not use this one!)\n\nMerge all the data into one type?\nI.e. just sum the columns in the data:\n\n\nsum(df$numberOfLaunches)\n\n[1] 5667\n\nsum(df$numberOfFailures)\n\n[1] 431\n\n\nWhy merging everything is a bad idea?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nSome of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.\nAn indeed, the aggregated failure rate is high compared to what you would expect from modern “workhorse” rockets (&lt;1%):\n\nsum(df$numberOfFailures) / sum(df$numberOfLaunches)\n\n[1] 0.07605435\n\n\nWe want to consider the different types of rockets as a population and model the variability within that population.\n\n\n\n\n\nTowards an improved way to use side data\n\nBackground: “mean–pseudo-sample-size” reparameterization of the Beta distribution.\n\nA reparametrization is a different labelling of a family such that you can go back and forth between the two labellings.\nConsider \\[\\alpha  = \\mu s, \\;\\; \\beta = (1 - \\mu) s\\] where \\(\\mu \\in (0, 1)\\), \\(s &gt; 0\\).\n\nInterpretation:\n\n\\(\\mu\\): mean of the Beta\n\\(s\\): measure of “peakiness” of the density, higher \\(s\\) corresponds to more peaked; roughly, \\(s \\approx\\) number of data points that would make the posterior peaked like that.\n\nWhy we did this reparameterization?\n\n\\(\\to\\) it should now be more intuitive how we can use “side data” to inform \\(\\mu\\)…\n\n\n\n\nSecond try (still suboptimal, but not as bad)\n\nEstimate a failure probability \\(\\hat p_i\\) for each type of rocket \\(i\\).\nFit a distribution \\(p(\\mu)\\) on those \\(\\{\\hat p_i\\}\\).\nUse this distribution \\(p(\\mu)\\) as the prior on \\(\\mu\\)?\n\n\nsuppressPackageStartupMessages(require(\"ggplot2\"))\nsuppressPackageStartupMessages(require(\"latex2exp\"))\n\nggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +\n  geom_histogram() + \n  xlab(TeX(\"$\\\\hat{p}_i = \\\\textrm{numberOfFailures}_i / \\\\textrm{numberOfLaunches}_i$\")) +\n  geom_rug(alpha = 0.1)\n\n\n\n\n\n\n\n\nQuestion: what are the weaknesses of using a prior fitted on this histogram?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nFirst, notice the “bumps” at 1/2 (and 1, 1/4, etc)…\n\nMost of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!\nBut if you fit a curve to this data, these “bumps” will have a large undesirable effects.\nMore broadly, we want to take into account uncertainty in each of these \\(\\hat p_i\\)’s.\n\nAlso: less clear how to generalize this method to handle the pseudo-sample-size \\(s\\).",
-    "crumbs": [
-      "Hierarchical models",
-      "Intro to hierarchical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic03_hierarchy.html#hierarchical-models-a-better-way-to-use-side-data",
-    "href": "w06_hierarchical/topic03_hierarchy.html#hierarchical-models-a-better-way-to-use-side-data",
-    "title": "Intro to hierarchical models",
-    "section": "Hierarchical models: a better way to use side data",
-    "text": "Hierarchical models: a better way to use side data\nSolution: go fully Bayesian!\nRecall: our Bayesian recipe…\n\nConstruct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution conditionally on the actual data at hand\nUse the posterior distribution to make a decision\n\nWhat it means here: we model the launcher type’s population parameters (\\(\\mu, s\\)) as random variables. We are not interested in these other launcher types, but they help us inform inference about the type of rocket we are interested in (i.e., “nuisance” parameters).\n\nGraphical model\n\n\n\nMathematical description\n\nShare these two “population parameters” across all launch types \\[p_i | \\mu, s \\sim {\\mathrm{Beta}}(\\mu s, (1 - \\mu) s)\\]\nLikelihood same as before: \\(F_i | p_i \\sim {\\mathrm{Bern}}(n_i, p_i).\\)\nWe still need to put prior on \\(\\mu\\) and \\(s\\)…\n\n…but as we’ll discuss next, you should expect this prior choice to be less sensitive.\nExample: \\(\\mu \\sim {\\mathrm{Beta}}(1,1) = {\\mathrm{Unif}}(0, 1)\\), \\(s \\sim {\\mathrm{Exp}}(1/10000)\\)\n\n\nPS: why we pick such a small value, \\(1/10000\\)?\n\nRecall the parameter of an exponential is a rate which is 1/mean.\nSo a mean of 10000 encodes we put significant mass to values up to \\(O(10000)\\).\nThis is sometimes described as a “vague prior”.\n\n\n\nDecrease prior choice sensitivity\nIt seems we have introduced new problems as now we again have hyper-parameters, namely those for the priors on \\(\\mu\\) and \\(s\\)!\nKey point: yes, but now we are less sensitive to these choices! Why?\nHeuristic: look at the node \\(n\\) connected to the hyper-parameters…\n\nIf most of \\(n\\)’s edges link to hyper-parameters: posterior more sensitive to hyper-parameters.\nIf most of \\(n\\)’s edges link to random variables connected to data: posterior will probably be less sensitive.\n\nBefore going hierarchical: for maiden/early flights we had\n\nNote: \\(p\\) is connected to only a small number of observations.\nAfter going hierarchical:\n\nNote: \\(\\mu, s\\) is connected to a large population of \\(p_i\\)’s, each linked with data.",
-    "crumbs": [
-      "Hierarchical models",
-      "Intro to hierarchical models"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html",
-    "href": "w06_hierarchical/topic01_priors.html",
-    "title": "Prior choice",
-    "section": "",
-    "text": "Strategies for constructing priors.\nSituations where choosing the prior matters.\nInformative vs non-informative priors.\n\n\n\n\nSelection of priors is a necessary step in the construction of Bayesian models. Difficulties that can be encountered in prior choice motivate hierarchical models, introduced this week.",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#outline",
-    "href": "w06_hierarchical/topic01_priors.html#outline",
-    "title": "Prior choice",
-    "section": "",
-    "text": "Strategies for constructing priors.\nSituations where choosing the prior matters.\nInformative vs non-informative priors.\n\n\n\n\nSelection of priors is a necessary step in the construction of Bayesian models. Difficulties that can be encountered in prior choice motivate hierarchical models, introduced this week.",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#example",
-    "href": "w06_hierarchical/topic01_priors.html#example",
-    "title": "Prior choice",
-    "section": "Example",
-    "text": "Example\nConsider the problem of selecting a prior for a parameter defined on \\([0, 1]\\), e.g. \\(p\\) in the basic rocket launch success probability example (iid, continuous): \\[\\begin{align*}\np &\\sim \\;\\text{???} \\\\\ny | p &\\sim {\\mathrm{Binom}}(n, p).\n\\end{align*}\\]",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#general-approach",
-    "href": "w06_hierarchical/topic01_priors.html#general-approach",
-    "title": "Prior choice",
-    "section": "General approach",
-    "text": "General approach\nOften, the choice of prior is approached in two stages\n\nFirst, pick a distribution family\n\nin our example: let us pick say \\({\\color{red} {\\mathrm{Beta}}}(\\cdot, \\cdot)\\),\n\na common starting point for distribution with support \\([0, 1]\\)\nbut not the only choice, e.g., an alternative is the Kumaraswamy distribution.\n\n\nThen, pick one member of this family\n\ne.g. Beta\\(({\\color{red} 1}, {\\color{red} 2})\\), but how to pick these “magic” numbers (called hyper-parameters)?",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#when-does-the-choice-of-prior-matter",
-    "href": "w06_hierarchical/topic01_priors.html#when-does-the-choice-of-prior-matter",
-    "title": "Prior choice",
-    "section": "When does the choice of prior matter?",
-    "text": "When does the choice of prior matter?\n\nWhen data is large, posterior tends to be less sensitive to specification of the prior\n\nTheoretical reason: the “Bayesian central limit theorem” (Bernstein von-Mises theorem).\nNot always true (e.g. weakly identifiable model).\n\nWhen data is small, posterior tends to be more sensitive to specification of the prior\n\nExtreme example:\n\nconsider a rocket maiden flight,\ni.e. there is no observation available yet,\nwhat will be the posterior?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWhere there is no observations, the posterior is equal to the prior.\nThis shows an extreme example of the posterior being sensitive to the choice of prior!",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#strategies-for-constructing-priors",
-    "href": "w06_hierarchical/topic01_priors.html#strategies-for-constructing-priors",
-    "title": "Prior choice",
-    "section": "Strategies for constructing priors",
-    "text": "Strategies for constructing priors\n\n“Informative priors”: use expert knowledge to determine the prior (“prior elicitation”)\n\ne.g.: when we build rockets, there is a lot of quality control, so it would be surprising to see very low values for the success probability parameter \\(p\\).\nMany prior elicitation techniques developed, see Petrus et al, 2021 for a recent review,\nbut the state of that literature not completely satisfactory.\n\n“Non-informative priors”: use properties of the likelihood to determine prior\n\nmore advanced, see Robert, Sections 3.5,\nnot automated, case-by-case mathematical derivation often intractable.\nAutomating this into PPLs is an open problem.\n\nToday: side-step these issues thanks to Hierarchical models.\n\nWe will not remove the need for prior choice, instead we will decrease sensitivity of the posterior to these choices.",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w06_hierarchical/topic01_priors.html#example-continued",
-    "href": "w06_hierarchical/topic01_priors.html#example-continued",
-    "title": "Prior choice",
-    "section": "Example, continued",
-    "text": "Example, continued\nSuppose we picked a Beta, so we now have to pick a member of the Beta family.\n\\[\\begin{align*}\np &\\sim {\\mathrm{Beta}}(?, ?) \\\\\ny | p &\\sim {\\mathrm{Binom}}(n, p).\n\\end{align*}\\]\nAgain the numbers to fill in the “?” are known as hyper-parameters, i.e., an hyper-parameter is a parameter of a prior.\nExpert elicitation:\n\nfind a rocket expert,\nask the expert what they think is a reasonable range of values for \\(p\\), e.g. upper and lower quartiles \\(Q_1, Q_3\\).\nUse numerical method to fit \\(\\alpha, \\beta\\) such that a Beta(\\(\\alpha, \\beta\\)) matches the reported quartiles \\(Q_1, Q_3\\).",
-    "crumbs": [
-      "Hierarchical models",
-      "Prior choice"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic06_glms.html",
-    "href": "w04_glms/topic06_glms.html",
-    "title": "Bayesian GLMs",
-    "section": "",
-    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bayesian GLMs"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic06_glms.html#summary-so-far",
-    "href": "w04_glms/topic06_glms.html#summary-so-far",
-    "title": "Bayesian GLMs",
-    "section": "",
-    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bayesian GLMs"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
-    "href": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
-    "title": "Bayesian GLMs",
-    "section": "Generalization of these two special cases",
-    "text": "Generalization of these two special cases\n\nLook at the data type of the output variable, this will guide the choice of likelihood model\nAre you trying to predict..\n\na real number? us a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)\na non-negative integer? Replace Bernoulli by Poisson (or Negative Binomial, or other integer valued distribution)\netc\n\nGeneral pattern:\n\n\\[\\text{output} | \\text{inputs}, \\text{parameters} \\sim \\text{SuitableDistribution}(f(\\text{parameters},  \\text{inputs}))\\]\n\n\\(f\\) should map to the range of parameters permitted by your “SuitableDistribution”\nknown in the GLM literature as the inverse of the link function\noften a composition of a linear function with a non-linear “squashing” function if the output is constrained.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bayesian GLMs"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic02_bivariate.html",
-    "href": "w04_glms/topic02_bivariate.html",
-    "title": "Bivariate posteriors",
-    "section": "",
-    "text": "Posterior distribution on two parameters (bivariate).\n\n\n\n\nThere is typically more than one unknown variables. Going from one unknown to two unknowns is the biggest leap.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bivariate posteriors"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic02_bivariate.html#outline",
-    "href": "w04_glms/topic02_bivariate.html#outline",
-    "title": "Bivariate posteriors",
-    "section": "",
-    "text": "Posterior distribution on two parameters (bivariate).\n\n\n\n\nThere is typically more than one unknown variables. Going from one unknown to two unknowns is the biggest leap.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bivariate posteriors"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic02_bivariate.html#example",
-    "href": "w04_glms/topic02_bivariate.html#example",
-    "title": "Bivariate posteriors",
-    "section": "Example",
-    "text": "Example\nWe will revisit the rocket comparison problem from the first week:\n\nWould you rather get strapped to…\n\n“shiny rocket” (option A): 1 success, 0 failures\n“rugged rocket” (option B): 98 successes, 2 failures\n\n\n\n\n\n\nIf you are sick of hearing about rockets, here is an alternative interpretation:\n\nImagine you work for Google and serve website ad banners.\nA client gives you two designs for the ad banner: A and B.\nYou will serve them to web visitors and the objective is to maximize the number of clicks.\n\nSuccess: a user clicked (1).\nFailure: a user did not click (0).\n\nTraining data:\n\nVersion A: 1 success, 0 failures.\nVersion B: 98 successes, 2 failures\n\nYou can only show the ad one more time to a user (client budget almost exhausted).\n\nShould you show A or B?\n\nThis is a basic example of what is known as A/B testing.\n\n\nModel: for \\(j \\in \\{A, B\\}\\), independently,\n\\[\\begin{align*}\np_j &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_j | p_j &\\sim {\\mathrm{Binom}}(n_j, p_j),\n\\end{align*}\\]\nwhere:\n\n\\(p_j\\) are the success probabilities\n\\(n_j\\) is the number of times you showed \\(j\\)\n\\(y_j\\) is the number of clicks on \\(j\\).\n\nQuestion:\nHow to mathematically encode the questions:\n\n“Would you rather get strapped to…”\n“Should you show A or B?”\n\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\mathbb{P}(p_A = 1)\\)\n\\(\\mathbb{P}(p_A = 1 | Y = y)\\)\n\\(\\mathbb{P}(p_A &gt; p_B)\\)\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\): in words, is the chance of success of A greater than B?\n\n\n\nModify the code below to approximate that probability.\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  # add the part of the model describing p_B (prior and likelihood)\n  \n  return # what is the \"test function\"?\n}\nposterior(bivariate, 10000)\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.3\\)\n\\(\\approx 0.6\\)\n\\(\\approx 0.9\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  return(ifelse(p_A &gt; p_B, 1, 0))\n}\nposterior(bivariate, 10000)\n\n[1] 0.06909026",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bivariate posteriors"
-    ]
-  },
-  {
-    "objectID": "w04_glms/topic02_bivariate.html#visualization-of-a-bivariate-joint-posterior",
-    "href": "w04_glms/topic02_bivariate.html#visualization-of-a-bivariate-joint-posterior",
-    "title": "Bivariate posteriors",
-    "section": "Visualization of a bivariate joint posterior",
-    "text": "Visualization of a bivariate joint posterior\nLet us get more insight on joint posterior distributions (posterior over two variables).\nTo do so, we use visualizations where the x-axis is the first parameter (here \\(p_A\\)) and the y-axis is the second parameter (here \\(p_B\\)).\n\n# This contains useful functions to visualize the output of simPPLe:\nsource(\"../blocks/simple_utils.R\")\n\nbivariate_pair = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  # We modify the above to return a vector containing both parameters\n  c(p_A, p_B)\n}\n\n# To compute the plot, we need the list of samples and weights (\"particles\"), i.e. more details compared to posterior()\n# This is what posterior_particles accomplishes\nparticles = posterior_particles(bivariate_pair, 10000)\n\n# Now we use these to create the plot below\nweighted_scatter_plot(particles, plot_options = list(xlab=\"p_A\", ylab=\"p_B\"))\n\nxaxis = seq(0, 1, 0.01)\nlines(xaxis, xaxis)\n\n\n\n\n\n\n\n\n\nEach point is a sample produced by SNIS, \\(x^{(m)}= (p_A^{(m)}, p_B^{(m)})\\).\nWe encode its associated weight \\(w^{(m)}\\) by the transparency (alpha) of the point.\n\nQuestion: What region of integration should you use to compute \\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n◤\n◥\n◢\n◣\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n◢",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Bivariate posteriors"
+      "Installing and running Stan"
     ]
   },
   {
@@ -2121,69 +1659,641 @@
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html",
-    "href": "w08_mcmc1/topic01_installing_stan.html",
-    "title": "Installing and running Stan",
+    "objectID": "w04_glms/topic02_bivariate.html",
+    "href": "w04_glms/topic02_bivariate.html",
+    "title": "Bivariate posteriors",
     "section": "",
-    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "text": "Posterior distribution on two parameters (bivariate).\n\n\n\n\nThere is typically more than one unknown variables. Going from one unknown to two unknowns is the biggest leap.",
     "crumbs": [
-      "Intro to MCMC",
-      "Installing and running Stan"
+      "The joy of probabilistic modelling",
+      "Bivariate posteriors"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html#outline",
-    "href": "w08_mcmc1/topic01_installing_stan.html#outline",
-    "title": "Installing and running Stan",
+    "objectID": "w04_glms/topic02_bivariate.html#outline",
+    "href": "w04_glms/topic02_bivariate.html#outline",
+    "title": "Bivariate posteriors",
     "section": "",
-    "text": "What is Stan?\nLinks to install.\nPeak of next week’s exercise first question (running Stan on your laptop).\n\n\n\n\nSNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the exercise on hierarchical models.\nStan is an alternative way to approximate posterior distributions, with complementary properties:\n\n\n\n\nSNIS\nStan\n\n\n\n\nSpeed\nSlow\nFaster1\n\n\nFlexibility\nVery flexible\nLess flexible2\n\n\nEasy to understand?\nSimple\nMore complex3\n\n\n\nFrom a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.",
+    "text": "Posterior distribution on two parameters (bivariate).\n\n\n\n\nThere is typically more than one unknown variables. Going from one unknown to two unknowns is the biggest leap.",
     "crumbs": [
-      "Intro to MCMC",
-      "Installing and running Stan"
+      "The joy of probabilistic modelling",
+      "Bivariate posteriors"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
-    "href": "w08_mcmc1/topic01_installing_stan.html#what-is-stan",
-    "title": "Installing and running Stan",
-    "section": "What is Stan?",
-    "text": "What is Stan?\n\nStan is the most popular PPL as of 2024.\nReview the notes on “what is a PPL.”\nStan uses Markov chain Monte Carlo (MCMC) to approximate the posterior distribution.\n\nThink of MCMC has a drop-in replacement for SNIS.\nWe will talk about it in more detail soon.",
+    "objectID": "w04_glms/topic02_bivariate.html#example",
+    "href": "w04_glms/topic02_bivariate.html#example",
+    "title": "Bivariate posteriors",
+    "section": "Example",
+    "text": "Example\nWe will revisit the rocket comparison problem from the first week:\n\nWould you rather get strapped to…\n\n“shiny rocket” (option A): 1 success, 0 failures\n“rugged rocket” (option B): 98 successes, 2 failures\n\n\n\n\n\n\nIf you are sick of hearing about rockets, here is an alternative interpretation:\n\nImagine you work for Google and serve website ad banners.\nA client gives you two designs for the ad banner: A and B.\nYou will serve them to web visitors and the objective is to maximize the number of clicks.\n\nSuccess: a user clicked (1).\nFailure: a user did not click (0).\n\nTraining data:\n\nVersion A: 1 success, 0 failures.\nVersion B: 98 successes, 2 failures\n\nYou can only show the ad one more time to a user (client budget almost exhausted).\n\nShould you show A or B?\n\nThis is a basic example of what is known as A/B testing.\n\n\nModel: for \\(j \\in \\{A, B\\}\\), independently,\n\\[\\begin{align*}\np_j &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_j | p_j &\\sim {\\mathrm{Binom}}(n_j, p_j),\n\\end{align*}\\]\nwhere:\n\n\\(p_j\\) are the success probabilities\n\\(n_j\\) is the number of times you showed \\(j\\)\n\\(y_j\\) is the number of clicks on \\(j\\).\n\nQuestion:\nHow to mathematically encode the questions:\n\n“Would you rather get strapped to…”\n“Should you show A or B?”\n\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\mathbb{P}(p_A = 1)\\)\n\\(\\mathbb{P}(p_A = 1 | Y = y)\\)\n\\(\\mathbb{P}(p_A &gt; p_B)\\)\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\): in words, is the chance of success of A greater than B?\n\n\n\nModify the code below to approximate that probability.\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  # add the part of the model describing p_B (prior and likelihood)\n  \n  return # what is the \"test function\"?\n}\nposterior(bivariate, 10000)\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.3\\)\n\\(\\approx 0.6\\)\n\\(\\approx 0.9\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  return(ifelse(p_A &gt; p_B, 1, 0))\n}\nposterior(bivariate, 10000)\n\n[1] 0.06909026",
     "crumbs": [
-      "Intro to MCMC",
-      "Installing and running Stan"
+      "The joy of probabilistic modelling",
+      "Bivariate posteriors"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
-    "href": "w08_mcmc1/topic01_installing_stan.html#installing-stan",
-    "title": "Installing and running Stan",
-    "section": "Installing Stan",
-    "text": "Installing Stan\nYou will need Stan installed to complete next week’s exercise. Don’t wait until next week, install it today!\nThere are two main steps to install Stan:\n\nConfiguring a C++ Toolchains\nInstalling RStan\n\nLet us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.",
+    "objectID": "w04_glms/topic02_bivariate.html#visualization-of-a-bivariate-joint-posterior",
+    "href": "w04_glms/topic02_bivariate.html#visualization-of-a-bivariate-joint-posterior",
+    "title": "Bivariate posteriors",
+    "section": "Visualization of a bivariate joint posterior",
+    "text": "Visualization of a bivariate joint posterior\nLet us get more insight on joint posterior distributions (posterior over two variables).\nTo do so, we use visualizations where the x-axis is the first parameter (here \\(p_A\\)) and the y-axis is the second parameter (here \\(p_B\\)).\n\n# This contains useful functions to visualize the output of simPPLe:\nsource(\"../blocks/simple_utils.R\")\n\nbivariate_pair = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  # We modify the above to return a vector containing both parameters\n  c(p_A, p_B)\n}\n\n# To compute the plot, we need the list of samples and weights (\"particles\"), i.e. more details compared to posterior()\n# This is what posterior_particles accomplishes\nparticles = posterior_particles(bivariate_pair, 10000)\n\n# Now we use these to create the plot below\nweighted_scatter_plot(particles, plot_options = list(xlab=\"p_A\", ylab=\"p_B\"))\n\nxaxis = seq(0, 1, 0.01)\nlines(xaxis, xaxis)\n\n\n\n\n\n\n\n\n\nEach point is a sample produced by SNIS, \\(x^{(m)}= (p_A^{(m)}, p_B^{(m)})\\).\nWe encode its associated weight \\(w^{(m)}\\) by the transparency (alpha) of the point.\n\nQuestion: What region of integration should you use to compute \\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n◤\n◥\n◢\n◣\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n◢",
     "crumbs": [
-      "Intro to MCMC",
-      "Installing and running Stan"
+      "The joy of probabilistic modelling",
+      "Bivariate posteriors"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html#running",
-    "href": "w08_mcmc1/topic01_installing_stan.html#running",
-    "title": "Installing and running Stan",
-    "section": "Running Stan",
-    "text": "Running Stan\nWe present two methods for running Stan in the next two section: either from an R script, or from a R Markdown document.\n\nFrom a R script\nFirst, copy and paste the following code into a file called beta_binomial.stan:\n\n\nbeta_binomial.stan\n\ndata {\n  int&lt;lower=0&gt; n;         // number of trials\n  int&lt;lower=0,upper=n&gt; k; // number of successes\n}\n\nparameters {\n  real&lt;lower=0,upper=1&gt; p;\n}\n\nmodel {\n  // prior\n  p ~ beta(1,1);\n\n  // likelihood\n  k ~ binomial(n, p);\n}\n\nSecond, run Stan as follows:\nrequire(rstan)\n\nfit = stan(\n  seed = 123,\n  file = \"beta_binomial.stan\",  # Stan program\n  data = list(n=3, k=3),        # named list of data\n  iter = 1000                   # number of samples to draw\n)\nThe first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:\nprint(fit)\n\n\nFrom a R Markdown document\nTo see an example of how to integrate Stan code inside R Markdown, see the source code used for the next page in the notes, available on github.",
+    "objectID": "w04_glms/topic06_glms.html",
+    "href": "w04_glms/topic06_glms.html",
+    "title": "Bayesian GLMs",
+    "section": "",
+    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
     "crumbs": [
-      "Intro to MCMC",
-      "Installing and running Stan"
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic01_installing_stan.html#footnotes",
-    "href": "w08_mcmc1/topic01_installing_stan.html#footnotes",
-    "title": "Installing and running Stan",
+    "objectID": "w04_glms/topic06_glms.html#summary-so-far",
+    "href": "w04_glms/topic06_glms.html#summary-so-far",
+    "title": "Bayesian GLMs",
+    "section": "",
+    "text": "We have seen two models that share the same general structure:\n\n“Bernoulli regression” for binary observations\n“Normal regression” for continuous observations.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
+    "href": "w04_glms/topic06_glms.html#generalization-of-these-two-special-cases",
+    "title": "Bayesian GLMs",
+    "section": "Generalization of these two special cases",
+    "text": "Generalization of these two special cases\n\nLook at the data type of the output variable, this will guide the choice of likelihood model\nAre you trying to predict..\n\na real number? us a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)\na non-negative integer? Replace Bernoulli by Poisson (or Negative Binomial, or other integer valued distribution)\netc\n\nGeneral pattern:\n\n\\[\\text{output} | \\text{inputs}, \\text{parameters} \\sim \\text{SuitableDistribution}(f(\\text{parameters},  \\text{inputs}))\\]\n\n\\(f\\) should map to the range of parameters permitted by your “SuitableDistribution”\nknown in the GLM literature as the inverse of the link function\noften a composition of a linear function with a non-linear “squashing” function if the output is constrained.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bayesian GLMs"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html",
+    "href": "w06_hierarchical/topic01_priors.html",
+    "title": "Prior choice",
+    "section": "",
+    "text": "Strategies for constructing priors.\nSituations where choosing the prior matters.\nInformative vs non-informative priors.\n\n\n\n\nSelection of priors is a necessary step in the construction of Bayesian models. Difficulties that can be encountered in prior choice motivate hierarchical models, introduced this week.",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#outline",
+    "href": "w06_hierarchical/topic01_priors.html#outline",
+    "title": "Prior choice",
+    "section": "",
+    "text": "Strategies for constructing priors.\nSituations where choosing the prior matters.\nInformative vs non-informative priors.\n\n\n\n\nSelection of priors is a necessary step in the construction of Bayesian models. Difficulties that can be encountered in prior choice motivate hierarchical models, introduced this week.",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#example",
+    "href": "w06_hierarchical/topic01_priors.html#example",
+    "title": "Prior choice",
+    "section": "Example",
+    "text": "Example\nConsider the problem of selecting a prior for a parameter defined on \\([0, 1]\\), e.g. \\(p\\) in the basic rocket launch success probability example (iid, continuous): \\[\\begin{align*}\np &\\sim \\;\\text{???} \\\\\ny | p &\\sim {\\mathrm{Binom}}(n, p).\n\\end{align*}\\]",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#general-approach",
+    "href": "w06_hierarchical/topic01_priors.html#general-approach",
+    "title": "Prior choice",
+    "section": "General approach",
+    "text": "General approach\nOften, the choice of prior is approached in two stages\n\nFirst, pick a distribution family\n\nin our example: let us pick say \\({\\color{red} {\\mathrm{Beta}}}(\\cdot, \\cdot)\\),\n\na common starting point for distribution with support \\([0, 1]\\)\nbut not the only choice, e.g., an alternative is the Kumaraswamy distribution.\n\n\nThen, pick one member of this family\n\ne.g. Beta\\(({\\color{red} 1}, {\\color{red} 2})\\), but how to pick these “magic” numbers (called hyper-parameters)?",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#when-does-the-choice-of-prior-matter",
+    "href": "w06_hierarchical/topic01_priors.html#when-does-the-choice-of-prior-matter",
+    "title": "Prior choice",
+    "section": "When does the choice of prior matter?",
+    "text": "When does the choice of prior matter?\n\nWhen data is large, posterior tends to be less sensitive to specification of the prior\n\nTheoretical reason: the “Bayesian central limit theorem” (Bernstein von-Mises theorem).\nNot always true (e.g. weakly identifiable model).\n\nWhen data is small, posterior tends to be more sensitive to specification of the prior\n\nExtreme example:\n\nconsider a rocket maiden flight,\ni.e. there is no observation available yet,\nwhat will be the posterior?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWhere there is no observations, the posterior is equal to the prior.\nThis shows an extreme example of the posterior being sensitive to the choice of prior!",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#strategies-for-constructing-priors",
+    "href": "w06_hierarchical/topic01_priors.html#strategies-for-constructing-priors",
+    "title": "Prior choice",
+    "section": "Strategies for constructing priors",
+    "text": "Strategies for constructing priors\n\n“Informative priors”: use expert knowledge to determine the prior (“prior elicitation”)\n\ne.g.: when we build rockets, there is a lot of quality control, so it would be surprising to see very low values for the success probability parameter \\(p\\).\nMany prior elicitation techniques developed, see Petrus et al, 2021 for a recent review,\nbut the state of that literature not completely satisfactory.\n\n“Non-informative priors”: use properties of the likelihood to determine prior\n\nmore advanced, see Robert, Sections 3.5,\nnot automated, case-by-case mathematical derivation often intractable.\nAutomating this into PPLs is an open problem.\n\nToday: side-step these issues thanks to Hierarchical models.\n\nWe will not remove the need for prior choice, instead we will decrease sensitivity of the posterior to these choices.",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic01_priors.html#example-continued",
+    "href": "w06_hierarchical/topic01_priors.html#example-continued",
+    "title": "Prior choice",
+    "section": "Example, continued",
+    "text": "Example, continued\nSuppose we picked a Beta, so we now have to pick a member of the Beta family.\n\\[\\begin{align*}\np &\\sim {\\mathrm{Beta}}(?, ?) \\\\\ny | p &\\sim {\\mathrm{Binom}}(n, p).\n\\end{align*}\\]\nAgain the numbers to fill in the “?” are known as hyper-parameters, i.e., an hyper-parameter is a parameter of a prior.\nExpert elicitation:\n\nfind a rocket expert,\nask the expert what they think is a reasonable range of values for \\(p\\), e.g. upper and lower quartiles \\(Q_1, Q_3\\).\nUse numerical method to fit \\(\\alpha, \\beta\\) such that a Beta(\\(\\alpha, \\beta\\)) matches the reported quartiles \\(Q_1, Q_3\\).",
+    "crumbs": [
+      "Hierarchical models",
+      "Prior choice"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic03_hierarchy.html",
+    "href": "w06_hierarchical/topic03_hierarchy.html",
+    "title": "Intro to hierarchical models",
+    "section": "",
+    "text": "Hierarchical models.\nIntuition why they decrease prior sensitivity.\n\n\n\n\nHierarchical models, a crowning achievement of Bayesian inference, can be used to decrease prior sensitivity even when the dataset of interest is of limited size.",
+    "crumbs": [
+      "Hierarchical models",
+      "Intro to hierarchical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic03_hierarchy.html#outline",
+    "href": "w06_hierarchical/topic03_hierarchy.html#outline",
+    "title": "Intro to hierarchical models",
+    "section": "",
+    "text": "Hierarchical models.\nIntuition why they decrease prior sensitivity.\n\n\n\n\nHierarchical models, a crowning achievement of Bayesian inference, can be used to decrease prior sensitivity even when the dataset of interest is of limited size.",
+    "crumbs": [
+      "Hierarchical models",
+      "Intro to hierarchical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic03_hierarchy.html#example",
+    "href": "w06_hierarchical/topic03_hierarchy.html#example",
+    "title": "Intro to hierarchical models",
+    "section": "Example",
+    "text": "Example\n\n\n\nExample: predicting the probability of failure of the next Delta 7925H launch (so far, we observed this type of rocket has been launched 3 times, with 0 failed launches).\nKey idea: use “side data” to inform the prior…\n\nFor example: success/failure launch data from other other types of rockets.\nCan we use the following rocket launch dataset to inform prediction for a single rocket type of interest?\n\n\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"../data/failure_counts.csv\") \nrmarkdown::paged_table(df)",
+    "crumbs": [
+      "Hierarchical models",
+      "Intro to hierarchical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic03_hierarchy.html#how-to-use-side-data-two-suboptimal-approaches",
+    "href": "w06_hierarchical/topic03_hierarchy.html#how-to-use-side-data-two-suboptimal-approaches",
+    "title": "Intro to hierarchical models",
+    "section": "How to use “side data”? Two suboptimal approaches",
+    "text": "How to use “side data”? Two suboptimal approaches\nFor pedagogy, we will first cover two simple heuristics to incorporate “side data” and describe their limitations.\nThen we will cover hierarchical models in the next section, showing how they address the limitations of simpler methods.\n\nFirst try (do not use this one!)\n\nMerge all the data into one type?\nI.e. just sum the columns in the data:\n\n\nsum(df$numberOfLaunches)\n\n[1] 5667\n\nsum(df$numberOfFailures)\n\n[1] 431\n\n\nWhy merging everything is a bad idea?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nSome of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.\nAn indeed, the aggregated failure rate is high compared to what you would expect from modern “workhorse” rockets (&lt;1%):\n\nsum(df$numberOfFailures) / sum(df$numberOfLaunches)\n\n[1] 0.07605435\n\n\nWe want to consider the different types of rockets as a population and model the variability within that population.\n\n\n\n\n\nTowards an improved way to use side data\n\nBackground: “mean–pseudo-sample-size” reparameterization of the Beta distribution.\n\nA reparametrization is a different labelling of a family such that you can go back and forth between the two labellings.\nConsider \\[\\alpha  = \\mu s, \\;\\; \\beta = (1 - \\mu) s\\] where \\(\\mu \\in (0, 1)\\), \\(s &gt; 0\\).\n\nInterpretation:\n\n\\(\\mu\\): mean of the Beta\n\\(s\\): measure of “peakiness” of the density, higher \\(s\\) corresponds to more peaked; roughly, \\(s \\approx\\) number of data points that would make the posterior peaked like that.\n\nWhy we did this reparameterization?\n\n\\(\\to\\) it should now be more intuitive how we can use “side data” to inform \\(\\mu\\)…\n\n\n\n\nSecond try (still suboptimal, but not as bad)\n\nEstimate a failure probability \\(\\hat p_i\\) for each type of rocket \\(i\\).\nFit a distribution \\(p(\\mu)\\) on those \\(\\{\\hat p_i\\}\\).\nUse this distribution \\(p(\\mu)\\) as the prior on \\(\\mu\\)?\n\n\nsuppressPackageStartupMessages(require(\"ggplot2\"))\nsuppressPackageStartupMessages(require(\"latex2exp\"))\n\nggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +\n  geom_histogram() + \n  xlab(TeX(\"$\\\\hat{p}_i = \\\\textrm{numberOfFailures}_i / \\\\textrm{numberOfLaunches}_i$\")) +\n  geom_rug(alpha = 0.1)\n\n\n\n\n\n\n\n\nQuestion: what are the weaknesses of using a prior fitted on this histogram?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nFirst, notice the “bumps” at 1/2 (and 1, 1/4, etc)…\n\nMost of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!\nBut if you fit a curve to this data, these “bumps” will have a large undesirable effects.\nMore broadly, we want to take into account uncertainty in each of these \\(\\hat p_i\\)’s.\n\nAlso: less clear how to generalize this method to handle the pseudo-sample-size \\(s\\).",
+    "crumbs": [
+      "Hierarchical models",
+      "Intro to hierarchical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic03_hierarchy.html#hierarchical-models-a-better-way-to-use-side-data",
+    "href": "w06_hierarchical/topic03_hierarchy.html#hierarchical-models-a-better-way-to-use-side-data",
+    "title": "Intro to hierarchical models",
+    "section": "Hierarchical models: a better way to use side data",
+    "text": "Hierarchical models: a better way to use side data\nSolution: go fully Bayesian!\nRecall: our Bayesian recipe…\n\nConstruct a probability model including\n\nrandom variables for what we will measure/observe\nrandom variables for the unknown quantities\n\nthose we are interested in (“parameters”, “predictions”)\nothers that just help us formulate the problem (“nuisance”, “random effects”).\n\n\nCompute the posterior distribution conditionally on the actual data at hand\nUse the posterior distribution to make a decision\n\nWhat it means here: we model the launcher type’s population parameters (\\(\\mu, s\\)) as random variables. We are not interested in these other launcher types, but they help us inform inference about the type of rocket we are interested in (i.e., “nuisance” parameters).\n\nGraphical model\n\n\n\nMathematical description\n\nShare these two “population parameters” across all launch types \\[p_i | \\mu, s \\sim {\\mathrm{Beta}}(\\mu s, (1 - \\mu) s)\\]\nLikelihood same as before: \\(F_i | p_i \\sim {\\mathrm{Bern}}(n_i, p_i).\\)\nWe still need to put prior on \\(\\mu\\) and \\(s\\)…\n\n…but as we’ll discuss next, you should expect this prior choice to be less sensitive.\nExample: \\(\\mu \\sim {\\mathrm{Beta}}(1,1) = {\\mathrm{Unif}}(0, 1)\\), \\(s \\sim {\\mathrm{Exp}}(1/10000)\\)\n\n\nPS: why we pick such a small value, \\(1/10000\\)?\n\nRecall the parameter of an exponential is a rate which is 1/mean.\nSo a mean of 10000 encodes we put significant mass to values up to \\(O(10000)\\).\nThis is sometimes described as a “vague prior”.\n\n\n\nDecrease prior choice sensitivity\nIt seems we have introduced new problems as now we again have hyper-parameters, namely those for the priors on \\(\\mu\\) and \\(s\\)!\nKey point: yes, but now we are less sensitive to these choices! Why?\nHeuristic: look at the node \\(n\\) connected to the hyper-parameters…\n\nIf most of \\(n\\)’s edges link to hyper-parameters: posterior more sensitive to hyper-parameters.\nIf most of \\(n\\)’s edges link to random variables connected to data: posterior will probably be less sensitive.\n\nBefore going hierarchical: for maiden/early flights we had\n\nNote: \\(p\\) is connected to only a small number of observations.\nAfter going hierarchical:\n\nNote: \\(\\mu, s\\) is connected to a large population of \\(p_i\\)’s, each linked with data.",
+    "crumbs": [
+      "Hierarchical models",
+      "Intro to hierarchical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html",
+    "href": "w06_hierarchical/topic02_gm.html",
+    "title": "Graphical models",
+    "section": "",
+    "text": "Directed graphical models.\n\n\n\n\nGraphical models help understanding complex models such as hierarchical ones",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#outline",
+    "href": "w06_hierarchical/topic02_gm.html#outline",
+    "title": "Graphical models",
+    "section": "",
+    "text": "Directed graphical models.\n\n\n\n\nGraphical models help understanding complex models such as hierarchical ones",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#directed-graphical-model",
+    "href": "w06_hierarchical/topic02_gm.html#directed-graphical-model",
+    "title": "Graphical models",
+    "section": "Directed graphical model",
+    "text": "Directed graphical model\nA graphical model is a discrete graph showing the dependencies involved in a forward sampling description of a model. Specifically:\nDefinition: a directed graphical model is a discrete graph such that:\n\nthe set of vertices is a set of random variables,\nthere is an edge \\(X_1 \\to X_2\\) if the forward sampling step producing \\(X_2\\) requires knowing \\(X_1\\).",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#examples",
+    "href": "w06_hierarchical/topic02_gm.html#examples",
+    "title": "Graphical models",
+    "section": "Examples",
+    "text": "Examples\n\nExchangeable observations\nMany simples models can be written as:\n\n\n\n\\[\\begin{align*}\n\\theta &\\sim \\text{SomePrior} \\\\\ny_i | \\theta &\\sim \\text{SomeLikelihood}(\\theta).\n\\end{align*}\\]\nMost of the models we have encountered so far have this form.\n\n\nHidden Markov model\nTime series are often modelled as follows:\n\n\n\n\nthere is an unobserved state \\(x_t\\) changing at each time step \\(t \\in \\{1, 2, \\dots\\}\\)\n\ne.g. true location of a plane,\n\nwe have noisy observations \\(y_t\\) from this true position,\n\ne.g. information from a radar.\n\n\nSimplest HMM example:\n\\[\\begin{align*}\nx_i | x_{i-1} &\\sim \\mathcal{N}(x_{i-1}, \\sigma_1) \\\\\ny_i | x_i &\\sim \\mathcal{N}(x_{i}, \\sigma_2),\n\\end{align*}\\]\nwhere \\(\\sigma_1\\) controls the amount of variability in the dynamics, and \\(\\sigma_2\\), in the measurement.",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#conditioning",
+    "href": "w06_hierarchical/topic02_gm.html#conditioning",
+    "title": "Graphical models",
+    "section": "Conditioning",
+    "text": "Conditioning\nShaded nodes in a directed graphical models indicate what we condition on (i.e. what we observe).",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#plates",
+    "href": "w06_hierarchical/topic02_gm.html#plates",
+    "title": "Graphical models",
+    "section": "Plates",
+    "text": "Plates\n\n\n\nPlate: When there are too many vertices to draw in a graphical model, use a square (“plate”) to indicate a group of nodes that are repeated several times. In other words, a graphical “for loop.”",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w06_hierarchical/topic02_gm.html#further-pointers-on-graphical-models",
+    "href": "w06_hierarchical/topic02_gm.html#further-pointers-on-graphical-models",
+    "title": "Graphical models",
+    "section": "Further pointers on graphical models",
+    "text": "Further pointers on graphical models\nDirected graphical models are also useful to identify conditional independence relationships (recall, \\(A\\) is conditionally independent of \\(B\\) given \\(C\\) if \\(\\Pr(A|C) \\Pr(B|C) = \\Pr(A \\cap B | C)\\)).\nIf you are curious, watch this video to see how this is done, or read the original paper.",
+    "crumbs": [
+      "Hierarchical models",
+      "Graphical models"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic01_simPPLe.html",
+    "href": "w04_glms/topic01_simPPLe.html",
+    "title": "simPPLe",
+    "section": "",
+    "text": "Last week’s Q2 exercise solution.\n\n\n\n\nWe will use simPPLe this week to do probabilistic modelling.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic01_simPPLe.html#outline",
+    "href": "w04_glms/topic01_simPPLe.html#outline",
+    "title": "simPPLe",
+    "section": "",
+    "text": "Last week’s Q2 exercise solution.\n\n\n\n\nWe will use simPPLe this week to do probabilistic modelling.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic01_simPPLe.html#background",
+    "href": "w04_glms/topic01_simPPLe.html#background",
+    "title": "simPPLe",
+    "section": "Background",
+    "text": "Background\nIf you missed Tuesday’s lecture last week, make sure to read the introduction to PPLs.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic01_simPPLe.html#setting-up-simpple-on-your-computer",
+    "href": "w04_glms/topic01_simPPLe.html#setting-up-simpple-on-your-computer",
+    "title": "simPPLe",
+    "section": "Setting up simPPLe on your computer",
+    "text": "Setting up simPPLe on your computer\n\nLet us combine the “scaffold” files and the answer of last week’s Q2 into one file. Copy paste the code below into a file called simple.R:\n\n\n\nsimple.R\n\n###### solution\n\nposterior = function(ppl_function, number_of_iterations) {\n  numerator = 0.0\n  denominator = 0.0\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0\n    g_i = ppl_function()\n    numerator = numerator + weight * g_i\n    denominator = denominator + weight\n  }\n  return(numerator/denominator)\n}\n\n###### contents of the scaffold\n\nsuppressPackageStartupMessages(library(distr))\n\n## Utilities to make the distr library a bit nicer to use\n\np &lt;- function(distribution, realization) {\n  d(distribution)(realization) # return the PMF or density \n}\n\nBern = function(probability_to_get_one) {\n  DiscreteDistribution(supp = 0:1, prob = c(1-probability_to_get_one, probability_to_get_one))\n}\n\n## Key functions called by simPPLe programs\n\n# Use simulate(distribution) for unobserved random variables\nsimulate &lt;- function(distribution) {\n  r(distribution)(1) # sample once from the given distribution\n}\n\n# Use observe(realization, distribution) for observed random variables\nobserve = function(realization, distribution) {\n  # `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function\n  weight &lt;&lt;- weight * p(distribution, realization) \n}\n\n\nThis way, you can now load simPPLe by loading simple.R into your session (note: in the code below replace ../../solutions/ by the path to the file you just created)\n\nsource(\"../../solutions/simple.R\")\n\n# define your model as a function, e.g. my_function\n\n# call: posterior(my_function, 100) to approximate posterior E[my_function | observations]",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic01_simPPLe.html#testing",
+    "href": "w04_glms/topic01_simPPLe.html#testing",
+    "title": "simPPLe",
+    "section": "Testing",
+    "text": "Testing\nI will start this Tuesday’s lecture with the following simPPLe test (a continuous version of the rocket model): (note: in the code below replace ../../solutions/ by the path to the file you just created)\nsource(\"../../solutions/simple.R\")\n\nset.seed(1)\n\ndata = rep(0, 4) \n\n# simPPLe's description of our \"bag of coins\" example\nbeta_binomial = function() {\n  \n  # Similar to forward sampling, but use 'observe' when the variable is observed\n  p = simulate(Beta(1, 1))\n  for (i in seq_along(data)) { \n    observe(data[i], Bern(p)) \n  }\n  \n  # return the test function, here the parameter p\n  return(p)\n}\n\nposterior(beta_binomial, 100)\n\nWhat is the output?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(0.0010394\\)\n\\(0.0194394\\)\n\\(0.0826293\\)\n\\(0.1728016\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(0.1728016\\).",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "simPPLe"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html",
+    "href": "w04_glms/topic05_regression.html",
+    "title": "(Normal) regression",
+    "section": "",
+    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nPriors on the positive real line.\nHomoscedasticity and heteroscedasticity.\nMarginal posterior.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#outline",
+    "href": "w04_glms/topic05_regression.html#outline",
+    "title": "(Normal) regression",
+    "section": "",
+    "text": "A second example of a Bayesian model based on a linear model, this time with a normal likelihood.\nPriors on the positive real line.\nHomoscedasticity and heteroscedasticity.\nMarginal posterior.\n\n\n\n\nTogether with classification (previous page), regression is the other major statistical task frequently encountered.\nWe see here that the same approach as we took for classification can be easily modified to do regression.\nThis provides us with a second example of Bayesian GLMs.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#example",
+    "href": "w04_glms/topic05_regression.html#example",
+    "title": "(Normal) regression",
+    "section": "Example",
+    "text": "Example\n\nIn the early 20th century, astronomers made the startling observation that pretty much all galaxies are moving away from ours. Why?\nWe now know this is because the universe is expanding.\nHere is a metaphor to help understand this:\n\nImagine ants on an inflating balloon.\nYou are one of the ants…\n…and you notice that all the others ants are moving away from you…\n\n…and the further the neighbor ant, the faster it looks like it is moving away from you.\n\n\nIn 1929 the astronomer Edwin Hubble published a paper1 on the relationship between distance and velocity of galaxies relative to us.\nIt is now called Hubble’s law.\nThe estimated slope of the relationship, known as Hubble’s constant, leads to an estimate of the age of the universe.\n\n\n\n\n\nData\n\nWe will estimate Hubble’s constant using data from the original data used by Edwin Hubble (in CSV).\nTo make the numbers less extreme in the following, I will divide the velocities by 1000\n\nInstructions:\n\ndownload the CVS\ncopy paste the code below and run it on your computer (after changing the path “../data” to the path on your computer)\n\n\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"../data/hubble-1.csv\") %&gt;%\n    rename(distance = R..Mpc.) %&gt;%\n    rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\nrmarkdown::paged_table(df)\n\n\n  \n\n\n\n\nHere is some EDA on that dataset:\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
+    "href": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
+    "title": "(Normal) regression",
+    "section": "Building a Bayesian regression model",
+    "text": "Building a Bayesian regression model\nGoal:\n\ndesigning a model containing a “slope” parameter,\nfrom which we will compute \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\nTo achieve our goal, we will complete the gap in the following code:\nsource(\"../../solutions/simple.R\")\n\nregression = function() {\n  # priors will be defined here\n  # ...\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    # likelihood will be defined here\n  }\n  return(slope)\n}\n\nposterior(regression, 1000)\n\nRecall: to build a model, start with the observations.\nSpecifically, let us build a model for the observed velocity first.\n\nQuestion: what would be a reasonable likelihood for the velocity?\n\nvelocity \\(\\sim\\) Exponential(…)\nvelocity \\(\\sim\\) Uniform(…)\nvelocity \\(\\sim\\) t(…)\nvelocity \\(\\sim\\) Normal(…)\nNone of the above.\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe have that velocity \\(\\in \\mathbb{R}\\), so the exponential (\\(\\in (0, \\infty)\\)) and the uniform (\\(\\in [a, b]\\)) are not great choices.\nBoth the normal and the t-distribution are reasonable.\nThe t-distribution can have fatter tails, so if the data has outliers this may be preferable but we will stick with the simpler normal choice today.\nErratum: I said in class it might be reasonable to use a uniform distribution where the bounds are the speed of light. It turns out to be incorrect: galaxies can recede from us faster than the speed of light!\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: What should we use as the mean parameter of the normal likelihood?\nUse the fact that the scientific question is “to find a linear relationship of the velocity as a function of the distance.”\n\nvelocity \\(\\sim\\) Normal(0, …)\nvelocity \\(\\sim\\) Normal(distance, …)\nvelocity \\(\\sim\\) Normal(distance * slope, …)\nvelocity \\(\\sim\\) Normal(distance * slope + intercept, …)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nHere the best answer is:\nvelocity \\(\\sim\\) Normal(distance * slope, …).\nWe do not need an intercept, because we know that by definition, our velocity relative to ourself is zero.\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: What should we use as the standard deviation parameter of the normal likelihood?\n\nvelocity \\(\\sim\\) Normal(…, some constant)\nvelocity \\(\\sim\\) Normal(…, some random variable)\nvelocity \\(\\sim\\) Normal(…, some random variable * distance)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nUsing a constant standard deviation is not ideal as the model will be sensitive to that choice.\nThe other choices are a priori reasonable and more domain knowledge would be needed to pick one. The choice:\nvelocity \\(\\sim\\) Normal(…, some random variable * distance)\nmeans that we expect that the variability of the galaxy velocities increase for galaxies that are further away. This could happen for example if the variability is dominated by measurement error for a measurement technique where errors increase linearly with distance.\nThe choice:\nvelocity \\(\\sim\\) Normal(…, some random variable)\nwould be more reasonable if the measurement error is negligible and the variability comes from other phenomena affecting the velocity of galaxies which are not expected to behave differently for close vs far galaxies (in our metaphor, think of ants walking in random directions at the same time as the balloon is expanding).\nThese are examples of heteroscedasticity (variability changes with input variable) and homoscedasticity (variability is invariant to input).\nLet us pick an homoscedasticity model. To summarize what we have so far:\nvelocity \\(\\sim\\) Normal(distance * slope, sd).\n\n\n\n\n\n\n\n\n\nClick for next step\n\n\n\n\n\nQuestion: Pick priors for the “slope” and “sd” parameters\n\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Normal(…)\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Exponential(…)\nslope \\(\\sim\\) Exponential(…), sd \\(\\sim\\) Exponential(…)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe do not want a normal for the standard deviation (sd) parameter, because negative sd’s are not allowed.\nUsing an exponential for the slope would violate Cromwell’s rule.\nHence the best choice here is:\nslope \\(\\sim\\) Normal(…), sd \\(\\sim\\) Exponential(…).\n\n\n\nQuestion: complete the code and approximate \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\nPick the closest:\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.5\\)\n\\(\\approx 1\\)\n\\(\\approx 2\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nsource(\"../blocks/simple_utils.R\")\n\nregression = function() {\n  slope = simulate(Norm(0, 1))\n  sd = simulate(Exp(10))\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    observe(velocity, Norm(distance * slope, sd))\n  }\n  c(slope, sd)\n}\n\nposterior(regression, 1000)\n\n[1] 0.3938742 0.2411316",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
+    "href": "w04_glms/topic05_regression.html#visualization-of-the-posterior-distribution",
+    "title": "(Normal) regression",
+    "section": "Visualization of the posterior distribution",
+    "text": "Visualization of the posterior distribution\n\nposterior = posterior_particles(regression, 10000)\nweighted_scatter_plot(posterior, plot_options = list(xlab=\"slope parameter\", ylab=\"sd parameter\"))\n\n\n\n\n\n\n\n\n\nplot(df$distance, df$velocity, xlab = \"distance\", ylab = \"velocity\")\n\nxs = seq(0, 2, 0.01)\nsamples = posterior$samples \nnorm_weights = posterior$weights / sum(posterior$weights)\n\nfor (i in 1:nrow(samples)) {\n  slope     = samples[i, 1]\n  pr = norm_weights[i]\n  lines(xs, slope * xs, col = rgb(red = 0, green = 0, blue = 0, alpha = pr*20))\n}\n\n\n\n\n\n\n\n\nHere since the scientific question only concerns one parameter, the slope, it is useful to look at the marginal posterior distribution.\n\nIn mathematical expressions, obtained by marginalization: \\[p(x_1 | y) = \\int p(x_1, x_2 | y) \\mathrm{d}x_2.\\]\nIn Monte Carlo methods, much simpler:\n\neach sample is a pair \\(x^{(m)}= (x_1^{(m)}, x_2^{(m)})\\)\nif you are interested in \\(x_1\\) only, just ignore \\(x_2\\)!\n\n\nHere is an example of creating a histogram for the marginal posterior:\n\nlibrary(\"ggplot2\")\nposterior.as.df &lt;- data.frame(slopes = samples[,1], norm_weights)\nggplot(posterior.as.df, aes(x = slopes, weight = norm_weights)) + \n  geom_histogram(binwidth = 0.02) + \n  xlim(0.2, 0.6) +\n  xlab(\"slope parameter\") + \n  ylab(\"probability\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nQuestion: if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration in the scatter plot above (the first plot in this subsection) would be used to compute the height of one histogram bin?\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n“—”\n“|”\n“◤”\n“◢”\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe answer is “|”.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#model-criticism",
+    "href": "w04_glms/topic05_regression.html#model-criticism",
+    "title": "(Normal) regression",
+    "section": "Model criticism",
+    "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?\n\n\n\n\n\n\nClick for discussion\n\n\n\n\n\nIn summary: it is very hard to estimate distance of distant objects.\nNot only the model explored today lacks an error model on the distances, but moreover, Hubble’s distance estimates had systematic errors (i.e. were all offset by a constant), hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results.\nIn fact, even with modern data and statistical methods, systematic errors are still suspected, this is known as the “Hubble tension.”",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#footnotes",
+    "href": "w04_glms/topic05_regression.html#footnotes",
+    "title": "(Normal) regression",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nFor example, for the model used in the exercise on hierarchical models, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!↩︎\nFor example, Stan does not support latent integer-value random variables, whereas simPPLe does.↩︎\nsimPPLe is a few dozen lines of codes, whereas Stan has millions of lines of code.↩︎",
+    "text": "Footnotes\n\n\nProceedings of the National Academy of Sciences, Vol. 15, pp. 168–173.↩︎",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic03_normal.html",
+    "href": "w04_glms/topic03_normal.html",
+    "title": "Normal distributions",
+    "section": "",
+    "text": "Quick review of the normal distribution.\nDifferent parameterizations.\n\n\n\n\nThe normal distribution is often used in Bayesian analysis when one needs a prior over an unknown \\(x\\) such that \\(x \\in (-\\infty, \\infty) = \\mathbb{R}\\).",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Normal distributions"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic03_normal.html#outline",
+    "href": "w04_glms/topic03_normal.html#outline",
+    "title": "Normal distributions",
+    "section": "",
+    "text": "Quick review of the normal distribution.\nDifferent parameterizations.\n\n\n\n\nThe normal distribution is often used in Bayesian analysis when one needs a prior over an unknown \\(x\\) such that \\(x \\in (-\\infty, \\infty) = \\mathbb{R}\\).",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Normal distributions"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic03_normal.html#examples-of-normal-densities",
+    "href": "w04_glms/topic03_normal.html#examples-of-normal-densities",
+    "title": "Normal distributions",
+    "section": "Examples of normal densities",
+    "text": "Examples of normal densities",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Normal distributions"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic03_normal.html#parameterizations",
+    "href": "w04_glms/topic03_normal.html#parameterizations",
+    "title": "Normal distributions",
+    "section": "Parameterizations",
+    "text": "Parameterizations\n\nThere are different conventions to measure the spread.\n\nStandard deviation \\(\\sigma\\).\nVariance, \\(\\sigma^2\\).\nPrecision, \\(\\tau = 1/\\sigma^2\\).\n\nKeep that in mind as different languages will use different conventions!\nStandard deviation is the most intuitive:\n\nit is the width of the bell,\nthe only one that has the same units as \\(x\\) (e.g. if \\(x\\) is in meters, so is \\(\\sigma\\)).",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Normal distributions"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html",
+    "href": "w08_mcmc1/topic02_stan_basics.html",
+    "title": "Stan basics",
+    "section": "",
+    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
     "crumbs": [
       "Intro to MCMC",
-      "Installing and running Stan"
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#outline",
+    "href": "w08_mcmc1/topic02_stan_basics.html#outline",
+    "title": "Stan basics",
+    "section": "",
+    "text": "Anatomy of a simple Stan program.\nInterpreting the output of Stan.\n\n\n\n\nWe will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#example",
+    "href": "w08_mcmc1/topic02_stan_basics.html#example",
+    "title": "Stan basics",
+    "section": "Example",
+    "text": "Example\n\nReview: code in simPPLe and analytic answer\nLet us revisit the Doomsday model, which we wrote in simPPLe as follows:\n\n\n\n\nsource(\"../../solutions/simple.R\")\n\ndoomsday_model &lt;- function() {\n  x = simulate(Unif(0, 5))\n  observe(0.06, Unif(0, x))\n  return(x)\n}\n\nposterior(doomsday_model, 100000)\n\n[1] 1.103447\n\n\nRecall the analytic answer that we computed in clicker questions was: \\(\\approx 1.117\\).\n\n\nCode in Stan\nToday we will re-write this model in Stan instead of simPPLe. The main difference is that:\n\nboth simulate and observe will be denoted by ~in Stan,\n\nto differentiate between observed and latent, Stan instead uses variable declarations (as data or parameters).\n\nFirst, load rstan:\n\nsuppressPackageStartupMessages(require(rstan))\n\nThen, as you did to test your install put the following code into a .stan file:\n\n1data {\n  real y; \n}\n\n2parameters {\n  real x;\n}\n\nmodel {\n3  x ~ uniform(0, 5);\n4  y ~ uniform(0, x);\n}\n\n\n1\n\nVariables introduced in a data block will be treated as observed.\n\n2\n\nVariables introduced in a parameters block will be treated as latent, i.e., unobserved.\n\n\n3\n\nSince x is declared latent (i.e., inside a parameters block), Stan will know to treat this as the counterpart of simPPLe’s x = simulate(Unif(0, 5)).\n\n4\n\nSince y is declared observed (i.e., inside a data block), Stan will know to treat this as the counterpart of simPPLe’s observe(0.06, Unif(0, x)).\n\n\n\n\nQuestion: How does Stan gets the actual observed value \\(y = 0.06\\)?\nAnswer: When Stan gets called in R:1\n\n\nfit = sampling(\n  doomsday,         \n1  data = list(y = 0.06),\n  chains = 1,\n2  iter = 100000\n)\n\n\n1\n\nPass in the values taken by the observed random variables.\n\n2\n\nThe number of samples to compute (equivalent to \\(M\\) in our Monte Carlo notation)\n\n\n\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: Rejecting initial value:\nChain 1:   Error evaluating the log probability at the initial value.\nChain 1: Exception: uniform_lpdf: Upper bound parameter is -1.58474, but must be greater than 0.000000 (in 'anon_model', line 9, column 2 to column 20)\nChain 1: \nChain 1: Gradient evaluation took 3e-06 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 10.363 seconds (Warm-up)\nChain 1:                3.196 seconds (Sampling)\nChain 1:                13.559 seconds (Total)\nChain 1: \n\n\nWe can now compare the approximation provided by Stan:\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n     mean se_mean   sd  2.5%   25%  50%  75% 97.5% n_eff Rhat\nx    1.15    0.03 1.30  0.07  0.18 0.56 1.72  4.56  1403    1\nlp__ 0.58    0.04 1.29 -1.52 -0.54 0.58 1.69  2.70  1092    1\n\nSamples were drawn using NUTS(diag_e) at Mon Mar  4 21:07:38 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
+    "href": "w08_mcmc1/topic02_stan_basics.html#tips-and-tricks",
+    "title": "Stan basics",
+    "section": "Tips and tricks",
+    "text": "Tips and tricks\n\nNotice statements in Stan have to end in semicolumns, ;\nTo find out Stan’s name for distributions, see Stan’s documentation,\n\ne.g., this is the documentation for uniform.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
+    "href": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
+    "title": "Stan basics",
+    "section": "Interpreting the output",
+    "text": "Interpreting the output\n\nJust as simple Monte Carlo and SNIS, the output of Stan/MCMC is a list of samples\nIn contrast to SNIS, the samples are equally weighted,\n\nin other words, for MCMC we have \\(W^{(m)}= 1/M\\),\ni.e., their structure is the same as samples from simple Monte Carlo!\n\n\nTo access the samples from a “fit” object when calling Stan, use:\n\nsamples = extract(fit)\n\nhead(samples$x)\n\n[1] 1.1564924 2.1603994 0.1596580 0.1776573 4.1258671 1.0702292\n\n\nQuestion: denote the samples output from Stan by \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\). What formula should you use to approximate \\(\\mathbb{E}[g(X) | Y = y]\\) based on the Stan output?\n\n\nPlotting histograms\nSince the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:\n\nhist(samples$x)\n\n\n\n\n\n\n\n\nYou can also use the bayesplot package which will be handy to create more complex plots from MCMC runs:\n\nsuppressPackageStartupMessages(require(bayesplot))\nmcmc_hist(fit, pars = c(\"x\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic02_stan_basics.html#footnotes",
+    "href": "w08_mcmc1/topic02_stan_basics.html#footnotes",
+    "title": "Stan basics",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nwhen calling Stan from an R script, use stan(file = ...), but when calling Stan from R Markdown (as we do here), use sampling(name, ...), where the first argument, name matches the code block argument output.var = \"name\" (see the source of this page for an example).↩︎",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan basics"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html",
+    "href": "w08_mcmc1/topic03_more_complex_example.html",
+    "title": "Stan: going further",
+    "section": "",
+    "text": "More complex types in Stan (vectors, constraints)\nLoops and vectorization\nFeeding complex data into Stan\n\n\n\n\nWe review here the constructs needed to write more complex models such as Q2 in the current exercise, more similar exercises coming in the next weeks, and the second quiz.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#outline",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#outline",
+    "title": "Stan: going further",
+    "section": "",
+    "text": "More complex types in Stan (vectors, constraints)\nLoops and vectorization\nFeeding complex data into Stan\n\n\n\n\nWe review here the constructs needed to write more complex models such as Q2 in the current exercise, more similar exercises coming in the next weeks, and the second quiz.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#example",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#example",
+    "title": "Stan: going further",
+    "section": "Example",
+    "text": "Example\nWe revisit the omicron modelling question from quiz 1.\nThe data consists, for each day in December 2021, of the percentage of sequenced COVID-19 samples that are of the Omicron variant.\n\nsuppressPackageStartupMessages(require(rstan))\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\n# data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data\ndf = read.csv(\"../../quizzes/q1/covid19_variants.csv\")\ndf$date = as.Date(df$date,format=\"%Y-%m-%d\")\n\ndf = df %&gt;% filter(date &gt; \"2021-12-01\" & date &lt; \"2021-12-31\") %&gt;% filter(variant_name == \"Omicron\")\n\ndf %&gt;% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + theme_minimal()",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-mathematical-notation",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#model-mathematical-notation",
+    "title": "Stan: going further",
+    "section": "Model (mathematical notation)",
+    "text": "Model (mathematical notation)\nRecall one possible model we discussed after the quiz (with slightly different prior hyper-parameters):\n\\[\\begin{align*}\n\\theta_0 &\\sim {\\mathrm{Exp}}(1) \\\\\n\\theta_1 &\\sim \\mathcal{N}(0, \\sigma = 1000) \\\\\n\\theta_2 &\\sim \\mathcal{N}(0, \\sigma = 1000) \\\\\n\\mu_i &= \\text{logistic}(i \\theta_1 + \\theta_2) \\\\\ny_i &\\sim {\\mathrm{Beta}}(\\mu_i, \\theta_0) \\\\\n\\end{align*}\\]",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-in-stan",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#model-in-stan",
+    "title": "Stan: going further",
+    "section": "Model (in Stan)",
+    "text": "Model (in Stan)\nLet us translate the mathematical notation into Stan:\n\n\n// comments in Stan use '//' not '#'\n\ndata { \n  // Here `N` is the number of days considered. \n  int N; \n  \n  // meaning: `y` is a vector of length `N` where each entry is between zero and one.\n  vector&lt;lower=0, upper=1&gt;[N] y; \n}\n\n// As before, we declare in `parameters` the types of the unobserved (latent) random variables. \nparameters { \n  real&lt;lower=0&gt; concentration; \n  real slope;\n  real intercept;\n}\n\nmodel {\n  concentration ~ exponential(1);\n  slope ~ normal(0, 1000);\n  intercept ~ normal(0, 1000);\n  \n  for (i in 1:N) { // Stan is 1-indexed\n    // inv_logit is Stan's name for the logistic function\n1    y[i] ~ beta_proportion(\n              inv_logit(intercept + slope * (i/N)), \n              concentration); \n  }\n  \n  // Stan supports vectorization---the line below will produce the same \n  // output as the loop above, but slightly faster:\n  \n  //   y ~ beta_proportion(mu, concentration);\n}\n\n\n1\n\nHere, beta_proportion corresponds to the mean-concentration parameterization we discussed in the lecture on hierarchical models.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#improving-our-model-with-generated-parameters",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#improving-our-model-with-generated-parameters",
+    "title": "Stan: going further",
+    "section": "Improving our model with generated parameters",
+    "text": "Improving our model with generated parameters\n\nThe code in the last section will not print out \\(\\mu_i\\)\nThe code below show how to fix this\n\n\\(\\mu_i\\) is handled differently than \\(\\theta_k\\), \\(y_i\\)…\n… because \\(\\mu_i\\) is defined with \\(=\\) instead of \\(\\sim\\)\n\n\n\n\ndata { \n  int N; \n  vector&lt;lower=0, upper=1&gt;[N] y; \n}\n\nparameters { \n  real&lt;lower=0&gt; concentration; \n  real slope;\n  real intercept;\n}\n\n1transformed parameters {\n  // linspaced_vector(N,0,1) creates a vector \n  //    of N equispace points between 0 and 1\n  //    (we normalize the dates to be between zero and one)\n  // functions in Stan are typically vectorized, \n  //    this is the case for example with inv_logit\n  vector[N] mu = \n    inv_logit(intercept + slope*linspaced_vector(N,0,1));\n}\n\n2model {\n  concentration ~ exponential(1);\n  slope ~ normal(0, 1000);\n  intercept ~ normal(0, 1000);\n  \n  y ~ beta_proportion(mu, concentration);\n}\n\n\n1\n\nWhenever in the mathematical notation a latent random variable is defined using an equality (“\\(=\\)”), input it in the transformed parameters block.\n\n2\n\nWhenever in the mathematical notation a latent random variable is defined using a distribution statement (“\\(\\sim\\)”), input it in the model block.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#running-mcmc",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#running-mcmc",
+    "title": "Stan: going further",
+    "section": "Running MCMC",
+    "text": "Running MCMC\nRunning MCMC on the model is done as before:1\n\ndata_without_zeros = pmax(pmin(df$percentage/100,0.999),0.001)\n\nfit = sampling(\n  omicron, \n1  data = list(\n          y = data_without_zeros, \n          N = length(data_without_zeros)\n        ), \n  chains = 1,\n  iter = 10000       \n)\n\n\n1\n\neach variable in Stan’s data block needs to be fed a value when called from R.\n\n\n\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 3.1e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.31 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:    1 / 10000 [  0%]  (Warmup)\nChain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)\nChain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)\nChain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)\nChain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)\nChain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)\nChain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)\nChain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)\nChain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)\nChain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)\nChain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)\nChain 1: Iteration: 10000 / 10000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.171 seconds (Warm-up)\nChain 1:                0.2 seconds (Sampling)\nChain 1:                0.371 seconds (Total)\nChain 1:",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#posterior-visualization",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#posterior-visualization",
+    "title": "Stan: going further",
+    "section": "Posterior visualization",
+    "text": "Posterior visualization\nWe can extract samples as follows:\n\nsamples = extract(fit)$mu\ndata = df$percentage\nn_samples = nrow(samples)\n\nand plot the posterior distribution over the beta’s mean functions:\n\nxs = 1:length(data) / length(df$percentage)\nplot(xs, data/100)\n\nmus = samples\nfor (i in 1:n_samples) {\n  lines(xs, samples[i,], col = rgb(red = 0, green = 0, blue = 0, alpha = 0.01))\n}",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
+    "title": "Stan: going further",
+    "section": "Model criticism",
+    "text": "Model criticism\nWhat are potential weakness(es) of the model?",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
+    "title": "Stan: going further",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nnote we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.↩︎",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
     ]
   },
   {
@@ -3443,8 +3553,8 @@
     ]
   },
   {
-    "objectID": "exercises/ex07.html#q.3-a-simple-mcmc-algorithm",
-    "href": "exercises/ex07.html#q.3-a-simple-mcmc-algorithm",
+    "objectID": "exercises/ex07.html#sec-q3",
+    "href": "exercises/ex07.html#sec-q3",
     "title": "Exercise 7: Intro to MCMC",
     "section": "Q.3: a simple MCMC algorithm",
     "text": "Q.3: a simple MCMC algorithm\nIn this question, you will implement a random-walk Metropolis algorithm with a standard normal proposal.\nStart with the following scaffold code that encodes the posterior distribution of interest. More specifically, this encodes an un-normalized distribution \\(\\gamma(p)\\) given by prior times likelihood.\n\n\nex07_scaffold.R\n\n# prior: Beta(alpha, beta)\nalpha = 1\nbeta = 2 \n\n# observations: binomial draws\nn_successes = 3 \nn_trials = 3\n\ngamma_beta_binomial = function(p) {\n  if (p &lt; 0 || p &gt; 1) return(0.0)\n  dbeta(p, alpha, beta) * dbinom(x = n_successes, size = n_trials, prob = p)\n}\n\nComplete the blanks in the following:\n# simple Metropolis-Hastings algorithm (normal proposal)\nsimple_mh = function(gamma, initial_point, n_iters) {\n  samples = numeric(n_iters) \n  dim = length(initial_point)\n  \n  # TODO\n  \n  return(samples)\n}\nUse this function to compute the posterior mean of the model encoded in gamma_beta_binomial.\nCompute the posterior mean of \\(p\\) using:\n\n1000 iterations of MCMC,\nanalytic computations based on the practice quiz 1 question.",

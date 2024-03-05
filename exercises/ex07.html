@@ -658,6 +658,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic04_mh.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metropolis-Hastings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -676,7 +682,7 @@ window.Quarto = {
   <ul>
   <li><a href="#q.1-installing-and-running-stan" id="toc-q.1-installing-and-running-stan" class="nav-link active" data-scroll-target="#q.1-installing-and-running-stan">Q.1: installing and running Stan</a></li>
   <li><a href="#q.2-regression-in-stan" id="toc-q.2-regression-in-stan" class="nav-link" data-scroll-target="#q.2-regression-in-stan">Q.2: regression in Stan</a></li>
-  <li><a href="#q.3-a-simple-mcmc-algorithm" id="toc-q.3-a-simple-mcmc-algorithm" class="nav-link" data-scroll-target="#q.3-a-simple-mcmc-algorithm">Q.3: a simple MCMC algorithm</a></li>
+  <li><a href="#sec-q3" id="toc-sec-q3" class="nav-link" data-scroll-target="#sec-q3">Q.3: a simple MCMC algorithm</a></li>
   </ul>
 </nav>
     </div>
@@ -748,8 +754,8 @@ https://github.com/trevorcampbell/shortex
 </ul>
 <p>Run stan for 2000 iterations and report a histogram on the quantity of interest, i.e., the slope parameter.</p>
 </section>
-<section id="q.3-a-simple-mcmc-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-a-simple-mcmc-algorithm">Q.3: a simple MCMC algorithm</h2>
+<section id="sec-q3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q3">Q.3: a simple MCMC algorithm</h2>
 <p>In this question, you will implement a random-walk Metropolis algorithm with a standard normal proposal.</p>
 <p>Start with the following scaffold code that encodes the posterior distribution of interest. More specifically, this encodes an un-normalized distribution <span class="math inline">\(\gamma(p)\)</span> given by prior times likelihood.</p>
 <div class="code-with-filename">

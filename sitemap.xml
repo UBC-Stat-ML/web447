@@ -121,52 +121,56 @@
     <lastmod>2024-01-15T22:50:24.531Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic03_more_complex_example.html</loc>
-    <lastmod>2024-03-05T06:21:35.451Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic04_mh.html</loc>
+    <lastmod>2024-03-05T17:00:05.137Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic02_stan_basics.html</loc>
-    <lastmod>2024-03-05T05:24:58.771Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic03_normal.html</loc>
-    <lastmod>2024-01-30T13:50:40.976Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic05_regression.html</loc>
-    <lastmod>2024-02-05T22:06:45.879Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic01_simPPLe.html</loc>
-    <lastmod>2024-01-29T14:56:38.966Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic02_gm.html</loc>
-    <lastmod>2024-02-13T01:12:24.963Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic03_hierarchy.html</loc>
-    <lastmod>2024-02-13T04:46:29.694Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic01_priors.html</loc>
-    <lastmod>2024-02-12T21:53:14.195Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic06_glms.html</loc>
-    <lastmod>2024-02-07T22:34:58.305Z</lastmod>
-  </url>
-  <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic02_bivariate.html</loc>
-    <lastmod>2024-02-08T21:15:54.413Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic01_installing_stan.html</loc>
+    <lastmod>2024-03-05T04:51:52.092Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic04_classification.html</loc>
     <lastmod>2024-01-30T06:43:00.463Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic01_installing_stan.html</loc>
-    <lastmod>2024-03-05T04:51:52.092Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic02_bivariate.html</loc>
+    <lastmod>2024-02-08T21:15:54.413Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic06_glms.html</loc>
+    <lastmod>2024-02-07T22:34:58.305Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic01_priors.html</loc>
+    <lastmod>2024-02-12T21:53:14.195Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic03_hierarchy.html</loc>
+    <lastmod>2024-02-13T04:46:29.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w06_hierarchical/topic02_gm.html</loc>
+    <lastmod>2024-02-13T01:12:24.963Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic01_simPPLe.html</loc>
+    <lastmod>2024-01-29T14:56:38.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic05_regression.html</loc>
+    <lastmod>2024-02-05T22:06:45.879Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w04_glms/topic03_normal.html</loc>
+    <lastmod>2024-01-30T13:50:40.976Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic02_stan_basics.html</loc>
+    <lastmod>2024-03-05T05:24:58.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w08_mcmc1/topic03_more_complex_example.html</loc>
+    <lastmod>2024-03-05T14:36:52.753Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w01_discrete_inference/topic09_bayes.html</loc>
@@ -262,7 +266,7 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/exercises/ex07.html</loc>
-    <lastmod>2024-03-05T06:26:00.547Z</lastmod>
+    <lastmod>2024-03-05T16:48:53.872Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/exercises/ex03_distr_tutorial.html</loc>
