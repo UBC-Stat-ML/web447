@@ -1,0 +1,18 @@
+---
+title: "Exercise 8: Bayesian Workflow"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+1. Model definition
+2. Prior predictive check 
+    - average response in logistic regression versus prior concentration of coef as in Fig 3? 
+    - R^2 versus prior concentration of regression coef as in example in Fig 21?
+3. Simulation-based calibration
+4. Posterior predictive check
+5. Prior sensitivity analysis
+6. Model selection?
