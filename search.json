@@ -2422,7 +2422,7 @@
     "href": "w08_mcmc1/topic05_mcmc_consistency.html",
     "title": "Consistency of MCMC",
     "section": "",
-    "text": "MH’s consistency guarantee.\nNotion of irreducibility.\n\n\n\n\nConsistency of",
+    "text": "MH’s consistency guarantee.\nNotion of irreducibility.\n\n\n\n\nConsistency of MH is a key property that explains MCMC’s popularity. We will prove the key steps of this theorem later on, today we only state it.",
     "crumbs": [
       "Intro to MCMC",
       "Consistency of MCMC"
@@ -2433,7 +2433,7 @@
     "href": "w08_mcmc1/topic05_mcmc_consistency.html#outline",
     "title": "Consistency of MCMC",
     "section": "",
-    "text": "MH’s consistency guarantee.\nNotion of irreducibility.\n\n\n\n\nConsistency of",
+    "text": "MH’s consistency guarantee.\nNotion of irreducibility.\n\n\n\n\nConsistency of MH is a key property that explains MCMC’s popularity. We will prove the key steps of this theorem later on, today we only state it.",
     "crumbs": [
       "Intro to MCMC",
       "Consistency of MCMC"
