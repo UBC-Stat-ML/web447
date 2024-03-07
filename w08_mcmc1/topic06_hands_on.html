@@ -779,18 +779,18 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="model" class="level2">
 <h2 class="anchored" data-anchor-id="model">Model</h2>
-<p>Recall the model we discussed previously:</p>
+<p>Recall the model we discussed previously (<strong>with the difference that we use a SD of 10 now</strong>)</p>
 <p><span class="math display">\[\begin{align*}
-\text{slope} &amp;\sim \mathcal{N}(0, 1) \\
-\text{intercept} &amp;\sim \mathcal{N}(0, 1) \\
+\text{slope} &amp;\sim \mathcal{N}(0, 10) \\
+\text{intercept} &amp;\sim \mathcal{N}(0, 10) \\
 \theta(i) &amp;= \text{logistic}(\text{slope} \cdot i + \text{intercept}) \\
 y_i &amp;\sim {\mathrm{Bern}}(\theta(i))
 \end{align*}\]</span></p>
 <p>…which you also implemented in simPPLe as part of <a href="../exercises/ex04.html">exercise 4</a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logistic_regression <span class="ot">=</span> <span class="cf">function</span>() {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  intercept <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Norm</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Norm</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  intercept <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Norm</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Norm</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(success_indicators)){</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    success_probability <span class="ot">=</span> <span class="fu">plogis</span>(intercept <span class="sc">+</span> i<span class="sc">*</span>slope)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(success_indicators[i], <span class="fu">Bern</span>(success_probability))</span>
@@ -815,66 +815,73 @@ y_i &amp;\sim {\mathrm{Bern}}(\theta(i))
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// complete this</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-The value closest to the posterior mean of the `slope` parameter is...
-
-1. 0.6
-1. 0.3
-1. 0.1
-1. -0.7
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-::: {.cell output.var='logistic'}
-
-```{.stan .cell-code}
-
-data { 
-  int N; 
-  array[N] int y; 
-}
-
-parameters { 
-  real slope;
-  real intercept;
-}
-
-model {
-  slope ~ normal(0, 10);
-  intercept ~ normal(0, 10);
-  for (i in 1:N) {
-    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
-  }
-}
-
-```
-:::
-
-
-::: {.cell}
-
-```{.r .cell-code}
-fit = sampling(
-  logistic, 
-  data = list( 
-          y = success_indicators, 
-          N = length(success_indicators)
-        ), 
-  chains = 1,
-  iter = 10000       
-)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The value closest to the posterior mean of the <code>slope</code> parameter is…</p>
+<ol type="1">
+<li>0.6</li>
+<li>0.3</li>
+<li>0.1</li>
+<li>-0.7</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-output.var="logistic">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> N; </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">int</span> y; </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> intercept;</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  slope ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  intercept ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    y[i] ~ bernoulli(inv_logit(intercept + slope * i));</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  logistic, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>( </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> success_indicators, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="fu">length</span>(success_indicators)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        ), </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>       </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
 Chain 1: Gradient evaluation took 5e-06 seconds
@@ -895,27 +902,16 @@ Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
 Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
 Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.049 seconds (Warm-up)
-Chain 1:                0.049 seconds (Sampling)
-Chain 1:                0.098 seconds (Total)
-Chain 1: 
-```
-
-
-:::
-:::
-
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Inference for Stan model: anon_model.
+Chain 1:  Elapsed Time: 0.046 seconds (Warm-up)
+Chain 1:                0.046 seconds (Sampling)
+Chain 1:                0.092 seconds (Total)
+Chain 1: </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
 1 chains, each with iter=10000; warmup=5000; thin=1; 
 post-warmup draws per chain=5000, total post-warmup draws=5000.
 
@@ -924,26 +920,22 @@ slope      0.58    0.01 0.44 -0.12  0.26  0.52  0.82  1.61  1009    1
 intercept -0.71    0.06 1.89 -4.46 -1.90 -0.64  0.55  2.86  1056    1
 lp__      -5.59    0.03 1.19 -8.85 -6.07 -5.23 -4.74 -4.41  1195    1
 
-Samples were drawn using NUTS(diag_e) at Wed Mar  6 21:20:04 2024.
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:04:48 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).
-```
-
-
-:::
-:::
-
-Hence the correct choice was `0.6`. 
-:::
-
--->
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<p>Hence the correct choice was <code>0.6</code>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="using-the-posterior" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-posterior">Using the posterior</h2>
 <p><strong>Question 2:</strong> compute a 95% credible interval on the <code>slope</code> parameter.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -952,39 +944,51 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use the output of <code>println</code> on the <code>fit</code> object.</p>
 </div>
 </div>
 </div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $[-4.5, 2.9]$ 
-1. $[-0.3, 1.4]$ 
-1. $[-0.1, 1.6]$
-1. $[0.2, 0.9]$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Using again the print out of the fit object:
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Inference for Stan model: anon_model.
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\([-4.5, 2.9]\)</span></li>
+<li><span class="math inline">\([-0.3, 1.4]\)</span></li>
+<li><span class="math inline">\([-0.1, 1.6]\)</span></li>
+<li><span class="math inline">\([0.2, 0.9]\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using again the print out of the fit object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
 1 chains, each with iter=10000; warmup=5000; thin=1; 
 post-warmup draws per chain=5000, total post-warmup draws=5000.
 
@@ -993,121 +997,130 @@ slope      0.58    0.01 0.44 -0.12  0.26  0.52  0.82  1.61  1009    1
 intercept -0.71    0.06 1.89 -4.46 -1.90 -0.64  0.55  2.86  1056    1
 lp__      -5.59    0.03 1.19 -8.85 -6.07 -5.23 -4.74 -4.41  1195    1
 
-Samples were drawn using NUTS(diag_e) at Wed Mar  6 21:20:04 2024.
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:04:48 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).
-```
-
-
-:::
-:::
-
-We can get a [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval 
-by looking at the columns `2.5%` and `97.5%` (i.e., chopping off 5%/2 on each side): 
-this yields $[-0.12, 1.61]$.
-:::
-
--->
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<p>We can get a <a href="../w02_discrete_bayes/topic05_credible.html">quantile-based</a> credible interval by looking at the columns <code>2.5%</code> and <code>97.5%</code> (i.e., chopping off 5%/2 on each side): this yields <span class="math inline">\([-0.12, 1.61]\)</span>.</p>
+</div>
+</div>
+</div>
 <p><strong>Question 3:</strong> translate “your updated belief that the Ariane 1 rockets were improving” into a mathematical expression.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\ex[\text{slope}| Y = y] > 0$
-1. $\ex[\text{slope}] > 0$
-1. $\pr(\text{slope} > 0 | Y = y)$
-1. $\pr(\text{slope} > 0)$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-"Ariane 1 rockets were improving" translates to the event $(\text{slope} > 0)$. 
-Hence our "updated belief," which is just the posterior probability, is 
-$\pr(\text{slope} > 0 | Y = y)$. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\mathbb{E}[\text{slope}| Y = y] &gt; 0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[\text{slope}] &gt; 0\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0 | Y = y)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0)\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>“Ariane 1 rockets were improving” translates to the event <span class="math inline">\((\text{slope} &gt; 0)\)</span>. Hence our “updated belief,” which is just the posterior probability, is <span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0 | Y = y)\)</span>.</p>
+</div>
+</div>
+</div>
 <p><strong>Question 4:</strong> estimate the numerical value of the expression in the last question.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. 0.65
-1. 0.75
-1. 0.85
-1. 0.95
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Here we want to add a new random variable to our model, defined as:
-$$\text{slope\_is\_positive} = \ind[\text{slope} > 0].$$
-Why? Because then the posterior mean of the indicator will yield the required probability:
-$$\ex[\ind[\text{slope} > 0]|Y = y] = \pr(\text{slope} > 0 | Y = y),$$
-and we will be able to read off that mean from the print out of the fit object. 
-
-Now, how to add the slope\_is\_positive random variable to our Stan model?
-
-Since the random variable is defined using "=" rather than "$\sim$", we can do this using 
-a `transformed parameters`, introduced [earlier this week](topic03_more_complex_example.qmd). 
-
-Here though notice that `is_slope_positive` is not used within the model block, 
-in such case, an alternative is to use a `generated quantities`, which we demonstrate here:
-
-::: {.cell output.var='logistic_with_generated'}
-
-```{.stan .cell-code}
-
-data { 
-  int N; 
-  array[N] int y; 
-}
-
-parameters { 
-  real slope;
-  real intercept;
-}
-
-model {
-  slope ~ normal(0, 10);
-  intercept ~ normal(0, 10);
-  for (i in 1:N) {
-    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
-  }
-}
-
-generated quantities {
-  real is_slope_positive = slope > 0 ? 1 : 0;
-}
-
-```
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-fit = sampling(
-  logistic_with_generated, 
-  data = list( 
-          y = success_indicators, 
-          N = length(success_indicators)
-        ), 
-  chains = 1,
-  iter = 10000       
-)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>0.65</li>
+<li>0.75</li>
+<li>0.85</li>
+<li>0.95</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here we want to add a new random variable to our model, defined as: <span class="math display">\[\text{slope\_is\_positive} = \mathbb{1}[\text{slope} &gt; 0].\]</span> Why? Because then the posterior mean of the indicator will yield the required probability: <span class="math display">\[\mathbb{E}[\mathbb{1}[\text{slope} &gt; 0]|Y = y] = \mathbb{P}(\text{slope} &gt; 0 | Y = y),\]</span> and we will be able to read off that mean from the print out of the fit object.</p>
+<p>Now, how to add the slope_is_positive random variable to our Stan model?</p>
+<p>Since the random variable is defined using “=” rather than “<span class="math inline">\(\sim\)</span>”, we can do this using a <code>transformed parameters</code>, introduced <a href="../w08_mcmc1/topic03_more_complex_example.html">earlier this week</a>.</p>
+<p>Here though notice that <code>is_slope_positive</code> is not used within the model block, in such case, an alternative is to use a <code>generated quantities</code>, which we demonstrate here:</p>
+<div class="cell" data-output.var="logistic_with_generated">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> N; </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">int</span> y; </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> intercept;</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  slope ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  intercept ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    y[i] ~ bernoulli(inv_logit(intercept + slope * i));</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> is_slope_positive = slope &gt; <span class="dv">0</span> ? <span class="dv">1</span> : <span class="dv">0</span>;</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  logistic_with_generated, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>( </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> success_indicators, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="fu">length</span>(success_indicators)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        ), </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>       </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
 Chain 1: Gradient evaluation took 5e-06 seconds
@@ -1128,50 +1141,35 @@ Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
 Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
 Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.048 seconds (Warm-up)
-Chain 1:                0.054 seconds (Sampling)
-Chain 1:                0.102 seconds (Total)
-Chain 1: 
-```
-
-
-:::
-:::
-
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Inference for Stan model: anon_model.
+Chain 1:  Elapsed Time: 0.047 seconds (Warm-up)
+Chain 1:                0.049 seconds (Sampling)
+Chain 1:                0.096 seconds (Total)
+Chain 1: </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
 1 chains, each with iter=10000; warmup=5000; thin=1; 
 post-warmup draws per chain=5000, total post-warmup draws=5000.
 
                    mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-slope              0.58    0.01 0.43 -0.08  0.28  0.53  0.82  1.57   839    1
-intercept         -0.75    0.06 1.82 -4.43 -1.89 -0.71  0.44  2.83   831    1
-is_slope_positive  0.95    0.01 0.22  0.00  1.00  1.00  1.00  1.00  1523    1
-lp__              -5.55    0.03 1.17 -8.61 -5.98 -5.20 -4.74 -4.41  1133    1
+slope              0.57    0.01 0.41 -0.11  0.30  0.53  0.81  1.51  1216    1
+intercept         -0.74    0.05 1.81 -4.30 -1.87 -0.72  0.40  2.74  1314    1
+is_slope_positive  0.95    0.01 0.23  0.00  1.00  1.00  1.00  1.00  1535    1
+lp__              -5.51    0.03 1.12 -8.47 -5.95 -5.21 -4.71 -4.41  1241    1
 
-Samples were drawn using NUTS(diag_e) at Wed Mar  6 22:01:06 2024.
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:05:05 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).
-```
-
-
-:::
-:::
-
-Hence the correct answer is `0.95`, the posterior mean of `is_slope_positive`. 
-:::
-
--->
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<p>Hence the correct answer is <code>0.95</code>, the posterior mean of <code>is_slope_positive</code>.</p>
+</div>
+</div>
+</div>
 
 
 </section>
