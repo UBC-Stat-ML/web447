@@ -1,0 +1,108 @@
+---
+title: "Stan: hands on"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline 
+
+We revisit [the time-varying Ariane 1 rocket failure probability model](../w04_glms/topic04_classification.qmd)
+to practice the Stan syntax introduced this week. 
+
+::: column-margin
+![](../images/ariane1.jpg){width="200"}
+:::
+
+
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(dplyr))
+
+set.seed(1)
+
+df = read.csv(url("https://raw.githubusercontent.com/UBC-Stat-ML/web447/main/data/launches.csv")) %>% filter(LV.Type == "Ariane 1")
+success_indicators = df$Suc_bin
+rmarkdown::paged_table(df)
+```
+
+```{r}
+plot(success_indicators, xlab = "Launch index i")
+```
+
+
+## Model 
+
+Recall the model we discussed previously (**with the difference that we use a SD of 10 now**)
+
+\begin{align*}
+\text{slope} &\sim \distNorm(0, 10) \\
+\text{intercept} &\sim \distNorm(0, 10) \\
+\theta(i) &= \text{logistic}(\text{slope} \cdot i + \text{intercept}) \\
+y_i &\sim \distBern(\theta(i))
+\end{align*}
+
+...which you also implemented in simPPLe as part of [exercise 4](../exercises/ex04.qmd):
+
+```{r}
+logistic_regression = function() {
+  intercept = simulate(Norm(0, 10))
+  slope     = simulate(Norm(0, 10))
+  for (i in seq_along(success_indicators)){
+    success_probability = plogis(intercept + i*slope)
+    observe(success_indicators[i], Bern(success_probability))
+  }
+  return(c(intercept, slope))
+}
+```
+
+
+## Translation into Stan
+
+**Question 1:** use the template below to translate the above model into Stan. 
+  Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter.
+  
+```stan
+data { 
+  int N; 
+  array[N] int y; 
+}
+
+parameters { 
+  real slope;
+  real intercept;
+}
+
+model {
+  // complete this
+}
+```
+  
+{{< include ../../clickers/w07/_c05.qmd >}}
+
+
+## Using the posterior
+
+**Question 2:** compute a 95% credible interval on the `slope` parameter. 
+
+::: {.callout-caution collapse="true"} 
+## Hint
+Use the output of `println` on the `fit` object.
+:::
+
+{{< include ../../clickers/w07/_c06.qmd >}}
+
+
+**Question 3:** translate "your updated belief that the Ariane 1 rockets were improving" into a mathematical expression. 
+
+{{< include ../../clickers/w07/_c07.qmd >}}
+
+
+**Question 4:** estimate the numerical value of the expression in the last question. 
+
+{{< include ../../clickers/w07/_c08.qmd >}}
+

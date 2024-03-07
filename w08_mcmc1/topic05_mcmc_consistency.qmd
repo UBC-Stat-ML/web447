@@ -1,0 +1,59 @@
+---
+title: "Consistency of MCMC"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- MH's consistency guarantee. 
+- Notion of irreducibility. 
+
+### Rationale
+
+Consistency of MH is a key property that explains MCMC's popularity. 
+We will prove the key steps of this theorem later on, today we only state it. 
+
+
+## Key theoretical guarantee of MH
+
+- We have the same type of result as we encountered in [Simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd#sec-lln) 
+  and [SNIS](../w03_ppl/topic04_consistency.qmd).
+- Namely: *for any approximation error tolerance, we can find a number of iterations $M$ large enough 
+such that we will be within that error tolerance with high probability after $M$ iterations.*
+- Recall that the name for the above property is *consistency*. 
+- However to get consistency with MH we will need one extra assumption...
+
+
+## Additional assumption 
+
+- Compared to SNIS, we need an additional assumption to get consistency. 
+- Informally: the proposal should permit the algorithm to explore the whole state space. 
+- Technical name: **irreducibility**.
+
+**Definition:** (discrete case[^1]) Let $\pi$ denote the posterior PMF, and $X^{(1)}, X^{(2)}, \dots$, the 
+[random variables produced at each iteration of MH](topic04_mh.qmd). 
+We say the chain $X^\parm$ is **irreducible** if 
+for any states $x, x'$ with $\pi(x) > 0$ and $\pi(x') > 0$, we can get from $x$ to $x'$ with 
+positive probability, i.e., there exists a number of steps $m$ such that 
+$\pr(X^{(m)} = x' | X^{(0)} = x) > 0$. 
+
+[^1]: For the generalization to continuous state spaces, see e.g., 
+    [Geyer's notes, page 5](https://www.stat.umn.edu/geyer/8112/notes/markov.pdf). 
+    In summary, the difficulty in continuous state space is that the probability 
+    of reaching an individual "destination point" $x'$ is zero. The solution 
+    is the replace the destinations $x'$ by positive probability events. 
+
+
+## Consistency of MH
+
+**Proposition:** if $\ex_\pi|g(X)| < \infty$, and the chain $X^\parm$ produced by MH is irreducible, then[^2]
+  $$\frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)],$$
+  as $M$ goes to $\infty$. 
+
+[^2]: More precisely, let $E = \{x : (X^\parm) \text{ initialized at }x, \frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)]\}$. 
+      Then $\pi(E) = 1$. 

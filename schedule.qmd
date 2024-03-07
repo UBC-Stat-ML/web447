@@ -7,7 +7,7 @@ editor:
 {{< include _construction.qmd >}}
 
 | Date          | Topics                                                                                            | Readings                                       |
-|------------------|----------------------------------|--------------------|
+|-------------------|----------------------------------|--------------------|
 | Tue, Jan 9    | Overview. Probabilistic inference on discrete spaces.                                             | BDA 1.1-1.10                                   |
 | Th, Jan 11    |                                                                                                   |                                                |
 | Tue, Jan 16   | A tour of Bayesian inference (on discrete spaces).                                                | BDA 2.1-2.5                                    |
@@ -26,9 +26,10 @@ editor:
 | Th, Feb 29    | Quiz debrief. Stan basics. Project logistics.                                                     |                                                |
 | Tue, Mar 5    | MCMC user guide (via Stan).                                                                       | BDA 11.1-11.6                                  |
 | Th, Mar 7     |                                                                                                   |                                                |
-| Fri, Mar 8    | **Project proposal due.**                                                                         |                                                |
+| Fri, Mar 8    | ~~**Project proposal due.**~~                                                                     |                                                |
 | Tue, Mar 12   | Bayesian workflow.                                                                                | BDA 6.1-6.5                                    |
 | Th, Mar 14    |                                                                                                   |                                                |
+| Fri, Mar 15   | **Project proposal due.**                                                                         |                                                |
 | Tue, Mar 19   | Modelling techniques (selected from prior design, mixtures, imputation, complex data collection). | BDA 8.1-8.7                                    |
 | Th, Mar 21    |                                                                                                   |                                                |
 | Tue, March 26 | **Quiz 2.**                                                                                       |                                                |

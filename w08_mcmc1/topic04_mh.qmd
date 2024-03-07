@@ -69,16 +69,20 @@ specifying a **query.**
 
 ## MH's extra ingredient: the proposal
 
-In addition to the unnormalized distribution $\gamma$ and test function
-$f$, MH requires a **proposal** $q(x' | x)$.
+MH requires a **proposal** $q(x' | x)$: 
+
+- given a current point $x$, 
+- $q(\cdot|x)$ is a density or PMF;
+- it is used to decide where to go next.
 
 **Example:** standard normal centered at the current point, 
   $$q(x' | x) \propto \exp\left(- \frac{1}{2} (x - x')^2 \right).$$
 
--   The proposal will help MH explore the space of possible values
-    that $X$ can take.
--   **Key difference compared to SNIS:** the proposal can depend on the current value $x$
--   Intuition:
+
+**Key difference compared to SNIS:** 
+
+-   the proposal can depend on the current value $x$.
+-   Why this is useful:
       - Once we find a "good neighborhood", i.e., a region where the posterior density is high,
       - having $q(\cdot|x)$ depend on current value allows us to stay for a while in that good neighborhood. 
       
@@ -105,9 +109,11 @@ $f$, MH requires a **proposal** $q(x' | x)$.
         - If $A^\parm = 1$, we **accept** the proposed sample:
           $$X^\parm = \tilde X^\parm,$$
         - Else, $A^\parm = 0$, and we **reject** the proposed sample and stay at previous position:
-          $$X^\parm = \tilde X^{(m-1)}.$$ 
+          $$X^\parm = X^{(m-1)}.$$ 
           
 **Output:** equally weighted samples $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. 
+
+**Demo:** Have a look at [this interactive animation](https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=banana) showing MH on two-dimensional target (green arrow shows accepted proposal, red arrow, rejected).
           
 
 ## Intuition
@@ -127,7 +133,7 @@ $f$, MH requires a **proposal** $q(x' | x)$.
 
 ## Visualization 
 
-In the exercise this week, you will [implement this simple version MH](../exercises/ex07.qmd#sec-q3) (i.e., symmetric proposal). 
+In the exercise this week, you will [implement MH with a standard normal proposal](../exercises/ex07.qmd#sec-q3). 
 
 Once your exercise is complete you will be able to call your function as follows:
 
@@ -177,3 +183,10 @@ source("../blocks/plot_traces_and_hist.R")
 
 plot_traces_and_hist(samples)
 ```
+
+
+## Further readings 
+
+- Geyer's course notes on MCMC, [available from the author's website](https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf)
+- [Handbook on MCMC](https://www.mcmchandbook.net/) [Available online via UBC Library]
+- [More advanced text on the theory](https://link.springer.com/book/10.1007/978-3-319-97704-1) [Available online via UBC Library]

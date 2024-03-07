@@ -101,7 +101,7 @@ model {
 ## Improving our model with generated parameters
 
 - The code in the last section will not print out $\mu_i$ 
-- The code below show how to fix this
+- The code below shows how to fix this
     - $\mu_i$ is handled differently than $\theta_k$, $y_i$...
     - ... because $\mu_i$ is defined with $=$ instead of $\sim$
 
@@ -159,11 +159,14 @@ fit = sampling(
           y = data_without_zeros, 
           N = length(data_without_zeros)
         ), 
-  chains = 1,
+  chains = 1, # <2>
   iter = 10000       
 )
 ```
-1. each variable in Stan's `data` block needs to be fed a value when called from R.
+1. Each variable in Stan's `data` block needs to be fed a value when called from R.
+2. The `chains` options can be used to simulate several independent MCMC chains, more 
+    precisely, this is available after calling the function 
+    `options(mc.cores = parallel::detectCores())`. 
 
 
 ## Posterior visualization
@@ -179,10 +182,11 @@ n_samples = nrow(samples)
 and plot the posterior distribution over the beta's mean functions:
 
 ```{r}
-xs = 1:length(data) / length(df$percentage)
-plot(xs, data/100)
+xs = 1:length(data) / length(data)
+plot(xs, data/100, 
+      xlab = "Fraction of the month of December, 2021", 
+      ylab = "Omicron fraction")
 
-mus = samples
 for (i in 1:n_samples) {
   lines(xs, samples[i,], col = rgb(red = 0, green = 0, blue = 0, alpha = 0.01))
 }

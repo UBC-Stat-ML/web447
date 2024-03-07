@@ -143,3 +143,8 @@ such that we will be within that error tolerance with high probability after $M$
 [^1]: Here "$\to$" can be taken to be "convergence in probability", or this can 
     be strengthen to "convergence almost sure." 
 
+
+## Further readings 
+
+- Art Owen's notes, [available form the author's website](https://artowen.su.domains/mc/Ch-var-is.pdf)
+- [Chopin and Papaspiliopoulos, Chapter 8](https://link.springer.com/book/10.1007/978-3-030-47845-2) [Available online via UBC Library]

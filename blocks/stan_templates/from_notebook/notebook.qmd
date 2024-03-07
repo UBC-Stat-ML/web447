@@ -1,0 +1,58 @@
+---
+title: "Running Stan from notebook"
+---
+
+## Install Quarto
+
+Quarto is an open source notebook platform integrated with RStudio: [download from here](https://quarto.org/). 
+
+(These instructions should also work for Rmarkdown, just change the extension to `.Rmd` instead of `.qmd`).
+
+
+## Import required packages
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+
+## Write the Stan model in a Stan cell
+
+```{stan output.var = "betabinomial"}
+data {
+  int<lower=0> n;         // number of trials
+  int<lower=0,upper=n> k; // number of successes
+}
+
+parameters {
+  real<lower=0,upper=1> p;
+}
+
+model {
+  // prior
+  p ~ beta(1,1);
+
+  // likelihood
+  k ~ binomial(n, p);
+}
+```
+
+
+## Call Stan from a R cell
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  betabinomial,
+  seed = 1,
+  data = list(n=3, k=3),        # named list of data
+  iter = 1000                   # number of samples to draw
+)
+```
+
+
+## Summarize the output
+
+```{r}
+fit
+```
+
