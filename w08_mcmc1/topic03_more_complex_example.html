@@ -664,6 +664,18 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic05_mcmc_consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consistency of MCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic06_hands_on.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stan: hands on</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -835,7 +847,7 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <h2 class="anchored" data-anchor-id="improving-our-model-with-generated-parameters">Improving our model with generated parameters</h2>
 <ul>
 <li>The code in the last section will not print out <span class="math inline">\(\mu_i\)</span></li>
-<li>The code below show how to fix this
+<li>The code below shows how to fix this
 <ul>
 <li><span class="math inline">\(\mu_i\)</span> is handled differently than <span class="math inline">\(\theta_k\)</span>, <span class="math inline">\(y_i\)</span>…</li>
 <li>… because <span class="math inline">\(\mu_i\)</span> is defined with <span class="math inline">\(=\)</span> instead of <span class="math inline">\(\sim\)</span></li>
@@ -899,14 +911,18 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> data_without_zeros, </span>
 <span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="fu">length</span>(data_without_zeros)</span>
 <span id="annotated-cell-4-8"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>        ), </span>
-<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-9" class="code-annotation-target"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
 <span id="annotated-cell-4-10"><a href="#annotated-cell-4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>       </span>
 <span id="annotated-cell-4-11"><a href="#annotated-cell-4-11" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="1">each variable in Stan’s <code>data</code> block needs to be fed a value when called from R.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="1">Each variable in Stan’s <code>data</code> block needs to be fed a value when called from R.</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="9" data-code-annotation="2">The <code>chains</code> options can be used to simulate several independent MCMC chains, more precisely, this is available after calling the function <code>options(mc.cores = parallel::detectCores())</code>.</span>
 </dd>
 </dl>
 </div>
@@ -914,8 +930,8 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 2.7e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.27 seconds.
+Chain 1: Gradient evaluation took 3.2e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.32 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -932,9 +948,9 @@ Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
 Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
 Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.142 seconds (Warm-up)
-Chain 1:                0.175 seconds (Sampling)
-Chain 1:                0.317 seconds (Total)
+Chain 1:  Elapsed Time: 0.161 seconds (Warm-up)
+Chain 1:                0.197 seconds (Sampling)
+Chain 1:                0.358 seconds (Total)
 Chain 1: </code></pre>
 </div>
 </div>
@@ -949,13 +965,14 @@ Chain 1: </code></pre>
 </div>
 <p>and plot the posterior distribution over the beta’s mean functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(data) <span class="sc">/</span> <span class="fu">length</span>(df<span class="sc">$</span>percentage)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xs, data<span class="sc">/</span><span class="dv">100</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mus <span class="ot">=</span> samples</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_samples) {</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xs, samples[i,], <span class="at">col =</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">0</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(data) <span class="sc">/</span> <span class="fu">length</span>(data)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xs, data<span class="sc">/</span><span class="dv">100</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Fraction of the month of December, 2021"</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"Omicron fraction"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_samples) {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xs, samples[i,], <span class="at">col =</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">0</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.01</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
