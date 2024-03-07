@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Installing and running Stan</title>
+<title>Bayes1@UBC - Exercise 8: Bayesian Workflow</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -114,7 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Installing and running Stan</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -602,16 +570,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
  <span class="menu-text">Intro to MCMC</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and running Stan</span></a>
   </div>
 </li>
@@ -663,27 +631,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#what-is-stan" id="toc-what-is-stan" class="nav-link" data-scroll-target="#what-is-stan">What is Stan?</a></li>
-  <li><a href="#installing-stan" id="toc-installing-stan" class="nav-link" data-scroll-target="#installing-stan">Installing Stan</a></li>
-  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan</a>
-  <ul class="collapse">
-  <li><a href="#from-a-r-script" id="toc-from-a-r-script" class="nav-link" data-scroll-target="#from-a-r-script">From a R script</a></li>
-  <li><a href="#from-a-notebook" id="toc-from-a-notebook" class="nav-link" data-scroll-target="#from-a-notebook">From a notebook</a></li>
-  </ul></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Installing and running Stan</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Installing and running Stan</h1>
+<h1 class="title">Exercise 8: Bayesian Workflow</h1>
 </div>
 
 
@@ -721,126 +678,23 @@ https://github.com/trevorcampbell/shortex
 <!-- general purpose math -->
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
-<ul>
-<li>What is Stan?</li>
-<li>Links to install.</li>
-<li>Peak of next week’s exercise first question (running Stan on your laptop).</li>
-</ul>
-</section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>SNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>.</p>
-<p>Stan is an alternative way to approximate posterior distributions, with complementary properties:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>SNIS</th>
-<th>Stan</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Speed</td>
-<td>Slow</td>
-<td>Faster<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
-</tr>
-<tr class="even">
-<td>Flexibility</td>
-<td>Very flexible</td>
-<td>Less flexible<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
-</tr>
-<tr class="odd">
-<td>Easy to understand?</td>
-<td>Simple</td>
-<td>More complex<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
-</tr>
-</tbody>
-</table>
-<p>From a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.</p>
-</section>
-</section>
-<section id="what-is-stan" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-stan">What is Stan?</h2>
-<ul>
-<li>Stan is <a href="https://projecteuclid.org/journals/statistical-science/volume-39/issue-1/Past-Present-and-Future-of-Software-for-Bayesian-Inference/10.1214/23-STS907.full">the most popular PPL as of 2024.</a></li>
-<li><a href="../w03_ppl/topic01_ppls_intro.html">Review the notes on “what is a PPL.”</a></li>
-<li>Stan uses <strong>Markov chain Monte Carlo (MCMC)</strong> to approximate the posterior distribution.
-<ul>
-<li>Think of MCMC has a drop-in replacement for SNIS.</li>
-<li>We will talk about it in more detail soon.</li>
-</ul></li>
-</ul>
-</section>
-<section id="installing-stan" class="level2">
-<h2 class="anchored" data-anchor-id="installing-stan">Installing Stan</h2>
-<p>You will need Stan installed to complete next week’s exercise. <strong>Don’t wait until next week, install it today!</strong></p>
-<p>There are two main steps to install Stan:</p>
 <ol type="1">
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain">Configuring a C++ Toolchains</a></li>
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan">Installing RStan</a></li>
+<li>Model definition</li>
+<li>Prior predictive check
+<ul>
+<li>average response in logistic regression versus prior concentration of coef as in Fig 3?</li>
+<li>R^2 versus prior concentration of regression coef as in example in Fig 21?</li>
+</ul></li>
+<li>Simulation-based calibration</li>
+<li>Posterior predictive check</li>
+<li>Prior sensitivity analysis</li>
+<li>Model selection?</li>
 </ol>
-<p>Let us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.</p>
-</section>
-<section id="running" class="level2">
-<h2 class="anchored" data-anchor-id="running">Running Stan</h2>
-<p>We present two methods for running Stan in the next two section: either from an R script, or from a notebook.</p>
-<p><strong>Template:</strong> to quickly get started, download the <a href="https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip">following templates</a> which you can use as a starting point for either R script or notebook.</p>
-<section id="from-a-r-script" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-r-script">From a R script</h3>
-<p>First, copy and paste the following code into a file called <code>beta_binomial.stan</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>beta_binomial.stan</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-shortcodes="true," data-filename="beta_binomial.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n;         <span class="co">// number of trials</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=n&gt; k; <span class="co">// number of successes</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; p;</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  p ~ beta(<span class="dv">1</span>,<span class="dv">1</span>);</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  k ~ binomial(n, p);</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Second, run Stan as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(rstan)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">stan</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"beta_binomial.stan"</span>,  <span class="co"># Stan program</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="from-a-notebook" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-notebook">From a notebook</h3>
-<p>To see an example of how to integrate Stan code inside quarto (R markdown would work the same), see the source code used for the next page in the notes, <a href="https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd">available on github</a>.</p>
 
 
 </section>
-</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>For example, for the model used in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>simPPLe is a few dozen lines of codes, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Installing and running Stan</title>
+<title>Bayes1@UBC - Running Stan from notebook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -114,7 +114,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Installing and running Stan</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -129,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Bayes1@UBC</a> 
+      <a href="../../../">Bayes1@UBC</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,19 +143,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -169,31 +171,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A bit of history</span></a>
   </div>
 </li>
@@ -210,73 +212,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision trees</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chain rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simple Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -293,61 +295,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Bayesian recipe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Posterior distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Credible sets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prediction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to model criticism</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../challenges/ch02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -364,49 +366,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What is a PPL?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Importance sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SNIS consistency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo convergence rate</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic06_ess.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w03_ppl/topic06_ess.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SNIS Effective Sample Size</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../challenges/ch03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -423,49 +425,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">simPPLe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bivariate posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bernoulli regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">(Normal) regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian GLMs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../challenges/ch04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -482,55 +484,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asymptotics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic03_decision_to_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic03_decision_to_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theoretic point estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic04_decision_to_set.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic04_decision_to_set.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theoretic set estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calibration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian calibration: well-specified case</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../challenges/ch05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -547,25 +549,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prior choice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Graphical models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to hierarchical models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -582,19 +584,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic02_practice_questions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w07_quiz1/topic02_practice_questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practice questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic03_logistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w07_quiz1/topic03_logistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logistics</span></a>
   </div>
 </li>
@@ -602,52 +604,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
  <span class="menu-text">Intro to MCMC</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and running Stan</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic02_stan_basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w08_mcmc1/topic02_stan_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic03_more_complex_example.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w08_mcmc1/topic03_more_complex_example.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan: going further</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic04_mh.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w08_mcmc1/topic04_mh.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metropolis-Hastings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic05_mcmc_consistency.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w08_mcmc1/topic05_mcmc_consistency.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consistency of MCMC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic06_hands_on.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../w08_mcmc1/topic06_hands_on.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan: hands on</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../exercises/ex07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -663,27 +665,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#what-is-stan" id="toc-what-is-stan" class="nav-link" data-scroll-target="#what-is-stan">What is Stan?</a></li>
-  <li><a href="#installing-stan" id="toc-installing-stan" class="nav-link" data-scroll-target="#installing-stan">Installing Stan</a></li>
-  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan</a>
-  <ul class="collapse">
-  <li><a href="#from-a-r-script" id="toc-from-a-r-script" class="nav-link" data-scroll-target="#from-a-r-script">From a R script</a></li>
-  <li><a href="#from-a-notebook" id="toc-from-a-notebook" class="nav-link" data-scroll-target="#from-a-notebook">From a notebook</a></li>
-  </ul></li>
+  <li><a href="#install-quarto" id="toc-install-quarto" class="nav-link active" data-scroll-target="#install-quarto">Install Quarto</a></li>
+  <li><a href="#import-required-packages" id="toc-import-required-packages" class="nav-link" data-scroll-target="#import-required-packages">Import required packages</a></li>
+  <li><a href="#write-the-stan-model-in-a-stan-cell" id="toc-write-the-stan-model-in-a-stan-cell" class="nav-link" data-scroll-target="#write-the-stan-model-in-a-stan-cell">Write the Stan model in a Stan cell</a></li>
+  <li><a href="#call-stan-from-a-r-cell" id="toc-call-stan-from-a-r-cell" class="nav-link" data-scroll-target="#call-stan-from-a-r-cell">Call Stan from a R cell</a></li>
+  <li><a href="#summarize-the-output" id="toc-summarize-the-output" class="nav-link" data-scroll-target="#summarize-the-output">Summarize the output</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Installing and running Stan</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Installing and running Stan</h1>
+<h1 class="title">Running Stan from notebook</h1>
 </div>
 
 
@@ -700,147 +695,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<!-- First, some macros specific to this course -->
-<!-- -->
-<!-- 
-Second, tiny-shortex for Quarto
-restricted to macros supported by MathJax
-https://github.com/trevorcampbell/shortex
--->
-<!-- common sets and set operations -->
-<!-- text shortcuts -->
-<!-- convergence -->
-<!-- unary functions -->
-<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
-<!-- Min and max -->
-<!-- binary operators -->
-<!-- independence -->
-<!-- parametric distributions -->
-<!-- nonparametric distributions -->
-<!-- calculus -->
-<!-- general purpose math -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
-<ul>
-<li>What is Stan?</li>
-<li>Links to install.</li>
-<li>Peak of next week’s exercise first question (running Stan on your laptop).</li>
-</ul>
+<section id="install-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="install-quarto">Install Quarto</h2>
+<p>Quarto is an open source notebook platform integrated with RStudio: <a href="https://quarto.org/">download from here</a>.</p>
+<p>(These instructions should also work for Rmarkdown, just change the extension to <code>.Rmd</code> instead of <code>.qmd</code>).</p>
 </section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>SNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>.</p>
-<p>Stan is an alternative way to approximate posterior distributions, with complementary properties:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>SNIS</th>
-<th>Stan</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Speed</td>
-<td>Slow</td>
-<td>Faster<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
-</tr>
-<tr class="even">
-<td>Flexibility</td>
-<td>Very flexible</td>
-<td>Less flexible<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
-</tr>
-<tr class="odd">
-<td>Easy to understand?</td>
-<td>Simple</td>
-<td>More complex<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
-</tr>
-</tbody>
-</table>
-<p>From a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.</p>
-</section>
-</section>
-<section id="what-is-stan" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-stan">What is Stan?</h2>
-<ul>
-<li>Stan is <a href="https://projecteuclid.org/journals/statistical-science/volume-39/issue-1/Past-Present-and-Future-of-Software-for-Bayesian-Inference/10.1214/23-STS907.full">the most popular PPL as of 2024.</a></li>
-<li><a href="../w03_ppl/topic01_ppls_intro.html">Review the notes on “what is a PPL.”</a></li>
-<li>Stan uses <strong>Markov chain Monte Carlo (MCMC)</strong> to approximate the posterior distribution.
-<ul>
-<li>Think of MCMC has a drop-in replacement for SNIS.</li>
-<li>We will talk about it in more detail soon.</li>
-</ul></li>
-</ul>
-</section>
-<section id="installing-stan" class="level2">
-<h2 class="anchored" data-anchor-id="installing-stan">Installing Stan</h2>
-<p>You will need Stan installed to complete next week’s exercise. <strong>Don’t wait until next week, install it today!</strong></p>
-<p>There are two main steps to install Stan:</p>
-<ol type="1">
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain">Configuring a C++ Toolchains</a></li>
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan">Installing RStan</a></li>
-</ol>
-<p>Let us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.</p>
-</section>
-<section id="running" class="level2">
-<h2 class="anchored" data-anchor-id="running">Running Stan</h2>
-<p>We present two methods for running Stan in the next two section: either from an R script, or from a notebook.</p>
-<p><strong>Template:</strong> to quickly get started, download the <a href="https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip">following templates</a> which you can use as a starting point for either R script or notebook.</p>
-<section id="from-a-r-script" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-r-script">From a R script</h3>
-<p>First, copy and paste the following code into a file called <code>beta_binomial.stan</code>:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>beta_binomial.stan</strong></pre>
+<section id="import-required-packages" class="level2">
+<h2 class="anchored" data-anchor-id="import-required-packages">Import required packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode" id="cb1" data-shortcodes="true," data-filename="beta_binomial.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n;         <span class="co">// number of trials</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=n&gt; k; <span class="co">// number of successes</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; p;</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  p ~ beta(<span class="dv">1</span>,<span class="dv">1</span>);</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  k ~ binomial(n, p);</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="write-the-stan-model-in-a-stan-cell" class="level2">
+<h2 class="anchored" data-anchor-id="write-the-stan-model-in-a-stan-cell">Write the Stan model in a Stan cell</h2>
+<div class="cell" data-output.var="betabinomial">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n;         <span class="co">// number of trials</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=n&gt; k; <span class="co">// number of successes</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; p;</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  p ~ beta(<span class="dv">1</span>,<span class="dv">1</span>);</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  k ~ binomial(n, p);</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Second, run Stan as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(rstan)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">stan</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"beta_binomial.stan"</span>,  <span class="co"># Stan program</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="from-a-notebook" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-notebook">From a notebook</h3>
-<p>To see an example of how to integrate Stan code inside quarto (R markdown would work the same), see the source code used for the next page in the notes, <a href="https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd">available on github</a>.</p>
+<section id="call-stan-from-a-r-cell" class="level2">
+<h2 class="anchored" data-anchor-id="call-stan-from-a-r-cell">Call Stan from a R cell</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  betabinomial,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summarize-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-the-output">Summarize the output</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
+4 chains, each with iter=1000; warmup=500; thin=1; 
+post-warmup draws per chain=500, total post-warmup draws=2000.
+
+      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+p     0.79    0.01 0.16  0.40  0.69  0.83  0.92  0.99   730 1.00
+lp__ -3.04    0.03 0.72 -4.92 -3.24 -2.76 -2.56 -2.50   785 1.01
+
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 12:54:49 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
 
 
 </section>
-</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>For example, for the model used in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>simPPLe is a few dozen lines of codes, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
