@@ -63,7 +63,10 @@ Next week, our priority will be replying questions about the material.
 ## Running Stan {#running}
 
 We present two methods for running Stan in the next two section: either from an R script, 
-or from a R Markdown document.
+or from a notebook.
+
+**Template:** to quickly get started, download the [following templates](https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip) which you can 
+use as a starting point for either R script or notebook.
 
 
 ### From a R script
@@ -94,8 +97,8 @@ which can be obtained under the column "50%" of the output of the following R co
 print(fit)
 ```
 
-### From a R Markdown document
+### From a notebook
 
-To see an example of how to integrate Stan code inside R Markdown, see the source code used for the next page in the notes, [available on github](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd).
+To see an example of how to integrate Stan code inside quarto (R markdown would work the same), see the source code used for the next page in the notes, [available on github](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd).
 
 
