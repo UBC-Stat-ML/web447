@@ -1531,7 +1531,7 @@
     "href": "w08_mcmc1/topic06_hands_on.html#translation-into-stan",
     "title": "Stan: hands on",
     "section": "Translation into Stan",
-    "text": "Translation into Stan\nQuestion 1: use the template below to translate the above model into Stan. Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter.",
+    "text": "Translation into Stan\nQuestion 1: use the template below to translate the above model into Stan. Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter.\ndata { \n  int N; \n  array[N] int y; \n}\n\nparameters { \n  real slope;\n  real intercept;\n}\n\nmodel {\n  // complete this\n}",
     "crumbs": [
       "Intro to MCMC",
       "Stan: hands on"
@@ -2378,7 +2378,7 @@
     "href": "w08_mcmc1/topic04_mh.html#mhs-extra-ingredient-the-proposal",
     "title": "Metropolis-Hastings",
     "section": "MH’s extra ingredient: the proposal",
-    "text": "MH’s extra ingredient: the proposal\nIn addition to the unnormalized distribution \\(\\gamma\\) and test function \\(f\\), MH requires a proposal \\(q(x' | x)\\).\nExample: standard normal centered at the current point, \\[q(x' | x) \\propto \\exp\\left(- \\frac{1}{2} (x - x')^2 \\right).\\]\n\nThe proposal will help MH explore the space of possible values that \\(X\\) can take.\nKey difference compared to SNIS: the proposal can depend on the current value \\(x\\)\nIntuition:\n\nOnce we find a “good neighborhood”, i.e., a region where the posterior density is high,\nhaving \\(q(\\cdot|x)\\) depend on current value allows us to stay for a while in that good neighborhood.\n\n\nToday:\n\nwe assume \\(q\\) is symmetric, i.e., \\(q(x | x') = q(x' | x)\\).\nWe will relax this later.",
+    "text": "MH’s extra ingredient: the proposal\nMH requires a proposal \\(q(x' | x)\\):\n\ngiven a current point \\(x\\),\n\\(q(\\cdot|x)\\) is a density or PMF;\nit is used to decide where to go next.\n\nExample: standard normal centered at the current point, \\[q(x' | x) \\propto \\exp\\left(- \\frac{1}{2} (x - x')^2 \\right).\\]\nKey difference compared to SNIS:\n\nthe proposal can depend on the current value \\(x\\).\nWhy this is useful:\n\nOnce we find a “good neighborhood”, i.e., a region where the posterior density is high,\nhaving \\(q(\\cdot|x)\\) depend on current value allows us to stay for a while in that good neighborhood.\n\n\nToday:\n\nwe assume \\(q\\) is symmetric, i.e., \\(q(x | x') = q(x' | x)\\).\nWe will relax this later.",
     "crumbs": [
       "Intro to MCMC",
       "Metropolis-Hastings"
@@ -2389,7 +2389,7 @@
     "href": "w08_mcmc1/topic04_mh.html#symmetric-proposal-mh-algorithm",
     "title": "Metropolis-Hastings",
     "section": "Symmetric proposal MH algorithm",
-    "text": "Symmetric proposal MH algorithm\nInputs: unnormalized target \\(\\gamma\\), proposal \\(q\\), number of iterations \\(M\\).\nAlgorithm:\n\nInitialize \\(X^{(0)}\\) arbitrarily\nFor \\(m = 1, 2, \\dots, M\\) do:\n\nDenote the proposal at iteration \\(m \\in \\{1, 2, \\dots, M\\}\\) by: \\[\\tilde X^{(m)}\\sim q(\\cdot | X^{(m-1)}).\\]\nCompute the MH ratio: \\[R^{(m)}= \\frac{\\gamma(\\tilde X^{(m)})}{\\gamma(X^{(m-1)})}.\\]\nSample an acceptance Bernoulli: \\[A^{(m)}\\sim {\\mathrm{Bern}}(\\min(1, R^{(m)})).\\]\n\nIf \\(A^{(m)}= 1\\), we accept the proposed sample: \\[X^{(m)}= \\tilde X^{(m)},\\]\nElse, \\(A^{(m)}= 0\\), and we reject the proposed sample and stay at previous position: \\[X^{(m)}= \\tilde X^{(m-1)}.\\]\n\n\n\nOutput: equally weighted samples \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\).",
+    "text": "Symmetric proposal MH algorithm\nInputs: unnormalized target \\(\\gamma\\), proposal \\(q\\), number of iterations \\(M\\).\nAlgorithm:\n\nInitialize \\(X^{(0)}\\) arbitrarily\nFor \\(m = 1, 2, \\dots, M\\) do:\n\nDenote the proposal at iteration \\(m \\in \\{1, 2, \\dots, M\\}\\) by: \\[\\tilde X^{(m)}\\sim q(\\cdot | X^{(m-1)}).\\]\nCompute the MH ratio: \\[R^{(m)}= \\frac{\\gamma(\\tilde X^{(m)})}{\\gamma(X^{(m-1)})}.\\]\nSample an acceptance Bernoulli: \\[A^{(m)}\\sim {\\mathrm{Bern}}(\\min(1, R^{(m)})).\\]\n\nIf \\(A^{(m)}= 1\\), we accept the proposed sample: \\[X^{(m)}= \\tilde X^{(m)},\\]\nElse, \\(A^{(m)}= 0\\), and we reject the proposed sample and stay at previous position: \\[X^{(m)}= X^{(m-1)}.\\]\n\n\n\nOutput: equally weighted samples \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\).\nDemo: Have a look at this interactive animation showing MH on two-dimensional target (green arrow shows accepted proposal, red arrow, rejected).",
     "crumbs": [
       "Intro to MCMC",
       "Metropolis-Hastings"
@@ -2411,7 +2411,7 @@
     "href": "w08_mcmc1/topic04_mh.html#visualization",
     "title": "Metropolis-Hastings",
     "section": "Visualization",
-    "text": "Visualization\nIn the exercise this week, you will implement this simple version MH (i.e., symmetric proposal).\nOnce your exercise is complete you will be able to call your function as follows:\n\nsource(\"../exercises/ex07_scaffold.R\")\nsource(\"../../solutions/sol07_mh.R\")\n\nsamples = simple_mh(gamma_beta_binomial, 0.5, 1000)\n\n\nTrace plot\nLet us visualize the first 100 samples:\n\nplot(samples[1:100], type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\nQuestion: Notice that many points take exactly the same value, why is that?\n\nTerminology: the above plot (sample as a function of MCMC iteration) is called a trace plot.\nFull trace plot:\n\nplot(samples, type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\n\n\nHistogram\nAs with Stan (another MCMC algorithm we saw earlier this week), we can use a histogram to summarize the posterior:\n\nhist(samples)\n\n\n\n\n\n\n\n\nTo connect the two pictures, it is useful to visualize the histogram rotated as follows:\n\nsource(\"../blocks/plot_traces_and_hist.R\")\n\nplot_traces_and_hist(samples)",
+    "text": "Visualization\nIn the exercise this week, you will implement MH with a standard normal proposal.\nOnce your exercise is complete you will be able to call your function as follows:\n\nsource(\"../exercises/ex07_scaffold.R\")\nsource(\"../../solutions/sol07_mh.R\")\n\nsamples = simple_mh(gamma_beta_binomial, 0.5, 1000)\n\n\nTrace plot\nLet us visualize the first 100 samples:\n\nplot(samples[1:100], type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\nQuestion: Notice that many points take exactly the same value, why is that?\n\nTerminology: the above plot (sample as a function of MCMC iteration) is called a trace plot.\nFull trace plot:\n\nplot(samples, type = \"o\", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\n\n\nHistogram\nAs with Stan (another MCMC algorithm we saw earlier this week), we can use a histogram to summarize the posterior:\n\nhist(samples)\n\n\n\n\n\n\n\n\nTo connect the two pictures, it is useful to visualize the histogram rotated as follows:\n\nsource(\"../blocks/plot_traces_and_hist.R\")\n\nplot_traces_and_hist(samples)",
     "crumbs": [
       "Intro to MCMC",
       "Metropolis-Hastings"
@@ -2477,7 +2477,7 @@
     "href": "w08_mcmc1/topic05_mcmc_consistency.html#footnotes",
     "title": "Consistency of MCMC",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nFor the generalization to continuous state spaces, see e.g., Geyer’s notes, page 5. In summary, the difficulty in continuous state space is that the probability of reaching an individual “destination point” \\(x'\\) is zero. The solution is the replace the destinations \\(x'\\) by events.↩︎\nMore precisely, let \\(E = \\{x : X^{(m)}\\text{ initialized at }x, \\frac{1}{M} \\sum_{m=1}^M g(X^{(m)}) \\to \\mathbb{E}_\\pi[g(X)]\\}\\). Then \\(\\pi(E) = 1\\).↩︎",
+    "text": "Footnotes\n\n\nFor the generalization to continuous state spaces, see e.g., Geyer’s notes, page 5. In summary, the difficulty in continuous state space is that the probability of reaching an individual “destination point” \\(x'\\) is zero. The solution is the replace the destinations \\(x'\\) by positive probability events.↩︎\nMore precisely, let \\(E = \\{x : (X^{(m)}) \\text{ initialized at }x, \\frac{1}{M} \\sum_{m=1}^M g(X^{(m)}) \\to \\mathbb{E}_\\pi[g(X)]\\}\\). Then \\(\\pi(E) = 1\\).↩︎",
     "crumbs": [
       "Intro to MCMC",
       "Consistency of MCMC"

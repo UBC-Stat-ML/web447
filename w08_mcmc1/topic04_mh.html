@@ -839,12 +839,17 @@ where $\pi(x) = p(x | y)$.
 </section>
 <section id="mhs-extra-ingredient-the-proposal" class="level2">
 <h2 class="anchored" data-anchor-id="mhs-extra-ingredient-the-proposal">MH’s extra ingredient: the proposal</h2>
-<p>In addition to the unnormalized distribution <span class="math inline">\(\gamma\)</span> and test function <span class="math inline">\(f\)</span>, MH requires a <strong>proposal</strong> <span class="math inline">\(q(x' | x)\)</span>.</p>
-<p><strong>Example:</strong> standard normal centered at the current point, <span class="math display">\[q(x' | x) \propto \exp\left(- \frac{1}{2} (x - x')^2 \right).\]</span></p>
+<p>MH requires a <strong>proposal</strong> <span class="math inline">\(q(x' | x)\)</span>:</p>
 <ul>
-<li>The proposal will help MH explore the space of possible values that <span class="math inline">\(X\)</span> can take.</li>
-<li><strong>Key difference compared to SNIS:</strong> the proposal can depend on the current value <span class="math inline">\(x\)</span></li>
-<li>Intuition:
+<li>given a current point <span class="math inline">\(x\)</span>,</li>
+<li><span class="math inline">\(q(\cdot|x)\)</span> is a density or PMF;</li>
+<li>it is used to decide where to go next.</li>
+</ul>
+<p><strong>Example:</strong> standard normal centered at the current point, <span class="math display">\[q(x' | x) \propto \exp\left(- \frac{1}{2} (x - x')^2 \right).\]</span></p>
+<p><strong>Key difference compared to SNIS:</strong></p>
+<ul>
+<li>the proposal can depend on the current value <span class="math inline">\(x\)</span>.</li>
+<li>Why this is useful:
 <ul>
 <li>Once we find a “good neighborhood”, i.e., a region where the posterior density is high,</li>
 <li>having <span class="math inline">\(q(\cdot|x)\)</span> depend on current value allows us to stay for a while in that good neighborhood.</li>
@@ -869,11 +874,12 @@ where $\pi(x) = p(x | y)$.
 <li>Sample an <strong>acceptance Bernoulli</strong>: <span class="math display">\[A^{(m)}\sim {\mathrm{Bern}}(\min(1, R^{(m)})).\]</span>
 <ul>
 <li>If <span class="math inline">\(A^{(m)}= 1\)</span>, we <strong>accept</strong> the proposed sample: <span class="math display">\[X^{(m)}= \tilde X^{(m)},\]</span></li>
-<li>Else, <span class="math inline">\(A^{(m)}= 0\)</span>, and we <strong>reject</strong> the proposed sample and stay at previous position: <span class="math display">\[X^{(m)}= \tilde X^{(m-1)}.\]</span></li>
+<li>Else, <span class="math inline">\(A^{(m)}= 0\)</span>, and we <strong>reject</strong> the proposed sample and stay at previous position: <span class="math display">\[X^{(m)}= X^{(m-1)}.\]</span></li>
 </ul></li>
 </ul></li>
 </ul>
 <p><strong>Output:</strong> equally weighted samples <span class="math inline">\(X^{(1)}, X^{(2)}, \dots, X^{(M)}\)</span>.</p>
+<p><strong>Demo:</strong> Have a look at <a href="https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&amp;target=banana">this interactive animation</a> showing MH on two-dimensional target (green arrow shows accepted proposal, red arrow, rejected).</p>
 </section>
 <section id="intuition" class="level2">
 <h2 class="anchored" data-anchor-id="intuition">Intuition</h2>
@@ -897,7 +903,7 @@ where $\pi(x) = p(x | y)$.
 </section>
 <section id="visualization" class="level2">
 <h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
-<p>In the exercise this week, you will <a href="../exercises/ex07.html#sec-q3">implement this simple version MH</a> (i.e., symmetric proposal).</p>
+<p>In the exercise this week, you will <a href="../exercises/ex07.html#sec-q3">implement MH with a standard normal proposal</a>.</p>
 <p>Once your exercise is complete you will be able to call your function as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex07_scaffold.R"</span>)</span>
