@@ -1071,7 +1071,7 @@ y_i | \theta &amp;\sim {\mathrm{Poisson}}(\theta_1 (\sin(\theta_2 i + \theta_3) 
 <li>The model is sufficiently flexible to capture the pattern observed in EDA.</li>
 </ul>
 <p><a href="../w04_glms/topic05_regression.html">See the page on the step-by-step construction of a GLM</a>.</p>
-<p>Many answers possible for <a href="../w02_discrete_bayes/topic08_criticism.html">model mis-specification</a>. For example, the Poisson distribution will force the mean and variance to be equal, which often does not hold in practice (in this specific example, this might be especially problematic for values <span class="math inline">\(i\)</span> where <span class="math inline">\(\sin(\theta_2 i + \theta_3)\)</span> is zero or close to zero).</p>
+<p>Many answers possible for <a href="../w02_discrete_bayes/topic08_criticism.html">model mis-specification</a>. For example, the Poisson distribution will force the mean and variance to be equal, which often does not hold in practice (in this specific example, this might be especially problematic for values <span class="math inline">\(i\)</span> where <span class="math inline">\(\sin(\theta_2 i + \theta_3) + 1\)</span> is zero or close to zero).</p>
 </div>
 </div>
 </div>
