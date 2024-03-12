@@ -8,6 +8,8 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
+{{< include ../_construction.qmd >}}
+
 Consider the following regression model:
 
 ```{r}
@@ -44,6 +46,7 @@ obs = c(0.2, 0.1, -0.4)
 fit = sampling(
   cauchy,
   seed = 1,
+  refresh = 0,
   data = list(design_matrix = matrix, observations = obs),        
   iter = 10000                   
 )
@@ -52,8 +55,7 @@ fit = sampling(
 ```{r}
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
-mcmc_trace(fit, pars_regex = c("coefficients")) + theme_minimal()
+mcmc_trace(fit, pars = c("coefficients[1]", "coefficients[2]")) + theme_minimal()
 ```
 
-$$\acute{\mu}$$
 
