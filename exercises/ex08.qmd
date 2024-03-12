@@ -102,9 +102,9 @@ skeleton for your answer
 opar = par(mfrow=c(1,3)) # set a layout of 3 plots in a single row
 for(n_pred in c(2,4,15)){
   X = # fill this
-  S = # fill this
-  hist(S, breaks=20, ylim=c(0,17000), main=paste(n_pred, "predictors"),
-       xlab = "Average outcome")
+  simulated_ybars = # fill this
+  hist(simulated_ybars, breaks=20, ylim=c(0,17000), 
+       main=paste(n_pred, "predictors"), xlab = "Average outcome")
 }
 par(opar) # reset graphical parameters
 ```
