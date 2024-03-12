@@ -60,6 +60,9 @@ website:
           - auto: "w08_mcmc1/*"
           - text: "Exercises"
             file: exercises/ex07.qmd
+      - section: "Bayesian workflow"
+        contents: 
+          - auto: "w09_workflow/*"
 
 
 format:

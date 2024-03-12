@@ -1,0 +1,95 @@
+---
+title: "Goodness of fit"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- General notion of goodness-of-fit checks. 
+- Specific example for Bayesian models: posterior predictive checks. 
+- Limitations. 
+
+
+### Rationale
+
+Is your statistical model missing some critical aspect of the data?
+We have approached this question in qualitative way [earlier in the course](../w02_discrete_bayes/topic08_criticism.qmd). 
+Today, we provide a more quantitative approach. In practice, both qualitative and quantitative 
+model criticism are essential ingredients to effective Bayesian data analysis.
+
+
+## What is goodness-of-fit?
+
+- Goodness-of-fit: a procedure to assess if a model is good (approximately well-specified) or bad (grossly mis-specified). 
+- Applies to both Bayesian and non-Bayesian models, obviously we focus on former today.
+
+
+## Review: calibration
+
+To understand today's material we need to review the notion of 
+[calibration of credible intervals](../w05_properties/topic06_calibration_well_specified.qmd).
+
+**Question:** for well-specified models, credible intervals are...
+
+1. calibrated for small data, calibrated for large data
+2. not calibrated for small data, calibrated for large data
+3. only approximately calibrated for both small and large data
+4. none of the above
+
+{{< include ../../clickers/w08/_c01.qmd >}}
+
+
+## From calibration to goodness-of-fit
+
+**Question:** Can we do goodness-of-fit check calibration on latent variables $X$?
+
+1. Yes
+2. No
+
+{{< include ../../clickers/w08/_c02.qmd >}}
+
+
+## Review: prediction 
+
+- Recall that Bayesian models can be used to predict the next observation, $y_{n+1}$. 
+- We did this...
+    - [mathematically](../w02_discrete_bayes/topic07_prediction.qmd),
+    - [in simPPLe](../w03_ppl/topic01_ppls_intro.qmd#extension-predicting-the-next-draw), 
+    - [in the first quiz](../w07_quiz1/topic02_practice_questions.qmd),
+    - and in this week's exercise you will do it in Stan using [generated quantities](../w08_mcmc1/topic06_hands_on.qmd).
+
+**Question:** Can we do goodness-of-fit check calibration on a prediction?
+
+1. Yes
+2. No
+
+{{< include ../../clickers/w08/_c03.qmd >}}
+
+
+## Posterior predictive check
+
+- Let $C(y)$ denote a 99\% credible interval computed from data $y$. 
+- Let $y_{\backslash n}$ denote the data excluding point $n$. 
+- Output a warning if $y_n \notin C(y_{\backslash n})$. 
+
+**Proposition:** if the model is well-specified,
+$$\pr(Y_n \in C(Y_{\backslash n})) = 99\%.$$
+
+**Proof:** special case of our 
+[generic result on calibration of credible intervals.](../w05_properties/topic06_calibration_well_specified.qmd).
+
+
+**Question:** what are potential cause(s) of a posterior predictive "warning", (i.e., $y_n \notin C(y_{\backslash n})$):
+
+a. Model mis-specification.
+b. Posterior is not approximately normal. 
+c. MCMC too slow and/or not enough samples. 
+d. Bad luck. 
+e. Software defect.
+
+{{< include ../../clickers/w08/_c04.qmd >}}

@@ -1,0 +1,17 @@
+---
+title: "MCMC diagnostics"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO

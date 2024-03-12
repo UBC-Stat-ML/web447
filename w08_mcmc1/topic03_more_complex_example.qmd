@@ -47,13 +47,17 @@ df %>% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + the
 
 ## Model (mathematical notation)
 
-Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters):
+Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters): for $i \in \{1, 2, \dots, N\}$, $N$ being the number of days in December ($N=31$),[^1]
+
+[^1]: In the model below, notice we normalize the day by $N$ to put it in the interval $[0, 1]$. This is not strictly necessary, but often,
+  bringing covariates in a nice range can make sampling faster when it improves the 
+  [condition number of the sampling problem](https://mc-stan.org/docs/stan-users-guide/efficiency-tuning.html#unit-scales-without-correlation).
 
 \begin{align*}
 \theta_0 &\sim \distExp(1) \\
 \theta_1 &\sim \distNorm(0, \sigma = 1000) \\
 \theta_2 &\sim \distNorm(0, \sigma = 1000) \\
-\mu_i &= \text{logistic}(i \theta_1 + \theta_2) \\
+\mu_i &= \text{logistic}(\theta_1 (i/N) + \theta_2) \\
 y_i &\sim \distBeta(\mu_i, \theta_0) \\
 \end{align*}
 
@@ -146,9 +150,9 @@ model { # <2>
 
 ## Running MCMC
 
-Running MCMC on the model is done as before:[^1] 
+Running MCMC on the model is done as before:[^2] 
 
-[^1]: note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
+[^2]: note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
 
 ```{r dependson=knitr::dep_prev()}
 data_without_zeros = pmax(pmin(df$percentage/100,0.999),0.001)

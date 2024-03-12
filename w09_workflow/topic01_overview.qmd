@@ -1,0 +1,23 @@
+---
+title: "Overview"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO
+
+
+
+## General data science workflow resources
+
+<!-- software carpentry -->

@@ -1,0 +1,17 @@
+---
+title: "Grouped data"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO

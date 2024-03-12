@@ -1,0 +1,25 @@
+---
+title: "Checking correctness"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO
+
+
+<!-- describe procedure --> 
+
+<!-- clicker/discussion: sources of failure (intruder: posterior is not approximately normal) --> 
+  <!-- bug (link to next slide) --> 
+  <!-- MCMC too slow / not enough samples (link to next next) --> 
+  <!-- model mis-specified (improve the model)  THIS ONE NOW OUT --> 

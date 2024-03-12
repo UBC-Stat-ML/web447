@@ -229,7 +229,7 @@ Some things we look at:
 Many answers possible for [model mis-specification](../w02_discrete_bayes/topic08_criticism.qmd). 
 For example, the Poisson distribution 
 will force the mean and variance to be equal, which often does not hold in practice (in this specific example, 
-this might be especially problematic for values $i$ where $\sin(\theta_2 i + \theta_3)$ is zero or close to zero).
+this might be especially problematic for values $i$ where $\sin(\theta_2 i + \theta_3) + 1$ is zero or close to zero).
 :::
 
 
