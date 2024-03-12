@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC</title>
+<title>Bayes1@UBC - Checking correctness</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,59 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar floating">
@@ -114,9 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w09_workflow/topic01_overview.html">Bayesian workflow</a></li><li class="breadcrumb-item"><a href="../w09_workflow/topic03_checking_correctness.html">Checking correctness</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -131,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../../">Bayes1@UBC</a> 
+      <a href="../">Bayes1@UBC</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -143,19 +107,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../project.html" class="sidebar-item-text sidebar-link">
+  <a href="../project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final project</span></a>
   </div>
 </li>
@@ -171,31 +135,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic01_why.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic02_what.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic03_high_level.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">High-level picture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic04_examples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Examples</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
+  <a href="../w00_intro/topic05_history.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">A bit of history</span></a>
   </div>
 </li>
@@ -212,73 +176,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sample space, outcomes, events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic02_axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Axioms of probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic03_random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Random variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic04_pmfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Probability mass functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic05_decision_diagrams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision trees</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic06_forward_sampling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Forward sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic07_conditional.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditioning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic08_chain.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chain rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic09_bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayes rule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic10_expectations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expectations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simple Monte Carlo</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex01.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -295,61 +259,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic01_bayes_recipe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The Bayesian recipe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic02_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic03_posteriors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Posterior distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic04_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic05_credible.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Credible sets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic06_decision.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic07_prediction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prediction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
+  <a href="../w02_discrete_bayes/topic08_criticism.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to model criticism</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex02.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../challenges/ch02.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -366,49 +330,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What is a PPL?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic02_snis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Importance sampling</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic04_consistency.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SNIS consistency</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic05_mc_rates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Monte Carlo convergence rate</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w03_ppl/topic06_ess.html" class="sidebar-item-text sidebar-link">
+  <a href="../w03_ppl/topic06_ess.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SNIS Effective Sample Size</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex03.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../challenges/ch03.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -425,49 +389,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic01_simPPLe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">simPPLe</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic02_bivariate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bivariate posteriors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic03_normal.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Normal distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic04_classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bernoulli regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic05_regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">(Normal) regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
+  <a href="../w04_glms/topic06_glms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian GLMs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex04.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../challenges/ch04.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -484,55 +448,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Asymptotics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic03_decision_to_point.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic03_decision_to_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theoretic point estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic04_decision_to_set.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic04_decision_to_set.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decision theoretic set estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic05_calibration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calibration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic06_calibration_well_specified.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian calibration: well-specified case</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
+  <a href="../w05_properties/topic07_calibration_mis_specified.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bayesian calibration: mis-specified case</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex05.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../challenges/ch05.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -549,25 +513,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
+  <a href="../w06_hierarchical/topic01_priors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prior choice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
+  <a href="../w06_hierarchical/topic02_gm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Graphical models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
+  <a href="../w06_hierarchical/topic03_hierarchy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Intro to hierarchical models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex06.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -584,19 +548,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w07_quiz1/topic02_practice_questions.html" class="sidebar-item-text sidebar-link">
+  <a href="../w07_quiz1/topic02_practice_questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Practice questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w07_quiz1/topic03_logistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../w07_quiz1/topic03_logistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logistics</span></a>
   </div>
 </li>
@@ -613,43 +577,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing and running Stan</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic02_stan_basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic02_stan_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic03_more_complex_example.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic03_more_complex_example.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan: going further</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic04_mh.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic04_mh.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metropolis-Hastings</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic05_mcmc_consistency.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic05_mcmc_consistency.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Consistency of MCMC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../w08_mcmc1/topic06_hands_on.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic06_hands_on.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stan: hands on</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../exercises/ex07.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+ <span class="menu-text">Bayesian workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic01_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic02_goodness_of_fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Goodness of fit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic03_checking_correctness.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Checking correctness</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic04_mcmc_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCMC diagnostics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic05_grouped_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grouped data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -665,49 +676,110 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#template-for-running-stan-in-a-rmarkdown-or-quarto-notebook" id="toc-template-for-running-stan-in-a-rmarkdown-or-quarto-notebook" class="nav-link active" data-scroll-target="#template-for-running-stan-in-a-rmarkdown-or-quarto-notebook">Template for running Stan in a rmarkdown or quarto notebook</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#from-goodness-of-fit-to-correctness-check" id="toc-from-goodness-of-fit-to-correctness-check" class="nav-link" data-scroll-target="#from-goodness-of-fit-to-correctness-check">From goodness-of-fit to correctness check</a></li>
+  <li><a href="#additional-references" id="toc-additional-references" class="nav-link" data-scroll-target="#additional-references">Additional references</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w09_workflow/topic01_overview.html">Bayesian workflow</a></li><li class="breadcrumb-item"><a href="../w09_workflow/topic03_checking_correctness.html">Checking correctness</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Checking correctness</h1>
+</div>
 
 
 
-<section id="template-for-running-stan-in-a-rmarkdown-or-quarto-notebook" class="level1">
-<h1>Template for running Stan in a rmarkdown or quarto notebook</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-output.var="beta_binomial">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> y; </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">5</span>&gt; x;</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  x ~ uniform(<span class="dv">0</span>, <span class="dv">5</span>); </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  y ~ uniform(<span class="dv">0</span>, x); </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  beta_binomial,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Stan model 'anon_model' does not contain samples.</code></pre>
-</div>
-</div>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- First, some macros specific to this course -->
+<!-- -->
+<!-- 
+Second, tiny-shortex for Quarto
+restricted to macros supported by MathJax
+https://github.com/trevorcampbell/shortex
+-->
+<!-- common sets and set operations -->
+<!-- text shortcuts -->
+<!-- convergence -->
+<!-- unary functions -->
+<!-- \newcommand{\Pr}{\mathbb{P}}   LaTeX Error: Command \Pr already defined. -->
+<!-- Min and max -->
+<!-- binary operators -->
+<!-- independence -->
+<!-- parametric distributions -->
+<!-- nonparametric distributions -->
+<!-- calculus -->
+<!-- general purpose math -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Using calibration to check correctness of model code.</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Code implementing Bayesian models can get complex in real applications. Complex code invariably means software defects (bugs) will creep in. We review a powerful method to detect bugs in Bayesian inference software.</p>
+<p>The topic covered here is typically known as “software testing”. However we avoid the terminology “testing” here as it is already used in the statistical literature.</p>
+</section>
+</section>
+<section id="from-goodness-of-fit-to-correctness-check" class="level2">
+<h2 class="anchored" data-anchor-id="from-goodness-of-fit-to-correctness-check">From goodness-of-fit to correctness check</h2>
+<ul>
+<li>In the <a href="../w09_workflow/topic02_goodness_of_fit.html">last page</a>, we developed a procedure for goodness-of-fit.</li>
+<li>However we identified several factors that can lead to a “warning”.</li>
+</ul>
+<p><strong>Question:</strong> how can we modify <a href="../w09_workflow/topic02_goodness_of_fit.html">last page’s check</a> to exclude “model mis-specification” as a potential cause?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. Use simulated data. 
+2. Use a smaller dataset. 
+3. Use a larger dataset. 
+4. Repeat the test several times. 
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is to 
+use [simulated data](../w01_discrete_inference/topic06_forward_sampling.qmd). 
+By construction, simulated data leads to the well-specified case---that is, unless there 
+is a software defect! 
+
+:::
+
+-->
+</section>
+<section id="additional-references" class="level2">
+<h2 class="anchored" data-anchor-id="additional-references">Additional references</h2>
+<p><strong>Note:</strong> there are more sophisticated method for checking correctness of MCMC code, see for example:</p>
+<ul>
+<li>The <em>Exact Invariance Test</em> in <a href="https://www.jstatsoft.org/article/view/v103i11">Bouchard-Côté, 2022, Section 10.5</a>.</li>
+<li>This line of work was initiated in <a href="https://www.jstor.org/stable/27590449">Geweke, 2004</a>. Reverse citation search on that article provides a comprehensive view of the literature on checking correctness of MCMC algorithms.</li>
+</ul>
 
 
 </section>

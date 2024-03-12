@@ -682,6 +682,53 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Bayesian workflow</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic01_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic02_goodness_of_fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Goodness of fit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic03_checking_correctness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checking correctness</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic04_mcmc_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCMC diagnostics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09_workflow/topic05_grouped_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Grouped data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -790,12 +837,12 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="model-mathematical-notation" class="level2">
 <h2 class="anchored" data-anchor-id="model-mathematical-notation">Model (mathematical notation)</h2>
-<p>Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters):</p>
+<p>Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters): for <span class="math inline">\(i \in \{1, 2, \dots, N\}\)</span>, <span class="math inline">\(N\)</span> being the number of days in December (<span class="math inline">\(N=31\)</span>),<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span class="math display">\[\begin{align*}
 \theta_0 &amp;\sim {\mathrm{Exp}}(1) \\
 \theta_1 &amp;\sim \mathcal{N}(0, \sigma = 1000) \\
 \theta_2 &amp;\sim \mathcal{N}(0, \sigma = 1000) \\
-\mu_i &amp;= \text{logistic}(i \theta_1 + \theta_2) \\
+\mu_i &amp;= \text{logistic}(\theta_1 (i/N) + \theta_2) \\
 y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 \end{align*}\]</span></p>
 </section>
@@ -901,7 +948,7 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 </section>
 <section id="running-mcmc" class="level2">
 <h2 class="anchored" data-anchor-id="running-mcmc">Running MCMC</h2>
-<p>Running MCMC on the model is done as before:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Running MCMC on the model is done as before:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>data_without_zeros <span class="ot">=</span> <span class="fu">pmax</span>(<span class="fu">pmin</span>(df<span class="sc">$</span>percentage<span class="sc">/</span><span class="dv">100</span>,<span class="fl">0.999</span>),<span class="fl">0.001</span>)</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1009,7 +1056,8 @@ Click for answer
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In the model below, notice we normalize the day by <span class="math inline">\(N\)</span> to put it in the interval <span class="math inline">\([0, 1]\)</span>. This is not strictly necessary, but often, bringing covariates in a nice range can make sampling faster when it improves the <a href="https://mc-stan.org/docs/stan-users-guide/efficiency-tuning.html#unit-scales-without-correlation">condition number of the sampling problem</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
