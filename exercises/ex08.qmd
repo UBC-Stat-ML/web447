@@ -6,10 +6,6 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
-## TODO
-
-- prior predictive check exercise: recreate Fig 3 in the Baeysian Workflow paper.
-
 
 ## Q.1: calibration analysis via cross-validation
 
@@ -64,7 +60,7 @@ suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(dplyr))
 
 df %>% 
-  bind_cols(data.frame(ci_limits)) %>% 
+  bind_cols(data.frame(CI_L = ci_limits[,1], CI_R = ci_limits[,2])) %>% 
   mutate(Inside_CI = (velocity >= CI_L & velocity <= CI_R)) %>% 
   ggplot(aes(x = 1:N_obs, y = velocity, ymin = CI_L, ymax = CI_R, color=Inside_CI)) +
   geom_point() + 
@@ -72,3 +68,47 @@ df %>%
   theme_minimal() +
   labs(x = "Point", y = "Velocity")
 ```
+
+
+## Q.2: prior predictive checks
+
+Consider the logistic regression model
+
+$$
+\begin{aligned}
+\beta_i &\distiid \distNorm(0,1), \quad i\in\{1,\dots,n_\text{pred}\} \\
+y_n|\beta &\sim \distBern(\text{logistic}(x_n^T \beta)), \quad n\in\{1,\dots,n_\text{obs}\} 
+\end{aligned}
+$$ {#eq-log-reg}
+
+In this exercise we will investigate the effect of having fixed independent priors
+on the coefficients $\{\beta_i\}_{i=1}^{n_\text{pred}}$ as $n_\text{pred}$ grows.
+
+1. Write a function called `logistic_regression` that takes as input a matrix `X` of
+`n_obs` rows and `n_pred` columns. Your function should a) simulate $\beta$
+according to @eq-log-reg, b) simulate the response vector $y$ given $\beta$, and
+c) return the average response $\bar{y}:=n_\text{obs}^{-1}\sum_i y_i$.
+
+2. Let us fix $n_\text{obs}=100$. For each $n_\text{pred}\in\{2,4,15\}$, sample
+$X$ according to
+$$
+X_{n,i} \distiid \distBern(0.9)
+$$
+Then, run `logistic_regression` 100,000 times, and report the histogram of the
+simulated $\bar{y}$ values. To help you, you may use the following code as a
+skeleton for your answer
+```r
+pred_prob = 0.9
+n_obs = 100
+n_sim = 100000
+opar = par(mfrow=c(1,3)) # set a layout of 3 plots in a single row
+for(n_pred in c(2,4,15)){
+  X = # fill this
+  S = # fill this
+  hist(S, breaks=20, ylim=c(0,17000), main=paste(n_pred, "predictors"))
+}
+par(opar) # reset graphical parameters
+```
+
+3. Do you observe any change in the distributions obtained in step 2? Do you think
+this is desirable in a model? If yes, why? If not, how would you fix this?
