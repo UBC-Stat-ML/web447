@@ -50,7 +50,7 @@ train_test_dta = list(
 ```
 Report the leave-one-out 80% credible interval for the left out observation.
 
-3. Repeat step 2 for all observations. That is, construct a matrix of `r nrow(df)`
+3. Repeat step 2 for all observations. That is, construct a matrix of `nrow(df)`
 rows and 2 columns called `ci_limits`, where the `i`-th row contains an 80% credible
 interval for the `i`-th observation left out. Is the fraction of left-out observations
 contained in their respective credible intervals similar to the nominal coverage
@@ -85,8 +85,9 @@ In this exercise we will investigate the effect of having fixed independent prio
 on the coefficients $\{\beta_i\}_{i=1}^{n_\text{pred}}$ as $n_\text{pred}$ grows.
 
 1. Write a function called `logistic_regression` that takes as input a matrix `X` of
-`n_obs` rows and `n_pred` columns. Your function should a) simulate $\beta$
-according to @eq-log-reg, b) simulate the response vector $y$ given $\beta$, and
+`n_obs` rows and `n_pred` columns. Your function should 
+a) simulate $\beta$ according to @eq-log-reg, 
+b) simulate the response vector $y$ given $\beta$, and 
 c) return the average response $\bar{y}:=n_\text{obs}^{-1}\sum_i y_i$.
 
 2. Let us fix $n_\text{obs}=100$. For each $n_\text{pred}\in\{2,4,15\}$, sample
@@ -98,14 +99,12 @@ Then, run `logistic_regression` 100,000 times, and report the histogram of the
 simulated $\bar{y}$ values. To help you, you may use the following code as a
 skeleton for your answer
 ```r
-pred_prob = 0.9
-n_obs = 100
-n_sim = 100000
 opar = par(mfrow=c(1,3)) # set a layout of 3 plots in a single row
 for(n_pred in c(2,4,15)){
   X = # fill this
   S = # fill this
-  hist(S, breaks=20, ylim=c(0,17000), main=paste(n_pred, "predictors"))
+  hist(S, breaks=20, ylim=c(0,17000), main=paste(n_pred, "predictors"),
+       xlab = "Average outcome")
 }
 par(opar) # reset graphical parameters
 ```
