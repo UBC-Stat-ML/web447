@@ -10,8 +10,152 @@ editor:
 
 ### Topics
 
-TODO
+- Using the package `tidybayes` to feed complex data into Stan.
 
 ### Rationale
 
-TODO
+Data organized in various groups is a frequent feature of Bayesian models, 
+in particular in [hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd). 
+
+Getting grouped data into stan is tedious and error prone.
+The package `tidybayes` automates much of this. 
+
+
+## Pre-reading
+
+If you have never heard about "tidy data", while it is not strictly essential for this course, 
+it is a good investment to skim this [tutorial on tidy data](https://r4ds.had.co.nz/tidy-data.html). 
+
+## Example
+
+First, install the packages `magrittr` and `tidybayes` (and `ggplot2` if you have not done so already), 
+then import them:
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(magrittr))
+suppressPackageStartupMessages(require(tidybayes))
+suppressPackageStartupMessages(require(ggplot2))
+```
+
+
+### Data prep
+
+We load the data used in [exercise 6](../exercises/ex06.qmd):
+
+```{r}
+data = read.csv("../exercises/ex06_assets/vaccines_full.csv")
+data$is_vaccinated = ifelse(data$arms == "vaccinated", 1, 0)
+rmarkdown::paged_table(data)
+```
+
+The magic conversion of "tidy data" (data in a format like the above) into a format
+that can be consumed by Stan is done using `compose_data`:
+
+```{r}
+stan_converted = compose_data(data)
+
+stan_converted
+```
+
+
+### Stan model 
+
+Here we consider a simple, non-hierarchical model but fitting all the data 
+at once. In the exercise, you will modify this model to follow the hierarchical 
+structure of [exercise 6](../exercises/ex06.qmd).
+
+```{stan output.var = "vaccines"}
+data {
+  int n;
+  int n_trials;
+  array[n] int<lower=1,upper=n_trials> trials;
+  array[n] int arms;
+  int n_arms;
+  array[n] int groupSizes;
+  array[n] int numbersOfCases;
+  array[n] int is_vaccinated;
+}
+
+parameters {
+  vector<lower=0,upper=1>[n_trials] efficiencies;
+  vector<lower=0,upper=1>[n_trials] prevalences;
+}
+
+model {
+
+  for (trial in 1:n_trials) {
+    efficiencies[trial] ~ beta(1, 1);
+    prevalences[trial] ~ beta(1, 1);
+  }
+
+  for (i in 1:n) {
+    numbersOfCases[i] ~ binomial(groupSizes[i], prevalences[trials[i]] * (is_vaccinated[i] == 1 ? 1.0 - efficiencies[trials[i]] : 1.0));
+  }
+}
+```
+
+
+### Fitting
+
+The fit object returned by `sampling` does not know about the string labels attached to
+each trial integer index. We use `fit %<>% recover_types(data)` to add back that information:
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  vaccines,
+  seed = 1,
+  data = stan_converted, 
+  refresh = 0,
+  iter = 10000                  
+)
+fit %<>% recover_types(data)
+```
+
+
+### Getting draws
+
+The output of Stan is not tidy either. 
+
+```{r}
+fit
+```
+
+
+Use `spread_draws` to put the draws into a tidy format:
+
+```{r}
+fit %>% spread_draws(efficiencies[trials], prevalences[trials]) %>% head(10)
+```
+
+### Plotting
+
+Now that we have draws in tidy format, instead of using specialized MCMC plotting 
+libraries we can just use ggplot:
+
+```{r}
+fit %>%
+  spread_draws(efficiencies[trials]) %>%
+  ggplot(aes(x = efficiencies, y = trials)) +
+  stat_halfeye() + 
+  theme_minimal()
+
+```
+
+This makes it easier to customize plots.
+
+
+### Summaries
+
+`tidybayes` also offers convenient ways to compute summaries such as 
+[High Density Intervals (HDI)](../w05_properties/topic04_decision_to_set.qmd)
+
+```{r}
+fit %>%
+  spread_draws(efficiencies[trials]) %>%
+  median_hdi(efficiencies)
+```
+
+## More information
+
+See the [tidybayes documentation](https://mjskay.github.io/tidybayes/).

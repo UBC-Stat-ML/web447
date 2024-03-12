@@ -112,3 +112,9 @@ par(opar) # reset graphical parameters
 
 3. Do you observe any change in the distributions obtained in step 2? Do you think
 this is desirable in a model? If yes, why? If not, how would you fix this?
+
+## Q.3: hierarchical models revisited
+
+Modify the [tutorial on tidybayes](../w09_workflow/topic05_grouped_data.qmd) to 
+make the model hierarchical, following the same model as in [exercise 6](ex06.qmd).
+

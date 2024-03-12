@@ -29,8 +29,11 @@ Informally, there are two possible situations to distinguish:
 
 **Fast mixing:**
 
-- The chain is almost like i.i.d. sampling, just a constant time slower.
-- This happens when the dependence between time step $i$ and $i+m$ decays exponentially in $m$.[^1]
+- The chain is almost like i.i.d. sampling, just a **constant time** slower (e.g., 2x slower).
+    - This constant is related to the relative effective sample size (e.g., is 2x slower, relative ESS would be $1/2$).
+    - Notice Stan estimates ESS when printing a `fit` object, look for column `n_eff`.
+    - More on this soon.
+- Fast mixing happens when the dependence between time step $i$ and $i+m$ decays exponentially in $m$.[^1]
 
 [^1]: "Fast mixing" is often formalized using [one of several equivalent definitions of geometric ergodicity](https://arxiv.org/pdf/2203.04395.pdf).
 
@@ -38,16 +41,18 @@ Informally, there are two possible situations to distinguish:
 **Slow/torpid mixing:**
 
 - Terminology: **slow/torpid mixing**. 
+- MCMC still consistent, but you may have to wait for years to get usable answer!
 - In this case, changes have to be made to the sampler. 
 - We will cover two alternatives to consider for these difficult targets:
-    - Tempering methods (week 12),
+    - Tempering methods (week 12).
     - Variational methods (week 13).
     
     
 ## Heuristics to detect slow mixing chains
 
 - Key idea: run several independent chains from "over-dispersed" initializations. 
-- Check for differences between these chains:
+    - Over-dispersed: use at least as much noise as the prior (roughly). 
+- Check for differences between the independent chains:
     - Trace plots.
     - Rank plots. 
 - These are not bullet-proof methods... 
@@ -63,7 +68,7 @@ suppressPackageStartupMessages(require(bayesplot))
 ```
 
 
-**Easy problem:**
+**Easy problem:** a familiar beta-binomial problem.
 
 ```{stan output.var = "betabinom"}
 data {
@@ -80,11 +85,11 @@ model {
 }
 ``` 
 
-**Challenging problem:** 
+**Challenging problem:** binomial likelihood, but with "too many parameters."
 
 - Write $p = p_1 p_2$, where $p_i \sim \distUnif(0, 1)$.
 - This creates an **unidentifiability**: for each value $p$ there are several possible $p_1, p_2$ such that $p = p_1 p_2$.
-- The posterior looks like a "thin ridge" (see visualization [here](https://julia-tempering.github.io/InferenceReport.jl/stable/generated/toy_turing_unid_model/src/), obtained using tempering, covered in week 12)
+- The posterior looks like a "thin ridge" (see visualization [here](https://julia-tempering.github.io/InferenceReport.jl/stable/generated/toy_turing_unid_model/src/), obtained using tempering, covered in week 12).
 
 ::: column-margin
 ![](../images/ridge.png){width="300"}
@@ -107,6 +112,9 @@ model {
 }
 ``` 
 
+- We run both easy and hard problems with 2 parallel chains each.
+- In practice use more than 2. 
+
 ```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
 fit_easy = sampling(
   betabinom,
@@ -127,7 +135,8 @@ fit_hard = sampling(
 )
 ```
 
-**Trace plots:**
+**Trace plots:** spot the difference between the easy and hard problems 
+(each line in a given plot is an independent chain).
 
 ```{r}
 mcmc_trace(fit_easy, pars = c("p")) + theme_minimal()

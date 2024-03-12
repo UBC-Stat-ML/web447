@@ -8,4 +8,52 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-{{< include ../_construction.qmd >}}
+Consider the following regression model:
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+```{stan output.var = "cauchy"}
+data {
+  matrix[3,2] design_matrix; // number of successes
+  vector[3] observations;
+}
+
+parameters {
+  vector[2] coefficients;
+}
+
+model {
+  coefficients[1] ~ cauchy(0, 1);
+  coefficients[2] ~ cauchy(0, 1);
+  
+  for (i in 1:3) {
+    observations[i] ~ normal(design_matrix[i] * coefficients, 1);
+  }
+}
+```
+
+```{r}
+matrix = rbind(
+  c(0.1, 0),
+  c(-0.3, 0),
+  c(0, 0)
+)
+obs = c(0.2, 0.1, -0.4)
+fit = sampling(
+  cauchy,
+  seed = 1,
+  data = list(design_matrix = matrix, observations = obs),        
+  iter = 10000                   
+)
+```
+
+```{r}
+suppressPackageStartupMessages(require(bayesplot))
+suppressPackageStartupMessages(require(ggplot2))
+mcmc_trace(fit, pars_regex = c("coefficients")) + theme_minimal()
+```
+
+$$\acute{\mu}$$
+

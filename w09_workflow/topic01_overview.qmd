@@ -41,7 +41,7 @@ a more detailed overview.
 ## General data science workflow resources
 
 We focus in this course on the Bayesian-specific aspects of the data analysis 
-workflow, but typical data analysis workflow practices should be used:
+workflow, but these should be combined with generic data analysis workflow practices:
 
 - Organizing your files in a project specific folder. 
 - Using version control. 

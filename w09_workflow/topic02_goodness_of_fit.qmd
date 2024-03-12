@@ -18,15 +18,15 @@ editor:
 ### Rationale
 
 Is your statistical model missing some critical aspect of the data?
-We have approached this question in qualitative way [earlier in the course](../w02_discrete_bayes/topic08_criticism.qmd). 
+We have approached this question in a qualitative way [earlier in the course](../w02_discrete_bayes/topic08_criticism.qmd). 
 Today, we provide a more quantitative approach. In practice, both qualitative and quantitative 
-model criticism are essential ingredients to effective Bayesian data analysis.
+model criticism are essential ingredients of an effective Bayesian data analysis.
 
 
 ## What is goodness-of-fit?
 
 - Goodness-of-fit: a procedure to assess if a model is good (approximately well-specified) or bad (grossly mis-specified). 
-- Applies to both Bayesian and non-Bayesian models, obviously we focus on former today.
+- Applies to both Bayesian and non-Bayesian models, obviously we focus on the former today.
 
 
 ## Review: calibration
@@ -79,7 +79,7 @@ To understand today's material we need to review the notion of
 
 - Let $C(y)$ denote a 99\% credible interval computed from data $y$. 
 - Let $y_{\backslash n}$ denote the data excluding point $n$. 
-- Output a warning if $y_n \notin C(y_{\backslash n})$. 
+- Output a warning if $y_n \notin C(y_{\backslash n})$.
 
 **Proposition:** if the model is well-specified,
 $$\pr(Y_n \in C(Y_{\backslash n})) = 99\%.$$
