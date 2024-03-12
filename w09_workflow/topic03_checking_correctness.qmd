@@ -10,16 +10,36 @@ editor:
 
 ### Topics
 
-TODO
+- Using calibration to check correctness of model code. 
 
 ### Rationale
 
-TODO
+Code implementing Bayesian models can get complex in real applications. 
+Complex code invariably means software defects (bugs) will creep in.
+We review a powerful method to detect bugs in Bayesian inference software. 
+
+The topic covered here is typically known as "software testing". 
+However we avoid the terminology "testing" here as it is already used in the 
+statistical literature. 
 
 
-<!-- describe procedure --> 
+## From goodness-of-fit to correctness check
 
-<!-- clicker/discussion: sources of failure (intruder: posterior is not approximately normal) --> 
-  <!-- bug (link to next slide) --> 
-  <!-- MCMC too slow / not enough samples (link to next next) --> 
-  <!-- model mis-specified (improve the model)  THIS ONE NOW OUT --> 
+- In the [last page](topic02_goodness_of_fit.qmd), we developed a 
+  procedure for goodness-of-fit. 
+- However we identified several factors that can lead to a "warning".
+
+**Question:** how can we modify [last page's check](topic02_goodness_of_fit.qmd) 
+to exclude "model mis-specification" as a potential cause?
+
+{{< include ../../clickers/w08/_c05.qmd >}}
+
+
+## Additional references
+
+**Note:** there are more sophisticated method for checking correctness of MCMC code, 
+see for example:
+
+- The *Exact Invariance Test* in 
+[Bouchard-Côté, 2022, Section 10.5](https://www.jstatsoft.org/article/view/v103i11).
+- This line of work was initiated in [Geweke, 2004](https://www.jstor.org/stable/27590449). Reverse citation search on that article provides a comprehensive view of the literature on checking correctness of MCMC algorithms. 

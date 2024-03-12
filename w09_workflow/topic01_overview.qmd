@@ -10,14 +10,43 @@ editor:
 
 ### Topics
 
-TODO
+- Overview of the Bayesian workflow.
+- Pointer to resources on generic data science workflows. 
 
 ### Rationale
 
-TODO
+End-to-end Bayesian analysis contains many steps. 
+This week covers some of the key steps with an emphasis on software tools 
+useful to accomplish them, while building connections with the concepts 
+covered in the class so far. 
 
+
+## Bayesian workflows
+
+Some examples of steps involved in effective Bayesian analysis:
+
+- Prior predictive checks: see [logistic regression lecture](../w04_glms/topic04_classification.qmd#prior-predictive), reinforced in this week's exercises.
+- [Validation of MCMC posterior approximation](topic04_mcmc_diagnostics.qmd).
+- [Validation of the model](topic02_goodness_of_fit.qmd).
+- [Techniques to identify software defects](topic03_checking_correctness.qmd).
+- etc.
+
+On a given problem, depending on the outcome of these steps, different tools will be used, 
+forming a graph of techniques. 
+
+Jump to page 5 in [Gelman et al., 2020](https://arxiv.org/pdf/2011.01808.pdf) for 
+a more detailed overview. 
 
 
 ## General data science workflow resources
 
-<!-- software carpentry -->
+We focus in this course on the Bayesian-specific aspects of the data analysis 
+workflow, but typical data analysis workflow practices should be used:
+
+- Organizing your files in a project specific folder. 
+- Using version control. 
+- Capturing library dependency versions for reproducibility. 
+- Follow good coding practice. 
+- etc.
+
+See, e.g., the [software carpentry lessons](https://software-carpentry.org/lessons/). 

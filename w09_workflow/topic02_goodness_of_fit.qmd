@@ -34,6 +34,10 @@ model criticism are essential ingredients to effective Bayesian data analysis.
 To understand today's material we need to review the notion of 
 [calibration of credible intervals](../w05_properties/topic06_calibration_well_specified.qmd).
 
+::: column-margin
+![](../images/calibration.png){width="200"}
+:::
+
 **Question:** for well-specified models, credible intervals are...
 
 1. calibrated for small data, calibrated for large data
@@ -54,7 +58,7 @@ To understand today's material we need to review the notion of
 {{< include ../../clickers/w08/_c02.qmd >}}
 
 
-## Review: prediction 
+### Review: prediction 
 
 - Recall that Bayesian models can be used to predict the next observation, $y_{n+1}$. 
 - We did this...
@@ -71,7 +75,7 @@ To understand today's material we need to review the notion of
 {{< include ../../clickers/w08/_c03.qmd >}}
 
 
-## Posterior predictive check
+### Posterior predictive check
 
 - Let $C(y)$ denote a 99\% credible interval computed from data $y$. 
 - Let $y_{\backslash n}$ denote the data excluding point $n$. 
