@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Continuous models</title>
+<title>Bayes1@UBC - Effective sample size</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic03_continuous.html">Continuous models</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w09_workflow/topic01_overview.html">Bayesian workflow</a></li><li class="breadcrumb-item"><a href="../w09_workflow/topic05_mcmc_ess.html">Effective sample size</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -384,13 +384,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
  <span class="menu-text">A first look at PPLs</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w03_ppl/topic01_ppls_intro.html" class="sidebar-item-text sidebar-link">
@@ -405,7 +405,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w03_ppl/topic03_continuous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Continuous models</span></a>
   </div>
 </li>
@@ -690,13 +690,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
  <span class="menu-text">Bayesian workflow</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w09_workflow/topic01_overview.html" class="sidebar-item-text sidebar-link">
@@ -723,7 +723,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w09_workflow/topic05_mcmc_ess.html" class="sidebar-item-text sidebar-link">
+  <a href="../w09_workflow/topic05_mcmc_ess.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Effective sample size</span></a>
   </div>
 </li>
@@ -756,25 +756,26 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#densities" id="toc-densities" class="nav-link" data-scroll-target="#densities">Densities</a></li>
-  <li><a href="#joint-densities" id="toc-joint-densities" class="nav-link" data-scroll-target="#joint-densities">Joint densities</a></li>
-  <li><a href="#key-properties" id="toc-key-properties" class="nav-link" data-scroll-target="#key-properties">Key properties</a></li>
-  <li><a href="#example-doomsday-model" id="toc-example-doomsday-model" class="nav-link" data-scroll-target="#example-doomsday-model">Example: Doomsday model</a>
+  <li><a href="#executive-version" id="toc-executive-version" class="nav-link" data-scroll-target="#executive-version">Executive version</a></li>
+  <li><a href="#mathematical-underpinnings" id="toc-mathematical-underpinnings" class="nav-link" data-scroll-target="#mathematical-underpinnings">Mathematical underpinnings</a>
   <ul class="collapse">
-  <li><a href="#mathematical-description" id="toc-mathematical-description" class="nav-link" data-scroll-target="#mathematical-description">Mathematical description</a></li>
-  <li><a href="#aleatoric-interpretation" id="toc-aleatoric-interpretation" class="nav-link" data-scroll-target="#aleatoric-interpretation">Aleatoric interpretation</a></li>
-  <li><a href="#epistemic-interpretation" id="toc-epistemic-interpretation" class="nav-link" data-scroll-target="#epistemic-interpretation">Epistemic interpretation</a></li>
-  <li><a href="#computations-on-the-doomsday-model" id="toc-computations-on-the-doomsday-model" class="nav-link" data-scroll-target="#computations-on-the-doomsday-model">Computations on the Doomsday model</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#central-limit-theorem-clt-for-markov-chains" id="toc-central-limit-theorem-clt-for-markov-chains" class="nav-link" data-scroll-target="#central-limit-theorem-clt-for-markov-chains">Central limit theorem (CLT) for Markov chains</a></li>
+  <li><a href="#asymptotic-variance" id="toc-asymptotic-variance" class="nav-link" data-scroll-target="#asymptotic-variance">Asymptotic variance</a></li>
+  <li><a href="#effective-sample-size" id="toc-effective-sample-size" class="nav-link" data-scroll-target="#effective-sample-size">Effective sample size</a></li>
+  <li><a href="#estimating-the-asymptotic-variance-with-many-chains" id="toc-estimating-the-asymptotic-variance-with-many-chains" class="nav-link" data-scroll-target="#estimating-the-asymptotic-variance-with-many-chains">Estimating the asymptotic variance with many chains</a></li>
+  <li><a href="#estimating-the-asymptotic-variance-with-one-chain" id="toc-estimating-the-asymptotic-variance-with-one-chain" class="nav-link" data-scroll-target="#estimating-the-asymptotic-variance-with-one-chain">Estimating the asymptotic variance with one chain</a></li>
   </ul></li>
+  <li><a href="#additional-references" id="toc-additional-references" class="nav-link" data-scroll-target="#additional-references">Additional references</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w03_ppl/topic01_ppls_intro.html">A first look at PPLs</a></li><li class="breadcrumb-item"><a href="../w03_ppl/topic03_continuous.html">Continuous models</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w09_workflow/topic01_overview.html">Bayesian workflow</a></li><li class="breadcrumb-item"><a href="../w09_workflow/topic05_mcmc_ess.html">Effective sample size</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Continuous models</h1>
+<h1 class="title">Effective sample size</h1>
 </div>
 
 
@@ -815,238 +816,301 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Review of key concepts for continuous random variables.
-<ul>
-<li>Density.</li>
-<li>Computing their expectation.</li>
-</ul></li>
-<li>Bayes rule with continuous random variables.</li>
+<li>Markov chain standard error (MCSE)</li>
+<li>Effective sample size (ESS)</li>
+<li>Mathematical underpinning: central limit theorem for Markov chains</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Since the parameters of distributions families are continuous, it natural to use continuous random variables for them in Bayesian statistics. For example it lets us get rid of the artificial discretization <span class="math inline">\(K\)</span> we used in <a href="../exercises/ex02.html">last week’s exercise</a>.</p>
-<p>Today we will approach the calculations with both manual mathematic derivation and PPLs. Later we will increasingly rely only on PPLs. But it is still important to understand both methods.</p>
+<p>After running an MCMC chain and <a href="../w09_workflow/topic04_mcmc_diagnostics.html">convincing yourself the chain is mixing well</a>, the next question is: how many digits are reliable when reporting an MCMC approximation (e.g., a posterior mean)?</p>
+<p>To answer this question, we will encounter an MCMC version of effective sample size. This is distinct from <a href="../w03_ppl/topic06_ess.html">SNIS’s ESS</a> but has the same underlying intuition.</p>
 </section>
 </section>
-<section id="densities" class="level2">
-<h2 class="anchored" data-anchor-id="densities">Densities</h2>
-<p><strong>Definition:</strong> <span class="math inline">\(X\)</span> has density <span class="math inline">\(f(x)\)</span> if <span class="math display">\[\mathbb{P}(X \in A) = \int_A f(x) \mathrm{d}x.\]</span></p>
-<p><strong>LOTUS:</strong> works the same as <a href="../w01_discrete_inference/topic10_expectations.html">with discrete models</a>: <span class="math display">\[\mathbb{E}[g(X)] = \int f(x) g(x) \mathrm{d}x.\]</span></p>
+<section id="executive-version" class="level2">
+<h2 class="anchored" data-anchor-id="executive-version">Executive version</h2>
+<p><strong>How many digits are reliable?</strong></p>
+<p>Suppose you are approximating a posterior mean in Stan. We now show how to determine how many digits are reliable:</p>
+<ol type="1">
+<li>print the <code>fit</code> object,</li>
+<li>roughly twice<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> the column <code>se_mean</code> provides a 95% confidence interval.</li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-output.var="doomsday">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> y; </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">5</span>&gt; x;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  x ~ uniform(<span class="dv">0</span>, <span class="dv">5</span>); </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  y ~ uniform(<span class="dv">0</span>, x); </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  doomsday,         </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">20000</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
+1 chains, each with iter=20000; warmup=10000; thin=1; 
+post-warmup draws per chain=10000, total post-warmup draws=10000.
+
+      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+x     1.16    0.03 1.29  0.07  0.18  0.57  1.76  4.56  1624    1
+lp__ -0.39    0.02 0.68 -2.44 -0.43 -0.12 -0.04 -0.01  1580    1
+
+Samples were drawn using NUTS(diag_e) at Tue Mar 12 22:45:46 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<p><strong>Question:</strong> construct a 95% confidence interval for the posterior mean of <span class="math inline">\(X\)</span>. Is the <a href="../w03_ppl/topic03_continuous.html">true value</a> contained in the interval?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $[1.16 \pm 0.03]$, and the true value is contained in the interval
+1. $[1.16 \pm 0.03]$, and the true value is not contained in the interval
+1. $[1.16 \pm 0.06]$, and the true value is contained in the interval
+1. $[1.16 \pm 0.06]$, and the true value is not contained in the interval
+1. None of the above
+
+In the above: $[x \pm r]$ denotes the confidence interval $[x - r, x + r]$
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Reading off this table we have:
+
+- Estimate is `1.16`, 
+- twice the standard error gives `0.06` (from the column `se_mean`, which stands for "standard error for the posterior mean").
+
+From [previous calculations](../w03_ppl/topic03_continuous.qmd), we know the true answer is $1.117$, so the 
+true error is $0.043$, hence the true value is contained in the interval, as expected for approximately[^2] 95\% of the random seeds passed to Stan. 
+
+[^2]: It is only approximate, since as we shall see the standard error estimator uses central limit theorem approximations. 
+
+:::
+
+-->
 </section>
-<section id="joint-densities" class="level2">
-<h2 class="anchored" data-anchor-id="joint-densities">Joint densities</h2>
-<p><strong>Definition:</strong> <span class="math inline">\((X, Y)\)</span> has joint density <span class="math inline">\(f(x, y)\)</span> if <span class="math display">\[\mathbb{P}((X, Y) \in A) = \int \int_A f(x, y) \mathrm{d}x.\]</span></p>
-</section>
-<section id="key-properties" class="level2">
-<h2 class="anchored" data-anchor-id="key-properties">Key properties</h2>
-<p>Note that in much of what follows, everything works the same as with <a href="../w01_discrete_inference/topic10_expectations.html">with discrete models</a> except we replace sums by integrals and PMFs <span class="math inline">\(p\)</span> by densities <span class="math inline">\(f\)</span>.</p>
-<p><strong>LOTUS:</strong> <span class="math display">\[\mathbb{E}[g(X, Y)] = \int \int f(x, y) g(x, y) \mathrm{d}x \mathrm{d}y.\]</span></p>
-<p><strong>Marginalization:</strong> going from a joint density on <span class="math inline">\((X, Y)\)</span> to the density of <span class="math inline">\(X\)</span> only (the latter is called the marginal): <span class="math display">\[f_X(x) = \int f(x, y) \mathrm{d}y.\]</span></p>
-<p><strong>Chain rule:</strong> <span class="math display">\[f(x, y) = f_X(x) f_{Y|X}(y|x).\]</span></p>
-<p><strong>Bayes theorem:</strong> <span class="math display">\[f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)}.\]</span></p>
-</section>
-<section id="example-doomsday-model" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="example-doomsday-model">Example: Doomsday model</h2>
-<section id="mathematical-description" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-description">Mathematical description</h3>
-<p>Consider the following joint density described using chain rule: <span class="math display">\[\begin{align*}
-X &amp;\sim {\mathrm{Unif}}(0, 5) \\
-Y | X &amp;\sim {\mathrm{Unif}}(0, X).
-\end{align*}\]</span></p>
-</section>
-<section id="aleatoric-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="aleatoric-interpretation">Aleatoric interpretation</h3>
+<section id="mathematical-underpinnings" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
 <ul>
-<li>I have a measuring tape, but you do not know how long is it.
+<li>Recall the central limit theorem (CLT) for i.i.d. random variables:
 <ul>
-<li>Length of tape: <span class="math inline">\(X\)</span>.</li>
-<li>Let’s say we think it’s less than 5m.</li>
+<li>if some random variables <span class="math inline">\(V_i\)</span>’s are i.i.d. and</li>
+<li>each has finite variance, then we have<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span id="eq-clt-iid"><span class="math display">\[\sqrt{n}(\bar V - \mu) \to \mathcal{N}(0, \operatorname{SD}[V]), \tag{1}\]</span></span> where <span class="math inline">\(\bar V = \frac{1}{n} \sum_{i=1}^n V_i\)</span> and <span class="math inline">\(\mu = \mathbb{E}[V]\)</span>.</li>
 </ul></li>
-<li>I go in a separate room, unroll it fully, and pick a number at random from the tape.
-<ul>
-<li>Random point on tape: <span class="math inline">\(Y\)</span></li>
-</ul></li>
+<li>From the CLT, recall that standard frequentist arguments give: <span id="eq-ci"><span class="math display">\[\mathbb{P}(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%, \tag{2}\]</span></span> where: the Standard Error (SE) is given by SE <span class="math inline">\(= \sqrt{\operatorname{SD}[V] / n}\)</span>.</li>
 </ul>
-<p><strong>Goal:</strong> from the <span class="math inline">\(Y\)</span>, trying to guess the full length of the tape.</p>
 </section>
-<section id="epistemic-interpretation" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="epistemic-interpretation">Epistemic interpretation</h3>
+<section id="central-limit-theorem-clt-for-markov-chains" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="central-limit-theorem-clt-for-markov-chains">Central limit theorem (CLT) for Markov chains</h3>
 <ul>
-<li><span class="math inline">\(X\)</span> is the total number of humans to ever live, future and past (in trillion).</li>
-<li><span class="math inline">\(Y\)</span> is the number of humans that were born before present (from archeological records, ~0.06 trillion).</li>
+<li>We would like to have something like <a href="#eq-ci" class="quarto-xref">Equation&nbsp;2</a> for our MCMC algorithm,</li>
+<li>however, the samples from MCMC have dependence, they are not i.i.d….</li>
+<li>… so we cannot use the above i.i.d. central limit theorem.</li>
+<li><strong>But</strong> fortunately there is generalization of the central limit theorem that applies!</li>
+<li>Namely: The central limit theorem for <strong>Markov chains.</strong></li>
 </ul>
+<p><strong>Definition:</strong> the random variables <span class="math inline">\(X^{(1)}, X^{(2)}, \dots\)</span> are called a Markov chain if they admit the following “chain” graphical model.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/doomsday.png" class="img-fluid" width="200"></p>
-</div></div><p><strong>Goal:</strong> Can we guess (probabilistically) how many more human there will ever be in total?</p>
-<p>This is known as the <a href="http://en.wikipedia.org/wiki/Doomsday_argument">Doomsday argument</a></p>
+<p><img src="../images/markov.png" class="img-fluid" width="300"></p>
+</div></div><ul>
+<li>Here we state a version of the CLT for Markov chains specialized to our situation:
+<ul>
+<li>Let <span class="math inline">\(X^{(1)}, X^{(2)}, \dots\)</span> denote the states visited by an <a href="../w08_mcmc1/topic04_mh.html">MH algorithm</a>.</li>
+<li><span class="math inline">\(\mu = \int x \pi(x) \mathrm{d}x\)</span> is the quantity we seek to approximate,
+<ul>
+<li>i.e., a posterior mean.</li>
+<li>Recall <span class="math inline">\(\pi(x) = \gamma(x) / Z\)</span>, where <span class="math inline">\(\gamma(x) = p(x, y)\)</span> and <span class="math inline">\(Z = p(y)\)</span>.</li>
+</ul></li>
+<li>Let <span class="math inline">\(\bar X\)</span> denote our MCMC estimator, i.e., the average of the samples.</li>
+</ul></li>
+</ul>
+<p><strong>Theorem:</strong> assuming <span class="math inline">\(\sigma^2 = \int (x - \mu)^2 \pi(x) \mathrm{d}x &lt; \infty\)</span> and under appropriate <a href="../w09_workflow/topic04_mcmc_diagnostics.html">fast mixing conditions</a>,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span id="eq-clt-mc"><span class="math display">\[\sqrt{n}(\bar X - \mu) \to \mathcal{N}(0, \sigma_a), \tag{3}\]</span></span> where the constant <span class="math inline">\(\sigma^2_a &gt; 0\)</span> is known as the <strong>asymptotic variance.</strong></p>
 </section>
-<section id="computations-on-the-doomsday-model" class="level3">
-<h3 class="anchored" data-anchor-id="computations-on-the-doomsday-model">Computations on the Doomsday model</h3>
-<p><strong>Joint density:</strong> which of these is the joint density?</p>
+<section id="asymptotic-variance" class="level3">
+<h3 class="anchored" data-anchor-id="asymptotic-variance">Asymptotic variance</h3>
+<p><strong>Notice:</strong> there is a difference between the limiting distributions in the i.i.d. and Markov CLTs (<a href="#eq-clt-iid" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-clt-mc" class="quarto-xref">Equation&nbsp;3</a>)!</p>
+<ul>
+<li>For i.i.d. CLT: variance of the limiting distribution is equal to the variance of <span class="math inline">\(X_1\)</span> (or any other <span class="math inline">\(X_i\)</span>, since they are i.i.d.).</li>
+<li>For Markov CLT: we left the variance of the limiting distribution more vague (<span class="math inline">\(\sigma_a^2\)</span>).</li>
+</ul>
+<p><strong>Intuition:</strong> because of the dependences between MCMC iterations, the noise of the approximation is larger compared to the i.i.d. setting.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</section>
+<section id="effective-sample-size" class="level3">
+<h3 class="anchored" data-anchor-id="effective-sample-size">Effective sample size</h3>
+<p>The MCMC Effective Sample Size (ESS) is an answer to the following:</p>
+<p><strong>Question:</strong> How many i.i.d. samples <span class="math inline">\(n_e\)</span> would be equivalent<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> to my <span class="math inline">\(M\)</span> samples obtained from MCMC?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for choices
+Click for hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(\frac{\mathbb{1}[y &lt; x &lt; 5]}{y - 5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}\)</span></li>
-<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; y &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; x &lt; y]}{y}\)</span></li>
-<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}\)</span></li>
-<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; 5]}{5}\)</span></li>
-<li>None of the above</li>
-</ol>
+<p>Apply the following formula, <span class="math inline">\(\operatorname{Var}[a X + b] = a^2 \operatorname{Var}[X]\)</span> to both the CLT for i.i.d. samples, and then the CLT for Markov chains.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We have <span class="math display">\[f_X(x) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5}\]</span> and <span class="math display">\[f_{Y|X}(y|x) =  \frac{\mathbb{1}[0 &lt; y &lt; x]}{x},\]</span> therefore <span class="math display">\[f(x, y) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}.\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Marginal density:</strong> compute the marginal <span class="math inline">\(f_Y(y)\)</span></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(\frac{1}{5} (\log 5 - \log y)\)</span></li>
-<li><span class="math inline">\(\log 5 - \log y\)</span></li>
-<li><span class="math inline">\(\frac{2}{y^2} - \frac{2}{25}\)</span></li>
-<li><span class="math inline">\(\frac{1}{5} \left( \frac{2}{y^2} - \frac{2}{25} \right)\)</span></li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math display">\[\begin{align*}
-f_Y(y) &amp;= \frac{1}{5} \int \frac{ \mathbb{1}[0 &lt; x &lt; 5] \mathbb{1}[0 &lt; y &lt; x]}{x} \mathrm{d}x \\
-&amp;= \frac{1}{5} \int_y^5 \frac{\mathrm{d}x}{x} \\
-&amp;= \frac{1}{5} (\log 5 - \log y).
-\end{align*}\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Posterior density:</strong> from our marginal and Bayes’ theorem, we obtain <span class="math display">\[f_{X|Y}(x|y) = \frac{\mathbb{1}[0&lt;x&lt;5] \mathbb{1}[0 &lt; y &lt; x]}{x (\log 5 - \log y)}.\]</span></p>
-<p><strong>Posterior expectation:</strong> compute <span class="math inline">\(\mathbb{E}[X|Y = 0.06]\)</span></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(1.5\)</span></li>
-<li><span class="math inline">\(\approx 1.23\)</span></li>
-<li><span class="math inline">\(\approx 1.117\)</span></li>
-<li><span class="math inline">\(\approx 0.9714\)</span></li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math display">\[\begin{align*}
-f_{X|Y}(x|y) &amp;= \int_y^5 x f_{X|Y}(x|y) \mathrm{d}x \\
-&amp;= \frac{1}{\log 5 - \log y} \int_y^5 \mathrm{d}x \\
-&amp;= \frac{1}{\log 5 - \log y} (5 - y) \approx 1.117. \\
-\end{align*}\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Comparison with simPPLe
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Compare this to the simPPLe approximation</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $$n_e = \frac{\sigma^2}{\sigma_a^2} M.$$
+1. $$n_e = \frac{\sigma}{\sigma_a} M.$$
+1. $$n_e = \frac{\sigma_a^2}{\sigma^2} M.$$
+1. $$n_e = \frac{\sigma_a}{\sigma} M.$$
+1. None of the above
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+
+CLT for Markov chains gives:
+$$\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,$$
+where $G$ is standard normal. 
+
+Taking the variance on both sides:
+$$M \var[\bar X_\text{Markov}] \approx \sigma_a^2.$$
+
+CLT for i.i.d. gives:
+$$\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G$$
+
+
+Taking the variance on both sides (we could actually bypass the CLT argument and show the equality below directly in the idd case):
+$$n_e \var[\bar X_\text{iid}] \approx \sigma^2.$$
+
+
+
+We have $n_e$ is defined as having the property that $\var[\bar X_\text{iid}] = \var[\bar X_\text{Markov}]$, 
+so after some algebra:
+$$n_e = \frac{\sigma^2}{\sigma_a^2} M.$$
+:::
+
+
+-->
+</section>
+<section id="estimating-the-asymptotic-variance-with-many-chains" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-the-asymptotic-variance-with-many-chains">Estimating the asymptotic variance with many chains</h3>
+<ul>
+<li>There are many ways to estimate the asymptotic variance (see references below).</li>
+<li>We start here with the simplest possible scenario:
+<ul>
+<li>suppose we have <span class="math inline">\(C\)</span> independent chains</li>
+<li>each with <span class="math inline">\(S\)</span> MCMC samples.</li>
+</ul></li>
+<li>Since we have <span class="math inline">\(C\)</span> chains, we get <span class="math inline">\(C\)</span> different Monte Carlo estimators:
+<ul>
+<li><span class="math inline">\(E_1, E_2, \dots, E_C\)</span>.</li>
+<li>Denote also the overall estimator by: <span class="math display">\[E = \frac{1}{C} \sum_{c=1}^C E_c.\]</span></li>
+</ul></li>
+<li>First, by the CLT for Markov chains: for any <span class="math inline">\(c\)</span>, <span id="eq-by-clt"><span class="math display">\[S \operatorname{Var}[E_c] \approx \sigma^2_a. \tag{4}\]</span></span></li>
+<li>Second, since the <span class="math inline">\(E_1, \dots, E_C\)</span> are i.i.d., <span id="eq-by-iid"><span class="math display">\[\operatorname{Var}[E_c] \approx \frac{1}{C} \sum_{c=1}^C (E_c - E)^2. \tag{5}\]</span></span></li>
+</ul>
+<p><strong>Question:</strong> combine <a href="#eq-by-clt" class="quarto-xref">Equation&nbsp;4</a> and <a href="#eq-by-iid" class="quarto-xref">Equation&nbsp;5</a> to obtain an estimator for the asymptotic variance.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $$\sigma_a \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)$$
+2. $$\sigma_a \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)$$
+3. $$\sigma_a^2 \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)$$
+4. $$\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)$$
+5. None of the above
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Combining the two equations, we obtain:
+
+$$\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right).$$
+:::
+
+
+-->
+</section>
+<section id="estimating-the-asymptotic-variance-with-one-chain" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-the-asymptotic-variance-with-one-chain">Estimating the asymptotic variance with one chain</h3>
+<ul>
+<li>View a trace of length <span class="math inline">\(M\)</span> as <span class="math inline">\(C\)</span> subsequent batches of length <span class="math inline">\(S\)</span> for <span class="math inline">\(M = C \cdot S\)</span>.</li>
+<li>Common choice: <span class="math inline">\(C = S = \sqrt{M}\)</span>.</li>
+<li>This is known as the <strong>batch mean</strong> estimator.</li>
+</ul>
+<!--
+clicker on aysmptotic variance
+
+- sigma_a > sigma take into account MC is less/more efficient 
+
+-->
+<!-- ESS -->
+<!-- super efficiency and peskun example -->
+<!-- estimating ESS -->
+</section>
+</section>
+<section id="additional-references" class="level2">
+<h2 class="anchored" data-anchor-id="additional-references">Additional references</h2>
+<ul>
+<li>See <a href="http://www.faculty.ucr.edu/~jflegal/Final_Thesis_twosided.pdf">Flegal, 2008</a> for a nice exposition on the technique described here for estimating the asymptotic variance, known as the batch mean estimator, as well as many other methods for asymptotic variance estimation.</li>
+<li>See <a href="https://arxiv.org/pdf/1512.07713.pdf">Vats et al., 2017</a> for a multivariate generalization of the effective sample size.</li>
+</ul>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Where does “twice” come from? More precisely, it is <span class="math inline">\(1.96\)</span>, which comes from the <a href="../w01_discrete_inference/topic04_pmfs.html#sec-simulate-pmf">quantile function</a> of the normal evaluated at <span class="math inline">\(100\% - 5\%/2\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_scaffold.R"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/sol03_posterior.R"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>doomsday_model <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Unif</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="fl">0.06</span>, <span class="fu">Unif</span>(<span class="dv">0</span>, x))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(doomsday_model, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.025</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.032426</code></pre>
+<pre><code>[1] 1.959964</code></pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-
-
-</section>
-</section>
-
-</main> <!-- /main -->
+<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn2"><p>In this page, <span class="math inline">\(\to\)</span> refers to <a href="https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution">convergence in distribution</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Several different conditions can be used to state the central limit theorem for CLT, see <a href="https://doi.org/10.1214/154957804100000051">Jones, 2004</a> for a review. For example, Corollary 4 in that review can be used since the MH algorithm is <a href="https://en.wikipedia.org/wiki/Detailed_balance">reversible</a> as we will see soon. Corollary 4 requires the following conditions: a finite variance (reasonable, as the CLT for i.i.d. requires this as well), <a href="https://arxiv.org/pdf/2203.04395.pdf">geometric ergodicity</a> (which we discussed in a footnote of <a href="../w09_workflow/topic04_mcmc_diagnostics.html">MCMC diagnostics</a>), and Harris ergodicity, which is more of technical condition that would be covered in a Markov chain course.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Interestingly, the noise can actually be lower! These are called super-efficient Markov chains. Consider for example an MH algorithm over the state space <span class="math inline">\(\{1, 2, 3\}\)</span> that proposes, at each iteration, uniformly over <span class="math inline">\(\{1, 2, 3\}\)</span> <em>while excluding its current position</em>. It can be shown that this algorithm faster than the i.i.d. simple Monte Carlo algorithm.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>By equivalent, we mean: “have the same variance”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

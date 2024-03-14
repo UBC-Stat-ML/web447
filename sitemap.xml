@@ -45,56 +45,60 @@
     <lastmod>2024-03-12T13:59:45.606Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic04_mcmc_diagnostics.html</loc>
-    <lastmod>2024-03-13T04:03:42.021Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic05_mcmc_ess.html</loc>
+    <lastmod>2024-03-14T05:30:41.149Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic03_checking_correctness.html</loc>
     <lastmod>2024-03-12T03:54:48.726Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic03_decision_to_point.html</loc>
-    <lastmod>2024-02-08T14:49:46.314Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic07_calibration_mis_specified.html</loc>
+    <lastmod>2024-02-16T00:23:56.242Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic06_calibration_well_specified.html</loc>
-    <lastmod>2024-02-15T17:12:22.702Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic05_calibration.html</loc>
+    <lastmod>2024-02-08T16:03:54.809Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic02_optimality.html</loc>
-    <lastmod>2024-02-08T14:41:39.566Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic04_decision_to_set.html</loc>
+    <lastmod>2024-02-08T16:01:50.658Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic06_ess.html</loc>
-    <lastmod>2024-02-08T05:16:13.466Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic01_asymptotics.html</loc>
+    <lastmod>2024-02-05T22:07:04.196Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic01_ppls_intro.html</loc>
-    <lastmod>2024-02-15T21:59:38.132Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic04_consistency.html</loc>
+    <lastmod>2024-01-24T14:12:23.725Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic03_continuous.html</loc>
-    <lastmod>2024-01-30T22:39:44.368Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic05_mc_rates.html</loc>
+    <lastmod>2024-02-15T20:49:34.169Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic03_posteriors.html</loc>
-    <lastmod>2024-01-15T00:18:18.075Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic02_snis.html</loc>
+    <lastmod>2024-03-07T17:14:11.914Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic08_criticism.html</loc>
-    <lastmod>2024-01-18T18:56:51.080Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic02_models.html</loc>
+    <lastmod>2024-01-14T22:25:53.960Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic06_decision.html</loc>
-    <lastmod>2024-02-06T03:31:22.967Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic05_credible.html</loc>
+    <lastmod>2024-02-15T14:54:46.018Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic04_point.html</loc>
-    <lastmod>2024-01-16T14:27:12.395Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic07_prediction.html</loc>
+    <lastmod>2024-01-15T23:13:19.405Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch05.html</loc>
-    <lastmod>2024-03-13T03:57:34.558Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic01_bayes_recipe.html</loc>
+    <lastmod>2024-01-23T14:08:10.895Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch04.html</loc>
+    <lastmod>2024-02-15T21:49:21.726Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch03.html</loc>
@@ -237,60 +241,64 @@
     <lastmod>2024-01-16T00:04:51.141Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch04.html</loc>
-    <lastmod>2024-02-15T21:49:21.726Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch06.html</loc>
+    <lastmod>2024-03-13T04:10:21.226Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic01_bayes_recipe.html</loc>
-    <lastmod>2024-01-23T14:08:10.895Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/challenges/ch05.html</loc>
+    <lastmod>2024-03-13T03:57:34.558Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic07_prediction.html</loc>
-    <lastmod>2024-01-15T23:13:19.405Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic04_point.html</loc>
+    <lastmod>2024-01-16T14:27:12.395Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic05_credible.html</loc>
-    <lastmod>2024-02-15T14:54:46.018Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic06_decision.html</loc>
+    <lastmod>2024-02-06T03:31:22.967Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic02_models.html</loc>
-    <lastmod>2024-01-14T22:25:53.960Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic08_criticism.html</loc>
+    <lastmod>2024-01-18T18:56:51.080Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic02_snis.html</loc>
-    <lastmod>2024-03-07T17:14:11.914Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w02_discrete_bayes/topic03_posteriors.html</loc>
+    <lastmod>2024-01-15T00:18:18.075Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic05_mc_rates.html</loc>
-    <lastmod>2024-02-15T20:49:34.169Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic03_continuous.html</loc>
+    <lastmod>2024-01-30T22:39:44.368Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic04_consistency.html</loc>
-    <lastmod>2024-01-24T14:12:23.725Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic01_ppls_intro.html</loc>
+    <lastmod>2024-02-15T21:59:38.132Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic01_asymptotics.html</loc>
-    <lastmod>2024-02-05T22:07:04.196Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w03_ppl/topic06_ess.html</loc>
+    <lastmod>2024-02-08T05:16:13.466Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic04_decision_to_set.html</loc>
-    <lastmod>2024-02-08T16:01:50.658Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic02_optimality.html</loc>
+    <lastmod>2024-02-08T14:41:39.566Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic05_calibration.html</loc>
-    <lastmod>2024-02-08T16:03:54.809Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic06_calibration_well_specified.html</loc>
+    <lastmod>2024-02-15T17:12:22.702Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic07_calibration_mis_specified.html</loc>
-    <lastmod>2024-02-16T00:23:56.242Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic03_decision_to_point.html</loc>
+    <lastmod>2024-02-08T14:49:46.314Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic06_grouped_data.html</loc>
+    <lastmod>2024-03-12T15:03:04.502Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic02_goodness_of_fit.html</loc>
     <lastmod>2024-03-12T14:05:35.162Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic05_grouped_data.html</loc>
-    <lastmod>2024-03-12T15:03:04.502Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic04_mcmc_diagnostics.html</loc>
+    <lastmod>2024-03-13T04:03:42.021Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/exercises/ex02.html</loc>
