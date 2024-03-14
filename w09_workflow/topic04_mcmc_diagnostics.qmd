@@ -10,8 +10,8 @@ editor:
 
 ### Topics
 
-- Heuristics to detect pathological behaviour. 
-- Methods to estimate effective sample size. 
+- Notion of mixing.
+- Heuristics to detect pathological behaviour: 
 
 ### Rationale
 

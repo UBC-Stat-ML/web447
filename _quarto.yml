@@ -52,6 +52,8 @@ website:
           - auto: "w06_hierarchical/*"
           - text: "Exercises"
             file: exercises/ex06.qmd
+          - text: "Challenge"
+            file: challenges/ch06.qmd
       - section: "Quiz 1"
         contents: 
           - auto: "w07_quiz1/*"

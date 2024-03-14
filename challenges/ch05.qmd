@@ -8,8 +8,6 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-{{< include ../_construction.qmd >}}
-
 Consider the following regression model:
 
 ```{r}
@@ -36,6 +34,8 @@ model {
 }
 ```
 
+We now run it on a simple synthetic dataset (note the zeros in the design matrix):
+
 ```{r}
 matrix = rbind(
   c(0.1, 0),
@@ -52,10 +52,12 @@ fit = sampling(
 )
 ```
 
+...and look at the trace plots...
+
 ```{r}
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
 mcmc_trace(fit, pars = c("coefficients[1]", "coefficients[2]")) + theme_minimal()
 ```
 
-
+What is going on with the second coefficient? Would you get a different behaviour if you used i.i.d. samples?

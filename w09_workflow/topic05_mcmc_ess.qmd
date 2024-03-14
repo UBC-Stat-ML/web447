@@ -1,0 +1,243 @@
+---
+title: "Effective sample size"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Markov chain standard error (MCSE)
+- Effective sample size (ESS)
+- Mathematical underpinning: central limit theorem for Markov chains
+
+### Rationale
+
+After running an MCMC chain and 
+[convincing yourself the chain is mixing well](topic04_mcmc_diagnostics.qmd), 
+the next question is: how many digits are reliable when reporting an 
+MCMC approximation (e.g., a posterior mean)?
+
+To answer this question, we will encounter an MCMC version of the notion of
+effective sample size. This is distinct from [SNIS's ESS](../w03_ppl/topic06_ess.qmd) 
+but has the same underlying intuition. 
+
+
+## Context
+
+**Two types of errors** involved in Bayesian analysis based on Monte Carlo 
+(see also: [the two kinds of asymptotics](../w05_properties/topic01_asymptotics.qmd)):
+
+1. **Statistical error**: inherent uncertainty due to e.g., the fact that we have finite data.
+2. **Computational error**: additional error due to the fact that we use an approximation of the posterior instead of the exact posterior.
+
+- This page focuses on the second type of error. 
+- Full picture should include both 
+(i.e., the first step of [this joke](https://xkcd.com/2110/) can be taken seriously).
+- Interestingly, the mathematical toolbox to study 2 is similar to the non-Bayesian toolbox (i.e. normal approximation) for studying 1.
+
+
+### Bayesian statisticians using CLTs?
+
+Earlier on, when building [credible interval](../w05_properties/topic04_decision_to_set.qmd), 
+(a Bayesian measure of *statistical error*)
+we avoided central limit theorems.
+
+**Question:** why are Bayesians OK with using CLTs for MCMC error analysis (i.e., for *computational error*)?
+
+{{< include ../../clickers/w08/_c09.qmd >}} 
+
+## Executive version
+
+**How many digits are reliable?** 
+
+Suppose you are approximating a posterior mean in Stan. 
+We now show how to determine how many digits are reliable:
+
+1. print the `fit` object,
+2. roughly twice[^1] the column `se_mean` provides the radius of a 95% confidence interval.
+
+[^1]: Where does "twice" come from? More precisely, it is $1.96$, which comes 
+    from the [quantile function](../w01_discrete_inference/topic04_pmfs.qmd#sec-simulate-pmf) 
+    of the normal evaluated at $100\% - 5\%/2$:
+    ```{r}
+    qnorm(1-0.025)
+    ```
+
+
+**Example:**
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+```{stan output.var = "doomsday"}
+data { 
+  real y; 
+}
+
+parameters { 
+  real<lower=0, upper=5> x;
+}
+
+model {
+  x ~ uniform(0, 5); 
+  y ~ uniform(0, x); 
+}
+
+```
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  doomsday,         
+  data = list(y = 0.06), 
+  chains = 1,
+  seed = 1,
+  refresh = 0, 
+  iter = 20000
+)
+```
+
+
+```{r}
+fit
+```
+
+**Question:** construct a 95\% confidence interval for the posterior mean of $X$. Is the [true value](../w03_ppl/topic03_continuous.qmd) contained in the interval?
+
+{{< include ../../clickers/w08/_c06.qmd >}}
+
+## Mathematical underpinnings
+
+We answer two questions:
+
+- How can we compute Monte Carlo Standard Errors (MCSE) (i.e., numbers such as in `se_mean`)?
+- What underlying theory justifies that computation?
+
+Along the way we define the notion of Effective Sample Size (ESS) for MCMC.
+
+
+### Background
+
+- Recall the central limit theorem (CLT) for i.i.d. random variables: 
+    - if some random variables $V_i$'s are i.i.d. and
+    - each has finite variance, then we have[^3]
+        $$\sqrt{n}(\bar V - \mu) \to \distNorm(0, \sd[V]),$$ {#eq-clt-iid}
+  where $\bar V = \frac{1}{n} \sum_{i=1}^n V_i$ and $\mu = \ex[V]$. 
+- From the CLT, recall that standard frequentist arguments give:
+  $$\pr(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%,$$ {#eq-ci}
+  where: the Standard Error (SE) is given by  $\text{SE} = \sd[V] / \sqrt{n}$. 
+  
+[^3]: In this page, $\to$ refers to [convergence in distribution](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution). 
+  
+
+### Central limit theorem (CLT) for Markov chains
+
+- We would like to have something like @eq-ci for our MCMC algorithm,
+- however, the samples from MCMC have dependence, they are not i.i.d....
+- ... so we cannot use the above i.i.d. central limit theorem.
+- **But** fortunately there is generalization of the central limit theorem that applies!
+- Namely: The central limit theorem for **Markov chains.**
+
+**Definition:** the random variables $X^{(1)}, X^{(2)}, \dots$ are called a Markov chain 
+    if they admit the following "chain" graphical model.
+    
+::: column-margin
+![](../images/markov.png){width="300"}
+:::
+
+- Here we state a version of the CLT for Markov chains specialized to our situation: 
+    - Let $X^{(1)}, X^{(2)}, \dots$ denote the states visited by an [MH algorithm](../w08_mcmc1/topic04_mh.qmd). 
+    - $\mu = \int x \pi(x) \dee x$ is the quantity we seek to approximate, 
+        - i.e., a posterior mean.
+        - Recall $\pi(x) = \gamma(x) / Z$, where $\gamma(x) = p(x, y)$ and $Z = p(y)$.
+    - Let $\bar X$ denote our MCMC estimator, i.e., the average of the samples.
+    
+**Theorem:** assuming $\sigma^2 = \int (x - \mu)^2 \pi(x) \dee x < \infty$ (in our context: posterior variance is finite) and 
+  under appropriate [fast mixing conditions](topic04_mcmc_diagnostics.qmd),[^4]
+  $$\sqrt{n}(\bar X - \mu) \to \distNorm(0, \sigma_a),$$ {#eq-clt-mc}
+  where the constant $\sigma^2_a > 0$ is known as the **asymptotic variance.**
+  
+[^4]: Several different conditions can be used to state the central limit theorem for Markov chains, 
+  see [Jones, 2004](https://doi.org/10.1214/154957804100000051) for a review. For example, Corollary 4 in that review can be used 
+  since the MH algorithm is [reversible](https://en.wikipedia.org/wiki/Detailed_balance) as we will see soon. 
+  Corollary 4 requires the following conditions: reversibility, a finite variance, $\sigma^2 < \infty$ 
+  (reasonable, as the CLT for i.i.d. requires this as well), 
+  [geometric ergodicity](https://arxiv.org/pdf/2203.04395.pdf) (which we discussed in a footnote of 
+  [MCMC diagnostics](topic04_mcmc_diagnostics.qmd)), and Harris ergodicity, which is more of a technical condition that would be covered in a 
+  Markov chain course.   
+
+
+### Asymptotic variance
+
+**Notice:** there is a difference between the limiting distributions in the i.i.d. and Markov CLTs (@eq-clt-iid and @eq-clt-mc)!
+
+- For i.i.d. CLT: variance of the limiting distribution is equal to the variance of $X_1$. 
+- For Markov CLT: we left the variance of the limiting distribution more vague ($\sigma_a^2$). 
+
+**Intuition:** because of the dependences between MCMC iterations, the noise of the approximation can be larger compared to the 
+  i.i.d. setting.[^5]
+  
+[^5]: Interestingly, the noise can also be lower in certain situations! These are called super-efficient MCMC algorithms. 
+  Consider for example an MH algorithm over the state space $\{1, 2, 3\}$ that proposes, at each iteration, 
+  uniformly over $\{1, 2, 3\}$ *while excluding its current position*. It can be shown that this algorithm 
+  will have lower variance compared to the i.i.d. simple Monte Carlo algorithm. 
+  
+  
+### Effective sample size
+
+The MCMC Effective Sample Size (ESS) is an answer to the following:
+
+**Question:** How many i.i.d. samples $n_e$ would be equivalent[^6] to my $M$ samples obtained from MCMC?
+
+[^6]: By equivalent, we mean: "have the same variance".
+
+::: {.callout-caution collapse="true"} 
+## Click for hint
+
+Apply the following formula, $\var[a X + b] = a^2 \var[X]$ to both the 
+CLT for i.i.d. samples, and then the CLT for Markov chains. 
+:::
+
+{{< include ../../clickers/w08/_c07.qmd >}}
+
+
+### Estimating the asymptotic variance with many chains
+
+- There are many ways to estimate the asymptotic variance (see references below).
+- We start here with the simplest possible scenario:
+    - suppose we have $C$ independent chains 
+    - each with $S$ MCMC samples. 
+- Since we have $C$ chains, we get $C$ different Monte Carlo estimators:
+    - $E_1, E_2, \dots, E_C$.
+    - Denote also the overall estimator by:
+    $$E = \frac{1}{C} \sum_{c=1}^C E_c.$$ 
+- First, by the CLT for Markov chains: for any $c$,
+    $$S \var[E_c] \approx \sigma^2_a.$$ {#eq-by-clt}
+- Second, since the $E_1, \dots, E_C$ are i.i.d.,
+    $$\var[E_c] \approx \frac{1}{C} \sum_{c=1}^C (E_c - E)^2.$$ {#eq-by-iid}
+    
+**Question:** combine @eq-by-clt and @eq-by-iid to obtain an estimator for the asymptotic variance.
+
+{{< include ../../clickers/w08/_c08.qmd >}} 
+
+
+### Estimating the asymptotic variance with one chain
+
+- View a trace of length $M$ as $C$ subsequent batches of length $S$ for $M = C \cdot S$.
+- Common choice: $C = S = \sqrt{M}$. 
+- This is known as the **batch mean** estimator. 
+
+
+
+
+
+## Additional references
+
+- See [Flegal, 2008](http://www.faculty.ucr.edu/~jflegal/Final_Thesis_twosided.pdf) for a nice exposition on the technique described here 
+  for estimating the asymptotic variance, known as the batch mean estimator, as well as many other methods for asymptotic variance estimation. 
+- See [Vats et al., 2017](https://arxiv.org/pdf/1512.07713.pdf) for a multivariate generalization of the effective sample size. 
+

@@ -52,8 +52,13 @@ $\pr(X^{(m)} = x' | X^{(0)} = x) > 0$.
 ## Consistency of MH
 
 **Proposition:** if $\ex_\pi|g(X)| < \infty$, and the chain $X^\parm$ produced by MH is irreducible, then[^2]
-  $$\frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)],$$
-  as $M$ goes to $\infty$. 
+  $$\frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)],$$ {#eq-lln}
+  as the number of MCMC iterations $M$ goes to infinity. 
 
 [^2]: More precisely, let $E = \{x : (X^\parm) \text{ initialized at }x, \frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)]\}$. 
-      Then $\pi(E) = 1$. 
+      Then $\pi(E) = 1$. This is known as Birkhoff's ergodic theorem (combined here with the additional structure that 
+      the sequence is Markovian and irreducible to obtain a deterministic limit). For more information and a proof, 
+      see for example [Douc et al., 2018, Theorem 5.2.1](https://link.springer.com/book/10.1007/978-3-319-97704-1).
+      
+**Note:** the right hand side of @eq-lln does not involve the initial distribution, i.e., the 
+  distribution we use to initialize our MCMC algorithm is eventually "forgotten" when the chain is irreducible. 
