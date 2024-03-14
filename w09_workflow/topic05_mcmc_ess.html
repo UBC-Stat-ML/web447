@@ -831,14 +831,17 @@ https://github.com/trevorcampbell/shortex
 <p>To answer this question, we will encounter an MCMC version of the notion of effective sample size. This is distinct from <a href="../w03_ppl/topic06_ess.html">SNIS’s ESS</a> but has the same underlying intuition.</p>
 </section>
 </section>
-<section id="context" class="level2">
+<section id="context" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="context">Context</h2>
 <p><strong>Two types of errors</strong> involved in Bayesian analysis based on Monte Carlo (see also: <a href="../w05_properties/topic01_asymptotics.html">the two kinds of asymptotics</a>):</p>
 <ol type="1">
 <li><strong>Statistical error</strong>: inherent uncertainty due to e.g., the fact that we have finite data.</li>
 <li><strong>Computational error</strong>: additional error due to the fact that we use an approximation of the posterior instead of the exact posterior.</li>
 </ol>
-<ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="https://imgs.xkcd.com/comics/error_bars.png" class="img-fluid" width="200"></p>
+</div></div><ul>
 <li>This page focuses on the second type of error.</li>
 <li>Full picture should include both (i.e., the first step of <a href="https://xkcd.com/2110/">this joke</a> can be taken seriously).</li>
 <li>Interestingly, the mathematical toolbox to study 2 is similar to the non-Bayesian toolbox (i.e.&nbsp;normal approximation) for studying 1.</li>
