@@ -803,7 +803,8 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="consistency-of-mh" class="level2">
 <h2 class="anchored" data-anchor-id="consistency-of-mh">Consistency of MH</h2>
-<p><strong>Proposition:</strong> if <span class="math inline">\(\mathbb{E}_\pi|g(X)| &lt; \infty\)</span>, and the chain <span class="math inline">\(X^{(m)}\)</span> produced by MH is irreducible, then<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math display">\[\frac{1}{M} \sum_{m=1}^M g(X^{(m)}) \to \mathbb{E}_\pi[g(X)],\]</span> as <span class="math inline">\(M\)</span> goes to <span class="math inline">\(\infty\)</span>.</p>
+<p><strong>Proposition:</strong> if <span class="math inline">\(\mathbb{E}_\pi|g(X)| &lt; \infty\)</span>, and the chain <span class="math inline">\(X^{(m)}\)</span> produced by MH is irreducible, then<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span id="eq-lln"><span class="math display">\[\frac{1}{M} \sum_{m=1}^M g(X^{(m)}) \to \mathbb{E}_\pi[g(X)], \tag{1}\]</span></span> as the number of MCMC iterations <span class="math inline">\(M\)</span> goes to infinity.</p>
+<p><strong>Note:</strong> the right hand side of <a href="#eq-lln" class="quarto-xref">Equation&nbsp;1</a> does not involve the initial distribution, i.e., the distribution we use to initialize our MCMC algorithm is eventually “forgotten” when the chain is irreducible.</p>
 
 
 </section>
@@ -813,7 +814,7 @@ https://github.com/trevorcampbell/shortex
 
 <ol>
 <li id="fn1"><p>For the generalization to continuous state spaces, see e.g., <a href="https://www.stat.umn.edu/geyer/8112/notes/markov.pdf">Geyer’s notes, page 5</a>. In summary, the difficulty in continuous state space is that the probability of reaching an individual “destination point” <span class="math inline">\(x'\)</span> is zero. The solution is the replace the destinations <span class="math inline">\(x'\)</span> by positive probability events.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>More precisely, let <span class="math inline">\(E = \{x : (X^{(m)}) \text{ initialized at }x, \frac{1}{M} \sum_{m=1}^M g(X^{(m)}) \to \mathbb{E}_\pi[g(X)]\}\)</span>. Then <span class="math inline">\(\pi(E) = 1\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>More precisely, let <span class="math inline">\(E = \{x : (X^{(m)}) \text{ initialized at }x, \frac{1}{M} \sum_{m=1}^M g(X^{(m)}) \to \mathbb{E}_\pi[g(X)]\}\)</span>. Then <span class="math inline">\(\pi(E) = 1\)</span>. This is known as Birkhoff’s ergodic theorem (combined here with the additional structure that the sequence is Markovian and irreducible to obtain a deterministic limit). For more information and a proof, see for example <a href="https://link.springer.com/book/10.1007/978-3-319-97704-1">Douc et al., 2018, Theorem 5.2.1</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
