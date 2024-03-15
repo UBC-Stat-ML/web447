@@ -741,6 +741,40 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+ <span class="menu-text">Modelling techniques</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic01_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text">Quiz 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminology review continued</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -820,7 +854,7 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Markov chain standard error (MCSE)</li>
+<li>Monte Carlo standard error (MCSE)</li>
 <li>Effective sample size (ESS)</li>
 <li>Mathematical underpinning: central limit theorem for Markov chains</li>
 </ul>
@@ -893,7 +927,7 @@ Click for answer
 </div>
 </section>
 </section>
-<section id="executive-version" class="level2">
+<section id="executive-version" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="executive-version">Executive version</h2>
 <p><strong>How many digits are reliable?</strong></p>
 <p>Suppose you are approximating a posterior mean in Stan. We now show how to determine how many digits are reliable:</p>
@@ -901,7 +935,7 @@ Click for answer
 <li>print the <code>fit</code> object,</li>
 <li>roughly twice<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> the column <code>se_mean</code> provides the radius of a 95% confidence interval.</li>
 </ol>
-<p><strong>Example:</strong></p>
+<p><strong>Example:</strong> our simple <a href="../w03_ppl/topic03_continuous.html">doomsday model</a>…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -919,7 +953,10 @@ Click for answer
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  y ~ uniform(<span class="dv">0</span>, x); </span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/doomsday.png" class="img-fluid" width="200"></p>
+</div></div><div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  doomsday,         </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>), </span>

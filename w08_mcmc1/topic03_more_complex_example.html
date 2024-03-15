@@ -741,6 +741,40 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+ <span class="menu-text">Modelling techniques</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic01_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text">Quiz 2</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Terminology review continued</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -759,7 +793,7 @@ window.Quarto = {
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#model-mathematical-notation" id="toc-model-mathematical-notation" class="nav-link" data-scroll-target="#model-mathematical-notation">Model (mathematical notation)</a></li>
   <li><a href="#model-in-stan" id="toc-model-in-stan" class="nav-link" data-scroll-target="#model-in-stan">Model (in Stan)</a></li>
-  <li><a href="#improving-our-model-with-generated-parameters" id="toc-improving-our-model-with-generated-parameters" class="nav-link" data-scroll-target="#improving-our-model-with-generated-parameters">Improving our model with generated parameters</a></li>
+  <li><a href="#improving-our-model-with-transformed-parameters" id="toc-improving-our-model-with-transformed-parameters" class="nav-link" data-scroll-target="#improving-our-model-with-transformed-parameters">Improving our model with transformed parameters</a></li>
   <li><a href="#running-mcmc" id="toc-running-mcmc" class="nav-link" data-scroll-target="#running-mcmc">Running MCMC</a></li>
   <li><a href="#posterior-visualization" id="toc-posterior-visualization" class="nav-link" data-scroll-target="#posterior-visualization">Posterior visualization</a></li>
   <li><a href="#model-criticism" id="toc-model-criticism" class="nav-link" data-scroll-target="#model-criticism">Model criticism</a></li>
@@ -902,8 +936,8 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 </div>
 </div>
 </section>
-<section id="improving-our-model-with-generated-parameters" class="level2">
-<h2 class="anchored" data-anchor-id="improving-our-model-with-generated-parameters">Improving our model with generated parameters</h2>
+<section id="improving-our-model-with-transformed-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="improving-our-model-with-transformed-parameters">Improving our model with transformed parameters</h2>
 <ul>
 <li>The code in the last section will not print out <span class="math inline">\(\mu_i\)</span></li>
 <li>The code below shows how to fix this

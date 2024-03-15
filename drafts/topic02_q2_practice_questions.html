@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Optimality</title>
+<title>Bayes1@UBC - Practice questions (Quiz 2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -109,7 +143,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -468,13 +504,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
  <span class="menu-text">Some theory</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
@@ -483,7 +519,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
@@ -754,21 +790,21 @@ window.Quarto = {
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
   <ul class="collapse">
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  <li><a href="#important-note-1" id="toc-important-note-1" class="nav-link" data-scroll-target="#important-note-1">Important note 1</a></li>
+  <li><a href="#important-note-2" id="toc-important-note-2" class="nav-link" data-scroll-target="#important-note-2">Important note 2</a></li>
+  <li><a href="#libraries-needed-to-run-the-example-below" id="toc-libraries-needed-to-run-the-example-below" class="nav-link" data-scroll-target="#libraries-needed-to-run-the-example-below">Libraries needed to run the example below</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#estimator" id="toc-estimator" class="nav-link" data-scroll-target="#estimator">Estimator</a></li>
-  <li><a href="#optimality-motivation" id="toc-optimality-motivation" class="nav-link" data-scroll-target="#optimality-motivation">Optimality: motivation</a></li>
-  <li><a href="#optimality-of-bayesian-estimators-theorem" id="toc-optimality-of-bayesian-estimators-theorem" class="nav-link" data-scroll-target="#optimality-of-bayesian-estimators-theorem">Optimality of Bayesian estimators: theorem</a></li>
+  <li><a href="#stan-based-prediction" id="toc-stan-based-prediction" class="nav-link" data-scroll-target="#stan-based-prediction">Stan-based prediction</a></li>
+  <li><a href="#computing-monte-carlo-confidence-intervals" id="toc-computing-monte-carlo-confidence-intervals" class="nav-link" data-scroll-target="#computing-monte-carlo-confidence-intervals">Computing Monte Carlo confidence intervals</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Optimality</h1>
+<h1 class="title">Practice questions (Quiz 2)</h1>
 </div>
 
 
@@ -809,59 +845,50 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Average loss optimality of Bayes estimators</li>
-<li>Limitations of this notion of optimality.</li>
+<li>Representative example of questions to prep for Quiz 2.</li>
 </ul>
 </section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Formalize and justify one of the motivations for Bayesian methods covered in the <a href="../w00_intro/topic01_why.html">first lecture</a>.</p>
+<section id="important-note-1" class="level3">
+<h3 class="anchored" data-anchor-id="important-note-1">Important note 1</h3>
+<p>The quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.</p>
+<p>But try to answer before looking at the possible choices to get a more realistic practice!</p>
+</section>
+<section id="important-note-2" class="level3">
+<h3 class="anchored" data-anchor-id="important-note-2">Important note 2</h3>
+<p>Also make sure to practice the <a href="../w07_quiz1/topic02_practice_questions.html">similar page for Quiz 1</a> since quiz 2 will cover that material as well.</p>
+</section>
+<section id="libraries-needed-to-run-the-example-below" class="level3">
+<h3 class="anchored" data-anchor-id="libraries-needed-to-run-the-example-below">Libraries needed to run the example below</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We go back to the <a href="../w02_discrete_bayes/topic06_decision.html">decision theoretic setup from week 2</a>.</p>
-</section>
-<section id="estimator" class="level2">
-<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
-<p><strong>Definition:</strong> an estimator is a function <span class="math inline">\(\delta\)</span> such that:</p>
-<ul>
-<li><span class="math inline">\(\delta\)</span> takes a dataset <span class="math inline">\(y\)</span> as input (i.e.&nbsp;the observations), <span class="math inline">\(\delta(y)\)</span>, and</li>
-<li>returns an action, i.e., <span class="math inline">\(\delta(y) \in A\)</span>.</li>
-</ul>
-<p><strong>Examples:</strong></p>
-<ul>
-<li><a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a>,</li>
-<li>maximum likelihood estimator (when the action is a parameter you are trying to estimate).</li>
-</ul>
-</section>
-<section id="optimality-motivation" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-motivation">Optimality: motivation</h2>
-<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explains they did the following:</p>
-<ul>
-<li>Let:
-<ul>
-<li><span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and</li>
-<li><span class="math inline">\(\delta_{\text{o}}\)</span>, another estimator, say based on a sophisticated deep neural network.</li>
-</ul></li>
-<li>To compare the two estimators, the presenter generated a large number of synthetic datasets <span class="math inline">\((X^{(m)}, Y^{(m)})\)</span> by <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation from the model.</a></li>
-<li>They evaluated the performance of the Bayes estimator as follows:
-<ul>
-<li>apply the estimator: <span class="math inline">\(a^{(m)}= \delta_{\text{B}}(Y^{(m)})\)</span>,</li>
-<li>compute the loss: <span class="math inline">\(l^{(m)}= L(a^{(m)}, X^{(m)})\)</span>, and</li>
-<li>return the average loss as the measure of performance: <span class="math display">\[\text{average loss} = \frac{1}{M} \sum l^{(m)}.\]</span></li>
-</ul></li>
-<li>Then, they did the same with the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span>.</li>
-<li>Suppose that the presenter reported a lower average loss for the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span></li>
-</ul>
-<p><strong>Poll:</strong> Which of these statements is true?</p>
-<ol type="1">
-<li>The deep neural network can perform better because it involves more parameters (over-parameterization)</li>
-<li>The deep neural network can perform better because of a combination of lucky initialization and noisy gradients</li>
-<li>The deep neural network can perform better because of some other reason</li>
-<li>This cannot happen unless the loss function is non-convex</li>
-<li>This cannot happen because of some other reason</li>
-</ol>
+<section id="stan-based-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="stan-based-prediction">Stan-based prediction</h2>
+<p>Consider the code you wrote in <a href="../exercises/ex07.html">Exercise 7</a> to perform Bayesian linear regression on galaxy distances and velocities:</p>
+<div class="cell" data-output.var="hubble_basic">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// number of observations</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] xs;   <span class="co">// independent variable</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] ys;   <span class="co">// dependent variable</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  slope     ~ student_t(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  sigma     ~ exponential(<span class="fl">0.001</span>);</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  ys ~ normal(slope*xs, sigma);</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How would you modify this code to predict the velocity of a galaxy at distance 1.5?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -874,51 +901,142 @@ Click for answer
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Correct answer is: “This cannot happen because of some other reason.”</p>
-<p><strong>Intuition:</strong> Bayes estimator is designed to minimize the average loss. So you cannot beat Bayes at its game!</p>
+<div class="cell" data-output.var="hubble_predictions">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// number of observations</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] xs;   <span class="co">// independent variable</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] ys;   <span class="co">// dependent variable</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  slope     ~ student_t(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  sigma     ~ exponential(<span class="fl">0.001</span>);</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  ys ~ normal(slope*xs, sigma);</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> prediction = normal_rng(slope*<span class="fl">1.5</span>, sigma);</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">distance =</span> R..Mpc.) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">velocity =</span> v..km.sec.)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">=</span> df<span class="sc">$</span>velocity<span class="sc">/</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Run the above program using stan</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  hubble_predictions,         </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">xs =</span> df<span class="sc">$</span>distance, <span class="at">ys =</span> df<span class="sc">$</span>velocity, <span class="at">N =</span> <span class="fu">length</span>(df<span class="sc">$</span>distance)), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_messages =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">open_progress =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">2000</span>       </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
+1 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=1000.
+
+            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1
+sigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1
+prediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1
+lp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="optimality-of-bayesian-estimators-theorem" class="level1">
-<h1>Optimality of Bayesian estimators: theorem</h1>
-<p><strong>Theorem:</strong> let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, any other estimator. Then: <span id="eq-opt"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)]. \tag{1}\]</span></span></p>
-<p><strong>Proof:</strong> by the law of total expectation, we can rewrite the left hand side of <a href="#eq-opt" class="quarto-xref">Equation&nbsp;1</a> as: <span id="eq-lte"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] = \mathbb{E}[ {\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]}]. \tag{2}\]</span></span> We will start by rewriting the part in red.</p>
-<p>To do so, denote the objective being minimized in <a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a> by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
-<p>Note: by definition, we can rewrite our Bayes estimator by: <span class="math display">\[\delta_{\text{B}}= \operatorname{arg\,min}_a \mathcal{O}(a),\]</span> and hence: <span id="eq-rewrite"><span class="math display">\[{\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]} = \mathcal{O}(\delta_{\text{B}}) = \mathcal{O}(\operatorname{arg\,min}_a \mathcal{O}(a)). \tag{3}\]</span></span> Plugging-in <a href="#eq-rewrite" class="quarto-xref">Equation&nbsp;3</a> into <a href="#eq-lte" class="quarto-xref">Equation&nbsp;2</a>, we get:</p>
-<p><span class="math display">\[\mathbb{E}[ \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]] = \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))].\]</span></p>
-<p>Now note that for all <span class="math inline">\(a' \in A\)</span>, <span class="math inline">\(\mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a)) \le \mathcal{O}(a')\)</span>, in particular, this is true for <span class="math inline">\(a' = \delta_{\text{o}}(y)\)</span>, hence:</p>
-<p><span class="math display">\[
-\begin{align*}
-\mathbb{E}[L(\delta_{\text{B}}(Y), X)] &amp;= \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))] \\
-&amp;\le \mathbb{E}[ \mathcal{O}( \delta_{\text{o}}(Y))] \\
-&amp;= \mathbb{E}[L(\delta_{\text{o}}(Y), X)].
-\end{align*}
-\]</span></p>
-<p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
+<section id="computing-monte-carlo-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="computing-monte-carlo-confidence-intervals">Computing Monte Carlo confidence intervals</h2>
+<p>Suppose you see the following output from a Stan MCMC fit object:</p>
+<pre><code>Inference for Stan model: anon_model.
+1 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=1000.
+
+            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1
+sigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1
+prediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1
+lp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+<p>Report a 80% confidence interval for the posterior mean of the <code>prediction</code> parameter.</p>
+<p>Some of the following will be helpful in answering that question:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8416212</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.281552</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for possible answers
+Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A key factor to take into account:</p>
-<ul>
-<li>If the estimator <span class="math inline">\(\delta_{\text{B}}\)</span> is based on an approximation of the posterior (e.g.&nbsp;SNIS), then the optimality property may not hold!</li>
-</ul>
-<p>Some other more “practical” factors to keep in mind:</p>
-<ul>
-<li>Software defects (more frequent than you may think—we will talk more about them later).</li>
-<li><a href="https://en.wikipedia.org/wiki/Publication_bias">Publication bias</a> or even, academic dishonesty (e.g.&nbsp;repeating simulation until a desired result is obtained).</li>
-</ul>
-<p>Also, keep in mind this page implicitly assumes the model is well-specified (since we generate data from the joint distribution). The situation is more complex in mis-specified models (asymptotics becomes critical in that case).</p>
+<p>We need to split the <span class="math inline">\(1-20\%\)</span> into the two tails, hence we are looking for the 10% tail.</p>
+<p>The radius of the interval is therefore:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.01</span> <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01281552</code></pre>
 </div>
+</div>
+<p>Hence the interval is <span class="math inline">\([0.64 \pm 0.01]\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Questions from week 10 is also included in the material covered in the quiz but is not included in this list.</p>
 </div>
 </div>
 

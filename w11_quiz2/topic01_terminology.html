@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Optimality</title>
+<title>Bayes1@UBC - Terminology review continued</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Quiz 2</a></li><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Terminology review continued</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -468,13 +468,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
  <span class="menu-text">Some theory</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w05_properties/topic01_asymptotics.html" class="sidebar-item-text sidebar-link">
@@ -483,7 +483,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w05_properties/topic02_optimality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimality</span></a>
   </div>
 </li>
@@ -726,16 +726,16 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
  <span class="menu-text">Quiz 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link">
+  <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Terminology review continued</span></a>
   </div>
 </li>
@@ -756,19 +756,23 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#estimator" id="toc-estimator" class="nav-link" data-scroll-target="#estimator">Estimator</a></li>
-  <li><a href="#optimality-motivation" id="toc-optimality-motivation" class="nav-link" data-scroll-target="#optimality-motivation">Optimality: motivation</a></li>
-  <li><a href="#optimality-of-bayesian-estimators-theorem" id="toc-optimality-of-bayesian-estimators-theorem" class="nav-link" data-scroll-target="#optimality-of-bayesian-estimators-theorem">Optimality of Bayesian estimators: theorem</a></li>
+  <li><a href="#general-mcmc-terms" id="toc-general-mcmc-terms" class="nav-link" data-scroll-target="#general-mcmc-terms">General MCMC terms</a></li>
+  <li><a href="#stan-terminology" id="toc-stan-terminology" class="nav-link" data-scroll-target="#stan-terminology">Stan terminology</a></li>
+  <li><a href="#metropolis-hastings" id="toc-metropolis-hastings" class="nav-link" data-scroll-target="#metropolis-hastings">Metropolis-Hastings</a></li>
+  <li><a href="#mcmc-plots" id="toc-mcmc-plots" class="nav-link" data-scroll-target="#mcmc-plots">MCMC plots</a></li>
+  <li><a href="#basic-mcmc-theory" id="toc-basic-mcmc-theory" class="nav-link" data-scroll-target="#basic-mcmc-theory">Basic MCMC theory</a></li>
+  <li><a href="#notion-of-unidentifiability" id="toc-notion-of-unidentifiability" class="nav-link" data-scroll-target="#notion-of-unidentifiability">Notion of unidentifiability</a></li>
+  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit">Goodness-of-fit</a></li>
+  <li><a href="#monte-carlo-standard-error-mcse" id="toc-monte-carlo-standard-error-mcse" class="nav-link" data-scroll-target="#monte-carlo-standard-error-mcse">Monte Carlo Standard Error (MCSE)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w05_properties/topic01_asymptotics.html">Some theory</a></li><li class="breadcrumb-item"><a href="../w05_properties/topic02_optimality.html">Optimality</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Quiz 2</a></li><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Terminology review continued</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Optimality</h1>
+<h1 class="title">Terminology review continued</h1>
 </div>
 
 
@@ -809,116 +813,103 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Average loss optimality of Bayes estimators</li>
-<li>Limitations of this notion of optimality.</li>
+<li>Review additional terminology covered since Quiz 1.</li>
+<li>Also make sure to review the <a href="../w07_quiz1/topic01_terminology.html">terminology before quiz 1</a>.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Formalize and justify one of the motivations for Bayesian methods covered in the <a href="../w00_intro/topic01_why.html">first lecture</a>.</p>
+<p>Just as for quiz 1, part of quiz 2 involves knowing these terms without having to look them up.</p>
+<p>While in “the real world” you can look things up, to attain mastery of a subject you need a critical mass of concepts in memory. Too much google look-ups prevent thinking at the speed of thought.</p>
 </section>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We go back to the <a href="../w02_discrete_bayes/topic06_decision.html">decision theoretic setup from week 2</a>.</p>
-</section>
-<section id="estimator" class="level2">
-<h2 class="anchored" data-anchor-id="estimator">Estimator</h2>
-<p><strong>Definition:</strong> an estimator is a function <span class="math inline">\(\delta\)</span> such that:</p>
+<section id="general-mcmc-terms" class="level2">
+<h2 class="anchored" data-anchor-id="general-mcmc-terms">General MCMC terms</h2>
 <ul>
-<li><span class="math inline">\(\delta\)</span> takes a dataset <span class="math inline">\(y\)</span> as input (i.e.&nbsp;the observations), <span class="math inline">\(\delta(y)\)</span>, and</li>
-<li>returns an action, i.e., <span class="math inline">\(\delta(y) \in A\)</span>.</li>
-</ul>
-<p><strong>Examples:</strong></p>
-<ul>
-<li><a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a>,</li>
-<li>maximum likelihood estimator (when the action is a parameter you are trying to estimate).</li>
+<li>Markov chain Monte Carlo (MCMC)</li>
+<li>Contrasting advantages and disadvantages of MCMC vs SNIS</li>
 </ul>
 </section>
-<section id="optimality-motivation" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-motivation">Optimality: motivation</h2>
-<p><strong>Consider the following situation</strong>—you are watching a talk, where the presenter explains they did the following:</p>
+<section id="stan-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="stan-terminology">Stan terminology</h2>
 <ul>
-<li>Let:
+<li>Differentiating between Stan and R code</li>
+<li>“data block”</li>
+<li>“parameters block”</li>
+<li>“model block”</li>
+<li>“transformed parameters block”</li>
+<li>“generated quantities block”</li>
+</ul>
+</section>
+<section id="metropolis-hastings" class="level2">
+<h2 class="anchored" data-anchor-id="metropolis-hastings">Metropolis-Hastings</h2>
 <ul>
-<li><span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and</li>
-<li><span class="math inline">\(\delta_{\text{o}}\)</span>, another estimator, say based on a sophisticated deep neural network.</li>
+<li>MH</li>
+<li>Proposal (and contrasting it with SNIS’s proposal)</li>
+<li>Symmetric proposal</li>
+<li>Test function <span class="math inline">\(g\)</span></li>
+<li>Target <span class="math inline">\(\pi\)</span></li>
+<li>Un-normalized target <span class="math inline">\(\gamma\)</span></li>
+<li>Normalization constant <span class="math inline">\(Z\)</span></li>
+<li>Notion of acceptance and rejection
+<ul>
+<li>What happens in each case</li>
+<li>MH ratio (memorize that equation)</li>
+<li>Acceptance probability</li>
 </ul></li>
-<li>To compare the two estimators, the presenter generated a large number of synthetic datasets <span class="math inline">\((X^{(m)}, Y^{(m)})\)</span> by <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation from the model.</a></li>
-<li>They evaluated the performance of the Bayes estimator as follows:
-<ul>
-<li>apply the estimator: <span class="math inline">\(a^{(m)}= \delta_{\text{B}}(Y^{(m)})\)</span>,</li>
-<li>compute the loss: <span class="math inline">\(l^{(m)}= L(a^{(m)}, X^{(m)})\)</span>, and</li>
-<li>return the average loss as the measure of performance: <span class="math display">\[\text{average loss} = \frac{1}{M} \sum l^{(m)}.\]</span></li>
-</ul></li>
-<li>Then, they did the same with the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span>.</li>
-<li>Suppose that the presenter reported a lower average loss for the other estimator, <span class="math inline">\(\delta_{\text{o}}\)</span></li>
 </ul>
-<p><strong>Poll:</strong> Which of these statements is true?</p>
-<ol type="1">
-<li>The deep neural network can perform better because it involves more parameters (over-parameterization)</li>
-<li>The deep neural network can perform better because of a combination of lucky initialization and noisy gradients</li>
-<li>The deep neural network can perform better because of some other reason</li>
-<li>This cannot happen unless the loss function is non-convex</li>
-<li>This cannot happen because of some other reason</li>
-</ol>
+</section>
+<section id="mcmc-plots" class="level2">
+<h2 class="anchored" data-anchor-id="mcmc-plots">MCMC plots</h2>
+<ul>
+<li>Trace plot</li>
+<li>Posterior histogram</li>
+<li>Rank plot</li>
+</ul>
+</section>
+<section id="basic-mcmc-theory" class="level2">
+<h2 class="anchored" data-anchor-id="basic-mcmc-theory">Basic MCMC theory</h2>
+<ul>
+<li>Consistency of MCMC</li>
+<li>Irreducibility</li>
+<li>Mixing (informal definition is OK)</li>
+</ul>
+</section>
+<section id="notion-of-unidentifiability" class="level2">
+<h2 class="anchored" data-anchor-id="notion-of-unidentifiability">Notion of unidentifiability</h2>
+<ul>
+<li>Informal definition</li>
+<li>Writing an example model</li>
+</ul>
+</section>
+<section id="goodness-of-fit" class="level2">
+<h2 class="anchored" data-anchor-id="goodness-of-fit">Goodness-of-fit</h2>
+<ul>
+<li>Goodness-of-fit</li>
+<li>Posterior predictive check</li>
+</ul>
+</section>
+<section id="monte-carlo-standard-error-mcse" class="level2">
+<h2 class="anchored" data-anchor-id="monte-carlo-standard-error-mcse">Monte Carlo Standard Error (MCSE)</h2>
+<ul>
+<li>MCSE</li>
+<li>Effective sample size (ESS)</li>
+<li>Central Limit Theorem (CLT) for IID: writing the result and assumptions formally.</li>
+<li>Central Limit Theorem (CLT) for Markov chain: writing the result formally and stating at least informally the conditions.</li>
+<li>Asymptotic variance</li>
+<li>Batch mean estimator</li>
+</ul>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for answer
+Caution
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Correct answer is: “This cannot happen because of some other reason.”</p>
-<p><strong>Intuition:</strong> Bayes estimator is designed to minimize the average loss. So you cannot beat Bayes at its game!</p>
-</div>
-</div>
-</div>
-</section>
-<section id="optimality-of-bayesian-estimators-theorem" class="level1">
-<h1>Optimality of Bayesian estimators: theorem</h1>
-<p><strong>Theorem:</strong> let <span class="math inline">\(\delta_{\text{B}}\)</span> denote the Bayes estimator, and <span class="math inline">\(\delta_{\text{o}}\)</span>, any other estimator. Then: <span id="eq-opt"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] \le \mathbb{E}[L(\delta_{\text{o}}(Y), X)]. \tag{1}\]</span></span></p>
-<p><strong>Proof:</strong> by the law of total expectation, we can rewrite the left hand side of <a href="#eq-opt" class="quarto-xref">Equation&nbsp;1</a> as: <span id="eq-lte"><span class="math display">\[\mathbb{E}[L(\delta_{\text{B}}(Y), X)] = \mathbb{E}[ {\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]}]. \tag{2}\]</span></span> We will start by rewriting the part in red.</p>
-<p>To do so, denote the objective being minimized in <a href="../w02_discrete_bayes/topic06_decision.html#sec-bayes-est">the Bayes estimator</a> by: <span class="math display">\[\mathcal{O}(a) = \mathbb{E}[L(a, X) | Y].\]</span></p>
-<p>Note: by definition, we can rewrite our Bayes estimator by: <span class="math display">\[\delta_{\text{B}}= \operatorname{arg\,min}_a \mathcal{O}(a),\]</span> and hence: <span id="eq-rewrite"><span class="math display">\[{\color{red} \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]} = \mathcal{O}(\delta_{\text{B}}) = \mathcal{O}(\operatorname{arg\,min}_a \mathcal{O}(a)). \tag{3}\]</span></span> Plugging-in <a href="#eq-rewrite" class="quarto-xref">Equation&nbsp;3</a> into <a href="#eq-lte" class="quarto-xref">Equation&nbsp;2</a>, we get:</p>
-<p><span class="math display">\[\mathbb{E}[ \mathbb{E}[L(\delta_{\text{B}}(Y), X) | Y]] = \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))].\]</span></p>
-<p>Now note that for all <span class="math inline">\(a' \in A\)</span>, <span class="math inline">\(\mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a)) \le \mathcal{O}(a')\)</span>, in particular, this is true for <span class="math inline">\(a' = \delta_{\text{o}}(y)\)</span>, hence:</p>
-<p><span class="math display">\[
-\begin{align*}
-\mathbb{E}[L(\delta_{\text{B}}(Y), X)] &amp;= \mathbb{E}[ \mathcal{O}( \operatorname{arg\,min}_a \mathcal{O}(a))] \\
-&amp;\le \mathbb{E}[ \mathcal{O}( \delta_{\text{o}}(Y))] \\
-&amp;= \mathbb{E}[L(\delta_{\text{o}}(Y), X)].
-\end{align*}
-\]</span></p>
-<p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for possible answers
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A key factor to take into account:</p>
-<ul>
-<li>If the estimator <span class="math inline">\(\delta_{\text{B}}\)</span> is based on an approximation of the posterior (e.g.&nbsp;SNIS), then the optimality property may not hold!</li>
-</ul>
-<p>Some other more “practical” factors to keep in mind:</p>
-<ul>
-<li>Software defects (more frequent than you may think—we will talk more about them later).</li>
-<li><a href="https://en.wikipedia.org/wiki/Publication_bias">Publication bias</a> or even, academic dishonesty (e.g.&nbsp;repeating simulation until a desired result is obtained).</li>
-</ul>
-<p>Also, keep in mind this page implicitly assumes the model is well-specified (since we generate data from the joint distribution). The situation is more complex in mis-specified models (asymptotics becomes critical in that case).</p>
-</div>
+<p>Notation from week 10 is also included in the material covered in the quiz but is not included in this list.</p>
 </div>
 </div>
 
