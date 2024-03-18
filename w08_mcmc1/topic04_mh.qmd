@@ -64,7 +64,7 @@ specifying a **query.**
 -   Let's say you want to approximate $\pr(X = 1 | Y = y)$...
     -   ...what function $g(x)$ would you take?
     
-{{< include ../../clickers/w07/_c03.qmd >}}    
+{{< include ../../clickers/w08/_c03.qmd >}}    
   
 
 ## MH's extra ingredient: the proposal
@@ -159,7 +159,7 @@ plot(samples[1:100],
 
 **Question:** Notice that many points take exactly the same value, why is that?
 
-{{< include ../../clickers/w07/_c04.qmd >}}
+{{< include ../../clickers/w08/_c04.qmd >}}
 
 
 **Terminology:** the above plot (sample as a function of MCMC iteration) is called a **trace plot.**

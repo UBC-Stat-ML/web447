@@ -13,6 +13,7 @@ editor:
 
 - denoted by $p$ (not to be confused by $\pr$),
 - defined by: $$p(x) = \pr(X = x).$$
+- Terminology: $\{x : p(x) > 0\}$ is called the **support**.
 - If there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,
     - $p_X$ for the PMF of the latent random variable,
     - $p_Y$ for the PMF of the observed random variable.

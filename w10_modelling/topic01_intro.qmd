@@ -21,3 +21,8 @@ editor:
     - creating your own building blocks (i.e., custom distributions),
     - more examples of using simple building blocks to construct complex things (mixtures).
 
+
+
+![](../images/hmm.png){width="400"}
+![](../images/gm-lego.png){width="400"}
+

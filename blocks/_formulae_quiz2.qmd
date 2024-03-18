@@ -15,4 +15,3 @@
 | Categorical         | $\distCat(p_1, \dots, p_K)$           | Probabilities $p_k > 0$, $\sum_k p_k = 1$                          |
 | Dirichlet           | $\distDir(\alpha_1, \dots, \alpha_K)$ | Concentrations $\alpha_i > 0$                                      |
 | Multivariate Normal | $\distNorm(\mu, \Sigma)$              | Mean vector $\mu \in \reals^K$, covariance matrix $\Sigma \succ 0$ |
-| LKJ                 | $\distLKJ(\eta)$                      | Shape $\eta > 0$                                                   |

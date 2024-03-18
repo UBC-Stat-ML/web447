@@ -45,7 +45,7 @@ To understand today's material we need to review the notion of
 3. only approximately calibrated for both small and large data
 4. none of the above
 
-{{< include ../../clickers/w08/_c01.qmd >}}
+{{< include ../../clickers/w09/_c01.qmd >}}
 
 
 ## From calibration to goodness-of-fit
@@ -55,7 +55,7 @@ To understand today's material we need to review the notion of
 1. Yes
 2. No
 
-{{< include ../../clickers/w08/_c02.qmd >}}
+{{< include ../../clickers/w09/_c02.qmd >}}
 
 
 ### Review: prediction 
@@ -72,7 +72,7 @@ To understand today's material we need to review the notion of
 1. Yes
 2. No
 
-{{< include ../../clickers/w08/_c03.qmd >}}
+{{< include ../../clickers/w09/_c03.qmd >}}
 
 
 ### Posterior predictive check
@@ -96,4 +96,4 @@ c. MCMC too slow and/or not enough samples.
 d. Bad luck. 
 e. Software defect.
 
-{{< include ../../clickers/w08/_c04.qmd >}}
+{{< include ../../clickers/w09/_c04.qmd >}}

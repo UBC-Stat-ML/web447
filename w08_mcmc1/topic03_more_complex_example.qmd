@@ -200,4 +200,4 @@ for (i in 1:n_samples) {
 
 What are potential weakness(es) of the model?
 
-{{< include ../../clickers/w07/_c02.qmd >}}
+{{< include ../../clickers/w08/_c02.qmd >}}

@@ -32,7 +32,7 @@ statistical literature.
 **Question:** how can we modify [last page's check](topic02_goodness_of_fit.qmd) 
 to exclude "model mis-specification" as a potential cause?
 
-{{< include ../../clickers/w08/_c05.qmd >}}
+{{< include ../../clickers/w09/_c05.qmd >}}
 
 
 ## Additional references

@@ -1,0 +1,544 @@
+---
+title: "Practice questions (Quiz 2)"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   Representative example of questions to prep for Quiz 2.
+
+
+### Important note 1
+
+
+The quiz will not focus on multiple choice questions---we use mostly multiple choice in this page just 
+to make it easier to pace the questions during the lecture.
+
+But try to answer before looking at the possible choices to get a more realistic practice!
+
+
+### Important note 2
+
+Also make sure to practice the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
+since quiz 2 will cover that material as well. 
+
+
+### Libraries needed to run the example below
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+
+
+
+## Bias and consistency
+
+Let $\hat G_M$ denote a Monte Carlo estimator based on $M$ iterations, providing 
+an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$. 
+
+1. Define the notion of bias. 
+2. Define the notion of consistency. 
+3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. $\bias(\hat G_M, g^*) = \ex[\hat G_M] - g^*$. 
+2. $\hat G_M \to g^*$.[^1]
+3. Consistency is more important. Consistency means that the error decreases as $M$ increases. 
+    In contrast, even if a method is unbiased, it still leads to error due to its variance. 
+:::
+
+[^1]: Where convergence is either almost sure (strong consistency), or in probability (weak consistency).
+
+
+
+## Model construction
+
+Consider the following setup
+
+- You have a cohort of 15 unemployed persons who are all starting a job search process at the same time. 
+- For each participant, you have collected 2 covariates: their age and their number of years of education. 
+- You contact the participants each day for 10 days and record the day they secured a new job.
+- At the end of your study, 3 of the participants are still looking for a job. 
+
+### Using the `~` notation
+
+Define a Bayesian model to handle this dataset. Introduce all random variables, and specify 
+for each its data type, if it observed or not.
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+The random variables are:
+
+- Let $y_1, y_2, \dots, y_{12}$ denote the job search times for the 12 participants who found a job 
+    in the study interval (10 days). These variables are observed. 
+- Let $y_{13}, y_{14}, y_{15}$ denote the job search times for the other 3 participants. These variables are latent.
+- Let $f_i$ denote an indicator variable equal to one iff participant $i$ found a job in the 10 days period, $i \in \{1, 2, \dots, 15\}$. 
+    These variables are observed. 
+- Let $x_{i,j}$, $i \in \{1, 2, \dots, 15\}, j \in \{1, 2\}$ denote the age ($j=1$) or years of education ($j=2$) for participant $i$. 
+    These variables are observed. 
+- Set $x_{i,0} = 1$ to simplify the notation for the intercept. 
+- Let $\theta_0$ denote and intercept parameter, $\theta_1, \theta_2$, slope parameters for the age and number of years of education. 
+    These variables are latent.
+
+One potential model is:
+\begin{align*}
+\theta_j &\sim \distNorm(0, 100), \\
+\phi &\sim \distExp(1/100), \\
+\mu_i &= \exp\left(\sum_{j=0}^3 x_{i,j} \theta_j\right) \\
+y_i &\sim \distNB\left(\mu_i, \phi\right), \\
+f_i &= \ind[y_i < 10].
+\end{align*}
+:::
+
+
+### Rao-blackwellization
+
+Write the joint density of the model in the last part, before and after Rao-Blackwellization.
+You can introduce symbols for densities and CDFs, for example leave the density of the 
+exponential as $p_\text{Exp}(x; \lambda),$ and similarly use $F_\text{Name}(\cdot; \cdot)$ 
+to denote CDFs. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Before Rao-Blackwellization, we have:
+
+\begin{align*}
+p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) = \\
+&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+&\left( \prod_{i=1}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right).
+\end{align*}
+
+Rao-Blackwellizing the above:
+\begin{align*}
+\int \int \int p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) \dee y_{13} \dee y_{14} \dee y_{15} = \\
+&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+&\left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
+& \int \int \int \left( \prod_{i=13}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \dee y_{13} \dee y_{14} \dee y_{15} \\
+=&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+& \left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
+&   \prod_{i=13}^{15} \left( 1 - F_\text{NB}\left(10; \mu_i, \phi\right)  \right).
+\end{align*}
+
+:::
+
+
+## Stan-based prediction
+
+Consider the code you wrote in [Exercise 7](../exercises/ex07.qmd) to 
+perform Bayesian linear regression on galaxy distances and velocities:
+
+
+```{stan output.var = "hubble_basic"}
+data {
+  int<lower=0> N; // number of observations
+  vector[N] xs;   // independent variable
+  vector[N] ys;   // dependent variable
+}
+
+parameters {
+  real slope;
+  real<lower=0> sigma;
+}
+
+model {
+  // prior
+  slope     ~ student_t(3, 0, 100);
+  sigma     ~ exponential(0.001);
+
+  // likelihood
+  ys ~ normal(slope*xs, sigma);
+}
+```
+
+How would you modify this code to predict the velocity of a galaxy at distance 1.5? 
+Hint: use the function `normal_rng(mean, sd)` to generate a normal random variable 
+with the provided mean and standard deviation parameters. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+```{stan output.var = "hubble_predictions"}
+data {
+  int<lower=0> N; // number of observations
+  vector[N] xs;   // independent variable
+  vector[N] ys;   // dependent variable
+}
+
+parameters {
+  real slope;
+  real<lower=0> sigma;
+}
+
+model {
+  // prior
+  slope     ~ student_t(3, 0, 100);
+  sigma     ~ exponential(0.001);
+
+  // likelihood
+  ys ~ normal(slope*xs, sigma);
+}
+
+generated quantities {
+  real prediction = normal_rng(slope*1.5, sigma);
+}
+```
+
+```{r}
+#| file: ../exercises/ex07_import_hubble.R
+```
+
+Run the above program using (the part below you are **not** expected to memorize):
+
+```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
+fit = sampling(
+  hubble_predictions,         
+  data = list(xs = df$distance, ys = df$velocity, N = length(df$distance)), 
+  show_messages = FALSE,
+  open_progress = FALSE, 
+  chains = 1,
+  iter = 2000       
+)
+```
+
+```{r}
+fit
+```
+:::
+
+
+## Intervals
+
+Suppose you see the following output from a Stan MCMC fit object:
+
+```
+Inference for Stan model: anon_model.
+1 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=1000.
+
+            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1
+sigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1
+prediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1
+lp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+```
+
+1. Report a 80% confidence interval to capture the Monte Carlo error for the posterior mean of the `prediction` parameter. 
+
+Some of the following will be helpful in answering that question:
+
+```{r}
+qnorm(0.8)
+qnorm(0.9)
+qnorm(0.95)
+```
+
+2. Report a 50\% credible interval for the `prediction` parameter. You can ignore Monte Carlo error in this sub-question.
+
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. We need to split the $1-20\%$ into the two tails, hence we are looking for the 10\% tail.
+
+The radius of the interval is therefore:
+
+```{r}
+0.01 * qnorm(0.9)
+```
+
+Hence the interval is $[0.64 \pm 0.01]$. 
+
+2. A [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval gives $[0.47, 0.81]$. 
+:::
+
+
+## Metropolis-Hastings
+
+Fill the **two** gaps in the pseudo code below:
+
+- Initialize $X^{(0)}$ arbitrarily
+- For $m = 1, 2, \dots, M$ do:
+    - Denote the proposal at iteration $m \in \{1, 2, \dots, M\}$ by:
+      $$\tilde X^\parm \sim q(\cdot | X^{(m-1)}).$$
+    - Compute the **MH ratio**:
+        $$R^\parm = \frac{\gamma(\tilde X^\parm)}{\gamma(X^{(m-1)})}.$$
+    - Sample an **acceptance Bernoulli**:
+      $$A^\parm \sim \text{???}.$$
+        - If $A^\parm = 1$, we **accept** the proposed sample:
+          $$X^\parm = \text{???}$$
+        - Else, $A^\parm = 0$, and we **reject** the proposed sample and stay at previous position:
+          $$X^\parm = X^{(m-1)}.$$ 
+
+
+
+## Stan 
+
+1. Explain the difference between the `parameters` block and the `generated parameters` block in Stan. 
+2. Why do you think Stan uses 4 independent chains by default?
+
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. The `parameters` block is used for random variable defined using `~` whereas the `generated parameters` block, for those defined using `=`. 
+2. By having the chains initialized at different point, this supports the detection of slow mixing. 
+:::
+
+
+
+## Reasoning about MH
+
+Consider the MH algorithm where we use as proposal a normal centered at the current point with standard deviation $\sigma_p$. 
+
+You observe the following trace plot:
+
+```{r}
+#| echo: false
+
+source("../exercises/ex07_scaffold.R")
+source("../../solutions/sol07_mh.R")
+
+set.seed(2)
+
+samples = simple_mh(gamma_beta_binomial, 0.5, 1000, proposal_sd = 10)
+
+plot(samples[1:100], 
+      xlab = "MCMC iteration", 
+      ylab = "Latent variable",
+      type = "o", 
+      col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
+```
+
+1. Is this chain mixing well? 
+2. Why or why not? 
+3. If it is not, what course of action do you recommend?
+
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. No. 
+2. Because the rejection rate is too high. 
+3. Decrease $\sigma_p$. 
+:::
+
+
+## Irreducibility
+
+Consider the following MH setup:
+
+- $\gamma(x) = \ind[x \in \{1, 2, \dots, 10\}]$
+- $q(x' | x) = \ind[x' \in \{x-1, x+1\}]/2$. 
+
+1. Define *irreducibility*. 
+2. Prove that the MH algorithm is irreducible in this setup. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. See [consistency of MH](../w08_mcmc1/topic05_mcmc_consistency.qmd). 
+2. Let $x, x' \in \{1, 2, \dots, 10\}$ (these are the only points where $\gamma(x) > 0$). 
+    Suppose first $x' > x$ (the case $x' < x$ is done similarly).  Pick $m = x' - x$, and note 
+    \begin{align*}
+    \pr(X^\parm = x' | X^{(0)} = x) &> \pr(X^\parm = x', X^{(m-1)} = x'-1, X^{(m-2)} = x'-2, \dots, X^{(1)} = x+1 | X^{(0)} = x) \\
+    &= (1/2)^m > 0. 
+    \end{align*}
+:::
+
+
+
+## Model debugging
+
+Let:
+
+- $C(y)$ denote a 99\% credible interval computed from data $y$. 
+- Let $y$ and $\check y$ denote a real and synthetic (simulated) data respectively. 
+
+Suppose you observed the following:
+
+1. $y_n \notin C(y_{\backslash n})$
+2. $\check y_n \notin C(\check y_{\backslash n})$
+3. On both synthetic and real data, trace plots and ESS both look good. 
+4. You replicated these experiments several times and always get the same results. 
+
+What would you do next? Justify your answer. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Referring to the workflow notes on [goodness of fit](../w09_workflow/topic02_goodness_of_fit.qmd) 
+and [software checking](../w09_workflow/topic03_checking_correctness.qmd), we have:
+
+- From 3, we can exclude "slow mixing." 
+- From 4, we can exclude "bad luck."
+- From 2, we therefore know there has to be a software defect (bug). 
+- Since 1 can be caused by either a software defect or a gross mis-specification, this item does not provide additional information.
+
+Therefore, the next step would be to fix the bug(s). 
+:::
+
+
+## MCMC diagnostics
+
+Explain how to detect slow mixing from a rank plot. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+When one of the chains has a shape that deviates from the uniform distribution, 
+we can raise a warning that there is slow mixing. 
+:::
+
+
+## MCSE
+
+
+How would you proceed if you want to decrease Monte Carlo Standard Error (MCSE)? 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Increase the number of MCMC iterations.
+:::
+
+
+## Debugging 
+
+You wish to write Stan model for logistic regression with normal priors 
+on the parameters with prior variance 100. 
+
+Consider the following draft of a Stan model:
+
+```
+data { 
+  int N
+  array[N] int y
+}
+
+model {
+  slope ~ normal(0, 100);
+  intercept ~ normal(0, 100);
+  for (i in 1:N) {
+    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
+  }
+}
+```
+
+Identify as many bugs as you can, and correct each. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+- Missing declaration of the parameters:
+```
+parameters { 
+  real slope;
+  real intercept;
+}
+```
+- Missing two `;` at the end of the lines in `data`. 
+- The second argument of `normal` in Stan is a standard deviation, 
+  not a variance, so it should be `slope ~ normal(0, 10);`. 
+- Similarly for the `intercept`.
+
+The full correct code is taken from the clicker 
+answers in [the "hands on" page](../w08_mcmc1/topic06_hands_on.qmd). 
+:::
+
+
+## Effective sample size from asymptotic variance
+
+Recall that the CLT for i.i.d. and Markov chains give us the following approximations:
+
+- $\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,$
+- $\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G,$
+
+where $M$ is the number of iterations, $n_e$ is the effective sample size, 
+$\bar X_\text{Markov}$ and $\bar X_\text{iid}$ are the MC estimators based 
+on MCMC and i.i.d. sampling respectively, $G$ is standard normal, $\mu$, $\sigma$ are the 
+posterior mean and standard deviation, and $\sigma_a$ is the asymptotic variance. 
+
+Use these two approximations to write a formula for the effective sample size 
+based on $\sigma$, $\sigma_a$ and $M$. 
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+See [lecture notes](../w09_workflow/topic05_mcmc_ess.qmd).
+:::
+
+
+## Independence: prior vs posterior
+
+Suppose we place a prior where $X_1$ and $X_2$ are independent, say $X_i \sim \distBern(0.5)$ independently. 
+If we condition on some data $Y$, will $X_1$ and $X_2$ always be independent under the posterior?
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+No. Consider for example $Y = X_1 \text{ xor } X_2$, 
+where recall that $x \text{ xor } y$ iff exactly one of $x_1, x_2$ is equal to one.
+Then under the posterior distribution that $(Y = 1)$, we have that $X_1$ is completely determined by $X_2$, 
+i.e. $\pr(X_1 = x_1, X_2 = x_2 | Y = 1) \neq \pr(X_1 = x_1 | Y = 1) \pr(X_2 = x_2 | Y = 1)$. 
+Many other counter examples are possible.
+:::
+
+
+## Normalization constant
+
+Consider the Bayesian model:
+
+\begin{align*}
+X &\sim \distExp(1/100) \\
+Y &\sim \distPoiss(X). 
+\end{align*}
+
+When using MCMC, will the output change if, for $x > 0$...
+
+1. You used $\check f(x) = \exp(-(1/100) x)$ instead of $f(x) = (1/100) \exp(-(1/100) x)$ for the prior?
+2. You used $\hat f(y|x) = x^y / y!$ instead of $f(y|x) = \exp(-x) x^y / y!$ for the likelihood? 
+   
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+For 1, the output will not change as the MH ratio with $\check f(x)$ is:
+
+$$
+\check r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{  \exp(-(1/100) \tilde x) f(y|\tilde x)}{ \exp(-(1/100) \tilde x)  f(y|x)}
+$$
+
+whereas for $f(x)$ we get:
+
+$$
+r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ (1/100) \exp(-(1/100) \tilde x) f(y|\tilde x)}{ (1/100) \exp(-(1/100) \tilde x)  f(y|x)}
+$$
+So we see the $(1/100)$ factors on numerator and denominator cancel and we have $r = \check r$.
+
+For 2, the output would change since for $\hat f(y|x)$ we have:
+
+$$
+\hat r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \tilde x^y / y!  }{ f(x) x^y / y! }
+$$
+whereas for $f(x)$ we get:
+
+$$
+r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \exp(-\tilde x) \tilde x^y / y!  }{ f(x) \exp(-x) x^y / y! }
+$$
+
+and hence $r = \hat r \exp(x - \tilde x)$ so $r$ and $\hat r$ are not equal. 
+:::

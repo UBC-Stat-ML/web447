@@ -82,7 +82,7 @@ model {
 }
 ```
   
-{{< include ../../clickers/w07/_c05.qmd >}}
+{{< include ../../clickers/w08/_c05.qmd >}}
 
 
 ## Using the posterior
@@ -94,15 +94,15 @@ model {
 Use the output of `println` on the `fit` object.
 :::
 
-{{< include ../../clickers/w07/_c06.qmd >}}
+{{< include ../../clickers/w08/_c06.qmd >}}
 
 
 **Question 3:** translate "your updated belief that the Ariane 1 rockets were improving" into a mathematical expression. 
 
-{{< include ../../clickers/w07/_c07.qmd >}}
+{{< include ../../clickers/w08/_c07.qmd >}}
 
 
 **Question 4:** estimate the numerical value of the expression in the last question. 
 
-{{< include ../../clickers/w07/_c08.qmd >}}
+{{< include ../../clickers/w08/_c08.qmd >}}
 

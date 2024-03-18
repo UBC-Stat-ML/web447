@@ -52,7 +52,7 @@ we avoided central limit theorems.
 
 **Question:** why are Bayesians OK with using central limit theorems for MCMC error analysis (i.e., for *computational error*)?
 
-{{< include ../../clickers/w08/_c09.qmd >}} 
+{{< include ../../clickers/w09/_c09.qmd >}} 
 
 ## Executive version
 
@@ -116,7 +116,7 @@ fit
 
 **Question:** construct a 95\% confidence interval for the posterior mean of $X$. Is the [true value](../w03_ppl/topic03_continuous.qmd) contained in the interval?
 
-{{< include ../../clickers/w08/_c06.qmd >}}
+{{< include ../../clickers/w09/_c06.qmd >}}
 
 ## Mathematical underpinnings
 
@@ -210,7 +210,7 @@ Apply the following formula, $\var[a X + b] = a^2 \var[X]$ to both the
 CLT for i.i.d. samples, and then the CLT for Markov chains. 
 :::
 
-{{< include ../../clickers/w08/_c07.qmd >}}
+{{< include ../../clickers/w09/_c07.qmd >}}
 
 
 ### Estimating the asymptotic variance with many chains
@@ -230,7 +230,7 @@ CLT for i.i.d. samples, and then the CLT for Markov chains.
     
 **Question:** combine @eq-by-clt and @eq-by-iid to obtain an estimator for the asymptotic variance.
 
-{{< include ../../clickers/w08/_c08.qmd >}} 
+{{< include ../../clickers/w09/_c08.qmd >}} 
 
 
 ### Estimating the asymptotic variance with one chain

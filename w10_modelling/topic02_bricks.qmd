@@ -1,11 +1,10 @@
 ---
-title: "New Bayesian bricks"
+title: "More Bayesian bricks"
 editor: 
   mode: source
 ---
 
 {{< include ../_macros.qmd >}}
-
 
 
 ## Outline
@@ -14,12 +13,15 @@ editor:
 
 - More distributions to complement [those tested in quiz 1](../w07_quiz1/topic03_logistics.qmd). 
 - Motivation, realization and parameterization(s) for each. 
+- Reparameterization.
+
 
 ### Rationale
 
 Recall our model building strategy: 
 
-- start with observation, and find distribution that match its data type (this creates the likehood),
+- start with observation, and find a distribution that "match its data type" (this creates the likelihood),
+    - i.e. such that [**support**](../w01_discrete_inference/topic04_pmfs.qmd) of the distribution $=$ observation data type
 - then look at the data types of the parameters, and look for distribution that match the parameters' data type (this creates the prior),
 - in the case of hierarchical models, recurse this process.
 
@@ -29,7 +31,7 @@ realizations of that datatype. We now fill this gap.
 
 ## Counts
 
-- Realization type: $\{0, 1, 2, 3, \dots\}$.
+- Support: $\{0, 1, 2, 3, \dots\}$.
 
 ::: column-margin
 ![](https://upload.wikimedia.org/wikipedia/commons/8/83/Negbinomial.gif){width="200"}
@@ -49,9 +51,9 @@ realizations of that datatype. We now fill this gap.
     - [Stan doc.](https://mc-stan.org/docs/functions-reference/unbounded_discrete_distributions.html#nbalt)
 
 
-## Positive numbers
+## Positive real numbers
 
-- Realization type: $\{x \in \reals: x > 0\} = \reals^+$
+- Support: $\{x \in \reals: x > 0\} = \reals^+$
 
 - More common choice is the **gamma distribution**:
     - $\distGam(\alpha, \beta)$
@@ -60,6 +62,10 @@ realizations of that datatype. We now fill this gap.
 
 
 **Question:** consider the following Stan model:
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
 
 ```{stan output.var = "gamma"}
 data {
@@ -86,87 +92,53 @@ Notice that neither of the parameters passed in the likelihood can be interprete
 However, you are asked to report a mean parameter for the population from which the observations come from. 
 How would you proceed?
 
-```{stan output.var = "gamma_with_mean"}
-data {
-  int<lower=0> n_obs;
-  vector<lower=0>[n_obs] observations;
-}
+{{< include ../../clickers/w10/_c01.qmd >}}
 
-parameters {
-  real<lower=0> shape;
-  real<lower=0> rate;
-}
-
-transformed parameters {
-  real rao_blackwellized_mean = shape/rate;
-}
-
-model {
-  // priors
-  shape ~ exponential(1.0/100);
-  rate ~ exponential(1.0/100);
-  
-  // likelihood
-  observations ~ gamma(shape, rate);
-}
-
-generated quantities {
-  real monte_carlo_mean = gamma_rng(shape, rate);
-}
-```
-
-
-```{r}
-suppressPackageStartupMessages(require(rstan))
-
-set.seed(1)
-observations = rgamma(5, shape = 2, rate = 3)
-```
-
-
-```{r dependson=knitr::dep_prev()}
-fit = sampling(
-  gamma_with_mean,
-  seed = 1,
-  refresh = 0,
-  data = list(n_obs = length(observations), observations = observations),       
-  iter = 100000                   
-)
-```
-
-```{r}
-fit
-```
-
-```{r}
-5.91 / 6.63
-```
-
-<!-- clicker question: how to get the mean in a stan program? -->
 
 
 ## Categories
 
-- Realization type: $\{0, 1, 2, 3, \dots, K\}$, for some number of categories $K$. 
-- We first discussed it in [Exercise 3](../exercises/ex03.qmd). 
+   
+```{r}
+#| column: margin
+#| echo: false
+
+xs = c(1, 2, 3, 4, 5)
+ps = c(0.2, 0.3, 0.1, 0.2, 0.1)
+
+plot(xs, ps, type = 'h', xlab = "realization", ylab = "probability", ylim = c(0, 0.5))
+```
+
+- Support: $\{0, 1, 2, 3, \dots, K\}$, for some number of categories $K$. 
+- We first discussed it in [Exercise 3](../exercises/ex03.qmd).
     - $\distCat(p_1, \dots, p_K)$
     - Probabilities $p_k > 0$, $\sum_k p_k = 1$.
-    - [Stan doc.]()
+    - [Stan doc.](https://mc-stan.org/docs/functions-reference/bounded_discrete_distributions.html#categorical-distribution)
+ 
 
 
 ## Simplex
 
-- $\distDir(\alpha_1, \dots, \alpha_K)$
-- Concentrations $\alpha_i > 0$    
+**Terminology** for the set of valid parameters for the categorical, $\{(p_1, p_2, \dots, p_K) : p_k > 0, \sum_k p_k = 1\}$: the **$K$-simplex**. 
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Dirichlet.pdf/page1-750px-Dirichlet.pdf.jpg){width="200"}
+:::
+
+- Hence, if you need a prior over the parameters of a categorical, you need a distribution over the simplex!
+- Common choice: the **Dirichlet distribution**:
+    - $\distDir(\alpha_1, \dots, \alpha_K)$
+    - Concentrations $\alpha_i > 0$.  
+    - [Stan doc.](https://mc-stan.org/docs/functions-reference/simplex_distributions.html)
 
 
 ## Vectors
 
-- $\distNorm(\mu, \Sigma)$
-- Mean vector $\mu \in \reals^K$, covariance matrix $\Sigma \succ 0$
-
-<!-- mention precision, Cholesky --> 
-
+- Support: $\reals^K$
+- Common choice: multivariate normal.
+    - $\distNorm(\mu, \Sigma)$
+    - Mean vector $\mu \in \reals^K$, covariance matrix $\Sigma \succ 0$, $\Sigma$ symmetric.
+    - [Stan doc.](https://mc-stan.org/docs/functions-reference/distributions_over_unbounded_vectors.html)
 
 
 
@@ -174,13 +146,19 @@ fit
 
 ### References
 
-- Use wikipedia,
-- and the Stan documentation.
+- Use wikipedia's [massive distribution list](https://en.wikipedia.org/wiki/List_of_probability_distributions),
+- and [Stan's documentation](https://mc-stan.org/docs/functions-reference/).
 
 ### Alternative approach: reparameterization
 
-TODO
-
-<!-- clicker question: how to get the mean in a stan program? -->
+- Suppose you need a distribution with support $[0, 1]$. 
+- We have seen above that one option is to use a beta prior. 
+- An alternative:
+    - define $X \sim \distNorm(0, 1)$, 
+    - use a transformation to map it to $[0, 1]$, e.g. $Y = \text{logistic}(X)$. 
+- This approach is known as "re-parametrization"
+    - For certain variational approaches, this helps inference. 
+    - More on that in the last week. 
+    
 
 
