@@ -1,0 +1,19 @@
+---
+title: "Data collection mechanisms"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+TODO
+
+### Rationale
+
+TODO
+

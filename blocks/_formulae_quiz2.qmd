@@ -1,0 +1,18 @@
+| Name                | Abbreviation                          | Parameters                                                         |
+|-----------------|-----------------|---------------------------------------|
+| Bernoulli           | $\distBern(p)$                        | Success probability $p \in [0, 1]$                                 |
+| Binomial            | $\distBinom(n, p)$                    | Number of trials $n \in \nats$, success probability $p \in [0, 1]$ |
+| Uniform             | $\distUnif(a, b)$                     | Left and right bounds, $a < b$                                     |
+| Normal              | $\distNorm(\mu, \sigma)$              | Mean $\mu \in \reals$ and standard deviation $\sigma > 0$          |
+|                     | $\distNorm(\mu, \sigma^2)$            | Mean $\mu \in \reals$ and variance $\sigma^2 > 0$                  |
+|                     | $\distNorm(\mu, \tau)$                | Mean $\mu \in \reals$ and precision $\tau = 1/\sigma^2 > 0$        |
+| Exponential         | $\distExp(\lambda)$                   | Rate $\lambda$ ($=1/$mean)                                         |
+| Beta                | $\distBeta(\alpha, \beta)$            | Shape parameters $\alpha > 0$ and $\beta > 0$                      |
+|                     | $\distBeta(\mu, s)$                   | Mean parameter $\mu \in (0, 1)$ and concentration $s>0$            |
+| Poisson             | $\distPoiss(\lambda)$                 | Mean $\lambda > 0$                                                 |
+| Negative Binomial   | $\distNB(\mu, \phi)$                  | Mean parameter $\mu > 0$ and concentration $\phi >0$               |
+| Gamma               | $\distGam(\alpha, \beta)$             | Shape parameters $\alpha > 0$ and rate $\beta > 0$                 |
+| Categorical         | $\distCat(p_1, \dots, p_K)$           | Probabilities $p_k > 0$, $\sum_k p_k = 1$                          |
+| Dirichlet           | $\distDir(\alpha_1, \dots, \alpha_K)$ | Concentrations $\alpha_i > 0$                                      |
+| Multivariate Normal | $\distNorm(\mu, \Sigma)$              | Mean vector $\mu \in \reals^K$, covariance matrix $\Sigma \succ 0$ |
+| LKJ                 | $\distLKJ(\eta)$                      | Shape $\eta > 0$                                                   |

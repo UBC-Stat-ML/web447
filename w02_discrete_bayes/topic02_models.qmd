@@ -34,7 +34,7 @@ A **Bayesian model** is a probability model equipped with:
   written using the "$\sim$" notation introduced last week.
 
 
-## From a coins to rockets
+## From coins to rockets
 
 For this week's rocket example, 
 we will use the exact same probability model as the bag of coin example from last week. 

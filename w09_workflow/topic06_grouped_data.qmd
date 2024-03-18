@@ -44,7 +44,7 @@ suppressPackageStartupMessages(require(ggplot2))
 We load the data used in [exercise 6](../exercises/ex06.qmd):
 
 ```{r}
-data = read.csv("../exercises/ex06_assets/vaccines_full.csv")
+data = read.csv(url("https://raw.githubusercontent.com/UBC-Stat-ML/web447/main/exercises/ex06_assets/vaccines_full.csv"))
 data$is_vaccinated = ifelse(data$arms == "vaccinated", 1, 0)
 rmarkdown::paged_table(data)
 ```

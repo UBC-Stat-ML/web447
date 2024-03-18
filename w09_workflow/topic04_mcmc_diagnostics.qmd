@@ -30,7 +30,7 @@ Informally, there are two possible situations to distinguish:
 **Fast mixing:**
 
 - The chain is almost like i.i.d. sampling, just a **constant time** slower (e.g., 2x slower).
-    - This constant is related to the relative effective sample size (e.g., is 2x slower, relative ESS would be $1/2$).
+    - This constant is related to the relative effective sample size (e.g., if 2x slower, relative ESS would be $1/2$).
     - Notice Stan estimates ESS when printing a `fit` object, look for column `n_eff`.
     - More on this soon.
 - Fast mixing happens when the dependence between time step $i$ and $i+m$ decays exponentially in $m$.[^1]

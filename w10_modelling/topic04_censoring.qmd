@@ -1,0 +1,171 @@
+---
+title: "Censoring"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Recognizing censoring
+- Modelling censoring
+
+### Rationale
+
+Censoring is an example of a **data collection process.** 
+We will see a case study where ignoring the data collection process literally cost many people's life...
+
+
+
+## Example 
+
+- Chernobyl, 1986
+
+
+```{r}
+set.seed(1)
+
+# detection limit: value higher than that stay at the limit
+limit = 1 
+
+n_measurements = 10
+
+true_mean = 5.6
+
+# data, if we were able to observe perfectly
+y = rexp(n_measurements, 1.0/true_mean)
+
+# number of measurements higher than the detection limit
+n_above_limit = sum(y >= limit)
+n_below_limit = sum(y < limit)
+
+# subset of the measurements that are below the limit:
+data_below_limit = y[y < limit]
+```
+
+
+### Observed mean
+
+```{r}
+# measurements: those higher than the limit stay at the limit
+measurements = ifelse(y < limit, y, limit)
+
+mean(measurements)
+```
+
+
+### Histogram of the measurements
+
+
+```{r}
+hist(measurements)
+```
+
+```{r}
+suppressPackageStartupMessages(require(rstan))
+```
+
+
+
+```{stan output.var = "chernobyl_naive"}
+data {
+  int<lower=0> n_above_limit;
+  int<lower=0> n_below_limit;
+  real<lower=0> limit;
+  vector<upper=limit>[n_below_limit] data_below_limit;
+  
+}
+
+parameters {
+  real<lower=0> rate; 
+  vector<lower=limit>[n_above_limit] data_above_limit;
+}
+
+model {
+  // prior
+  rate ~ exponential(1.0/100);
+  
+  // likelihood
+  data_above_limit ~ exponential(rate);
+  data_below_limit ~ exponential(rate); 
+}
+
+generated quantities {
+  real mean = 1.0/rate;
+}
+```
+
+
+```{r dependson=knitr::dep_prev()}
+fit = sampling(
+  chernobyl_naive,
+  seed = 1,
+  refresh = 0,
+  data = list(
+            limit = limit,
+            n_above_limit = n_above_limit, 
+            n_below_limit = n_below_limit,
+            data_below_limit = data_below_limit
+          ),       
+  iter = 10000                   
+)
+```
+
+```{r}
+fit
+```
+
+
+## Rao-Blackwellization
+
+
+```{stan output.var = "chernobyl_rao_blackwellized"}
+data {
+  int<lower=0> n_above_limit;
+  int<lower=0> n_below_limit;
+  real<lower=0> limit;
+  vector<upper=limit>[n_below_limit] data_below_limit;
+}
+
+parameters {
+  real<lower=0> rate; 
+}
+
+model {
+  // prior
+  rate ~ exponential(1.0/100);
+  
+  // likelihood
+  target += n_above_limit * exponential_lccdf(limit | rate);
+  data_below_limit ~ exponential(rate); 
+}
+
+generated quantities {
+  real mean = 1.0/rate;
+}
+```
+
+
+```{r dependson=knitr::dep_prev()}
+fit = sampling(
+  chernobyl_rao_blackwellized,
+  seed = 1,
+  refresh = 0,
+  data = list(
+            limit = limit,
+            n_above_limit = n_above_limit, 
+            n_below_limit = n_below_limit,
+            data_below_limit = data_below_limit
+          ),       
+  iter = 10000                   
+)
+```
+
+```{r}
+fit
+```
+

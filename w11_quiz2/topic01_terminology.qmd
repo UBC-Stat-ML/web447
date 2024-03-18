@@ -1,0 +1,103 @@
+---
+title: "Terminology review continued"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+- Review additional terminology covered since Quiz 1. 
+- Also make sure to review the [terminology before quiz 1](../w07_quiz1/topic01_terminology.qmd).
+
+### Rationale
+
+Just as for quiz 1, 
+part of quiz 2 involves knowing these terms 
+without having to look them up. 
+
+While in "the real world" you can look things up, to attain mastery 
+of a subject you need a critical mass of concepts in memory. 
+Too much google look-ups  prevent thinking at the speed of thought.
+
+
+## Common distributions (PMFs and densities)
+
+As in quiz 1, 
+knowing the **support** (no need to memorize other details) is needed, but 
+note additional distributions have been introduced [see the list](topic03_q2_logistics.qmd).
+
+
+## General MCMC terms
+
+- Markov chain Monte Carlo (MCMC)
+- Contrasting advantages and disadvantages of MCMC vs SNIS
+
+
+## Stan terminology
+
+- Differentiating between Stan and R code
+- "data block"
+- "parameters block"
+- "model block"
+- "transformed parameters block"
+- "generated quantities block"
+
+## Metropolis-Hastings
+
+- MH
+- Proposal (and contrasting it with SNIS's proposal)
+- Symmetric proposal
+- Test function $g$
+- Target $\pi$
+- Un-normalized target $\gamma$
+- Normalization constant $Z$
+- Notion of acceptance and rejection
+    - What happens in each case
+    - MH ratio (memorize that equation)
+    - Acceptance probability
+
+## MCMC plots
+
+- Trace plot
+- Posterior histogram
+- Rank plot
+
+
+## Basic MCMC theory
+
+- Consistency of MCMC
+- Irreducibility
+- Mixing (informal definition is OK)
+
+
+## Notion of unidentifiability
+
+- Informal definition
+- Writing an example model
+
+
+## Goodness-of-fit
+
+- Goodness-of-fit
+- Posterior predictive check
+
+
+## Monte Carlo Standard Error (MCSE)
+
+- MCSE 
+- Effective sample size (ESS)
+- Central Limit Theorem (CLT) for IID: writing the result and assumptions formally. 
+- Central Limit Theorem (CLT) for Markov chain: writing the result formally and stating at least informally the conditions.
+- Asymptotic variance
+- Batch mean estimator
+
+::: callout-caution
+Notation from week 10 is also included in the material covered in the quiz but is not included in this list. 
+:::
+
+

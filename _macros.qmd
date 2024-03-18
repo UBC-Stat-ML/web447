@@ -87,6 +87,7 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\distInvGam}{\distNamed{InvGam}}
 \newcommand{\distPoiss}{\distNamed{Poisson}}
 \newcommand{\distExp}{\distNamed{Exp}}
+\newcommand{\distNB}{\distNamed{NegBinom}}
 \newcommand{\distBeta}{\distNamed{Beta}}
 \newcommand{\distBetaPrime}{\distNamed{Beta}'}
 \newcommand{\distDir}{\distNamed{Dir}}
@@ -97,6 +98,8 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\distCauchy}{\distNamed{Cauchy}}
 \newcommand{\distVMF}{\distNamed{vMF}}
 \newcommand{\distDiscrete}{\distNamed{Discrete}}
+\newcommand{\distLKJ}{\distNamed{LKJ}}
+
 
 
 <!-- nonparametric distributions -->

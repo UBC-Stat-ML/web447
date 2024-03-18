@@ -41,7 +41,7 @@ You should not pick a dataset that has already been analyzed using the same appr
 
 Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶's. 
 
--   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and M-open setups. Examples:
+-   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:
     -   Applying a simple model and an improved one on a dataset.
     -   Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
     -   Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?

@@ -1,0 +1,17 @@
+---
+title: "Custom bricks"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+
+
+
+
+## Custom distribution
+
+
+### Log-scale computation

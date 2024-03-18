@@ -1,0 +1,22 @@
+---
+title: "Logistics"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## What to bring?
+
+-   You only need pencil, eraser, student or government id.
+-   The quiz is closed book (in particular, no electronics, including simple calculator permitted).
+
+## Time
+
+We will start promptly at 9:30 (please arrive on time) and end at 10:45 (75 minutes).
+
+## Distribution reference
+
+The cover page of the exam will have the following table. **Note that compared to last quiz, additional distributions have been added.**
+
+{{< include ../blocks/_formulae_quiz2.qmd >}}

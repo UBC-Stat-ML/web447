@@ -102,7 +102,7 @@ model {
 1. Here, `beta_proportion` corresponds to the [mean-concentration parameterization](https://mc-stan.org/docs/functions-reference/continuous_distributions_on_0_1.html#beta-proportion-distribution) we discussed [in the lecture on hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd).
 
 
-## Improving our model with generated parameters
+## Improving our model with transformed parameters
 
 - The code in the last section will not print out $\mu_i$ 
 - The code below shows how to fix this

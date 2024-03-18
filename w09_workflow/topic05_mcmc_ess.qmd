@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Markov chain standard error (MCSE)
+- Monte Carlo standard error (MCSE)
 - Effective sample size (ESS)
 - Mathematical underpinning: central limit theorem for Markov chains
 
@@ -34,19 +34,23 @@ but has the same underlying intuition.
 1. **Statistical error**: inherent uncertainty due to e.g., the fact that we have finite data.
 2. **Computational error**: additional error due to the fact that we use an approximation of the posterior instead of the exact posterior.
 
+::: column-margin
+![](https://imgs.xkcd.com/comics/error_bars.png){width="200"}
+:::
+
 - This page focuses on the second type of error. 
 - Full picture should include both 
 (i.e., the first step of [this joke](https://xkcd.com/2110/) can be taken seriously).
 - Interestingly, the mathematical toolbox to study 2 is similar to the non-Bayesian toolbox (i.e. normal approximation) for studying 1.
 
 
-### Bayesian statisticians using CLTs?
+### Bayesian statisticians using central limit theorems?
 
 Earlier on, when building [credible interval](../w05_properties/topic04_decision_to_set.qmd), 
 (a Bayesian measure of *statistical error*)
 we avoided central limit theorems.
 
-**Question:** why are Bayesians OK with using CLTs for MCMC error analysis (i.e., for *computational error*)?
+**Question:** why are Bayesians OK with using central limit theorems for MCMC error analysis (i.e., for *computational error*)?
 
 {{< include ../../clickers/w08/_c09.qmd >}} 
 
@@ -68,7 +72,7 @@ We now show how to determine how many digits are reliable:
     ```
 
 
-**Example:**
+**Example:** our simple [doomsday model](../w03_ppl/topic03_continuous.qmd)...
 
 ```{r}
 suppressPackageStartupMessages(require(rstan))
@@ -89,6 +93,10 @@ model {
 }
 
 ```
+
+::: column-margin
+![](../images/doomsday.png){width="200"}
+:::
 
 ```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(
@@ -122,12 +130,12 @@ Along the way we define the notion of Effective Sample Size (ESS) for MCMC.
 
 ### Background
 
-- Recall the central limit theorem (CLT) for i.i.d. random variables: 
+- Recall the central limit theorem (CLT) for independent and identically distributed (i.i.d.) random variables: 
     - if some random variables $V_i$'s are i.i.d. and
     - each has finite variance, then we have[^3]
         $$\sqrt{n}(\bar V - \mu) \to \distNorm(0, \sd[V]),$$ {#eq-clt-iid}
   where $\bar V = \frac{1}{n} \sum_{i=1}^n V_i$ and $\mu = \ex[V]$. 
-- From the CLT, recall that standard frequentist arguments give:
+- From the central limit theorem, recall that standard frequentist arguments give:
   $$\pr(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%,$$ {#eq-ci}
   where: the Standard Error (SE) is given by  $\text{SE} = \sd[V] / \sqrt{n}$. 
   

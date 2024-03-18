@@ -1,0 +1,23 @@
+---
+title: "Bayesian Lego"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+::: column-margin
+![](../images/legos-types.png){width="300"}
+:::
+
+## This week's outline
+
+- The success of Bayesian methods **and** Lego Blocks can be traced to the same basic reasons:
+    - A varied set of basic building blocks.
+    - The ability to combine them freely.
+    
+- This week, we introduce:
+    - more examples of basic building blocks (i.e., distributions),
+    - creating your own building blocks (i.e., custom distributions),
+    - more examples of using simple building blocks to construct complex things (mixtures).
+

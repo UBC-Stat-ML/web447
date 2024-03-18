@@ -50,7 +50,7 @@ MH is used to solve the following type of problems:
     -   Example: the numerator in [Bayes
         rule](../w01_discrete_inference/topic09_bayes.qmd).
 -   **Output:** You want to approximate an expectation...
-    -   ...under the **renormalized** distribution
+    -   ...under the renormalized **target** distribution
         $\pi(x) = \gamma(x) / Z$.
     -   Mathematically: MH provides an approximation to
         $\ex_\pi[g(X)] = \sum \pi(x) g(x)$.
@@ -113,7 +113,7 @@ MH requires a **proposal** $q(x' | x)$:
           
 **Output:** equally weighted samples $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. 
 
-**Demo:** Have a look at [this interactive animation](https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=banana) showing MH on two-dimensional target (green arrow shows accepted proposal, red arrow, rejected).
+**Demo:** Have a look at [this interactive animation](https://chi-feng.github.io/mcmc-demo/app.html?algorithm=RandomWalkMH&target=banana) showing MH on a two-dimensional target (green arrow shows accepted proposal, red arrow, rejected).
           
 
 ## Intuition
@@ -150,7 +150,11 @@ samples = simple_mh(gamma_beta_binomial, 0.5, 1000)
 Let us visualize the first 100 samples:
 
 ```{r}
-plot(samples[1:100], type = "o", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
+plot(samples[1:100], 
+     xlab = "MCMC iteration", 
+     ylab = "p",
+     type = "o", 
+     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
 ```
 
 **Question:** Notice that many points take exactly the same value, why is that?
@@ -163,7 +167,11 @@ plot(samples[1:100], type = "o", col = rgb(red = 0, green = 0, blue = 0, alpha =
 Full trace plot:
 
 ```{r}
-plot(samples, type = "o", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
+plot(samples, 
+     xlab = "MCMC iteration", 
+     ylab = "p",
+     type = "o", 
+     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))
 ```
 
 

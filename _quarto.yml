@@ -67,6 +67,12 @@ website:
           - auto: "w09_workflow/*"
           - text: "Exercises"
             file: exercises/ex08.qmd
+      - section: "Modelling techniques"
+        contents: 
+          - auto: "w10_modelling/*"
+      - section: "Quiz 2"
+        contents: 
+          - auto: "w11_quiz2/*"
 
 
 format:
