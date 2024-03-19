@@ -105,7 +105,8 @@ suppressPackageStartupMessages(require("latex2exp"))
 ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
   geom_histogram() + 
   xlab(TeX("$\\hat{p}_i = \\textrm{numberOfFailures}_i / \\textrm{numberOfLaunches}_i$")) +
-  geom_rug(alpha = 0.1)
+  geom_rug(alpha = 0.1) + 
+  theme_minimal()
 ```
 
 **Question:** what are the weaknesses of using a prior fitted on this histogram?

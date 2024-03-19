@@ -17,72 +17,105 @@ editor:
 ### Rationale
 
 Censoring is an example of a **data collection process.** 
-We will see a case study where ignoring the data collection process literally cost many people's life...
+We will see a case study where ignoring the data collection process literally cost many lives...
 
 
+## Example: Chernobyl, 1986 
 
-## Example 
+- In 1986, the Chernobyl Nuclear Power Plant exploded. 
+- Initially, the reactor crew chief, A. Akimov, assumed the core reactor was intact.
 
-- Chernobyl, 1986
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/en/f/f6/Chernobyl_burning-aerial_view_of_core.jpg){width="200"}
+:::
 
+### Data generation {#sec-generation} 
 
-```{r}
-set.seed(1)
+- The numbers used in this page are synthetic but inspired by a [true story](https://en.wikipedia.org/wiki/Chernobyl_disaster#Radiation_levels).
+- Let us not look at the data generating code just yet, we will come back to it.
 
-# detection limit: value higher than that stay at the limit
-limit = 1 
-
-n_measurements = 10
-
-true_mean = 5.6
-
-# data, if we were able to observe perfectly
-y = rexp(n_measurements, 1.0/true_mean)
-
-# number of measurements higher than the detection limit
-n_above_limit = sum(y >= limit)
-n_below_limit = sum(y < limit)
-
-# subset of the measurements that are below the limit:
-data_below_limit = y[y < limit]
-```
+{{< include ../blocks/_chernobyl_data_gen.qmd >}}
 
 
-### Observed mean
+### Measuring radiation levels
+
+- A [dosimeter](https://en.wikipedia.org/wiki/Dosimeter) is a device measuring ionizing radiation.
+    - Unit: roentgens per second (R/s).
+- Suppose that:
+    - If ionizing radiation is **greater** than 1.5 R/s $\Rightarrow$ we think the reactor is breached (radiation coming out of reactor core).
+    - If ionizing radiation is **smaller** than 1.5 R/s $\Rightarrow$ we think the reactor is not breached. 
+- We send `r n_measurements` workers each with a dosimeter.
+- The average over the `r n_measurements` readings is:
 
 ```{r}
-# measurements: those higher than the limit stay at the limit
-measurements = ifelse(y < limit, y, limit)
-
 mean(measurements)
 ```
 
+- All good?
+- Let us look at the raw data and histogram.
 
-### Histogram of the measurements
+```{r message=FALSE, warning=FALSE}
+suppressPackageStartupMessages(require("ggplot2"))
+df = data.frame(measurements = measurements)
 
+ggplot(df, aes(x = measurements)) +
+  geom_histogram() + 
+  geom_rug(alpha = 0.1) + 
+  theme_minimal()
 
-```{r}
-hist(measurements)
+measurements
 ```
+
+**Question:** is this concerning?
+
+{{< include ../../clickers/w10/_c02.qmd >}}
+
+
+## Bayesian approach to censoring
+
+- What we have encountered in the Chernobyl example is known as **censoring.**
+- Solution: modelling the censoring process. 
+
+### Mathematical description
+
+- Let $L$ denote a detection limit (here $L = 1.1$)
+- Let $X$ denote the unknown parameter (here, the true mean we try to recover). 
+- Let $i$ denote the observation index (worker $i \in \{1, 2, \dots, 10\}$ in our example)
+- Let $H_i$ denote the measurements **before censoring**. 
+- Let $C_i$ denote a binary indicator on the censoring.
+- Let $Y_i = C_i L + (1 - C_i) H_i$. 
+
+In the Chernobyl example, we will use the following model:
+
+\begin{align*}
+X &\sim \distExp(1/100) \\
+H_i &\sim \distExp(X) \\ 
+C_i &= \ind[H_i \ge L], \\
+Y_i &= C_i L + (1 - C_i) H_i.
+\end{align*}
+
+The goal is to compute $\ex[X | Y]$. 
+
+
+### Stan implementation
 
 ```{r}
 suppressPackageStartupMessages(require(rstan))
 ```
 
 
-
 ```{stan output.var = "chernobyl_naive"}
 data {
-  int<lower=0> n_above_limit;
-  int<lower=0> n_below_limit;
+  int<lower=0> n_above_limit; # <1>
+  int<lower=0> n_below_limit; # <2>
   real<lower=0> limit;
-  vector<upper=limit>[n_below_limit] data_below_limit;
+  vector<upper=limit>[n_below_limit] data_below_limit; # <3>
   
 }
 
 parameters {
   real<lower=0> rate; 
-  vector<lower=limit>[n_above_limit] data_above_limit;
+  vector<lower=limit>[n_above_limit] data_above_limit; # <4>
 }
 
 model {
@@ -98,20 +131,24 @@ generated quantities {
   real mean = 1.0/rate;
 }
 ```
+1. The number of $H_i$'s above the detection limit. 
+2. The number of $H_i$'s below the detection limit.
+3. The $H_i$'s below the limit are observed, so they go in the `data` block.
+4. The $H_i$'s above the limit are not observed, so they go in the `parameters` block (a better name would have been "latent block").
 
 
 ```{r dependson=knitr::dep_prev()}
 fit = sampling(
   chernobyl_naive,
   seed = 1,
-  refresh = 0,
+  chains = 1,
   data = list(
             limit = limit,
             n_above_limit = n_above_limit, 
             n_below_limit = n_below_limit,
             data_below_limit = data_below_limit
           ),       
-  iter = 10000                   
+  iter = 100000                   
 )
 ```
 
@@ -119,53 +156,19 @@ fit = sampling(
 fit
 ```
 
+```{r message=FALSE, warning=FALSE}
 
-## Rao-Blackwellization
-
-
-```{stan output.var = "chernobyl_rao_blackwellized"}
-data {
-  int<lower=0> n_above_limit;
-  int<lower=0> n_below_limit;
-  real<lower=0> limit;
-  vector<upper=limit>[n_below_limit] data_below_limit;
-}
-
-parameters {
-  real<lower=0> rate; 
-}
-
-model {
-  // prior
-  rate ~ exponential(1.0/100);
-  
-  // likelihood
-  target += n_above_limit * exponential_lccdf(limit | rate);
-  data_below_limit ~ exponential(rate); 
-}
-
-generated quantities {
-  real mean = 1.0/rate;
-}
+suppressPackageStartupMessages(require(bayesplot))
+suppressPackageStartupMessages(require(ggplot2))
+mcmc_areas_ridges(fit, pars = c("mean"), point_est = c()) + 
+  theme_minimal() + 
+  scale_x_continuous(limits = c(0, 10)) 
 ```
 
-
-```{r dependson=knitr::dep_prev()}
-fit = sampling(
-  chernobyl_rao_blackwellized,
-  seed = 1,
-  refresh = 0,
-  data = list(
-            limit = limit,
-            n_above_limit = n_above_limit, 
-            n_below_limit = n_below_limit,
-            data_below_limit = data_below_limit
-          ),       
-  iter = 10000                   
-)
-```
+Back to the question of whether the radiation is greater than 1.5 R/s:
 
 ```{r}
-fit
-```
+samples = extract(fit)$mean
 
+sum(samples > 1.5) / length(samples)
+```

@@ -1,0 +1,30 @@
+---
+editor: 
+  mode: source
+---
+
+```{r}
+#| code-fold: true
+
+set.seed(1)
+
+# detection limit: value higher than that stay at the limit
+limit = 1.1 
+
+n_measurements = 10
+
+true_mean = 5.6
+
+# data, if we were able to observe perfectly
+y = rexp(n_measurements, 1.0/true_mean)
+
+# number of measurements higher than the detection limit
+n_above_limit = sum(y >= limit)
+n_below_limit = sum(y < limit)
+
+# subset of the measurements that are below the limit:
+data_below_limit = y[y < limit]
+
+# measurements: those higher than the limit stay at the limit
+measurements = ifelse(y < limit, y, limit)
+```

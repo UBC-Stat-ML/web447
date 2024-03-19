@@ -46,17 +46,7 @@ an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$.
 2. Define the notion of consistency. 
 3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. $\bias(\hat G_M, g^*) = \ex[\hat G_M] - g^*$. 
-2. $\hat G_M \to g^*$.[^1]
-3. Consistency is more important. Consistency means that the error decreases as $M$ increases. 
-    In contrast, even if a method is unbiased, it still leads to error due to its variance. 
-:::
-
-[^1]: Where convergence is either almost sure (strong consistency), or in probability (weak consistency).
-
+{{< include ../../clickers/w11/_c01.qmd >}}
 
 
 ## Model construction
@@ -73,32 +63,7 @@ Consider the following setup
 Define a Bayesian model to handle this dataset. Introduce all random variables, and specify 
 for each its data type, if it observed or not.
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-The random variables are:
-
-- Let $y_1, y_2, \dots, y_{12}$ denote the job search times for the 12 participants who found a job 
-    in the study interval (10 days). These variables are observed. 
-- Let $y_{13}, y_{14}, y_{15}$ denote the job search times for the other 3 participants. These variables are latent.
-- Let $f_i$ denote an indicator variable equal to one iff participant $i$ found a job in the 10 days period, $i \in \{1, 2, \dots, 15\}$. 
-    These variables are observed. 
-- Let $x_{i,j}$, $i \in \{1, 2, \dots, 15\}, j \in \{1, 2\}$ denote the age ($j=1$) or years of education ($j=2$) for participant $i$. 
-    These variables are observed. 
-- Set $x_{i,0} = 1$ to simplify the notation for the intercept. 
-- Let $\theta_0$ denote and intercept parameter, $\theta_1, \theta_2$, slope parameters for the age and number of years of education. 
-    These variables are latent.
-
-One potential model is:
-\begin{align*}
-\theta_j &\sim \distNorm(0, 100), \\
-\phi &\sim \distExp(1/100), \\
-\mu_i &= \exp\left(\sum_{j=0}^3 x_{i,j} \theta_j\right) \\
-y_i &\sim \distNB\left(\mu_i, \phi\right), \\
-f_i &= \ind[y_i < 10].
-\end{align*}
-:::
-
+{{< include ../../clickers/w11/_c02.qmd >}}
 
 ### Rao-blackwellization
 
@@ -107,30 +72,7 @@ You can introduce symbols for densities and CDFs, for example leave the density 
 exponential as $p_\text{Exp}(x; \lambda),$ and similarly use $F_\text{Name}(\cdot; \cdot)$ 
 to denote CDFs. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Before Rao-Blackwellization, we have:
-
-\begin{align*}
-p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) = \\
-&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
-&\left( \prod_{i=1}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right).
-\end{align*}
-
-Rao-Blackwellizing the above:
-\begin{align*}
-\int \int \int p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) \dee y_{13} \dee y_{14} \dee y_{15} = \\
-&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
-&\left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
-& \int \int \int \left( \prod_{i=13}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \dee y_{13} \dee y_{14} \dee y_{15} \\
-=&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
-& \left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
-&   \prod_{i=13}^{15} \left( 1 - F_\text{NB}\left(10; \mu_i, \phi\right)  \right).
-\end{align*}
-
-:::
-
+{{< include ../../clickers/w11/_c03.qmd >}}
 
 ## Stan-based prediction
 
@@ -164,56 +106,7 @@ How would you modify this code to predict the velocity of a galaxy at distance 1
 Hint: use the function `normal_rng(mean, sd)` to generate a normal random variable 
 with the provided mean and standard deviation parameters. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-```{stan output.var = "hubble_predictions"}
-data {
-  int<lower=0> N; // number of observations
-  vector[N] xs;   // independent variable
-  vector[N] ys;   // dependent variable
-}
-
-parameters {
-  real slope;
-  real<lower=0> sigma;
-}
-
-model {
-  // prior
-  slope     ~ student_t(3, 0, 100);
-  sigma     ~ exponential(0.001);
-
-  // likelihood
-  ys ~ normal(slope*xs, sigma);
-}
-
-generated quantities {
-  real prediction = normal_rng(slope*1.5, sigma);
-}
-```
-
-```{r}
-#| file: ../exercises/ex07_import_hubble.R
-```
-
-Run the above program using (the part below you are **not** expected to memorize):
-
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
-fit = sampling(
-  hubble_predictions,         
-  data = list(xs = df$distance, ys = df$velocity, N = length(df$distance)), 
-  show_messages = FALSE,
-  open_progress = FALSE, 
-  chains = 1,
-  iter = 2000       
-)
-```
-
-```{r}
-fit
-```
-:::
+{{< include ../../clickers/w11/_c04.qmd >}}
 
 
 ## Intervals
@@ -249,22 +142,8 @@ qnorm(0.95)
 
 2. Report a 50\% credible interval for the `prediction` parameter. You can ignore Monte Carlo error in this sub-question.
 
+{{< include ../../clickers/w11/_c05.qmd >}}
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. We need to split the $1-20\%$ into the two tails, hence we are looking for the 10\% tail.
-
-The radius of the interval is therefore:
-
-```{r}
-0.01 * qnorm(0.9)
-```
-
-Hence the interval is $[0.64 \pm 0.01]$. 
-
-2. A [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval gives $[0.47, 0.81]$. 
-:::
 
 
 ## Metropolis-Hastings
@@ -284,21 +163,14 @@ Fill the **two** gaps in the pseudo code below:
         - Else, $A^\parm = 0$, and we **reject** the proposed sample and stay at previous position:
           $$X^\parm = X^{(m-1)}.$$ 
 
-
+{{< include ../../clickers/w11/_c06.qmd >}}
 
 ## Stan 
 
 1. Explain the difference between the `parameters` block and the `generated parameters` block in Stan. 
 2. Why do you think Stan uses 4 independent chains by default?
 
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. The `parameters` block is used for random variable defined using `~` whereas the `generated parameters` block, for those defined using `=`. 
-2. By having the chains initialized at different point, this supports the detection of slow mixing. 
-:::
-
+{{< include ../../clickers/w11/_c07.qmd >}}
 
 
 ## Reasoning about MH
@@ -329,13 +201,7 @@ plot(samples[1:100],
 3. If it is not, what course of action do you recommend?
 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. No. 
-2. Because the rejection rate is too high. 
-3. Decrease $\sigma_p$. 
-:::
+{{< include ../../clickers/w11/_c08.qmd >}}
 
 
 ## Irreducibility
@@ -348,18 +214,7 @@ Consider the following MH setup:
 1. Define *irreducibility*. 
 2. Prove that the MH algorithm is irreducible in this setup. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. See [consistency of MH](../w08_mcmc1/topic05_mcmc_consistency.qmd). 
-2. Let $x, x' \in \{1, 2, \dots, 10\}$ (these are the only points where $\gamma(x) > 0$). 
-    Suppose first $x' > x$ (the case $x' < x$ is done similarly).  Pick $m = x' - x$, and note 
-    \begin{align*}
-    \pr(X^\parm = x' | X^{(0)} = x) &> \pr(X^\parm = x', X^{(m-1)} = x'-1, X^{(m-2)} = x'-2, \dots, X^{(1)} = x+1 | X^{(0)} = x) \\
-    &= (1/2)^m > 0. 
-    \end{align*}
-:::
-
+{{< include ../../clickers/w11/_c09.qmd >}}
 
 
 ## Model debugging
@@ -378,31 +233,14 @@ Suppose you observed the following:
 
 What would you do next? Justify your answer. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Referring to the workflow notes on [goodness of fit](../w09_workflow/topic02_goodness_of_fit.qmd) 
-and [software checking](../w09_workflow/topic03_checking_correctness.qmd), we have:
-
-- From 3, we can exclude "slow mixing." 
-- From 4, we can exclude "bad luck."
-- From 2, we therefore know there has to be a software defect (bug). 
-- Since 1 can be caused by either a software defect or a gross mis-specification, this item does not provide additional information.
-
-Therefore, the next step would be to fix the bug(s). 
-:::
+{{< include ../../clickers/w11/_c10.qmd >}}
 
 
 ## MCMC diagnostics
 
 Explain how to detect slow mixing from a rank plot. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-When one of the chains has a shape that deviates from the uniform distribution, 
-we can raise a warning that there is slow mixing. 
-:::
+{{< include ../../clickers/w11/_c11.qmd >}}
 
 
 ## MCSE
@@ -410,11 +248,7 @@ we can raise a warning that there is slow mixing.
 
 How would you proceed if you want to decrease Monte Carlo Standard Error (MCSE)? 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-Increase the number of MCMC iterations.
-:::
+{{< include ../../clickers/w11/_c12.qmd >}}
 
 
 ## Debugging 
@@ -441,25 +275,8 @@ model {
 
 Identify as many bugs as you can, and correct each. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
 
-- Missing declaration of the parameters:
-```
-parameters { 
-  real slope;
-  real intercept;
-}
-```
-- Missing two `;` at the end of the lines in `data`. 
-- The second argument of `normal` in Stan is a standard deviation, 
-  not a variance, so it should be `slope ~ normal(0, 10);`. 
-- Similarly for the `intercept`.
-
-The full correct code is taken from the clicker 
-answers in [the "hands on" page](../w08_mcmc1/topic06_hands_on.qmd). 
-:::
-
+{{< include ../../clickers/w11/_c13.qmd >}}
 
 ## Effective sample size from asymptotic variance
 
@@ -476,11 +293,8 @@ posterior mean and standard deviation, and $\sigma_a$ is the asymptotic variance
 Use these two approximations to write a formula for the effective sample size 
 based on $\sigma$, $\sigma_a$ and $M$. 
 
-::: {.callout-caution collapse="true"}
-## Click for answer
+{{< include ../../clickers/w11/_c14.qmd >}}
 
-See [lecture notes](../w09_workflow/topic05_mcmc_ess.qmd).
-:::
 
 
 ## Independence: prior vs posterior
@@ -488,15 +302,7 @@ See [lecture notes](../w09_workflow/topic05_mcmc_ess.qmd).
 Suppose we place a prior where $X_1$ and $X_2$ are independent, say $X_i \sim \distBern(0.5)$ independently. 
 If we condition on some data $Y$, will $X_1$ and $X_2$ always be independent under the posterior?
 
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-No. Consider for example $Y = X_1 \text{ xor } X_2$, 
-where recall that $x \text{ xor } y$ iff exactly one of $x_1, x_2$ is equal to one.
-Then under the posterior distribution that $(Y = 1)$, we have that $X_1$ is completely determined by $X_2$, 
-i.e. $\pr(X_1 = x_1, X_2 = x_2 | Y = 1) \neq \pr(X_1 = x_1 | Y = 1) \pr(X_2 = x_2 | Y = 1)$. 
-Many other counter examples are possible.
-:::
+{{< include ../../clickers/w11/_c15.qmd >}}
 
 
 ## Normalization constant
@@ -513,32 +319,4 @@ When using MCMC, will the output change if, for $x > 0$...
 1. You used $\check f(x) = \exp(-(1/100) x)$ instead of $f(x) = (1/100) \exp(-(1/100) x)$ for the prior?
 2. You used $\hat f(y|x) = x^y / y!$ instead of $f(y|x) = \exp(-x) x^y / y!$ for the likelihood? 
    
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-For 1, the output will not change as the MH ratio with $\check f(x)$ is:
-
-$$
-\check r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{  \exp(-(1/100) \tilde x) f(y|\tilde x)}{ \exp(-(1/100) \tilde x)  f(y|x)}
-$$
-
-whereas for $f(x)$ we get:
-
-$$
-r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ (1/100) \exp(-(1/100) \tilde x) f(y|\tilde x)}{ (1/100) \exp(-(1/100) \tilde x)  f(y|x)}
-$$
-So we see the $(1/100)$ factors on numerator and denominator cancel and we have $r = \check r$.
-
-For 2, the output would change since for $\hat f(y|x)$ we have:
-
-$$
-\hat r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \tilde x^y / y!  }{ f(x) x^y / y! }
-$$
-whereas for $f(x)$ we get:
-
-$$
-r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \exp(-\tilde x) \tilde x^y / y!  }{ f(x) \exp(-x) x^y / y! }
-$$
-
-and hence $r = \hat r \exp(x - \tilde x)$ so $r$ and $\hat r$ are not equal. 
-:::
+{{< include ../../clickers/w11/_c16.qmd >}}

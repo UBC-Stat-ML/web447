@@ -6,6 +6,9 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+{{< include ../_construction.qmd >}}
+
+<!--
 
 ## Outline
 
@@ -17,3 +20,4 @@ TODO
 
 TODO
 
+-->

@@ -11,9 +11,59 @@ editor:
 
 ### Topics
 
-TODO
+- Generalizing the censoring problem to other data collection mechanisms.
+- Examples of other data collection mechanisms.
 
 ### Rationale
 
-TODO
+Rather than memorizing several data collection mechanisms, it is more important 
+to recognize that it is simply a special (but important) example of probabilistic 
+modelling and the [first step of our Bayesian recipe](../w02_discrete_bayes/topic01_bayes_recipe.qmd#the-bayesian-recipe).
 
+
+## Examples 
+
+### Truncation 
+
+- In censoring, we knew how many $H_i$'s were above the detection limit. 
+- In **truncation**, a different setup, we now have even less information: 
+    - we only observe the $H_i$'s that are below the limit... 
+    - ...we don't know how many were above the limit. 
+- Mathematically, when the $H_i$ have a continuous distribution this can be modelled as:
+
+\begin{align*}
+X &\sim \text{prior}() \\
+H_i &\sim \text{likelihood}(X) \\
+I_i &= \ind[H_i \le L] \\
+Y &= \{ H_i : I_i = 1 \}.
+\end{align*}
+
+- Here $I_i$ is an "inclusion indicator". 
+- Bayesian analysis will be based on $X | Y$
+
+**Example:** CRISPR-Cas9 unique molecular identifier (UMI) family size. "Families of cells" that left zero progenies are not observed!
+
+
+![](../images/UMIs.png){width="600"}
+
+
+### Non-ignorable missingness
+
+Truncation can be generalized as follows:
+
+- Instead of a deterministic criterion based on $H_i$ to decide if to include in the set of observations or not, 
+- make that decision based on some probability model $p$ that could depend on $h_i$ and $x$, $p(x, h_i) \in [0, 1]$:
+
+\begin{align*}
+X &\sim \text{prior}() \\
+H_i &\sim \text{likelihood}(X) \\
+I_i &\sim \distBern(p(X, H_i)) \\
+Y &= \{ H_i : I_i = 1 \}.
+\end{align*}
+
+**Question:** how would you set $p(x, h)$ to recover truncation as a special case of non-ignorable missingness. 
+
+
+### Additional readings 
+
+See this week's readings, Chapter 8 of [Gelman et al., 2013](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf)

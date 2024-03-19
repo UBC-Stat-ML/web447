@@ -96,8 +96,15 @@ note additional distributions have been introduced [see the list](topic03_q2_log
 - Asymptotic variance
 - Batch mean estimator
 
-::: callout-caution
-Notation from week 10 is also included in the material covered in the quiz but is not included in this list. 
-:::
+## Implementing custom distributions
 
+- Log scale computation.
+- Underflow. 
+
+## Data collection mechanisms
+
+- Censoring
+- Truncation
+- Non-ignorable missingness
+- Rao-blackwellization
 

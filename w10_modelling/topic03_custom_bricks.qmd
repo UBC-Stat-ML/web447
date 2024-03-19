@@ -12,7 +12,7 @@ editor:
 ### Topics
 
 - What to do when you need a distribution not in the [Stan built-in library](https://mc-stan.org/docs/functions-reference/). 
-- Understanding why Stan represents the density in log-scale. 
+- Understanding why Stan (and most MCMC methods) represents the density in log-scale. 
 
 
 ### Rationale
@@ -41,12 +41,12 @@ where $x \in (0, 1)$ and $a, b$ are positive parameters.
 
 - In the `model` block:
     - Use `target += [logarithm (base e) of the log density]`
+    - Applying this to our Kumaraswamy example:
+      $$\log(f(x)) = \log(a) + \log(b) + (a-1) \log(x) + (b-1) \log(1 - x^a).$$
       
 - In the `parameters` block:
     - Make sure you enforce the support (here $x \in (0, 1)$)
     
-- Applying this to our Kumaraswamy example
-    - Use: $\log(f(x)) = \log(a) + \log(b) + (a-1) \log(x) + (b-1) \log(1 - x^a).$
 
 ```{r}
 suppressPackageStartupMessages(require(rstan))
@@ -60,27 +60,28 @@ data {
 }
 
 parameters {
-  real<lower=0, upper=1> x; 
+  real<lower=0, upper=1> x; # <1>
 }
 
 model {
-  target += log(a) + log(b) + (a-1) * log(x) + (b-1) * log1p(-x^a);
+  target += log(a) + log(b) + (a-1) * log(x) + (b-1) * log1p(-x^a); # <2>
+                                                    // ^ log1p(z) = log(1+z)
 }
 ```
-
+1. Support enforced. 
+2. Contribution of the Kumaraswamy log density added the log joint density.
 
 ```{r dependson=knitr::dep_prev()}
 fit = sampling(
   Kumaraswamy,
   seed = 1,
   refresh = 0,
-  data = list(
-            a = 2,
-            b = 5
-          ),       
+  data = list(a = 2, b = 5),       
   iter = 10000                   
 )
 ```
+
+Checking that the histogram roughly matches the one from the wikipedia article (see [top of page Figure](topic03_custom_bricks.qmd), purple line).
 
 ```{r message=FALSE, warning=FALSE}
 #| column: margin
@@ -98,6 +99,7 @@ mcmc_hist(fit, pars = c("x")) + theme_minimal()
 **Question:** why is Stan computing the **logarithm** of $\gamma(x)$?
 
 **Key fact:** Stan, like most numerical methods, use [double-precision floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) approximation of real numbers. 
+
 - Suppose you have 500 observations.
 - Each have a likelihood of about $1/10$. 
 - What is the joint likelihood?
@@ -114,12 +116,12 @@ likelihood
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
-- Because $(1/10)^{500}$ is smaller than the smallest positive number representable in double precision ($\approx 10^{-300}$)
+- Because $(1/10)^{500}$ is smaller than the smallest positive number representeable in double precision ($\approx 10^{-300}$)
     - So it gets rounded to zero.
     - This is called **an underflow**
 :::
     
-**Log-scale computation:** let us say we store instead the log-likelihood:
+**Log-scale computation:** let us say we store instead the **log**-likelihood:
 
 ```{r}
 loglikelihood = log(1.0)
@@ -159,18 +161,15 @@ model {
 }
 ```
 1. The `function` block allows you to create custom functions. See [the Stan documentation for more details.](https://mc-stan.org/docs/stan-users-guide/user-functions.html#basic-functions.section)
-2. Use the special suffix `_lpdf` for your function name, which stands for "log probability density function."
-3. Then you can use the distribution as usual. From this it is apparent that Stan's `~` notation is just a shortcut for `target += distributionName_lpdf(...)`.
+2. For Stan to pick up your function in its `~` syntax, you must use the special suffix `_lpdf` for your function name, which stands for "log probability density function."
+3. Then you can use your distribution name using `~` as usual (notice we do not include the `_lpdf` when we do such call). From this it is apparent that Stan's `~` notation is just a shortcut for `target += distributionName_lpdf(...)`. 
 
 ```{r echo=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(
   Kumaraswamy2,
   seed = 1,
   refresh = 0,
-  data = list(
-            a = 2,
-            b = 5
-          ),       
+  data = list(a = 2, b = 5),       
   iter = 10000                   
 )
 ```
