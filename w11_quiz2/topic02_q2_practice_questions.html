@@ -143,9 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Bayes1@UBC
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Quiz 2</a></li><li class="breadcrumb-item"><a href="../w11_quiz2/topic02_q2_practice_questions.html">Practice questions (Quiz 2)</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -755,24 +753,72 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w10_modelling/topic01_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text">Bayesian Lego</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic02_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">More Bayesian bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic03_custom_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Custom bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic04_censoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Censoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic05_collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data collection mechanisms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic06_rao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rao-Blackwellization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic07_mixtures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixtures</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true">
  <span class="menu-text">Quiz 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review continued</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic02_q2_practice_questions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Practice questions (Quiz 2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic03_q2_logistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logistics</span></a>
   </div>
 </li>
       </ul>
@@ -794,15 +840,32 @@ window.Quarto = {
   <li><a href="#important-note-2" id="toc-important-note-2" class="nav-link" data-scroll-target="#important-note-2">Important note 2</a></li>
   <li><a href="#libraries-needed-to-run-the-example-below" id="toc-libraries-needed-to-run-the-example-below" class="nav-link" data-scroll-target="#libraries-needed-to-run-the-example-below">Libraries needed to run the example below</a></li>
   </ul></li>
+  <li><a href="#bias-and-consistency" id="toc-bias-and-consistency" class="nav-link" data-scroll-target="#bias-and-consistency">Bias and consistency</a></li>
+  <li><a href="#model-construction" id="toc-model-construction" class="nav-link" data-scroll-target="#model-construction">Model construction</a>
+  <ul class="collapse">
+  <li><a href="#using-the-notation" id="toc-using-the-notation" class="nav-link" data-scroll-target="#using-the-notation">Using the <code>~</code> notation</a></li>
+  <li><a href="#rao-blackwellization" id="toc-rao-blackwellization" class="nav-link" data-scroll-target="#rao-blackwellization">Rao-blackwellization</a></li>
+  </ul></li>
   <li><a href="#stan-based-prediction" id="toc-stan-based-prediction" class="nav-link" data-scroll-target="#stan-based-prediction">Stan-based prediction</a></li>
-  <li><a href="#computing-monte-carlo-confidence-intervals" id="toc-computing-monte-carlo-confidence-intervals" class="nav-link" data-scroll-target="#computing-monte-carlo-confidence-intervals">Computing Monte Carlo confidence intervals</a></li>
+  <li><a href="#intervals" id="toc-intervals" class="nav-link" data-scroll-target="#intervals">Intervals</a></li>
+  <li><a href="#metropolis-hastings" id="toc-metropolis-hastings" class="nav-link" data-scroll-target="#metropolis-hastings">Metropolis-Hastings</a></li>
+  <li><a href="#stan" id="toc-stan" class="nav-link" data-scroll-target="#stan">Stan</a></li>
+  <li><a href="#reasoning-about-mh" id="toc-reasoning-about-mh" class="nav-link" data-scroll-target="#reasoning-about-mh">Reasoning about MH</a></li>
+  <li><a href="#irreducibility" id="toc-irreducibility" class="nav-link" data-scroll-target="#irreducibility">Irreducibility</a></li>
+  <li><a href="#model-debugging" id="toc-model-debugging" class="nav-link" data-scroll-target="#model-debugging">Model debugging</a></li>
+  <li><a href="#mcmc-diagnostics" id="toc-mcmc-diagnostics" class="nav-link" data-scroll-target="#mcmc-diagnostics">MCMC diagnostics</a></li>
+  <li><a href="#mcse" id="toc-mcse" class="nav-link" data-scroll-target="#mcse">MCSE</a></li>
+  <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  <li><a href="#effective-sample-size-from-asymptotic-variance" id="toc-effective-sample-size-from-asymptotic-variance" class="nav-link" data-scroll-target="#effective-sample-size-from-asymptotic-variance">Effective sample size from asymptotic variance</a></li>
+  <li><a href="#independence-prior-vs-posterior" id="toc-independence-prior-vs-posterior" class="nav-link" data-scroll-target="#independence-prior-vs-posterior">Independence: prior vs posterior</a></li>
+  <li><a href="#normalization-constant" id="toc-normalization-constant" class="nav-link" data-scroll-target="#normalization-constant">Normalization constant</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w11_quiz2/topic01_terminology.html">Quiz 2</a></li><li class="breadcrumb-item"><a href="../w11_quiz2/topic02_q2_practice_questions.html">Practice questions (Quiz 2)</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Practice questions (Quiz 2)</h1>
 </div>
@@ -864,6 +927,104 @@ https://github.com/trevorcampbell/shortex
 </div>
 </section>
 </section>
+<section id="bias-and-consistency" class="level2">
+<h2 class="anchored" data-anchor-id="bias-and-consistency">Bias and consistency</h2>
+<p>Let <span class="math inline">\(\hat G_M\)</span> denote a Monte Carlo estimator based on <span class="math inline">\(M\)</span> iterations, providing an approximation for an intractable expectation, <span class="math inline">\(g^* = \mathbb{E}_\pi[g(X)]\)</span>.</p>
+<ol type="1">
+<li>Define the notion of bias.</li>
+<li>Define the notion of consistency.</li>
+<li>In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. $\bias(\hat G_M, g^*) = \ex[\hat G_M] - g^*$. 
+2. $\hat G_M \to g^*$.[^1]
+3. Consistency is more important. Consistency means that the error decreases as $M$ increases. 
+    In contrast, even if a method is unbiased, it still leads to error due to its variance. 
+:::
+
+[^1]: Where convergence is either almost sure (strong consistency), or in probability (weak consistency).
+
+
+-->
+</section>
+<section id="model-construction" class="level2">
+<h2 class="anchored" data-anchor-id="model-construction">Model construction</h2>
+<p>Consider the following setup</p>
+<ul>
+<li>You have a cohort of 15 unemployed persons who are all starting a job search process at the same time.</li>
+<li>For each participant, you have collected 2 covariates: their age and their number of years of education.</li>
+<li>You contact the participants each day for 10 days and record the day they secured a new job.</li>
+<li>At the end of your study, 3 of the participants are still looking for a job.</li>
+</ul>
+<section id="using-the-notation" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-notation">Using the <code>~</code> notation</h3>
+<p>Define a Bayesian model to handle this dataset. Introduce all random variables, and specify for each its data type, if it observed or not.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+The random variables are:
+
+- Let $y_1, y_2, \dots, y_{12}$ denote the job search times for the 12 participants who found a job 
+    in the study interval (10 days). These variables are observed. 
+- Let $y_{13}, y_{14}, y_{15}$ denote the job search times for the other 3 participants. These variables are latent.
+- Let $f_i$ denote an indicator variable equal to one iff participant $i$ found a job in the 10 days period, $i \in \{1, 2, \dots, 15\}$. 
+    These variables are observed. 
+- Let $x_{i,j}$, $i \in \{1, 2, \dots, 15\}, j \in \{1, 2\}$ denote the age ($j=1$) or years of education ($j=2$) for participant $i$. 
+    These variables are observed. 
+- Set $x_{i,0} = 1$ to simplify the notation for the intercept. 
+- Let $\theta_0$ denote and intercept parameter, $\theta_1, \theta_2$, slope parameters for the age and number of years of education. 
+    These variables are latent.
+
+One potential model is:
+\begin{align*}
+\theta_j &\sim \distNorm(0, 100), \\
+\phi &\sim \distExp(1/100), \\
+\mu_i &= \exp\left(\sum_{j=0}^3 x_{i,j} \theta_j\right) \\
+y_i &\sim \distNB\left(\mu_i, \phi\right), \\
+f_i &= \ind[y_i < 10].
+\end{align*}
+:::
+
+-->
+</section>
+<section id="rao-blackwellization" class="level3">
+<h3 class="anchored" data-anchor-id="rao-blackwellization">Rao-blackwellization</h3>
+<p>Write the joint density of the model in the last part, before and after Rao-Blackwellization. You can introduce symbols for densities and CDFs, for example leave the density of the exponential as <span class="math inline">\(p_\text{Exp}(x; \lambda),\)</span> and similarly use <span class="math inline">\(F_\text{Name}(\cdot; \cdot)\)</span> to denote CDFs.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Before Rao-Blackwellization, we have:
+
+\begin{align*}
+p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) = \\
+&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+&\left( \prod_{i=1}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right).
+\end{align*}
+
+Rao-Blackwellizing the above:
+\begin{align*}
+\int \int \int p(\phi, \theta_1, &\dots, \theta_3, y_1, y_2, \dots, y_{15}, f_1, f_2, \dots, f_{15}) \dee y_{13} \dee y_{14} \dee y_{15} = \\
+&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+&\left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
+& \int \int \int \left( \prod_{i=13}^{15} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \dee y_{13} \dee y_{14} \dee y_{15} \\
+=&p_\text{Exp}(\phi; 1/100) \left( \prod_{j=0}^2 p_\text{Norm}(\theta_j; 0, 100) \right) \\
+& \left( \prod_{i=1}^{12} p_\text{NB}\left(y_i; \mu_i, \phi\right) p_\text{Bern}(f_i; \ind[y_i < 10]) \right) \\
+&   \prod_{i=13}^{15} \left( 1 - F_\text{NB}\left(10; \mu_i, \phi\right)  \right).
+\end{align*}
+
+:::
+
+-->
+</section>
+</section>
 <section id="stan-based-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="stan-based-prediction">Stan-based prediction</h2>
 <p>Consider the code you wrote in <a href="../exercises/ex07.html">Exercise 7</a> to perform Bayesian linear regression on galaxy distances and velocities:</p>
@@ -888,89 +1049,104 @@ https://github.com/trevorcampbell/shortex
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  ys ~ normal(slope*xs, sigma);</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>How would you modify this code to predict the velocity of a galaxy at distance 1.5?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell" data-output.var="hubble_predictions">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// number of observations</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] xs;   <span class="co">// independent variable</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N] ys;   <span class="co">// dependent variable</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma;</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  slope     ~ student_t(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">100</span>);</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  sigma     ~ exponential(<span class="fl">0.001</span>);</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  ys ~ normal(slope*xs, sigma);</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> prediction = normal_rng(slope*<span class="fl">1.5</span>, sigma);</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">distance =</span> R..Mpc.) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">velocity =</span> v..km.sec.)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">=</span> df<span class="sc">$</span>velocity<span class="sc">/</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Run the above program using stan</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  hubble_predictions,         </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">xs =</span> df<span class="sc">$</span>distance, <span class="at">ys =</span> df<span class="sc">$</span>velocity, <span class="at">N =</span> <span class="fu">length</span>(df<span class="sc">$</span>distance)), </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_messages =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">open_progress =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">2000</span>       </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Inference for Stan model: anon_model.
+<p>How would you modify this code to predict the velocity of a galaxy at distance 1.5? Hint: use the function <code>normal_rng(mean, sd)</code> to generate a normal random variable with the provided mean and standard deviation parameters.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+::: {.cell output.var='hubble_predictions'}
+
+```{.stan .cell-code}
+data {
+  int<lower=0> N; // number of observations
+  vector[N] xs;   // independent variable
+  vector[N] ys;   // dependent variable
+}
+
+parameters {
+  real slope;
+  real<lower=0> sigma;
+}
+
+model {
+  // prior
+  slope     ~ student_t(3, 0, 100);
+  sigma     ~ exponential(0.001);
+
+  // likelihood
+  ys ~ normal(slope*xs, sigma);
+}
+
+generated quantities {
+  real prediction = normal_rng(slope*1.5, sigma);
+}
+```
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(dplyr))
+
+df = read.csv(url("https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv")) %>%
+  rename(distance = R..Mpc.) %>%
+  rename(velocity = v..km.sec.)
+df$velocity = df$velocity/1000
+```
+:::
+
+Run the above program using (the part below you are **not** expected to memorize):
+
+::: {.cell}
+
+```{.r .cell-code}
+fit = sampling(
+  hubble_predictions,         
+  data = list(xs = df$distance, ys = df$velocity, N = length(df$distance)), 
+  show_messages = FALSE,
+  open_progress = FALSE, 
+  chains = 1,
+  iter = 2000       
+)
+```
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+fit
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Inference for Stan model: anon_model.
 1 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=1000.
 
             mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-slope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1
-sigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1
-prediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1
-lp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1
+slope       0.43    0.00 0.04  0.34  0.40  0.42  0.45  0.52   607    1
+sigma       0.24    0.00 0.04  0.18  0.22  0.24  0.27  0.33   692    1
+prediction  0.63    0.01 0.26  0.12  0.46  0.63  0.81  1.14   913    1
+lp__       21.38    0.05 1.09 18.64 20.99 21.70 22.11 22.36   447    1
 
-Samples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.
+Samples were drawn using NUTS(diag_e) at Sun Mar 17 08:56:05 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
+convergence, Rhat=1).
+```
+
+
+:::
+:::
+:::
+
+-->
 </section>
-<section id="computing-monte-carlo-confidence-intervals" class="level2">
-<h2 class="anchored" data-anchor-id="computing-monte-carlo-confidence-intervals">Computing Monte Carlo confidence intervals</h2>
+<section id="intervals" class="level2">
+<h2 class="anchored" data-anchor-id="intervals">Intervals</h2>
 <p>Suppose you see the following output from a Stan MCMC fit object:</p>
 <pre><code>Inference for Stan model: anon_model.
 1 chains, each with iter=2000; warmup=1000; thin=1; 
@@ -986,59 +1162,331 @@ Samples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).</code></pre>
-<p>Report a 80% confidence interval for the posterior mean of the <code>prediction</code> parameter.</p>
+<ol type="1">
+<li>Report a 80% confidence interval to capture the Monte Carlo error for the posterior mean of the <code>prediction</code> parameter.</li>
+</ol>
 <p>Some of the following will be helpful in answering that question:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8416212</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.281552</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.644854</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We need to split the <span class="math inline">\(1-20\%\)</span> into the two tails, hence we are looking for the 10% tail.</p>
-<p>The radius of the interval is therefore:</p>
+<ol start="2" type="1">
+<li>Report a 50% credible interval for the <code>prediction</code> parameter. You can ignore Monte Carlo error in this sub-question.</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. We need to split the $1-20\%$ into the two tails, hence we are looking for the 10\% tail.
+
+The radius of the interval is therefore:
+
+::: {.cell}
+
+```{.r .cell-code}
+0.01 * qnorm(0.9)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.01281552
+```
+
+
+:::
+:::
+
+Hence the interval is $[0.64 \pm 0.01]$. 
+
+2. A [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval gives $[0.47, 0.81]$. 
+:::
+
+-->
+</section>
+<section id="metropolis-hastings" class="level2">
+<h2 class="anchored" data-anchor-id="metropolis-hastings">Metropolis-Hastings</h2>
+<p>Fill the <strong>two</strong> gaps in the pseudo code below:</p>
+<ul>
+<li>Initialize <span class="math inline">\(X^{(0)}\)</span> arbitrarily</li>
+<li>For <span class="math inline">\(m = 1, 2, \dots, M\)</span> do:
+<ul>
+<li>Denote the proposal at iteration <span class="math inline">\(m \in \{1, 2, \dots, M\}\)</span> by: <span class="math display">\[\tilde X^{(m)}\sim q(\cdot | X^{(m-1)}).\]</span></li>
+<li>Compute the <strong>MH ratio</strong>: <span class="math display">\[R^{(m)}= \frac{\gamma(\tilde X^{(m)})}{\gamma(X^{(m-1)})}.\]</span></li>
+<li>Sample an <strong>acceptance Bernoulli</strong>: <span class="math display">\[A^{(m)}\sim \text{???}.\]</span>
+<ul>
+<li>If <span class="math inline">\(A^{(m)}= 1\)</span>, we <strong>accept</strong> the proposed sample: <span class="math display">\[X^{(m)}= \text{???}\]</span></li>
+<li>Else, <span class="math inline">\(A^{(m)}= 0\)</span>, and we <strong>reject</strong> the proposed sample and stay at previous position: <span class="math display">\[X^{(m)}= X^{(m-1)}.\]</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="stan" class="level2">
+<h2 class="anchored" data-anchor-id="stan">Stan</h2>
+<ol type="1">
+<li>Explain the difference between the <code>parameters</code> block and the <code>generated parameters</code> block in Stan.</li>
+<li>Why do you think Stan uses 4 independent chains by default?</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. The `parameters` block is used for random variable defined using `~` whereas the `generated parameters` block, for those defined using `=`. 
+2. By having the chains initialized at different point, this supports the detection of slow mixing. 
+:::
+
+-->
+</section>
+<section id="reasoning-about-mh" class="level2">
+<h2 class="anchored" data-anchor-id="reasoning-about-mh">Reasoning about MH</h2>
+<p>Consider the MH algorithm where we use as proposal a normal centered at the current point with standard deviation <span class="math inline">\(\sigma_p\)</span>.</p>
+<p>You observe the following trace plot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.01</span> <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.01281552</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic02_q2_practice_questions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>Hence the interval is <span class="math inline">\([0.64 \pm 0.01]\)</span>.</p>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Questions from week 10 is also included in the material covered in the quiz but is not included in this list.</p>
-</div>
-</div>
+<ol type="1">
+<li>Is this chain mixing well?</li>
+<li>Why or why not?</li>
+<li>If it is not, what course of action do you recommend?</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. No. 
+2. Because the rejection rate is too high. 
+3. Decrease $\sigma_p$. 
+:::
+
+-->
+</section>
+<section id="irreducibility" class="level2">
+<h2 class="anchored" data-anchor-id="irreducibility">Irreducibility</h2>
+<p>Consider the following MH setup:</p>
+<ul>
+<li><span class="math inline">\(\gamma(x) = \mathbb{1}[x \in \{1, 2, \dots, 10\}]\)</span></li>
+<li><span class="math inline">\(q(x' | x) = \mathbb{1}[x' \in \{x-1, x+1\}]/2\)</span>.</li>
+</ul>
+<ol type="1">
+<li>Define <em>irreducibility</em>.</li>
+<li>Prove that the MH algorithm is irreducible in this setup.</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+1. See [consistency of MH](../w08_mcmc1/topic05_mcmc_consistency.qmd). 
+2. Let $x, x' \in \{1, 2, \dots, 10\}$ (these are the only points where $\gamma(x) > 0$). 
+    Suppose first $x' > x$ (the case $x' < x$ is done similarly).  Pick $m = x' - x$, and note 
+    \begin{align*}
+    \pr(X^\parm = x' | X^{(0)} = x) &> \pr(X^\parm = x', X^{(m-1)} = x'-1, X^{(m-2)} = x'-2, \dots, X^{(1)} = x+1 | X^{(0)} = x) \\
+    &= (1/2)^m > 0. 
+    \end{align*}
+:::
+
+-->
+</section>
+<section id="model-debugging" class="level2">
+<h2 class="anchored" data-anchor-id="model-debugging">Model debugging</h2>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(C(y)\)</span> denote a 99% credible interval computed from data <span class="math inline">\(y\)</span>.</li>
+<li>Let <span class="math inline">\(y\)</span> and <span class="math inline">\(\check y\)</span> denote a real and synthetic (simulated) data respectively.</li>
+</ul>
+<p>Suppose you observed the following:</p>
+<ol type="1">
+<li><span class="math inline">\(y_n \notin C(y_{\backslash n})\)</span></li>
+<li><span class="math inline">\(\check y_n \notin C(\check y_{\backslash n})\)</span></li>
+<li>On both synthetic and real data, trace plots and ESS both look good.</li>
+<li>You replicated these experiments several times and always get the same results.</li>
+</ol>
+<p>What would you do next? Justify your answer.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Referring to the workflow notes on [goodness of fit](../w09_workflow/topic02_goodness_of_fit.qmd) 
+and [software checking](../w09_workflow/topic03_checking_correctness.qmd), we have:
+
+- From 3, we can exclude "slow mixing." 
+- From 4, we can exclude "bad luck."
+- From 2, we therefore know there has to be a software defect (bug). 
+- Since 1 can be caused by either a software defect or a gross mis-specification, this item does not provide additional information.
+
+Therefore, the next step would be to fix the bug(s). 
+:::
+
+-->
+</section>
+<section id="mcmc-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="mcmc-diagnostics">MCMC diagnostics</h2>
+<p>Explain how to detect slow mixing from a rank plot.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+When one of the chains has a shape that deviates from the uniform distribution, 
+we can raise a warning that there is slow mixing. 
+:::
+
+-->
+</section>
+<section id="mcse" class="level2">
+<h2 class="anchored" data-anchor-id="mcse">MCSE</h2>
+<p>How would you proceed if you want to decrease Monte Carlo Standard Error (MCSE)?</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+Increase the number of MCMC iterations.
+:::
+
+-->
+</section>
+<section id="debugging" class="level2">
+<h2 class="anchored" data-anchor-id="debugging">Debugging</h2>
+<p>You wish to write Stan model for logistic regression with normal priors on the parameters with prior variance 100.</p>
+<p>Consider the following draft of a Stan model:</p>
+<pre><code>data { 
+  int N
+  array[N] int y
+}
+
+model {
+  slope ~ normal(0, 100);
+  intercept ~ normal(0, 100);
+  for (i in 1:N) {
+    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
+  }
+}</code></pre>
+<p>Identify as many bugs as you can, and correct each.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+- Missing declaration of the parameters:
+```
+parameters { 
+  real slope;
+  real intercept;
+}
+```
+- Missing two `;` at the end of the lines in `data`. 
+- The second argument of `normal` in Stan is a standard deviation, 
+  not a variance, so it should be `slope ~ normal(0, 10);`. 
+- Similarly for the `intercept`.
+
+The full correct code is taken from the clicker 
+answers in [the "hands on" page](../w08_mcmc1/topic06_hands_on.qmd). 
+:::
+
+-->
+</section>
+<section id="effective-sample-size-from-asymptotic-variance" class="level2">
+<h2 class="anchored" data-anchor-id="effective-sample-size-from-asymptotic-variance">Effective sample size from asymptotic variance</h2>
+<p>Recall that the CLT for i.i.d. and Markov chains give us the following approximations:</p>
+<ul>
+<li><span class="math inline">\(\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,\)</span></li>
+<li><span class="math inline">\(\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G,\)</span></li>
+</ul>
+<p>where <span class="math inline">\(M\)</span> is the number of iterations, <span class="math inline">\(n_e\)</span> is the effective sample size, <span class="math inline">\(\bar X_\text{Markov}\)</span> and <span class="math inline">\(\bar X_\text{iid}\)</span> are the MC estimators based on MCMC and i.i.d. sampling respectively, <span class="math inline">\(G\)</span> is standard normal, <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> are the posterior mean and standard deviation, and <span class="math inline">\(\sigma_a\)</span> is the asymptotic variance.</p>
+<p>Use these two approximations to write a formula for the effective sample size based on <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\sigma_a\)</span> and <span class="math inline">\(M\)</span>.</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+See [lecture notes](../w09_workflow/topic05_mcmc_ess.qmd).
+:::
+
+-->
+</section>
+<section id="independence-prior-vs-posterior" class="level2">
+<h2 class="anchored" data-anchor-id="independence-prior-vs-posterior">Independence: prior vs posterior</h2>
+<p>Suppose we place a prior where <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are independent, say <span class="math inline">\(X_i \sim {\mathrm{Bern}}(0.5)\)</span> independently. If we condition on some data <span class="math inline">\(Y\)</span>, will <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> always be independent under the posterior?</p>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+No. Consider for example $Y = X_1 \text{ xor } X_2$, 
+where recall that $x \text{ xor } y$ iff exactly one of $x_1, x_2$ is equal to one.
+Then under the posterior distribution that $(Y = 1)$, we have that $X_1$ is completely determined by $X_2$, 
+i.e. $\pr(X_1 = x_1, X_2 = x_2 | Y = 1) \neq \pr(X_1 = x_1 | Y = 1) \pr(X_2 = x_2 | Y = 1)$. 
+Many other counter examples are possible.
+:::
+
+-->
+</section>
+<section id="normalization-constant" class="level2">
+<h2 class="anchored" data-anchor-id="normalization-constant">Normalization constant</h2>
+<p>Consider the Bayesian model:</p>
+<p><span class="math display">\[\begin{align*}
+X &amp;\sim {\mathrm{Exp}}(1/100) \\
+Y &amp;\sim {\mathrm{Poisson}}(X).
+\end{align*}\]</span></p>
+<p>When using MCMC, will the output change if, for <span class="math inline">\(x &gt; 0\)</span>…</p>
+<ol type="1">
+<li>You used <span class="math inline">\(\check f(x) = \exp(-(1/100) x)\)</span> instead of <span class="math inline">\(f(x) = (1/100) \exp(-(1/100) x)\)</span> for the prior?</li>
+<li>You used <span class="math inline">\(\hat f(y|x) = x^y / y!\)</span> instead of <span class="math inline">\(f(y|x) = \exp(-x) x^y / y!\)</span> for the likelihood?</li>
+</ol>
+<!--
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+For 1, the output will not change as the MH ratio with $\check f(x)$ is:
+
+$$
+\check r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{  \exp(-(1/100) \tilde x) f(y|\tilde x)}{ \exp(-(1/100) \tilde x)  f(y|x)}
+$$
+
+whereas for $f(x)$ we get:
+
+$$
+r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ (1/100) \exp(-(1/100) \tilde x) f(y|\tilde x)}{ (1/100) \exp(-(1/100) \tilde x)  f(y|x)}
+$$
+So we see the $(1/100)$ factors on numerator and denominator cancel and we have $r = \check r$.
+
+For 2, the output would change since for $\hat f(y|x)$ we have:
+
+$$
+\hat r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \tilde x^y / y!  }{ f(x) x^y / y! }
+$$
+whereas for $f(x)$ we get:
+
+$$
+r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \exp(-\tilde x) \tilde x^y / y!  }{ f(x) \exp(-x) x^y / y! }
+$$
+
+and hence $r = \hat r \exp(x - \tilde x)$ so $r$ and $\hat r$ are not equal. 
+:::
+
+-->
 
 
 </section>

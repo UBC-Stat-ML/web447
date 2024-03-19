@@ -753,7 +753,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w10_modelling/topic01_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text">Bayesian Lego</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic02_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">More Bayesian bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic03_custom_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Custom bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic04_censoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Censoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic05_collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data collection mechanisms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic06_rao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rao-Blackwellization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic07_mixtures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixtures</span></a>
   </div>
 </li>
       </ul>
@@ -771,6 +807,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../w11_quiz2/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review continued</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic02_q2_practice_questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice questions (Quiz 2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic03_q2_logistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logistics</span></a>
   </div>
 </li>
       </ul>
@@ -792,7 +840,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a>
   <ul class="collapse">
-  <li><a href="#bayesian-statisticians-using-clts" id="toc-bayesian-statisticians-using-clts" class="nav-link" data-scroll-target="#bayesian-statisticians-using-clts">Bayesian statisticians using CLTs?</a></li>
+  <li><a href="#bayesian-statisticians-using-central-limit-theorems" id="toc-bayesian-statisticians-using-central-limit-theorems" class="nav-link" data-scroll-target="#bayesian-statisticians-using-central-limit-theorems">Bayesian statisticians using central limit theorems?</a></li>
   </ul></li>
   <li><a href="#executive-version" id="toc-executive-version" class="nav-link" data-scroll-target="#executive-version">Executive version</a></li>
   <li><a href="#mathematical-underpinnings" id="toc-mathematical-underpinnings" class="nav-link" data-scroll-target="#mathematical-underpinnings">Mathematical underpinnings</a>
@@ -880,10 +928,10 @@ https://github.com/trevorcampbell/shortex
 <li>Full picture should include both (i.e., the first step of <a href="https://xkcd.com/2110/">this joke</a> can be taken seriously).</li>
 <li>Interestingly, the mathematical toolbox to study 2 is similar to the non-Bayesian toolbox (i.e.&nbsp;normal approximation) for studying 1.</li>
 </ul>
-<section id="bayesian-statisticians-using-clts" class="level3">
-<h3 class="anchored" data-anchor-id="bayesian-statisticians-using-clts">Bayesian statisticians using CLTs?</h3>
+<section id="bayesian-statisticians-using-central-limit-theorems" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-statisticians-using-central-limit-theorems">Bayesian statisticians using central limit theorems?</h3>
 <p>Earlier on, when building <a href="../w05_properties/topic04_decision_to_set.html">credible interval</a>, (a Bayesian measure of <em>statistical error</em>) we avoided central limit theorems.</p>
-<p><strong>Question:</strong> why are Bayesians OK with using CLTs for MCMC error analysis (i.e., for <em>computational error</em>)?</p>
+<p><strong>Question:</strong> why are Bayesians OK with using central limit theorems for MCMC error analysis (i.e., for <em>computational error</em>)?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1040,12 +1088,12 @@ Click for answer
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
 <ul>
-<li>Recall the central limit theorem (CLT) for i.i.d. random variables:
+<li>Recall the central limit theorem (CLT) for independent and identically distributed (i.i.d.) random variables:
 <ul>
 <li>if some random variables <span class="math inline">\(V_i\)</span>’s are i.i.d. and</li>
 <li>each has finite variance, then we have<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span id="eq-clt-iid"><span class="math display">\[\sqrt{n}(\bar V - \mu) \to \mathcal{N}(0, \operatorname{SD}[V]), \tag{1}\]</span></span> where <span class="math inline">\(\bar V = \frac{1}{n} \sum_{i=1}^n V_i\)</span> and <span class="math inline">\(\mu = \mathbb{E}[V]\)</span>.</li>
 </ul></li>
-<li>From the CLT, recall that standard frequentist arguments give: <span id="eq-ci"><span class="math display">\[\mathbb{P}(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%, \tag{2}\]</span></span> where: the Standard Error (SE) is given by <span class="math inline">\(\text{SE} = \operatorname{SD}[V] / \sqrt{n}\)</span>.</li>
+<li>From the central limit theorem, recall that standard frequentist arguments give: <span id="eq-ci"><span class="math display">\[\mathbb{P}(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%, \tag{2}\]</span></span> where: the Standard Error (SE) is given by <span class="math inline">\(\text{SE} = \operatorname{SD}[V] / \sqrt{n}\)</span>.</li>
 </ul>
 </section>
 <section id="central-limit-theorem-clt-for-markov-chains" class="level3 page-columns page-full">

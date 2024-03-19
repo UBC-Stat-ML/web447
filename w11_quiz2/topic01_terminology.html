@@ -719,7 +719,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w10_modelling/topic01_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
+ <span class="menu-text">Bayesian Lego</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic02_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">More Bayesian bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic03_custom_bricks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Custom bricks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic04_censoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Censoring</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic05_collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data collection mechanisms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic06_rao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rao-Blackwellization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10_modelling/topic07_mixtures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixtures</span></a>
   </div>
 </li>
       </ul>
@@ -739,6 +775,18 @@ window.Quarto = {
  <span class="menu-text">Terminology review continued</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic02_q2_practice_questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Practice questions (Quiz 2)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11_quiz2/topic03_q2_logistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logistics</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -756,6 +804,7 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#common-distributions-pmfs-and-densities" id="toc-common-distributions-pmfs-and-densities" class="nav-link" data-scroll-target="#common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</a></li>
   <li><a href="#general-mcmc-terms" id="toc-general-mcmc-terms" class="nav-link" data-scroll-target="#general-mcmc-terms">General MCMC terms</a></li>
   <li><a href="#stan-terminology" id="toc-stan-terminology" class="nav-link" data-scroll-target="#stan-terminology">Stan terminology</a></li>
   <li><a href="#metropolis-hastings" id="toc-metropolis-hastings" class="nav-link" data-scroll-target="#metropolis-hastings">Metropolis-Hastings</a></li>
@@ -764,6 +813,8 @@ window.Quarto = {
   <li><a href="#notion-of-unidentifiability" id="toc-notion-of-unidentifiability" class="nav-link" data-scroll-target="#notion-of-unidentifiability">Notion of unidentifiability</a></li>
   <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit">Goodness-of-fit</a></li>
   <li><a href="#monte-carlo-standard-error-mcse" id="toc-monte-carlo-standard-error-mcse" class="nav-link" data-scroll-target="#monte-carlo-standard-error-mcse">Monte Carlo Standard Error (MCSE)</a></li>
+  <li><a href="#implementing-custom-distributions" id="toc-implementing-custom-distributions" class="nav-link" data-scroll-target="#implementing-custom-distributions">Implementing custom distributions</a></li>
+  <li><a href="#data-collection-mechanisms" id="toc-data-collection-mechanisms" class="nav-link" data-scroll-target="#data-collection-mechanisms">Data collection mechanisms</a></li>
   </ul>
 </nav>
     </div>
@@ -822,6 +873,10 @@ https://github.com/trevorcampbell/shortex
 <p>Just as for quiz 1, part of quiz 2 involves knowing these terms without having to look them up.</p>
 <p>While in “the real world” you can look things up, to attain mastery of a subject you need a critical mass of concepts in memory. Too much google look-ups prevent thinking at the speed of thought.</p>
 </section>
+</section>
+<section id="common-distributions-pmfs-and-densities" class="level2">
+<h2 class="anchored" data-anchor-id="common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</h2>
+<p>As in quiz 1, knowing the <strong>support</strong> (no need to memorize other details) is needed, but note additional distributions have been introduced <a href="../w11_quiz2/topic03_q2_logistics.html">see the list</a>.</p>
 </section>
 <section id="general-mcmc-terms" class="level2">
 <h2 class="anchored" data-anchor-id="general-mcmc-terms">General MCMC terms</h2>
@@ -899,19 +954,22 @@ https://github.com/trevorcampbell/shortex
 <li>Asymptotic variance</li>
 <li>Batch mean estimator</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Notation from week 10 is also included in the material covered in the quiz but is not included in this list.</p>
-</div>
-</div>
+</section>
+<section id="implementing-custom-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="implementing-custom-distributions">Implementing custom distributions</h2>
+<ul>
+<li>Log scale computation.</li>
+<li>Underflow.</li>
+</ul>
+</section>
+<section id="data-collection-mechanisms" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection-mechanisms">Data collection mechanisms</h2>
+<ul>
+<li>Censoring</li>
+<li>Truncation</li>
+<li>Non-ignorable missingness</li>
+<li>Rao-blackwellization</li>
+</ul>
 
 
 </section>
