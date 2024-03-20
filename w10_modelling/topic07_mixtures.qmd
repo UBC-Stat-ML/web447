@@ -21,3 +21,68 @@ TODO
 TODO
 
 -->
+
+
+```{r}
+suppressPackageStartupMessages(require("rstan"))
+
+data = read.csv(url("https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv"))
+
+hist(data$Score)
+```
+
+Source: [Albert and Hu, 2020](https://bayesball.github.io/BOOK/case-studies.html#latent-class-modeling)
+
+
+```{stan output.var = "students_guessing"}
+data {
+  int n_students;
+  int n_questions;
+  array[n_students] int<lower=0, upper=n_questions> scores; 
+  
+}
+
+parameters {
+  real<lower=0, upper=1> fraction_guessing;
+  
+  real<lower=0, upper=1> non_guessing_population_mean;
+  real<lower=0> non_guessing_population_spread;
+  
+  vector<lower=0, upper=1>[n_students] abilities_if_non_guessing;
+}
+
+model {
+  fraction_guessing ~ uniform(0, 1);
+  
+  non_guessing_population_mean ~ uniform(0, 1);
+  non_guessing_population_spread ~ exponential(1.0/100);
+  
+  for (i in 1:n_students) {
+    abilities_if_non_guessing[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);
+    
+    target += log_sum_exp(
+      log(fraction_guessing) + binomial_lpmf(scores[i] | n_questions, 0.5),
+      log1p(- fraction_guessing) + binomial_lpmf(scores[i] | n_questions, abilities_if_non_guessing[i])
+    );
+  }
+
+}
+```
+
+```{r dependson=knitr::dep_prev()}
+fit = sampling(
+  students_guessing,
+  seed = 1,
+  chains = 1,
+  data = list(
+            n_students = length(data$Score),
+            n_questions = 20,
+            scores = data$Score
+          ),       
+  iter = 10000                   
+)
+```
+
+```{r}
+fit
+```
