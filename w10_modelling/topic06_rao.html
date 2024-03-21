@@ -1065,67 +1065,96 @@ Y &amp;= C L + (1 - C) H.
 </ul></li>
 </ul>
 <p><strong>Question:</strong> how to define <span class="math inline">\(\gamma(x)\)</span> from <span class="math inline">\(\gamma(x, h)\)</span> so that the result on <span class="math inline">\(x\)</span> stay the same?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\max_x \gamma(x, h)$
-2. $\max_h \gamma(x, h)$
-3. $\int \gamma(x, h) \dee x$
-4. $\int \gamma(x, h) \dee h$
-5. None of the above. 
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is 4: 
-
-\begin{align*}
-\int \gamma(x, h) \dee h &= \int f(x, h, y) \dee h \\
-&= f(x, y) = \gamma(x). 
-\end{align*}
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\max_x \gamma(x, h)\)</span></li>
+<li><span class="math inline">\(\max_h \gamma(x, h)\)</span></li>
+<li><span class="math inline">\(\int \gamma(x, h) \mathrm{d}x\)</span></li>
+<li><span class="math inline">\(\int \gamma(x, h) \mathrm{d}h\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The correct answer is 4:</p>
+<p><span class="math display">\[\begin{align*}
+\int \gamma(x, h) \mathrm{d}h &amp;= \int f(x, h, y) \mathrm{d}h \\
+&amp;= f(x, y) = \gamma(x).
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 <p><strong>Question:</strong> compute <span class="math inline">\(\gamma(x)\)</span> in our simplified example, <a href="#eq-simplified" class="quarto-xref">Equation&nbsp;1</a>.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $f(x) F(L; x)$
-2. $f(x) (1 - F(L; x))$
-3. $f(x) F(x; L)$
-4. $f(x) (1 - F(x; L))$
-5. None of the above. 
-
-Where $F(h; x)$ is the cumulative distribution function of the 
-likelihood given parameters $x$. 
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Since $y = L$, the detection limit,
-
-\begin{align*}
-\gamma(x) &= \int \gamma(x, h) \dee h \\
-&= \int f(x, h, y) \dee h \\
-&= \int f(x) f(h | x) f(y | h) \dee h \\
-&=  f(x) \int f(h | x) \ind[L \le h] \dee h \\ 
-&= f(x) (1 - F(L; x)). 
-\end{align*}
-
-Note that in the Stan code above, $1 - F(L; x)$ is implemented with 
-`exponential_lccdf(limit | rate)` ("lccdf" stands for "log complement of cumulative distribution function"). 
-:::
-
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(f(x) F(L; x)\)</span></li>
+<li><span class="math inline">\(f(x) (1 - F(L; x))\)</span></li>
+<li><span class="math inline">\(f(x) F(x; L)\)</span></li>
+<li><span class="math inline">\(f(x) (1 - F(x; L))\)</span></li>
+<li>None of the above.</li>
+</ol>
+<p>Where <span class="math inline">\(F(h; x)\)</span> is the cumulative distribution function of the likelihood given parameters <span class="math inline">\(x\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(y = L\)</span>, the detection limit,</p>
+<p><span class="math display">\[\begin{align*}
+\gamma(x) &amp;= \int \gamma(x, h) \mathrm{d}h \\
+&amp;= \int f(x, h, y) \mathrm{d}h \\
+&amp;= \int f(x) f(h | x) f(y | h) \mathrm{d}h \\
+&amp;=  f(x) \int f(h | x) \mathbb{1}[L \le h] \mathrm{d}h \\
+&amp;= f(x) (1 - F(L; x)).
+\end{align*}\]</span></p>
+<p>Note that in the Stan code above, <span class="math inline">\(1 - F(L; x)\)</span> is implemented with <code>exponential_lccdf(limit | rate)</code> (“lccdf” stands for “log complement of cumulative distribution function”).</p>
+</div>
+</div>
+</div>
 
 
 </section>
