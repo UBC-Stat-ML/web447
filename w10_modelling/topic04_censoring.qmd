@@ -160,7 +160,7 @@ fit
 
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
-mcmc_areas_ridges(fit, pars = c("mean"), point_est = c()) + 
+mcmc_areas_ridges(fit, pars = c("mean")) + 
   theme_minimal() + 
   scale_x_continuous(limits = c(0, 10)) 
 ```

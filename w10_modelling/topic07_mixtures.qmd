@@ -6,83 +6,278 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
-
-<!--
 
 ## Outline
 
 ### Topics
 
-TODO
+- Mathematical definition of mixtures
+- Implementation in Stan
+
 
 ### Rationale
 
-TODO
+Mixtures are motivated by cases where you believe the data is composed of 
+two or more distinct sub-populations. 
 
--->
+One use of mixtures is to figure out, for each data point, from which 
+sub-population it comes from. 
 
+Beyond the sub-population example, mixtures are also used to get more flexible 
+distribution families. 
+
+
+## Example: detection of random guessing
+
+- We look at a dataset from [Albert and Hu, 2020](https://bayesball.github.io/BOOK/case-studies.html#latent-class-modeling). 
+- We have scores for 30 students on a test. 
+- The test has 20 questions. 
+- All questions are TRUE/FALSE with same weight. 
+- Every student attempted every question. 
 
 ```{r}
 suppressPackageStartupMessages(require("rstan"))
 
 data = read.csv(url("https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv"))
-
-hist(data$Score)
+rmarkdown::paged_table(data)
 ```
 
-Source: [Albert and Hu, 2020](https://bayesball.github.io/BOOK/case-studies.html#latent-class-modeling)
+```{r}
+plot(data$Score,
+      ylim = c(0, 20),
+      xlab = "Student index", 
+      ylab = "Score (out of 20 questions)")
+```
 
+
+- Notice a cluster of students with scores around 50%,
+- and a second cluster with much better scores. 
+- Hypothesis: some students answered completely at random.
+
+
+## Simplified problem
+
+- Suppose first that we have the score for only one student.
+- E.g.: first one, who got 9/20. 
+- You want a model to put a probability on: "is this student is guessing at random?"
+    - Real application: analysis of clicker scores where grade is participation-based. 
+
+
+### Mathematical model
+
+- Start with the data: $Y$, an integer between 0 and 20. 
+
+**Question:** what is a good choice of likelihood?
+
+{{< include ../../clickers/w10/_c05.qmd >}}
+
+- The parameters of the likelihood depend on whether the student is guessing or not
+    - Let $G$ denote an indicator on guessing, i.e.:
+        - $G = 1$: guessing,
+        - $G = 0$: not guessing, i.e., trying at the best of their ability. 
+        
+        
+**Question:** what is a good choice of prior on $G$?
+
+{{< include ../../clickers/w10/_c06.qmd >}} 
+
+
+- The likelihood given $G = 1$ (guessing) is easy:
+  $$Y \sim \distBinom(20, 0.5).$$
+- The likelihood given $G = 0$ (trying at the best of their ability) is slightly trickier:
+    - what is "the best of their ability"?
+    - **Bayesian recipe:** treat it as an unknown ability parameters $A$
+    
+**Full model:**
+
+\begin{align*}
+A &\sim \distUnif(0, 1) \\
+G &\sim \distBern(1/3) \\
+Y &\sim \distBinom(20, 0.5 G + A(1-G)).
+\end{align*}
+
+
+### Marginalization
+
+- Stan does not support discrete latent random variables like $G$
+- Therefore we use [Rao-Blackwellization](topic06_rao.qmd):
+    - Joint distribution before Rao-Blackwellization:
+      $$\gamma(a, g, y) = p(a) p(g) p(y|a, g).$$
+    - Joint distribution after Rao-Blackwellization:
+      \begin{align*}
+      \gamma(a, y) &= \sum_{g=0}^1 \gamma(a, g, y) \\
+      &= \sum_{g=0}^1 p(a) p(g) p(y|a, g) \\
+      &= p(a) \sum_{g=0}^1 p(g) p(y|a, g) \\
+      &= \underbrace{p(a)}_\text{(a)} \underbrace{\left( \underbrace{p(g=1) p(y|a, g=1)}_\text{(b)} + \underbrace{p(g=0) p(y|a, g=0)}_\text{(c)} \right)}_\text{(d)}.
+      \end{align*}
+      
+**Question:** match-up (a)-(d) with the labelled statements in the Stan code below. 
+
+
+{{< include ../../clickers/w10/_c07.qmd >}}
+
+
+```{stan output.var = "students_guessing_simplified"}
+data {
+  int<lower=0, upper=20> score;
+}
+
+parameters {
+  real<lower=0, upper=1> ability;
+}
+
+transformed parameters {
+  real complete_likelihood_guessing      = 1.0/3 * exp(binomial_lpmf(score | 20, 0.5)); # <1>
+  real complete_likelihood_non_guessing  = 2.0/3 * exp(binomial_lpmf(score | 20, ability)); # <2>
+}
+
+model {
+  ability ~ uniform(0, 1); # <3>
+  target += log(complete_likelihood_guessing + complete_likelihood_non_guessing); # <4>
+}
+
+generated quantities {
+  real guessing_probability = # <5>
+    complete_likelihood_guessing / (complete_likelihood_guessing + complete_likelihood_non_guessing);
+}
+```
+1. Stan statement 1 (used in clicker question)
+2. Stan statement 2
+3. Stan statement 3
+4. Stan statement 4
+5. Stan statement 5
+
+
+### Re-instatiation
+
+- We care about the posterior mean of $G$, $\ex[G | Y = y]$...
+- ...but we have marginalized $G$ 🙁
+- To compute the posterior mean, we first use the law of total expectation:
+  $$\ex[G | Y] = \ex[\red{\ex[G | A, Y]} | Y],$$
+- Let us look at the part in red, and see how we can compute it at every MCMC iteration based on the current value of $A^\parm$...
+    - Using the fact the mean of a Bernoulli is the probability that it takes value 1:
+      $$\ex[G | A, Y] = \pr(G = 1 | A, Y).$$
+    - By Bayes rule:
+      $$\pr(G = 1 | A, Y) = \frac{\pr(G = 1 | A, Y)}{\pr(G = 0 | A, Y) + \pr(G = 1 | A, Y)}.$$
+    - This is what gets computed in statement ⑤ in the above Stan code. 
+- Now, recall from the [LLN for Markov chains](../w08_mcmc1/topic05_mcmc_consistency.qmd) gives us condition so that for a test function $h$, we have that the Monte Carlo samples, $A^{(1)}, A^{(2)}, \dots, A^{(M)}$ satisfy,
+$$\frac{1}{M} \sum_{m=1}^M h(A^\parm) \to \ex[h(A) | Y],$$
+with probability one.
+- Therefore from taking $h(a) = \pr(G = 1 | A = a, Y)$, we obtain,
+$$\frac{1}{M} \sum_{m=1}^M \pr(G = 1 | A^\parm, Y = y) \to \ex[G | Y],$$
+with probability one.
+
+
+### Testing the model
+
+**Probably guessing:** feeding a score of **9** out of 20, we get:
+
+
+```{r dependson=knitr::dep_prev()}
+fit = sampling(
+  students_guessing_simplified,
+  seed = 1,
+  refresh = 0,
+  data = list(score = 9)       
+)
+
+mean(extract(fit)$guessing_probability)
+```
+
+**Probably not guessing:** feeding a score of **19** out of 20, we get:
+
+```{r dependson=knitr::dep_prev()}
+fit = sampling(
+  students_guessing_simplified,
+  seed = 1,
+  refresh = 0,
+  data = list(score = 19)      
+)
+
+mean(extract(fit)$guessing_probability)
+```
+
+
+**What is the key limitation of this approach?**
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The student could have a low score because the questions were too difficult! 
+
+With some assumptions (unimodality of the students abilities) we can avoid this limitation.
+:::
+
+
+
+## Full model: getting rid of key limitation
+
+- **Idea:** use a [hierarchical model](../w06_hierarchical/topic03_hierarchy.qmd)! 
+- Random variables that are student-specific:
+    - $Y_i \sim \distBinom(20, 0.5 G_i + A_i (1 - G_i)).$
+    - $A_i \sim \distBeta(\mu, S)$
+    - $G_i \sim \distBern(F)$
+- Random variables that are global:
+    - Population fraction that are guessing: $F \sim \distUnif(0, 1)$,
+    - Population parameters for the abilities:
+        - $\mu \sim \distUnif(0, 1)$ 
+        - $S \sim \distExp(1/100)$. 
+- Stan implementation:
 
 ```{stan output.var = "students_guessing"}
 data {
-  int n_students;
-  int n_questions;
-  array[n_students] int<lower=0, upper=n_questions> scores; 
-  
+  int n_students; 
+  array[n_students] int<lower=0, upper=20> scores; 
 }
 
 parameters {
   real<lower=0, upper=1> fraction_guessing;
-  
   real<lower=0, upper=1> non_guessing_population_mean;
   real<lower=0> non_guessing_population_spread;
-  
-  vector<lower=0, upper=1>[n_students] abilities_if_non_guessing;
+  vector<lower=0, upper=1>[n_students] abilities;
+}
+
+transformed parameters {
+  vector[n_students] complete_loglikelihood_guessing; 
+  vector[n_students] complete_loglikelihood_non_guessing; 
+  for (i in 1:n_students) {
+    complete_loglikelihood_guessing[i]     = log(fraction_guessing)    + binomial_lpmf(scores[i] | 20, 0.5); 
+    complete_loglikelihood_non_guessing[i] = log1p(-fraction_guessing) + binomial_lpmf(scores[i] | 20, abilities[i]);
+  }
 }
 
 model {
   fraction_guessing ~ uniform(0, 1);
-  
   non_guessing_population_mean ~ uniform(0, 1);
   non_guessing_population_spread ~ exponential(1.0/100);
-  
   for (i in 1:n_students) {
-    abilities_if_non_guessing[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);
-    
-    target += log_sum_exp(
-      log(fraction_guessing) + binomial_lpmf(scores[i] | n_questions, 0.5),
-      log1p(- fraction_guessing) + binomial_lpmf(scores[i] | n_questions, abilities_if_non_guessing[i])
-    );
+    abilities[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);
+    target += log_sum_exp(complete_loglikelihood_guessing[i], complete_loglikelihood_non_guessing[i]);
   }
+}
 
+generated quantities {
+  vector[n_students] guessing_probabilities = inv_logit(complete_loglikelihood_guessing - complete_loglikelihood_non_guessing);
 }
 ```
 
-```{r dependson=knitr::dep_prev()}
+```{r  message=FALSE, warning=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(
   students_guessing,
   seed = 1,
-  chains = 1,
+  refresh = 0,
   data = list(
             n_students = length(data$Score),
-            n_questions = 20,
             scores = data$Score
-          ),       
-  iter = 10000                   
+          )                  
 )
 ```
 
-```{r}
-fit
+**Credible intervals and posterior medians:** 90% (thick lines) and 50% (thin lines)
+ 
+```{r message=FALSE, warning=FALSE}
+
+mcmc_intervals(fit, regex_pars = c("guessing_probabilities.*")) + 
+  theme_minimal() + 
+  scale_x_continuous(limits = c(0, 1)) 
 ```
