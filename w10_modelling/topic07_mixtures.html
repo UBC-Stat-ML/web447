@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -66,7 +100,38 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -766,7 +831,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
+  <ul class="collapse">
+  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#example-detection-of-random-guessing" id="toc-example-detection-of-random-guessing" class="nav-link" data-scroll-target="#example-detection-of-random-guessing">Example: detection of random guessing</a></li>
+  <li><a href="#simplified-problem" id="toc-simplified-problem" class="nav-link" data-scroll-target="#simplified-problem">Simplified problem</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-model" id="toc-mathematical-model" class="nav-link" data-scroll-target="#mathematical-model">Mathematical model</a></li>
+  <li><a href="#marginalization" id="toc-marginalization" class="nav-link" data-scroll-target="#marginalization">Marginalization</a></li>
+  <li><a href="#re-instatiation" id="toc-re-instatiation" class="nav-link" data-scroll-target="#re-instatiation">Re-instatiation</a></li>
+  <li><a href="#testing-the-model" id="toc-testing-the-model" class="nav-link" data-scroll-target="#testing-the-model">Testing the model</a></li>
+  </ul></li>
+  <li><a href="#full-model-getting-rid-of-key-limitation" id="toc-full-model-getting-rid-of-key-limitation" class="nav-link" data-scroll-target="#full-model-getting-rid-of-key-limitation">Full model: getting rid of key limitation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -809,34 +893,395 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="topics" class="level3">
+<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<ul>
+<li>Mathematical definition of mixtures</li>
+<li>Implementation in Stan</li>
+</ul>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>Mixtures are motivated by cases where you believe the data is composed of two or more distinct sub-populations.</p>
+<p>One use of mixtures is to figure out, for each data point, from which sub-population it comes from.</p>
+<p>Beyond the sub-population example, mixtures are also used to get more flexible distribution families.</p>
+</section>
+</section>
+<section id="example-detection-of-random-guessing" class="level2">
+<h2 class="anchored" data-anchor-id="example-detection-of-random-guessing">Example: detection of random guessing</h2>
+<ul>
+<li>We look at a dataset from <a href="https://bayesball.github.io/BOOK/case-studies.html#latent-class-modeling">Albert and Hu, 2020</a>.</li>
+<li>We have scores for 30 students on a test.</li>
+<li>The test has 20 questions.</li>
+<li>All questions are TRUE/FALSE with same weight.</li>
+<li>Every student attempted every question.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"rstan"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv"</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Person"],"name":[1],"type":["int"],"align":["right"]},{"label":["Score"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"9"},{"1":"2","2":"12"},{"1":"3","2":"9"},{"1":"4","2":"13"},{"1":"5","2":"13"},{"1":"6","2":"6"},{"1":"7","2":"10"},{"1":"8","2":"13"},{"1":"9","2":"10"},{"1":"10","2":"10"},{"1":"11","2":"15"},{"1":"12","2":"18"},{"1":"13","2":"17"},{"1":"14","2":"18"},{"1":"15","2":"20"},{"1":"16","2":"16"},{"1":"17","2":"19"},{"1":"18","2":"20"},{"1":"19","2":"19"},{"1":"20","2":"16"},{"1":"21","2":"16"},{"1":"22","2":"17"},{"1":"23","2":"18"},{"1":"24","2":"14"},{"1":"25","2":"18"},{"1":"26","2":"17"},{"1":"27","2":"18"},{"1":"28","2":"18"},{"1":"29","2":"19"},{"1":"30","2":"19"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(data<span class="sc">$</span>Score,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Student index"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"Score (out of 20 questions)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic07_mixtures_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Notice a cluster of students with scores around 50%,</li>
+<li>and a second cluster with much better scores.</li>
+<li>Hypothesis: some students answered completely at random.</li>
+</ul>
+</section>
+<section id="simplified-problem" class="level2">
+<h2 class="anchored" data-anchor-id="simplified-problem">Simplified problem</h2>
+<ul>
+<li>Suppose first that we have the score for only one student.</li>
+<li>E.g.: first one, who got 9/20.</li>
+<li>You want a model to put a probability on: “is this student is guessing at random?”
+<ul>
+<li>Real application: analysis of clicker scores where grade is participation-based.</li>
+</ul></li>
+</ul>
+<section id="mathematical-model" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-model">Mathematical model</h3>
+<ul>
+<li>Start with the data: <span class="math inline">\(Y\)</span>, an integer between 0 and 20.</li>
+</ul>
+<p><strong>Question:</strong> what is a good choice of likelihood?</p>
+<!-- 
+
+::: {.callout-caution collapse="true"} 
+## Click for hint
+
+We can write $Y = Y_1 + Y_2 + \dots + Y_{20}$, where $Y_j$ is a Bernoulli 
+for the score of question $j$. 
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. Normal.
+2. Binomial.
+3. Discrete uniform. 
+4. Continuous uniform.
+5. None of the above. 
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+Since $Y$ is a sum of Bernoullis, if we assume that the questions are independent, 
+then this suggests a binomial likelihood family.
+:::
+
+
+-->
+<ul>
+<li>The parameters of the likelihood depend on whether the student is guessing or not
+<ul>
+<li>Let <span class="math inline">\(G\)</span> denote an indicator on guessing, i.e.:
+<ul>
+<li><span class="math inline">\(G = 1\)</span>: guessing,</li>
+<li><span class="math inline">\(G = 0\)</span>: not guessing, i.e., trying at the best of their ability.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Question:</strong> what is a good choice of prior on <span class="math inline">\(G\)</span>?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $\distNorm(0, 1)$
+2. $\distUnif(0, 1)$
+3. $\distBern(1/3)$
+4. $\distExp(1/100)$
+5. None of the above. 
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Since $G$ can only take values $0$ or $1$, the prior has to be taken from the Bernoulli family. 
+
+We put $1/3$ to model a prior belief that students guessing at random will be a minority.
+:::
+
+-->
+<ul>
+<li>The likelihood given <span class="math inline">\(G = 1\)</span> (guessing) is easy: <span class="math display">\[Y \sim {\mathrm{Binom}}(20, 0.5).\]</span></li>
+<li>The likelihood given <span class="math inline">\(G = 0\)</span> (trying at the best of their ability) is slightly trickier:
+<ul>
+<li>what is “the best of their ability”?</li>
+<li><strong>Bayesian recipe:</strong> treat it as an unknown ability parameters <span class="math inline">\(A\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Full model:</strong></p>
+<p><span class="math display">\[\begin{align*}
+A &amp;\sim {\mathrm{Unif}}(0, 1) \\
+G &amp;\sim {\mathrm{Bern}}(1/3) \\
+Y &amp;\sim {\mathrm{Binom}}(20, 0.5 G + A(1-G)).
+\end{align*}\]</span></p>
+</section>
+<section id="marginalization" class="level3">
+<h3 class="anchored" data-anchor-id="marginalization">Marginalization</h3>
+<ul>
+<li>Stan does not support discrete latent random variables like <span class="math inline">\(G\)</span></li>
+<li>Therefore we use <a href="../w10_modelling/topic06_rao.html">Rao-Blackwellization</a>:
+<ul>
+<li>Joint distribution before Rao-Blackwellization: <span class="math display">\[\gamma(a, g, y) = p(a) p(g) p(y|a, g).\]</span></li>
+<li>Joint distribution after Rao-Blackwellization: <span class="math display">\[\begin{align*}
+\gamma(a, y) &amp;= \sum_{g=0}^1 \gamma(a, g, y) \\
+&amp;= \sum_{g=0}^1 p(a) p(g) p(y|a, g) \\
+&amp;= p(a) \sum_{g=0}^1 p(g) p(y|a, g) \\
+&amp;= \underbrace{p(a)}_\text{(a)} \underbrace{\left( \underbrace{p(g=1) p(y|a, g=1)}_\text{(b)} + \underbrace{p(g=0) p(y|a, g=0)}_\text{(c)} \right)}_\text{(d)}.
+\end{align*}\]</span></li>
+</ul></li>
+</ul>
+<p><strong>Question:</strong> match-up (a)-(d) with the labelled statements in the Stan code below.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. `(a) <-> ③, (b) <-> ②, (c) <-> ①, (d) <-> ⑤,`
+2. `(a) <-> ③, (b) <-> ①, (c) <-> ②, (d) <-> ⑤,`
+3. `(a) <-> ③, (b) <-> ②, (c) <-> ①, (d) <-> ④,`
+4. `(a) <-> ③, (b) <-> ①, (c) <-> ②, (d) <-> ④,`
+5. None of the above. 
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The matching:
+
+```
+(a) <-> ③, (b) <-> ①, (c) <-> ②, (d) <-> ④,
+```
+
+is the correct answer. 
+:::
+
+
+-->
+<div class="cell" data-output.var="students_guessing_simplified">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">20</span>&gt; score;</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; ability;</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_guessing      = <span class="fl">1.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, <span class="fl">0.5</span>));</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_non_guessing  = <span class="fl">2.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, ability));</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>  ability ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">target +=</span> log(complete_likelihood_guessing + complete_likelihood_non_guessing);</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-20" class="code-annotation-target"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> guessing_probability =</span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-hidden="true" tabindex="-1"></a>    complete_likelihood_guessing / (complete_likelihood_guessing + complete_likelihood_non_guessing);</span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="1">Stan statement 1 (used in clicker question)</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="2">Stan statement 2</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="3">Stan statement 3</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="4">Stan statement 4</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="20" data-code-annotation="5">Stan statement 5</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="re-instatiation" class="level3">
+<h3 class="anchored" data-anchor-id="re-instatiation">Re-instatiation</h3>
+<ul>
+<li>We care about the posterior mean of <span class="math inline">\(G\)</span>, <span class="math inline">\(\mathbb{E}[G | Y = y]\)</span>…</li>
+<li>…but we have marginalized <span class="math inline">\(G\)</span> 🙁</li>
+<li>To compute the posterior mean, we first use the law of total expectation: <span class="math display">\[\mathbb{E}[G | Y] = \mathbb{E}[{\color{red} \mathbb{E}[G | A, Y]} | Y],\]</span></li>
+<li>Let us look at the part in red, and see how we can compute it at every MCMC iteration based on the current value of <span class="math inline">\(A^{(m)}\)</span>…
+<ul>
+<li>Using the fact the mean of a Bernoulli is the probability that it takes value 1: <span class="math display">\[\mathbb{E}[G | A, Y] = \mathbb{P}(G = 1 | A, Y).\]</span></li>
+<li>By Bayes rule: <span class="math display">\[\mathbb{P}(G = 1 | A, Y) = \frac{\mathbb{P}(G = 1 | A, Y)}{\mathbb{P}(G = 0 | A, Y) + \mathbb{P}(G = 1 | A, Y)}.\]</span></li>
+<li>This is what gets computed in statement ⑤ in the above Stan code.</li>
+</ul></li>
+<li>Now, recall from the <a href="../w08_mcmc1/topic05_mcmc_consistency.html">LLN for Markov chains</a> gives us condition so that for a test function <span class="math inline">\(h\)</span>, we have that the Monte Carlo samples, <span class="math inline">\(A^{(1)}, A^{(2)}, \dots, A^{(M)}\)</span> satisfy, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M h(A^{(m)}) \to \mathbb{E}[h(A) | Y],\]</span> with probability one.</li>
+<li>Therefore from taking <span class="math inline">\(h(a) = \mathbb{P}(G = 1 | A = a, Y)\)</span>, we obtain, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M \mathbb{P}(G = 1 | A^{(m)}, Y = y) \to \mathbb{E}[G | Y],\]</span> with probability one.</li>
+</ul>
+</section>
+<section id="testing-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="testing-the-model">Testing the model</h3>
+<p><strong>Probably guessing:</strong> feeding a score of <strong>9</strong> out of 20, we get:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  students_guessing_simplified,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">score =</span> <span class="dv">9</span>)       </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">extract</span>(fit)<span class="sc">$</span>guessing_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.613919</code></pre>
+</div>
+</div>
+<p><strong>Probably not guessing:</strong> feeding a score of <strong>19</strong> out of 20, we get:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  students_guessing_simplified,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">score =</span> <span class="dv">19</span>)      </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">extract</span>(fit)<span class="sc">$</span>guessing_probability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.302208e-05</code></pre>
+</div>
+</div>
+<p><strong>What is the key limitation of this approach?</strong></p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Click for answer
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
+<p>The student could have a low score because the questions were too difficult!</p>
+<p>With some assumptions (unimodality of the students abilities) we can avoid this limitation.</p>
 </div>
 </div>
-<!--
+</div>
+</section>
+</section>
+<section id="full-model-getting-rid-of-key-limitation" class="level2">
+<h2 class="anchored" data-anchor-id="full-model-getting-rid-of-key-limitation">Full model: getting rid of key limitation</h2>
+<ul>
+<li><strong>Idea:</strong> use a <a href="../w06_hierarchical/topic03_hierarchy.html">hierarchical model</a>!</li>
+<li>Random variables that are student-specific:
+<ul>
+<li><span class="math inline">\(Y_i \sim {\mathrm{Binom}}(20, 0.5 G_i + A_i (1 - G_i)).\)</span></li>
+<li><span class="math inline">\(A_i \sim {\mathrm{Beta}}(\mu, S)\)</span></li>
+<li><span class="math inline">\(G_i \sim {\mathrm{Bern}}(F)\)</span></li>
+</ul></li>
+<li>Random variables that are global:
+<ul>
+<li>Population fraction that are guessing: <span class="math inline">\(F \sim {\mathrm{Unif}}(0, 1)\)</span>,</li>
+<li>Population parameters for the abilities:
+<ul>
+<li><span class="math inline">\(\mu \sim {\mathrm{Unif}}(0, 1)\)</span></li>
+<li><span class="math inline">\(S \sim {\mathrm{Exp}}(1/100)\)</span>.</li>
+</ul></li>
+</ul></li>
+<li>Stan implementation:</li>
+</ul>
+<div class="cell" data-output.var="students_guessing">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> n_students; </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[n_students] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">20</span>&gt; scores; </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; fraction_guessing;</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt; non_guessing_population_mean;</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; non_guessing_population_spread;</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">1</span>&gt;[n_students] abilities;</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] complete_loglikelihood_guessing; </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] complete_loglikelihood_non_guessing; </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:n_students) {</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_guessing[i]     = log(fraction_guessing)    + binomial_lpmf(scores[i] | <span class="dv">20</span>, <span class="fl">0.5</span>); </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_non_guessing[i] = log1p(-fraction_guessing) + binomial_lpmf(scores[i] | <span class="dv">20</span>, abilities[i]);</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  fraction_guessing ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_mean ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_spread ~ exponential(<span class="fl">1.0</span>/<span class="dv">100</span>);</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:n_students) {</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    abilities[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">target +=</span> log_sum_exp(complete_loglikelihood_guessing[i], complete_loglikelihood_non_guessing[i]);</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] guessing_probabilities = inv_logit(complete_loglikelihood_guessing - complete_loglikelihood_non_guessing);</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  students_guessing,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_students =</span> <span class="fu">length</span>(data<span class="sc">$</span>Score),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">scores =</span> data<span class="sc">$</span>Score</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>          )                  </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Credible intervals and posterior medians:</strong> 90% (thick lines) and 50% (thin lines)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit, <span class="at">regex_pars =</span> <span class="fu">c</span>(<span class="st">"guessing_probabilities.*"</span>)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic07_mixtures_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
-## Outline
 
-### Topics
-
-TODO
-
-### Rationale
-
-TODO
-
--->
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

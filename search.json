@@ -3654,7 +3654,7 @@
     "href": "challenges/ch06.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\nImplement in Stan the hierarchical model for rockets described in the lectures.\nDescribe and implement one improvement to the model.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\nImplement in Stan the hierarchical model for rockets described in the lectures.\nThe full data is available at https://github.com/UBC-Stat-ML/web447/raw/main/data/launches.csv\nDescribe and implement one improvement to the model.",
     "crumbs": [
       "Hierarchical models",
       "Challenge"
@@ -4365,17 +4365,6 @@
     ]
   },
   {
-    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#bias-and-consistency",
-    "href": "w11_quiz2/topic02_q2_practice_questions.html#bias-and-consistency",
-    "title": "Practice questions (Quiz 2)",
-    "section": "Bias and consistency",
-    "text": "Bias and consistency\nLet \\(\\hat G_M\\) denote a Monte Carlo estimator based on \\(M\\) iterations, providing an approximation for an intractable expectation, \\(g^* = \\mathbb{E}_\\pi[g(X)]\\).\n\nDefine the notion of bias.\nDefine the notion of consistency.\nIn the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?",
-    "crumbs": [
-      "Quiz 2",
-      "Practice questions (Quiz 2)"
-    ]
-  },
-  {
     "objectID": "w11_quiz2/topic02_q2_practice_questions.html#model-construction",
     "href": "w11_quiz2/topic02_q2_practice_questions.html#model-construction",
     "title": "Practice questions (Quiz 2)",
@@ -4387,11 +4376,22 @@
     ]
   },
   {
-    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#stan-based-prediction",
-    "href": "w11_quiz2/topic02_q2_practice_questions.html#stan-based-prediction",
+    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#model-debugging",
+    "href": "w11_quiz2/topic02_q2_practice_questions.html#model-debugging",
     "title": "Practice questions (Quiz 2)",
-    "section": "Stan-based prediction",
-    "text": "Stan-based prediction\nConsider the code you wrote in Exercise 7 to perform Bayesian linear regression on galaxy distances and velocities:\n\ndata {\n  int&lt;lower=0&gt; N; // number of observations\n  vector[N] xs;   // independent variable\n  vector[N] ys;   // dependent variable\n}\n\nparameters {\n  real slope;\n  real&lt;lower=0&gt; sigma;\n}\n\nmodel {\n  // prior\n  slope     ~ student_t(3, 0, 100);\n  sigma     ~ exponential(0.001);\n\n  // likelihood\n  ys ~ normal(slope*xs, sigma);\n}\n\nHow would you modify this code to predict the velocity of a galaxy at distance 1.5? Hint: use the function normal_rng(mean, sd) to generate a normal random variable with the provided mean and standard deviation parameters.",
+    "section": "Model debugging",
+    "text": "Model debugging\nLet:\n\n\\(C(y)\\) denote a 99% credible interval computed from data \\(y\\).\nLet \\(y\\) and \\(\\check y\\) denote a real and synthetic (simulated) data respectively.\n\nSuppose you observed the following:\n\n\\(y_n \\notin C(y_{\\backslash n})\\)\n\\(\\check y_n \\notin C(\\check y_{\\backslash n})\\)\nOn both synthetic and real data, trace plots and ESS both look good.\nYou replicated these experiments several times and always get the same results.\n\nWhat would you do next? Justify your answer.",
+    "crumbs": [
+      "Quiz 2",
+      "Practice questions (Quiz 2)"
+    ]
+  },
+  {
+    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#normalization-constant",
+    "href": "w11_quiz2/topic02_q2_practice_questions.html#normalization-constant",
+    "title": "Practice questions (Quiz 2)",
+    "section": "Normalization constant",
+    "text": "Normalization constant\nConsider the Bayesian model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nY &\\sim {\\mathrm{Poisson}}(X).\n\\end{align*}\\]\nWhen using MCMC, will the output change if, for \\(x &gt; 0\\)…\n\nYou used \\(\\check f(x) = \\exp(-(1/100) x)\\) instead of \\(f(x) = (1/100) \\exp(-(1/100) x)\\) for the prior?\nYou used \\(\\hat f(y|x) = x^y / y!\\) instead of \\(f(y|x) = \\exp(-x) x^y / y!\\) for the likelihood?",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -4403,6 +4403,28 @@
     "title": "Practice questions (Quiz 2)",
     "section": "Intervals",
     "text": "Intervals\nSuppose you see the following output from a Stan MCMC fit object:\nInference for Stan model: anon_model.\n1 chains, each with iter=2000; warmup=1000; thin=1; \npost-warmup draws per chain=1000, total post-warmup draws=1000.\n\n            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat\nslope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1\nsigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1\nprediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1\nlp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1\n\nSamples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\nReport a 80% confidence interval to capture the Monte Carlo error for the posterior mean of the prediction parameter.\n\nSome of the following will be helpful in answering that question:\n\nqnorm(0.8)\n\n[1] 0.8416212\n\nqnorm(0.9)\n\n[1] 1.281552\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n\nReport a 50% credible interval for the prediction parameter. You can ignore Monte Carlo error in this sub-question.",
+    "crumbs": [
+      "Quiz 2",
+      "Practice questions (Quiz 2)"
+    ]
+  },
+  {
+    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#bias-and-consistency",
+    "href": "w11_quiz2/topic02_q2_practice_questions.html#bias-and-consistency",
+    "title": "Practice questions (Quiz 2)",
+    "section": "Bias and consistency",
+    "text": "Bias and consistency\nLet \\(\\hat G_M\\) denote a Monte Carlo estimator based on \\(M\\) iterations, providing an approximation for an intractable expectation, \\(g^* = \\mathbb{E}_\\pi[g(X)]\\).\n\nDefine the notion of bias.\nDefine the notion of consistency.\nIn the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?",
+    "crumbs": [
+      "Quiz 2",
+      "Practice questions (Quiz 2)"
+    ]
+  },
+  {
+    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#stan-based-prediction",
+    "href": "w11_quiz2/topic02_q2_practice_questions.html#stan-based-prediction",
+    "title": "Practice questions (Quiz 2)",
+    "section": "Stan-based prediction",
+    "text": "Stan-based prediction\nConsider the code you wrote in Exercise 7 to perform Bayesian linear regression on galaxy distances and velocities:\n\ndata {\n  int&lt;lower=0&gt; N; // number of observations\n  vector[N] xs;   // independent variable\n  vector[N] ys;   // dependent variable\n}\n\nparameters {\n  real slope;\n  real&lt;lower=0&gt; sigma;\n}\n\nmodel {\n  // prior\n  slope     ~ student_t(3, 0, 100);\n  sigma     ~ exponential(0.001);\n\n  // likelihood\n  ys ~ normal(slope*xs, sigma);\n}\n\nHow would you modify this code to predict the velocity of a galaxy at distance 1.5? Hint: use the function normal_rng(mean, sd) to generate a normal random variable with the provided mean and standard deviation parameters.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -4447,17 +4469,6 @@
     "title": "Practice questions (Quiz 2)",
     "section": "Irreducibility",
     "text": "Irreducibility\nConsider the following MH setup:\n\n\\(\\gamma(x) = \\mathbb{1}[x \\in \\{1, 2, \\dots, 10\\}]\\)\n\\(q(x' | x) = \\mathbb{1}[x' \\in \\{x-1, x+1\\}]/2\\).\n\n\nDefine irreducibility.\nProve that the MH algorithm is irreducible in this setup.",
-    "crumbs": [
-      "Quiz 2",
-      "Practice questions (Quiz 2)"
-    ]
-  },
-  {
-    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#model-debugging",
-    "href": "w11_quiz2/topic02_q2_practice_questions.html#model-debugging",
-    "title": "Practice questions (Quiz 2)",
-    "section": "Model debugging",
-    "text": "Model debugging\nLet:\n\n\\(C(y)\\) denote a 99% credible interval computed from data \\(y\\).\nLet \\(y\\) and \\(\\check y\\) denote a real and synthetic (simulated) data respectively.\n\nSuppose you observed the following:\n\n\\(y_n \\notin C(y_{\\backslash n})\\)\n\\(\\check y_n \\notin C(\\check y_{\\backslash n})\\)\nOn both synthetic and real data, trace plots and ESS both look good.\nYou replicated these experiments several times and always get the same results.\n\nWhat would you do next? Justify your answer.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -4513,17 +4524,6 @@
     "title": "Practice questions (Quiz 2)",
     "section": "Independence: prior vs posterior",
     "text": "Independence: prior vs posterior\nSuppose we place a prior where \\(X_1\\) and \\(X_2\\) are independent, say \\(X_i \\sim {\\mathrm{Bern}}(0.5)\\) independently. If we condition on some data \\(Y\\), will \\(X_1\\) and \\(X_2\\) always be independent under the posterior?",
-    "crumbs": [
-      "Quiz 2",
-      "Practice questions (Quiz 2)"
-    ]
-  },
-  {
-    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#normalization-constant",
-    "href": "w11_quiz2/topic02_q2_practice_questions.html#normalization-constant",
-    "title": "Practice questions (Quiz 2)",
-    "section": "Normalization constant",
-    "text": "Normalization constant\nConsider the Bayesian model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nY &\\sim {\\mathrm{Poisson}}(X).\n\\end{align*}\\]\nWhen using MCMC, will the output change if, for \\(x &gt; 0\\)…\n\nYou used \\(\\check f(x) = \\exp(-(1/100) x)\\) instead of \\(f(x) = (1/100) \\exp(-(1/100) x)\\) for the prior?\nYou used \\(\\hat f(y|x) = x^y / y!\\) instead of \\(f(y|x) = \\exp(-x) x^y / y!\\) for the likelihood?",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -5095,7 +5095,51 @@
     "href": "w10_modelling/topic07_mixtures.html",
     "title": "Mixtures",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Mathematical definition of mixtures\nImplementation in Stan\n\n\n\n\nMixtures are motivated by cases where you believe the data is composed of two or more distinct sub-populations.\nOne use of mixtures is to figure out, for each data point, from which sub-population it comes from.\nBeyond the sub-population example, mixtures are also used to get more flexible distribution families.",
+    "crumbs": [
+      "Modelling techniques",
+      "Mixtures"
+    ]
+  },
+  {
+    "objectID": "w10_modelling/topic07_mixtures.html#outline",
+    "href": "w10_modelling/topic07_mixtures.html#outline",
+    "title": "Mixtures",
+    "section": "",
+    "text": "Mathematical definition of mixtures\nImplementation in Stan\n\n\n\n\nMixtures are motivated by cases where you believe the data is composed of two or more distinct sub-populations.\nOne use of mixtures is to figure out, for each data point, from which sub-population it comes from.\nBeyond the sub-population example, mixtures are also used to get more flexible distribution families.",
+    "crumbs": [
+      "Modelling techniques",
+      "Mixtures"
+    ]
+  },
+  {
+    "objectID": "w10_modelling/topic07_mixtures.html#example-detection-of-random-guessing",
+    "href": "w10_modelling/topic07_mixtures.html#example-detection-of-random-guessing",
+    "title": "Mixtures",
+    "section": "Example: detection of random guessing",
+    "text": "Example: detection of random guessing\n\nWe look at a dataset from Albert and Hu, 2020.\nWe have scores for 30 students on a test.\nThe test has 20 questions.\nAll questions are TRUE/FALSE with same weight.\nEvery student attempted every question.\n\n\nsuppressPackageStartupMessages(require(\"rstan\"))\n\ndata = read.csv(url(\"https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv\"))\nrmarkdown::paged_table(data)\n\n\n  \n\n\n\n\nplot(data$Score,\n      ylim = c(0, 20),\n      xlab = \"Student index\", \n      ylab = \"Score (out of 20 questions)\")\n\n\n\n\n\n\n\n\n\nNotice a cluster of students with scores around 50%,\nand a second cluster with much better scores.\nHypothesis: some students answered completely at random.",
+    "crumbs": [
+      "Modelling techniques",
+      "Mixtures"
+    ]
+  },
+  {
+    "objectID": "w10_modelling/topic07_mixtures.html#simplified-problem",
+    "href": "w10_modelling/topic07_mixtures.html#simplified-problem",
+    "title": "Mixtures",
+    "section": "Simplified problem",
+    "text": "Simplified problem\n\nSuppose first that we have the score for only one student.\nE.g.: first one, who got 9/20.\nYou want a model to put a probability on: “is this student is guessing at random?”\n\nReal application: analysis of clicker scores where grade is participation-based.\n\n\n\nMathematical model\n\nStart with the data: \\(Y\\), an integer between 0 and 20.\n\nQuestion: what is a good choice of likelihood?\n\n\nThe parameters of the likelihood depend on whether the student is guessing or not\n\nLet \\(G\\) denote an indicator on guessing, i.e.:\n\n\\(G = 1\\): guessing,\n\\(G = 0\\): not guessing, i.e., trying at the best of their ability.\n\n\n\nQuestion: what is a good choice of prior on \\(G\\)?\n\n\nThe likelihood given \\(G = 1\\) (guessing) is easy: \\[Y \\sim {\\mathrm{Binom}}(20, 0.5).\\]\nThe likelihood given \\(G = 0\\) (trying at the best of their ability) is slightly trickier:\n\nwhat is “the best of their ability”?\nBayesian recipe: treat it as an unknown ability parameters \\(A\\)\n\n\nFull model:\n\\[\\begin{align*}\nA &\\sim {\\mathrm{Unif}}(0, 1) \\\\\nG &\\sim {\\mathrm{Bern}}(1/3) \\\\\nY &\\sim {\\mathrm{Binom}}(20, 0.5 G + A(1-G)).\n\\end{align*}\\]\n\n\nMarginalization\n\nStan does not support discrete latent random variables like \\(G\\)\nTherefore we use Rao-Blackwellization:\n\nJoint distribution before Rao-Blackwellization: \\[\\gamma(a, g, y) = p(a) p(g) p(y|a, g).\\]\nJoint distribution after Rao-Blackwellization: \\[\\begin{align*}\n\\gamma(a, y) &= \\sum_{g=0}^1 \\gamma(a, g, y) \\\\\n&= \\sum_{g=0}^1 p(a) p(g) p(y|a, g) \\\\\n&= p(a) \\sum_{g=0}^1 p(g) p(y|a, g) \\\\\n&= \\underbrace{p(a)}_\\text{(a)} \\underbrace{\\left( \\underbrace{p(g=1) p(y|a, g=1)}_\\text{(b)} + \\underbrace{p(g=0) p(y|a, g=0)}_\\text{(c)} \\right)}_\\text{(d)}.\n\\end{align*}\\]\n\n\nQuestion: match-up (a)-(d) with the labelled statements in the Stan code below.\n\n\ndata {\n  int&lt;lower=0, upper=20&gt; score;\n}\n\nparameters {\n  real&lt;lower=0, upper=1&gt; ability;\n}\n\ntransformed parameters {\n1  real complete_likelihood_guessing      = 1.0/3 * exp(binomial_lpmf(score | 20, 0.5));\n2  real complete_likelihood_non_guessing  = 2.0/3 * exp(binomial_lpmf(score | 20, ability));\n}\n\nmodel {\n3  ability ~ uniform(0, 1);\n4  target += log(complete_likelihood_guessing + complete_likelihood_non_guessing);\n}\n\ngenerated quantities {\n5  real guessing_probability =\n    complete_likelihood_guessing / (complete_likelihood_guessing + complete_likelihood_non_guessing);\n}\n\n\n1\n\nStan statement 1 (used in clicker question)\n\n2\n\nStan statement 2\n\n3\n\nStan statement 3\n\n4\n\nStan statement 4\n\n5\n\nStan statement 5\n\n\n\n\n\n\nRe-instatiation\n\nWe care about the posterior mean of \\(G\\), \\(\\mathbb{E}[G | Y = y]\\)…\n…but we have marginalized \\(G\\) 🙁\nTo compute the posterior mean, we first use the law of total expectation: \\[\\mathbb{E}[G | Y] = \\mathbb{E}[{\\color{red} \\mathbb{E}[G | A, Y]} | Y],\\]\nLet us look at the part in red, and see how we can compute it at every MCMC iteration based on the current value of \\(A^{(m)}\\)…\n\nUsing the fact the mean of a Bernoulli is the probability that it takes value 1: \\[\\mathbb{E}[G | A, Y] = \\mathbb{P}(G = 1 | A, Y).\\]\nBy Bayes rule: \\[\\mathbb{P}(G = 1 | A, Y) = \\frac{\\mathbb{P}(G = 1 | A, Y)}{\\mathbb{P}(G = 0 | A, Y) + \\mathbb{P}(G = 1 | A, Y)}.\\]\nThis is what gets computed in statement ⑤ in the above Stan code.\n\nNow, recall from the LLN for Markov chains gives us condition so that for a test function \\(h\\), we have that the Monte Carlo samples, \\(A^{(1)}, A^{(2)}, \\dots, A^{(M)}\\) satisfy, \\[\\frac{1}{M} \\sum_{m=1}^M h(A^{(m)}) \\to \\mathbb{E}[h(A) | Y],\\] with probability one.\nTherefore from taking \\(h(a) = \\mathbb{P}(G = 1 | A = a, Y)\\), we obtain, \\[\\frac{1}{M} \\sum_{m=1}^M \\mathbb{P}(G = 1 | A^{(m)}, Y = y) \\to \\mathbb{E}[G | Y],\\] with probability one.\n\n\n\nTesting the model\nProbably guessing: feeding a score of 9 out of 20, we get:\n\nfit = sampling(\n  students_guessing_simplified,\n  seed = 1,\n  refresh = 0,\n  data = list(score = 9)       \n)\n\nmean(extract(fit)$guessing_probability)\n\n[1] 0.613919\n\n\nProbably not guessing: feeding a score of 19 out of 20, we get:\n\nfit = sampling(\n  students_guessing_simplified,\n  seed = 1,\n  refresh = 0,\n  data = list(score = 19)      \n)\n\nmean(extract(fit)$guessing_probability)\n\n[1] 9.302208e-05\n\n\nWhat is the key limitation of this approach?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe student could have a low score because the questions were too difficult!\nWith some assumptions (unimodality of the students abilities) we can avoid this limitation.",
+    "crumbs": [
+      "Modelling techniques",
+      "Mixtures"
+    ]
+  },
+  {
+    "objectID": "w10_modelling/topic07_mixtures.html#full-model-getting-rid-of-key-limitation",
+    "href": "w10_modelling/topic07_mixtures.html#full-model-getting-rid-of-key-limitation",
+    "title": "Mixtures",
+    "section": "Full model: getting rid of key limitation",
+    "text": "Full model: getting rid of key limitation\n\nIdea: use a hierarchical model!\nRandom variables that are student-specific:\n\n\\(Y_i \\sim {\\mathrm{Binom}}(20, 0.5 G_i + A_i (1 - G_i)).\\)\n\\(A_i \\sim {\\mathrm{Beta}}(\\mu, S)\\)\n\\(G_i \\sim {\\mathrm{Bern}}(F)\\)\n\nRandom variables that are global:\n\nPopulation fraction that are guessing: \\(F \\sim {\\mathrm{Unif}}(0, 1)\\),\nPopulation parameters for the abilities:\n\n\\(\\mu \\sim {\\mathrm{Unif}}(0, 1)\\)\n\\(S \\sim {\\mathrm{Exp}}(1/100)\\).\n\n\nStan implementation:\n\n\ndata {\n  int n_students; \n  array[n_students] int&lt;lower=0, upper=20&gt; scores; \n}\n\nparameters {\n  real&lt;lower=0, upper=1&gt; fraction_guessing;\n  real&lt;lower=0, upper=1&gt; non_guessing_population_mean;\n  real&lt;lower=0&gt; non_guessing_population_spread;\n  vector&lt;lower=0, upper=1&gt;[n_students] abilities;\n}\n\ntransformed parameters {\n  vector[n_students] complete_loglikelihood_guessing; \n  vector[n_students] complete_loglikelihood_non_guessing; \n  for (i in 1:n_students) {\n    complete_loglikelihood_guessing[i]     = log(fraction_guessing)    + binomial_lpmf(scores[i] | 20, 0.5); \n    complete_loglikelihood_non_guessing[i] = log1p(-fraction_guessing) + binomial_lpmf(scores[i] | 20, abilities[i]);\n  }\n}\n\nmodel {\n  fraction_guessing ~ uniform(0, 1);\n  non_guessing_population_mean ~ uniform(0, 1);\n  non_guessing_population_spread ~ exponential(1.0/100);\n  for (i in 1:n_students) {\n    abilities[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);\n    target += log_sum_exp(complete_loglikelihood_guessing[i], complete_loglikelihood_non_guessing[i]);\n  }\n}\n\ngenerated quantities {\n  vector[n_students] guessing_probabilities = inv_logit(complete_loglikelihood_guessing - complete_loglikelihood_non_guessing);\n}\n\n\nfit = sampling(\n  students_guessing,\n  seed = 1,\n  refresh = 0,\n  data = list(\n            n_students = length(data$Score),\n            scores = data$Score\n          )                  \n)\n\nCredible intervals and posterior medians: 90% (thick lines) and 50% (thin lines)\n\nmcmc_intervals(fit, regex_pars = c(\"guessing_probabilities.*\")) + \n  theme_minimal() + \n  scale_x_continuous(limits = c(0, 1))",
     "crumbs": [
       "Modelling techniques",
       "Mixtures"
@@ -5183,7 +5227,7 @@
     "href": "w10_modelling/topic04_censoring.html#bayesian-approach-to-censoring",
     "title": "Censoring",
     "section": "Bayesian approach to censoring",
-    "text": "Bayesian approach to censoring\n\nWhat we have encountered in the Chernobyl example is known as censoring.\nSolution: modelling the censoring process.\n\n\nMathematical description\n\nLet \\(L\\) denote a detection limit (here \\(L = 1.1\\))\nLet \\(X\\) denote the unknown parameter (here, the true mean we try to recover).\nLet \\(i\\) denote the observation index (worker \\(i \\in \\{1, 2, \\dots, 10\\}\\) in our example)\nLet \\(H_i\\) denote the measurements before censoring.\nLet \\(C_i\\) denote a binary indicator on the censoring.\nLet \\(Y_i = C_i L + (1 - C_i) H_i\\).\n\nIn the Chernobyl example, we will use the following model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nH_i &\\sim {\\mathrm{Exp}}(X) \\\\\nC_i &= \\mathbb{1}[H_i \\ge L], \\\\\nY_i &= C_i L + (1 - C_i) H_i.\n\\end{align*}\\]\nThe goal is to compute \\(\\mathbb{E}[X | Y]\\).\n\n\nStan implementation\n\nsuppressPackageStartupMessages(require(rstan))\n\n\ndata {\n1  int&lt;lower=0&gt; n_above_limit;\n2  int&lt;lower=0&gt; n_below_limit;\n  real&lt;lower=0&gt; limit;\n3  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit;\n  \n}\n\nparameters {\n  real&lt;lower=0&gt; rate; \n4  vector&lt;lower=limit&gt;[n_above_limit] data_above_limit;\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n  data_above_limit ~ exponential(rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nThe number of \\(H_i\\)’s above the detection limit.\n\n2\n\nThe number of \\(H_i\\)’s below the detection limit.\n\n3\n\nThe \\(H_i\\)’s below the limit are observed, so they go in the data block.\n\n4\n\nThe \\(H_i\\)’s above the limit are not observed, so they go in the parameters block (a better name would have been “latent block”).\n\n\n\n\n\nfit = sampling(\n  chernobyl_naive,\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),       \n  iter = 100000                   \n)\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 1.6e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.538 seconds (Warm-up)\nChain 1:                0.72 seconds (Sampling)\nChain 1:                1.258 seconds (Total)\nChain 1: \n\n\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n                      mean se_mean   sd   2.5%    25%    50%    75%  97.5%\nrate                  0.40    0.00 0.20   0.11   0.25   0.36   0.51   0.86\ndata_above_limit[1]   4.44    0.03 4.74   1.17   1.86   3.01   5.23  16.18\ndata_above_limit[2]   4.44    0.03 4.87   1.16   1.85   2.99   5.23  16.30\ndata_above_limit[3]   4.44    0.03 5.01   1.16   1.84   2.96   5.20  16.40\ndata_above_limit[4]   4.42    0.03 4.78   1.17   1.86   3.01   5.21  16.00\ndata_above_limit[5]   4.45    0.03 5.04   1.16   1.86   3.00   5.25  16.24\ndata_above_limit[6]   4.43    0.03 4.60   1.16   1.85   3.00   5.23  16.10\ndata_above_limit[7]   4.45    0.03 4.97   1.16   1.83   2.99   5.29  16.26\nmean                  3.35    0.02 2.43   1.16   1.97   2.74   3.96   9.20\nlp__                -19.27    0.02 2.25 -24.59 -20.55 -18.92 -17.61 -15.96\n                    n_eff Rhat\nrate                29917    1\ndata_above_limit[1] 31929    1\ndata_above_limit[2] 29991    1\ndata_above_limit[3] 30474    1\ndata_above_limit[4] 30375    1\ndata_above_limit[5] 29617    1\ndata_above_limit[6] 29820    1\ndata_above_limit[7] 33738    1\nmean                17755    1\nlp__                16351    1\n\nSamples were drawn using NUTS(diag_e) at Mon Mar 18 23:08:34 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\n\n\nsuppressPackageStartupMessages(require(bayesplot))\nsuppressPackageStartupMessages(require(ggplot2))\nmcmc_areas_ridges(fit, pars = c(\"mean\"), point_est = c()) + \n  theme_minimal() + \n  scale_x_continuous(limits = c(0, 10)) \n\n\n\n\n\n\n\n\nBack to the question of whether the radiation is greater than 1.5 R/s:\n\nsamples = extract(fit)$mean\n\nsum(samples &gt; 1.5) / length(samples)\n\n[1] 0.90094",
+    "text": "Bayesian approach to censoring\n\nWhat we have encountered in the Chernobyl example is known as censoring.\nSolution: modelling the censoring process.\n\n\nMathematical description\n\nLet \\(L\\) denote a detection limit (here \\(L = 1.1\\))\nLet \\(X\\) denote the unknown parameter (here, the true mean we try to recover).\nLet \\(i\\) denote the observation index (worker \\(i \\in \\{1, 2, \\dots, 10\\}\\) in our example)\nLet \\(H_i\\) denote the measurements before censoring.\nLet \\(C_i\\) denote a binary indicator on the censoring.\nLet \\(Y_i = C_i L + (1 - C_i) H_i\\).\n\nIn the Chernobyl example, we will use the following model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nH_i &\\sim {\\mathrm{Exp}}(X) \\\\\nC_i &= \\mathbb{1}[H_i \\ge L], \\\\\nY_i &= C_i L + (1 - C_i) H_i.\n\\end{align*}\\]\nThe goal is to compute \\(\\mathbb{E}[X | Y]\\).\n\n\nStan implementation\n\nsuppressPackageStartupMessages(require(rstan))\n\n\ndata {\n1  int&lt;lower=0&gt; n_above_limit;\n2  int&lt;lower=0&gt; n_below_limit;\n  real&lt;lower=0&gt; limit;\n3  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit;\n  \n}\n\nparameters {\n  real&lt;lower=0&gt; rate; \n4  vector&lt;lower=limit&gt;[n_above_limit] data_above_limit;\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n  data_above_limit ~ exponential(rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nThe number of \\(H_i\\)’s above the detection limit.\n\n2\n\nThe number of \\(H_i\\)’s below the detection limit.\n\n3\n\nThe \\(H_i\\)’s below the limit are observed, so they go in the data block.\n\n4\n\nThe \\(H_i\\)’s above the limit are not observed, so they go in the parameters block (a better name would have been “latent block”).\n\n\n\n\n\nfit = sampling(\n  chernobyl_naive,\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),       \n  iter = 100000                   \n)\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 1.6e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.538 seconds (Warm-up)\nChain 1:                0.72 seconds (Sampling)\nChain 1:                1.258 seconds (Total)\nChain 1: \n\n\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n                      mean se_mean   sd   2.5%    25%    50%    75%  97.5%\nrate                  0.40    0.00 0.20   0.11   0.25   0.36   0.51   0.86\ndata_above_limit[1]   4.44    0.03 4.74   1.17   1.86   3.01   5.23  16.18\ndata_above_limit[2]   4.44    0.03 4.87   1.16   1.85   2.99   5.23  16.30\ndata_above_limit[3]   4.44    0.03 5.01   1.16   1.84   2.96   5.20  16.40\ndata_above_limit[4]   4.42    0.03 4.78   1.17   1.86   3.01   5.21  16.00\ndata_above_limit[5]   4.45    0.03 5.04   1.16   1.86   3.00   5.25  16.24\ndata_above_limit[6]   4.43    0.03 4.60   1.16   1.85   3.00   5.23  16.10\ndata_above_limit[7]   4.45    0.03 4.97   1.16   1.83   2.99   5.29  16.26\nmean                  3.35    0.02 2.43   1.16   1.97   2.74   3.96   9.20\nlp__                -19.27    0.02 2.25 -24.59 -20.55 -18.92 -17.61 -15.96\n                    n_eff Rhat\nrate                29917    1\ndata_above_limit[1] 31929    1\ndata_above_limit[2] 29991    1\ndata_above_limit[3] 30474    1\ndata_above_limit[4] 30375    1\ndata_above_limit[5] 29617    1\ndata_above_limit[6] 29820    1\ndata_above_limit[7] 33738    1\nmean                17755    1\nlp__                16351    1\n\nSamples were drawn using NUTS(diag_e) at Mon Mar 18 23:08:34 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\n\n\nsuppressPackageStartupMessages(require(bayesplot))\nsuppressPackageStartupMessages(require(ggplot2))\nmcmc_areas_ridges(fit, pars = c(\"mean\")) + \n  theme_minimal() + \n  scale_x_continuous(limits = c(0, 10)) \n\n\n\n\n\n\n\n\nBack to the question of whether the radiation is greater than 1.5 R/s:\n\nsamples = extract(fit)$mean\n\nsum(samples &gt; 1.5) / length(samples)\n\n[1] 0.90094",
     "crumbs": [
       "Modelling techniques",
       "Censoring"
