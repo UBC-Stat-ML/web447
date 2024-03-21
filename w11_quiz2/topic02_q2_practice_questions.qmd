@@ -37,18 +37,6 @@ suppressPackageStartupMessages(require(rstan))
 
 
 
-## Bias and consistency
-
-Let $\hat G_M$ denote a Monte Carlo estimator based on $M$ iterations, providing 
-an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$. 
-
-1. Define the notion of bias. 
-2. Define the notion of consistency. 
-3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?
-
-{{< include ../../clickers/w11/_c01.qmd >}}
-
-
 ## Model construction
 
 Consider the following setup
@@ -74,39 +62,44 @@ to denote CDFs.
 
 {{< include ../../clickers/w11/_c03.qmd >}}
 
-## Stan-based prediction
-
-Consider the code you wrote in [Exercise 7](../exercises/ex07.qmd) to 
-perform Bayesian linear regression on galaxy distances and velocities:
 
 
-```{stan output.var = "hubble_basic"}
-data {
-  int<lower=0> N; // number of observations
-  vector[N] xs;   // independent variable
-  vector[N] ys;   // dependent variable
-}
+## Model debugging
 
-parameters {
-  real slope;
-  real<lower=0> sigma;
-}
+Let:
 
-model {
-  // prior
-  slope     ~ student_t(3, 0, 100);
-  sigma     ~ exponential(0.001);
+- $C(y)$ denote a 99\% credible interval computed from data $y$. 
+- Let $y$ and $\check y$ denote a real and synthetic (simulated) data respectively. 
 
-  // likelihood
-  ys ~ normal(slope*xs, sigma);
-}
-```
+Suppose you observed the following:
 
-How would you modify this code to predict the velocity of a galaxy at distance 1.5? 
-Hint: use the function `normal_rng(mean, sd)` to generate a normal random variable 
-with the provided mean and standard deviation parameters. 
+1. $y_n \notin C(y_{\backslash n})$
+2. $\check y_n \notin C(\check y_{\backslash n})$
+3. On both synthetic and real data, trace plots and ESS both look good. 
+4. You replicated these experiments several times and always get the same results. 
 
-{{< include ../../clickers/w11/_c04.qmd >}}
+What would you do next? Justify your answer. 
+
+{{< include ../../clickers/w11/_c10.qmd >}}
+
+
+
+## Normalization constant
+
+Consider the Bayesian model:
+
+\begin{align*}
+X &\sim \distExp(1/100) \\
+Y &\sim \distPoiss(X). 
+\end{align*}
+
+When using MCMC, will the output change if, for $x > 0$...
+
+1. You used $\check f(x) = \exp(-(1/100) x)$ instead of $f(x) = (1/100) \exp(-(1/100) x)$ for the prior?
+2. You used $\hat f(y|x) = x^y / y!$ instead of $f(y|x) = \exp(-x) x^y / y!$ for the likelihood? 
+   
+{{< include ../../clickers/w11/_c16.qmd >}}
+
 
 
 ## Intervals
@@ -143,6 +136,58 @@ qnorm(0.95)
 2. Report a 50\% credible interval for the `prediction` parameter. You can ignore Monte Carlo error in this sub-question.
 
 {{< include ../../clickers/w11/_c05.qmd >}}
+
+
+## Bias and consistency
+
+Let $\hat G_M$ denote a Monte Carlo estimator based on $M$ iterations, providing 
+an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$. 
+
+1. Define the notion of bias. 
+2. Define the notion of consistency. 
+3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?
+
+{{< include ../../clickers/w11/_c01.qmd >}}
+
+
+
+
+## Stan-based prediction
+
+Consider the code you wrote in [Exercise 7](../exercises/ex07.qmd) to 
+perform Bayesian linear regression on galaxy distances and velocities:
+
+
+```{stan output.var = "hubble_basic"}
+data {
+  int<lower=0> N; // number of observations
+  vector[N] xs;   // independent variable
+  vector[N] ys;   // dependent variable
+}
+
+parameters {
+  real slope;
+  real<lower=0> sigma;
+}
+
+model {
+  // prior
+  slope     ~ student_t(3, 0, 100);
+  sigma     ~ exponential(0.001);
+
+  // likelihood
+  ys ~ normal(slope*xs, sigma);
+}
+```
+
+How would you modify this code to predict the velocity of a galaxy at distance 1.5? 
+Hint: use the function `normal_rng(mean, sd)` to generate a normal random variable 
+with the provided mean and standard deviation parameters. 
+
+{{< include ../../clickers/w11/_c04.qmd >}}
+
+
+
 
 
 
@@ -217,23 +262,6 @@ Consider the following MH setup:
 {{< include ../../clickers/w11/_c09.qmd >}}
 
 
-## Model debugging
-
-Let:
-
-- $C(y)$ denote a 99\% credible interval computed from data $y$. 
-- Let $y$ and $\check y$ denote a real and synthetic (simulated) data respectively. 
-
-Suppose you observed the following:
-
-1. $y_n \notin C(y_{\backslash n})$
-2. $\check y_n \notin C(\check y_{\backslash n})$
-3. On both synthetic and real data, trace plots and ESS both look good. 
-4. You replicated these experiments several times and always get the same results. 
-
-What would you do next? Justify your answer. 
-
-{{< include ../../clickers/w11/_c10.qmd >}}
 
 
 ## MCMC diagnostics
@@ -305,18 +333,3 @@ If we condition on some data $Y$, will $X_1$ and $X_2$ always be independent und
 {{< include ../../clickers/w11/_c15.qmd >}}
 
 
-## Normalization constant
-
-Consider the Bayesian model:
-
-\begin{align*}
-X &\sim \distExp(1/100) \\
-Y &\sim \distPoiss(X). 
-\end{align*}
-
-When using MCMC, will the output change if, for $x > 0$...
-
-1. You used $\check f(x) = \exp(-(1/100) x)$ instead of $f(x) = (1/100) \exp(-(1/100) x)$ for the prior?
-2. You used $\hat f(y|x) = x^y / y!$ instead of $f(y|x) = \exp(-x) x^y / y!$ for the likelihood? 
-   
-{{< include ../../clickers/w11/_c16.qmd >}}
