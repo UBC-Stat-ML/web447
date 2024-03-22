@@ -46,6 +46,7 @@ Consider the following setup
 - You contact the participants each day for 10 days and record the day they secured a new job.
 - At the end of your study, 3 of the participants are still looking for a job. 
 
+
 ### Using the `~` notation
 
 Define a Bayesian model to handle this dataset. Introduce all random variables, and specify 
