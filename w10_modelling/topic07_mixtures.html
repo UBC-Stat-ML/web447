@@ -1093,19 +1093,22 @@ is the correct answer.
 <span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_guessing      = <span class="fl">1.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, <span class="fl">0.5</span>));</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_non_guessing  = <span class="fl">2.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, ability));</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-15" class="code-annotation-target"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>  ability ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-16" class="code-annotation-target"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">target +=</span> log(complete_likelihood_guessing + complete_likelihood_non_guessing);</span>
-<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-20" class="code-annotation-target"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> guessing_probability =</span>
-<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-hidden="true" tabindex="-1"></a>    complete_likelihood_guessing / (complete_likelihood_guessing + complete_likelihood_non_guessing);</span>
-<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_guessing</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>    = <span class="fl">1.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, <span class="fl">0.5</span>)); </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-12" class="code-annotation-target"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> complete_likelihood_non_guessing</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>    = <span class="fl">2.0</span>/<span class="dv">3</span> * exp(binomial_lpmf(score | <span class="dv">20</span>, ability)); </span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-17" class="code-annotation-target"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>  ability ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-18" class="code-annotation-target"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">target +=</span></span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19" aria-hidden="true" tabindex="-1"></a>    log(complete_likelihood_guessing + complete_likelihood_non_guessing); </span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-3-23" class="code-annotation-target"><a href="#annotated-cell-3-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> guessing_probability =</span>
+<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24" aria-hidden="true" tabindex="-1"></a>    complete_likelihood_guessing / (complete_likelihood_guessing + complete_likelihood_non_guessing);</span>
+<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -1114,19 +1117,19 @@ is the correct answer.
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="2">Stan statement 2</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="2">Stan statement 2</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="15" data-code-annotation="3">Stan statement 3</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="17" data-code-annotation="3">Stan statement 3</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="16" data-code-annotation="4">Stan statement 4</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="18" data-code-annotation="4">Stan statement 4</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="20" data-code-annotation="5">Stan statement 5</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="23" data-code-annotation="5">Stan statement 5</span>
 </dd>
 </dl>
 </div>
@@ -1141,11 +1144,11 @@ is the correct answer.
 <li>Let us look at the part in red, and see how we can compute it at every MCMC iteration based on the current value of <span class="math inline">\(A^{(m)}\)</span>…
 <ul>
 <li>Using the fact the mean of a Bernoulli is the probability that it takes value 1: <span class="math display">\[\mathbb{E}[G | A, Y] = \mathbb{P}(G = 1 | A, Y).\]</span></li>
-<li>By Bayes rule: <span class="math display">\[\mathbb{P}(G = 1 | A, Y) = \frac{\mathbb{P}(G = 1 | A, Y)}{\mathbb{P}(G = 0 | A, Y) + \mathbb{P}(G = 1 | A, Y)}.\]</span></li>
+<li>By Bayes rule (noting that a conditional probability like <span class="math inline">\(\mathbb{P}(\cdot | A)\)</span> <a href="../w01_discrete_inference/topic07_conditional.html#a-conditional-probability-is-a-probability">is a probability</a>): <span class="math display">\[\mathbb{P}(G = 1 | A, Y = y) = \frac{\mathbb{P}(G = 1, Y = y | A)}{\mathbb{P}(G = 0, Y = y | A) + \mathbb{P}(G = 1, Y = y | A)}.\]</span></li>
 <li>This is what gets computed in statement ⑤ in the above Stan code.</li>
 </ul></li>
-<li>Now, recall from the <a href="../w08_mcmc1/topic05_mcmc_consistency.html">LLN for Markov chains</a> gives us condition so that for a test function <span class="math inline">\(h\)</span>, we have that the Monte Carlo samples, <span class="math inline">\(A^{(1)}, A^{(2)}, \dots, A^{(M)}\)</span> satisfy, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M h(A^{(m)}) \to \mathbb{E}[h(A) | Y],\]</span> with probability one.</li>
-<li>Therefore from taking <span class="math inline">\(h(a) = \mathbb{P}(G = 1 | A = a, Y)\)</span>, we obtain, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M \mathbb{P}(G = 1 | A^{(m)}, Y = y) \to \mathbb{E}[G | Y],\]</span> with probability one.</li>
+<li>Now, recall from the <a href="../w08_mcmc1/topic05_mcmc_consistency.html">LLN for Markov chains</a> gives us condition so that for a test function <span class="math inline">\(h\)</span>, we have that the Monte Carlo samples, <span class="math inline">\(A^{(1)}, A^{(2)}, \dots, A^{(M)}\)</span> satisfy, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M h(A^{(m)}) \to \mathbb{E}[h(A) | Y = y],\]</span> with probability one.</li>
+<li>Therefore from taking <span class="math inline">\(h(A^{(m)}) = \mathbb{P}(G = 1 | A^{(m)}, Y = y)\)</span>, we obtain, <span class="math display">\[\frac{1}{M} \sum_{m=1}^M \mathbb{P}(G = 1 | A^{(m)}, Y = y) \to \mathbb{E}[G | Y = y],\]</span> with probability one.</li>
 </ul>
 </section>
 <section id="testing-the-model" class="level3">
@@ -1236,24 +1239,28 @@ Click for answer
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] complete_loglikelihood_guessing; </span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] complete_loglikelihood_non_guessing; </span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:n_students) {</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_guessing[i]     = log(fraction_guessing)    + binomial_lpmf(scores[i] | <span class="dv">20</span>, <span class="fl">0.5</span>); </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_non_guessing[i] = log1p(-fraction_guessing) + binomial_lpmf(scores[i] | <span class="dv">20</span>, abilities[i]);</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  fraction_guessing ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_mean ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_spread ~ exponential(<span class="fl">1.0</span>/<span class="dv">100</span>);</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:n_students) {</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    abilities[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">target +=</span> log_sum_exp(complete_loglikelihood_guessing[i], complete_loglikelihood_non_guessing[i]);</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] guessing_probabilities = inv_logit(complete_loglikelihood_guessing - complete_loglikelihood_non_guessing);</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_guessing[i]     </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      = log(fraction_guessing) + binomial_lpmf(scores[i] | <span class="dv">20</span>, <span class="fl">0.5</span>); </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    complete_loglikelihood_non_guessing[i] </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      = log1p(-fraction_guessing) + binomial_lpmf(scores[i] | <span class="dv">20</span>, abilities[i]);</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  fraction_guessing ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_mean ~ uniform(<span class="dv">0</span>, <span class="dv">1</span>);</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  non_guessing_population_spread ~ exponential(<span class="fl">1.0</span>/<span class="dv">100</span>);</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:n_students) {</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    abilities[i] ~ beta_proportion(non_guessing_population_mean, non_guessing_population_spread);</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">target +=</span> </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>      log_sum_exp(complete_loglikelihood_guessing[i], complete_loglikelihood_non_guessing[i]);</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[n_students] guessing_probabilities = inv_logit(complete_loglikelihood_guessing - complete_loglikelihood_non_guessing);</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> predictive_score_non_guessing = <span class="dv">20</span> * beta_proportion_rng(non_guessing_population_mean, non_guessing_population_spread);</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
@@ -1275,6 +1282,19 @@ Click for answer
 <div>
 <figure class="figure">
 <p><img src="topic07_mixtures_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Predictive score distribution:</strong> for the non guessing sub-population…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit, <span class="at">regex_pars =</span> <span class="fu">c</span>(<span class="st">"predictive_score_non_guessing*"</span>)) <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="topic07_mixtures_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
