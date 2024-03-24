@@ -13,18 +13,9 @@ editor:
 -   Representative example of questions to prep for Quiz 2.
 
 
-### Important note 1
+### Important note
 
-
-The quiz will not focus on multiple choice questions---we use mostly multiple choice in this page just 
-to make it easier to pace the questions during the lecture.
-
-But try to answer before looking at the possible choices to get a more realistic practice!
-
-
-### Important note 2
-
-Also make sure to practice the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
+Make sure to practice the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
 since quiz 2 will cover that material as well. 
 
 
@@ -213,7 +204,7 @@ Fill the **two** gaps in the pseudo code below:
 
 ## Stan 
 
-1. Explain the difference between the `parameters` block and the `generated parameters` block in Stan. 
+1. Explain the difference between the `parameters` block and the `transformed parameters` block in Stan. 
 2. Why do you think Stan uses 4 independent chains by default?
 
 {{< include ../../clickers/w11/_c07.qmd >}}

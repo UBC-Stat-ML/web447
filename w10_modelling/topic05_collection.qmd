@@ -33,7 +33,8 @@ modelling and the [first step of our Bayesian recipe](../w02_discrete_bayes/topi
 
 \begin{align*}
 X &\sim \text{prior}() \\
-H_i &\sim \text{likelihood}(X) \\
+N &\sim \text{DiscreteDistribution}() \\
+H_1, \dots, H_N &\sim \text{likelihood}(X) \\
 I_i &= \ind[H_i \le L] \\
 Y &= \{ H_i : I_i = 1 \}.
 \end{align*}
@@ -56,12 +57,13 @@ Truncation can be generalized as follows:
 
 \begin{align*}
 X &\sim \text{prior}() \\
-H_i &\sim \text{likelihood}(X) \\
+N &\sim \text{DiscreteDistribution}() \\
+H_1, \dots, H_N &\sim \text{likelihood}(X) \\
 I_i &\sim \distBern(p(X, H_i)) \\
 Y &= \{ H_i : I_i = 1 \}.
 \end{align*}
 
-**Question:** how would you set $p(x, h)$ to recover truncation as a special case of non-ignorable missingness. 
+**Question:** how would you set $p(x, h)$ to recover truncation as a special case of non-ignorable missingness? 
 
 
 ### Additional readings 
