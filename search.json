@@ -113,7 +113,7 @@
     "href": "w10_modelling/topic05_collection.html#examples",
     "title": "Data collection mechanisms",
     "section": "Examples",
-    "text": "Examples\n\nTruncation\n\nIn censoring, we knew how many \\(H_i\\)’s were above the detection limit.\nIn truncation, a different setup, we now have even less information:\n\nwe only observe the \\(H_i\\)’s that are below the limit…\n…we don’t know how many were above the limit.\n\nMathematically, when the \\(H_i\\) have a continuous distribution this can be modelled as:\n\n\\[\\begin{align*}\nX &\\sim \\text{prior}() \\\\\nH_i &\\sim \\text{likelihood}(X) \\\\\nI_i &= \\mathbb{1}[H_i \\le L] \\\\\nY &= \\{ H_i : I_i = 1 \\}.\n\\end{align*}\\]\n\nHere \\(I_i\\) is an “inclusion indicator”.\nBayesian analysis will be based on \\(X | Y\\)\n\nExample: CRISPR-Cas9 unique molecular identifier (UMI) family size. “Families of cells” that left zero progenies are not observed!\n\n\n\nNon-ignorable missingness\nTruncation can be generalized as follows:\n\nInstead of a deterministic criterion based on \\(H_i\\) to decide if to include in the set of observations or not,\nmake that decision based on some probability model \\(p\\) that could depend on \\(h_i\\) and \\(x\\), \\(p(x, h_i) \\in [0, 1]\\):\n\n\\[\\begin{align*}\nX &\\sim \\text{prior}() \\\\\nH_i &\\sim \\text{likelihood}(X) \\\\\nI_i &\\sim {\\mathrm{Bern}}(p(X, H_i)) \\\\\nY &= \\{ H_i : I_i = 1 \\}.\n\\end{align*}\\]\nQuestion: how would you set \\(p(x, h)\\) to recover truncation as a special case of non-ignorable missingness.\n\n\nAdditional readings\nSee this week’s readings, Chapter 8 of Gelman et al., 2013",
+    "text": "Examples\n\nTruncation\n\nIn censoring, we knew how many \\(H_i\\)’s were above the detection limit.\nIn truncation, a different setup, we now have even less information:\n\nwe only observe the \\(H_i\\)’s that are below the limit…\n…we don’t know how many were above the limit.\n\nMathematically, when the \\(H_i\\) have a continuous distribution this can be modelled as:\n\n\\[\\begin{align*}\nX &\\sim \\text{prior}() \\\\\nN &\\sim \\text{DiscreteDistribution}() \\\\\nH_1, \\dots, H_N &\\sim \\text{likelihood}(X) \\\\\nI_i &= \\mathbb{1}[H_i \\le L] \\\\\nY &= \\{ H_i : I_i = 1 \\}.\n\\end{align*}\\]\n\nHere \\(I_i\\) is an “inclusion indicator”.\nBayesian analysis will be based on \\(X | Y\\)\n\nExample: CRISPR-Cas9 unique molecular identifier (UMI) family size. “Families of cells” that left zero progenies are not observed!\n\n\n\nNon-ignorable missingness\nTruncation can be generalized as follows:\n\nInstead of a deterministic criterion based on \\(H_i\\) to decide if to include in the set of observations or not,\nmake that decision based on some probability model \\(p\\) that could depend on \\(h_i\\) and \\(x\\), \\(p(x, h_i) \\in [0, 1]\\):\n\n\\[\\begin{align*}\nX &\\sim \\text{prior}() \\\\\nN &\\sim \\text{DiscreteDistribution}() \\\\\nH_1, \\dots, H_N &\\sim \\text{likelihood}(X) \\\\\nI_i &\\sim {\\mathrm{Bern}}(p(X, H_i)) \\\\\nY &= \\{ H_i : I_i = 1 \\}.\n\\end{align*}\\]\nQuestion: how would you set \\(p(x, h)\\) to recover truncation as a special case of non-ignorable missingness?\n\n\nAdditional readings\nSee this week’s readings, Chapter 8 of Gelman et al., 2013",
     "crumbs": [
       "Modelling techniques",
       "Data collection mechanisms"
@@ -4347,7 +4347,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html",
     "title": "Practice questions (Quiz 2)",
     "section": "",
-    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!\n\n\n\nAlso make sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
+    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nMake sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -4358,7 +4358,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html#outline",
     "title": "Practice questions (Quiz 2)",
     "section": "",
-    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!\n\n\n\nAlso make sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
+    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nMake sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -4446,7 +4446,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html#stan",
     "title": "Practice questions (Quiz 2)",
     "section": "Stan",
-    "text": "Stan\n\nExplain the difference between the parameters block and the generated parameters block in Stan.\nWhy do you think Stan uses 4 independent chains by default?\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nThe parameters block is used for random variable defined using ~ whereas the generated parameters block, for those defined using =.\nBy having the chains initialized at different point, this supports the detection of slow mixing.",
+    "text": "Stan\n\nExplain the difference between the parameters block and the transformed parameters block in Stan.\nWhy do you think Stan uses 4 independent chains by default?\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nThe parameters block is used for random variable defined using ~ whereas the transformed parameters block, for those defined using =.\nBy having the chains initialized at different point, this supports the detection of slow mixing.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"

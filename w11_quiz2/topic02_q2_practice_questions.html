@@ -836,8 +836,7 @@ window.Quarto = {
   <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
   <ul class="collapse">
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#important-note-1" id="toc-important-note-1" class="nav-link" data-scroll-target="#important-note-1">Important note 1</a></li>
-  <li><a href="#important-note-2" id="toc-important-note-2" class="nav-link" data-scroll-target="#important-note-2">Important note 2</a></li>
+  <li><a href="#important-note" id="toc-important-note" class="nav-link" data-scroll-target="#important-note">Important note</a></li>
   <li><a href="#libraries-needed-to-run-the-example-below" id="toc-libraries-needed-to-run-the-example-below" class="nav-link" data-scroll-target="#libraries-needed-to-run-the-example-below">Libraries needed to run the example below</a></li>
   </ul></li>
   <li><a href="#model-construction" id="toc-model-construction" class="nav-link" data-scroll-target="#model-construction">Model construction</a>
@@ -911,14 +910,9 @@ https://github.com/trevorcampbell/shortex
 <li>Representative example of questions to prep for Quiz 2.</li>
 </ul>
 </section>
-<section id="important-note-1" class="level3">
-<h3 class="anchored" data-anchor-id="important-note-1">Important note 1</h3>
-<p>The quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.</p>
-<p>But try to answer before looking at the possible choices to get a more realistic practice!</p>
-</section>
-<section id="important-note-2" class="level3">
-<h3 class="anchored" data-anchor-id="important-note-2">Important note 2</h3>
-<p>Also make sure to practice the <a href="../w07_quiz1/topic02_practice_questions.html">similar page for Quiz 1</a> since quiz 2 will cover that material as well.</p>
+<section id="important-note" class="level3">
+<h3 class="anchored" data-anchor-id="important-note">Important note</h3>
+<p>Make sure to practice the <a href="../w07_quiz1/topic02_practice_questions.html">similar page for Quiz 1</a> since quiz 2 will cover that material as well.</p>
 </section>
 <section id="libraries-needed-to-run-the-example-below" class="level3">
 <h3 class="anchored" data-anchor-id="libraries-needed-to-run-the-example-below">Libraries needed to run the example below</h3>
@@ -1311,7 +1305,7 @@ convergence, Rhat=1).</code></pre>
 <section id="stan" class="level2">
 <h2 class="anchored" data-anchor-id="stan">Stan</h2>
 <ol type="1">
-<li>Explain the difference between the <code>parameters</code> block and the <code>generated parameters</code> block in Stan.</li>
+<li>Explain the difference between the <code>parameters</code> block and the <code>transformed parameters</code> block in Stan.</li>
 <li>Why do you think Stan uses 4 independent chains by default?</li>
 </ol>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -1327,7 +1321,7 @@ Click for answer
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>The <code>parameters</code> block is used for random variable defined using <code>~</code> whereas the <code>generated parameters</code> block, for those defined using <code>=</code>.</li>
+<li>The <code>parameters</code> block is used for random variable defined using <code>~</code> whereas the <code>transformed parameters</code> block, for those defined using <code>=</code>.</li>
 <li>By having the chains initialized at different point, this supports the detection of slow mixing.</li>
 </ol>
 </div>

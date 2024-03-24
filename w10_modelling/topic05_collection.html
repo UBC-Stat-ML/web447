@@ -883,7 +883,8 @@ https://github.com/trevorcampbell/shortex
 </ul>
 <p><span class="math display">\[\begin{align*}
 X &amp;\sim \text{prior}() \\
-H_i &amp;\sim \text{likelihood}(X) \\
+N &amp;\sim \text{DiscreteDistribution}() \\
+H_1, \dots, H_N &amp;\sim \text{likelihood}(X) \\
 I_i &amp;= \mathbb{1}[H_i \le L] \\
 Y &amp;= \{ H_i : I_i = 1 \}.
 \end{align*}\]</span></p>
@@ -903,11 +904,12 @@ Y &amp;= \{ H_i : I_i = 1 \}.
 </ul>
 <p><span class="math display">\[\begin{align*}
 X &amp;\sim \text{prior}() \\
-H_i &amp;\sim \text{likelihood}(X) \\
+N &amp;\sim \text{DiscreteDistribution}() \\
+H_1, \dots, H_N &amp;\sim \text{likelihood}(X) \\
 I_i &amp;\sim {\mathrm{Bern}}(p(X, H_i)) \\
 Y &amp;= \{ H_i : I_i = 1 \}.
 \end{align*}\]</span></p>
-<p><strong>Question:</strong> how would you set <span class="math inline">\(p(x, h)\)</span> to recover truncation as a special case of non-ignorable missingness.</p>
+<p><strong>Question:</strong> how would you set <span class="math inline">\(p(x, h)\)</span> to recover truncation as a special case of non-ignorable missingness?</p>
 </section>
 <section id="additional-readings" class="level3">
 <h3 class="anchored" data-anchor-id="additional-readings">Additional readings</h3>
