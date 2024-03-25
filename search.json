@@ -5161,7 +5161,7 @@
     "href": "w10_modelling/topic06_rao.html",
     "title": "Rao-Blackwellization",
     "section": "",
-    "text": "Rao-Blackwellization: what and why\nImplementing Rao-Blackwellization in Stan\nMathematical underpinnings\n\n\n\n\nRao-Blackwellization is an important technique for two reasons:\n\nIt can speed-up MCMC considerably.\nIn languages that do not support continuous latent variables (for example, Stan), this is they only way to implement certain model (e.g. mixture models, coming next)",
+    "text": "Rao-Blackwellization: what and why\nImplementing Rao-Blackwellization in Stan\nMathematical underpinnings\n\n\n\n\nRao-Blackwellization is an important technique for two reasons:\n\nIt can speed-up MCMC considerably.\nIn languages that do not support discrete latent variables (for example, Stan), this is they only way to implement certain model (e.g. mixture models, coming next)",
     "crumbs": [
       "Modelling techniques",
       "Rao-Blackwellization"
@@ -5172,7 +5172,7 @@
     "href": "w10_modelling/topic06_rao.html#outline",
     "title": "Rao-Blackwellization",
     "section": "",
-    "text": "Rao-Blackwellization: what and why\nImplementing Rao-Blackwellization in Stan\nMathematical underpinnings\n\n\n\n\nRao-Blackwellization is an important technique for two reasons:\n\nIt can speed-up MCMC considerably.\nIn languages that do not support continuous latent variables (for example, Stan), this is they only way to implement certain model (e.g. mixture models, coming next)",
+    "text": "Rao-Blackwellization: what and why\nImplementing Rao-Blackwellization in Stan\nMathematical underpinnings\n\n\n\n\nRao-Blackwellization is an important technique for two reasons:\n\nIt can speed-up MCMC considerably.\nIn languages that do not support discrete latent variables (for example, Stan), this is they only way to implement certain model (e.g. mixture models, coming next)",
     "crumbs": [
       "Modelling techniques",
       "Rao-Blackwellization"

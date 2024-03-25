@@ -1046,7 +1046,7 @@ Click for answer
 <section id="encapsulation-into-a-function" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="encapsulation-into-a-function">Encapsulation into a function</h2>
 <p>If you are using a custom density for several variables, encapsulate it into a function:</p>
-<div class="cell" data-output.var="Kumaraswamy2">
+<div class="cell" data-output.var="Kumaraswamy_as_function">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">functions</span> {</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> Kumaraswamy_lpdf(<span class="dt">real</span> x, <span class="dt">real</span> a, <span class="dt">real</span> b) {</span>
 <span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log(a) + log(b) + (a<span class="dv">-1</span>) * log(x) + (b<span class="dv">-1</span>) * log1p(-x^a);</span>
