@@ -20,7 +20,7 @@ editor:
 Rao-Blackwellization is an important technique for two reasons:
 
 - It can speed-up MCMC considerably. 
-- In languages that do not support continuous latent variables (for example, Stan), 
+- In languages that do not support discrete latent variables ([for example, Stan](https://mc-stan.org/docs/stan-users-guide/latent-discrete.html)), 
   this is they only way to implement certain model (e.g. mixture models, coming next)
 
 

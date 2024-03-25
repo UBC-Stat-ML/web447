@@ -140,7 +140,7 @@ loglikelihood
 
 If you are using a custom density for several variables, encapsulate it into a function:
 
-```{stan output.var = "Kumaraswamy2"}
+```{stan output.var = "Kumaraswamy_as_function"}
 functions { # <1>
   real Kumaraswamy_lpdf(real x, real a, real b) { # <2>
     return log(a) + log(b) + (a-1) * log(x) + (b-1) * log1p(-x^a);
@@ -166,7 +166,7 @@ model {
 
 ```{r echo=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(
-  Kumaraswamy2,
+  Kumaraswamy_as_function,
   seed = 1,
   refresh = 0,
   data = list(a = 2, b = 5),       
@@ -181,3 +181,5 @@ suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
 mcmc_hist(fit, pars = c("x")) + theme_minimal()
 ```
+
+
