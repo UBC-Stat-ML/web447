@@ -946,61 +946,88 @@ https://github.com/trevorcampbell/shortex
 <li>an <strong>acceptance probability</strong> <span class="math inline">\(\alpha(x, x') = \min(1, r(x, x'))\)</span>.</li>
 </ul>
 <p><strong>Question:</strong> write the transition kernel <span class="math inline">\(K(x' | x)\)</span>, assuming <span class="math inline">\(x \neq x'\)</span>.</p>
-<!--
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $q(x' | x)$ 
-2. $q(x' | x) \alpha(x, x')$ 
-3. $\alpha(x, x')$ 
-4. $\sum_{x'} q(x' | x) (1 - \alpha(x, x'))$
-5. None of the above. 
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for hint
-
-The probability to move to $x' \neq x$ requires both:
-
-1. proposing to $x'$, with probability $q(x'|x)$, **and**,
-2. accepting the proposal, with probability $\alpha(x, x')$. 
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is  $q(x' | x) \alpha(x, x')$. 
-
-**Intuition:** the "**and**" in the hint suggests chain rule hence multiplication.
-
-**Mathematical derivation**: first denote
-
-- the current state by $X$
-- the proposed state by $X^* \sim q(\cdot|X)$
-- the next state by $X'$ (equal to either $X^*$ if the proposal is accepted, $X$ otherwise). 
-
-\begin{align*}
-K(x'|x) &= \pr(X' = x' | X = x)  \\
-&= \sum_{x^*} \pr(X' = x', X^* = x^* | X = x) \expl{marginalization} \\
-&= \sum_{x^*} \pr(X^* = x^* | X = x) \pr(X' = x' | X^* = x^*, X = x) \expl{chain rule}\\
-&= \sum_{x^*} q(x^*|x) \pr(X' = x' | X^* = x^*, X = x). \expl{definition of proposal}
-\end{align*}
-
-- Since $x \neq x'$, we can only get to $x'$ by accepting a proposal...
-- ..., i.e. when $x' = x^*$. 
-- So there is only one term in the sum where $\pr(X' = x' | X^* = x^*, X = x) > 0$...
-- ..., namely when $x' = x^*$.
-
-\begin{align*}
-K(x'|x) &= \sum_{x^*} q(x^*|x) \pr(X' = x' | X^* = x^*, X = x) \\
- &= q(x'|x) \pr(X' = x' | X^* = x', X = x) \expl{see expl. above} \\
- &= q(x'|x) \alpha(x, x'). \expl{definition of accept probability} \\
-\end{align*}
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(q(x' | x)\)</span></li>
+<li><span class="math inline">\(q(x' | x) \alpha(x, x')\)</span></li>
+<li><span class="math inline">\(\alpha(x, x')\)</span></li>
+<li><span class="math inline">\(\sum_{x'} q(x' | x) (1 - \alpha(x, x'))\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The probability to move to <span class="math inline">\(x' \neq x\)</span> requires both:</p>
+<ol type="1">
+<li>proposing to <span class="math inline">\(x'\)</span>, with probability <span class="math inline">\(q(x'|x)\)</span>, <strong>and</strong>,</li>
+<li>accepting the proposal, with probability <span class="math inline">\(\alpha(x, x')\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The correct answer is <span class="math inline">\(q(x' | x) \alpha(x, x')\)</span>.</p>
+<p><strong>Intuition:</strong> the “<strong>and</strong>” in the hint suggests chain rule hence multiplication.</p>
+<p><strong>Mathematical derivation</strong>: first denote</p>
+<ul>
+<li>the current state by <span class="math inline">\(X\)</span></li>
+<li>the proposed state by <span class="math inline">\(X^* \sim q(\cdot|X)\)</span></li>
+<li>the next state by <span class="math inline">\(X'\)</span> (equal to either <span class="math inline">\(X^*\)</span> if the proposal is accepted, <span class="math inline">\(X\)</span> otherwise).</li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+K(x'|x) &amp;= \mathbb{P}(X' = x' | X = x)  \\
+&amp;= \sum_{x^*} \mathbb{P}(X' = x', X^* = x^* | X = x) \;\;\text{(marginalization)} \\
+&amp;= \sum_{x^*} \mathbb{P}(X^* = x^* | X = x) \mathbb{P}(X' = x' | X^* = x^*, X = x) \;\;\text{(chain rule)}\\
+&amp;= \sum_{x^*} q(x^*|x) \mathbb{P}(X' = x' | X^* = x^*, X = x). \;\;\text{(definition of proposal)}
+\end{align*}\]</span></p>
+<ul>
+<li>Since <span class="math inline">\(x \neq x'\)</span>, we can only get to <span class="math inline">\(x'\)</span> by accepting a proposal…</li>
+<li>…, i.e.&nbsp;when <span class="math inline">\(x' = x^*\)</span>.</li>
+<li>So there is only one term in the sum where <span class="math inline">\(\mathbb{P}(X' = x' | X^* = x^*, X = x) &gt; 0\)</span>…</li>
+<li>…, namely when <span class="math inline">\(x' = x^*\)</span>.</li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+K(x'|x) &amp;= \sum_{x^*} q(x^*|x) \mathbb{P}(X' = x' | X^* = x^*, X = x) \\
+&amp;= q(x'|x) \mathbb{P}(X' = x' | X^* = x', X = x) \;\;\text{(see expl. above)} \\
+&amp;= q(x'|x) \alpha(x, x'). \;\;\text{(definition of accept probability)} \\
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>
