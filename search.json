@@ -4367,34 +4367,34 @@
   {
     "objectID": "w12_mcmc2/topic01_intro.html",
     "href": "w12_mcmc2/topic01_intro.html",
-    "title": "MCMC Hacking",
+    "title": "Overview",
     "section": "",
     "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debut your MCMC code.",
     "crumbs": [
       "MCMC Hacking",
-      "MCMC Hacking"
+      "Overview"
     ]
   },
   {
     "objectID": "w12_mcmc2/topic01_intro.html#this-weeks-outline",
     "href": "w12_mcmc2/topic01_intro.html#this-weeks-outline",
-    "title": "MCMC Hacking",
+    "title": "Overview",
     "section": "",
     "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debut your MCMC code.",
     "crumbs": [
       "MCMC Hacking",
-      "MCMC Hacking"
+      "Overview"
     ]
   },
   {
     "objectID": "w12_mcmc2/topic01_intro.html#rationale",
     "href": "w12_mcmc2/topic01_intro.html#rationale",
-    "title": "MCMC Hacking",
+    "title": "Overview",
     "section": "Rationale",
     "text": "Rationale\nWe need to write new MCMC algorithm because there are situations that Stan/other PPLs cannot handle automatically.\nSome examples:\n\nPhylogenetic tree inference\nAnalysis of network data\nProto-language reconstruction\nMultiple sequence alignment",
     "crumbs": [
       "MCMC Hacking",
-      "MCMC Hacking"
+      "Overview"
     ]
   },
   {
