@@ -1,0 +1,18 @@
+---
+title: "Alternations"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Alternations of MCMC kernels
+
+### Rationale
+
+TODO: non-reversibility
+

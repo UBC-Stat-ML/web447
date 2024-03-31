@@ -1,0 +1,73 @@
+---
+title: "Invariance: intuition"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Intuition behind invariance
+
+
+
+### Rationale
+
+$\pi$-invariance is the key condition needed to establish 
+a [law of large numbers for Markov chains](topic03_markov_lln.qmd).
+
+
+
+## Analogy: fixed point iteration 
+
+**Goal here:** gaining some intuition on what is the notion of $\pi$-invariance, using an analogy. 
+
+### Fixed point iteration 
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/e/ea/Cosine_fixed_point.svg){width="300"}
+:::
+
+
+- You are given a function $f(x)$ 
+- Game:
+    - Pick any starting point $x_1$ (e.g. in figure, $x_1 = -1$)
+    - Compute $x_2 = f(x_1)$ (e.g. in figure, $x_2 = 0.5$)
+    - Compute $x_3 = f(x_2)$
+    - Compute $x_4 = f(x_3)$
+    - etc.
+    - Can we predict where will $x_n$ end up after an infinite number of iterations?
+
+
+### Fixed points
+
+**Surprise:** sometimes, we can predict where $x_n$ ends up!
+
+**Definition:** a **fixed point** of a function $f$ is a point $x$ such that $f(x) = x$. 
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/2/20/Fixed_point_example.svg){width="300"}
+:::
+
+**Question:** what are the fixed point in this picture?
+
+**Example:** 
+
+- look at the fixed point iteration picture more closely,
+- note that indeed here we end up at a fixed point (diagonal line shows $f(x) = x$)
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/ea/Cosine_fixed_point.svg){width="500"}
+
+
+### Back to Markov chain
+
+**Intuition:** $\pi$-invariance means "$\pi$ acts like a fixed-point of $K$." 
+
+**Connection:** 
+
+- replace "points" by "probability distributions",
+- replace "function application" by "simulating the Markov chain for 1 step",
+- replace "fixed point" by "$\pi$-invariance". 

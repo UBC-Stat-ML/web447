@@ -1,0 +1,28 @@
+---
+title: "Overview"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## This week's outline
+
+By "MCMC hacking," I mean learning the tools to:
+
+1. Predict when some MCMC algorithm will fail.
+2. Strategies to fix it. 
+3. How to write a new MCMC algorithm. 
+4. How to debut your MCMC code.
+
+## Rationale
+
+We need to write new MCMC algorithm because there are 
+situations that Stan/other PPLs cannot handle automatically. 
+
+**Some examples:**
+
+- [Phylogenetic tree inference](https://www.routledge.com/Bayesian-Phylogenetics-Methods-Algorithms-and-Applications/Chen-Kuo-Lewis/p/book/9781466500792)
+- [Analysis of network data](https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssb.12289)
+- [Proto-language reconstruction](https://www.pnas.org/doi/pdf/10.1073/pnas.1204678110)
+- [Multiple sequence alignment](https://www.bali-phy.org/)

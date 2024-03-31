@@ -1,0 +1,58 @@
+---
+title: "MH is invariant"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Invariance of MH
+
+### Rationale
+
+We can now complete [the **plan** laid earlier](topic03_markov_lln.qmd).
+
+
+## Invariance of symmetric proposal MH
+
+- Recall: invariance is a synonym for "satisfying the global balance equation"
+- Strategy
+    - Since detailed balance implies global balance,
+    - If we can prove detailed balance we are done, i.e. it is enough to show
+    
+    $$\pi(x) K(x' | x) = \pi(x') K(x | x').$$ {#eq-detailed-balance}
+    
+    
+**Proof:** 
+
+- Start with the subcase $x' \neq x$. 
+- We know from [our previous calculation](topic02_mh_as_markov.qmd) that:
+  $$K(x' | x) = q(x'|x) \alpha(x, x'),$$ where $\alpha(x, x') = \min(1, r(x, x'))$ and $r(x, x') = \gamma(x') / \gamma(x) = \pi(x') / \pi(x)$. 
+- Hence: the left hand side of @eq-detailed-balance is:
+
+\begin{align*}
+\pi(x) K(x' | x) &= \pi(x) q(x'|x) \alpha(x, x') \expl{previous calculation} \\
+&= \pi(x) q(x'|x) \min(1, r(x, x'))  \expl{by definition} \\
+&= \pi(x) q(x'|x) \min(1, \pi(x') / \pi(x)) \expl{by definition} \\
+\end{align*}
+
+Now note that $a \min(1, b) = \min(a, ab)$, hence,
+
+\begin{align*}
+&=  q(x'|x) \min(\pi(x), \pi(x')).
+\end{align*}
+
+Now the last expression has the nice property that we can swap $x$ and $x'$, since:
+
+- $\min(a, b) = \min(b, a)$,
+- $q(x'|x) = q(x | x')$ by the symmetric proposal assumption. 
+
+Hence, doing all the steps in reverse with $x$ and $x'$ permuted, we get 
+$$\pi(x) K(x' | x) = \pi(x') K(x | x'),$$
+i.e., detailed balance.
+
+**Exercise:** finish the argument by considering the case where $x' = x$. 

@@ -73,6 +73,11 @@ website:
       - section: "Quiz 2"
         contents: 
           - auto: "w11_quiz2/*"
+      - section: "MCMC Hacking"
+        contents: 
+          - auto: "w12_mcmc2/*"
+          - text: "Exercises"
+            file: exercises/ex09.qmd
 
 
 format:

@@ -1,0 +1,52 @@
+---
+title: "Law of large numbers for Markov chain"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Law of Large Numbers (LLN) for Markov chains
+- $\pi$-invariance
+
+
+### Rationale
+
+Recall we have seen a special case of the LLN for Markov chain (for MH), 
+[when talking about the consistency of MH](../w08_mcmc1/topic05_mcmc_consistency.qmd). 
+
+Here we look at LLNs for Markov chains more generally. 
+
+
+## Law of large numbers for Markov chains
+
+**Recall,** we mentioned a LLN for MH specifically (simplified here for finite state spaces):
+
+**Proposition:** (discrete case) if the chain $X^\parm$ produced by MH is irreducible, then 
+  we have a **LLN with respect to $\pi$**, i.e.,
+  $$\frac{1}{M} \sum_{m=1}^M g(X^\parm) \to \ex_\pi[g(X)],$$
+  with probability one as the number of MCMC iterations $M$ goes to infinity. 
+  
+**Today** we see the above proposition is a corollary of the following two results:
+
+**Proposition:** (discrete case)
+
+1. MH satisfies a property called $\pi$-**invariance**
+2. $\pi$-invariance + irreducibility $\Rightarrow$ LLN with respect to $\pi$.
+
+
+## Invariance
+
+**Definition:** a Markov kernel $K$ is called **$\pi$-invariant** when 
+$$X \sim \pi \text{ and } X' \sim K(\cdot|X) \Rightarrow X' \sim \pi.$$ 
+
+
+## Plan
+
+- We will prove point 1 above, i.e., that MH is $\pi$-invariant.
+- For 2, see [further readings](../w08_mcmc1/topic04_mh.qmd#further-readings).
+

@@ -1,0 +1,235 @@
+---
+title: "Exercise 9: MCMC Hacking"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+## Overview
+
+In this exercise, you will implement a custom MCMC sampler for 
+a **change point detection** Bayesian model.
+
+### Getting the data
+
+Copy the blurb below into a file, you will need it in Q3. 
+
+```{r}
+#| eval: true
+#| file: ex09_data.R
+```
+
+
+### Problem formulation
+
+We use a dataset and model inspired by [Davidson-Pilon, 2013](https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb). 
+
+The data we analyze records, for each day, the number of text messages exchanged each day during `r length(sms_data)` days. 
+The raw data looks like this:
+
+```{r}
+plot(sms_data, xlab = "Day", ylab = "Number of text messages that day")
+```
+
+**Goal:** find if this user's behaviour changed in that time period, and if so,
+when. 
+
+This is a simple example of a change point detection task. 
+
+
+### Bayesian model
+
+Change point models are related to [mixture models](../w10_modelling/topic07_mixtures.qmd), 
+but instead of each data point being free to pick which of the two clusters to belong to, 
+change point models have a different cluster membership mechanism, defined as follows:
+
+1. Pick a change point $C$ uniformly among the days $d \in \{1, 2, \dots, `r length(sms_data)`\}$. 
+2. All data points before $C$ use the parameter of cluster 1. 
+3. All data points at or after $C$ use the parameter of cluster 2. 
+
+**Mathematical description:**
+
+\begin{align*}
+\lambda_i &\sim \distExp(1/100), \text{ for }i \in \{1, 2\}, \\
+C &\sim \distUnif\{1, 2, \dots `r length(sms_data)`\}, \\ 
+Y_d &\sim \distPoiss(\lambda_C), \text{ for }d \in \{1, 2, \dots, `r length(sms_data)`\}.
+\end{align*}
+
+**R implementation:**
+
+We provide an implementation of the joint distribution of this model below.
+You will need it in this exercise. 
+
+```{r}
+#| eval: true
+#| file: ex09_q1_template.R
+```
+
+**Explanation:** the argument...
+
+- ... `rates` takes in a vector of length two, with the two components corresponding to $\lambda_1$ and $\lambda_2$. 
+- ... `change_point` takes in an integer, corresponding to $C$ in the mathematical description above. 
+- ... `y` takes in an array of non-negative integer, corresponding to $Y = (Y_1, Y_2, \dots, Y_{`r length(sms_data)`})$. 
+
+Notice also we return the [log of the joint distribution](w10_modelling/topic03_custom_bricks.qmd#log-scale-computation), 
+so each term in the joint is computed in log scale using the `log = TRUE` option. 
+
+
+## Q.1: A custom MCMC sampler
+
+1. Define mathematically an irreducible and invariant MCMC algorithm to sample from the change point model's posterior.
+
+::: {.callout-caution collapse="true"} 
+## Click for hint
+
+Start by defining a kernel $K_1$ modifying only the `rates` parameter, then a second one, $K_2$, 
+modifying the `change_point` variable. Write the proposal $q_k$ for $k \in \{1, 2\}$ for 
+each kernel. Then specify a kernel $K$ based on $K_1$ and $K_2$. 
+
+Note: to get good mixing in Q3, your discrete proposal should have a standard deviation greater than 5. 
+:::
+
+2. Prove that the MCMC algorithm you defined in part 1 is $\pi$-invariant. 
+
+3. Implement the MCMC algorithm you describe mathematically in R. 
+   You should follow the following template:
+
+
+```{r}
+#| eval: false
+
+mcmc = function(rates, change_point, y, n_iterations) {
+  change_point_trace = rep(-1, n_iterations)
+  
+  for (i in 1:n_iterations) {
+    # TODO: implement a MCMC sampler
+  }
+  
+  # Return:
+  # - the trace of the change points (for question 1) 
+  # - the rates at the last iteration (for question 2)
+  return(
+    list(
+      change_point_trace = change_point_trace, 
+      last_iteration_rates = rates
+    )
+  )
+}
+
+```
+
+**Note:**
+
+- Make sure to use the input arguments `rates` and `change_point` as initial values 
+  of your MCMC algorithms (this will be important for Q2). 
+- The function returns two pieces of information:
+    - The list of samples ("trace") for the parameter of interest, `change_point` (used for Q3). 
+    - The rate parameter at the very end of the MCMC algorithm (used for Q2).
+
+
+## Q.2: MCMC correctness testing 
+
+We now subject our MCMC implementation to an "exact invariance test" to validate its 
+correctness. 
+
+1. Start by completing the function below to perform [forward simulation](../w01_discrete_inference/topic06_forward_sampling.qmd) 
+   on the same Bayesian model as in Q1. The input argument `synthetic_data_size` specifies the size of the dataset to generate.
+
+
+```{r}
+#| eval: false
+forward = function(synthetic_data_size) {
+  
+  # TODO: implement forward simulation
+  
+  return(list(
+    rates = rates,
+    change_point = change_point,
+    data = data
+  ))
+}
+
+
+```
+
+Recall that each iteration of the exact invariance test starts by forward sampling, followed by 
+either 0 or several rounds of MCMC (we will use 200). We provide this function to do this for you:
+
+```{r}
+#| eval: true
+#| file: ex09_q2_template.R
+```
+
+2. Apply the test to your code, by completing the lines below. 
+
+
+```{r}
+#| eval: false
+
+# Note: we use synthetic datasets with only 5 observations to speed things up
+forward_only = replicate(1000, forward_posterior(5, 200))
+with_mcmc = replicate(1000, forward_posterior(5, 200))
+
+# TODO: perform 2-samples t-test or Kolmogorov-Smirnov test
+#       to see if forward_only and with_mcmc follow the same distribution. 
+```
+
+Report the p-value. Recall that if it "tiny" (e.g., less than 0.01), it suggests there may be a bug in your code. 
+
+::: {.callout-caution collapse="true"} 
+## Click for tricks useful if you get a tiny p-value
+
+What to do if you suspect there is a bug? 
+
+First, try to narrow down if the putative bug is in the change-point MCMC move, or 
+in the rates MCMC move, or the forward sampling function. 
+
+To do so, temporary turn off the sampler $K_1$, and run the test. Then do the same for $K_2$. 
+
+If the low p value only shows up for one of the $K_i$, that suggests the bug might be 
+located there. 
+If it's on each separately, then there could be a common mistake, or the bug could be 
+in the forward simulation (or testing) code. 
+:::
+
+
+3. If you identified a bug using this method, show the part of the code that had a bug 
+   (before and after fixing), as well as the p-value (before and after). 
+   If no bugs where found, temporarily create one and report the same thing. 
+   Don't forget to fix all bugs before moving to the next question.
+
+
+## Q.3: Using your sampler for data analysis
+
+Perform 10k iteration of MCMC on the text message data. 
+
+```{r}
+#| eval: false
+
+samples = mcmc(...)
+```
+
+Recall that you can access the list of sampled change point using 
+`samples$change_point_trace`. 
+
+1. Create two trace plots for the change point parameter, one for the 
+   full trace, one for the subset of samples in the second half (via `[5000:10000]`). 
+   Comment on the mixing behaviour. 
+   
+2. Install the following package to compute the effective sample size:
+
+```{r}
+#| eval: false
+
+install.packages("mcmcse")
+require("mcmcse")
+
+mcmcse::ess(...)
+```
+
+Again, report it for both the full set of samples and the subset coming from the second half.
+
+3. Produce a histogram from the second half of samples. Briefly comment on the results in light of the note below. 
+
+**Note:** this dataset comes with the additional information that *"the 45th day corresponds to Christmas, and I moved away to Toronto the next month, leaving a girlfriend behind"* ([Davidson-Pilon, 2013](https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb)).

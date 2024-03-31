@@ -1,0 +1,19 @@
+---
+title: "Mixtures"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Mixture of MCMC kernels
+
+### Rationale
+
+TODO: bring back irreducibility
+
+

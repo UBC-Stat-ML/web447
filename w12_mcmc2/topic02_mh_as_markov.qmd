@@ -1,0 +1,62 @@
+---
+title: "MH as a Markov chain"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Homogeneous Markov chains
+- Transition kernel
+- Initial distribution 
+- MH as a Markov chain
+
+
+### Rationale
+
+**Why** is the [MH ratio](../w08_mcmc1/topic04_mh.qmd) defined as $\gamma(x')/\gamma(x)$?
+
+If we modified the MH ratio, would MCMC still "work"?
+
+**Recall:** by "MCMC still work" we mean "MCMC still be [consistent](../w08_mcmc1/topic05_mcmc_consistency.qmd)" i.e. enjoy a law of large numbers. 
+
+
+## Markov chain definitions
+
+**To answer the question above:**
+
+- we need to study in more details law of large numbers for **Markov chains**. 
+- We will need a some concepts related to Markov chains
+
+**Recall:** the random variables $X^{(1)}, X^{(2)}, \dots$ are called a Markov chain 
+    if they admit the following "chain" graphical model.
+    
+::: column-margin
+![](../images/markov.png){width="300"}
+:::
+
+**Note:** today we will assume the state space is discrete, we'll relax this soon. 
+
+**Definition:** let $K_m(x' | x) = \pr(X^{(m+1)} = x' | X^\parm = x)$. We call $K_m$ the **transition kernel** (for the $m$-th step).
+
+**Definition:** if all the transition kernels are equal, $K_m = K$ for some $K$, we say the Markov chain is **homogeneous**. 
+
+**Definition:** the marginal distribution of the first state, $X^{(1)}$ is called the **initial distribution**. 
+
+
+## The MH algorithm as a Markov chain  
+
+Recall MH involves:
+
+- a proposal $q(x'|x)$
+- a MH ratio $r(x, x') = \gamma(x') / \gamma(x)$, and
+- an **acceptance probability** $\alpha(x, x') = \min(1, r(x, x'))$. 
+
+**Question:** write the transition kernel $K(x' | x)$, assuming $x \neq x'$.
+
+{{< include ../../clickers/w12/_c01.qmd >}}
+

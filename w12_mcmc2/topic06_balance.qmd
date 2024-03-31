@@ -1,0 +1,71 @@
+---
+title: "Balance equations"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Global balance
+- Detailed balance
+
+### Rationale
+
+We need formulas to help us prove that MH is [$\pi$-invariant](topic04_invariance.qmd) 
+(and [hence combined with irreducibility, admits a LLN](topic03_markov_lln.qmd)).
+
+
+## Example
+
+- We continue our [eccentric tourists example](topic05_cke.qmd)
+
+**Question:** which travelling scheme(s) are $\pi$-invariant?
+
+**Intuition:** $\pi$-invariance in this context just means the fraction of tourists in each city will stay constant over time.
+
+a. Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (planes always full). 
+b. A **tour** where a fixed number of planes go around the world on a common route (again, planes always full). 
+c. A central "hub", where all flights either land or take off from the hub (again, planes always full). 
+
+::: column-margin
+a:
+![](../images/tourists-detailed.png){width="300"}
+b:
+![](../images/tourists-global.png){width="300"}
+c:
+![](../images/tourists-hub.png){width="300"}
+:::
+
+{{< include ../../clickers/w12/_c03.qmd >}}
+
+
+## Global balance 
+
+**Question:** combine 
+
+- the [definition of $\pi$-invariance](topic04_invariance.qmd), with  
+- [the formula we derived for the marginals of a Markov chain](topic05_cke.qmd), i.e.,
+    $$\mu_2(x') = \sum_x \mu_1(x) K(x' | x),$$
+    
+to get an equation characterizing $\pi$-invarinace in terms of $K$. 
+
+
+{{< include ../../clickers/w12/_c04.qmd >}}
+
+
+## Detailed balance
+
+**Question:** write mathematically "pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (planes always full)."
+
+{{< include ../../clickers/w12/_c05.qmd >}}
+
+
+## Relationship between detailed and global balance
+
+**Question:** what is the relationship between local and global balance?
+
+{{< include ../../clickers/w12/_c06.qmd >}}

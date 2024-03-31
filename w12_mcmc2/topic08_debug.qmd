@@ -1,0 +1,22 @@
+---
+title: "MCMC debugging"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Exact invariance test
+
+### Rationale
+
+TODO: exercise
+
+
+TODO: take very simple model and sampler (beta binomial)
+
+
