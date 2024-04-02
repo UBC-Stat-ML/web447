@@ -72,7 +72,7 @@ You will need it in this exercise.
 - ... `change_point` takes in an integer, corresponding to $C$ in the mathematical description above. 
 - ... `y` takes in an array of non-negative integer, corresponding to $Y = (Y_1, Y_2, \dots, Y_{`r length(sms_data)`})$. 
 
-Notice also we return the [log of the joint distribution](w10_modelling/topic03_custom_bricks.qmd#log-scale-computation), 
+Notice also we return the [log of the joint distribution](../w10_modelling/topic03_custom_bricks.qmd#log-scale-computation), 
 so each term in the joint is computed in log scale using the `log = TRUE` option. 
 
 

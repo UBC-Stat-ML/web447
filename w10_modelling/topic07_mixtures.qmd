@@ -36,7 +36,10 @@ distribution families.
 - Every student attempted every question. 
 
 ```{r}
-suppressPackageStartupMessages(require("rstan"))
+suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(dplyr))
+suppressPackageStartupMessages(require(bayesplot))
 
 data = read.csv(url("https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv"))
 rmarkdown::paged_table(data)
