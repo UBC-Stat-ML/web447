@@ -1014,9 +1014,13 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>We will write an MCMC algorithm for the above beta-binomial model (<span class="math inline">\(x\)</span> in math notation will be <code>p</code> in the above code).</li>
 <li>Suppose we want to use a <a href="../w08_mcmc1/topic04_mh.html">symmetric MH algorithm</a> with a normal proposal…</li>
-<li>….but we are not sure if we should use a proposal with standard deviation 1 or 2</li>
-<li>Let <span class="math inline">\(K_1\)</span> denote the MH kernel with proposal standard deviation 1, and <span class="math inline">\(K_2\)</span>, the MH kernel with proposal standard deviation 2.</li>
-<li>Idea: at each MCMC iteration, suppose we start at <span class="math inline">\(x\)</span>
+<li>….but we are not sure if we should use a proposal with standard deviation 1 or 2.</li>
+<li>Let:
+<ul>
+<li><span class="math inline">\(K_1\)</span> denote the MH kernel with proposal standard deviation 1, and</li>
+<li><span class="math inline">\(K_2\)</span>, the MH kernel with proposal standard deviation 2.</li>
+</ul></li>
+<li>Idea of <strong>kernel mixture</strong>: at each MCMC iteration, suppose we start at <span class="math inline">\(x\)</span>
 <ul>
 <li>Flip a coin,</li>
 <li>if heads, use <span class="math inline">\(K_1\)</span>, i.e., <span class="math inline">\(x' \sim K_1(\cdot | x)\)</span>,</li>
@@ -1028,7 +1032,7 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="coding-up-kernel-mixtures">Coding up kernel mixtures</h3>
 <ul>
 <li>We start by defining our kernels.</li>
-<li>Calling the code below with <code>kernel(gamma, x, i)</code> corresponds to sampling from <span class="math inline">\(K_i(\cdot | x)\)</span></li>
+<li>Calling the code below with <code>kernel(gamma, x, i)</code> corresponds to sampling from <span class="math inline">\(K_i(\cdot | x)\)</span> for <span class="math inline">\(i \in \{1, 2\}\)</span>:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kernel <span class="ot">=</span> <span class="cf">function</span>(gamma, current_point, proposal_sd) {</span>
@@ -1044,24 +1048,36 @@ https://github.com/trevorcampbell/shortex
 </div>
 <p>Based on these these kernels, here is an example how to implement the mixture:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mcmc_mixture <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iters) {</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    kernel_index_choice <span class="ot">=</span> <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">0.5</span>) <span class="dv">1</span> <span class="cf">else</span> <span class="dv">2</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    current_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, current_point, kernel_index_choice)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    samples[i] <span class="ot">=</span> current_point</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/plot_traces_and_hist.R"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_mixture</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_traces_and_hist</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mcmc_mixture <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iters) {</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    kernel_index_choice <span class="ot">=</span> <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">0.5</span>) <span class="dv">1</span> <span class="cf">else</span> <span class="dv">2</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-9" class="code-annotation-target"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>    current_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, current_point, kernel_index_choice)</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>    samples[i] <span class="ot">=</span> current_point</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/plot_traces_and_hist.R"</span>)</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_mixture</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_traces_and_hist</span>(samples)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="1">Flip a coin.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="9" data-code-annotation="2">Use kernel corresponding to the coin flip outcome.</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1114,38 +1130,48 @@ Click for answer
 <section id="methodological-application" class="level2">
 <h2 class="anchored" data-anchor-id="methodological-application">Methodological application</h2>
 <p><strong>Question:</strong> would it be a good idea to use the current state to adapt the mixture proportion (i.e., using <span class="math inline">\(\rho_i(x)\)</span> instead of <span class="math inline">\(\rho_i\)</span>?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Yes, it would improve mixing. 
-2. Yes, it would reduce the running time. 
-3. No, it would break irreducibility. 
-4. No, it would break invariance.
-5. None of the above.
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-No, it would break $\pi$-invariance. 
-
-Let us rewrite the first few steps of the above invariance argument, with $\rho_i(x)$
-instead of $\rho$, until the 
-argument breaks down:
-\begin{align*}
-\sum_x \pi(x) K(x' | x) &= \sum_x \pi(x) \sum_i \rho_i(x) K_i(x' | x) \expl{def of mixture} \\
-&\neq  \sum_i \rho_i(x)  \sum_x \pi(x)  K_i(x' | x),  \\
-\end{align*}
-where the last line does not make sense, i.e. $\rho_i(x)$ now depends on $x$, 
-so we cannot rearrange the sums in a way that makes it possible to invoke invariance of 
-the $K_i$. Can you identify an explicit counter example?
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Yes, it would improve mixing.</li>
+<li>Yes, it would reduce the running time.</li>
+<li>No, it would break irreducibility.</li>
+<li>No, it would break invariance.</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No, it would break <span class="math inline">\(\pi\)</span>-invariance.</p>
+<p>Let us rewrite the first few steps of the above invariance argument, with <span class="math inline">\(\rho_i(x)\)</span> instead of <span class="math inline">\(\rho\)</span>, until the argument breaks down: <span class="math display">\[\begin{align*}
+\sum_x \pi(x) K(x' | x) &amp;= \sum_x \pi(x) \sum_i \rho_i(x) K_i(x' | x) \;\;\text{(def of mixture)} \\
+&amp;\neq  \sum_i \rho_i(x)  \sum_x \pi(x)  K_i(x' | x),  \\
+\end{align*}\]</span> where the last line does not make sense, i.e.&nbsp;<span class="math inline">\(\rho_i(x)\)</span> now depends on <span class="math inline">\(x\)</span>, so we cannot rearrange the sums in a way that makes it possible to invoke invariance of the <span class="math inline">\(K_i\)</span>. Can you identify an explicit counter example?</p>
+</div>
+</div>
+</div>
 
 
 </section>
