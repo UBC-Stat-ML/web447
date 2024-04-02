@@ -81,8 +81,8 @@ measurements
 - Let $L$ denote a detection limit (here $L = 1.1$)
 - Let $X$ denote the unknown parameter (here, the true mean we try to recover). 
 - Let $i$ denote the observation index (worker $i \in \{1, 2, \dots, 10\}$ in our example)
-- Let $H_i$ denote the measurements **before censoring**. 
-- Let $C_i$ denote a binary indicator on the censoring.
+- Let $H_i$ denote the measurements **before censoring** (i.e., if we had a perfect measurement device immune to saturation effects). 
+- Let $C_i$ denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).
 - Let $Y_i = C_i L + (1 - C_i) H_i$. 
 
 In the Chernobyl example, we will use the following model:

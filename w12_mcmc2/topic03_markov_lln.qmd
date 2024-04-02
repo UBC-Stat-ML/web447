@@ -48,5 +48,5 @@ $$X \sim \pi \text{ and } X' \sim K(\cdot|X) \Rightarrow X' \sim \pi.$$
 ## Plan
 
 - We will prove point 1 above, i.e., that MH is $\pi$-invariant.
-- For 2, see [further readings](../w08_mcmc1/topic04_mh.qmd#further-readings).
+- For 2, see [further readings](../w08_mcmc1/topic04_mh.qmd#further-readings). 
 

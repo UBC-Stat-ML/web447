@@ -14,9 +14,155 @@ editor:
 
 ### Rationale
 
-TODO: exercise
+It is easy for bugs to sneak in MCMC code. 
+In the workflow week, we have briefly outlined [how simulated data can be used to detect software defects](../w09_workflow/topic03_checking_correctness.qmd). 
+However, the test discussed there still left "MCMC too slow" as one possible issue confounding software defect. 
+
+Here we describe a new test (the *exact invariance test*) that excludes "MCMC too slow" from the possible causes of warning. 
+When the *exact invariance test* rises a warning, the only possible causes are "software defect" and "bad luck."
 
 
-TODO: take very simple model and sampler (beta binomial)
+## Example
 
+Here is an implementation of the joint distribution of a beta-binomial model **with a bug planted**!
+
+```{r}
+set.seed(1)
+# prior: Beta(alpha, beta)
+alpha = 1
+beta = 2 
+n_trials = 3
+
+buggy_joint = function(x, y) {
+  if (x < 0 || x > 1) return(0.0)
+  dbeta(x, alpha, beta) * dbinom(y, size = n_trials, prob = x, log = TRUE)
+}
+```
+
+Can you spot the bug? 
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+It mixes up log-scale and non-log-scale computations, a common mistake. 
+Concretely, the `log = TRUE` argument should be removed.
+:::
+
+Can we automatically detect there is a bug?
+
+
+## Exact invariance test
+
+### Building block: forward simulation-initialized MCMC
+
+The first ingredient we need is a [forward simulator](../w01_discrete_inference/topic06_forward_sampling.qmd):
+
+```{r}
+forward = function() {
+  x = rbeta(1, alpha, beta) 
+  y = rbinom(1, n_trials, x)
+  return(
+    list(
+      x = x,
+      y = y
+    ))
+}
+```
+
+Next, let's do the following:
+
+- Call our forward simulator. 
+  $$(x, y) \sim \text{forward()}. $$
+- Run an MCMC algorithm **initialized** at the $(x, y)$ we just forward simulated. 
+
+```{r}
+stationary_mcmc = function(joint, n_iterations) {
+  initialization = forward() 
+  y = initialization$y
+  if (n_iterations == 0) {
+    return(initialization$x)
+  } else {
+    current_x = initialization$x
+    for (i in 1:n_iterations) {
+      proposed_x = current_x + rnorm(1) 
+      ratio = joint(proposed_x, y) / joint(current_x, y) 
+      if (runif(1) < ratio) {
+        current_x = proposed_x
+      }
+    }
+    return(current_x)
+  }
+}
+```
+
+- Typically, we do MCMC on $x$ only...
+    - ...but here, view the MCMC as a chain on **pairs** $(x, y)$.
+- Typically, MCMC targets the conditional, $\pi(x) = p(x | y)$...
+    - ...but here, view it as targeting the **joint**, $\pi(x, y) = p(x, y)$. 
+- What is the initial distribution, $\mu_1$?
+    - By construction, we initialize with `forward()`, so,
+    $$\mu_1(x, y) = \pi(x, y).$$
+    
+**Question:** if the code is correct, what is the distribution $\mu_2$ of the chain after one iteration, i.e., the distribution of $(X^{(2)}, Y^{(2)})$?
+
+
+{{< include ../../clickers/w12/_c09.qmd >}} 
+
+
+### Repeat 2000 times
+
+- We now repeat what we just did 1000 times. 
+- We also do forward simulation alone, 1000 times.  
+
+```{r}
+exact_invariance = function(joint) {
+  forward_only = replicate(1000, stationary_mcmc(joint, 0))
+  with_mcmc    = replicate(1000, stationary_mcmc(joint, 200))
+
+  ks.test(forward_only, with_mcmc)
+}
+```
+
+
+### Frequentist test of distributional equality
+
+- We now have 2 sets of samples, each i.i.d.: `forward_only` and `with_mcmc`. 
+- **Key property:** if they have different distributions, we can conclude that the code is not $\pi$-invariant, i.e., buggy. 
+- How to check this?
+    - Let's use frequentist tools!
+    - One of the rare situations where a "point-null hypothesis" makes perfect sense.
+        - i.e., exact equality of the distribution is precisely what we would expect if the code is correct. 
+
+```{r}
+test_result = exact_invariance(buggy_joint)
+test_result
+```
+
+- You do not need to know the details about this test...
+- ...rather, focus on its **interpretation**:
+    - we observed a certain "discrepancy" between the empirical CDFs of `forward_only` and `with_mcmc`, here `r test_result$statistic`
+    - if the code was correct, we would see a discrepancy larger or equal to that only with probability `r format(test_result$p.value, scientific = FALSE)`
+    - that last probability is the infamous "p-value" which is often over-used, but a good tool in this present situation. 
+
+**Success!** The p-value is tiny, we would indeed have caught that bug. 
+
+
+### Checking that correct code passes the test
+
+Let's look at the fixed code:
+
+```{r}
+fixed_joint = function(x, y) {
+  if (x < 0 || x > 1) return(0.0)
+  dbeta(x, alpha, beta) * dbinom(y, size = n_trials, prob = x)
+}
+
+exact_invariance(fixed_joint)
+```
+
+**Again, success!** The p-value is not tiny, with high probability there would not be a false alarm. 
+
+## References 
+
+See [earlier page on checking correctness](../w09_workflow/topic03_checking_correctness.qmd#additional-references).
 

@@ -11,13 +11,14 @@ editor:
 ### Topics
 
 - Intuition behind invariance
-
+- Invariance as a fixed point
 
 
 ### Rationale
 
-$\pi$-invariance is the key condition needed to establish 
-a [law of large numbers for Markov chains](topic03_markov_lln.qmd).
+Invariance is the key condition needed to establish 
+a [law of large numbers for Markov chains](topic03_markov_lln.qmd). 
+Hence it is useful to build some intuition on what it means. 
 
 
 
@@ -39,12 +40,13 @@ a [law of large numbers for Markov chains](topic03_markov_lln.qmd).
     - Compute $x_3 = f(x_2)$
     - Compute $x_4 = f(x_3)$
     - etc.
-    - Can we predict where will $x_n$ end up after an infinite number of iterations?
+- Can we predict where will $x_n$ end up after an infinite number of iterations?
+    - Hint: try to understand why the figure has a blue line $y = x$.
 
 
 ### Fixed points
 
-**Surprise:** sometimes, we can predict where $x_n$ ends up!
+**Surprise:** sometimes, we can predict where $\lim_{n\to\infty} x_n$ ends up!
 
 **Definition:** a **fixed point** of a function $f$ is a point $x$ such that $f(x) = x$. 
 
@@ -54,10 +56,16 @@ a [law of large numbers for Markov chains](topic03_markov_lln.qmd).
 
 **Question:** what are the fixed point in this picture?
 
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The 3 yellow points. These are the points where the curve intersect the line $y = x$. 
+:::
+
 **Example:** 
 
 - look at the fixed point iteration picture more closely,
-- note that indeed here we end up at a fixed point (diagonal line shows $f(x) = x$)
+- note that indeed here we end up at a fixed point (blue diagonal line shows the linear function $y = x$)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/ea/Cosine_fixed_point.svg){width="500"}
 

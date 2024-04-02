@@ -10,8 +10,8 @@ editor:
 
 ### Topics
 
-- Global balance
-- Detailed balance
+- Global balance (synonym: invariance)
+- Detailed balance (synonym: time-reversibility)
 
 ### Rationale
 
@@ -21,7 +21,7 @@ We need formulas to help us prove that MH is [$\pi$-invariant](topic04_invarianc
 
 ## Example
 
-- We continue our [eccentric tourists example](topic05_cke.qmd)
+We continue our [eccentric tourists example](topic05_cke.qmd)...
 
 **Question:** which travelling scheme(s) are $\pi$-invariant?
 

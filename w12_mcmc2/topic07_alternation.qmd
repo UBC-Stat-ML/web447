@@ -1,5 +1,5 @@
 ---
-title: "Alternations"
+title: "Kernel alternations"
 editor: 
   mode: source
 ---
@@ -11,8 +11,93 @@ editor:
 ### Topics
 
 - Alternations of MCMC kernels
+- Code implementation
+- Alternations preserve invariance
 
 ### Rationale
 
-TODO: non-reversibility
+*Alternation of kernels* is another method to combine kernels. 
+It is mathematically slightly more complicated than mixtures, but can yield 
+faster mixing (in some situations, [much faster](https://rss.onlinelibrary.wiley.com/doi/10.1111/rssb.12464)).
 
+Here we just give an introduction to kernel alternation.
+We will talk about the reason why they can yield much faster performance when 
+we talk about *non-reversibility.*
+
+
+## Alternation of MCMC kernels
+
+### Example 
+
+We use the same example as the [one we used for MCMC mixtures](topic06_mix.qmd).
+
+```{r}
+#| eval: true
+#| code-fold: true
+#| file: ../exercises/ex07_scaffold.R
+```
+
+### Intuition
+
+**Setup:** Denote the 2 kernels we want to use by $K_1$ and $K_2$. 
+
+**Idea:** at each MCMC iteration, let $x$ denote the current state, 
+
+1. Sample from $K_1$ from the current state.
+2. Sample from $K_2$ from the state output by $K_1$. 
+
+
+### Coding up kernel alternation
+
+Here is an example how to implement the alternation.
+It is based on the same normal proposal MH kernels, $K_1$ and $K_2$, with 
+standard deviations 1 and 2 respectively.
+
+```{r}
+#| eval: true
+#| code-fold: true
+#| file: ../blocks/normal_mh_kernel.R
+```
+
+```{r}
+
+# simple Metropolis-Hastings algorithm (normal proposal)
+mcmc_mixture = function(gamma, initial_point, n_iters) {
+  samples = numeric(n_iters) 
+  dim = length(initial_point)
+  current_point = initial_point
+  for (i in 1:n_iters) {
+
+    intermediate_point = kernel(gamma, current_point, 1)
+    current_point = kernel(gamma, intermediate_point, 2)
+    
+    samples[i] = current_point
+  }
+  return(samples)
+}
+
+samples = mcmc_mixture(gamma_beta_binomial, 0.5,  1000)
+```
+
+
+### Mathematical notation for kernel mixtures
+
+**Question:** write a mathematical expression for the alternation $\Kalt$ in terms of $K_1$ and $K_2$. 
+
+{{< include ../../clickers/w12/_c08.qmd >}} 
+
+
+## Invariance result
+
+### Alternation preserves invariance
+
+**Proposition:** if $K_i$ are $\pi$-invariant, then their alternation is $\pi$-invariant. 
+
+**Proof:**
+
+\begin{align*}
+\sum_{x} \pi(x) \Kalt(x' | x) &= \sum_{x} \pi(x) \sum_{\check x} K_1(\check x | x) K_2(x' | \check x) \\
+&=  \sum_{\check x} K_2(x' | \check x) \sum_{x} \pi(x)  K_1(\check x | x) \\
+&= \sum_{\check x} K_2(x' | \check x) \pi(\check x) \expl{invariance of $K_1$} \\
+&= \pi(x') \expl{invariance of $K_2$}.
+\end{align*}

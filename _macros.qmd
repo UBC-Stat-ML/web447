@@ -16,6 +16,8 @@ editor:
 \newcommand{\best}{\delta_{\text{B}}}
 \newcommand{\oest}{\delta_{\text{o}}}
 
+\newcommand{\Kmix}{K_\text{mix}}
+\newcommand{\Kalt}{K_\text{alt}}
 
 <!-- -->
 
