@@ -840,6 +840,30 @@ window.Quarto = {
  <span class="menu-text">MH is invariant</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic06_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel mixtures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic07_alternation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel alternations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic08_debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCMC debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -913,11 +937,12 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>Intuition behind invariance</li>
+<li>Invariance as a fixed point</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p><span class="math inline">\(\pi\)</span>-invariance is the key condition needed to establish a <a href="../w12_mcmc2/topic03_markov_lln.html">law of large numbers for Markov chains</a>.</p>
+<p>Invariance is the key condition needed to establish a <a href="../w12_mcmc2/topic03_markov_lln.html">law of large numbers for Markov chains</a>. Hence it is useful to build some intuition on what it means.</p>
 </section>
 </section>
 <section id="analogy-fixed-point-iteration" class="level2 page-columns page-full">
@@ -937,22 +962,41 @@ https://github.com/trevorcampbell/shortex
 <li>Compute <span class="math inline">\(x_3 = f(x_2)\)</span></li>
 <li>Compute <span class="math inline">\(x_4 = f(x_3)\)</span></li>
 <li>etc.</li>
-<li>Can we predict where will <span class="math inline">\(x_n\)</span> end up after an infinite number of iterations?</li>
+</ul></li>
+<li>Can we predict where will <span class="math inline">\(x_n\)</span> end up after an infinite number of iterations?
+<ul>
+<li>Hint: try to understand why the figure has a blue line <span class="math inline">\(y = x\)</span>.</li>
 </ul></li>
 </ul>
 </section>
 <section id="fixed-points" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fixed-points">Fixed points</h3>
-<p><strong>Surprise:</strong> sometimes, we can predict where <span class="math inline">\(x_n\)</span> ends up!</p>
+<p><strong>Surprise:</strong> sometimes, we can predict where <span class="math inline">\(\lim_{n\to\infty} x_n\)</span> ends up!</p>
 <p><strong>Definition:</strong> a <strong>fixed point</strong> of a function <span class="math inline">\(f\)</span> is a point <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = x\)</span>.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Fixed_point_example.svg" class="img-fluid" width="300"></p>
 </div></div><p><strong>Question:</strong> what are the fixed point in this picture?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The 3 yellow points. These are the points where the curve intersect the line <span class="math inline">\(y = x\)</span>.</p>
+</div>
+</div>
+</div>
 <p><strong>Example:</strong></p>
 <ul>
 <li>look at the fixed point iteration picture more closely,</li>
-<li>note that indeed here we end up at a fixed point (diagonal line shows <span class="math inline">\(f(x) = x\)</span>)</li>
+<li>note that indeed here we end up at a fixed point (blue diagonal line shows the linear function <span class="math inline">\(y = x\)</span>)</li>
 </ul>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Cosine_fixed_point.svg" class="img-fluid" width="500"></p>
 </section>

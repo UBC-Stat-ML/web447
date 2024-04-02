@@ -840,6 +840,30 @@ window.Quarto = {
  <span class="menu-text">MH is invariant</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic06_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel mixtures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic07_alternation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel alternations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic08_debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCMC debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -1025,6 +1049,14 @@ K(x'|x) &amp;= \sum_{x^*} q(x^*|x) \mathbb{P}(X' = x' | X^* = x^*, X = x) \\
 &amp;= q(x'|x) \mathbb{P}(X' = x' | X^* = x', X = x) \;\;\text{(see expl. above)} \\
 &amp;= q(x'|x) \alpha(x, x'). \;\;\text{(definition of accept probability)} \\
 \end{align*}\]</span></p>
+<p><strong>Note:</strong> the case <span class="math inline">\(x = x'\)</span> is a bit more complicated, because there are two situations where MH stays at the same state, namely,</p>
+<ol type="1">
+<li>the proposal tells us to stay at the current state (possible with discrete proposals only) and we accept that proposal, or,</li>
+<li>the proposal tries to go somewhere (including <span class="math inline">\(x\)</span>) but the proposal is rejected.</li>
+</ol>
+<p>Notice that the two situations are disjoint, so using the additivity axiom:</p>
+<p><span class="math display">\[K(x | x) = q(x|x) \alpha(x, x) + \sum_{x'} q(x'|x) ( 1- \alpha(x, x')).\]</span></p>
+<p>The above equation might be impossible to numerically compute in certain situations. Fortunately, we do not need to compute it to run MCMC, we only need to <em>simulate</em> from <span class="math inline">\(K(\cdot | x)\)</span>. Why do we spend time writing expressions for <span class="math inline">\(K(x'|x)\)</span> then? In order to do mathematical analysis, which gives us useful guarantees, such as law of large numbers and central limit theorems.</p>
 </div>
 </div>
 </div>

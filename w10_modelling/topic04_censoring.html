@@ -874,6 +874,30 @@ window.Quarto = {
  <span class="menu-text">MH is invariant</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic06_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel mixtures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic07_alternation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernel alternations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic08_debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MCMC debugging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/ex09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -1104,8 +1128,8 @@ Click for answer
 <li>Let <span class="math inline">\(L\)</span> denote a detection limit (here <span class="math inline">\(L = 1.1\)</span>)</li>
 <li>Let <span class="math inline">\(X\)</span> denote the unknown parameter (here, the true mean we try to recover).</li>
 <li>Let <span class="math inline">\(i\)</span> denote the observation index (worker <span class="math inline">\(i \in \{1, 2, \dots, 10\}\)</span> in our example)</li>
-<li>Let <span class="math inline">\(H_i\)</span> denote the measurements <strong>before censoring</strong>.</li>
-<li>Let <span class="math inline">\(C_i\)</span> denote a binary indicator on the censoring.</li>
+<li>Let <span class="math inline">\(H_i\)</span> denote the measurements <strong>before censoring</strong> (i.e., if we had a perfect measurement device immune to saturation effects).</li>
+<li>Let <span class="math inline">\(C_i\)</span> denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).</li>
 <li>Let <span class="math inline">\(Y_i = C_i L + (1 - C_i) H_i\)</span>.</li>
 </ul>
 <p>In the Chernobyl example, we will use the following model:</p>
