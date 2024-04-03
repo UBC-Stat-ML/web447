@@ -46,9 +46,11 @@ Let us use the simple beta-binomial example from [question 3 of exercise 7](../e
 - We will write an MCMC algorithm for the above beta-binomial model ($x$ in math notation will be `p` in the above code). 
 - Suppose we want to use a [symmetric MH algorithm](../w08_mcmc1/topic04_mh.qmd) 
   with a normal proposal...
-- ....but we are not sure if we should use a proposal with standard deviation 1 or 2
-- Let $K_1$ denote the MH kernel with proposal standard deviation 1, and $K_2$, the MH kernel with proposal standard deviation 2. 
-- Idea: at each MCMC iteration, suppose we start at $x$
+- ....but we are not sure if we should use a proposal with standard deviation 1 or 2.
+- Let:
+    - $K_1$ denote the MH kernel with proposal standard deviation 1, and 
+    - $K_2$, the MH kernel with proposal standard deviation 2. 
+- Idea of **kernel mixture**: at each MCMC iteration, suppose we start at $x$
     - Flip a coin, 
     - if heads, use $K_1$, i.e., $x' \sim K_1(\cdot | x)$,
     - if tails, $K_2$, i.e., $x' \sim K_2(\cdot | x)$.
@@ -56,7 +58,7 @@ Let us use the simple beta-binomial example from [question 3 of exercise 7](../e
 ### Coding up kernel mixtures
 
 - We start by defining our kernels. 
-- Calling the code below with `kernel(gamma, x, i)` corresponds to sampling from $K_i(\cdot | x)$
+- Calling the code below with `kernel(gamma, x, i)` corresponds to sampling from $K_i(\cdot | x)$ for $i \in \{1, 2\}$:
 
 ```{r}
 #| eval: true
@@ -76,8 +78,8 @@ mcmc_mixture = function(gamma, initial_point, n_iters) {
   current_point = initial_point
   for (i in 1:n_iters) {
     
-    kernel_index_choice = if (runif(1) < 0.5) 1 else 2
-    current_point = kernel(gamma, current_point, kernel_index_choice)
+    kernel_index_choice = if (runif(1) < 0.5) 1 else 2 # <1>
+    current_point = kernel(gamma, current_point, kernel_index_choice) # <2>
     
     samples[i] = current_point
   }
@@ -88,6 +90,8 @@ source("../blocks/plot_traces_and_hist.R")
 samples = mcmc_mixture(gamma_beta_binomial, 0.5,  1000)
 plot_traces_and_hist(samples)
 ```
+1. Flip a coin. 
+2. Use kernel corresponding to the coin flip outcome.
 
 ### Mathematical notation for kernel mixtures
 

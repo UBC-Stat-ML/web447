@@ -29,7 +29,7 @@ We continue our [eccentric tourists example](topic05_cke.qmd)...
 
 a. Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (planes always full). 
 b. A **tour** where a fixed number of planes go around the world on a common route (again, planes always full). 
-c. A central "hub", where all flights either land or take off from the hub (again, planes always full). 
+c. A central "hub", where all flights land at the hub (again, planes always full). 
 
 ::: column-margin
 a:
@@ -51,7 +51,7 @@ c:
 - [the formula we derived for the marginals of a Markov chain](topic05_cke.qmd), i.e.,
     $$\mu_2(x') = \sum_x \mu_1(x) K(x' | x),$$
     
-to get an equation characterizing $\pi$-invarinace in terms of $K$. 
+to get an equation characterizing $\pi$-invariance in terms of $K$. 
 
 
 {{< include ../../clickers/w12/_c04.qmd >}}
@@ -66,6 +66,6 @@ to get an equation characterizing $\pi$-invarinace in terms of $K$.
 
 ## Relationship between detailed and global balance
 
-**Question:** what is the relationship between local and global balance?
+**Question:** what is the relationship between local and global balance? Does one imply the other?
 
 {{< include ../../clickers/w12/_c06.qmd >}}

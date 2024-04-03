@@ -68,8 +68,8 @@ mcmc_mixture = function(gamma, initial_point, n_iters) {
   current_point = initial_point
   for (i in 1:n_iters) {
 
-    intermediate_point = kernel(gamma, current_point, 1)
-    current_point = kernel(gamma, intermediate_point, 2)
+    intermediate_point = kernel(gamma, current_point, 1) # <1>
+    current_point = kernel(gamma, intermediate_point, 2) # <2>
     
     samples[i] = current_point
   }
@@ -78,7 +78,8 @@ mcmc_mixture = function(gamma, initial_point, n_iters) {
 
 samples = mcmc_mixture(gamma_beta_binomial, 0.5,  1000)
 ```
-
+1. Sample from $K_1$.
+2. Sample from $K_2$ from the state output by $K_1$. 
 
 ### Mathematical notation for kernel mixtures
 

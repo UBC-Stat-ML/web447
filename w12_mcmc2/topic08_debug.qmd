@@ -77,13 +77,13 @@ Next, let's do the following:
 
 ```{r}
 stationary_mcmc = function(joint, n_iterations) {
-  initialization = forward() 
+  initialization = forward() # <1>
   y = initialization$y
-  if (n_iterations == 0) {
+  if (n_iterations == 0) { 
     return(initialization$x)
   } else {
-    current_x = initialization$x
-    for (i in 1:n_iterations) {
+    current_x = initialization$x # <2> 
+    for (i in 1:n_iterations) { # <3>
       proposed_x = current_x + rnorm(1) 
       ratio = joint(proposed_x, y) / joint(current_x, y) 
       if (runif(1) < ratio) {
@@ -94,6 +94,9 @@ stationary_mcmc = function(joint, n_iterations) {
   }
 }
 ```
+1. Call our forward simulator. 
+2. Initialize the MCMC chain. 
+3. Perform `n_iterations` rounds of MCMC conditioning on the `y` we simulated. 
 
 - Typically, we do MCMC on $x$ only...
     - ...but here, view the MCMC as a chain on **pairs** $(x, y)$.
@@ -112,7 +115,7 @@ stationary_mcmc = function(joint, n_iterations) {
 ### Repeat 2000 times
 
 - We now repeat what we just did 1000 times. 
-- We also do forward simulation alone, 1000 times.  
+- We also do forward simulation alone, 1000 times (by setting `n_iterations` to zero).  
 
 ```{r}
 exact_invariance = function(joint) {

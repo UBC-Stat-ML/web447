@@ -37,7 +37,7 @@ We can now complete [the **plan** laid earlier](topic03_markov_lln.qmd).
 \begin{align*}
 \pi(x) K(x' | x) &= \pi(x) q(x'|x) \alpha(x, x') \expl{previous calculation} \\
 &= \pi(x) q(x'|x) \min(1, r(x, x'))  \expl{by definition} \\
-&= \pi(x) q(x'|x) \min(1, \pi(x') / \pi(x)) \expl{by definition} \\
+&= \pi(x) q(x'|x) \min(1, \pi(x') / \pi(x)) \expl{by definition}. \\
 \end{align*}
 
 Now note that $a \min(1, b) = \min(a, ab)$, hence,
