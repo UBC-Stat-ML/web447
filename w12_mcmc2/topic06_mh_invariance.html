@@ -100,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -910,7 +910,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic06_mh_invariance.html">MH is invariant</a></li></ol></nav>
 <div class="quarto-title">
@@ -963,28 +963,29 @@ https://github.com/trevorcampbell/shortex
 <p>We can now complete <a href="../w12_mcmc2/topic03_markov_lln.html">the <strong>plan</strong> laid earlier</a>.</p>
 </section>
 </section>
-<section id="invariance-of-symmetric-proposal-mh" class="level2">
+<section id="invariance-of-symmetric-proposal-mh" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="invariance-of-symmetric-proposal-mh">Invariance of symmetric proposal MH</h2>
 <ul>
 <li>Recall: invariance is a synonym for “satisfying the global balance equation”</li>
 <li>Strategy
 <ul>
 <li>Since detailed balance implies global balance,</li>
-<li>If we can prove detailed balance we are done, i.e.&nbsp;it is enough to show</li>
+<li>If we can prove detailed balance we are done, i.e.&nbsp;it is enough to show <span id="eq-detailed-balance"><span class="math display">\[\pi(x) K(x' | x) = \pi(x') K(x | x'). \tag{1}\]</span></span></li>
+</ul></li>
 </ul>
-<span id="eq-detailed-balance"><span class="math display">\[\pi(x) K(x' | x) = \pi(x') K(x | x'). \tag{1}\]</span></span></li>
-</ul>
-<p><strong>Proof:</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/tourists-detailed.png" class="img-fluid" width="300"></p>
+</div></div><p><strong>Proof:</strong></p>
 <ul>
 <li>Start with the subcase <span class="math inline">\(x' \neq x\)</span>.</li>
 <li>We know from <a href="../w12_mcmc2/topic02_mh_as_markov.html">our previous calculation</a> that: <span class="math display">\[K(x' | x) = q(x'|x) \alpha(x, x'),\]</span> where <span class="math inline">\(\alpha(x, x') = \min(1, r(x, x'))\)</span> and <span class="math inline">\(r(x, x') = \gamma(x') / \gamma(x) = \pi(x') / \pi(x)\)</span>.</li>
-<li>Hence: the left hand side of <a href="#eq-detailed-balance" class="quarto-xref">Equation&nbsp;1</a> is:</li>
-</ul>
-<p><span class="math display">\[\begin{align*}
+<li>Hence: the left hand side of <a href="#eq-detailed-balance" class="quarto-xref">Equation&nbsp;1</a> is: <span class="math display">\[\begin{align*}
 \pi(x) K(x' | x) &amp;= \pi(x) q(x'|x) \alpha(x, x') \;\;\text{(previous calculation)} \\
 &amp;= \pi(x) q(x'|x) \min(1, r(x, x'))  \;\;\text{(by definition)} \\
 &amp;= \pi(x) q(x'|x) \min(1, \pi(x') / \pi(x)) \;\;\text{(by definition)}. \\
-\end{align*}\]</span></p>
+\end{align*}\]</span></li>
+</ul>
 <p>Now note that <span class="math inline">\(a \min(1, b) = \min(a, ab)\)</span>, hence,</p>
 <p><span class="math display">\[\begin{align*}
 &amp;=  q(x'|x) \min(\pi(x), \pi(x')).
