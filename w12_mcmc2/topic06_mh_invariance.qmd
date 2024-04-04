@@ -23,8 +23,11 @@ We can now complete [the **plan** laid earlier](topic03_markov_lln.qmd).
 - Strategy
     - Since detailed balance implies global balance,
     - If we can prove detailed balance we are done, i.e. it is enough to show
-    
     $$\pi(x) K(x' | x) = \pi(x') K(x | x').$$ {#eq-detailed-balance}
+    
+::: column-margin
+![](../images/tourists-detailed.png){width="300"}
+:::
     
     
 **Proof:** 
@@ -33,7 +36,6 @@ We can now complete [the **plan** laid earlier](topic03_markov_lln.qmd).
 - We know from [our previous calculation](topic02_mh_as_markov.qmd) that:
   $$K(x' | x) = q(x'|x) \alpha(x, x'),$$ where $\alpha(x, x') = \min(1, r(x, x'))$ and $r(x, x') = \gamma(x') / \gamma(x) = \pi(x') / \pi(x)$. 
 - Hence: the left hand side of @eq-detailed-balance is:
-
 \begin{align*}
 \pi(x) K(x' | x) &= \pi(x) q(x'|x) \alpha(x, x') \expl{previous calculation} \\
 &= \pi(x) q(x'|x) \min(1, r(x, x'))  \expl{by definition} \\

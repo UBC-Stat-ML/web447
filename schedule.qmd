@@ -7,7 +7,7 @@ editor:
 {{< include _construction.qmd >}}
 
 | Date          | Topics                                                                                            | Readings                                       |
-|-------------------|----------------------------------|--------------------|
+|-------------------|---------------------------------|--------------------|
 | Tue, Jan 9    | Overview. Probabilistic inference on discrete spaces.                                             | BDA 1.1-1.10                                   |
 | Th, Jan 11    |                                                                                                   |                                                |
 | Tue, Jan 16   | A tour of Bayesian inference (on discrete spaces).                                                | BDA 2.1-2.5                                    |
@@ -36,8 +36,8 @@ editor:
 | Th, Mar 28    | TBA                                                                                               |                                                |
 | Tue, Apr 2    | MCMC developer guide.                                                                             | BDA 12.1-12.6                                  |
 | Th, Apr 4     |                                                                                                   |                                                |
-| Tue, Apr 9    | Variational inference.                                                                            | BDA 13.7                                       |
-| Th, Apr 11    | Guest lecture. *(Last lecture)*                                                                   |                                                |
+| Tue, Apr 9    | More inference techniques. (guest lecture)                                                        | BDA 13.7                                       |
+| Th, Apr 11    |                                                                                                   |                                                |
 | Fri, Apr 19   | **Final project due.**                                                                            |                                                |
 
 : {.striped .hover tbl-colwidths="\[15,65,20\]"}

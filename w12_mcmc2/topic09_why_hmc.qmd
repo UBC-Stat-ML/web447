@@ -28,13 +28,13 @@ We start by motivating HMC.
 
 ## Why is HMC popular: the short answer
 
-For many models, HMC is faster than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
+For many models, HMC is less costly than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
 
 
 
 ## Notion of efficiency
 
-We first have to define what we mean by an MCMC algorithm less "costly" than another one.
+We first have to define what we mean by an MCMC algorithm being less "costly" than another one.
 
 **Question:** is the time to compute one iteration (in e.g., in seconds or [FLOPS](https://en.wikipedia.org/wiki/FLOPS)) a 
 reasonable notion of computational cost for MCMC algorithms?
@@ -64,6 +64,6 @@ the latter is often called **random walk MH** (to avoid confusion since HMC is j
 
 - This means as $d$ increases, there is an increasing performance gap in favour of HMC.
 - We would not use HMC for normal targets...
-    - but many real models are [approximately normal](../w05_properties/topic07_calibration_mis_specified.qmd), 
+    - ...but many real models are [approximately normal](../w05_properties/topic07_calibration_mis_specified.qmd), 
     - so this result is a useful rule of thumb. 
 
