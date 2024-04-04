@@ -1,0 +1,69 @@
+---
+title: "Why HMC?"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Motivation behind Hamiltonian Monte Carlo (HMC)
+- Effective sample size per second
+- ESS per second scaling for popular Monte Carlo methods on Gaussian targets 
+
+
+### Rationale
+
+We have used Stan heavily in the second half of the course. 
+Stan uses an algorithm called NUTS which is based on HMC. 
+
+We will now spend time understanding HMC. This will illustrate two important 
+ideas used to construct advanced MCMC methods (involutions, augmentation).
+
+We start by motivating HMC. 
+
+
+## Why is HMC popular: the short answer
+
+For many models, HMC is faster than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
+
+
+
+## Notion of efficiency
+
+We first have to define what we mean by an MCMC algorithm less "costly" than another one.
+
+**Question:** is the time to compute one iteration (in e.g., in seconds or [FLOPS](https://en.wikipedia.org/wiki/FLOPS)) a 
+reasonable notion of computational cost for MCMC algorithms?
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+- No, it is incomplete.
+- For example, according to this incomplete metric, an algorithm with proposal $q(x' | x) = \ind[x = x']$, would be really fast (can skip the MH ratio calculation!)...
+    - ... but is useless because its effective sample size will be 1 no matter how long you run it.
+- What you care about: how long does it take to get to a certain [Monte Carlo standard error](../w09_workflow/topic05_mcmc_ess.qmd).
+    - i.e.: **seconds per effective sample size** (lower is better). 
+:::
+
+
+## Scaling of Monte Carlo methods as a function of dimensionality
+
+**Terminology:** to differentiate HMC from "the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd)", 
+the latter is often called **random walk MH** (to avoid confusion since HMC is just an MH algorithm with a fancy proposal).
+
+**Proposition:** ([Beskos et al., 2010](https://arxiv.org/pdf/1001.4460.pdf)) For $d$-dimensional i.i.d. normal targets,
+
+- optimally tuned HMC's cost (seconds/ESS) scales in $O(d^{5/4})$, whereas,
+- optimally tuned random walk MH' cost (seconds/ESS) scales in $O(d^2)$. 
+
+**Notes:** 
+
+- This means as $d$ increases, there is an increasing performance gap in favour of HMC.
+- We would not use HMC for normal targets...
+    - but many real models are [approximately normal](../w05_properties/topic07_calibration_mis_specified.qmd), 
+    - so this result is a useful rule of thumb. 
+

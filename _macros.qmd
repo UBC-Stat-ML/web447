@@ -19,6 +19,14 @@ editor:
 \newcommand{\Kmix}{K_\text{mix}}
 \newcommand{\Kalt}{K_\text{alt}}
 
+\newcommand\Kg{K_\text{gibbs}}
+\newcommand\Kh{K_\text{hmc}}
+
+\newcommand{\Tf}{T_\text{flip}}
+\newcommand{\Tk}{T_\text{kick}}
+\newcommand{\Td}{T_\text{drift}}
+\newcommand{\Tlf}{T_\text{leap-frog}}
+
 <!-- -->
 
 <!-- 

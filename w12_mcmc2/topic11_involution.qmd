@@ -1,0 +1,103 @@
+---
+title: "Deterministic proposals"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Deterministic proposals
+- Involutions
+- Proposal Jacobian determinants
+
+
+### Rationale
+
+In our [first exposure to MH](../w08_mcmc1/topic04_mh.qmd), we defined the proposal as a probability distribution 
+$q(\cdot|x)$ based on the current point $x$. 
+
+For HMC, it is more natural to consider 
+the proposal as a deterministic function $T(x)$. 
+
+We state a version of the MH algorithm based on such deterministic proposal here.  
+
+
+## MH with deterministic proposals
+
+**Algorithm:** 
+
+1. Denote the current state by $x \in \reals^d$ 
+2. **Propose:** $x^* = T(x)$ for some deterministic proposal mapping $T : \reals^d \to \reals^d$ 
+    - **Assume:** $T$ must satisfy $T = T^{-1}$. 
+    - This property is called **involution**. 
+3. Compute the ratio,
+  $$r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,$$
+  where $| \nabla T(x) |$ denotes the determinant of the [Jacobian determinant](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant).
+4. Accept $x^*$ with probability $\alpha(x) = \min(1, r(x))$, otherwise stay at $x$. 
+
+**Calculus review:** do you remember what is the Jacobian determinant?
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+\begin{align*}
+\nabla T(x) &= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x_1} & \cdots & \dfrac{\partial T_1}{\partial x_n}\\
+    \vdots                             & \ddots & \vdots\\
+    \dfrac{\partial T_m}{\partial x_1} & \cdots & \dfrac{\partial T_m}{\partial x_n}
+\end{bmatrix} \\
+|\nabla T(x)| &= |\det  \nabla T(x)|.
+\end{align*}
+
+:::
+
+**Proposition:** [(Tierney, 1998)](https://doi.org/10.1214/aoap/1027961031) if $T$ is a continuously differentiable involution, then the above algorithm is $\pi$-invariant. 
+
+
+## Examples of involution
+
+**Swaps:** 
+
+::: column-margin
+![](../images/swap_involution.png){width="150"}
+:::
+
+- Set $T(x_1, x_2) = (x_2, x_1)$. 
+- To show involution, compute $T^2(x) = T(T(x))$ and show $T^2 = I$, the identity map. 
+- $T(T(x_1, x_2)) = T(x_2, x_1) = (x_1, x_2)$ ✅
+
+
+
+**Multiplicative proposal:** complete the definition of $T$ to make it an involution on $\reals \times \reals^+$.
+  $$T(x_1, x_2) = T(x, m) = (mx, \_\_).$$ 
+{{< include ../../clickers/w12/_c10.qmd >}}
+
+**Question:** Compute the Jacobian determinant of the multiplicative proposal involution.
+
+::: {.callout-caution collapse="true"} 
+## Click for hint 
+
+You should get a **triangular matrix** i.e. in our context of the form
+
+\begin{align*}
+\nabla T &= \begin{bmatrix}
+    a_{11} & a_{12} \\
+    0 & a_{22}
+\end{bmatrix}.
+\end{align*}
+
+Now recall that from [properties of triangular matrices](https://en.wikipedia.org/wiki/Triangular_matrix#Properties), 
+this means that to compute it determinant, you just have to compute the product of the diagonal entries, $\det \nabla T = a_{11} a_{22}$.
+:::
+
+{{< include ../../clickers/w12/_c11.qmd >}}
+
+
+## References 
+
+- See [Tierney, 1998](https://doi.org/10.1214/aoap/1027961031) for the introduction of the notion of involutions and deterministic proposals to the MCMC literature. 
+- See [Green, 1995](https://doi.org/10.1093/biomet/82.4.711) for early use of the multivariate change of variable formula in MH acceptance ratios. 

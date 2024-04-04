@@ -163,7 +163,7 @@ fixed_joint = function(x, y) {
 exact_invariance(fixed_joint)
 ```
 
-**Again, success!** The p-value is not tiny, with high probability there would not be a false alarm. 
+**Again, success!** The p-value is not tiny, as one would hope. 
 
 ## References 
 

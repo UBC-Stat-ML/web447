@@ -1,0 +1,209 @@
+---
+title: "HMC as involution"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Inspiration from continuous time dynamics
+- Leap-frog integrator
+- "Flip trick"
+
+
+### Rationale
+
+We can complete our goal of writing formally HMC, as a special case of the 
+MH with [deterministic proposal we just saw](topic11_involution.qmd).
+
+
+## Plan
+
+- How to build and involution for ["rolling a ball for time $t$ starting at current location and momentum"](topic10_hmc_intuition.qmd)?
+- Start with an exact description of the ball's motion (in continuous time). 
+- Discretize time carefully to be able to compute while maintaining the involution property. 
+
+
+## Inspiration from physics
+
+- Physics gives us precise expression for quantifying the notion of "rolling a ball". 
+- As often, it is easier to describe how **things change** rather than how thing are,
+    - i.e. to provide an **ordinary differential equation** (ODE).
+- ODE for the continuous time evolution of frictionless ball's position and momentum $(x^{(t)}, p^{(t)})$:
+  \begin{align*}
+  x' &= p \expl{in a small time interval the change in position is equal to the momentum} \\
+  p' &= - \nabla U(x) \expl{the velocity decreases proportionally to the steepness of the landscape}.
+  \end{align*}
+
+
+## Flip trick
+
+
+
+- At the very end of the trajectory, in the analysis we flip the momentum:
+  $$\Tf(x, p) = (x, -p).$$
+
+::: column-margin
+![](../images/flip.png){width="500"} 
+:::
+
+- This will allow us to prove the involution property:
+    - After the momentum sign flip, 
+    - the ball will retrace its step!
+- Since we [alternate](topic07_alternation.qmd) between an HMC kernel and [sampling a new momentum](topic10_hmc_intuition.qmd)...
+    - ...this flipped momentum will be overwritten right away,
+    - i.e. this is just a device for theoretical analysis in the vanilla HMC algorithm. 
+
+
+## Notation 
+
+- let $\epsilon$ denote a small time interval (discretization),
+- let $L$ denote the number of small steps we will use,
+    - hence, $t = \epsilon L$. 
+
+
+
+## Leap frog integrator
+
+**Key idea:** update only one of $\{x, p\}$ at the time to get triangular Jacobian matrices (easier to analyze). 
+
+**Drift operator** 
+
+- Let the current momentum move the current position a bit.
+- Discretization of $x' = p$:
+  $$\Td(x, p) = (x + \epsilon p, p).$$
+
+**Question:** compute the Jacobian determinant of $\Td$. 
+
+{{< include ../../clickers/w12/_c12.qmd >}}
+
+**Kick operator** 
+
+- Let the steepness of the landscape at current position update the momentum a bit. 
+- Discretization of $p' = - \nabla U$:
+  $$\Tk(x, p) = \left(x, p + \frac{\epsilon}{2} \nabla \log \pi(x)\right).$$
+
+```{r}
+
+# example: a normal
+# This function return gradient_x of log pi(x)
+gradient = function(x) {
+  -2*x
+}
+
+epsilon = 0.1
+
+kick = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x, p + epsilon * gradient(x) / 2)
+}
+
+flip = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x, -p)
+}
+
+initial = c(1.1, 2.3) 
+
+# flip o kick o flip o kick
+#   where 'o' denotes 'function composition',
+#   which recall are read right to left
+newpoint = kick(initial) 
+flipped = flip(newpoint)
+traceback = kick(flipped)
+fipped_again = flip(traceback)
+
+initial
+newpoint
+flipped
+traceback
+fipped_again
+```
+
+Ah! Ah! we come back where we started!
+
+I.e., the code above illustrates that $\Tf \circ \Tk \circ \Tf \circ \Tk = I$, which is easy to show and a building block for showing that the full proposal is an involution. (And a great way to check correctness of involution-based MH algorithms!)
+
+We have the same property for drifts:
+
+```{r}
+
+drift = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x + epsilon * p, p)
+}
+
+
+initial = c(1.1, 2.3) 
+
+# flip o kick o flip o kick
+newpoint = drift(initial) 
+flipped = flip(newpoint)
+traceback = drift(flipped)
+fipped_again = flip(traceback)
+
+initial
+newpoint
+flipped
+traceback
+fipped_again
+```
+
+**Leap frog**: 
+
+- Alternate between kick and drift. 
+- Do so in a palindromic fashion to obtain involution after flip.
+  $$\Tlf = \Tk \circ \Td \circ \Tk.$$ 
+
+```{r}
+
+L = 5
+
+hmc_proposal = function(s) {
+  for (i in 1:L) {
+    s = kick(s)
+    s = drift(s)
+    s = kick(s)
+  }
+  flip(s)
+}
+
+
+newpoint = hmc_proposal(initial) 
+apply_twice = hmc_proposal(newpoint)
+
+initial 
+newpoint
+apply_twice
+```
+
+
+**Proposition:** $T = \Tf \circ \Tlf^L$ is an involution, where $T^n = T^{n-1} \circ T$. 
+
+**Proof idea:** use the property $\Tf \circ \Tk \circ \Tf \circ \Tk = I$ we encountered (and similar one for the drift) and the fact that $\Tlf^l$ is a **palindrome** (can be read both ways, like "madam" or "nurses run"). 
+
+**Proposition:** $T = \Tf \circ \Tlf^L$ has Jacobian one. 
+
+**Proof idea:** show that each constituent has Jacobian determinant one, so the product of these is also one.
+
+
+## Putting it all together
+
+Recall the high-level organization of HMC is the deterministic alternation of:
+
+- a complicated kernel $\Kh$: "rolling the ball",
+- a simple kernel $\Kg$: [sampling the momentum](topic10_hmc_intuition.qmd#sampling-a-new-momentum).
+
+We can now define $\Kh$: it it the [deterministic proposal MH](topic11_involution.qmd) with proposal $T = \Tf \circ \Tlf^L$. 
+
+
+## Reference
+
+See [Neal, 2012](http://arxiv.org/abs/1206.1901) for an in-depth tutorial on HMC, in particular how to tune it. 
