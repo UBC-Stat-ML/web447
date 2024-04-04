@@ -971,11 +971,11 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="why-is-hmc-popular-the-short-answer" class="level2">
 <h2 class="anchored" data-anchor-id="why-is-hmc-popular-the-short-answer">Why is HMC popular: the short answer</h2>
-<p>For many models, HMC is faster than the basic MH algorithm <a href="../w08_mcmc1/topic04_mh.html">we saw earlier</a>.</p>
+<p>For many models, HMC is less costly than the basic MH algorithm <a href="../w08_mcmc1/topic04_mh.html">we saw earlier</a>.</p>
 </section>
 <section id="notion-of-efficiency" class="level2">
 <h2 class="anchored" data-anchor-id="notion-of-efficiency">Notion of efficiency</h2>
-<p>We first have to define what we mean by an MCMC algorithm less “costly” than another one.</p>
+<p>We first have to define what we mean by an MCMC algorithm being less “costly” than another one.</p>
 <p><strong>Question:</strong> is the time to compute one iteration (in e.g., in seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of computational cost for MCMC algorithms?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -1017,7 +1017,7 @@ Click for answer
 <li>This means as <span class="math inline">\(d\)</span> increases, there is an increasing performance gap in favour of HMC.</li>
 <li>We would not use HMC for normal targets…
 <ul>
-<li>but many real models are <a href="../w05_properties/topic07_calibration_mis_specified.html">approximately normal</a>,</li>
+<li>…but many real models are <a href="../w05_properties/topic07_calibration_mis_specified.html">approximately normal</a>,</li>
 <li>so this result is a useful rule of thumb.</li>
 </ul></li>
 </ul>
