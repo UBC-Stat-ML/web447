@@ -975,8 +975,8 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="notion-of-efficiency" class="level2">
 <h2 class="anchored" data-anchor-id="notion-of-efficiency">Notion of efficiency</h2>
-<p>We first have to define what we mean by an MCMC algorithm “faster” than another one.</p>
-<p><strong>Question:</strong> is the time to compute one iteration (in e.g., in seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of efficiency for MCMC algorithms?</p>
+<p>We first have to define what we mean by an MCMC algorithm less “costly” than another one.</p>
+<p><strong>Question:</strong> is the time to compute one iteration (in e.g., in seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of computational cost for MCMC algorithms?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -991,13 +991,13 @@ Click for answer
 <div class="callout-body-container callout-body">
 <ul>
 <li>No, it is incomplete.</li>
-<li>For example, according to this incomplete metric, an algorithm with proposal <span class="math inline">\(q(x' | x) = \mathbb{1}[x = x']\)</span> will beat any other algorithm…
+<li>For example, according to this incomplete metric, an algorithm with proposal <span class="math inline">\(q(x' | x) = \mathbb{1}[x = x']\)</span>, would be really fast (can skip the MH ratio calculation!)…
 <ul>
 <li>… but is useless because its effective sample size will be 1 no matter how long you run it.</li>
 </ul></li>
 <li>What you care about: how long does it take to get to a certain <a href="../w09_workflow/topic05_mcmc_ess.html">Monte Carlo standard error</a>.
 <ul>
-<li>i.e.: <strong>effective sample size per second</strong> (higher is better).</li>
+<li>i.e.: <strong>seconds per effective sample size</strong> (lower is better).</li>
 </ul></li>
 </ul>
 </div>
@@ -1009,8 +1009,8 @@ Click for answer
 <p><strong>Terminology:</strong> to differentiate HMC from “the basic MH algorithm <a href="../w08_mcmc1/topic04_mh.html">we saw earlier</a>”, the latter is often called <strong>random walk MH</strong> (to avoid confusion since HMC is just an MH algorithm with a fancy proposal).</p>
 <p><strong>Proposition:</strong> (<a href="https://arxiv.org/pdf/1001.4460.pdf">Beskos et al., 2010</a>) For <span class="math inline">\(d\)</span>-dimensional i.i.d. normal targets,</p>
 <ul>
-<li>optimally tuned HMC’s ESS/second scales in <span class="math inline">\(O(d^{5/4})\)</span>, whereas,</li>
-<li>optimally tuned random walk MH scales in <span class="math inline">\(O(d^2)\)</span>.</li>
+<li>optimally tuned HMC’s cost (seconds/ESS) scales in <span class="math inline">\(O(d^{5/4})\)</span>, whereas,</li>
+<li>optimally tuned random walk MH’ cost (seconds/ESS) scales in <span class="math inline">\(O(d^2)\)</span>.</li>
 </ul>
 <p><strong>Notes:</strong></p>
 <ul>

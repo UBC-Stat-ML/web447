@@ -944,6 +944,7 @@ window.Quarto = {
   <li><a href="#flip-trick" id="toc-flip-trick" class="nav-link" data-scroll-target="#flip-trick">Flip trick</a></li>
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
   <li><a href="#leap-frog-integrator" id="toc-leap-frog-integrator" class="nav-link" data-scroll-target="#leap-frog-integrator">Leap frog integrator</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -1051,9 +1052,9 @@ p' &amp;= - \nabla U(x) \;\;\text{(the velocity decreases proportionally to the 
 <h2 class="anchored" data-anchor-id="notation">Notation</h2>
 <ul>
 <li>let <span class="math inline">\(\epsilon\)</span> denote a small time interval (discretization),</li>
-<li>let <span class="math inline">\(l\)</span> denote the number of small steps we will use,
+<li>let <span class="math inline">\(L\)</span> denote the number of small steps we will use,
 <ul>
-<li>hence, <span class="math inline">\(t = \epsilon l\)</span>.</li>
+<li>hence, <span class="math inline">\(t = \epsilon L\)</span>.</li>
 </ul></li>
 </ul>
 </section>
@@ -1066,56 +1067,43 @@ p' &amp;= - \nabla U(x) \;\;\text{(the velocity decreases proportionally to the 
 <li>Discretization of <span class="math inline">\(x' = p\)</span>: <span class="math display">\[T_\text{drift}(x, p) = (x + \epsilon p, p).\]</span></li>
 </ul>
 <p><strong>Question:</strong> compute the Jacobian determinant of <span class="math inline">\(T_\text{drift}\)</span>.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(x\)</span></li>
-<li><span class="math inline">\(p\)</span></li>
-<li><span class="math inline">\(1\)</span></li>
-<li><span class="math inline">\(xp\)</span></li>
-<li>None of the above.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Correct answer is 1.</p>
-<p>First, we compute the Jacobian matrix:</p>
-<p><span class="math display">\[\begin{align*}
-\nabla T_\text{drift}(x, p) &amp;= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  &amp; \dfrac{\partial T_1}{\partial p}\\
-    \dfrac{\partial T_2}{\partial x} &amp; \dfrac{\partial T_2}{\partial p}
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $x$
+2. $p$
+3. $1$
+4. $xp$
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is 1.
+
+First, we compute the Jacobian matrix:
+
+\begin{align*}
+\nabla \Td(x, p) &= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial p}\\
+    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial p}
 \end{bmatrix} \\
-&amp;= \begin{bmatrix}
-    1 &amp; \epsilon \\
-    0 &amp; 1
+&= \begin{bmatrix}
+    1 & \epsilon \\
+    0 & 1
 \end{bmatrix}.
-\end{align*}\]</span></p>
-<p>Hence, the Jacobian determinant is 1.</p>
-</div>
-</div>
-</div>
+\end{align*}
+
+
+Hence, the Jacobian determinant is 1.
+:::
+
+-->
 <p><strong>Kick operator</strong></p>
 <ul>
 <li>Let the steepness of the landscape at current position update the momentum a bit.</li>
@@ -1123,43 +1111,46 @@ Click for answer
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example: a normal</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>gradient <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>x</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>epsilon <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>kick <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, p <span class="sc">+</span> epsilon <span class="sc">*</span> <span class="fu">gradient</span>(x) <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>flip <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, <span class="sc">-</span>p)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>initial <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.3</span>) </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># flip o kick o flip o kick</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>newpoint <span class="ot">=</span> <span class="fu">kick</span>(initial) </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>flipped <span class="ot">=</span> <span class="fu">flip</span>(newpoint)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>traceback <span class="ot">=</span> <span class="fu">kick</span>(flipped)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>fipped_again <span class="ot">=</span> <span class="fu">flip</span>(traceback)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>initial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This function return gradient_x of log pi(x)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gradient <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>epsilon <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kick <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, p <span class="sc">+</span> epsilon <span class="sc">*</span> <span class="fu">gradient</span>(x) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>flip <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, <span class="sc">-</span>p)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>initial <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.3</span>) </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># flip o kick o flip o kick</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   where 'o' denotes 'function composition',</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   which recall are read right to left</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>newpoint <span class="ot">=</span> <span class="fu">kick</span>(initial) </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>flipped <span class="ot">=</span> <span class="fu">flip</span>(newpoint)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>traceback <span class="ot">=</span> <span class="fu">kick</span>(flipped)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>fipped_again <span class="ot">=</span> <span class="fu">flip</span>(traceback)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>initial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.1 2.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>newpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.10 2.41</code></pre>
+<pre><code>[1] 1.10 2.19</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.10 -2.41</code></pre>
+<pre><code>[1]  1.10 -2.19</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>traceback</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1170,7 +1161,8 @@ Click for answer
 <pre><code>[1] 1.1 2.3</code></pre>
 </div>
 </div>
-<p><strong>Note:</strong> the code above illustrates that <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span>, which is easy to show and a building block for showing that the full proposal is an involution.</p>
+<p>Ah! Ah! we come back where we started!</p>
+<p>I.e., the code above illustrates that <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span>, which is easy to show and a building block for showing that the full proposal is an involution. (And a great way to check correctness of involution-based MH algorithms!)</p>
 <p>We have the same property for drifts:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>drift <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
@@ -1215,10 +1207,10 @@ Click for answer
 <li>Do so in a palindromic fashion to obtain involution after flip. <span class="math display">\[T_\text{leap-frog}= T_\text{kick}\circ T_\text{drift}\circ T_\text{kick}.\]</span></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">=</span> <span class="dv">5</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>hmc_proposal <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>l) {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>L) {</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">drift</span>(s)</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
@@ -1236,17 +1228,26 @@ Click for answer
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>newpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  2.630102 -4.094135</code></pre>
+<pre><code>[1]  1.8957642 -0.7389151</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>apply_twice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.1 2.3</code></pre>
 </div>
 </div>
-<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^l\)</span> is an involution.</p>
+<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span> is an involution, where <span class="math inline">\(T^n = T^{n-1} \circ T\)</span>.</p>
 <p><strong>Proof idea:</strong> use the property <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span> we encountered (and similar one for the drift) and the fact that <span class="math inline">\(T_\text{leap-frog}^l\)</span> is a <strong>palindrome</strong> (can be read both ways, like “madam” or “nurses run”).</p>
-<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^l\)</span> has Jacobian one.</p>
+<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span> has Jacobian one.</p>
 <p><strong>Proof idea:</strong> show that each constituent has Jacobian determinant one, so the product of these is also one.</p>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>Recall the high-level organization of HMC is the deterministic alternation of:</p>
+<ul>
+<li>a complicated kernel <span class="math inline">\(K_\text{hmc}\)</span>: “rolling the ball”,</li>
+<li>a simple kernel <span class="math inline">\(K_\text{gibbs}\)</span>: <a href="../w12_mcmc2/topic10_hmc_intuition.html#sampling-a-new-momentum">sampling the momentum</a>.</li>
+</ul>
+<p>We can now define <span class="math inline">\(K_\text{hmc}\)</span>: it it the <a href="../w12_mcmc2/topic11_involution.html">deterministic proposal MH</a> with proposal <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span>.</p>
 </section>
 <section id="reference" class="level2">
 <h2 class="anchored" data-anchor-id="reference">Reference</h2>

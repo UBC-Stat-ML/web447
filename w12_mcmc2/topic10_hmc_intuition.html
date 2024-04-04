@@ -905,9 +905,10 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   </ul></li>
   <li><a href="#intuition" id="toc-intuition" class="nav-link" data-scroll-target="#intuition">Intuition</a></li>
-  <li><a href="#sampling-a-new-momentum" id="toc-sampling-a-new-momentum" class="nav-link" data-scroll-target="#sampling-a-new-momentum">Sampling a new momentum</a></li>
   <li><a href="#conservation-of-energy" id="toc-conservation-of-energy" class="nav-link" data-scroll-target="#conservation-of-energy">Conservation of energy</a></li>
   <li><a href="#augmentation" id="toc-augmentation" class="nav-link" data-scroll-target="#augmentation">Augmentation</a></li>
+  <li><a href="#sampling-a-new-momentum" id="toc-sampling-a-new-momentum" class="nav-link" data-scroll-target="#sampling-a-new-momentum">Sampling a new momentum</a></li>
+  <li><a href="#high-level-picture" id="toc-high-level-picture" class="nav-link" data-scroll-target="#high-level-picture">High-level picture</a></li>
   </ul>
 </nav>
     </div>
@@ -990,23 +991,6 @@ https://github.com/trevorcampbell/shortex
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="../images/hamiltonian.png" class="img-fluid" width="300"></p>
 </div></div></section>
-<section id="sampling-a-new-momentum" class="level2">
-<h2 class="anchored" data-anchor-id="sampling-a-new-momentum">Sampling a new momentum</h2>
-<ul>
-<li>Notice that <span class="math inline">\(K\)</span> is a quadratic function.</li>
-<li>Hence, <span class="math inline">\(\exp(\text{quadratic})\)</span> is just a normal distribution!</li>
-<li>How to sample a new momentum?
-<ul>
-<li>Proposal: standard normal on <span class="math inline">\(p\)</span>, keep <span class="math inline">\(x\)</span> the same.</li>
-<li>Exercise: this will always accept (example of a <strong>Gibbs move</strong>)</li>
-</ul></li>
-<li>So HMC <a href="../w12_mcmc2/topic07_alternation.html">alternates</a> between:
-<ul>
-<li>a complex kernel: the HMC dynamics, which we will explore in more details</li>
-<li>a simple kernel: Gibbs sampling on the momemtum.</li>
-</ul></li>
-</ul>
-</section>
 <section id="conservation-of-energy" class="level2">
 <h2 class="anchored" data-anchor-id="conservation-of-energy">Conservation of energy</h2>
 <p><strong>Why</strong> would “rolling a marble on <span class="math inline">\(U\)</span>” be a good proposal?</p>
@@ -1014,7 +998,8 @@ https://github.com/trevorcampbell/shortex
 \text{Hamiltonian}^{(t)} &amp;:= \text{potential energy}^{(t)} + \text{kinetic energy}^{(t)} = \text{constant}
 \end{align*}\]</span> where: <span class="math display">\[\begin{align*}
 \text{potential energy}^{(t)} &amp;:= U(x^{(t)}), \\
-\text{kinetic energy}^{(t)} &amp;:= K(p^{(t)}) :=  \frac{1}{2} \sum_{i=1}^d (p_i^{(t)})^2.
+\text{kinetic energy}^{(t)} &amp;:= K(p^{(t)}) :=  \frac{1}{2} \sum_{i=1}^d (p_i^{(t)})^2, \\
+\text{Hamiltonian}^{(t)} &amp;:= H(x^{(t)}, p^{(t)}) = U(x^{(t)}) + K(p^{(t)}).
 \end{align*}\]</span></p>
 <p><strong>Formalizing this idea:</strong></p>
 <ul>
@@ -1032,7 +1017,7 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>if we propose <span class="math inline">\((x^{(t)}, p^{(t)})\)</span> by “rolling a marble on <span class="math inline">\(U\)</span>”, starting at the current point <span class="math inline">\((x^{(0)}, p^{(0)})\)</span></li>
 <li>we get <span class="math inline">\(\text{Hamiltonian}^{(t)} = \text{Hamiltonian}^{(0)}\)</span>,</li>
-<li>i.e.&nbsp;<span class="math inline">\(\bar \pi(x^{(t)}, p^{(t)}) = \bar \pi(x^{(0)}, p^{(0)})\)</span></li>
+<li>i.e.&nbsp;<span class="math inline">\(\bar \pi(x^{(t)}, p^{(t)}) = \bar \pi(x^{(0)}, p^{(0)})\)</span>,</li>
 <li>i.e.&nbsp;the MH ratio is one, so we automatically accept!</li>
 </ul></li>
 <li>In practice, we need to approximate the motion of the “rolling marble” so we get <span class="math inline">\(\bar \pi(x^{(t)}, p^{(t)}) \approx \bar \pi(x^{(0)}, p^{(0)})\)</span> instead.</li>
@@ -1048,6 +1033,44 @@ https://github.com/trevorcampbell/shortex
 <li>the joint distribution over the auxiliary variable and the one of interest <span class="math inline">\(x\)</span> is called the <strong>augmented distribution</strong> <span class="math inline">\(\bar \pi(x, p)\)</span>.</li>
 </ul></li>
 <li>Generally, we want <span class="math inline">\(\int \bar \pi(x, p) \mathrm{d}p = \pi(x)\)</span> so that we can easily recover the sample of interest.</li>
+</ul>
+</section>
+<section id="sampling-a-new-momentum" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-a-new-momentum">Sampling a new momentum</h2>
+<ul>
+<li>Notice that <span class="math inline">\(K\)</span> is a quadratic function.</li>
+<li>Hence, <span class="math inline">\(\exp(\text{quadratic})\)</span> is just a normal distribution!</li>
+<li>How to sample a new momentum?
+<ul>
+<li>Just sample <span class="math inline">\(p\)</span> from a standard normal…</li>
+<li>… while keeping <span class="math inline">\(x\)</span> the same.</li>
+</ul></li>
+<li>Denote the above kernel by <span class="math inline">\(K_\text{gibbs}\)</span>.</li>
+</ul>
+<p><strong>Proposition:</strong> <span class="math inline">\(K_\text{gibbs}\)</span> is <span class="math inline">\(\bar \pi\)</span>-invariant.</p>
+<p><strong>Proof idea:</strong> we show a similar result in the discrete case to simplify notation.</p>
+<ul>
+<li>Suppose <span class="math inline">\(\bar \pi(x) = \pi_1(x_1) \pi_2(x_2)\)</span>, <span class="math inline">\(x = (x_1, x_2)\)</span> as with HMC
+<ul>
+<li>(to map to the above example, think of <span class="math inline">\(x_1\)</span> as <span class="math inline">\(x\)</span> and <span class="math inline">\(x_2\)</span> as <span class="math inline">\(p\)</span>).</li>
+</ul></li>
+<li>Define <span class="math inline">\(K(x' | x) = \mathbb{1}[x_1 = x'_1] \pi_2(x'_2)\)</span>.</li>
+<li>Note we have detailed balance: <span class="math display">\[\begin{align*}
+\bar \pi(x) K(x' | x) &amp;= \pi_1(x_1) \pi_2(x_2) \mathbb{1}[x_1 = x'_1] \pi_2(x'_2) \\
+&amp;= \pi_1({\color{red} x'_1}) \pi_2(x_2) \mathbb{1}[x_1 = x'_1] \pi_2(x'_2) \;\;\text{(thanks to the indicator)} \\
+&amp;= \pi_1(x'_1) \pi_2(x_2) \mathbb{1}[{\color{red} x'_1 = x_1}] \pi_2(x'_2) \\
+&amp;= \pi_1(x'_1) {\color{red} \pi_2(x'_2)} \mathbb{1}[x'_1 = x_1] {\color{red} \pi_2(x_2)} \\
+&amp;= \bar \pi(x') K(x | x'),
+\end{align*}\]</span></li>
+<li>hence global balance holds.</li>
+</ul>
+</section>
+<section id="high-level-picture" class="level2">
+<h2 class="anchored" data-anchor-id="high-level-picture">High-level picture</h2>
+<p>HMC <a href="../w12_mcmc2/topic07_alternation.html">alternates</a> between two kernels:</p>
+<ul>
+<li>a complicated kernel <span class="math inline">\(K_\text{hmc}\)</span>: “rolling the ball”, combined with MH accept-reject which we will explore in more details</li>
+<li>a simple kernel <span class="math inline">\(K_\text{gibbs}\)</span>: Gibbs sampling on the momentum.</li>
 </ul>
 
 
