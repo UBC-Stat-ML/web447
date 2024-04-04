@@ -85,16 +85,24 @@
     <lastmod>2024-03-31T23:35:07.563Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic05_cke.html</loc>
-    <lastmod>2024-03-28T15:10:55.711Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_balance.html</loc>
+    <lastmod>2024-04-02T18:12:10.293Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic03_markov_lln.html</loc>
-    <lastmod>2024-03-31T23:31:01.525Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic01_intro.html</loc>
+    <lastmod>2024-03-28T15:56:28.809Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic08_debug.html</loc>
-    <lastmod>2024-04-02T16:15:53.623Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic12_hmc_as_involution.html</loc>
+    <lastmod>2024-04-04T15:34:40.401Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_mix.html</loc>
+    <lastmod>2024-04-02T16:11:39.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic11_involution.html</loc>
+    <lastmod>2024-04-04T15:29:44.855Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic03_decision_to_point.html</loc>
@@ -333,16 +341,24 @@
     <lastmod>2024-02-16T00:23:56.242Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_mix.html</loc>
-    <lastmod>2024-04-02T16:11:39.052Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic08_debug.html</loc>
+    <lastmod>2024-04-04T03:06:12.495Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic01_intro.html</loc>
-    <lastmod>2024-03-28T15:56:28.809Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic03_markov_lln.html</loc>
+    <lastmod>2024-03-31T23:31:01.525Z</lastmod>
   </url>
   <url>
-    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_balance.html</loc>
-    <lastmod>2024-04-02T18:12:10.293Z</lastmod>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic10_hmc_intuition.html</loc>
+    <lastmod>2024-04-04T15:25:27.607Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic05_cke.html</loc>
+    <lastmod>2024-03-28T15:10:55.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic09_why_hmc.html</loc>
+    <lastmod>2024-04-04T15:22:36.268Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_mh_invariance.html</loc>
