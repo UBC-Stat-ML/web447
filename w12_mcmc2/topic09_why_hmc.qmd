@@ -11,8 +11,8 @@ editor:
 ### Topics
 
 - Motivation behind Hamiltonian Monte Carlo (HMC)
-- Effective sample size per second
-- ESS per second scaling for popular Monte Carlo methods on Gaussian targets 
+- Computational cost of MCMC methods
+- Computational cost scaling for popular Monte Carlo methods on normal targets 
 
 
 ### Rationale
@@ -28,11 +28,11 @@ We start by motivating HMC.
 
 ## Why is HMC popular: the short answer
 
-For many models, HMC is less costly than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
+For many models, HMC is less computationally costly than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
 
 
 
-## Notion of efficiency
+## Notion of computational cost
 
 We first have to define what we mean by an MCMC algorithm being less "costly" than another one.
 
@@ -46,7 +46,7 @@ reasonable notion of computational cost for MCMC algorithms?
 - For example, according to this incomplete metric, an algorithm with proposal $q(x' | x) = \ind[x = x']$, would be really fast (can skip the MH ratio calculation!)...
     - ... but is useless because its effective sample size will be 1 no matter how long you run it.
 - What you care about: how long does it take to get to a certain [Monte Carlo standard error](../w09_workflow/topic05_mcmc_ess.qmd).
-    - i.e.: **seconds per effective sample size** (lower is better). 
+    - i.e.: **seconds per effective sample** (seconds/ESS; lower is better). 
 :::
 
 

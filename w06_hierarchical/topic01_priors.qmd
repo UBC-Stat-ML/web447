@@ -47,7 +47,7 @@ Often, the choice of prior is approached in two stages
       
 - When **data is large**, posterior tends to be **less sensitive** to specification of the prior 
     - Theoretical reason: the "Bayesian central limit theorem" (Bernstein von-Mises theorem).
-    - Not always true (e.g. weakly identifiable model).
+    - Not always true (e.g. partially identifiable model).
 - When **data is small**, posterior tends to be **more sensitive** to specification of the prior 
     - Extreme example: 
         - consider a rocket maiden flight, 

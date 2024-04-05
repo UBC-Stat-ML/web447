@@ -241,3 +241,8 @@ Some terminology from classification:
     - also known as "independent variables", "covariates", "predictor", "regressors", "feature",..
     - typically always observed (both at training and test time)
 - parameters: auxiliary quantities that encode a function mapping inputs to (information on) output.
+
+
+## References 
+
+- [Dataset source](https://planet4589.org/space/gcat/data/derived/launchlog.html).

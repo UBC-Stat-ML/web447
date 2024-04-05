@@ -32,11 +32,11 @@ We state a version of the MH algorithm based on such deterministic proposal here
 
 1. Denote the current state by $x \in \reals^d$ 
 2. **Propose:** $x^* = T(x)$ for some deterministic proposal mapping $T : \reals^d \to \reals^d$ 
-    - **Assume:** $T$ must satisfy $T = T^{-1}$. 
-    - This property is called **involution**. 
+    - **Assume** that $T$ satisfies $T = T^{-1}$. 
+    - Terminology: $T$ is an **involution**. 
 3. Compute the ratio,
   $$r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,$$
-  where $| \nabla T(x) |$ denotes the determinant of the [Jacobian determinant](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant).
+  where $| \nabla T(x) |$ denotes the [Jacobian determinant](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant).
 4. Accept $x^*$ with probability $\alpha(x) = \min(1, r(x))$, otherwise stay at $x$. 
 
 **Calculus review:** do you remember what is the Jacobian determinant?

@@ -86,6 +86,7 @@ where:
 - How to sample a new momentum?
     - Just sample $p$ from a standard normal...
     - ... while keeping $x$ the same.
+    - This is an example of **Gibbs sampling**.
 - Denote the above kernel by $\Kg$. 
   
 **Proposition:** $\Kg$ is $\bar \pi$-invariant. 

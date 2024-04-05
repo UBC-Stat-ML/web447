@@ -194,3 +194,7 @@ systematic errors are still suspected, this is known as the "Hubble tension."
 :::
 
 
+## References
+
+- This example is inspired by William Welch's Stat 305 lecture notes, where the same dataset is analyzed using MLE. 
+- [Learn more about the still on-going research on resolving the "Hubble tension"](https://en.wikipedia.org/wiki/Hubble%27s_law#Hubble_tension).
