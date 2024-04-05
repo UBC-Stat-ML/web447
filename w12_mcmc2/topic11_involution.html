@@ -976,10 +976,10 @@ https://github.com/trevorcampbell/shortex
 <li>Denote the current state by <span class="math inline">\(x \in \mathbb{R}^d\)</span></li>
 <li><strong>Propose:</strong> <span class="math inline">\(x^* = T(x)\)</span> for some deterministic proposal mapping <span class="math inline">\(T : \mathbb{R}^d \to \mathbb{R}^d\)</span>
 <ul>
-<li><strong>Assume:</strong> <span class="math inline">\(T\)</span> must satisfy <span class="math inline">\(T = T^{-1}\)</span>.</li>
-<li>This property is called <strong>involution</strong>.</li>
+<li><strong>Assume</strong> that <span class="math inline">\(T\)</span> satisfies <span class="math inline">\(T = T^{-1}\)</span>.</li>
+<li>Terminology: <span class="math inline">\(T\)</span> is an <strong>involution</strong>.</li>
 </ul></li>
-<li>Compute the ratio, <span class="math display">\[r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,\]</span> where <span class="math inline">\(| \nabla T(x) |\)</span> denotes the determinant of the <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant">Jacobian determinant</a>.</li>
+<li>Compute the ratio, <span class="math display">\[r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,\]</span> where <span class="math inline">\(| \nabla T(x) |\)</span> denotes the <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant">Jacobian determinant</a>.</li>
 <li>Accept <span class="math inline">\(x^*\)</span> with probability <span class="math inline">\(\alpha(x) = \min(1, r(x))\)</span>, otherwise stay at <span class="math inline">\(x\)</span>.</li>
 </ol>
 <p><strong>Calculus review:</strong> do you remember what is the Jacobian determinant?</p>

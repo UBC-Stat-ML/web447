@@ -906,7 +906,7 @@ window.Quarto = {
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#why-is-hmc-popular-the-short-answer" id="toc-why-is-hmc-popular-the-short-answer" class="nav-link" data-scroll-target="#why-is-hmc-popular-the-short-answer">Why is HMC popular: the short answer</a></li>
-  <li><a href="#notion-of-efficiency" id="toc-notion-of-efficiency" class="nav-link" data-scroll-target="#notion-of-efficiency">Notion of efficiency</a></li>
+  <li><a href="#notion-of-computational-cost" id="toc-notion-of-computational-cost" class="nav-link" data-scroll-target="#notion-of-computational-cost">Notion of computational cost</a></li>
   <li><a href="#scaling-of-monte-carlo-methods-as-a-function-of-dimensionality" id="toc-scaling-of-monte-carlo-methods-as-a-function-of-dimensionality" class="nav-link" data-scroll-target="#scaling-of-monte-carlo-methods-as-a-function-of-dimensionality">Scaling of Monte Carlo methods as a function of dimensionality</a></li>
   </ul>
 </nav>
@@ -958,8 +958,8 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>Motivation behind Hamiltonian Monte Carlo (HMC)</li>
-<li>Effective sample size per second</li>
-<li>ESS per second scaling for popular Monte Carlo methods on Gaussian targets</li>
+<li>Computational cost of MCMC methods</li>
+<li>Computational cost scaling for popular Monte Carlo methods on normal targets</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
@@ -971,10 +971,10 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="why-is-hmc-popular-the-short-answer" class="level2">
 <h2 class="anchored" data-anchor-id="why-is-hmc-popular-the-short-answer">Why is HMC popular: the short answer</h2>
-<p>For many models, HMC is less costly than the basic MH algorithm <a href="../w08_mcmc1/topic04_mh.html">we saw earlier</a>.</p>
+<p>For many models, HMC is less computationally costly than the basic MH algorithm <a href="../w08_mcmc1/topic04_mh.html">we saw earlier</a>.</p>
 </section>
-<section id="notion-of-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="notion-of-efficiency">Notion of efficiency</h2>
+<section id="notion-of-computational-cost" class="level2">
+<h2 class="anchored" data-anchor-id="notion-of-computational-cost">Notion of computational cost</h2>
 <p>We first have to define what we mean by an MCMC algorithm being less “costly” than another one.</p>
 <p><strong>Question:</strong> is the time to compute one iteration (in e.g., in seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of computational cost for MCMC algorithms?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -997,7 +997,7 @@ Click for answer
 </ul></li>
 <li>What you care about: how long does it take to get to a certain <a href="../w09_workflow/topic05_mcmc_ess.html">Monte Carlo standard error</a>.
 <ul>
-<li>i.e.: <strong>seconds per effective sample size</strong> (lower is better).</li>
+<li>i.e.: <strong>seconds per effective sample</strong> (seconds/ESS; lower is better).</li>
 </ul></li>
 </ul>
 </div>

@@ -1535,7 +1535,7 @@
     "href": "w12_mcmc2/topic11_involution.html#mh-with-deterministic-proposals",
     "title": "Deterministic proposals",
     "section": "MH with deterministic proposals",
-    "text": "MH with deterministic proposals\nAlgorithm:\n\nDenote the current state by \\(x \\in \\mathbb{R}^d\\)\nPropose: \\(x^* = T(x)\\) for some deterministic proposal mapping \\(T : \\mathbb{R}^d \\to \\mathbb{R}^d\\)\n\nAssume: \\(T\\) must satisfy \\(T = T^{-1}\\).\nThis property is called involution.\n\nCompute the ratio, \\[r(x) = \\frac{\\gamma(x^*)}{\\gamma(x)} | \\nabla T(x) |,\\] where \\(| \\nabla T(x) |\\) denotes the determinant of the Jacobian determinant.\nAccept \\(x^*\\) with probability \\(\\alpha(x) = \\min(1, r(x))\\), otherwise stay at \\(x\\).\n\nCalculus review: do you remember what is the Jacobian determinant?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\[\\begin{align*}\n\\nabla T(x) &= \\begin{bmatrix}\n    \\dfrac{\\partial T_1}{\\partial x_1} & \\cdots & \\dfrac{\\partial T_1}{\\partial x_n}\\\\\n    \\vdots                             & \\ddots & \\vdots\\\\\n    \\dfrac{\\partial T_m}{\\partial x_1} & \\cdots & \\dfrac{\\partial T_m}{\\partial x_n}\n\\end{bmatrix} \\\\\n|\\nabla T(x)| &= |\\det  \\nabla T(x)|.\n\\end{align*}\\]\n\n\n\nProposition: (Tierney, 1998) if \\(T\\) is a continuously differentiable involution, then the above algorithm is \\(\\pi\\)-invariant.",
+    "text": "MH with deterministic proposals\nAlgorithm:\n\nDenote the current state by \\(x \\in \\mathbb{R}^d\\)\nPropose: \\(x^* = T(x)\\) for some deterministic proposal mapping \\(T : \\mathbb{R}^d \\to \\mathbb{R}^d\\)\n\nAssume that \\(T\\) satisfies \\(T = T^{-1}\\).\nTerminology: \\(T\\) is an involution.\n\nCompute the ratio, \\[r(x) = \\frac{\\gamma(x^*)}{\\gamma(x)} | \\nabla T(x) |,\\] where \\(| \\nabla T(x) |\\) denotes the Jacobian determinant.\nAccept \\(x^*\\) with probability \\(\\alpha(x) = \\min(1, r(x))\\), otherwise stay at \\(x\\).\n\nCalculus review: do you remember what is the Jacobian determinant?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\[\\begin{align*}\n\\nabla T(x) &= \\begin{bmatrix}\n    \\dfrac{\\partial T_1}{\\partial x_1} & \\cdots & \\dfrac{\\partial T_1}{\\partial x_n}\\\\\n    \\vdots                             & \\ddots & \\vdots\\\\\n    \\dfrac{\\partial T_m}{\\partial x_1} & \\cdots & \\dfrac{\\partial T_m}{\\partial x_n}\n\\end{bmatrix} \\\\\n|\\nabla T(x)| &= |\\det  \\nabla T(x)|.\n\\end{align*}\\]\n\n\n\nProposition: (Tierney, 1998) if \\(T\\) is a continuously differentiable involution, then the above algorithm is \\(\\pi\\)-invariant.",
     "crumbs": [
       "MCMC Hacking",
       "Deterministic proposals"
@@ -2789,6 +2789,17 @@
     ]
   },
   {
+    "objectID": "w04_glms/topic04_classification.html#references",
+    "href": "w04_glms/topic04_classification.html#references",
+    "title": "Bernoulli regression",
+    "section": "References",
+    "text": "References\n\nDataset source.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Bernoulli regression"
+    ]
+  },
+  {
     "objectID": "w04_glms/topic02_bivariate.html",
     "href": "w04_glms/topic02_bivariate.html",
     "title": "Bivariate posteriors",
@@ -2914,7 +2925,7 @@
     "href": "w06_hierarchical/topic01_priors.html#when-does-the-choice-of-prior-matter",
     "title": "Prior choice",
     "section": "When does the choice of prior matter?",
-    "text": "When does the choice of prior matter?\n\nWhen data is large, posterior tends to be less sensitive to specification of the prior\n\nTheoretical reason: the “Bayesian central limit theorem” (Bernstein von-Mises theorem).\nNot always true (e.g. weakly identifiable model).\n\nWhen data is small, posterior tends to be more sensitive to specification of the prior\n\nExtreme example:\n\nconsider a rocket maiden flight,\ni.e. there is no observation available yet,\nwhat will be the posterior?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWhere there is no observations, the posterior is equal to the prior.\nThis shows an extreme example of the posterior being sensitive to the choice of prior!",
+    "text": "When does the choice of prior matter?\n\nWhen data is large, posterior tends to be less sensitive to specification of the prior\n\nTheoretical reason: the “Bayesian central limit theorem” (Bernstein von-Mises theorem).\nNot always true (e.g. partially identifiable model).\n\nWhen data is small, posterior tends to be more sensitive to specification of the prior\n\nExtreme example:\n\nconsider a rocket maiden flight,\ni.e. there is no observation available yet,\nwhat will be the posterior?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWhere there is no observations, the posterior is equal to the prior.\nThis shows an extreme example of the posterior being sensitive to the choice of prior!",
     "crumbs": [
       "Hierarchical models",
       "Prior choice"
@@ -3232,6 +3243,17 @@
     "title": "(Normal) regression",
     "section": "Model criticism",
     "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?\n\n\n\n\n\n\nClick for discussion\n\n\n\n\n\nIn summary: it is very hard to estimate distance of distant objects.\nNot only the model explored today lacks an error model on the distances, but moreover, Hubble’s distance estimates had systematic errors (i.e. were all offset by a constant), hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results.\nIn fact, even with modern data and statistical methods, systematic errors are still suspected, this is known as the “Hubble tension.”",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "(Normal) regression"
+    ]
+  },
+  {
+    "objectID": "w04_glms/topic05_regression.html#references",
+    "href": "w04_glms/topic05_regression.html#references",
+    "title": "(Normal) regression",
+    "section": "References",
+    "text": "References\n\nThis example is inspired by William Welch’s Stat 305 lecture notes, where the same dataset is analyzed using MLE.\nLearn more about the still on-going research on resolving the “Hubble tension”.",
     "crumbs": [
       "The joy of probabilistic modelling",
       "(Normal) regression"
@@ -4902,7 +4924,7 @@
     "href": "w12_mcmc2/topic09_why_hmc.html",
     "title": "Why HMC?",
     "section": "",
-    "text": "Motivation behind Hamiltonian Monte Carlo (HMC)\nEffective sample size per second\nESS per second scaling for popular Monte Carlo methods on Gaussian targets\n\n\n\n\nWe have used Stan heavily in the second half of the course. Stan uses an algorithm called NUTS which is based on HMC.\nWe will now spend time understanding HMC. This will illustrate two important ideas used to construct advanced MCMC methods (involutions, augmentation).\nWe start by motivating HMC.",
+    "text": "Motivation behind Hamiltonian Monte Carlo (HMC)\nComputational cost of MCMC methods\nComputational cost scaling for popular Monte Carlo methods on normal targets\n\n\n\n\nWe have used Stan heavily in the second half of the course. Stan uses an algorithm called NUTS which is based on HMC.\nWe will now spend time understanding HMC. This will illustrate two important ideas used to construct advanced MCMC methods (involutions, augmentation).\nWe start by motivating HMC.",
     "crumbs": [
       "MCMC Hacking",
       "Why HMC?"
@@ -4913,7 +4935,7 @@
     "href": "w12_mcmc2/topic09_why_hmc.html#outline",
     "title": "Why HMC?",
     "section": "",
-    "text": "Motivation behind Hamiltonian Monte Carlo (HMC)\nEffective sample size per second\nESS per second scaling for popular Monte Carlo methods on Gaussian targets\n\n\n\n\nWe have used Stan heavily in the second half of the course. Stan uses an algorithm called NUTS which is based on HMC.\nWe will now spend time understanding HMC. This will illustrate two important ideas used to construct advanced MCMC methods (involutions, augmentation).\nWe start by motivating HMC.",
+    "text": "Motivation behind Hamiltonian Monte Carlo (HMC)\nComputational cost of MCMC methods\nComputational cost scaling for popular Monte Carlo methods on normal targets\n\n\n\n\nWe have used Stan heavily in the second half of the course. Stan uses an algorithm called NUTS which is based on HMC.\nWe will now spend time understanding HMC. This will illustrate two important ideas used to construct advanced MCMC methods (involutions, augmentation).\nWe start by motivating HMC.",
     "crumbs": [
       "MCMC Hacking",
       "Why HMC?"
@@ -4924,18 +4946,18 @@
     "href": "w12_mcmc2/topic09_why_hmc.html#why-is-hmc-popular-the-short-answer",
     "title": "Why HMC?",
     "section": "Why is HMC popular: the short answer",
-    "text": "Why is HMC popular: the short answer\nFor many models, HMC is less costly than the basic MH algorithm we saw earlier.",
+    "text": "Why is HMC popular: the short answer\nFor many models, HMC is less computationally costly than the basic MH algorithm we saw earlier.",
     "crumbs": [
       "MCMC Hacking",
       "Why HMC?"
     ]
   },
   {
-    "objectID": "w12_mcmc2/topic09_why_hmc.html#notion-of-efficiency",
-    "href": "w12_mcmc2/topic09_why_hmc.html#notion-of-efficiency",
+    "objectID": "w12_mcmc2/topic09_why_hmc.html#notion-of-computational-cost",
+    "href": "w12_mcmc2/topic09_why_hmc.html#notion-of-computational-cost",
     "title": "Why HMC?",
-    "section": "Notion of efficiency",
-    "text": "Notion of efficiency\nWe first have to define what we mean by an MCMC algorithm being less “costly” than another one.\nQuestion: is the time to compute one iteration (in e.g., in seconds or FLOPS) a reasonable notion of computational cost for MCMC algorithms?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nNo, it is incomplete.\nFor example, according to this incomplete metric, an algorithm with proposal \\(q(x' | x) = \\mathbb{1}[x = x']\\), would be really fast (can skip the MH ratio calculation!)…\n\n… but is useless because its effective sample size will be 1 no matter how long you run it.\n\nWhat you care about: how long does it take to get to a certain Monte Carlo standard error.\n\ni.e.: seconds per effective sample size (lower is better).",
+    "section": "Notion of computational cost",
+    "text": "Notion of computational cost\nWe first have to define what we mean by an MCMC algorithm being less “costly” than another one.\nQuestion: is the time to compute one iteration (in e.g., in seconds or FLOPS) a reasonable notion of computational cost for MCMC algorithms?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nNo, it is incomplete.\nFor example, according to this incomplete metric, an algorithm with proposal \\(q(x' | x) = \\mathbb{1}[x = x']\\), would be really fast (can skip the MH ratio calculation!)…\n\n… but is useless because its effective sample size will be 1 no matter how long you run it.\n\nWhat you care about: how long does it take to get to a certain Monte Carlo standard error.\n\ni.e.: seconds per effective sample (seconds/ESS; lower is better).",
     "crumbs": [
       "MCMC Hacking",
       "Why HMC?"
