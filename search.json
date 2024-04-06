@@ -3469,17 +3469,6 @@
     ]
   },
   {
-    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
-    "href": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
-    "title": "Stan: going further",
-    "section": "Model criticism",
-    "text": "Model criticism\nWhat are potential weakness(es) of the model?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nMany answers possible. For example, the systematic errors in the residuals (i.e., many points in a row are smaller at the beginning, and the reversed trend at the end) suggest that the logistic function is not quite rich enough to capture the details of the observed curve.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Stan: going further"
-    ]
-  },
-  {
     "objectID": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
     "href": "w08_mcmc1/topic03_more_complex_example.html#footnotes",
     "title": "Stan: going further",
