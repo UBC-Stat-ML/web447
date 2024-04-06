@@ -109,7 +109,7 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\distVMF}{\distNamed{vMF}}
 \newcommand{\distDiscrete}{\distNamed{Discrete}}
 \newcommand{\distLKJ}{\distNamed{LKJ}}
-
+\newcommand{\distSkellam}{\distNamed{Skellam}}
 
 
 <!-- nonparametric distributions -->
