@@ -49,7 +49,7 @@ We assume you have a laptop on which you can install these tools, if not, you ma
 
 Notes will be provided and complemented with readings from the following freely available textbook:
 
--   *Bayesian Data Analysis, Third Rdition.* Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. [PDF freely available](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf).
+-   *Bayesian Data Analysis, Third Edition.* Andrew Gelman, John Carlin, Hal Stern, David Dunson, Aki Vehtari, and Donald Rubin. [PDF freely available](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf).
 
 Additional readings and case studies will be drawn from other textbooks that are either freely available or available within UBC VPN:
 
