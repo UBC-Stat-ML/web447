@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Law of large numbers for Markov chain</title>
+<title>Bayes1@UBC - Exercise 10: advanced inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -109,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic03_markov_lln.html">Law of large numbers for Markov chain</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/ex10.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../exercises/ex10.html">Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -791,13 +825,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
  <span class="menu-text">MCMC Hacking</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -812,7 +846,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w12_mcmc2/topic03_markov_lln.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w12_mcmc2/topic03_markov_lln.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Law of large numbers for Markov chain</span></a>
   </div>
 </li>
@@ -892,16 +926,16 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
  <span class="menu-text">Advanced inference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/ex10.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/ex10.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -917,23 +951,17 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#law-of-large-numbers-for-markov-chains" id="toc-law-of-large-numbers-for-markov-chains" class="nav-link" data-scroll-target="#law-of-large-numbers-for-markov-chains">Law of large numbers for Markov chains</a></li>
-  <li><a href="#invariance" id="toc-invariance" class="nav-link" data-scroll-target="#invariance">Invariance</a></li>
-  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
+  <li><a href="#q1-asymmetric-proposal" id="toc-q1-asymmetric-proposal" class="nav-link active" data-scroll-target="#q1-asymmetric-proposal">Q1: Asymmetric proposal</a></li>
+  <li><a href="#q2-implementing-hmc" id="toc-q2-implementing-hmc" class="nav-link" data-scroll-target="#q2-implementing-hmc">Q2: Implementing HMC</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic03_markov_lln.html">Law of large numbers for Markov chain</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/ex10.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../exercises/ex10.html">Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Law of large numbers for Markov chain</h1>
+<h1 class="title">Exercise 10: advanced inference</h1>
 </div>
 
 
@@ -969,42 +997,104 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+This week it’s enough to answer only one question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To give more time for project, the grade for this last exercise will be the maximum of question 1 and question 2, i.e., you can solve only one of the questions and get full grade.</p>
+</div>
+</div>
+<section id="q1-asymmetric-proposal" class="level2">
+<h2 class="anchored" data-anchor-id="q1-asymmetric-proposal">Q1: Asymmetric proposal</h2>
+<p>Suppose you have a proposal <span class="math inline">\(q(x' | x)\)</span> which is not symmetric. We show here how to generalize MH to handle that case.</p>
 <ul>
-<li>Law of Large Numbers (LLN) for Markov chains</li>
-<li><span class="math inline">\(\pi\)</span>-invariance</li>
+<li>Our goal is to sample from <span class="math inline">\(\pi(x)\)</span>, <span class="math inline">\(x \in \mathscr{X}\)</span>.</li>
+<li>We will use an <a href="../w12_mcmc2/topic10_hmc_intuition.html#augmentation">augmented distribution</a> <span class="math inline">\(\bar \pi(x, v) = \pi(x) q(v | x)\)</span>, where <span class="math inline">\(v \in \mathscr{X}\)</span>.</li>
+<li>Alternate between two kernels <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>:
+<ul>
+<li><span class="math inline">\(K_1\)</span> consists in a <a href="../w12_mcmc2/topic11_involution.html">deterministic proposal MH</a> with a swap proposal, <span class="math inline">\(T(x, v) = (v, x)\)</span>.</li>
+<li><span class="math inline">\(K_2\)</span> keeps <span class="math inline">\(x\)</span> constant and samples a new value for <span class="math inline">\(v\)</span> from <span class="math inline">\(q(\cdot|x)\)</span>.</li>
+</ul></li>
 </ul>
-</section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Recall we have seen a special case of the LLN for Markov chain (for MH), <a href="../w08_mcmc1/topic05_mcmc_consistency.html">when talking about the consistency of MH</a>.</p>
-<p>Here we look at LLNs for Markov chains more generally.</p>
-</section>
-</section>
-<section id="law-of-large-numbers-for-markov-chains" class="level2">
-<h2 class="anchored" data-anchor-id="law-of-large-numbers-for-markov-chains">Law of large numbers for Markov chains</h2>
-<p><strong>Recall,</strong> we mentioned a LLN for MH specifically (simplified here for finite state spaces):</p>
-<p><strong>Proposition:</strong> (discrete case) if the chain <span class="math inline">\(X^{(m)}\)</span> produced by MH is irreducible, then we have a <strong>LLN with respect to <span class="math inline">\(\pi\)</span></strong>, i.e., <span class="math display">\[\frac{1}{M} \sum_{m=1}^M g(X^{(m)}) \to \mathbb{E}_\pi[g(X)],\]</span> with probability one as the number of MCMC iterations <span class="math inline">\(M\)</span> goes to infinity.</p>
-<p><strong>Today</strong> we see the above proposition is a corollary of the following two results:</p>
-<p><strong>Proposition:</strong> (discrete case)</p>
 <ol type="1">
-<li>MH satisfies a property called <span class="math inline">\(\pi\)</span>-<strong>invariance</strong></li>
-<li><span class="math inline">\(\pi\)</span>-invariance + irreducibility <span class="math inline">\(\Rightarrow\)</span> LLN with respect to <span class="math inline">\(\pi\)</span>.</li>
+<li>Write the MH ratio corresponding to the swap proposal in terms of <span class="math inline">\(\pi\)</span> and <span class="math inline">\(q\)</span>.</li>
+<li>Modify the proof <a href="../w12_mcmc2/topic10_hmc_intuition.html#sampling-a-new-momentum">here</a> to show that <span class="math inline">\(K_2\)</span> is <span class="math inline">\(\bar \pi\)</span>-invariant. You may assume <span class="math inline">\(\mathscr{X}\)</span> is discrete (this makes the notation simpler, but the result is the same in continuous space).</li>
 </ol>
 </section>
-<section id="invariance" class="level2">
-<h2 class="anchored" data-anchor-id="invariance">Invariance</h2>
-<p><strong>Definition:</strong> a Markov kernel <span class="math inline">\(K\)</span> is called <strong><span class="math inline">\(\pi\)</span>-invariant</strong> when <span class="math display">\[X \sim \pi \text{ and } X' \sim K(\cdot|X) \Rightarrow X' \sim \pi.\]</span></p>
-</section>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
-<ul>
-<li>We will prove point 1 above, i.e., that MH is <span class="math inline">\(\pi\)</span>-invariant.</li>
-<li>For 2, see <a href="../w08_mcmc1/topic04_mh.html#further-readings">further readings</a>.</li>
-</ul>
+<section id="q2-implementing-hmc" class="level2">
+<h2 class="anchored" data-anchor-id="q2-implementing-hmc">Q2: Implementing HMC</h2>
+<p>Read <a href="../w12_mcmc2/topic12_hmc_as_involution.html">how HMC can be viewed as MH with a deterministic proposal</a>. That page provides code for a proposal.</p>
+<ol type="1">
+<li>Complete the code to obtain an HMC algorithm. Use the following templates:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span> <span class="co"># = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># code from the notes:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>gradient <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>epsilon <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>kick <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, p <span class="sc">+</span> epsilon <span class="sc">*</span> <span class="fu">gradient</span>(x) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>drift <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x <span class="sc">+</span> epsilon <span class="sc">*</span> p, p)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>flip <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, <span class="sc">-</span>p)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>hmc_proposal <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>L) {</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">drift</span>(s)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flip</span>(s)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># part to complete below</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>hamiltonian <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>hmc <span class="ot">=</span> <span class="cf">function</span>(initial_x, n_iteration) {</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  current_x <span class="ot">=</span> initial_x</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iterations)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iteration) {</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Compute 10000 iterations and report the mean and variance of the samples.</li>
+</ol>
 
 
 </section>
