@@ -699,7 +699,7 @@
     "href": "exercises/ex10.html#q2-implementing-hmc",
     "title": "Exercise 10: advanced inference",
     "section": "Q2: Implementing HMC",
-    "text": "Q2: Implementing HMC\nRead how HMC can be viewed as MH with a deterministic proposal. That page provides code for a proposal.\n\nComplete the code to obtain an HMC algorithm. Use the following templates:\n\nset.seed(1234)\n\ngamma = function(x) {\n  -x^2 # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5\n}\n\n# code from the notes:\n\ngradient = function(x) {\n  -2*x\n}\n\nepsilon = 0.1\n\nkick = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, p + epsilon * gradient(x) / 2)\n}\n\ndrift = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x + epsilon * p, p)\n}\n\nflip = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, -p)\n}\n\nL = 5\n\nhmc_proposal = function(s) {\n  for (i in 1:L) {\n    s = kick(s)\n    s = drift(s)\n    s = kick(s)\n  }\n  flip(s)\n}\n\n# part to complete below\n\nhamiltonian = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  # TODO\n}\n\nhmc = function(initial_x, n_iteration) {\n  current_x = initial_x\n  samples = numeric(n_iterations)\n  for (i in 1:n_iteration) {\n    # TODO\n  }\n  return(samples)\n}\n\nCompute 10000 iterations and report the mean and variance of the samples.",
+    "text": "Q2: Implementing HMC\nRead how HMC can be viewed as MH with a deterministic proposal. That page provides code for a proposal.\n\nComplete the code to obtain an HMC algorithm. Use the following templates:\n\n(note the function “gamma” was renamed “log_gamma” to be more descriptive on April 10)\nset.seed(1234)\n\nlog_gamma = function(x) {\n  -x^2 # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5\n}\n\n# code from the notes:\n\ngradient = function(x) {\n  -2*x\n}\n\nepsilon = 0.1\n\nkick = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, p + epsilon * gradient(x) / 2)\n}\n\ndrift = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x + epsilon * p, p)\n}\n\nflip = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, -p)\n}\n\nL = 5\n\nhmc_proposal = function(s) {\n  for (i in 1:L) {\n    s = kick(s)\n    s = drift(s)\n    s = kick(s)\n  }\n  flip(s)\n}\n\n# part to complete below\n\nhamiltonian = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  # TODO\n}\n\nhmc = function(initial_x, n_iteration) {\n  current_x = initial_x\n  samples = numeric(n_iterations)\n  for (i in 1:n_iteration) {\n    # TODO\n  }\n  return(samples)\n}\n\nCompute 10000 iterations and report the mean and variance of the samples.",
     "crumbs": [
       "Advanced inference",
       "Exercises"
@@ -868,6 +868,28 @@
     "crumbs": [
       "Bayes on a discrete model",
       "Exercises"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic01_intro.html",
+    "href": "w13_advanced_infer/topic01_intro.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Tuesday, guest lecture),\n…the model is not too complex but data is large: variational methods (today),\n…the model is complex and data is large: largely open, we need you!!!",
+    "crumbs": [
+      "Advanced inference",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic01_intro.html#this-weeks-outline",
+    "href": "w13_advanced_infer/topic01_intro.html#this-weeks-outline",
+    "title": "Overview",
+    "section": "",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Tuesday, guest lecture),\n…the model is not too complex but data is large: variational methods (today),\n…the model is complex and data is large: largely open, we need you!!!",
+    "crumbs": [
+      "Advanced inference",
+      "Overview"
     ]
   },
   {
@@ -5445,6 +5467,61 @@
     "crumbs": [
       "Quiz 2",
       "Logistics"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic02_variational.html",
+    "href": "w13_advanced_infer/topic02_variational.html",
+    "title": "Variational methods",
+    "section": "",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "crumbs": [
+      "Advanced inference",
+      "Variational methods"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic02_variational.html#outline",
+    "href": "w13_advanced_infer/topic02_variational.html#outline",
+    "title": "Variational methods",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nVariational approximations\nDistribution families\nPosterior approximation as optimization\n\n\n\nRationale\nIn certain situations, and for a finite time budget, variational methods can provide a better approximation than MCMC methods.",
+    "crumbs": [
+      "Advanced inference",
+      "Variational methods"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic02_variational.html#what-is-a-variational-method",
+    "href": "w13_advanced_infer/topic02_variational.html#what-is-a-variational-method",
+    "title": "Variational methods",
+    "section": "What is a variational method?",
+    "text": "What is a variational method?\nSetup: as in MCMC…\n\nwe try to approximate a posterior \\(\\pi(x)\\) with \\(x \\in states\\),\nknown only up to normalization constant, \\(\\pi(x) = \\gamma(x) / Z\\).\n\nAdditional ingredient: a family (set) of distributions, \\(\\mathscr{Q}= \\{q_\\phi : \\phi \\in \\Phi\\}\\) called the variational family.1\n\nEach element of the variational family is a density/PMF \\(q_\\phi(x)\\) defined on the same space as \\(\\pi(x)\\).\nEach element is indexed by a variational parameter \\(\\phi \\in \\Phi\\).\n\nVariational inference: find a variational approximation \\(q_\\phi\\) as close as possible to the posterior \\(\\pi\\).",
+    "crumbs": [
+      "Advanced inference",
+      "Variational methods"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic02_variational.html#distribution-families",
+    "href": "w13_advanced_infer/topic02_variational.html#distribution-families",
+    "title": "Variational methods",
+    "section": "Distribution families",
+    "text": "Distribution families\nExample: when \\(\\mathscr{X}= \\mathbb{R}\\), a typical choice is to use a normal family.\nQuestion: complete the definition of variational approximation \\(q_\\phi\\), variational parameter \\(\\phi\\) and parameters \\(\\Phi\\).\n\nQuestion: what would you do if instead \\(\\mathscr{X}= \\mathbb{R}^+\\)?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nOne method (used e.g., by Stan’s variational method) is to define \\(q_\\phi\\) in two steps:\n\nsample \\(\\tilde z \\sim q_\\phi(\\cdot)\\), where \\(q_\\phi\\) is normal,\nreturn \\(z = \\exp(\\tilde z)\\).",
+    "crumbs": [
+      "Advanced inference",
+      "Variational methods"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic02_variational.html#footnotes",
+    "href": "w13_advanced_infer/topic02_variational.html#footnotes",
+    "title": "Variational methods",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNotice we also used \\(q\\) for MCMC proposal and importance sampling’s importance distribution. These are different but related. It is a general convention to use \\(q\\) for “quantities that help us to approximate a complex distribution.” The connection between variational inference’s \\(q\\) and importance sampling’s \\(q\\) is more direct compared to MCMC’s proposal \\(q\\).↩︎",
+    "crumbs": [
+      "Advanced inference",
+      "Variational methods"
     ]
   },
   {
