@@ -100,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -884,6 +884,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w12_mcmc2/topic13_autodiff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Autodiff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -909,6 +915,30 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../w13_advanced_infer/topic02_variational.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Variational methods</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w13_advanced_infer/topic03_kl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The KL divergence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w13_advanced_infer/topic04_opt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimizing the KL</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w13_advanced_infer/topic05_sgd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stochastic gradient descent</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w13_advanced_infer/topic06_stoch_grad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stochastic gradient estimation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -940,7 +970,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic01_intro.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic02_variational.html">Variational methods</a></li></ol></nav>
 <div class="quarto-title">
@@ -980,19 +1010,7 @@ https://github.com/trevorcampbell/shortex
 <!-- nonparametric distributions -->
 <!-- calculus -->
 <!-- general purpose math -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
+<!-- divergences -->
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
@@ -1012,7 +1030,7 @@ Caution
 <h2 class="anchored" data-anchor-id="what-is-a-variational-method">What is a variational method?</h2>
 <p><strong>Setup:</strong> as in MCMC…</p>
 <ul>
-<li>we try to approximate a posterior <span class="math inline">\(\pi(x)\)</span> with <span class="math inline">\(x \in states\)</span>,</li>
+<li>we try to approximate a posterior <span class="math inline">\(\pi(x)\)</span> with <span class="math inline">\(x \in \mathscr{X}\)</span>,</li>
 <li>known only up to normalization constant, <span class="math inline">\(\pi(x) = \gamma(x) / Z\)</span>.</li>
 </ul>
 <p><strong>Additional ingredient:</strong> a family (set) of distributions, <span class="math inline">\(\mathscr{Q}= \{q_\phi : \phi \in \Phi\}\)</span> called the <strong>variational family.</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
@@ -1020,14 +1038,31 @@ Caution
 <li>Each element of the variational family is a density/PMF <span class="math inline">\(q_\phi(x)\)</span> defined on the same space as <span class="math inline">\(\pi(x)\)</span>.</li>
 <li>Each element is indexed by a <strong>variational parameter</strong> <span class="math inline">\(\phi \in \Phi\)</span>.</li>
 </ul>
-<p><strong>Variational inference:</strong> find a variational approximation <span class="math inline">\(q_\phi\)</span> as close as possible to the posterior <span class="math inline">\(\pi\)</span>.</p>
+<p><strong>Variational inference:</strong> find a variational approximation <span class="math inline">\(q^*_\phi\in\mathscr{Q}\)</span> as close as possible to the posterior <span class="math inline">\(\pi\)</span>.</p>
 </section>
-<section id="distribution-families" class="level2">
+<section id="distribution-families" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="distribution-families">Distribution families</h2>
-<p><strong>Example:</strong> when <span class="math inline">\(\mathscr{X}= \mathbb{R}\)</span>, a typical choice is to use a normal family.</p>
-<p><strong>Question:</strong> complete the definition of variational approximation <span class="math inline">\(q_\phi\)</span>, variational parameter <span class="math inline">\(\phi\)</span> and parameters <span class="math inline">\(\Phi\)</span>.</p>
-<!--
+<p><strong>Example:</strong> consider the <a href="../exercises/ex07.html#sec-q3">beta-binomial example</a>.</p>
 
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/variational-inside.png" class="img-fluid" width="150"></p>
+</div></div><ul>
+<li>Here we could take <span class="math inline">\(\mathscr{Q}\)</span> to be the set of all beta distributions.</li>
+<li>The beta family has two positive parameters, <span class="math inline">\(\phi = (\alpha, \beta)\)</span>, <span class="math inline">\(\alpha, \beta &gt; 0\)</span>…</li>
+<li>… so <span class="math inline">\(\Phi = \mathbb{R}^+ \times \mathbb{R}^+\)</span>.</li>
+<li>This is the “best case” for variational inference:
+<ul>
+<li>from <a href="../w07_quiz1/topic02_practice_questions.html#beta-binomial-conjugacy">a practice quiz exercise</a>, <span class="math inline">\(\pi \in \mathscr{Q}\)</span>,</li>
+<li>so <span class="math inline">\(q^*_\phi = \pi\)</span>, i.e., variational inference incurs no approximation error in this special case (see figure).</li>
+</ul></li>
+<li>Typically, we do not have tractable (easy to compute) conjugate family though.</li>
+</ul>
+<p><strong>Example:</strong> when <span class="math inline">\(\mathscr{X}= \mathbb{R}\)</span>, a typical choice of variational family is to use a normal family.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/variational-outside.png" class="img-fluid" width="150"></p>
+</div></div><p><strong>Question:</strong> for the normal variational family, complete the definition of variational approximation <span class="math inline">\(q_\phi\)</span>, variational parameter <span class="math inline">\(\phi\)</span> and parameters <span class="math inline">\(\Phi\)</span>.</p>
+<!--
 
 ::: {.callout-caution collapse="true"} 
 ## Click for choices
@@ -1044,36 +1079,31 @@ Caution
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-Correct answer is 4. 
+Correct answer is 4: in this example...
 
 - Each distribution in the family is a normal density, $q_\phi(x) = (\sigma \sqrt{2\pi})^{-1} \exp(-(x - \mu)^2 /(2\sigma^2))$.
+  - Notice we need to incorporate the normalization constant of $q$, this will be important in our calculations later on.
 - A variational parameter here is a mean and a variance, $\phi = (\mu, \sigma^2)$. 
 - Hence the variational parameters are $\Phi = \reals \times \reals^+$.
 :::
 
 
 -->
-<p><strong>Question:</strong> what would you do if instead <span class="math inline">\(\mathscr{X}= \mathbb{R}^+\)</span>?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>One method (used e.g., by Stan’s variational method) is to define <span class="math inline">\(q_\phi\)</span> in two steps:</p>
-<ol type="1">
-<li>sample <span class="math inline">\(\tilde z \sim q_\phi(\cdot)\)</span>, where <span class="math inline">\(q_\phi\)</span> is normal,</li>
-<li>return <span class="math inline">\(z = \exp(\tilde z)\)</span>.</li>
-</ol>
-</div>
-</div>
-</div>
+<!-- postpone that; not essential---maybe better served in its own page too
+
+**Question:** what would you do if instead $\states = \reals^+$?
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+One method (used e.g., by Stan's variational method) is to use a change of 
+variable to 
+
+1. sample $\tilde z \sim q_\phi(\cdot)$, where $q_\phi$ is normal,
+2. return $z = \exp(\tilde z)$.
+:::
+
+-->
 
 
 </section>

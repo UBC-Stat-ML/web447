@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Terminology review</title>
+<title>Bayes1@UBC - Autodiff</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -80,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic13_autodiff.html">Autodiff</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -545,16 +608,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
  <span class="menu-text">Quiz 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review</span></a>
   </div>
 </li>
@@ -762,13 +825,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
  <span class="menu-text">MCMC Hacking</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -855,7 +918,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w12_mcmc2/topic13_autodiff.html" class="sidebar-item-text sidebar-link">
+  <a href="../w12_mcmc2/topic13_autodiff.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Autodiff</span></a>
   </div>
 </li>
@@ -935,26 +998,17 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#probability-essentials" id="toc-probability-essentials" class="nav-link" data-scroll-target="#probability-essentials">Probability essentials</a></li>
-  <li><a href="#common-distributions-pmfs-and-densities" id="toc-common-distributions-pmfs-and-densities" class="nav-link" data-scroll-target="#common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</a></li>
-  <li><a href="#basic-bayesian-terms" id="toc-basic-bayesian-terms" class="nav-link" data-scroll-target="#basic-bayesian-terms">Basic Bayesian terms</a></li>
-  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling">Sampling</a></li>
-  <li><a href="#decision-theory" id="toc-decision-theory" class="nav-link" data-scroll-target="#decision-theory">Decision theory</a></li>
-  <li><a href="#posterior-summaries" id="toc-posterior-summaries" class="nav-link" data-scroll-target="#posterior-summaries">Posterior summaries</a></li>
-  <li><a href="#point-estimation" id="toc-point-estimation" class="nav-link" data-scroll-target="#point-estimation">Point estimation</a></li>
-  <li><a href="#credible-regions" id="toc-credible-regions" class="nav-link" data-scroll-target="#credible-regions">Credible regions</a></li>
-  <li><a href="#model-criticism" id="toc-model-criticism" class="nav-link" data-scroll-target="#model-criticism">Model criticism</a></li>
-  <li><a href="#ppls" id="toc-ppls" class="nav-link" data-scroll-target="#ppls">PPLs</a></li>
-  <li><a href="#model-terminology" id="toc-model-terminology" class="nav-link" data-scroll-target="#model-terminology">Model terminology</a></li>
+  <li><a href="#automatic-differentiation" id="toc-automatic-differentiation" class="nav-link" data-scroll-target="#automatic-differentiation">Automatic differentiation</a></li>
+  <li><a href="#using-stan-as-a-stand-alone-autodiff-system" id="toc-using-stan-as-a-stand-alone-autodiff-system" class="nav-link" data-scroll-target="#using-stan-as-a-stand-alone-autodiff-system">Using Stan as a stand-alone autodiff system</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic13_autodiff.html">Autodiff</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Terminology review</h1>
+<h1 class="title">Autodiff</h1>
 </div>
 
 
@@ -996,115 +1050,65 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Review of key terminology covered so far.</li>
+<li>Reverse mode automatic differentiation (autodiff)</li>
+<li>Using Stan as a stand-alone autodiff system</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Part of quiz 1 involves knowing these terms without having to look them up.</p>
-<p>While in “the real world” you can look things up, to attain mastery of a subject you need a critical mass of concepts in memory. Too much google look-ups prevent thinking at the speed of thought.</p>
+<p>As we just saw, HMC requires computing the gradient (vector of partial derivatives) at each iteration. But notice we did not have to manually derive the gradient when writing Stan models.</p>
+<p>Why? Thanks to autodiff!</p>
 </section>
 </section>
-<section id="probability-essentials" class="level2">
-<h2 class="anchored" data-anchor-id="probability-essentials">Probability essentials</h2>
+<section id="automatic-differentiation" class="level2">
+<h2 class="anchored" data-anchor-id="automatic-differentiation">Automatic differentiation</h2>
 <ul>
-<li>Probability vs PMF vs density</li>
-<li>Event vs outcome</li>
-<li>Random variable</li>
-<li>Realization</li>
-<li>Probability and conditional probability</li>
-<li>Expectation vs probability</li>
-<li>Indicator function</li>
+<li>A Stan program specifies <span class="math inline">\(\log \gamma(x)\)</span>, a function from <span class="math inline">\(\mathbb{R}^d\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</li>
+<li>Stan knows how to differentiate “primitive operations” such as <span class="math inline">\(+, \cdots, \exp, \dots\)</span></li>
+<li>Stan knows how to recurse based on the chain rule: <span class="math inline">\((f\circ g)' = (f' \circ g)  g'\)</span>.</li>
+</ul>
+<p><strong>Reverse-mode autodiff:</strong> see <a href="https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation">wikipedia for details</a>; in summary,</p>
+<ul>
+<li>Stan uses known derivatives for primitive operations, combined with chain rule to compute <span class="math inline">\(\nabla \log \gamma\)</span> automatically.</li>
+<li>The “reverse-mode” variant of autodiff allows us to do that computation with the same running time as computing <span class="math inline">\(\log \gamma\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 </ul>
 </section>
-<section id="common-distributions-pmfs-and-densities" class="level2">
-<h2 class="anchored" data-anchor-id="common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</h2>
-<p>Knowing the <strong>support</strong> (no need to memorize other details)</p>
-<ul>
-<li>Bernoulli</li>
-<li>Binomial</li>
-<li>Uniform (discrete and continuous)</li>
-<li>Categorical</li>
-<li>Normal</li>
-<li>Exponential</li>
-<li>Beta</li>
-</ul>
-</section>
-<section id="basic-bayesian-terms" class="level2">
-<h2 class="anchored" data-anchor-id="basic-bayesian-terms">Basic Bayesian terms</h2>
-<ul>
-<li>Prior distribution (PMF/density)</li>
-<li>Likelihood</li>
-<li>Posterior distribution (PMF/density)</li>
-<li>Joint distribution</li>
-<li>Joint vs marginal posterior</li>
-<li>Predictive distribution</li>
-</ul>
-</section>
-<section id="sampling" class="level2">
-<h2 class="anchored" data-anchor-id="sampling">Sampling</h2>
-<ul>
-<li>Sample</li>
-<li>Forward vs posterior sampling</li>
-<li>Simple Monte Carlo vs SNIS</li>
-<li>Test function</li>
-</ul>
-</section>
-<section id="decision-theory" class="level2">
-<h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
-<ul>
-<li>Loss function</li>
-<li>Bayes estimator</li>
-</ul>
-</section>
-<section id="posterior-summaries" class="level2">
-<h2 class="anchored" data-anchor-id="posterior-summaries">Posterior summaries</h2>
-<ul>
-<li>Point estimate vs credible regions</li>
-</ul>
-</section>
-<section id="point-estimation" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimation">Point estimation</h2>
-<ul>
-<li>Posterior mean</li>
-<li>Posterior mode</li>
-</ul>
-</section>
-<section id="credible-regions" class="level2">
-<h2 class="anchored" data-anchor-id="credible-regions">Credible regions</h2>
-<ul>
-<li>Nominal coverage</li>
-<li>Quantile-based credible interval</li>
-<li>Highest Density Set</li>
-</ul>
-</section>
-<section id="model-criticism" class="level2">
-<h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
-<ul>
-<li>Model mis-specification</li>
-<li>Cromwell’s rule</li>
-</ul>
-</section>
-<section id="ppls" class="level2">
-<h2 class="anchored" data-anchor-id="ppls">PPLs</h2>
-<ul>
-<li>PPL</li>
-<li>Consistency</li>
-<li>Rate of convergence</li>
-<li>(Importance) weights (normalized vs un-normalized)</li>
-</ul>
-</section>
-<section id="model-terminology" class="level2">
-<h2 class="anchored" data-anchor-id="model-terminology">Model terminology</h2>
-<ul>
-<li>Classification vs regression</li>
-<li>Input/output/covariate</li>
-</ul>
+<section id="using-stan-as-a-stand-alone-autodiff-system" class="level2">
+<h2 class="anchored" data-anchor-id="using-stan-as-a-stand-alone-autodiff-system">Using Stan as a stand-alone autodiff system</h2>
+<p>If you just need just the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use <a href="https://github.com/roualdes/bridgestan">BridgeStan</a> (bridges Stan with R, Julia, Rust, etc).</p>
+<p>To install it:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(remotes)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"https://github.com/roualdes/bridgestan"</span>, <span class="at">subdir=</span><span class="st">"R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To use it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(bridgestan)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> StanModel<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../blocks/ariane.stan"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../blocks/ariane.json"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span><span class="fu">log_density_gradient</span>(<span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>), <span class="at">propto =</span> <span class="cn">TRUE</span>, <span class="at">jacobian =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$val
+[1] -5.299514
+
+$gradient
+[1] 11.389504  1.451964</code></pre>
+</div>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In contrast, both forward mode autodiff and numerical differentiation would be <span class="math inline">\(d\)</span> time slower at computing <span class="math inline">\(\nabla \log \gamma\)</span> compared to <span class="math inline">\(\log \gamma\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

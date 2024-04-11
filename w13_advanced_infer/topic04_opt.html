@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Terminology review</title>
+<title>Bayes1@UBC - Optimizing the KL</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,11 +67,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic01_intro.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic04_opt.html">Optimizing the KL</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -545,16 +574,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
  <span class="menu-text">Quiz 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w07_quiz1/topic01_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Terminology review</span></a>
   </div>
 </li>
@@ -869,13 +898,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
  <span class="menu-text">Advanced inference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w13_advanced_infer/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -896,7 +925,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w13_advanced_infer/topic04_opt.html" class="sidebar-item-text sidebar-link">
+  <a href="../w13_advanced_infer/topic04_opt.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Optimizing the KL</span></a>
   </div>
 </li>
@@ -935,26 +964,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
-  <li><a href="#probability-essentials" id="toc-probability-essentials" class="nav-link" data-scroll-target="#probability-essentials">Probability essentials</a></li>
-  <li><a href="#common-distributions-pmfs-and-densities" id="toc-common-distributions-pmfs-and-densities" class="nav-link" data-scroll-target="#common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</a></li>
-  <li><a href="#basic-bayesian-terms" id="toc-basic-bayesian-terms" class="nav-link" data-scroll-target="#basic-bayesian-terms">Basic Bayesian terms</a></li>
-  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling">Sampling</a></li>
-  <li><a href="#decision-theory" id="toc-decision-theory" class="nav-link" data-scroll-target="#decision-theory">Decision theory</a></li>
-  <li><a href="#posterior-summaries" id="toc-posterior-summaries" class="nav-link" data-scroll-target="#posterior-summaries">Posterior summaries</a></li>
-  <li><a href="#point-estimation" id="toc-point-estimation" class="nav-link" data-scroll-target="#point-estimation">Point estimation</a></li>
-  <li><a href="#credible-regions" id="toc-credible-regions" class="nav-link" data-scroll-target="#credible-regions">Credible regions</a></li>
-  <li><a href="#model-criticism" id="toc-model-criticism" class="nav-link" data-scroll-target="#model-criticism">Model criticism</a></li>
-  <li><a href="#ppls" id="toc-ppls" class="nav-link" data-scroll-target="#ppls">PPLs</a></li>
-  <li><a href="#model-terminology" id="toc-model-terminology" class="nav-link" data-scroll-target="#model-terminology">Model terminology</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#black-box-methods" id="toc-black-box-methods" class="nav-link" data-scroll-target="#black-box-methods">Black box methods</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Quiz 1</a></li><li class="breadcrumb-item"><a href="../w07_quiz1/topic01_terminology.html">Terminology review</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic01_intro.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic04_opt.html">Optimizing the KL</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Terminology review</h1>
+<h1 class="title">Optimizing the KL</h1>
 </div>
 
 
@@ -996,109 +1017,48 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Review of key terminology covered so far.</li>
+<li>Black-box / automatic differentiation variational inference (ADVI)</li>
+<li>Coordinate ascent variational inference (CAVI)</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Part of quiz 1 involves knowing these terms without having to look them up.</p>
-<p>While in “the real world” you can look things up, to attain mastery of a subject you need a critical mass of concepts in memory. Too much google look-ups prevent thinking at the speed of thought.</p>
+<p>We have now identified our objective function, the ELBO. We still need to pick a numerical method to optimize it.</p>
 </section>
 </section>
-<section id="probability-essentials" class="level2">
-<h2 class="anchored" data-anchor-id="probability-essentials">Probability essentials</h2>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<ol type="1">
+<li>Before ~2015, the user had to do mathematical derivation each time they wanted to apply VI to a new model.</li>
+<li>This changed with the advent of “black box methods” such ADVI.</li>
+</ol>
 <ul>
-<li>Probability vs PMF vs density</li>
-<li>Event vs outcome</li>
-<li>Random variable</li>
-<li>Realization</li>
-<li>Probability and conditional probability</li>
-<li>Expectation vs probability</li>
-<li>Indicator function</li>
+<li>In this course we focus on 2 since they are easier to use.</li>
+<li>However, 1 is still useful as it can be much faster in practice.</li>
 </ul>
 </section>
-<section id="common-distributions-pmfs-and-densities" class="level2">
-<h2 class="anchored" data-anchor-id="common-distributions-pmfs-and-densities">Common distributions (PMFs and densities)</h2>
-<p>Knowing the <strong>support</strong> (no need to memorize other details)</p>
+<section id="black-box-methods" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="black-box-methods">Black box methods</h2>
 <ul>
-<li>Bernoulli</li>
-<li>Binomial</li>
-<li>Uniform (discrete and continuous)</li>
-<li>Categorical</li>
-<li>Normal</li>
-<li>Exponential</li>
-<li>Beta</li>
+<li><strong>Idea:</strong> use a gradient descent method to minimize <span class="math inline">\(L(\phi)\)</span>.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Gradient_descent.svg" class="img-fluid" width="150"></p>
+</div></div><ul>
+<li><strong>Difficulty</strong>: the objective function <span class="math inline">\(L\)</span> has an integral over <span class="math inline">\(q\)</span>. How to compute its gradient?</li>
+<li><strong>Solution</strong>:
+<ul>
+<li>approximate the gradient using a Monte Carlo method.</li>
+<li>Feed that gradient into a Stochastic Gradient Descent (SGD) algorithm.</li>
+<li>Convergence guarantees typically ask that this approximation be unbiased.</li>
+</ul></li>
 </ul>
 </section>
-<section id="basic-bayesian-terms" class="level2">
-<h2 class="anchored" data-anchor-id="basic-bayesian-terms">Basic Bayesian terms</h2>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Prior distribution (PMF/density)</li>
-<li>Likelihood</li>
-<li>Posterior distribution (PMF/density)</li>
-<li>Joint distribution</li>
-<li>Joint vs marginal posterior</li>
-<li>Predictive distribution</li>
-</ul>
-</section>
-<section id="sampling" class="level2">
-<h2 class="anchored" data-anchor-id="sampling">Sampling</h2>
-<ul>
-<li>Sample</li>
-<li>Forward vs posterior sampling</li>
-<li>Simple Monte Carlo vs SNIS</li>
-<li>Test function</li>
-</ul>
-</section>
-<section id="decision-theory" class="level2">
-<h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
-<ul>
-<li>Loss function</li>
-<li>Bayes estimator</li>
-</ul>
-</section>
-<section id="posterior-summaries" class="level2">
-<h2 class="anchored" data-anchor-id="posterior-summaries">Posterior summaries</h2>
-<ul>
-<li>Point estimate vs credible regions</li>
-</ul>
-</section>
-<section id="point-estimation" class="level2">
-<h2 class="anchored" data-anchor-id="point-estimation">Point estimation</h2>
-<ul>
-<li>Posterior mean</li>
-<li>Posterior mode</li>
-</ul>
-</section>
-<section id="credible-regions" class="level2">
-<h2 class="anchored" data-anchor-id="credible-regions">Credible regions</h2>
-<ul>
-<li>Nominal coverage</li>
-<li>Quantile-based credible interval</li>
-<li>Highest Density Set</li>
-</ul>
-</section>
-<section id="model-criticism" class="level2">
-<h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
-<ul>
-<li>Model mis-specification</li>
-<li>Cromwell’s rule</li>
-</ul>
-</section>
-<section id="ppls" class="level2">
-<h2 class="anchored" data-anchor-id="ppls">PPLs</h2>
-<ul>
-<li>PPL</li>
-<li>Consistency</li>
-<li>Rate of convergence</li>
-<li>(Importance) weights (normalized vs un-normalized)</li>
-</ul>
-</section>
-<section id="model-terminology" class="level2">
-<h2 class="anchored" data-anchor-id="model-terminology">Model terminology</h2>
-<ul>
-<li>Classification vs regression</li>
-<li>Input/output/covariate</li>
+<li>See <a href="https://arxiv.org/pdf/1601.00670.pdf">Blei et al., 2018</a>.</li>
 </ul>
 
 
