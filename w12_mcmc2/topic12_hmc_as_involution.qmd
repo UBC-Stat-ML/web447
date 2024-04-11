@@ -23,9 +23,9 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
 
 ## Plan
 
-- How to build and involution for ["rolling a ball for time $t$ starting at current location and momentum"](topic10_hmc_intuition.qmd)?
+- How to build and [involution](topic11_involution.qmd) for ["rolling a ball for time $t$ starting at current location and momentum"](topic10_hmc_intuition.qmd)?
 - Start with an exact description of the ball's motion (in continuous time). 
-- Discretize time carefully to be able to compute while maintaining the involution property. 
+- Discretize time carefully to be able to compute trajectory while maintaining the involution property. 
 
 
 ## Inspiration from physics
@@ -35,14 +35,19 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
     - i.e. to provide an **ordinary differential equation** (ODE).
 - ODE for the continuous time evolution of frictionless ball's position and momentum $(x^{(t)}, p^{(t)})$:
   \begin{align*}
-  x' &= p \expl{in a small time interval the change in position is equal to the momentum} \\
-  p' &= - \nabla U(x) \expl{the velocity decreases proportionally to the steepness of the landscape}.
+  x' = \frac{\dee x^{(t)}}{\dee t} &= p \expl{in a small time interval the change in position is equal to the momentum} \\
+  p' = \frac{\dee p^{(t)}}{\dee t} &= - \nabla U(x) \expl{the velocity decreases proportionally to the steepness of the landscape}.
   \end{align*}
+  
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/d/d2/3d-gradient-cos.svg){width="150"}
+:::
+  
+**Recall:** the gradient $\nabla U(x) = (\partial U/\partial x_1, \dots, \partial U/\partial x_d)$ is a vector pointing towards 
+the direction of steepest ascent. 
 
 
 ## Flip trick
-
-
 
 - At the very end of the trajectory, in the analysis we flip the momentum:
   $$\Tf(x, p) = (x, -p).$$
@@ -66,10 +71,9 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
     - hence, $t = \epsilon L$. 
 
 
-
 ## Leap frog integrator
 
-**Key idea:** update only one of $\{x, p\}$ at the time to get triangular Jacobian matrices (easier to analyze). 
+**Key idea:** update only one of $\{x, p\}$ at the time to get [triangular Jacobian matrices](topic11_involution.qmd#examples-of-involution) (easier to analyze). 
 
 **Drift operator** 
 
@@ -92,7 +96,7 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
 # example: a normal
 # This function return gradient_x of log pi(x)
 gradient = function(x) {
-  -2*x
+  -2*x # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5
 }
 
 epsilon = 0.1

@@ -1,0 +1,50 @@
+---
+title: "Optimizing the KL"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+-   Black-box / automatic differentiation variational inference (ADVI)
+-   Coordinate ascent variational inference (CAVI)
+
+### Rationale
+
+We have now identified our objective function, the ELBO. 
+We still need to pick a numerical method to optimize it.
+
+
+## Overview
+
+1. Before ~2015, the user had to do mathematical derivation each time they wanted to apply VI to a new model.
+2. This changed with the advent of "black box methods" such ADVI.
+
+- In this course we focus on 2 since they are easier to use. 
+- However, 1 is still useful as it can be much faster in practice. 
+
+
+## Black box methods
+
+
+- **Idea:** use a gradient descent method to minimize $L(\phi)$. 
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/f/ff/Gradient_descent.svg){width="150"}
+:::
+
+- **Difficulty**: the objective function $L$ has an integral over $q$. How to compute its gradient?
+- **Solution**: 
+  - approximate the gradient using a Monte Carlo method. 
+  - Feed that gradient into a Stochastic Gradient Descent (SGD) algorithm. 
+  - Convergence guarantees typically ask that this approximation be unbiased. 
+
+
+## References
+
+- See [Blei et al., 2018](https://arxiv.org/pdf/1601.00670.pdf).

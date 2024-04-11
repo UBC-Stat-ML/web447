@@ -1,0 +1,55 @@
+---
+title: "Stochastic gradient descent"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+-   Gradient descent
+-   Stochastic gradient descent (SGD)
+
+### Rationale
+
+Black-box VI uses SGD (or similar algorithms) to perform optimization over 
+the variational parameters. 
+
+The "stochasticity" comes from the fact we approximate the integral in $L$ using Monte Carlo.[^1]
+
+[^1]: On top of that, we may "sub-sample" datapoints at each iteration, adding additional stochasticity. 
+
+
+## Gradient descent
+
+**Recall:** the gradient $\nabla L(\phi) = (\partial L/\partial \phi_1, \dots, \partial L/\partial \phi_K)$ is a vector pointing towards 
+the direction of steepest ascent. 
+
+::: column-margin
+![](https://upload.wikimedia.org/wikipedia/commons/d/d2/3d-gradient-cos.svg){width="150"}
+:::
+
+**Gradient descent:** at each iteration, move the current point in the direction opposite to the gradient,
+  $$\phi^{(t+1)} \gets \phi^{(t)} - \epsilon_t \nabla L(\phi^{(t)}),$$
+  where $\epsilon_t > 0$ is called a **step size**. 
+  
+**Property:** for the right choice of step size $\epsilon_t$, the gradient descent algorithm converges to 
+the minimum of the convex function ([Boyd and Vandenberghe, 2004](https://web.stanford.edu/~boyd/cvxbook/)). 
+
+
+## Stochastic gradient descent
+
+**Idea:** replace $\nabla L$ by a randomized approximation, $\hat \nabla L$. 
+
+**Definition:** we say $\hat \nabla L$ is **unbiased** if $\ex[\hat \nabla L] = \nabla L$. 
+
+**Note:** the expectation in "$\ex[\hat \nabla L]$" is with respect to the randomness used to create the random approximation. 
+In our situation it will correspond to the randomness of sampling from our current variational family, $q_{\phi^{(t)}}$. 
+
+**Property:** if $\hat \nabla L$ is unbiased, the objective function is convex, and the variance of $\ex[\hat \nabla L]$ is bounded, 
+stochastic gradient descent converges to the optimal solution $t \to \infty$ with $\epsilon_t = t^{-\alpha}$ for $\alpha \in (1/2, 1]$ ([Benveriste et al., 1990](https://link.springer.com/book/10.1007/978-3-642-75894-2)).
+

@@ -78,6 +78,11 @@ website:
           - auto: "w12_mcmc2/*"
           - text: "Exercises"
             file: exercises/ex09.qmd
+      - section: "Advanced inference"
+        contents: 
+          - auto: "w13_advanced_infer/*"
+          - text: "Exercises"
+            file: exercises/ex10.qmd
 
 
 format:

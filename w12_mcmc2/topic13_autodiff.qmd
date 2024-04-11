@@ -1,0 +1,63 @@
+---
+title: "Autodiff"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+- Reverse mode automatic differentiation (autodiff)
+- Using Stan as a stand-alone autodiff system
+
+
+### Rationale
+
+As we just saw, HMC requires computing the gradient (vector of partial derivatives) at each iteration. 
+But notice we did not have to manually derive the gradient when writing Stan models. 
+
+Why? Thanks to autodiff!
+
+
+## Automatic differentiation
+
+- A Stan program specifies $\log \gamma(x)$, a function from $\reals^d$ to $\reals$.
+- Stan knows how to differentiate "primitive operations" such as $+, \cdots, \exp, \dots$
+- Stan knows how to recurse based on the chain rule: $(f\circ g)' = (f' \circ g)  g'$. 
+
+**Reverse-mode autodiff:** see [wikipedia for details](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation); in summary,
+
+- Stan uses known derivatives for primitive operations, combined with chain rule to compute $\nabla \log \gamma$ automatically. 
+- The "reverse-mode" variant of autodiff allows us to do that computation with the same running time as computing $\log \gamma$.[^1]
+
+[^1]: In contrast, both forward mode autodiff and numerical differentiation would be $d$ time slower at computing $\nabla \log \gamma$ compared to $\log \gamma$.
+
+ 
+## Using Stan as a stand-alone autodiff system
+
+If you just need just the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use [BridgeStan](https://github.com/roualdes/bridgestan) (bridges Stan with R, Julia, Rust, etc).
+
+To install it:
+
+```r
+install.packages("remotes")
+require(remotes)
+remotes::install_github("https://github.com/roualdes/bridgestan", subdir="R")
+```
+
+To use it:
+
+```{r}
+require(bridgestan)
+model = StanModel$new(
+  "../blocks/ariane.stan",
+  "../blocks/ariane.json",
+  1
+)
+
+model$log_density_gradient(c(0.1, 0.2), propto = TRUE, jacobian = TRUE)
+```
+

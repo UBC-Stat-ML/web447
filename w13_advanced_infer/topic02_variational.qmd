@@ -1,0 +1,70 @@
+---
+title: "Variational methods"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+-   Variational approximations
+-   Distribution families
+-   Posterior approximation as optimization
+
+### Rationale
+
+In certain situations, and for a finite time budget, variational methods 
+can provide a better approximation than MCMC methods. 
+
+
+## What is a variational method?
+
+**Setup:** as in MCMC...
+
+- we try to approximate a posterior $\pi(x)$ with $x \in \states$, 
+- known only up to normalization constant, $\pi(x) = \gamma(x) / Z$. 
+
+**Additional ingredient:** a family (set) of distributions, $\family = \{q_\phi : \phi \in \Phi\}$ called the **variational family.**[^1]
+
+[^1]: Notice we also used $q$ for MCMC proposal and importance sampling's importance distribution. These are different but related. It is a general 
+  convention to use $q$ for "quantities that help us to approximate a complex distribution." The connection between variational inference's $q$ and importance
+  sampling's $q$ is more direct compared to MCMC's proposal $q$.
+
+- Each element of the variational family is a density/PMF $q_\phi(x)$ defined on the same space as $\pi(x)$. 
+- Each element is indexed by a **variational parameter** $\phi \in \Phi$. 
+
+**Variational inference:** find a variational approximation $q^*_\phi\in\family$ as close as possible to the posterior $\pi$. 
+
+
+## Distribution families
+
+**Example:** consider the [beta-binomial example](../exercises/ex07.qmd#sec-q3).
+
+::: column-margin
+![](../images/variational-inside.png){width="150"}
+:::
+
+- Here we could take $\family$ to be the set of all beta distributions. 
+- The beta family has two positive parameters, $\phi = (\alpha, \beta)$, $\alpha, \beta > 0$...
+- ... so $\Phi = \reals^+ \times \reals^+$. 
+- This is the "best case" for variational inference:
+  - from [a practice quiz exercise](../w07_quiz1/topic02_practice_questions.qmd#beta-binomial-conjugacy), $\pi \in \family$,
+  - so $q^*_\phi = \pi$, i.e., variational inference incurs no approximation error in this special case (see figure). 
+- Typically, we do not have tractable (easy to compute) conjugate family though. 
+
+**Example:** when $\states = \reals$, a typical choice of variational family is to use a normal family. 
+
+::: column-margin
+![](../images/variational-outside.png){width="150"}
+:::
+
+**Question:** for the normal variational family, complete the definition of variational approximation $q_\phi$, variational parameter $\phi$ and parameters $\Phi$.
+
+{{< include ../../clickers/w13/_c01.qmd >}}  
+
+
+

@@ -4,7 +4,6 @@ editor:
   mode: source
 ---
 
-{{< include _construction.qmd >}}
 
 | Date          | Topics                                                                                            | Readings                                       |
 |-------------------|---------------------------------|--------------------|
@@ -37,7 +36,7 @@ editor:
 | Tue, Apr 2    | MCMC developer guide.                                                                             | BDA 12.1-12.6                                  |
 | Th, Apr 4     |                                                                                                   |                                                |
 | Tue, Apr 9    | More inference techniques. (guest lecture)                                                        | BDA 13.7                                       |
-| Th, Apr 11    |                                                                                                   |                                                |
+| Th, Apr 11    | More inference techniques. (last lecture)                                                         |                                                |
 | Fri, Apr 19   | **Final project due.**                                                                            |                                                |
 
 : {.striped .hover tbl-colwidths="\[15,65,20\]"}

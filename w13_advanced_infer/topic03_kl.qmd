@@ -1,0 +1,81 @@
+---
+title: "The KL divergence"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline
+
+### Topics
+
+-   Kullback-Leibler (KL) divergence
+-   Evidence Lower Bound (ELBO)
+
+### Rationale
+
+In the [previous page](topic02_variational.qmd) we saw that we need a notion of "closeness" 
+of distributions. The KL divergence is the most frequent choice in the context of variational inference.
+We define the KL and explain why it is used in variational inference. 
+
+
+## Definition
+
+Given two distribution $\pi$ and $q$, define the **Kullback-Leibler (KL) divergence** as:
+  $$\KL(q \| \pi) = \int q(x) \log \frac{q(x)}{\pi(x)} \dee x.$$
+
+**Note:** 
+
+- the KL is asymmetric in its two arguments. 
+- We will put the variational approximation $q$ as the distribution we average over.
+- This is sometimes called the "backward" or "reverse" KL.
+- More on this choice below.
+
+
+## Why variational inference uses the reverse KL?
+
+We cover the two key reasons below: it captures "closeness" and it can be optimized. 
+
+### Reverse KL captures the notion of "cloness"
+
+**Property:** $\KL(q_1 \| q_2 ) \ge 0$ with equality iff $q_1 = q_2$. 
+
+**Proof:** since $\log$ is a concave function, by [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality),
+
+\begin{align*}
+\KL(q_1 \| q_2 ) &= \int q_1(x) \log \frac{q_1(x)}{q_2(x)} \dee x \expl{definition} \\
+&= - \int q_1(x) \log \frac{q_2(x)}{q_1(x)} \dee x \expl{$-\log a = \log a^{-1}$} \\ 
+&\ge - \log \int \red{q_1(x)} \frac{q_2(x)}{\red{q_1(x)}} \dee x \expl{Jensen's} \\ 
+&= - \log \int q_2(x) \dee x \expl{red factors cancel} \\
+&= 0 \expl{$q_2$ is a probability density}.
+\end{align*}
+
+
+### Reverse KL can be optimized
+
+**Requirement:** we want to be able to optimize the objective function without having to compute  the intractable normalization constant $Z$.
+
+Many other notions of distribution "closeness" do not satisfy this.
+
+
+## Towards optimization of the reverse KL
+
+We show that optimizing the reverse KL does not require knowing the intractable normalization constant $Z$:
+
+\begin{align*}
+\argmin_\phi \KL(q_\phi \| \pi) &= \argmin_\phi \int q_\phi(x) \log \frac{q_\phi(x)}{\pi(x)} \dee x \\
+&= \argmin_\phi  \int q_\phi(x) \log \frac{q_\phi(x) Z}{\gamma(x)} \dee x \\
+&= \argmin_\phi  \int q_\phi(x) \left[ \log q_\phi(x) + \log Z - \log \gamma(x)   \right] \dee x \\
+&= \argmin_\phi  \underbrace{\int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] \dee x}_{L(\phi)} + \red{\log Z} \\
+&= \argmin_\phi L(\phi) \expl{red term does not depend on $\phi$}.
+\end{align*}
+
+**Notice:** $L(\phi)$ does not involve $Z$! 
+
+**Terminology:** the negative value of $L$ is called the Evidence Lower BOund (ELBO), $\ELBO(\phi) = -L(\phi)$.  
+
+**Question:** how did we get $\log Z$ outside of the integral (step in red)?
+
+{{< include ../../clickers/w13/_c02.qmd >}}

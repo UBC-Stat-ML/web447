@@ -27,6 +27,9 @@ editor:
 \newcommand{\Td}{T_\text{drift}}
 \newcommand{\Tlf}{T_\text{leap-frog}}
 
+\newcommand{\states}{\mathscr{X}}
+\newcommand{\family}{\mathscr{Q}}
+
 <!-- -->
 
 <!-- 
@@ -136,3 +139,11 @@ https://github.com/trevorcampbell/shortex
 \newcommand{\ind}{\mathbb{1}}
 
 \newcommand{\ones}{\boldsymbol{1}}
+
+<!-- divergences -->
+\newcommand{\KL}{\operatorname{KL}}
+\newcommand{\TV}{\operatorname{TV}}
+\newcommand{\Wass}{\operatorname{W}}
+\newcommand{\Hell}{\operatorname{H}}
+\newcommand{\ELBO}{\operatorname{ELBO}}
+

@@ -1,0 +1,15 @@
+---
+title: "Overview"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## This week's outline
+
+Resources when...
+
+- ...the model is complex but data not too large: **tempering methods** (Tuesday, guest lecture),
+- ...the model is not too complex but data is large: **variational methods** (VI) (today),
+- ...the model is complex and data is large: largely open, we need you!!!
