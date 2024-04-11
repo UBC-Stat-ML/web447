@@ -974,7 +974,7 @@
     "href": "w13_advanced_infer/topic03_kl.html#towards-optimization-of-the-reverse-kl",
     "title": "The KL divergence",
     "section": "Towards optimization of the reverse KL",
-    "text": "Towards optimization of the reverse KL\nWe show that optimizing the reverse KL does not require knowing the intractable normalization constant \\(Z\\):\n\\[\\begin{align*}\n\\min_\\phi \\operatorname{KL}(q_\\phi \\| \\pi) &= \\min_\\phi \\int q_\\phi(x) \\log \\frac{q_\\phi(x)}{\\pi(x)} \\mathrm{d}x \\\\\n&= \\min_\\phi  \\int q_\\phi(x) \\log \\frac{q_\\phi(x) Z}{\\gamma(x)} \\mathrm{d}x \\\\\n&= \\min_\\phi  \\int q_\\phi(x) \\left[ \\log q_\\phi(x) + \\log Z - \\log \\gamma(x)   \\right] \\mathrm{d}x \\\\\n&= \\min_\\phi  \\underbrace{\\int q_\\phi(x) \\left[ \\log q_\\phi(x)  - \\log \\gamma(x)   \\right] \\mathrm{d}x}_{L(\\phi)} + {\\color{red} \\log Z} \\\\\n&= \\min_\\phi L(\\phi).\n\\end{align*}\\]\nNotice: \\(L\\) does not involve \\(Z\\)!\nTerminology: the negative value of \\(L\\) is called the Evidence Lower BOund (ELBO), \\(\\operatorname{ELBO}(\\phi) = -L(\\phi)\\).\nQuestion: how did we get \\(\\log Z\\) outside of the integral (step in red)?",
+    "text": "Towards optimization of the reverse KL\nWe show that optimizing the reverse KL does not require knowing the intractable normalization constant \\(Z\\):\n\\[\\begin{align*}\n\\min_\\phi \\operatorname{KL}(q_\\phi \\| \\pi) &= \\min_\\phi \\int q_\\phi(x) \\log \\frac{q_\\phi(x)}{\\pi(x)} \\mathrm{d}x \\\\\n&= \\min_\\phi  \\int q_\\phi(x) \\log \\frac{q_\\phi(x) Z}{\\gamma(x)} \\mathrm{d}x \\\\\n&= \\min_\\phi  \\int q_\\phi(x) \\left[ \\log q_\\phi(x) + \\log Z - \\log \\gamma(x)   \\right] \\mathrm{d}x \\\\\n&= \\min_\\phi  \\underbrace{\\int q_\\phi(x) \\left[ \\log q_\\phi(x)  - \\log \\gamma(x)   \\right] \\mathrm{d}x}_{L(\\phi)} + {\\color{red} \\log Z} \\\\\n&= \\min_\\phi L(\\phi) \\;\\;\\text{(red term does not depend on $\\phi$)}.\n\\end{align*}\\]\nNotice: \\(L(\\phi)\\) does not involve \\(Z\\)!\nTerminology: the negative value of \\(L\\) is called the Evidence Lower BOund (ELBO), \\(\\operatorname{ELBO}(\\phi) = -L(\\phi)\\).\nQuestion: how did we get \\(\\log Z\\) outside of the integral (step in red)?",
     "crumbs": [
       "Advanced inference",
       "The KL divergence"
@@ -1007,7 +1007,7 @@
     "href": "w13_advanced_infer/topic05_sgd.html#gradient-descent",
     "title": "Stochastic gradient descent",
     "section": "Gradient descent",
-    "text": "Gradient descent\nRecall: the gradient \\(\\nabla L(\\phi) = (\\partial L/\\partial \\phi_1, \\dots, \\partial L/\\partial \\phi_K)\\) is a vector pointing towards the direction of steepest ascent.\n\n\n\nGradient descent: at each iteration, move the current point in the direction opposite to the gradient, \\[\\phi^{(m+1)} \\gets \\phi^{(m)} - \\epsilon_m \\nabla L(\\phi^{(m)}),\\] where \\(\\epsilon_m &gt; 0\\) is called a step size.\nProperty: for the right choice of step size \\(\\epsilon_m\\), the gradient descent algorithm converges to the minimum of the convex function (Boyd and Vandenberghe, 2004).",
+    "text": "Gradient descent\nRecall: the gradient \\(\\nabla L(\\phi) = (\\partial L/\\partial \\phi_1, \\dots, \\partial L/\\partial \\phi_K)\\) is a vector pointing towards the direction of steepest ascent.\n\n\n\nGradient descent: at each iteration, move the current point in the direction opposite to the gradient, \\[\\phi^{(t+1)} \\gets \\phi^{(t)} - \\epsilon_t \\nabla L(\\phi^{(t)}),\\] where \\(\\epsilon_t &gt; 0\\) is called a step size.\nProperty: for the right choice of step size \\(\\epsilon_t\\), the gradient descent algorithm converges to the minimum of the convex function (Boyd and Vandenberghe, 2004).",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient descent"
@@ -1018,7 +1018,7 @@
     "href": "w13_advanced_infer/topic05_sgd.html#stochastic-gradient-descent",
     "title": "Stochastic gradient descent",
     "section": "Stochastic gradient descent",
-    "text": "Stochastic gradient descent\nIdea: replace \\(\\nabla L\\) by a randomized approximation, \\(\\tilde \\nabla L\\).\nDefinition: we say \\(\\tilde \\nabla L\\) is unbiased if \\(\\mathbb{E}[\\tilde \\nabla L] = \\nabla L\\).\nNote: the expectation in “\\(\\mathbb{E}[\\tilde \\nabla L]\\)” is with respect to the randomness used to create the random approximation. In our situation it will correspond to the randomness of sampling from our current variational family, \\(q_{\\phi^{(m)}}\\).\nProperty: if \\(\\tilde \\nabla L\\) is unbiased, the objective function is convex, and the variance of \\(\\mathbb{E}[\\tilde \\nabla L]\\) is bounded, stochastic gradient descent converges to the optimal solution \\(m \\to \\infty\\) with \\(\\epsilon_m = m^{-\\alpha}\\) for \\(\\alpha \\in (1/2, 1]\\) (Benveriste et al., 1990).",
+    "text": "Stochastic gradient descent\nIdea: replace \\(\\nabla L\\) by a randomized approximation, \\(\\hat \\nabla L\\).\nDefinition: we say \\(\\hat \\nabla L\\) is unbiased if \\(\\mathbb{E}[\\hat \\nabla L] = \\nabla L\\).\nNote: the expectation in “\\(\\mathbb{E}[\\hat \\nabla L]\\)” is with respect to the randomness used to create the random approximation. In our situation it will correspond to the randomness of sampling from our current variational family, \\(q_{\\phi^{(t)}}\\).\nProperty: if \\(\\hat \\nabla L\\) is unbiased, the objective function is convex, and the variance of \\(\\mathbb{E}[\\hat \\nabla L]\\) is bounded, stochastic gradient descent converges to the optimal solution \\(t \\to \\infty\\) with \\(\\epsilon_t = t^{-\\alpha}\\) for \\(\\alpha \\in (1/2, 1]\\) (Benveriste et al., 1990).",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient descent"
@@ -5672,7 +5672,7 @@
     "href": "w13_advanced_infer/topic06_stoch_grad.html",
     "title": "Stochastic gradient estimation",
     "section": "",
-    "text": "Stochastic gradient estimation problem\nPush-out estimator (also known as “reparameterization trick”)\n\n\n\n\nTo optimize our variational objective \\(L\\) using SGD, we need to construct an unbiased estimator of the gradient of \\(L\\).\nWe review one particularly effective method to do so, coming from the operations research literature, the push-out estimator Rubinstein, 1992. It is called the “reparameterization trick” in the machine learning literature.",
+    "text": "Stochastic gradient estimation problem\nPush-out estimator (also known as “reparameterization trick”)\nSubsampling\n\n\n\n\nTo optimize our variational objective \\(L\\) using SGD, we need to construct an unbiased estimator of the gradient of \\(L\\).\nWe review one particularly effective method to do so, coming from the operations research literature, the push-out estimator Rubinstein, 1992. It is called the “reparameterization trick” in the machine learning literature.",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient estimation"
@@ -5683,7 +5683,7 @@
     "href": "w13_advanced_infer/topic06_stoch_grad.html#outline",
     "title": "Stochastic gradient estimation",
     "section": "",
-    "text": "Stochastic gradient estimation problem\nPush-out estimator (also known as “reparameterization trick”)\n\n\n\n\nTo optimize our variational objective \\(L\\) using SGD, we need to construct an unbiased estimator of the gradient of \\(L\\).\nWe review one particularly effective method to do so, coming from the operations research literature, the push-out estimator Rubinstein, 1992. It is called the “reparameterization trick” in the machine learning literature.",
+    "text": "Stochastic gradient estimation problem\nPush-out estimator (also known as “reparameterization trick”)\nSubsampling\n\n\n\n\nTo optimize our variational objective \\(L\\) using SGD, we need to construct an unbiased estimator of the gradient of \\(L\\).\nWe review one particularly effective method to do so, coming from the operations research literature, the push-out estimator Rubinstein, 1992. It is called the “reparameterization trick” in the machine learning literature.",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient estimation"
@@ -5716,7 +5716,7 @@
     "href": "w13_advanced_infer/topic06_stoch_grad.html#difficulty",
     "title": "Stochastic gradient estimation",
     "section": "Difficulty",
-    "text": "Difficulty\nFind the most serious error in the buggy argument below:\n\\[\\begin{align*}\n\\nabla \\mathbb{E}_\\phi[h(\\phi, X)] &= \\mathbb{E}_\\phi[\\nabla h(\\phi, X)] \\;\\;\\text{(interchange of $\\nabla$ and $\\mathbb{E}$)} \\\\\n&\\approx \\underbrace{ \\frac{1}{N} \\sum_{i=1}^N \\nabla h(\\phi, X^{(i)})}_{\\text{broken stochastic gradient estimator}} \\;\\;\\text{(simple Monte Carlo)}.\n\\end{align*}\\]",
+    "text": "Difficulty\nFind the most serious error in the buggy argument below:\n\\[\\begin{align*}\n\\nabla \\mathbb{E}_\\phi[h(\\phi, X)] &= \\mathbb{E}_\\phi[\\nabla h(\\phi, X)] \\;\\;\\text{(interchange of $\\nabla$ and $\\mathbb{E}$)} \\\\\n&\\approx \\underbrace{ \\frac{1}{M} \\sum_{m=1}^M \\nabla h(\\phi, X^{(m)})}_{\\text{broken stochastic gradient estimator}} \\;\\;\\text{(simple Monte Carlo)}.\n\\end{align*}\\]",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient estimation"
@@ -5727,7 +5727,18 @@
     "href": "w13_advanced_infer/topic06_stoch_grad.html#solution-reparameterization",
     "title": "Stochastic gradient estimation",
     "section": "Solution: reparameterization",
-    "text": "Solution: reparameterization\nIdea: move the parts of \\(q\\) that depend on \\(\\phi\\) into \\(h\\) via reparametrization.\nExample:\n\nsuppose \\(\\{q_\\phi\\}\\) is a normal family, so \\(\\phi = (\\mu, \\sigma^2)\\).\nNote:\n\nif \\(S \\sim \\mathcal{N}(0, 1)\\) is standard normal,\nthen \\(\\sigma S + \\mu \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nhence: \\[\\mathbb{E}_\\phi[h(\\phi, X)] = \\mathbb{E}[h(\\phi, \\sigma S + \\mu)].\\]\n\nNotice that on the right-hand side, the distribution with respect to which we take the expectation no longer depends on \\(\\phi\\)!\n\nGeneral method: (“push-out estimator” or “reparameterization trick”)\n\nif for all \\(\\phi\\), \\(X_\\phi \\sim q_\\phi\\)…\n…you can write \\(X_\\phi = f(S, \\phi)\\)\n\nfor some random variable \\(S\\)\n\nand function \\(f(s, \\phi)\\) (e.g., \\(f(s, \\phi) = \\sigma s + \\mu\\) in the normal case),1\n\nthen:\n\n\\[\\begin{align*}\n\\nabla \\mathbb{E}_\\phi[h(\\phi, X)] &= \\nabla \\mathbb{E}[h(\\phi, f(S, \\phi))] \\\\\n&= \\mathbb{E}[\\nabla\\{h(\\phi, f(S, \\phi))\\}] \\;\\;\\text{(assuming Leibniz integral rule applies)} \\\\\n&\\approx \\frac{1}{N} \\sum_{i=1}^N \\nabla\\{h(\\phi, f(S^{(i)}, \\phi))\\}.\n\\end{align*}\\]\nFinally, one typically use reverse mode autodiff to compute \\(\\nabla\\{h(\\phi, f(S^{(i)}, \\phi))\\}\\).",
+    "text": "Solution: reparameterization\nIdea: move the parts of \\(q\\) that depend on \\(\\phi\\) into \\(h\\) via reparametrization.\nExample:\n\nsuppose \\(\\{q_\\phi\\}\\) is a normal family, so \\(\\phi = (\\mu, \\sigma^2)\\).\nNote:\n\nif \\(S \\sim \\mathcal{N}(0, 1)\\) is standard normal,\nthen \\(\\sigma S + \\mu \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nhence: \\[\\mathbb{E}_\\phi[h(\\phi, X)] = \\mathbb{E}[h(\\phi, \\sigma S + \\mu)].\\]\n\nNotice that on the right-hand side, the distribution with respect to which we take the expectation no longer depends on \\(\\phi\\)!\n\nGeneral method: (“push-out estimator” or “reparameterization trick”)\n\nif for all \\(\\phi\\), \\(X_\\phi \\sim q_\\phi\\)…\n…you can write \\(X_\\phi = f(S, \\phi)\\)\n\nfor some random variable \\(S\\)\n\nand function \\(f(s, \\phi)\\) (e.g., \\(f(s, \\phi) = \\sigma s + \\mu\\) in the normal case),1\n\nthen:\n\n\\[\\begin{align*}\n\\nabla \\mathbb{E}_\\phi[h(\\phi, X)] &= \\nabla \\mathbb{E}[h(\\phi, f(S, \\phi))] \\\\\n&= \\mathbb{E}[\\nabla\\{h(\\phi, f(S, \\phi))\\}] \\;\\;\\text{(assuming Leibniz integral rule applies)} \\\\\n&\\approx \\frac{1}{M} \\sum_{m=1}^M \\nabla\\{h(\\phi, f(S^{(m)}, \\phi))\\}.\n\\end{align*}\\]\nFinally, one typically use reverse mode autodiff to compute \\(\\nabla\\{h(\\phi, f(S^{(m)}, \\phi))\\}\\).",
+    "crumbs": [
+      "Advanced inference",
+      "Stochastic gradient estimation"
+    ]
+  },
+  {
+    "objectID": "w13_advanced_infer/topic06_stoch_grad.html#subsampling",
+    "href": "w13_advanced_infer/topic06_stoch_grad.html#subsampling",
+    "title": "Stochastic gradient estimation",
+    "section": "Subsampling",
+    "text": "Subsampling\n\nOften (but not always), the function \\(h\\) be written as: \\[h(\\phi, x) = \\sum_{i=1}^N h_i(\\phi, x),\\]\nexample: when the data is i.i.d. (recall we are in log space, \\(h(\\phi, x) = \\log q_\\phi(x)  - \\log \\gamma(x)\\))\n\n\\(N\\) is then the number of data points\n\nWhen \\(N\\) is large “sub-sampling” will tradeoff:\n\ncomputationally cheaper gradient…\n…at the cost of more noise (variance) and hence more SGD iterations \\(t\\) needed.\n\nIdea: sub-sampling consists in\n\nsampling one term (data point) \\(I \\sim {\\mathrm{Unif}}\\{1, 2, \\dots, N\\}\\)\ncomputing unbiased estimate \\(\\hat G_I\\) for the random term\ndebiasing by returning \\(N \\hat G_I\\)\n\n\nProperty: the subsampling estimator \\(N \\hat G_I\\) is unbiased provided for each \\(i\\), \\(\\hat G_i\\) is unbiased.\nProof:\n\\[\\begin{align*}\n\\mathbb{E}[N \\hat G_I] &= N \\mathbb{E}[ \\mathbb{E}[\\hat G_I|I]] \\;\\;\\text{(law of total expectation)} \\\\\n&= N \\sum_{i=1}^N \\frac{1}{N} \\mathbb{E}[\\hat G_i] \\\\\n&= \\sum_{i=1}^N \\mathbb{E}[\\hat G_i].\n\\end{align*}\\]\nMini-batching: this idea can be extended to picking a small subset of points (typically, the maximum that can fit in the GPU memory).",
     "crumbs": [
       "Advanced inference",
       "Stochastic gradient estimation"

@@ -1032,15 +1032,15 @@ https://github.com/trevorcampbell/shortex
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/3d-gradient-cos.svg" class="img-fluid" width="150"></p>
-</div></div><p><strong>Gradient descent:</strong> at each iteration, move the current point in the direction opposite to the gradient, <span class="math display">\[\phi^{(m+1)} \gets \phi^{(m)} - \epsilon_m \nabla L(\phi^{(m)}),\]</span> where <span class="math inline">\(\epsilon_m &gt; 0\)</span> is called a <strong>step size</strong>.</p>
-<p><strong>Property:</strong> for the right choice of step size <span class="math inline">\(\epsilon_m\)</span>, the gradient descent algorithm converges to the minimum of the convex function (<a href="https://web.stanford.edu/~boyd/cvxbook/">Boyd and Vandenberghe, 2004</a>).</p>
+</div></div><p><strong>Gradient descent:</strong> at each iteration, move the current point in the direction opposite to the gradient, <span class="math display">\[\phi^{(t+1)} \gets \phi^{(t)} - \epsilon_t \nabla L(\phi^{(t)}),\]</span> where <span class="math inline">\(\epsilon_t &gt; 0\)</span> is called a <strong>step size</strong>.</p>
+<p><strong>Property:</strong> for the right choice of step size <span class="math inline">\(\epsilon_t\)</span>, the gradient descent algorithm converges to the minimum of the convex function (<a href="https://web.stanford.edu/~boyd/cvxbook/">Boyd and Vandenberghe, 2004</a>).</p>
 </section>
 <section id="stochastic-gradient-descent" class="level2">
 <h2 class="anchored" data-anchor-id="stochastic-gradient-descent">Stochastic gradient descent</h2>
-<p><strong>Idea:</strong> replace <span class="math inline">\(\nabla L\)</span> by a randomized approximation, <span class="math inline">\(\tilde \nabla L\)</span>.</p>
-<p><strong>Definition:</strong> we say <span class="math inline">\(\tilde \nabla L\)</span> is <strong>unbiased</strong> if <span class="math inline">\(\mathbb{E}[\tilde \nabla L] = \nabla L\)</span>.</p>
-<p><strong>Note:</strong> the expectation in “<span class="math inline">\(\mathbb{E}[\tilde \nabla L]\)</span>” is with respect to the randomness used to create the random approximation. In our situation it will correspond to the randomness of sampling from our current variational family, <span class="math inline">\(q_{\phi^{(m)}}\)</span>.</p>
-<p><strong>Property:</strong> if <span class="math inline">\(\tilde \nabla L\)</span> is unbiased, the objective function is convex, and the variance of <span class="math inline">\(\mathbb{E}[\tilde \nabla L]\)</span> is bounded, stochastic gradient descent converges to the optimal solution <span class="math inline">\(m \to \infty\)</span> with <span class="math inline">\(\epsilon_m = m^{-\alpha}\)</span> for <span class="math inline">\(\alpha \in (1/2, 1]\)</span> (<a href="https://link.springer.com/book/10.1007/978-3-642-75894-2">Benveriste et al., 1990</a>).</p>
+<p><strong>Idea:</strong> replace <span class="math inline">\(\nabla L\)</span> by a randomized approximation, <span class="math inline">\(\hat \nabla L\)</span>.</p>
+<p><strong>Definition:</strong> we say <span class="math inline">\(\hat \nabla L\)</span> is <strong>unbiased</strong> if <span class="math inline">\(\mathbb{E}[\hat \nabla L] = \nabla L\)</span>.</p>
+<p><strong>Note:</strong> the expectation in “<span class="math inline">\(\mathbb{E}[\hat \nabla L]\)</span>” is with respect to the randomness used to create the random approximation. In our situation it will correspond to the randomness of sampling from our current variational family, <span class="math inline">\(q_{\phi^{(t)}}\)</span>.</p>
+<p><strong>Property:</strong> if <span class="math inline">\(\hat \nabla L\)</span> is unbiased, the objective function is convex, and the variance of <span class="math inline">\(\mathbb{E}[\hat \nabla L]\)</span> is bounded, stochastic gradient descent converges to the optimal solution <span class="math inline">\(t \to \infty\)</span> with <span class="math inline">\(\epsilon_t = t^{-\alpha}\)</span> for <span class="math inline">\(\alpha \in (1/2, 1]\)</span> (<a href="https://link.springer.com/book/10.1007/978-3-642-75894-2">Benveriste et al., 1990</a>).</p>
 
 
 </section>

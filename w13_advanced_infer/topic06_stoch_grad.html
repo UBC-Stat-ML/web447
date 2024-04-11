@@ -968,6 +968,7 @@ window.Quarto = {
   <li><a href="#generic-gradient-estimation-setup" id="toc-generic-gradient-estimation-setup" class="nav-link" data-scroll-target="#generic-gradient-estimation-setup">Generic gradient estimation setup</a></li>
   <li><a href="#difficulty" id="toc-difficulty" class="nav-link" data-scroll-target="#difficulty">Difficulty</a></li>
   <li><a href="#solution-reparameterization" id="toc-solution-reparameterization" class="nav-link" data-scroll-target="#solution-reparameterization">Solution: reparameterization</a></li>
+  <li><a href="#subsampling" id="toc-subsampling" class="nav-link" data-scroll-target="#subsampling">Subsampling</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -1021,6 +1022,7 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>Stochastic gradient estimation problem</li>
 <li>Push-out estimator (also known as “reparameterization trick”)</li>
+<li>Subsampling</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
@@ -1047,7 +1049,7 @@ L(\phi) &amp;= \int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] 
 <p><strong>Find the most serious error</strong> in the buggy argument below:</p>
 <p><span class="math display">\[\begin{align*}
 \nabla \mathbb{E}_\phi[h(\phi, X)] &amp;= \mathbb{E}_\phi[\nabla h(\phi, X)] \;\;\text{(interchange of $\nabla$ and $\mathbb{E}$)} \\
-&amp;\approx \underbrace{ \frac{1}{N} \sum_{i=1}^N \nabla h(\phi, X^{(i)})}_{\text{broken stochastic gradient estimator}} \;\;\text{(simple Monte Carlo)}.
+&amp;\approx \underbrace{ \frac{1}{M} \sum_{m=1}^M \nabla h(\phi, X^{(m)})}_{\text{broken stochastic gradient estimator}} \;\;\text{(simple Monte Carlo)}.
 \end{align*}\]</span></p>
 <!--
 
@@ -1116,9 +1118,38 @@ to write as an expectation and hence approximated using simple Monte Carlo.
 <p><span class="math display">\[\begin{align*}
 \nabla \mathbb{E}_\phi[h(\phi, X)] &amp;= \nabla \mathbb{E}[h(\phi, f(S, \phi))] \\
 &amp;= \mathbb{E}[\nabla\{h(\phi, f(S, \phi))\}] \;\;\text{(assuming Leibniz integral rule applies)} \\
-&amp;\approx \frac{1}{N} \sum_{i=1}^N \nabla\{h(\phi, f(S^{(i)}, \phi))\}.
+&amp;\approx \frac{1}{M} \sum_{m=1}^M \nabla\{h(\phi, f(S^{(m)}, \phi))\}.
 \end{align*}\]</span></p>
-<p>Finally, one typically use <a href="../w12_mcmc2/topic13_autodiff.html">reverse mode autodiff</a> to compute <span class="math inline">\(\nabla\{h(\phi, f(S^{(i)}, \phi))\}\)</span>.</p>
+<p>Finally, one typically use <a href="../w12_mcmc2/topic13_autodiff.html">reverse mode autodiff</a> to compute <span class="math inline">\(\nabla\{h(\phi, f(S^{(m)}, \phi))\}\)</span>.</p>
+</section>
+<section id="subsampling" class="level2">
+<h2 class="anchored" data-anchor-id="subsampling">Subsampling</h2>
+<ul>
+<li>Often (but not always), the function <span class="math inline">\(h\)</span> be written as: <span class="math display">\[h(\phi, x) = \sum_{i=1}^N h_i(\phi, x),\]</span></li>
+<li>example: when the data is i.i.d. (recall we are in log space, <span class="math inline">\(h(\phi, x) = \log q_\phi(x)  - \log \gamma(x)\)</span>)
+<ul>
+<li><span class="math inline">\(N\)</span> is then the number of data points</li>
+</ul></li>
+<li>When <span class="math inline">\(N\)</span> is large “sub-sampling” will tradeoff:
+<ul>
+<li>computationally cheaper gradient…</li>
+<li>…at the cost of more noise (variance) and hence more SGD iterations <span class="math inline">\(t\)</span> needed.</li>
+</ul></li>
+<li><strong>Idea:</strong> sub-sampling consists in
+<ul>
+<li>sampling one term (data point) <span class="math inline">\(I \sim {\mathrm{Unif}}\{1, 2, \dots, N\}\)</span></li>
+<li>computing unbiased estimate <span class="math inline">\(\hat G_I\)</span> for the random term</li>
+<li>debiasing by returning <span class="math inline">\(N \hat G_I\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Property:</strong> the subsampling estimator <span class="math inline">\(N \hat G_I\)</span> is unbiased provided for each <span class="math inline">\(i\)</span>, <span class="math inline">\(\hat G_i\)</span> is unbiased.</p>
+<p><strong>Proof:</strong></p>
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}[N \hat G_I] &amp;= N \mathbb{E}[ \mathbb{E}[\hat G_I|I]] \;\;\text{(law of total expectation)} \\
+&amp;= N \sum_{i=1}^N \frac{1}{N} \mathbb{E}[\hat G_i] \\
+&amp;= \sum_{i=1}^N \mathbb{E}[\hat G_i].
+\end{align*}\]</span></p>
+<p><strong>Mini-batching:</strong> this idea can be extended to picking a small subset of points (typically, the maximum that can fit in the GPU memory).</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

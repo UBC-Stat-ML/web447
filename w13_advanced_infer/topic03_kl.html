@@ -1070,9 +1070,9 @@ https://github.com/trevorcampbell/shortex
 &amp;= \min_\phi  \int q_\phi(x) \log \frac{q_\phi(x) Z}{\gamma(x)} \mathrm{d}x \\
 &amp;= \min_\phi  \int q_\phi(x) \left[ \log q_\phi(x) + \log Z - \log \gamma(x)   \right] \mathrm{d}x \\
 &amp;= \min_\phi  \underbrace{\int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] \mathrm{d}x}_{L(\phi)} + {\color{red} \log Z} \\
-&amp;= \min_\phi L(\phi).
+&amp;= \min_\phi L(\phi) \;\;\text{(red term does not depend on $\phi$)}.
 \end{align*}\]</span></p>
-<p><strong>Notice:</strong> <span class="math inline">\(L\)</span> does not involve <span class="math inline">\(Z\)</span>!</p>
+<p><strong>Notice:</strong> <span class="math inline">\(L(\phi)\)</span> does not involve <span class="math inline">\(Z\)</span>!</p>
 <p><strong>Terminology:</strong> the negative value of <span class="math inline">\(L\)</span> is called the Evidence Lower BOund (ELBO), <span class="math inline">\(\operatorname{ELBO}(\phi) = -L(\phi)\)</span>.</p>
 <p><strong>Question:</strong> how did we get <span class="math inline">\(\log Z\)</span> outside of the integral (step in red)?</p>
 <!--
