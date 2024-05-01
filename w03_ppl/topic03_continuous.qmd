@@ -73,7 +73,7 @@ Y | X &\sim \distUnif(0, X).
 \end{align*}$$
 
 
-### Aleatoric interpretation
+### Interpretation 1
 
 - I have a measuring tape, but you do not know how long is it.
   - Length of tape: $X$.
@@ -84,7 +84,7 @@ Y | X &\sim \distUnif(0, X).
 **Goal:** from the $Y$, trying to guess the full length of the tape.  
 
 
-### Epistemic interpretation
+### Interpretation 2
 
 - $X$ is the total number of humans to ever live, future and past (in trillion). 
 - $Y$ is the number of humans that were born before present (from archeological records, ~0.06 trillion). 
