@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 9\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 11\n\n\n\n\nTue, Jan 16\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 18\n\n\n\n\nTue, Jan 23\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 25\n\n\n\n\nTue, Jan 30\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Feb 1\n\n\n\n\nTue, Feb 6\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 8\n\n\n\n\nTue, Feb 13\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 15\n\n\n\n\nTue, Feb 20\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 22\nReading week.\n\n\n\nTue, Feb 27\nQuiz 1.\n\n\n\nTh, Feb 29\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 5\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 7\n\n\n\n\nFri, Mar 8\nProject proposal due.\n\n\n\nTue, Mar 12\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 14\n\n\n\n\nFri, Mar 15\nProject proposal due.\n\n\n\nTue, Mar 19\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 21\n\n\n\n\nTue, March 26\nQuiz 2.\n\n\n\nTh, Mar 28\nTBA\n\n\n\nTue, Apr 2\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 4\n\n\n\n\nTue, Apr 9\nMore inference techniques. (guest lecture)\nBDA 13.7\n\n\nTh, Apr 11\nMore inference techniques. (last lecture)\n\n\n\nFri, Apr 19\nFinal project due.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Schedule"
     ]
@@ -124,87 +124,7 @@
     "href": "project.html",
     "title": "Final project",
     "section": "",
-    "text": "The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#overview",
-    "href": "project.html#overview",
-    "title": "Final project",
-    "section": "",
-    "text": "The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#logistics",
-    "href": "project.html#logistics",
-    "title": "Final project",
-    "section": "Logistics",
-    "text": "Logistics\n\nTeams of maximum 2 people are encouraged, in which case you should outline the final report who did what. Expectation will grow linearly in the group size.\nSubmit on canvas, a pdf document of maximum 5 pages/person (i.e. max length is 10 for groups of 2 people), excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#project-timeline",
-    "href": "project.html#project-timeline",
-    "title": "Final project",
-    "section": "Project timeline",
-    "text": "Project timeline\n\nFriday, Mar 8: prepare proposal, freeze teams, each team sends a 1 page abstract submitted on Canvas.\nFriday, April 19: due date for the reports.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#core-guideline",
-    "href": "project.html#core-guideline",
-    "title": "Final project",
-    "section": "Core guideline",
-    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset.\nIn addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).\nAfter selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.\nSome resources:\n\nVanderbilt Biostatistics datasets\nTidyTuesday\nInter-university Consortium for Political and Social Research\nWHO mortality data\nThe World Bank Data\nMore…\n\nYou should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#menu-of-project-themes",
-    "href": "project.html#menu-of-project-themes",
-    "title": "Final project",
-    "section": "Menu of project themes",
-    "text": "Menu of project themes\nRoughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶’s.\n\nA careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:\n\nApplying a simple model and an improved one on a dataset.\nBayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …\nIs there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?\n\nGoing further on one of… (more details can be provided upon request)\n\nBayesian regression and classification (e.g. sparsity, hierarchical structure, etc)\nmodel selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)\ntime series and state-space models\n🌶 spatial models\n🌶 cross-effect models\n🌶🌶 Bayesian non-parametric models\n🌶🌶 deep generative models\n🌶🌶 topics models\n🌶🌶 variational inference\n\n🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:\n\nTypes of graphs such as matchings\nPhylogenetic trees or networks\nMultiple sequence alignments\nClustering or feature matrices\n\n🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#rubric-for-the-project-proposal",
-    "href": "project.html#rubric-for-the-project-proposal",
-    "title": "Final project",
-    "section": "Rubric for the project proposal",
-    "text": "Rubric for the project proposal\n\nBasic requirements\n\nTeam is identified.\nThe proposal identifies which of the project themes it will address.\nThere is a working link to a public repo containing commits from all team members.\n\nTwo real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or head of a dataframe).\nA short summary of potential approaches to tackle the project theme.\nIf it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.\n\nAs long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period, but I can still provide feedback past the grace period but no later than April 1st. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. before April 1st ideally and certainly before the last lecture.\nTotal: 5%",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#rubric-for-the-final-report",
-    "href": "project.html#rubric-for-the-final-report",
-    "title": "Final project",
-    "section": "Rubric for the final report",
-    "text": "Rubric for the final report\n\nBasic requirements (5%)\n\nThe report fits within the prescribed page limits.\nThere is a working link to a public repo containing commits from all team members.\nThe report follows best practices of technical writing.\nIf it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.\n\nProblem formulation. (15%) The report clearly describes:\n\na real-world inference task/problem,\nsuccinct but sufficient context (e.g. biological terminology) needed to understand the problem,\nthe key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.\n\nThe report contains a literature review: (10%) relevant literature is cited and properly summarized.\nData analysis (40%)\n\nA Bayesian model is precisely described (e.g. using the .. ~ .. notation)\nImplementation code in the appendix (e.g. using Stan)\nPrior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.\nCritical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.\n\nProject theme: methodological/theoretical aspect of the project (20%)\n\nIs the approach sound?\nCreative?\n\nDiscussion (5%)\n\nDoes the report describe key limitations?\n\n\nTotal: 95%",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#projects-showcase",
-    "href": "project.html#projects-showcase",
-    "title": "Final project",
-    "section": "Projects showcase",
-    "text": "Projects showcase\nProjects of exceptional quality will be offered the option to be showcased on the public course webpage.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Final project"
     ]
@@ -291,7 +211,7 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Syllabus"
     ]
@@ -300,8 +220,8 @@
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT447C Bayesian Statistics",
-    "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
+    "section": "Course description",
+    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
     "crumbs": [
       "Syllabus"
     ]
@@ -311,7 +231,7 @@
     "href": "syllabus.html#lecture-time-and-place",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Lecture time and place",
-    "text": "Lecture time and place\nLecture dates: January 9, 2024 to April 11, 2024. Detailed schedule\nTuesday and Thursday, 9:30-11:00. FNH Building, Room 40.",
+    "text": "Lecture time and place\nLecture dates: January 7, 2025 to April 8, 2025. Detailed schedule\nTuesday and Thursday, 9:30-11:00.",
     "crumbs": [
       "Syllabus"
     ]
@@ -321,7 +241,7 @@
     "href": "syllabus.html#teaching-team",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Teaching team",
-    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nMiguel Biron-Lattes (TA)\nAli Mehrabian (TA)",
+    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nNikola Surjanovic (TA)\nTBA",
     "crumbs": [
       "Syllabus"
     ]
@@ -361,7 +281,7 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Assessments",
-    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza.\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Tuesday February 27, Tuesday March 26.\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Keep these for sick days/unforeseen circumstances. No need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nAdded on Jan 10: For exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. (This was put in place to help a couple students travelling in the first week, but will be automatically applied for everyone so no need to request it).\nAdded on Jan 15: Once in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.\nAdded on Jan 21: Since a few more people arrived in the second week, I will extend the Jan 10 waiver above to cover the first two week, i.e. using \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...), \\text{mean}(e_3, ...))\\), so you can still get full marks if you do not do exercises and/or participation/clicker in weeks 1 or 2.",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza.\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Tuesday February 27, Tuesday March 26.\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Keep these for sick days/unforeseen circumstances. No need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nMore details to be posted later",
     "crumbs": [
       "Syllabus"
     ]
@@ -371,7 +291,7 @@
     "href": "syllabus.html#office-hours",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Office hours",
-    "text": "Office hours\n\nInstructor office hour: Thursdays, 3:30-4:30, ESB 3125\nTA office hour: Fridays, 11:00-12:00, ESB 3125\n\nAvailable by appointment if you are unable to attend drop-in hours.",
+    "text": "Office hours\n\nInstructor office hour: TBA\nTA office hour: TBA\n\nAvailable by appointment if you are unable to attend drop-in hours.",
     "crumbs": [
       "Syllabus"
     ]
@@ -3024,7 +2944,7 @@
     "href": "w04_glms/topic02_bivariate.html#example",
     "title": "Bivariate posteriors",
     "section": "Example",
-    "text": "Example\nWe will revisit the rocket comparison problem from the first week:\n\nWould you rather get strapped to…\n\n“shiny rocket” (option A): 1 success, 0 failures\n“rugged rocket” (option B): 98 successes, 2 failures\n\n\n\n\n\n\nIf you are sick of hearing about rockets, here is an alternative interpretation:\n\nImagine you work for Google and serve website ad banners.\nA client gives you two designs for the ad banner: A and B.\nYou will serve them to web visitors and the objective is to maximize the number of clicks.\n\nSuccess: a user clicked (1).\nFailure: a user did not click (0).\n\nTraining data:\n\nVersion A: 1 success, 0 failures.\nVersion B: 98 successes, 2 failures\n\nYou can only show the ad one more time to a user (client budget almost exhausted).\n\nShould you show A or B?\n\nThis is a basic example of what is known as A/B testing.\n\n\nModel: for \\(j \\in \\{A, B\\}\\), independently,\n\\[\\begin{align*}\np_j &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_j | p_j &\\sim {\\mathrm{Binom}}(n_j, p_j),\n\\end{align*}\\]\nwhere:\n\n\\(p_j\\) are the success probabilities\n\\(n_j\\) is the number of times you showed \\(j\\)\n\\(y_j\\) is the number of clicks on \\(j\\).\n\nQuestion:\nHow to mathematically encode the questions:\n\n“Would you rather get strapped to…”\n“Should you show A or B?”\n\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\mathbb{P}(p_A = 1)\\)\n\\(\\mathbb{P}(p_A = 1 | Y = y)\\)\n\\(\\mathbb{P}(p_A &gt; p_B)\\)\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\): in words, is the chance of success of A greater than B?\n\n\n\nModify the code below to approximate that probability.\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  # add the part of the model describing p_B (prior and likelihood)\n  \n  return # what is the \"test function\"?\n}\nposterior(bivariate, 10000)\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.3\\)\n\\(\\approx 0.6\\)\n\\(\\approx 0.9\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  return(ifelse(p_A &gt; p_B, 1, 0))\n}\nposterior(bivariate, 10000)\n\n[1] 0.06909026",
+    "text": "Example\nWe will revisit the rocket comparison problem from the first week:\n\nWould you rather get strapped to…\n\n“shiny rocket” (option A): 1 success, 0 failures\n“rugged rocket” (option B): 98 successes, 2 failures\n\n\n\n\n\n\nIf you are sick of hearing about rockets, here is an alternative interpretation:\n\nImagine you work for Google and serve website ad banners.\nA client gives you two designs for the ad banner: A and B.\nYou will serve them to web visitors and the objective is to maximize the number of clicks.\n\nSuccess: a user clicked (1).\nFailure: a user did not click (0).\n\nTraining data:\n\nVersion A: 1 success, 0 failures.\nVersion B: 98 successes, 2 failures\n\nYou can only show the ad one more time to a user (client budget almost exhausted).\n\nShould you show A or B?\n\nThis is a basic example of what is known as A/B testing.\n\n\nModel: for \\(j \\in \\{A, B\\}\\), independently,\n\\[\\begin{align*}\np_j &\\sim {\\mathrm{Unif}}(0, 1) \\\\\ny_j | p_j &\\sim {\\mathrm{Binom}}(n_j, p_j),\n\\end{align*}\\]\nwhere:\n\n\\(p_j\\) are the success probabilities\n\\(n_j\\) is the number of times you showed \\(j\\)\n\\(y_j\\) is the number of clicks on \\(j\\).\n\nQuestion:\nHow to mathematically encode the questions:\n\n“Would you rather get strapped to…”\n“Should you show A or B?”\n\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\mathbb{P}(p_A = 1)\\)\n\\(\\mathbb{P}(p_A = 1 | Y = y)\\)\n\\(\\mathbb{P}(p_A &gt; p_B)\\)\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\)\nNone of the above\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\\(\\mathbb{P}(p_A &gt; p_B | Y = y)\\): in words, is the chance of success of A greater than B, given the data?\n\n\n\nModify the code below to approximate that probability.\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  # add the part of the model describing p_B (prior and likelihood)\n  \n  return # what is the \"test function\"?\n}\nposterior(bivariate, 10000)\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(\\approx 0.1\\)\n\\(\\approx 0.3\\)\n\\(\\approx 0.6\\)\n\\(\\approx 0.9\\)\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nsource(\"../../solutions/simple.R\")\nset.seed(1)\n\nbivariate = function() {\n  \n  p_A = simulate(Beta(1, 1))\n  observe(1, Binom(size = 1, prob = p_A)) \n  \n  p_B = simulate(Beta(1, 1))\n  observe(98, Binom(size = 100, prob = p_B)) \n  \n  return(ifelse(p_A &gt; p_B, 1, 0))\n}\nposterior(bivariate, 10000)\n\n[1] 0.06909026",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Bivariate posteriors"
@@ -5430,7 +5350,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html",
     "title": "Practice questions (Quiz 2)",
     "section": "",
-    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nMake sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -5440,8 +5360,8 @@
     "objectID": "w11_quiz2/topic02_q2_practice_questions.html#outline",
     "href": "w11_quiz2/topic02_q2_practice_questions.html#outline",
     "title": "Practice questions (Quiz 2)",
-    "section": "",
-    "text": "Representative example of questions to prep for Quiz 2.\n\n\n\n\nMake sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(require(rstan))",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nRepresentative example of questions to prep for Quiz 2.\n\n\n\nImportant note\nMake sure to practice the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\nLibraries needed to run the example below\n\nsuppressPackageStartupMessages(require(rstan))",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -5628,7 +5548,7 @@
     "href": "w11_quiz2/topic03_q2_logistics.html",
     "title": "Logistics",
     "section": "",
-    "text": "You only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Quiz 2",
       "Logistics"
@@ -5638,8 +5558,8 @@
     "objectID": "w11_quiz2/topic03_q2_logistics.html#what-to-bring",
     "href": "w11_quiz2/topic03_q2_logistics.html#what-to-bring",
     "title": "Logistics",
-    "section": "",
-    "text": "You only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
+    "section": "What to bring?",
+    "text": "What to bring?\n\nYou only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
     "crumbs": [
       "Quiz 2",
       "Logistics"
@@ -6019,7 +5939,7 @@
     "href": "w07_quiz1/topic02_practice_questions.html",
     "title": "Practice questions",
     "section": "",
-    "text": "Representative example of questions to prep for Quiz 1.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Quiz 1",
       "Practice questions"
@@ -6029,8 +5949,8 @@
     "objectID": "w07_quiz1/topic02_practice_questions.html#outline",
     "href": "w07_quiz1/topic02_practice_questions.html#outline",
     "title": "Practice questions",
-    "section": "",
-    "text": "Representative example of questions to prep for Quiz 1.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nRepresentative example of questions to prep for Quiz 1.\n\n\n\nImportant note\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
     "crumbs": [
       "Quiz 1",
       "Practice questions"
@@ -6206,7 +6126,7 @@
     "href": "w07_quiz1/topic03_logistics.html",
     "title": "Logistics",
     "section": "",
-    "text": "You only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Quiz 1",
       "Logistics"
@@ -6216,8 +6136,8 @@
     "objectID": "w07_quiz1/topic03_logistics.html#what-to-bring",
     "href": "w07_quiz1/topic03_logistics.html#what-to-bring",
     "title": "Logistics",
-    "section": "",
-    "text": "You only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
+    "section": "What to bring?",
+    "text": "What to bring?\n\nYou only need pencil, eraser, student or government id.\nThe quiz is closed book (in particular, no electronics, including simple calculator permitted).",
     "crumbs": [
       "Quiz 1",
       "Logistics"
