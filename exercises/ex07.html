@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -101,35 +67,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -989,15 +926,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#q.1-installing-and-running-stan" id="toc-q.1-installing-and-running-stan" class="nav-link active" data-scroll-target="#q.1-installing-and-running-stan">Q.1: installing and running Stan</a></li>
-  <li><a href="#q.2-regression-in-stan" id="toc-q.2-regression-in-stan" class="nav-link" data-scroll-target="#q.2-regression-in-stan">Q.2: regression in Stan</a></li>
-  <li><a href="#sec-q3" id="toc-sec-q3" class="nav-link" data-scroll-target="#sec-q3">Q.3: a simple MCMC algorithm</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1041,73 +970,21 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="q.1-installing-and-running-stan" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-installing-and-running-stan">Q.1: installing and running Stan</h2>
-<p>Report the posterior median in the <a href="../w08_mcmc1/topic01_installing_stan.html#running">mini Stan exercise from the notes</a>.</p>
-</section>
-<section id="q.2-regression-in-stan" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-regression-in-stan">Q.2: regression in Stan</h2>
-<p>In this question, you will analyze the <a href="../w04_glms/topic05_regression.html">Hubble data we encountered earlier in the course</a> but using different priors, and with Stan instead of simPPLe.</p>
-<p>First, access the data as follows:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>ex07_import_hubble.R</strong></pre>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="sourceCode" id="cb1" data-shortcodes="true," data-filename="ex07_import_hubble.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">distance =</span> R..Mpc.) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">velocity =</span> v..km.sec.)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">=</span> df<span class="sc">$</span>velocity<span class="sc">/</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Caution
 </div>
-<p>Second, write a Stan model following the same structure as the model from <a href="../w04_glms/topic05_regression.html">last time we analyzed this data</a> <strong>except</strong> that the following priors should be used:</p>
-<ul>
-<li>for the slope parameter, <code>student_t(3, 0, 100)</code></li>
-<li>for the standard deviation parameter and exponential with rate <code>0.001</code></li>
-</ul>
-<p>Run stan for 2000 iterations and report a histogram on the quantity of interest, i.e., the slope parameter.</p>
-</section>
-<section id="sec-q3" class="level2">
-<h2 class="anchored" data-anchor-id="sec-q3">Q.3: a simple MCMC algorithm</h2>
-<p>In this question, you will implement a random-walk Metropolis algorithm with a standard normal proposal.</p>
-<p>Start with the following scaffold code that encodes the posterior distribution of interest. More specifically, this encodes an un-normalized distribution <span class="math inline">\(\gamma(p)\)</span> given by prior times likelihood.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>ex07_scaffold.R</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-shortcodes="true," data-filename="ex07_scaffold.R"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prior: Beta(alpha, beta)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">=</span> <span class="dv">2</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># observations: binomial draws</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>n_successes <span class="ot">=</span> <span class="dv">3</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>n_trials <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>gamma_beta_binomial <span class="ot">=</span> <span class="cf">function</span>(p) {</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (p <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">||</span> p <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="fu">return</span>(<span class="fl">0.0</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbeta</span>(p, alpha, beta) <span class="sc">*</span> <span class="fu">dbinom</span>(<span class="at">x =</span> n_successes, <span class="at">size =</span> n_trials, <span class="at">prob =</span> p)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-body-container callout-body">
+<p>Page under construction: information on this page may change.</p>
 </div>
-<p>Complete the blanks in the following:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>simple_mh <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">TODO</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use this function to compute the posterior mean of the model encoded in <code>gamma_beta_binomial</code>.</p>
-<p>Compute the posterior mean of <span class="math inline">\(p\)</span> using:</p>
-<ol type="1">
-<li>1000 iterations of MCMC,</li>
-<li>analytic computations based on <a href="../w07_quiz1/topic02_practice_questions.html">the practice quiz 1 question</a>.</li>
-</ol>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -100,38 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -991,13 +926,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#q.1-efficacy-of-vaccines" id="toc-q.1-efficacy-of-vaccines" class="nav-link active" data-scroll-target="#q.1-efficacy-of-vaccines">Q.1: efficacy of vaccines</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1041,73 +970,21 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="q.1-efficacy-of-vaccines" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-efficacy-of-vaccines">Q.1: efficacy of vaccines</h2>
-<p>In this exercise we will model the effectiveness of COVID vaccines using clinical trials data. Each trial consists of two <em>arms</em>: <em>vaccinated</em> (i.e., <em>treated</em>) and <em>control</em> (i.e., <em>not</em> treated). For a typical trial we know</p>
-<ol type="a">
-<li>The total number of patients in each arm: <span class="math inline">\(t_\text{v}\)</span> (vaccinated), <span class="math inline">\(t_\text{c}\)</span> (control).</li>
-<li>The number of patients that got infected with the SARS-CoV-2 virus in each arm: <span class="math inline">\(n_\text{v}\)</span>, <span class="math inline">\(n_\text{c}\)</span>.</li>
-</ol>
-<p>We model <span class="math inline">\(n_\text{v}\)</span> and <span class="math inline">\(n_\text{c}\)</span> as Binomial random variables. The unknown parameter for these distributions will depend on two numbers in <span class="math inline">\([0,1]\)</span></p>
-<ol type="a">
-<li>Incidence <span class="math inline">\(p\)</span>: the probability that a patient in the trial will become infected without being treated with the vaccine.</li>
-<li>Effectiveness <span class="math inline">\(e\)</span>: the decrease in incidence that the vaccine provides.</li>
-</ol>
-<p>We put a beta prior on both parameters. Since the parameters of the <span class="math inline">\({\mathrm{Beta}}(\alpha,\beta)\)</span> distribution are not very interpretable, we will work with a re-parametrized version <span class="math inline">\({\mathrm{BetaMP}}(\mu,\lambda)\)</span> where <span class="math inline">\(\mu\in[0,1]\)</span> is the <em>mean</em> and <span class="math inline">\(\lambda&gt;0\)</span> is a <em>precision</em> parameter. The bijection is given by <span class="math display">\[
-\mu = \frac{\alpha}{\alpha+\beta} \quad \lambda=\alpha+\beta \qquad\iff\qquad
-\alpha = \mu \lambda \quad \beta = (1-\mu)\lambda
-\]</span></p>
-<p>Finally, we put priors on the parameters of these beta distributions to complete the model as follows <span id="eq-model-one-vac"><span class="math display">\[
-\begin{aligned}
-\mu_\text{e} &amp;\sim {\mathrm{Unif}}(0,1) &amp;&amp; (\text{diffuse prior})\\
-\lambda_\text{e} &amp;\sim {\mathrm{Exp}}(0.001) &amp;&amp; (\text{diffuse prior})\\
-\mu_\text{p} &amp;\sim {\mathrm{BetaMP}}(0.1, 10) &amp;&amp; (\text{incidence is usually low})\\
-\lambda_\text{p} &amp;\sim {\mathrm{Exp}}(0.001) &amp;&amp; (\text{diffuse prior})\\
-e|\mu_\text{e},\lambda_\text{e} &amp;\sim {\mathrm{BetaMP}}(\mu_\text{e}, \lambda_\text{e}) \\
-p|\mu_\text{p},\lambda_\text{p} &amp;\sim {\mathrm{BetaMP}}(\mu_\text{p}, \lambda_\text{p}) \\
-n_\text{c}|p &amp;\sim {\mathrm{Binom}}(t_\text{c}, p) \\
-n_\text{v}|e,p &amp;\sim {\mathrm{Binom}}(t_\text{v}, p(1-e))
-\end{aligned}
-\tag{1}\]</span></span></p>
-<!-- 
-::: {.callout-note}
-When $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
-the statement
-$$
-f(X) \sim \pi
-$$
-means that $X$ is drawn by first sampling $Y\sim\pi$ and then transforming 
-$X = f^{-1}(Y)$.
-:::
--->
-<p>Now, consider the following data—available <a href="ex06_assets/vaccines.csv">here</a>—arising from clinical trials of two popular COVID vaccines</p>
-<div class="cell">
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["trials"],"name":[1],"type":["chr"],"align":["left"]},{"label":["arms"],"name":[2],"type":["chr"],"align":["left"]},{"label":["groupSizes"],"name":[3],"type":["int"],"align":["right"]},{"label":["numbersOfCases"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Pfizer-BioNTech","2":"vaccinated","3":"18198","4":"8"},{"1":"Pfizer-BioNTech","2":"control","3":"18325","4":"162"},{"1":"Moderna-NIH","2":"vaccinated","3":"14134","4":"11"},{"1":"Moderna-NIH","2":"control","3":"14073","4":"185"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Page under construction: information on this page may change.</p>
 </div>
-<ol type="1">
-<li>Expand the model in <a href="#eq-model-one-vac" class="quarto-xref">Equation&nbsp;1</a> into a hierarchical model that covers both vaccines. The parameters <span class="math inline">\((\mu_\text{e},\lambda_\text{e},\mu_\text{p},\lambda_\text{p})\)</span> must be shared across vaccines. In contrast, each vaccine must have its own <span class="math inline">\((e,p)\)</span> pair.</li>
-<li>Implement the model from part 1 in <a href="../w04_glms/topic01_simPPLe.html">simPPLe</a>. Your PPL function should return the indicator that Moderna is more effective than Pfizer. Use this code to define <span class="math inline">\({\mathrm{BetaMP}}(\mu, \lambda)\)</span></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>BetaMP <span class="ot">=</span> <span class="cf">function</span>(mean, precision){</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Beta</span>(mean<span class="sc">*</span>precision, (<span class="dv">1</span><span class="sc">-</span>mean)<span class="sc">*</span>precision)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>Download the <a href="ex06_assets/vaccines.csv">data</a> and load it using the following (no points for this part)</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>vaccines <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"vaccines.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vaccines<span class="sc">$</span>groupSizes <span class="ot">=</span> <span class="fu">as.double</span>(vaccines<span class="sc">$</span>groupSizes) <span class="co"># needed due to bug in Binom code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>Run your model in <a href="../w04_glms/topic01_simPPLe.html">simPPLe</a> using <code>posterior</code> with 20,000 iterations, and report the estimated posterior probability that Moderna is more effective than Pfizer. Is there strong evidence for this claim? <strong>Note</strong>: it takes a couple of minutes to run 20,000 iterations. Therefore, for prototyping it may be easier to test your implementation with fewer iterations.</li>
-</ol>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

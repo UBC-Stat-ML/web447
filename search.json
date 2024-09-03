@@ -454,51 +454,7 @@
     "href": "exercises/ex09.html",
     "title": "Exercise 9: MCMC Hacking",
     "section": "",
-    "text": "In this exercise, you will implement a custom MCMC sampler for a change point detection Bayesian model.\n\n\nCopy the blurb below into a file, you will need it in Q3.\n\n# Source: https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers\nsms_data = c(\n    13,24,8,24,7,35,14,11,15,11,22,22,11,57,11,19,29,6,19,\n    12,22,12,18,72,32,9,7,13,19,23,27,20,6,17,13,10,14,6,\n    16,15,7,2,15,15,19,70,49,7,53,22,21,31,19,11,18,20,12,\n    35,17,23,17,4,2,31,30,13,27,0,39,37,5,14,13,22)\n\n\n\n\nWe use a dataset and model inspired by Davidson-Pilon, 2013.\nThe data we analyze records, for each of 74 days, the number of text messages sent and received by Davidson-Pilon. The raw data looks like this:\n\nplot(sms_data, xlab = \"Day\", ylab = \"Number of text messages that day\")\n\n\n\n\n\n\n\n\nGoal: find if this user’s behaviour changed in that time period, and if so, when.\nThis is a simple example of a change point detection task.\n\n\n\nChange point models are related to mixture models, but instead of each data point being free to pick which of the two clusters to belong to, change point models have a different cluster membership mechanism, defined as follows:\n\nPick a change point \\(C\\) uniformly among the days \\(d \\in \\{1, 2, \\dots, 74\\}\\).\nThe likelihood for days before the change point \\(C\\) uses the parameter of cluster 1.\nThe likelihood for days after the change point \\(C\\) uses the parameter of cluster 2.\n\nMathematical description:\n\\[\\begin{align*}\n\\lambda_i &\\sim {\\mathrm{Exp}}(1/100), \\text{ for }i \\in \\{1, 2\\}, \\;\\;\\text{(parameters for 2 clusters)} \\\\\nC &\\sim {\\mathrm{Unif}}\\{1, 2, \\dots 74\\}, \\;\\;\\text{(change point)} \\\\\nY_d &\\sim {\\mathrm{Poisson}}(\\lambda_{\\mathbb{1}[d &lt; C] + 1}), \\text{ for }d \\in \\{1, 2, \\dots, 74\\} \\;\\;\\text{(likelihood)}.\n\\end{align*}\\]\nR implementation:\nWe provide an implementation of the joint distribution of this model below. You will need it in this exercise.\n\nset.seed(1)\n\nlog_joint = function(rates, change_point, y) {\n  \n  # Return log(0.0) if parameters are outside of the support\n  if (rates[[1]] &lt; 0 | rates[[2]] &lt; 0 | change_point &lt; 1 | change_point &gt; length(y)) \n    return(-Inf)\n  \n  log_prior = \n    dexp(rates[[1]], 1/100, log = TRUE) + \n    dexp(rates[[2]], 1/100, log = TRUE)\n  \n  log_likelihood = 0.0\n  for (i in 1:length(y)) {\n    rate = if (i &lt; change_point) rates[[1]] else rates[[2]]\n    log_likelihood = log_likelihood + dpois(y[[i]], rate, log = TRUE)\n  }\n  \n  return(log_prior + log_likelihood)\n}\n\nExplanation: the argument…\n\n… rates takes in a vector of length two, with the two components corresponding to \\(\\lambda_1\\) and \\(\\lambda_2\\).\n… change_point takes in an integer, corresponding to \\(C\\) in the mathematical description above.\n… y takes in an array of non-negative integer, corresponding to \\(Y = (Y_1, Y_2, \\dots, Y_{74})\\).\n\nNotice also we return the log of the joint distribution, so each term in the joint is computed in log scale using the log = TRUE option.",
-    "crumbs": [
-      "MCMC Hacking",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex09.html#overview",
-    "href": "exercises/ex09.html#overview",
-    "title": "Exercise 9: MCMC Hacking",
-    "section": "",
-    "text": "In this exercise, you will implement a custom MCMC sampler for a change point detection Bayesian model.\n\n\nCopy the blurb below into a file, you will need it in Q3.\n\n# Source: https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers\nsms_data = c(\n    13,24,8,24,7,35,14,11,15,11,22,22,11,57,11,19,29,6,19,\n    12,22,12,18,72,32,9,7,13,19,23,27,20,6,17,13,10,14,6,\n    16,15,7,2,15,15,19,70,49,7,53,22,21,31,19,11,18,20,12,\n    35,17,23,17,4,2,31,30,13,27,0,39,37,5,14,13,22)\n\n\n\n\nWe use a dataset and model inspired by Davidson-Pilon, 2013.\nThe data we analyze records, for each of 74 days, the number of text messages sent and received by Davidson-Pilon. The raw data looks like this:\n\nplot(sms_data, xlab = \"Day\", ylab = \"Number of text messages that day\")\n\n\n\n\n\n\n\n\nGoal: find if this user’s behaviour changed in that time period, and if so, when.\nThis is a simple example of a change point detection task.\n\n\n\nChange point models are related to mixture models, but instead of each data point being free to pick which of the two clusters to belong to, change point models have a different cluster membership mechanism, defined as follows:\n\nPick a change point \\(C\\) uniformly among the days \\(d \\in \\{1, 2, \\dots, 74\\}\\).\nThe likelihood for days before the change point \\(C\\) uses the parameter of cluster 1.\nThe likelihood for days after the change point \\(C\\) uses the parameter of cluster 2.\n\nMathematical description:\n\\[\\begin{align*}\n\\lambda_i &\\sim {\\mathrm{Exp}}(1/100), \\text{ for }i \\in \\{1, 2\\}, \\;\\;\\text{(parameters for 2 clusters)} \\\\\nC &\\sim {\\mathrm{Unif}}\\{1, 2, \\dots 74\\}, \\;\\;\\text{(change point)} \\\\\nY_d &\\sim {\\mathrm{Poisson}}(\\lambda_{\\mathbb{1}[d &lt; C] + 1}), \\text{ for }d \\in \\{1, 2, \\dots, 74\\} \\;\\;\\text{(likelihood)}.\n\\end{align*}\\]\nR implementation:\nWe provide an implementation of the joint distribution of this model below. You will need it in this exercise.\n\nset.seed(1)\n\nlog_joint = function(rates, change_point, y) {\n  \n  # Return log(0.0) if parameters are outside of the support\n  if (rates[[1]] &lt; 0 | rates[[2]] &lt; 0 | change_point &lt; 1 | change_point &gt; length(y)) \n    return(-Inf)\n  \n  log_prior = \n    dexp(rates[[1]], 1/100, log = TRUE) + \n    dexp(rates[[2]], 1/100, log = TRUE)\n  \n  log_likelihood = 0.0\n  for (i in 1:length(y)) {\n    rate = if (i &lt; change_point) rates[[1]] else rates[[2]]\n    log_likelihood = log_likelihood + dpois(y[[i]], rate, log = TRUE)\n  }\n  \n  return(log_prior + log_likelihood)\n}\n\nExplanation: the argument…\n\n… rates takes in a vector of length two, with the two components corresponding to \\(\\lambda_1\\) and \\(\\lambda_2\\).\n… change_point takes in an integer, corresponding to \\(C\\) in the mathematical description above.\n… y takes in an array of non-negative integer, corresponding to \\(Y = (Y_1, Y_2, \\dots, Y_{74})\\).\n\nNotice also we return the log of the joint distribution, so each term in the joint is computed in log scale using the log = TRUE option.",
-    "crumbs": [
-      "MCMC Hacking",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex09.html#q.1-a-custom-mcmc-sampler",
-    "href": "exercises/ex09.html#q.1-a-custom-mcmc-sampler",
-    "title": "Exercise 9: MCMC Hacking",
-    "section": "Q.1: A custom MCMC sampler",
-    "text": "Q.1: A custom MCMC sampler\n\nDefine mathematically an irreducible and invariant MCMC algorithm to sample from the change point model’s posterior.\n\n\n\n\n\n\n\nClick for hint\n\n\n\n\n\nStart by defining a kernel \\(K_1\\) modifying only the rates parameter, then a second one, \\(K_2\\), modifying the change_point variable. Write the proposal \\(q_k\\) for \\(k \\in \\{1, 2\\}\\) for each kernel. Then specify a kernel \\(K\\) based on \\(K_1\\) and \\(K_2\\).\nNote: to get good mixing in Q3, your discrete proposal should have a standard deviation greater than 5.\n\n\n\n\nProve that the MCMC algorithm you defined in part 1 is \\(\\pi\\)-invariant.\nImplement the MCMC algorithm you describe mathematically in R. You should follow the following template:\n\n\nmcmc = function(rates, change_point, y, n_iterations) {\n  change_point_trace = rep(-1, n_iterations)\n  \n  for (i in 1:n_iterations) {\n    # TODO: implement a MCMC sampler\n  }\n  \n  # Return:\n  # - the trace of the change points (for question 1) \n  # - the rates at the last iteration (for question 2)\n  return(\n    list(\n      change_point_trace = change_point_trace, \n      last_iteration_rates = rates\n    )\n  )\n}\n\nNote:\n\nMake sure to use the input arguments rates and change_point as initial values of your MCMC algorithms (this will be important for Q2).\nThe function returns two pieces of information:\n\nThe list of samples (“trace”) for the parameter of interest, change_point (used for Q3).\nThe rate parameter at the very end of the MCMC algorithm (used for Q2).",
-    "crumbs": [
-      "MCMC Hacking",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex09.html#q.2-mcmc-correctness-testing",
-    "href": "exercises/ex09.html#q.2-mcmc-correctness-testing",
-    "title": "Exercise 9: MCMC Hacking",
-    "section": "Q.2: MCMC correctness testing",
-    "text": "Q.2: MCMC correctness testing\nWe now subject our MCMC implementation to an “exact invariance test” to validate its correctness.\n\nStart by completing the function below to perform forward simulation on the same Bayesian model as in Q1. The input argument synthetic_data_size specifies the size of the dataset to generate.\n\n\nforward = function(synthetic_data_size) {\n  \n  # TODO: implement forward simulation\n  \n  return(list(\n    rates = rates,\n    change_point = change_point,\n    data = data\n  ))\n}\n\nRecall that each iteration of the exact invariance test starts by forward sampling, followed by either 0 or several rounds of MCMC (we will use 200). We provide this function to do this for you:\n\nforward_posterior = function(synthetic_data_size, n_mcmc_iters) {\n  initial = forward(synthetic_data_size)\n  \n  if (n_mcmc_iters &gt; 0) {\n    samples = mcmc(initial$rates, initial$change_point, initial$data, n_mcmc_iters)\n    return(samples$last_iteration_rates[[1]])\n  } else {\n    return(initial$rates[[1]])\n  }\n}\n\n\nApply the test to your code, by completing the lines below.\n\n\n# Note: we use synthetic datasets with only 5 observations to speed things up\nforward_only = replicate(1000, forward_posterior(5, 0))\nwith_mcmc = replicate(1000, forward_posterior(5, 200))\n\n# TODO: perform 2-samples t-test or Kolmogorov-Smirnov test\n#       to see if forward_only and with_mcmc follow the same distribution. \n\nReport the p-value. Recall that if it “tiny” (e.g., less than 0.01), it suggests there may be a bug in your code.\n\n\n\n\n\n\nClick for tricks useful if you get a tiny p-value\n\n\n\n\n\nWhat to do if you suspect there is a bug?\nFirst, try to narrow down if the putative bug is in the change-point MCMC move, or in the rates MCMC move, or the forward sampling function.\nTo do so, temporary turn off the sampler \\(K_1\\), and run the test. Then do the same for \\(K_2\\).\nIf the low p value only shows up for one of the \\(K_i\\), that suggests the bug might be located there. If it’s on each separately, then there could be a common mistake, or the bug could be in the forward simulation (or testing) code.\n\n\n\n\nIf you identified a bug using this method, show the part of the code that had a bug (before and after fixing), as well as the p-value (before and after). If no bugs where found, temporarily create one and report the same thing. Don’t forget to fix all bugs before moving to the next question.",
-    "crumbs": [
-      "MCMC Hacking",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex09.html#q.3-using-your-sampler-for-data-analysis",
-    "href": "exercises/ex09.html#q.3-using-your-sampler-for-data-analysis",
-    "title": "Exercise 9: MCMC Hacking",
-    "section": "Q.3: Using your sampler for data analysis",
-    "text": "Q.3: Using your sampler for data analysis\nPerform 10k iteration of MCMC on the text message data.\n\nsamples = mcmc(...)\n\nRecall that you can access the list of sampled change point using samples$change_point_trace.\n\nCreate two trace plots for the change point parameter, one for the full trace, one for the subset of samples in the second half (via [5000:10000]). Comment on the mixing behaviour.\nInstall the following package to compute the effective sample size:\n\n\ninstall.packages(\"mcmcse\")\nrequire(\"mcmcse\")\n\nmcmcse::ess(...)\n\nAgain, report it for both the full set of samples and the subset coming from the second half.\n\nProduce a histogram from the second half of samples. Briefly comment on the results in light of the note below.\n\nNote: this dataset comes with the additional information that “the 45th day corresponds to Christmas, and I moved away to Toronto the next month, leaving a girlfriend behind” (Davidson-Pilon, 2013).",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "MCMC Hacking",
       "Exercises"
@@ -509,40 +465,7 @@
     "href": "exercises/ex08.html",
     "title": "Exercise 8: Bayesian Workflow",
     "section": "",
-    "text": "We have already discussed the concept of calibration for Bayesian inference, where we reviewed the behavior of both well-specified—the ideal situation—and mis-specified models—the most common case in practice. In the latter case, we demonstrated with a simulation experiment that mis-specification results in credible intervals that are not calibrated. However in practice, these tests are impossible to carry out because we do not have access to the true data-generating distribution.\nOne way to approximate the outcome of such an experiment is via cross-validation. In particular, this exercise will teach you how to use leave-one-out cross-validation to assess the calibration of the model for the Hubble dataset. Let’s begin by loading and formatting the data\n\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\ndf = read.csv(url(\"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv\")) %&gt;%\n  rename(distance = R..Mpc.) %&gt;%\n  rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\n\n\nModify the stan code you wrote for exercise 7 to include\n\n\nIn the data block: an additional real-valued argument x_pred for the independent variable for the left-out point.\nIn the generated quantities block: generate a value y_pred given x_pred and the parameters \\((\\text{slope, sigma})\\).\n\nCreate a compiled model called hubble_predict by passing the modified stan code to the function stan_model.\n\nTest your implementation by fitting the version of the model that leaves out the last row of the dataset. Hint: you should pass as data to stan the train_test_dta list defined below\n\nN_obs = nrow(df)\nN_train = N_obs-1\ntrain_test_dta = list(\n    N  = N_train,\n    xs = df$distance[-N_obs], \n    ys = df$velocity[-N_obs], \n    x_pred = df$distance[N_obs]\n)\nReport the leave-one-out 80% credible interval for the left out observation.\n\nRepeat step 2 for all observations. That is, construct a matrix of nrow(df) rows and 2 columns called ci_limits, where the i-th row contains an 80% credible interval for the i-th observation left out. Report the plot generated by the following code\n\nsuppressPackageStartupMessages(library(ggplot2))\nsuppressPackageStartupMessages(library(dplyr))\n\nmerged_df = df %&gt;% \n  bind_cols(data.frame(CI_L = ci_limits[,1], CI_R = ci_limits[,2])) %&gt;% \n  mutate(Inside_CI = (velocity &gt;= CI_L & velocity &lt;= CI_R)) \nmerged_df %&gt;% \n  ggplot(aes(x = 1:N_obs, y = velocity, ymin = CI_L, ymax = CI_R, color=Inside_CI)) +\n  geom_point() + \n  geom_errorbar() +\n  theme_minimal() +\n  labs(x = \"Point\", y = \"Velocity\")\nIs the fraction of left-out observations contained in their respective credible intervals similar to the nominal coverage level?",
-    "crumbs": [
-      "Bayesian workflow",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex08.html#q.1-calibration-analysis-via-cross-validation",
-    "href": "exercises/ex08.html#q.1-calibration-analysis-via-cross-validation",
-    "title": "Exercise 8: Bayesian Workflow",
-    "section": "",
-    "text": "We have already discussed the concept of calibration for Bayesian inference, where we reviewed the behavior of both well-specified—the ideal situation—and mis-specified models—the most common case in practice. In the latter case, we demonstrated with a simulation experiment that mis-specification results in credible intervals that are not calibrated. However in practice, these tests are impossible to carry out because we do not have access to the true data-generating distribution.\nOne way to approximate the outcome of such an experiment is via cross-validation. In particular, this exercise will teach you how to use leave-one-out cross-validation to assess the calibration of the model for the Hubble dataset. Let’s begin by loading and formatting the data\n\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\ndf = read.csv(url(\"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv\")) %&gt;%\n  rename(distance = R..Mpc.) %&gt;%\n  rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\n\n\nModify the stan code you wrote for exercise 7 to include\n\n\nIn the data block: an additional real-valued argument x_pred for the independent variable for the left-out point.\nIn the generated quantities block: generate a value y_pred given x_pred and the parameters \\((\\text{slope, sigma})\\).\n\nCreate a compiled model called hubble_predict by passing the modified stan code to the function stan_model.\n\nTest your implementation by fitting the version of the model that leaves out the last row of the dataset. Hint: you should pass as data to stan the train_test_dta list defined below\n\nN_obs = nrow(df)\nN_train = N_obs-1\ntrain_test_dta = list(\n    N  = N_train,\n    xs = df$distance[-N_obs], \n    ys = df$velocity[-N_obs], \n    x_pred = df$distance[N_obs]\n)\nReport the leave-one-out 80% credible interval for the left out observation.\n\nRepeat step 2 for all observations. That is, construct a matrix of nrow(df) rows and 2 columns called ci_limits, where the i-th row contains an 80% credible interval for the i-th observation left out. Report the plot generated by the following code\n\nsuppressPackageStartupMessages(library(ggplot2))\nsuppressPackageStartupMessages(library(dplyr))\n\nmerged_df = df %&gt;% \n  bind_cols(data.frame(CI_L = ci_limits[,1], CI_R = ci_limits[,2])) %&gt;% \n  mutate(Inside_CI = (velocity &gt;= CI_L & velocity &lt;= CI_R)) \nmerged_df %&gt;% \n  ggplot(aes(x = 1:N_obs, y = velocity, ymin = CI_L, ymax = CI_R, color=Inside_CI)) +\n  geom_point() + \n  geom_errorbar() +\n  theme_minimal() +\n  labs(x = \"Point\", y = \"Velocity\")\nIs the fraction of left-out observations contained in their respective credible intervals similar to the nominal coverage level?",
-    "crumbs": [
-      "Bayesian workflow",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex08.html#q.2-prior-predictive-checks",
-    "href": "exercises/ex08.html#q.2-prior-predictive-checks",
-    "title": "Exercise 8: Bayesian Workflow",
-    "section": "Q.2: prior predictive checks",
-    "text": "Q.2: prior predictive checks\nConsider the logistic regression model\n\\[\n\\begin{aligned}\n\\beta_i &\\overset{\\text{iid}}{\\sim}\\mathcal{N}(0,1), \\quad i\\in\\{1,\\dots,n_\\text{pred}\\} \\\\\ny_n|\\beta &\\sim {\\mathrm{Bern}}(\\text{logistic}(x_n^T \\beta)), \\quad n\\in\\{1,\\dots,n_\\text{obs}\\}\n\\end{aligned}\n\\tag{1}\\]\nIn this exercise we will investigate the effect of having fixed independent priors on the coefficients \\(\\{\\beta_i\\}_{i=1}^{n_\\text{pred}}\\) as \\(n_\\text{pred}\\) grows.\n\nWrite a function called logistic_regression that takes as input a matrix X of n_obs rows and n_pred columns. Your function should\n\n\nsimulate \\(\\beta\\) according to Equation 1,\nsimulate the response vector \\(y\\) given \\(\\beta\\), and\nreturn the average response \\(\\bar{y}:=n_\\text{obs}^{-1}\\sum_i y_i\\).\n\n\nLet us fix \\(n_\\text{obs}=100\\). For each \\(n_\\text{pred}\\in\\{2,4,15\\}\\), sample \\(X\\) according to \\[\nX_{n,i} \\overset{\\text{iid}}{\\sim}{\\mathrm{Bern}}(0.9)\n\\] Then, run logistic_regression 100,000 times, and report the histogram of the simulated \\(\\bar{y}\\) values. To help you, you may use the following code as a skeleton for your answer\n\nopar = par(mfrow=c(1,3)) # set a layout of 3 plots in a single row\nfor(n_pred in c(2,4,15)){\n  X = # fill this\n  simulated_ybars = # fill this\n  hist(simulated_ybars, breaks=20, ylim=c(0,17000), \n       main=paste(n_pred, \"predictors\"), xlab = \"Average outcome\")\n}\npar(opar) # reset graphical parameters\n\nDo you observe any change in the distributions obtained in step 2? Do you think this is desirable in a model? If yes, why? If not, how would you fix this?",
-    "crumbs": [
-      "Bayesian workflow",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex08.html#q.3-hierarchical-models-revisited",
-    "href": "exercises/ex08.html#q.3-hierarchical-models-revisited",
-    "title": "Exercise 8: Bayesian Workflow",
-    "section": "Q.3: hierarchical models revisited",
-    "text": "Q.3: hierarchical models revisited\nModify the tutorial on tidybayes to make the model hierarchical, following the same model as in exercise 6.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayesian workflow",
       "Exercises"
@@ -553,40 +476,7 @@
     "href": "exercises/ex07.html",
     "title": "Exercise 7: Intro to MCMC",
     "section": "",
-    "text": "Report the posterior median in the mini Stan exercise from the notes.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex07.html#q.1-installing-and-running-stan",
-    "href": "exercises/ex07.html#q.1-installing-and-running-stan",
-    "title": "Exercise 7: Intro to MCMC",
-    "section": "",
-    "text": "Report the posterior median in the mini Stan exercise from the notes.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex07.html#q.2-regression-in-stan",
-    "href": "exercises/ex07.html#q.2-regression-in-stan",
-    "title": "Exercise 7: Intro to MCMC",
-    "section": "Q.2: regression in Stan",
-    "text": "Q.2: regression in Stan\nIn this question, you will analyze the Hubble data we encountered earlier in the course but using different priors, and with Stan instead of simPPLe.\nFirst, access the data as follows:\n\n\nex07_import_hubble.R\n\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\ndf = read.csv(url(\"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv\")) %&gt;%\n  rename(distance = R..Mpc.) %&gt;%\n  rename(velocity = v..km.sec.)\ndf$velocity = df$velocity/1000\n\nSecond, write a Stan model following the same structure as the model from last time we analyzed this data except that the following priors should be used:\n\nfor the slope parameter, student_t(3, 0, 100)\nfor the standard deviation parameter and exponential with rate 0.001\n\nRun stan for 2000 iterations and report a histogram on the quantity of interest, i.e., the slope parameter.",
-    "crumbs": [
-      "Intro to MCMC",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex07.html#sec-q3",
-    "href": "exercises/ex07.html#sec-q3",
-    "title": "Exercise 7: Intro to MCMC",
-    "section": "Q.3: a simple MCMC algorithm",
-    "text": "Q.3: a simple MCMC algorithm\nIn this question, you will implement a random-walk Metropolis algorithm with a standard normal proposal.\nStart with the following scaffold code that encodes the posterior distribution of interest. More specifically, this encodes an un-normalized distribution \\(\\gamma(p)\\) given by prior times likelihood.\n\n\nex07_scaffold.R\n\n# prior: Beta(alpha, beta)\nalpha = 1\nbeta = 2 \n\n# observations: binomial draws\nn_successes = 3 \nn_trials = 3\n\ngamma_beta_binomial = function(p) {\n  if (p &lt; 0 || p &gt; 1) return(0.0)\n  dbeta(p, alpha, beta) * dbinom(x = n_successes, size = n_trials, prob = p)\n}\n\nComplete the blanks in the following:\n# simple Metropolis-Hastings algorithm (normal proposal)\nsimple_mh = function(gamma, initial_point, n_iters) {\n  samples = numeric(n_iters) \n  dim = length(initial_point)\n  \n  # TODO\n  \n  return(samples)\n}\nUse this function to compute the posterior mean of the model encoded in gamma_beta_binomial.\nCompute the posterior mean of \\(p\\) using:\n\n1000 iterations of MCMC,\nanalytic computations based on the practice quiz 1 question.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Intro to MCMC",
       "Exercises"
@@ -597,29 +487,7 @@
     "href": "exercises/ex10.html",
     "title": "Exercise 10: advanced inference",
     "section": "",
-    "text": "This week it’s enough to answer only one question\n\n\n\nTo give more time for project, the grade for this last exercise will be the maximum of question 1 and question 2, i.e., you can solve only one of the questions and get full grade.",
-    "crumbs": [
-      "Advanced inference",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex10.html#q1-asymmetric-proposal",
-    "href": "exercises/ex10.html#q1-asymmetric-proposal",
-    "title": "Exercise 10: advanced inference",
-    "section": "Q1: Asymmetric proposal",
-    "text": "Q1: Asymmetric proposal\nSuppose you have a proposal \\(q(x' | x)\\) which is not symmetric. We show here how to generalize MH to handle that case.\n\nOur goal is to sample from \\(\\pi(x)\\), \\(x \\in \\mathscr{X}\\).\nWe will use an augmented distribution \\(\\bar \\pi(x, v) = \\pi(x) q(v | x)\\), where \\(v \\in \\mathscr{X}\\).\nAlternate between two kernels \\(K_1\\) and \\(K_2\\):\n\n\\(K_1\\) consists in a deterministic proposal MH with a swap proposal, \\(T(x, v) = (v, x)\\).\n\\(K_2\\) keeps \\(x\\) constant and samples a new value for \\(v\\) from \\(q(\\cdot|x)\\).\n\n\n\nWrite the MH ratio corresponding to the swap proposal in terms of \\(\\pi\\) and \\(q\\).\nModify the proof here to show that \\(K_2\\) is \\(\\bar \\pi\\)-invariant. You may assume \\(\\mathscr{X}\\) is discrete (this makes the notation simpler, but the result is the same in continuous space).",
-    "crumbs": [
-      "Advanced inference",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex10.html#q2-implementing-hmc",
-    "href": "exercises/ex10.html#q2-implementing-hmc",
-    "title": "Exercise 10: advanced inference",
-    "section": "Q2: Implementing HMC",
-    "text": "Q2: Implementing HMC\nRead how HMC can be viewed as MH with a deterministic proposal. That page provides code for a proposal.\n\nComplete the code to obtain an HMC algorithm. Use the following templates:\n\n(note the function “gamma” was renamed “log_gamma” to be more descriptive on April 10)\nset.seed(1234)\n\nlog_gamma = function(x) {\n  -x^2 # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5\n}\n\n# code from the notes:\n\ngradient = function(x) {\n  -2*x\n}\n\nepsilon = 0.1\n\nkick = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, p + epsilon * gradient(x) / 2)\n}\n\ndrift = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x + epsilon * p, p)\n}\n\nflip = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, -p)\n}\n\nL = 5\n\nhmc_proposal = function(s) {\n  for (i in 1:L) {\n    s = kick(s)\n    s = drift(s)\n    s = kick(s)\n  }\n  flip(s)\n}\n\n# part to complete below\n\nhamiltonian = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  # TODO\n}\n\nhmc = function(initial_x, n_iteration) {\n  current_x = initial_x\n  samples = numeric(n_iterations)\n  for (i in 1:n_iteration) {\n    # TODO\n  }\n  return(samples)\n}\n\nCompute 10000 iterations and report the mean and variance of the samples.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Advanced inference",
       "Exercises"
@@ -630,84 +498,7 @@
     "href": "exercises/ex01.html",
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "",
-    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#goals",
-    "href": "exercises/ex01.html#goals",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Goals",
-    "text": "Goals\n\nBring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).\nIntroduce forward discrete simulation.\nReview expectation and the law of large numbers.",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#setup",
-    "href": "exercises/ex01.html#setup",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Setup",
-    "text": "Setup\nThis exercise is centered around the following scenario:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#sec-q1",
-    "href": "exercises/ex01.html#sec-q1",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Q.1: sampling from a joint distribution",
-    "text": "Q.1: sampling from a joint distribution\n\nCompute \\(\\mathbb{E}[(1+Y_1)^X]\\) mathematically (with a precise mathematical derivation).\nWrite an R function called forward_sample that samples (“simulates”) from the joint distribution of \\((X, Y_1, \\dots, Y_4)\\). As a general practice, fix the seed, and submit both the code and the output (here, a single sample).\nHow can your code and the law of large number be used to approximate \\(\\mathbb{E}[(1+Y_1)^X]\\)?\nCompare the approximation from your code with you answer in part 1.\n\n\n\n\n\n\n\nBig idea\n\n\n\nPart 4 of this question illustrates a big idea in this course:\nstrategies to validate inference, i.e. ensuring it is bug-free in both the code and in the math. In a nutshell, this is possible thanks to theory: we use results that provide two ways to do the same thing, and verifying they indeed agree.",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#sec-q2",
-    "href": "exercises/ex01.html#sec-q2",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Q.2: computing a conditional",
-    "text": "Q.2: computing a conditional\nSuppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = [0, 0, 0, 0]. Given that observation, what is the probability that you picked the standard coin (i.e., the one with \\(p = 1/2\\))?\n\nWrite mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”\nCompute the numerical value of the expression defined in part 1 (with a precise mathematical derivation).",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#sec-q3",
-    "href": "exercises/ex01.html#sec-q3",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Q.3: non uniform prior on coin types",
-    "text": "Q.3: non uniform prior on coin types\nWe now modify the problem as follows: I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Categorical distribution.\nCompute the probability that you picked one of the fair coins, given you see [0, 0, 0, 0].",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#sec-q4",
-    "href": "exercises/ex01.html#sec-q4",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Q.4: a first posterior inference algorithm",
-    "text": "Q.4: a first posterior inference algorithm\nWe now generalize to having \\(K + 1\\) types of coins such that:\n\ncoin type \\(k \\in \\{0, 1, \\dots, K\\}\\) has bias \\(k/K\\)\nthe fraction of coins in the bag of type \\(k\\) is \\(\\rho_k\\).\n\nWe consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability \\(\\pi_k\\) for all \\(k\\) that we picked coin type \\(k \\in \\{0, 1, \\dots, K\\}\\) from the bag given the observation.\n\nWrite an R function called posterior_given_four_heads taking as input a vector \\(\\rho = (\\rho_0, \\rho_1, \\dots, \\rho_K)\\) and returning \\(\\pi = (\\pi_0, \\pi_1, \\dots, \\pi_K)\\).\nTest your code by making sure you can recover the answer in Q. 3 as a special case. Report what values of \\(K\\) and \\(\\rho\\) you used.\nShow the output for \\(\\rho \\propto (1, 2, 3, \\dots, 10)\\). Here \\(\\propto\\) means “proportional to”; try to infer what it means in this context.",
-    "crumbs": [
-      "Probability essentials",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex01.html#sec-q5",
-    "href": "exercises/ex01.html#sec-q5",
-    "title": "Exercise 1: discrete probabilistic inference",
-    "section": "Q.5: generalizing observations",
-    "text": "Q.5: generalizing observations\nWe now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe n_heads out of n_observations, where n_heads and n_observations will be additional arguments passed into a new R function.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Binomial distribution.\nWrite an R function called posterior taking three input arguments in the following order: a vector \\(\\rho\\) as in Q. 4, as well as two integers, n_heads and n_observations.\nTest your code by making sure you can recover the answer in Q. 3 as a special case.\nShow the output for \\(\\rho \\propto (1, 2, 3, \\dots, 10)\\) and n_heads = 2 and n_observations = 10.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Probability essentials",
       "Exercises"
@@ -718,73 +509,7 @@
     "href": "exercises/ex02.html",
     "title": "Exercise 2: Bayesian inference first contact",
     "section": "",
-    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#goals",
-    "href": "exercises/ex02.html#goals",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Goals",
-    "text": "Goals\n\nBuild a probability model for a concrete example.\nIntroduce the concept of Bayes estimators.",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#sec-setup",
-    "href": "exercises/ex02.html#sec-setup",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Setup",
-    "text": "Setup\nThis exercise is centered around the following scenario:\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure.",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#sec-q1",
-    "href": "exercises/ex02.html#sec-q1",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Q.1: define a Bayesian model",
-    "text": "Q.1: define a Bayesian model\nIn order to perform inference on the unknown quantities, we must specify how they relate to the data; i.e., we need a probabilistic model. Assume that every Delta 7925H rocket has the same probability \\(p\\) of success. For simplicity, let us assume that \\(p\\) is allowed to take values on an evenly space grid \\[\np \\in \\left\\{\\frac{k}{K}: k\\in \\{0,\\dots,K\\}\\right\\}\n\\] for some fixed \\(K\\in\\mathbb{N}\\). Furthermore, we have access to a collection of numbers \\(\\rho_k\\in[0,1]\\) such that1 \\[\n\\forall k\\in\\{0,\\dots,K\\}:\\ \\mathbb{P}\\left(p=\\frac{k}{K}\\right) = \\rho_k.\n\\tag{1}\\]\nLet \\(Y_i\\) denote a binary variable with \\(Y_i=1\\) encoding a success, and \\(Y_i=0\\) a failure. We assume that, conditionally on \\(p\\), the \\(Y_i\\)’s are independent of each other.\nWe will use the following prior: \\[\n\\rho_k \\propto \\frac{k}{K}\\left(1-\\frac{k}{K}\\right).\n\\tag{2}\\] From now on, use \\(K = 20\\).\n\nWhat are the unknown quantities in this scenario? And what is the data?\nWrite the joint distribution of this model (use the \\(\\sim\\) notation).",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#sec-q2",
-    "href": "exercises/ex02.html#sec-q2",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Q.2: posterior and point estimates",
-    "text": "Q.2: posterior and point estimates\nTo help you answer the following questions, create the two vectors:\n\nprior_probabilities where entry \\(i\\) containing the prior probability \\(\\rho_{i-1}\\) defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and\nrealizations, a vector of possible realizations of \\(p\\) in the same order, namely \\((0, 1/K, 2/K \\dots, 1)\\).\n\n\nPlot the prior PMF. Do you think this is a reasonable prior? Hint: use the same type of plot as used last week to plot PMFs.\nLet \\(\\pi_k = \\mathbb{P}(p = k/K | Y_{1:3} = (1, 1, 1))\\) denote the posterior probabilities, for \\(k \\in \\{0, 1, 2, \\dots, K\\}\\). Create a vector posterior_probabilities where entry \\(i\\) is \\(\\pi_{i-1}\\). Plot the posterior PMF.\nWhat is the posterior mode?\nWrite a function that compute the posterior mean of \\(p\\). Hint: you should obtain \\(\\mathbb{E}[p | Y_{1:3} = (1, 1, 1)] \\approx 0.7\\).",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#sec-q3",
-    "href": "exercises/ex02.html#sec-q3",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Q.3: Bayes action",
-    "text": "Q.3: Bayes action\nLet \\(a\\in\\{0,1\\}\\) be a binary variable denoting the decision of buying the insurance (\\(a=1\\)) or not (\\(a=0\\)).\n\nBased on the problem description from the Setup Section, define a loss function \\(L(a, y)\\) that summarizes the cost of having taken decision \\(a\\in\\{0,1\\}\\) depending on whether the next launch is successful (\\(y = 1\\)) or not (\\(y = 0\\)). Hint: use indicator functions (i.e. binary functions taking either the value zero or one).\nWe now consider the expected loss under the posterior predictive distribution: \\[\n\\mathcal{L}(a) := \\mathbb{E}[L(a,Y_4)|Y_{1:3}=(1, 1, 1)]\n\\] Write \\(\\mathcal{L}(a)\\) in terms of \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\). Important: you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\) is the same as the posterior mean, which we computed earlier to be \\(\\approx 0.7\\) for our choice of prior.2\nFormulate a recommendation to the owner of the satellite (again, you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right) \\approx 0.7\\)).",
-    "crumbs": [
-      "Bayes on a discrete model",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex02.html#footnotes",
-    "href": "exercises/ex02.html#footnotes",
-    "title": "Exercise 2: Bayesian inference first contact",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nNotice that in Equation 1 we are using (small cap) \\(p\\) as a random variable, i.e. starting to move away from the probability theory capitalization convention towards the Bayesian convention where the same capitalization is used for both the random variable and its realization, as discussed in the first week.↩︎\nThe proof is as follows, where here we do desambiguate between the random variable \\(P\\) and its realization \\(p\\) (not to be confused with \\(\\mathbb{P}\\) and PMF \\(p(\\cdot)\\)!): \\[\\begin{align*}\n  \\mathbb{P}(Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) &= \\sum_p \\mathbb{P}(P = p, Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(additivity axiom)} \\\\\n  &= \\sum_p  \\mathbb{P}(P = p | Y_{1:3} = \\boldsymbol{1}) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(chain rule)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(definition)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p) \\;\\;\\text{(conditional independence)} \\\\\n  &= \\sum_p \\pi(p) p \\;\\;\\text{(since each flip is assumed to be Bernoulli)} \\\\\n  &= \\mathbb{E}[p | Y_{1:3} = \\boldsymbol{1}].\n  \\end{align*}\\] Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. We will cover in class the general method to compute predictive distribution, see lecture notes.↩︎",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayes on a discrete model",
       "Exercises"
@@ -5768,40 +5493,7 @@
     "href": "exercises/ex03.html",
     "title": "Exercise 3: write your own PPL!",
     "section": "",
-    "text": "Introduce Monte Carlo integration in continuous spaces.\nImplement importance sampling.\nBuild a universal probabilistic programming language in &lt;30 lines of code.",
-    "crumbs": [
-      "A first look at PPLs",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex03.html#goals",
-    "href": "exercises/ex03.html#goals",
-    "title": "Exercise 3: write your own PPL!",
-    "section": "",
-    "text": "Introduce Monte Carlo integration in continuous spaces.\nImplement importance sampling.\nBuild a universal probabilistic programming language in &lt;30 lines of code.",
-    "crumbs": [
-      "A first look at PPLs",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
-    "href": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
-    "title": "Exercise 3: write your own PPL!",
-    "section": "Q.1: functions on the unit interval",
-    "text": "Q.1: functions on the unit interval\nFor this question, use Simple Monte Carlo. The main twist compared to week one is that you will use a continuous random variable.\n\nWrite a function mc_estimate that takes a function \\(f:[0,1]\\to\\mathbb{R}\\) and outputs a Monte Carlo estimate of \\(\\int_0^1 f(x)\\mathrm{d}x\\) using \\(n=10000\\) independent samples from \\({\\mathrm{Unif}}(0,1)\\).\nConsider the function \\(f:[0,1]\\to[0,\\infty)\\) given by \\[\nf(x) = \\frac{1}{\\sqrt[3]{x^2(1-x)}}.\n\\] It is possible to show that \\[\n\\int_0^1 f(x)\\mathrm{d}x = \\frac{\\pi}{\\sin\\left(\\frac{\\pi}{3}\\right)}.\n\\tag{1}\\] Test your implementation of mc_estimate by checking that it produces an answer close to the value in Equation 1.\nThe following integral, known as the sine integral, \\[\n\\int_0^1 \\frac{\\sin(t)}{t} \\mathrm{d}t.\n\\] does not admit a closed-form expression. Estimate its value using mc_estimate(f).",
-    "crumbs": [
-      "A first look at PPLs",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex03.html#sec-simPPLe",
-    "href": "exercises/ex03.html#sec-simPPLe",
-    "title": "Exercise 3: write your own PPL!",
-    "section": "Q.2: implementing SNIS for simPPLe",
-    "text": "Q.2: implementing SNIS for simPPLe\nIn this question, you will write the function posterior that we used in the PPL introduction.\n\nFirst, install the package distr, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using\n\n\nif (!require(distr)){\n  install.packages(\"distr\")\n  require(distr)\n}\n\n\nRead this short tutorial on distr. Nothing to submit for this item.\nRead the “scaffold code”, and use distr and two of the functions below to create a fair coin, flip it, and to compute the probability of that flip:\n\n\n\nex03_scaffold.R\n\nsuppressPackageStartupMessages(library(distr))\n\n## Utilities to make the distr library a bit nicer to use\n\np &lt;- function(distribution, realization) {\n  d(distribution)(realization) # return the PMF or density \n}\n\nBern = function(probability_to_get_one) {\n  DiscreteDistribution(supp = 0:1, prob = c(1-probability_to_get_one, probability_to_get_one))\n}\n\n## Key functions called by simPPLe programs\n\n# Use simulate(distribution) for unobserved random variables\nsimulate &lt;- function(distribution) {\n  r(distribution)(1) # sample once from the given distribution\n}\n\n# Use observe(realization, distribution) for observed random variables\nobserve = function(realization, distribution) {\n  # `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function\n  weight &lt;&lt;- weight * p(distribution, realization) \n}\n\n\nComplete the implementation of the function posterior:\n\nposterior = function(ppl_function, number_of_iterations) {\n  numerator = 0.0\n  denominator = 0.0\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0\n    # update numerator and denominator\n  }\n  return(numerator/denominator)\n}\n\nTest your program by checking that you can approximate the posterior probability of the fair coin obtained in exercise 1, Q.2.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "A first look at PPLs",
       "Exercises"
@@ -5812,40 +5504,7 @@
     "href": "exercises/ex04.html",
     "title": "Exercise 4: the joy of probabilistic inference",
     "section": "",
-    "text": "Make sure to read the simPPLe setup page before you begin.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex04.html#q.1-logistic-rocket-improvement",
-    "href": "exercises/ex04.html#q.1-logistic-rocket-improvement",
-    "title": "Exercise 4: the joy of probabilistic inference",
-    "section": "Q.1: logistic rocket improvement",
-    "text": "Q.1: logistic rocket improvement\nConsider the Ariane 1 data we used this week,\nsuccess_indicators = c(1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1)\nand the model described in the same page.\nRecall that we discussed a model where the reliability of the rocket changes in time. This will allow us to incorporate, for example, the fact that engineering teams implement fixes based on past launches and therefore the probability of success should increase.\n\nWrite a function called logistic_regression containing a simPPLe probabilistic programming description of the model described in class. Your function should return a vector containing 3 elements in the following order:\n\nthe intercept (\\(\\in \\mathbb{R}\\)),\nthe slope (\\(\\in \\mathbb{R}\\)),\na prediction if one more launch would have been successful (1) or a failure (0) (\\(\\in \\{0, 1\\}\\)).\n\nFollow the instructions in the appendix below to get some helper functions. Use these functions to reproduce the lecture’s bivariate posterior plot over the intercept and slope parameters.\nEstimate the probability that the next launch is a success given the data under the logistic model.\nCreate a variant of the same model but where the slope is set to zero. Estimate the probability that the next launch is a success given the data under this simplified model.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex04.html#q.2-choosing-a-model",
-    "href": "exercises/ex04.html#q.2-choosing-a-model",
-    "title": "Exercise 4: the joy of probabilistic inference",
-    "section": "Q.2: choosing a model",
-    "text": "Q.2: choosing a model\nYou debate with your friend whether the logistic model or the simplified model (with slope equals to zero) should be preferred. To stop that debate, write a unified model which gives probability 1/2 to the simplified model, and 1/2 to the logistic model. Estimate the posterior probability that the logistic model is preferred under the unified model given the same data as in Q.1.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex04.html#sec-utils",
-    "href": "exercises/ex04.html#sec-utils",
-    "title": "Exercise 4: the joy of probabilistic inference",
-    "section": "Appendix",
-    "text": "Appendix\nFor Q.1.2, you will need to copy the following code and paste it in a file called simple_utils.R. We have demonstrated the use of these functions in the lectures.\n\n\nsimple_utils.R\n\n\nposterior_particles = function(ppl_function, number_of_iterations) {\n  weight &lt;&lt;- 1.0\n  sample = ppl_function()\n  dimension = length(sample) \n  samples = matrix(0, nrow = number_of_iterations, ncol = dimension, \n                   dimnames = list(1:number_of_iterations, names(sample)))\n  weights = rep(0, number_of_iterations)\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0       # reset the weight accumulator\n    sample = ppl_function()\n    samples[i,] = sample\n    weights[i]  = weight\n  }\n  return(list(samples=samples, weights=weights))\n}\n\ness = function(particles){\n  w = particles$weights\n  return(effective_sample_size(w))\n}\n\neffective_sample_size = function(w){\n  (sum(w)^2)/sum(w^2)\n}\n\nrepresentative_sample = function(snis_output, percentile=0.9999){\n  ess = effective_sample_size(snis_output$weights)\n  idx_ordered_weights = order(snis_output$weights, decreasing = TRUE)\n  acc_norm_weights = cumsum(snis_output$weights[idx_ordered_weights])/sum(snis_output$weights)\n  reduced_sample_size = max(round(ess), max(which(acc_norm_weights &lt; percentile)))\n  idx_subset = idx_ordered_weights[1:reduced_sample_size]\n  list(samples = snis_output$samples[idx_subset,], weights = snis_output$weights[idx_subset])\n}\nweighted_scatter_plot = function(\n    snis_output,\n    plot_idxs = 1:2,\n    base_color_hex = hcl.colors(1, palette = \"viridis\"),\n    plot_options = list(xlab=\"Param 1\", ylab=\"Param 2\")\n){\n  base_color = col2rgb(base_color_hex)/255\n  \n  # find the subset with almost all the mass\n  snis_subset = representative_sample(snis_output)\n  \n  # linear transform of weights to [0,1]\n  extreme_weights = range(snis_subset$weights, na.rm = T)\n  alphas = (snis_subset$weights-extreme_weights[1])/diff(extreme_weights)\n  \n  # create colors with transparencies and plot\n  points_color_alphas = rgb(base_color[1],base_color[2],base_color[3], alphas)\n  call_args=c(\n    list(x=snis_subset$samples[, plot_idxs], col=points_color_alphas), \n    plot_options\n  )\n  do.call(plot, call_args)\n}",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Exercises"
@@ -5856,29 +5515,7 @@
     "href": "exercises/ex05.html",
     "title": "Exercise 5: Bayesian theory",
     "section": "",
-    "text": "Consider a joint probabilistic model given by \\[\n\\begin{aligned}\n\\theta &\\sim \\rho \\\\\nx_i|\\theta &\\overset{\\text{iid}}{\\sim}\\nu_\\theta, \\quad i\\in\\{1,\\dots,n\\}\n\\end{aligned}\n\\] where \\(\\rho\\) is a prior distribution for the unknown parameter \\(\\theta\\), and \\(\\{x_i\\}_{i=1}^n\\) is a sequence of observations with conditional distribution \\(\\nu_\\theta\\).\n\nWrite down the posterior distribution of \\(\\theta\\) given \\(\\{x_i\\}_{i=1}^n\\).\nSuppose now we get an additional data point \\(x_{n+1}\\) with the same conditional distribution \\(\\nu_\\theta\\). Show that using the posterior from part 1 as prior and data equal to just \\(x_{n+1}\\) gives the same posterior distribution as redoing part 1 with the \\(n+1\\) data points.",
-    "crumbs": [
-      "Some theory",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex05.html#q.1-sequential-updating",
-    "href": "exercises/ex05.html#q.1-sequential-updating",
-    "title": "Exercise 5: Bayesian theory",
-    "section": "",
-    "text": "Consider a joint probabilistic model given by \\[\n\\begin{aligned}\n\\theta &\\sim \\rho \\\\\nx_i|\\theta &\\overset{\\text{iid}}{\\sim}\\nu_\\theta, \\quad i\\in\\{1,\\dots,n\\}\n\\end{aligned}\n\\] where \\(\\rho\\) is a prior distribution for the unknown parameter \\(\\theta\\), and \\(\\{x_i\\}_{i=1}^n\\) is a sequence of observations with conditional distribution \\(\\nu_\\theta\\).\n\nWrite down the posterior distribution of \\(\\theta\\) given \\(\\{x_i\\}_{i=1}^n\\).\nSuppose now we get an additional data point \\(x_{n+1}\\) with the same conditional distribution \\(\\nu_\\theta\\). Show that using the posterior from part 1 as prior and data equal to just \\(x_{n+1}\\) gives the same posterior distribution as redoing part 1 with the \\(n+1\\) data points.",
-    "crumbs": [
-      "Some theory",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex05.html#q.2-bayesian-inference-in-the-limit-of-increasing-data",
-    "href": "exercises/ex05.html#q.2-bayesian-inference-in-the-limit-of-increasing-data",
-    "title": "Exercise 5: Bayesian theory",
-    "section": "Q.2: Bayesian inference in the limit of increasing data",
-    "text": "Q.2: Bayesian inference in the limit of increasing data\nWe will use the tractability of the coin bag example to explore the behavior of the posterior distribution as the number of observations goes to infinity. Recall that its joint distribution is \\[\n\\begin{aligned}\np &\\sim {\\mathrm{Discrete}}(\\{0,1/K,2/K,\\dots,1\\},\\rho) \\\\\ny_i|p &\\overset{\\text{iid}}{\\sim}{\\mathrm{Bern}}(p), \\quad i\\in\\{1,\\dots,n\\}\n\\end{aligned}\n\\tag{1}\\] and we use the convention that \\(y=1\\) is “heads”.\n\nLoad the following code to compute the posterior in Equation 1. Nothing to submit for this item.\n\n\nposterior_distribution = function(rho, n_heads, n_observations) {\n  K = length(rho) - 1\n  gamma = rho * dbinom(n_heads, n_observations, (0:K)/K)\n  normalizing_constant = sum(gamma)\n  gamma/normalizing_constant\n}\n\n\nWrite a function posterior_mean that computes the posterior mean given the output of posterior_distribution.\nWrite another function with signature\n\nsimulate_posterior_mean_error = function(rho_true, rho_prior, n_observations){...}\nthat performs the following\n\nsample \\(p_\\text{true} \\sim {\\mathrm{Discrete}}(\\{0,1/K,2/K,\\dots,1\\},\\rho_\\text{true})\\)\nsample the data \\(y_{1:n_\\text{obs}}\\) conditional on \\(p_\\text{true}\\)\ncall posterior_distribution using \\(\\rho_\\text{prior}\\) and the simulated data\ncompute the posterior mean \\(\\mathbb{E}[p|y_{1:n_\\text{obs}}]\\)\nreturn the absolute error between \\(p_\\text{true}\\) and the posterior mean\n\n\nUsing\n\nrho_true = rho_prior = rep(1, K+1)\nand \\(K=100\\), run simulate_posterior_mean_error for all n_observations values in\nn_obs_vector &lt;- 2^(0:6)\nRepeat each case 1000 times. Store the error values in a dataframe experiment_results that has columns (n_observations, replication, error), with replication ranging from 1 to 1000. Show the output of head and the output of tail for your dataframe.\n\nVisualize the above data using a log-log plot using the following code\n\nggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0)\n  stat_summary(fun = mean, geom=\"line\") + # Line averages over 1000 replicates\n  scale_x_log10() +  # Show result in log-log scale\n  scale_y_log10(n.breaks=16) +\n  coord_cartesian(ylim = c(1e-3, 1)) +\n  theme_minimal() +\n  geom_point() +\n  labs(x = \"Number of observations\",\n       y = \"Absolute error of the posterior mean\")\n\nDo a quick estimate of the slope at the rightmost end of the graph via \\[\n\\frac{y_7-y_5}{x_7-x_5}\n\\] where \\(x\\) is \\(\\log_{10}(n)\\), \\(y\\) is \\(\\log_{10}(\\text{error})\\), and the subscript indicates the column of points from left to right. What can you deduce about the scaling law of the error?\nRepeat part 4 but now using\n\nrho_true = rep(1, K+1)\nrho_prior = 1:(K+1)\nStore the results in a dataframe called new_results. Use the following code to plot both sets of results\nggplot(all_results, aes(x=n_observations, y=errors+1e-9, # avoid log(0) \n                        color=prior_type, shape=prior_type)) + \n  stat_summary(fun = mean, geom=\"line\") + # Line averages over 1000 replicates\n  scale_x_log10() +  # Show result in log-log scale\n  scale_y_log10(n.breaks=16) +\n  coord_cartesian(ylim = c(1e-3, 1)) +\n  theme_minimal() +\n  geom_point() +\n  labs(x = \"Number of observations\",\n       y = \"Absolute error of the posterior mean\")\nwhere the dataframe all_results must be created by\n\nAdding a column prior_type to experiment_results with constant value equal to Match\nAdding the same column to new_results with the value Different\nFinally, use rbind to join both dataframes into one.\n\nComment on the visual differences between the two sets of results.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Some theory",
       "Exercises"
@@ -5889,18 +5526,7 @@
     "href": "exercises/ex06.html",
     "title": "Exercise 6: Hierarchical models",
     "section": "",
-    "text": "In this exercise we will model the effectiveness of COVID vaccines using clinical trials data. Each trial consists of two arms: vaccinated (i.e., treated) and control (i.e., not treated). For a typical trial we know\n\nThe total number of patients in each arm: \\(t_\\text{v}\\) (vaccinated), \\(t_\\text{c}\\) (control).\nThe number of patients that got infected with the SARS-CoV-2 virus in each arm: \\(n_\\text{v}\\), \\(n_\\text{c}\\).\n\nWe model \\(n_\\text{v}\\) and \\(n_\\text{c}\\) as Binomial random variables. The unknown parameter for these distributions will depend on two numbers in \\([0,1]\\)\n\nIncidence \\(p\\): the probability that a patient in the trial will become infected without being treated with the vaccine.\nEffectiveness \\(e\\): the decrease in incidence that the vaccine provides.\n\nWe put a beta prior on both parameters. Since the parameters of the \\({\\mathrm{Beta}}(\\alpha,\\beta)\\) distribution are not very interpretable, we will work with a re-parametrized version \\({\\mathrm{BetaMP}}(\\mu,\\lambda)\\) where \\(\\mu\\in[0,1]\\) is the mean and \\(\\lambda&gt;0\\) is a precision parameter. The bijection is given by \\[\n\\mu = \\frac{\\alpha}{\\alpha+\\beta} \\quad \\lambda=\\alpha+\\beta \\qquad\\iff\\qquad\n\\alpha = \\mu \\lambda \\quad \\beta = (1-\\mu)\\lambda\n\\]\nFinally, we put priors on the parameters of these beta distributions to complete the model as follows \\[\n\\begin{aligned}\n\\mu_\\text{e} &\\sim {\\mathrm{Unif}}(0,1) && (\\text{diffuse prior})\\\\\n\\lambda_\\text{e} &\\sim {\\mathrm{Exp}}(0.001) && (\\text{diffuse prior})\\\\\n\\mu_\\text{p} &\\sim {\\mathrm{BetaMP}}(0.1, 10) && (\\text{incidence is usually low})\\\\\n\\lambda_\\text{p} &\\sim {\\mathrm{Exp}}(0.001) && (\\text{diffuse prior})\\\\\ne|\\mu_\\text{e},\\lambda_\\text{e} &\\sim {\\mathrm{BetaMP}}(\\mu_\\text{e}, \\lambda_\\text{e}) \\\\\np|\\mu_\\text{p},\\lambda_\\text{p} &\\sim {\\mathrm{BetaMP}}(\\mu_\\text{p}, \\lambda_\\text{p}) \\\\\nn_\\text{c}|p &\\sim {\\mathrm{Binom}}(t_\\text{c}, p) \\\\\nn_\\text{v}|e,p &\\sim {\\mathrm{Binom}}(t_\\text{v}, p(1-e))\n\\end{aligned}\n\\tag{1}\\]\n\nNow, consider the following data—available here—arising from clinical trials of two popular COVID vaccines\n\n\n\n  \n\n\n\n\nExpand the model in Equation 1 into a hierarchical model that covers both vaccines. The parameters \\((\\mu_\\text{e},\\lambda_\\text{e},\\mu_\\text{p},\\lambda_\\text{p})\\) must be shared across vaccines. In contrast, each vaccine must have its own \\((e,p)\\) pair.\nImplement the model from part 1 in simPPLe. Your PPL function should return the indicator that Moderna is more effective than Pfizer. Use this code to define \\({\\mathrm{BetaMP}}(\\mu, \\lambda)\\)\n\nBetaMP = function(mean, precision){\n  Beta(mean*precision, (1-mean)*precision)\n}\n\nDownload the data and load it using the following (no points for this part)\n\nvaccines = read.csv(\"vaccines.csv\")\nvaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code\n\nRun your model in simPPLe using posterior with 20,000 iterations, and report the estimated posterior probability that Moderna is more effective than Pfizer. Is there strong evidence for this claim? Note: it takes a couple of minutes to run 20,000 iterations. Therefore, for prototyping it may be easier to test your implementation with fewer iterations.",
-    "crumbs": [
-      "Hierarchical models",
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/ex06.html#q.1-efficacy-of-vaccines",
-    "href": "exercises/ex06.html#q.1-efficacy-of-vaccines",
-    "title": "Exercise 6: Hierarchical models",
-    "section": "",
-    "text": "In this exercise we will model the effectiveness of COVID vaccines using clinical trials data. Each trial consists of two arms: vaccinated (i.e., treated) and control (i.e., not treated). For a typical trial we know\n\nThe total number of patients in each arm: \\(t_\\text{v}\\) (vaccinated), \\(t_\\text{c}\\) (control).\nThe number of patients that got infected with the SARS-CoV-2 virus in each arm: \\(n_\\text{v}\\), \\(n_\\text{c}\\).\n\nWe model \\(n_\\text{v}\\) and \\(n_\\text{c}\\) as Binomial random variables. The unknown parameter for these distributions will depend on two numbers in \\([0,1]\\)\n\nIncidence \\(p\\): the probability that a patient in the trial will become infected without being treated with the vaccine.\nEffectiveness \\(e\\): the decrease in incidence that the vaccine provides.\n\nWe put a beta prior on both parameters. Since the parameters of the \\({\\mathrm{Beta}}(\\alpha,\\beta)\\) distribution are not very interpretable, we will work with a re-parametrized version \\({\\mathrm{BetaMP}}(\\mu,\\lambda)\\) where \\(\\mu\\in[0,1]\\) is the mean and \\(\\lambda&gt;0\\) is a precision parameter. The bijection is given by \\[\n\\mu = \\frac{\\alpha}{\\alpha+\\beta} \\quad \\lambda=\\alpha+\\beta \\qquad\\iff\\qquad\n\\alpha = \\mu \\lambda \\quad \\beta = (1-\\mu)\\lambda\n\\]\nFinally, we put priors on the parameters of these beta distributions to complete the model as follows \\[\n\\begin{aligned}\n\\mu_\\text{e} &\\sim {\\mathrm{Unif}}(0,1) && (\\text{diffuse prior})\\\\\n\\lambda_\\text{e} &\\sim {\\mathrm{Exp}}(0.001) && (\\text{diffuse prior})\\\\\n\\mu_\\text{p} &\\sim {\\mathrm{BetaMP}}(0.1, 10) && (\\text{incidence is usually low})\\\\\n\\lambda_\\text{p} &\\sim {\\mathrm{Exp}}(0.001) && (\\text{diffuse prior})\\\\\ne|\\mu_\\text{e},\\lambda_\\text{e} &\\sim {\\mathrm{BetaMP}}(\\mu_\\text{e}, \\lambda_\\text{e}) \\\\\np|\\mu_\\text{p},\\lambda_\\text{p} &\\sim {\\mathrm{BetaMP}}(\\mu_\\text{p}, \\lambda_\\text{p}) \\\\\nn_\\text{c}|p &\\sim {\\mathrm{Binom}}(t_\\text{c}, p) \\\\\nn_\\text{v}|e,p &\\sim {\\mathrm{Binom}}(t_\\text{v}, p(1-e))\n\\end{aligned}\n\\tag{1}\\]\n\nNow, consider the following data—available here—arising from clinical trials of two popular COVID vaccines\n\n\n\n  \n\n\n\n\nExpand the model in Equation 1 into a hierarchical model that covers both vaccines. The parameters \\((\\mu_\\text{e},\\lambda_\\text{e},\\mu_\\text{p},\\lambda_\\text{p})\\) must be shared across vaccines. In contrast, each vaccine must have its own \\((e,p)\\) pair.\nImplement the model from part 1 in simPPLe. Your PPL function should return the indicator that Moderna is more effective than Pfizer. Use this code to define \\({\\mathrm{BetaMP}}(\\mu, \\lambda)\\)\n\nBetaMP = function(mean, precision){\n  Beta(mean*precision, (1-mean)*precision)\n}\n\nDownload the data and load it using the following (no points for this part)\n\nvaccines = read.csv(\"vaccines.csv\")\nvaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code\n\nRun your model in simPPLe using posterior with 20,000 iterations, and report the estimated posterior probability that Moderna is more effective than Pfizer. Is there strong evidence for this claim? Note: it takes a couple of minutes to run 20,000 iterations. Therefore, for prototyping it may be easier to test your implementation with fewer iterations.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Hierarchical models",
       "Exercises"

@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -101,35 +67,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -989,21 +926,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
-  <ul class="collapse">
-  <li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link" data-scroll-target="#getting-the-data">Getting the data</a></li>
-  <li><a href="#problem-formulation" id="toc-problem-formulation" class="nav-link" data-scroll-target="#problem-formulation">Problem formulation</a></li>
-  <li><a href="#bayesian-model" id="toc-bayesian-model" class="nav-link" data-scroll-target="#bayesian-model">Bayesian model</a></li>
-  </ul></li>
-  <li><a href="#q.1-a-custom-mcmc-sampler" id="toc-q.1-a-custom-mcmc-sampler" class="nav-link" data-scroll-target="#q.1-a-custom-mcmc-sampler">Q.1: A custom MCMC sampler</a></li>
-  <li><a href="#q.2-mcmc-correctness-testing" id="toc-q.2-mcmc-correctness-testing" class="nav-link" data-scroll-target="#q.2-mcmc-correctness-testing">Q.2: MCMC correctness testing</a></li>
-  <li><a href="#q.3-using-your-sampler-for-data-analysis" id="toc-q.3-using-your-sampler-for-data-analysis" class="nav-link" data-scroll-target="#q.3-using-your-sampler-for-data-analysis">Q.3: Using your sampler for data analysis</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1047,231 +970,21 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>In this exercise, you will implement a custom MCMC sampler for a <strong>change point detection</strong> Bayesian model.</p>
-<section id="getting-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="getting-the-data">Getting the data</h3>
-<p>Copy the blurb below into a file, you will need it in Q3.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source: https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sms_data <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">13</span>,<span class="dv">24</span>,<span class="dv">8</span>,<span class="dv">24</span>,<span class="dv">7</span>,<span class="dv">35</span>,<span class="dv">14</span>,<span class="dv">11</span>,<span class="dv">15</span>,<span class="dv">11</span>,<span class="dv">22</span>,<span class="dv">22</span>,<span class="dv">11</span>,<span class="dv">57</span>,<span class="dv">11</span>,<span class="dv">19</span>,<span class="dv">29</span>,<span class="dv">6</span>,<span class="dv">19</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>,<span class="dv">22</span>,<span class="dv">12</span>,<span class="dv">18</span>,<span class="dv">72</span>,<span class="dv">32</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">13</span>,<span class="dv">19</span>,<span class="dv">23</span>,<span class="dv">27</span>,<span class="dv">20</span>,<span class="dv">6</span>,<span class="dv">17</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">14</span>,<span class="dv">6</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">19</span>,<span class="dv">70</span>,<span class="dv">49</span>,<span class="dv">7</span>,<span class="dv">53</span>,<span class="dv">22</span>,<span class="dv">21</span>,<span class="dv">31</span>,<span class="dv">19</span>,<span class="dv">11</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">12</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">35</span>,<span class="dv">17</span>,<span class="dv">23</span>,<span class="dv">17</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">13</span>,<span class="dv">27</span>,<span class="dv">0</span>,<span class="dv">39</span>,<span class="dv">37</span>,<span class="dv">5</span>,<span class="dv">14</span>,<span class="dv">13</span>,<span class="dv">22</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="problem-formulation" class="level3">
-<h3 class="anchored" data-anchor-id="problem-formulation">Problem formulation</h3>
-<p>We use a dataset and model inspired by <a href="https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb">Davidson-Pilon, 2013</a>.</p>
-<p>The data we analyze records, for each of 74 days, the number of text messages sent and received by Davidson-Pilon. The raw data looks like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sms_data, <span class="at">xlab =</span> <span class="st">"Day"</span>, <span class="at">ylab =</span> <span class="st">"Number of text messages that day"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ex09_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>Goal:</strong> find if this user’s behaviour changed in that time period, and if so, when.</p>
-<p>This is a simple example of a change point detection task.</p>
-</section>
-<section id="bayesian-model" class="level3">
-<h3 class="anchored" data-anchor-id="bayesian-model">Bayesian model</h3>
-<p>Change point models are related to <a href="../w10_modelling/topic07_mixtures.html">mixture models</a>, but instead of each data point being free to pick which of the two clusters to belong to, change point models have a different cluster membership mechanism, defined as follows:</p>
-<ol type="1">
-<li>Pick a change point <span class="math inline">\(C\)</span> uniformly among the days <span class="math inline">\(d \in \{1, 2, \dots, 74\}\)</span>.</li>
-<li>The likelihood for days before the change point <span class="math inline">\(C\)</span> uses the parameter of cluster 1.</li>
-<li>The likelihood for days after the change point <span class="math inline">\(C\)</span> uses the parameter of cluster 2.</li>
-</ol>
-<p><strong>Mathematical description:</strong></p>
-<p><span class="math display">\[\begin{align*}
-\lambda_i &amp;\sim {\mathrm{Exp}}(1/100), \text{ for }i \in \{1, 2\}, \;\;\text{(parameters for 2 clusters)} \\
-C &amp;\sim {\mathrm{Unif}}\{1, 2, \dots 74\}, \;\;\text{(change point)} \\
-Y_d &amp;\sim {\mathrm{Poisson}}(\lambda_{\mathbb{1}[d &lt; C] + 1}), \text{ for }d \in \{1, 2, \dots, 74\} \;\;\text{(likelihood)}.
-\end{align*}\]</span></p>
-<p><strong>R implementation:</strong></p>
-<p>We provide an implementation of the joint distribution of this model below. You will need it in this exercise.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>log_joint <span class="ot">=</span> <span class="cf">function</span>(rates, change_point, y) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return log(0.0) if parameters are outside of the support</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (rates[[<span class="dv">1</span>]] <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">|</span> rates[[<span class="dv">2</span>]] <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">|</span> change_point <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">|</span> change_point <span class="sc">&gt;</span> <span class="fu">length</span>(y)) </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="sc">-</span><span class="cn">Inf</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  log_prior <span class="ot">=</span> </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dexp</span>(rates[[<span class="dv">1</span>]], <span class="dv">1</span><span class="sc">/</span><span class="dv">100</span>, <span class="at">log =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dexp</span>(rates[[<span class="dv">2</span>]], <span class="dv">1</span><span class="sc">/</span><span class="dv">100</span>, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  log_likelihood <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(y)) {</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    rate <span class="ot">=</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> change_point) rates[[<span class="dv">1</span>]] <span class="cf">else</span> rates[[<span class="dv">2</span>]]</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    log_likelihood <span class="ot">=</span> log_likelihood <span class="sc">+</span> <span class="fu">dpois</span>(y[[i]], rate, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(log_prior <span class="sc">+</span> log_likelihood)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Explanation:</strong> the argument…</p>
-<ul>
-<li>… <code>rates</code> takes in a vector of length two, with the two components corresponding to <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span>.</li>
-<li>… <code>change_point</code> takes in an integer, corresponding to <span class="math inline">\(C\)</span> in the mathematical description above.</li>
-<li>… <code>y</code> takes in an array of non-negative integer, corresponding to <span class="math inline">\(Y = (Y_1, Y_2, \dots, Y_{74})\)</span>.</li>
-</ul>
-<p>Notice also we return the <a href="../w10_modelling/topic03_custom_bricks.html#log-scale-computation">log of the joint distribution</a>, so each term in the joint is computed in log scale using the <code>log = TRUE</code> option.</p>
-</section>
-</section>
-<section id="q.1-a-custom-mcmc-sampler" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-a-custom-mcmc-sampler">Q.1: A custom MCMC sampler</h2>
-<ol type="1">
-<li>Define mathematically an irreducible and invariant MCMC algorithm to sample from the change point model’s posterior.</li>
-</ol>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for hint
+Caution
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Start by defining a kernel <span class="math inline">\(K_1\)</span> modifying only the <code>rates</code> parameter, then a second one, <span class="math inline">\(K_2\)</span>, modifying the <code>change_point</code> variable. Write the proposal <span class="math inline">\(q_k\)</span> for <span class="math inline">\(k \in \{1, 2\}\)</span> for each kernel. Then specify a kernel <span class="math inline">\(K\)</span> based on <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
-<p>Note: to get good mixing in Q3, your discrete proposal should have a standard deviation greater than 5.</p>
+<p>Page under construction: information on this page may change.</p>
 </div>
 </div>
-</div>
-<ol start="2" type="1">
-<li><p>Prove that the MCMC algorithm you defined in part 1 is <span class="math inline">\(\pi\)</span>-invariant.</p></li>
-<li><p>Implement the MCMC algorithm you describe mathematically in R. You should follow the following template:</p></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mcmc <span class="ot">=</span> <span class="cf">function</span>(rates, change_point, y, n_iterations) {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  change_point_trace <span class="ot">=</span> <span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>, n_iterations)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iterations) {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: implement a MCMC sampler</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return:</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - the trace of the change points (for question 1) </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - the rates at the last iteration (for question 2)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">change_point_trace =</span> change_point_trace, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">last_iteration_rates =</span> rates</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Note:</strong></p>
-<ul>
-<li>Make sure to use the input arguments <code>rates</code> and <code>change_point</code> as initial values of your MCMC algorithms (this will be important for Q2).</li>
-<li>The function returns two pieces of information:
-<ul>
-<li>The list of samples (“trace”) for the parameter of interest, <code>change_point</code> (used for Q3).</li>
-<li>The rate parameter at the very end of the MCMC algorithm (used for Q2).</li>
-</ul></li>
-</ul>
-</section>
-<section id="q.2-mcmc-correctness-testing" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-mcmc-correctness-testing">Q.2: MCMC correctness testing</h2>
-<p>We now subject our MCMC implementation to an “exact invariance test” to validate its correctness.</p>
-<ol type="1">
-<li>Start by completing the function below to perform <a href="../w01_discrete_inference/topic06_forward_sampling.html">forward simulation</a> on the same Bayesian model as in Q1. The input argument <code>synthetic_data_size</code> specifies the size of the dataset to generate.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">=</span> <span class="cf">function</span>(synthetic_data_size) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span><span class="al">TODO</span><span class="co">: implement forward simulation</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rates =</span> rates,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">change_point =</span> change_point,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Recall that each iteration of the exact invariance test starts by forward sampling, followed by either 0 or several rounds of MCMC (we will use 200). We provide this function to do this for you:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>forward_posterior <span class="ot">=</span> <span class="cf">function</span>(synthetic_data_size, n_mcmc_iters) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  initial <span class="ot">=</span> <span class="fu">forward</span>(synthetic_data_size)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n_mcmc_iters <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    samples <span class="ot">=</span> <span class="fu">mcmc</span>(initial<span class="sc">$</span>rates, initial<span class="sc">$</span>change_point, initial<span class="sc">$</span>data, n_mcmc_iters)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(samples<span class="sc">$</span>last_iteration_rates[[<span class="dv">1</span>]])</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(initial<span class="sc">$</span>rates[[<span class="dv">1</span>]])</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="2" type="1">
-<li>Apply the test to your code, by completing the lines below.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: we use synthetic datasets with only 5 observations to speed things up</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>forward_only <span class="ot">=</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">forward_posterior</span>(<span class="dv">5</span>, <span class="dv">0</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>with_mcmc <span class="ot">=</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">forward_posterior</span>(<span class="dv">5</span>, <span class="dv">200</span>))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: perform 2-samples t-test or Kolmogorov-Smirnov test</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       to see if forward_only and with_mcmc follow the same distribution. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Report the p-value. Recall that if it “tiny” (e.g., less than 0.01), it suggests there may be a bug in your code.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for tricks useful if you get a tiny p-value
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>What to do if you suspect there is a bug?</p>
-<p>First, try to narrow down if the putative bug is in the change-point MCMC move, or in the rates MCMC move, or the forward sampling function.</p>
-<p>To do so, temporary turn off the sampler <span class="math inline">\(K_1\)</span>, and run the test. Then do the same for <span class="math inline">\(K_2\)</span>.</p>
-<p>If the low p value only shows up for one of the <span class="math inline">\(K_i\)</span>, that suggests the bug might be located there. If it’s on each separately, then there could be a common mistake, or the bug could be in the forward simulation (or testing) code.</p>
-</div>
-</div>
-</div>
-<ol start="3" type="1">
-<li>If you identified a bug using this method, show the part of the code that had a bug (before and after fixing), as well as the p-value (before and after). If no bugs where found, temporarily create one and report the same thing. Don’t forget to fix all bugs before moving to the next question.</li>
-</ol>
-</section>
-<section id="q.3-using-your-sampler-for-data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-using-your-sampler-for-data-analysis">Q.3: Using your sampler for data analysis</h2>
-<p>Perform 10k iteration of MCMC on the text message data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Recall that you can access the list of sampled change point using <code>samples$change_point_trace</code>.</p>
-<ol type="1">
-<li><p>Create two trace plots for the change point parameter, one for the full trace, one for the subset of samples in the second half (via <code>[5000:10000]</code>). Comment on the mixing behaviour.</p></li>
-<li><p>Install the following package to compute the effective sample size:</p></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mcmcse"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">"mcmcse"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>mcmcse<span class="sc">::</span><span class="fu">ess</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Again, report it for both the full set of samples and the subset coming from the second half.</p>
-<ol start="3" type="1">
-<li>Produce a histogram from the second half of samples. Briefly comment on the results in light of the note below.</li>
-</ol>
-<p><strong>Note:</strong> this dataset comes with the additional information that <em>“the 45th day corresponds to Christmas, and I moved away to Toronto the next month, leaving a girlfriend behind”</em> (<a href="https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb">Davidson-Pilon, 2013</a>).</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

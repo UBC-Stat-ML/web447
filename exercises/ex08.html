@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -101,35 +67,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -989,15 +926,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#q.1-calibration-analysis-via-cross-validation" id="toc-q.1-calibration-analysis-via-cross-validation" class="nav-link active" data-scroll-target="#q.1-calibration-analysis-via-cross-validation">Q.1: calibration analysis via cross-validation</a></li>
-  <li><a href="#q.2-prior-predictive-checks" id="toc-q.2-prior-predictive-checks" class="nav-link" data-scroll-target="#q.2-prior-predictive-checks">Q.2: prior predictive checks</a></li>
-  <li><a href="#q.3-hierarchical-models-revisited" id="toc-q.3-hierarchical-models-revisited" class="nav-link" data-scroll-target="#q.3-hierarchical-models-revisited">Q.3: hierarchical models revisited</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1041,97 +970,21 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="q.1-calibration-analysis-via-cross-validation" class="level2">
-<h2 class="anchored" data-anchor-id="q.1-calibration-analysis-via-cross-validation">Q.1: calibration analysis via cross-validation</h2>
-<p>We have already discussed the concept of <a href="../w05_properties/topic05_calibration.html">calibration</a> for Bayesian inference, where we reviewed the behavior of both well-specified—the ideal situation—and mis-specified models—the most common case in practice. In the latter case, we demonstrated with a simulation experiment that mis-specification results in credible intervals that are not calibrated. However in practice, these tests are impossible to carry out because we do not have access to the true data-generating distribution.</p>
-<p>One way to approximate the outcome of such an experiment is via <em>cross-validation</em>. In particular, this exercise will teach you how to use leave-one-out cross-validation to assess the calibration of the model for the Hubble dataset. Let’s begin by loading and formatting the data</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">distance =</span> R..Mpc.) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">velocity =</span> v..km.sec.)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">=</span> df<span class="sc">$</span>velocity<span class="sc">/</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<ol type="1">
-<li>Modify the stan code you wrote for <a href="../exercises/ex07.html">exercise 7</a> to include</li>
-</ol>
-<ol type="a">
-<li>In the <code>data</code> block: an additional real-valued argument <code>x_pred</code> for the independent variable for the left-out point.</li>
-<li>In the <code>generated quantities</code> block: generate a value <code>y_pred</code> given <code>x_pred</code> and the parameters <span class="math inline">\((\text{slope, sigma})\)</span>.</li>
-</ol>
-<p>Create a compiled model called <code>hubble_predict</code> by passing the modified stan code to the function <code>stan_model</code>.</p>
-<ol start="2" type="1">
-<li>Test your implementation by fitting the version of the model that leaves out the last row of the dataset. <strong>Hint</strong>: you should pass as data to stan the <code>train_test_dta</code> list defined below</li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N_obs <span class="ot">=</span> <span class="fu">nrow</span>(df)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N_train <span class="ot">=</span> N_obs<span class="dv">-1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>train_test_dta <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">N  =</span> N_train,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xs =</span> df<span class="sc">$</span>distance[<span class="sc">-</span>N_obs], </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ys =</span> df<span class="sc">$</span>velocity[<span class="sc">-</span>N_obs], </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_pred =</span> df<span class="sc">$</span>distance[N_obs]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Report the leave-one-out 80% credible interval for the left out observation.</p>
-<ol start="3" type="1">
-<li>Repeat step 2 for all observations. That is, construct a matrix of <code>nrow(df)</code> rows and 2 columns called <code>ci_limits</code>, where the <code>i</code>-th row contains an 80% credible interval for the <code>i</code>-th observation left out. Report the plot generated by the following code</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>merged_df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="fu">data.frame</span>(<span class="at">CI_L =</span> ci_limits[,<span class="dv">1</span>], <span class="at">CI_R =</span> ci_limits[,<span class="dv">2</span>])) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Inside_CI =</span> (velocity <span class="sc">&gt;=</span> CI_L <span class="sc">&amp;</span> velocity <span class="sc">&lt;=</span> CI_R)) </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>merged_df <span class="sc">%&gt;%</span> </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>N_obs, <span class="at">y =</span> velocity, <span class="at">ymin =</span> CI_L, <span class="at">ymax =</span> CI_R, <span class="at">color=</span>Inside_CI)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>() <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Point"</span>, <span class="at">y =</span> <span class="st">"Velocity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Is the fraction of left-out observations contained in their respective credible intervals similar to the nominal coverage level?</p>
-</section>
-<section id="q.2-prior-predictive-checks" class="level2">
-<h2 class="anchored" data-anchor-id="q.2-prior-predictive-checks">Q.2: prior predictive checks</h2>
-<p>Consider the logistic regression model</p>
-<p><span id="eq-log-reg"><span class="math display">\[
-\begin{aligned}
-\beta_i &amp;\overset{\text{iid}}{\sim}\mathcal{N}(0,1), \quad i\in\{1,\dots,n_\text{pred}\} \\
-y_n|\beta &amp;\sim {\mathrm{Bern}}(\text{logistic}(x_n^T \beta)), \quad n\in\{1,\dots,n_\text{obs}\}
-\end{aligned}
-\tag{1}\]</span></span></p>
-<p>In this exercise we will investigate the effect of having fixed independent priors on the coefficients <span class="math inline">\(\{\beta_i\}_{i=1}^{n_\text{pred}}\)</span> as <span class="math inline">\(n_\text{pred}\)</span> grows.</p>
-<ol type="1">
-<li>Write a function called <code>logistic_regression</code> that takes as input a matrix <code>X</code> of <code>n_obs</code> rows and <code>n_pred</code> columns. Your function should</li>
-</ol>
-<ol type="a">
-<li>simulate <span class="math inline">\(\beta\)</span> according to <a href="#eq-log-reg" class="quarto-xref">Equation&nbsp;1</a>,</li>
-<li>simulate the response vector <span class="math inline">\(y\)</span> given <span class="math inline">\(\beta\)</span>, and</li>
-<li>return the average response <span class="math inline">\(\bar{y}:=n_\text{obs}^{-1}\sum_i y_i\)</span>.</li>
-</ol>
-<ol start="2" type="1">
-<li>Let us fix <span class="math inline">\(n_\text{obs}=100\)</span>. For each <span class="math inline">\(n_\text{pred}\in\{2,4,15\}\)</span>, sample <span class="math inline">\(X\)</span> according to <span class="math display">\[
-X_{n,i} \overset{\text{iid}}{\sim}{\mathrm{Bern}}(0.9)
-\]</span> Then, run <code>logistic_regression</code> 100,000 times, and report the histogram of the simulated <span class="math inline">\(\bar{y}\)</span> values. To help you, you may use the following code as a skeleton for your answer</li>
-</ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>opar <span class="ot">=</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># set a layout of 3 plots in a single row</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n_pred <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">15</span>)){</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">=</span> <span class="co"># fill this</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  simulated_ybars <span class="ot">=</span> <span class="co"># fill this</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(simulated_ybars, <span class="at">breaks=</span><span class="dv">20</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">17000</span>), </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="fu">paste</span>(n_pred, <span class="st">"predictors"</span>), <span class="at">xlab =</span> <span class="st">"Average outcome"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(opar) <span class="co"># reset graphical parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="3" type="1">
-<li>Do you observe any change in the distributions obtained in step 2? Do you think this is desirable in a model? If yes, why? If not, how would you fix this?</li>
-</ol>
-</section>
-<section id="q.3-hierarchical-models-revisited" class="level2">
-<h2 class="anchored" data-anchor-id="q.3-hierarchical-models-revisited">Q.3: hierarchical models revisited</h2>
-<p>Modify the <a href="../w09_workflow/topic06_grouped_data.html">tutorial on tidybayes</a> to make the model hierarchical, following the same model as in <a href="../exercises/ex06.html">exercise 6</a>.</p>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Page under construction: information on this page may change.</p>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
