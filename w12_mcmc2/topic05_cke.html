@@ -1094,51 +1094,6 @@ Click for answer
 <section id="computing-a-marginal" class="level2">
 <h2 class="anchored" data-anchor-id="computing-a-marginal">Computing a marginal</h2>
 <p><strong>Question:</strong> write the marginal distribution at step 2, <span class="math inline">\(\mu_2\)</span> using <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(K\)</span>.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The marginal <span class="math inline">\(\mu_2(x')\)</span> is given by…</p>
-<ol type="1">
-<li><span class="math inline">\(\mu_1(x) K(x' | x)\)</span></li>
-<li><span class="math inline">\(\mu_1(x') K(x | x')\)</span></li>
-<li><span class="math inline">\(\sum_x \mu_1(x) K(x' | x)\)</span></li>
-<li><span class="math inline">\(\sum_x \mu_1(x') K(x | x')\)</span></li>
-<li>None of the above.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>We have:</p>
-<p><span class="math display">\[\begin{align*}
-\mu_2(x') &amp;= \mathbb{P}(X^{(2)} = x') \\
-&amp;= \sum_x \mathbb{P}(X^{(1)} = x, X^{(2)} = x') \;\;\text{(marginalization)} \\
-&amp;= \sum_x \mathbb{P}(X^{(1)} = x) \mathbb{P}(X^{(2)} = x' | X^{(1)} = x) \;\;\text{(chain rule)} \\
-&amp;= \sum_x \mu_1(x) K(x' | x). \;\;\text{(by definition)} \\
-\end{align*}\]</span></p>
-</div>
-</div>
-</div>
 
 
 </section>

@@ -966,10 +966,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#example-coins-in-a-bag" id="toc-example-coins-in-a-bag" class="nav-link" data-scroll-target="#example-coins-in-a-bag">Example: coins in a bag</a></li>
   <li><a href="#general-approach" id="toc-general-approach" class="nav-link" data-scroll-target="#general-approach">General approach</a></li>
-  <li><a href="#example-continued" id="toc-example-continued" class="nav-link" data-scroll-target="#example-continued">Example, continued</a>
-  <ul class="collapse">
-  <li><a href="#poll-compute-the-predictive" id="toc-poll-compute-the-predictive" class="nav-link" data-scroll-target="#poll-compute-the-predictive">Poll: compute the predictive</a></li>
-  </ul></li>
+  <li><a href="#example-continued" id="toc-example-continued" class="nav-link" data-scroll-target="#example-continued">Example, continued</a></li>
   </ul>
 </nav>
     </div>
@@ -1045,57 +1042,8 @@ https://github.com/trevorcampbell/shortex
 <h2 class="anchored" data-anchor-id="example-continued">Example, continued</h2>
 <p>Use the following picture to help you computing <span class="math inline">\(\mathbb{P}(Y_4 = 1 | Y_{1:3} = \boldsymbol{1})\)</span>.</p>
 <p><img src="../images/prediction.png" class="img-fluid" width="800"></p>
-<section id="poll-compute-the-predictive" class="level3">
-<h3 class="anchored" data-anchor-id="poll-compute-the-predictive">Poll: compute the predictive</h3>
-<ol type="1">
-<li><span class="math inline">\(\approx 0.11\)</span></li>
-<li><span class="math inline">\(\approx 0.35\)</span></li>
-<li><span class="math inline">\(\approx 0.52\)</span></li>
-<li><span class="math inline">\(\approx 0.94\)</span></li>
-<li>None of the above</li>
-</ol>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Add a random variable for the quantity you want to predict (next flip <span class="math inline">\(Y_4\)</span>).</li>
-<li>Add one level in the decision tree.</li>
-<li>Use Bayes rule.
-<ul>
-<li>Twist: distinct paths are compatible with observations and lead to the same prediction: <span class="math inline">\((Y_{1:4} = \boldsymbol{1}) = (X = 2, Y_{1:4} = \boldsymbol{1}) \cup (X = 1, Y_{1:4} = \boldsymbol{1})\)</span>.</li>
-<li>Sum the probabilities of the paths leading to the same prediction (why can we do this?).
-<ul>
-<li>Let <span class="math inline">\(\gamma(i) = \mathbb{P}(Y_{1:3} = \boldsymbol{1}, Y_4 = i)\)</span>.</li>
-<li>Two ways to get <span class="math inline">\((Y_{1:4} = \boldsymbol{1})\)</span>, hence: <span class="math inline">\(\gamma(1) = 1/48 + 1/3\)</span></li>
-<li>Only one way to get <span class="math inline">\((Y_{1:3} = \boldsymbol{1}, Y_4 = 0)\)</span>: <span class="math inline">\(\gamma(0) = 1/48\)</span></li>
-</ul></li>
-<li>As before, normalize <span class="math inline">\(\gamma\)</span> to get <span class="math inline">\(\pi\)</span>: <span class="math display">\[\mathbb{P}(Y_4 = 1|Y_{1:3} = \boldsymbol{1}) = \frac{\gamma(1)}{\gamma(0) + \gamma(1)} = 17/18 \approx 0.94\]</span></li>
-</ul></li>
-</ol>
-<p><strong>Mathematical details of the above intuitive explanation:</strong></p>
-<p>By definition of conditioning: <span class="math display">\[\pi(i) := \mathbb{P}(Y_4 = i | Y_{1:3} = \boldsymbol{1}) = \frac{\mathbb{P}(Y_{1:3} = \boldsymbol{1}, Y_4 = i)}{\mathbb{P}(Y_{1:3} = \boldsymbol{1})} \propto \mathbb{P}(Y_{1:3} = \boldsymbol{1}, Y_4 = i) =: \gamma(i).\]</span> Since <span class="math inline">\(\{(X = 0, Y_{1:3} = \boldsymbol{1}, Y_4 = i), (X = 1, Y_{1:3} = \boldsymbol{1}, Y_4 = i), (X = 2, Y_{1:3} = \boldsymbol{1}, Y_4 = i)\}\)</span> is a partition of <span class="math inline">\((Y_{1:3} = \boldsymbol{1}, Y_4 = i)\)</span>, from the additivity axiom of probability, <a href="../w01_discrete_inference/topic02_axioms.html">reviewed last week</a>, we have: <span id="eq-total-pr"><span class="math display">\[\gamma(i) = \mathbb{P}(Y_{1:3} = \boldsymbol{1}, Y_4 = i) = \sum_x \mathbb{P}(X = x, Y_{1:3} = \boldsymbol{1}, Y_4 = i). \tag{1}\]</span></span> The above explains why we can “sum the paths leading to the same prediction.”</p>
-<p>Next, to compute each term in <a href="#eq-total-pr" class="quarto-xref">Equation&nbsp;1</a>, we use <a href="../w01_discrete_inference/topic08_chain.html">chain rule</a> (“multiplying the edge probabilities to find a path probability”): <span class="math display">\[\mathbb{P}(X = x, Y_{1:3} = \boldsymbol{1}, Y_4 = i) = \mathbb{P}(X = x) \mathbb{P}(Y_1 = y_1 | X = x) \mathbb{P}(Y_2 = y_2 | X = x, Y_1 = y_1) \mathbb{P}(Y_3 = y_3 | X = x, Y_{1:2} = y_{1:2}) \mathbb{P}(Y_4 = y_4 | X = x, Y_{1:3} = y_{1:3}).\]</span> Note that by <a href="../w01_discrete_inference/topic08_chain.html#sec-conditional-independence">conditional independence</a>, these probabilities can be simplified, for example, <span class="math display">\[\mathbb{P}(Y_2 = y_2 | X = x, Y_1 = y_1) = \mathbb{P}(Y_2 = y_2 | X = x),\]</span> or in words: “once I know the kind of coin (<span class="math inline">\(X\)</span>), knowing the first flips (<span class="math inline">\(Y_1\)</span>) does not bring additional information on the second flip (<span class="math inline">\(Y_2\)</span>).”</p>
-<p>Doing this for each <span class="math inline">\(i\)</span> in <a href="#eq-total-pr" class="quarto-xref">Equation&nbsp;1</a>:</p>
-<ul>
-<li><span class="math inline">\(\gamma(0) = 0 + 1/48 + 0\)</span></li>
-<li><span class="math inline">\(\gamma(1) = 0 + 1/48 + 1/3\)</span>.</li>
-</ul>
-<p>Finally, we renormalize to get a posterior PMF <span class="math inline">\(\pi\)</span>: <span class="math display">\[\pi = \frac{\gamma}{Z},\]</span> i.e.: <span class="math display">\[(\pi(0), \pi(1)) = \frac{(\gamma(0), \gamma(1))}{\gamma(0) + \gamma(1)}.\]</span></p>
-</div>
-</div>
-</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
