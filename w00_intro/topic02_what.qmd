@@ -6,29 +6,10 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-
-## Poll: What characterizes "Bayesian Analysis"?
-
-1. MAP estimators (maximum a posteriori)
-1. posterior means
-1. Bayes rule
-1. models where some unknown quantities are treated as random
-1. none of the above
+{{< include ../../clickers/w01/_c01.qmd >}}
 
 
-::: {.callout-caution collapse="true"} 
-## Click for answer
 
-All these popular answers are misleading and/or very incomplete:
-
-1. MAP estimators (maximum a posteriori)
-    - MAP is seldom used by expert Bayesians (mode is misleading in high dimensions)
-1. posterior means
-    - the posterior mean is often undefined (e.g. Bayesian analysis over combinatorial objects such as graphs)
-1. Bayes rule
-    - Bayes rule is intractable in most practical situations (we use MCMC/variational methods)
-1. models where some unknown quantities are treated as random
-    - true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models
     
 **So... what *is* Bayesian Analysis?**
 
