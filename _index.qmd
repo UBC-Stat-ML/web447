@@ -9,7 +9,7 @@ about:
 
 ## STAT447C: Bayesian Statistics
 
-**Dates:** January 2024---April 2024
+**Dates:** January 2025---April 2025
 
 -   Master a set of tools flexible enough to address most data analysis issues: non-standard data types, non-iid, expert knowledge, etc.
 -   Acquire hands-on experience with rapid prototyping of statistical models capturing uncertainty.

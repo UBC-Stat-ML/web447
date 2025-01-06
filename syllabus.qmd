@@ -4,6 +4,8 @@ editor:
   mode: source
 ---
 
+{{< include _construction.qmd >}}
+
 ## Course description
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
@@ -17,15 +19,15 @@ In **STAT 447C**, you will:
 
 ## Lecture time and place
 
-**Lecture dates:** January 9, 2024 to April 11, 2024. [Detailed schedule](schedule.qmd)
+**Lecture dates:** January 7, 2025 to April 8, 2025. [Detailed schedule](schedule.qmd)
 
-Tuesday and Thursday, 9:30-11:00. [FNH Building, Room 40.](https://learningspaces.ubc.ca/classrooms/fnh-40)
+Tuesday and Thursday, 9:30-11:00. 
 
 ## Teaching team
 
 -   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html)
--   [Miguel Biron-Lattes (TA)](https://miguelbiron.github.io/)
--   [Ali Mehrabian (TA)](mailto:alimehrabian619@yahoo.com)
+-   [Nikola Surjanovic (TA)](https://nikola-sur.netlify.app/)
+-   TBA
 
 ## Prerequisite
 
@@ -75,33 +77,19 @@ Click on each item for details.
     -   Released and submitted on {{< var canvas >}}.
 -   Quizzes (2 x 20%): 40%
     -   In-class.
-    -   Dates: Tuesday February 27, Tuesday March 26.
+    -   Dates: **TBD**
 -   [Final project](project.qmd): 30%
 
 For the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Keep these for sick days/unforeseen circumstances. No need to ask for permission/provide doctor's note, this will be done automatically for everyone.
 
-Added on Jan 10: *For exercise grading, I will take the $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...))$, where $e_1, e_2, e_3, \dots$ are the scores for the different exercises.
-The same applies for clicker participation points.
-(This was put in place to help a couple 
-students travelling in the first week, but will be automatically applied for everyone so no need to request it).*
-
-Added on Jan 15: *Once in a while, I will post some "challenge questions". 
-These are not essential for learning the material and can be skipped. 
-Submit your answer at any time. 
-For each that you successfully solve, a week of participation activity will be waived 
-(it does not have to be the same week you submit the challenge question). 
-I will not post solutions for the challenge questions.*
-
-Added on Jan 21: *Since a few more people arrived in the second week, I will extend the Jan 10 waiver above to cover the 
-first two week, i.e. using $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...), \text{mean}(e_3, ...))$, so 
-you can still get full marks if you do not do exercises and/or participation/clicker in weeks 1 or 2.*
+**More details to be posted later**
 
 
 
 ## Office hours
 
--   Instructor office hour: Thursdays, 3:30-4:30, ESB 3125
--   TA office hour: Fridays, 11:00-12:00, ESB 3125
+-   Instructor office hour: **TBA**
+-   TA office hour: **TBA**
 
 Available by appointment if you are unable to attend drop-in hours.
 
