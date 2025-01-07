@@ -52,6 +52,7 @@ when viewed as a function of the first argument for any fixed $E$.
 - We want to remove from $A$ all the outcomes that are not compatible with the new information $E$. How?
     - Take the intersection: $A \cap E$
     - We also want: $\pr(S | E) = 1$ (last section)
-    - How? *Renormalize*:
-    $$\pr(A | E) = \frac{\pr(A \cap E)}{\pr(E)}$$
-    - Intersection can also be denoted using a comma, for example $\pr(A \cap E) = \pr(A, E)$
+    - How? *Renormalize*:[^1]
+    $$\pr(A | E) = \frac{\pr(A, E)}{\pr(E)}$$
+
+[^1]: In the equation, we use comma to denote intersection, i.e., $(A \cap E) = (A, E)$. 

@@ -44,7 +44,7 @@ as forward simulation, posterior inference, importance sampling, probabilistic p
 To describe the event corresponding to a node $v$ in the tree: 
 
 1. trace the path from the node $v$ to the root
-2. take the intersection of all node labels
+2. take the intersection of all node labels.
 
 **Example:** find the node in the above tree corresponding to the event $(X = 1) \cap (Y_1 = 0)$.
 

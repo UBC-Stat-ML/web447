@@ -6,31 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+
+
 {{< include ../../clickers/w01/_c01.qmd >}}
 
-
-
-    
-**So... what *is* Bayesian Analysis?**
-
-### Preview of key definitions
-
-**Bayesian Analysis:** statistical discipline centered around the use of **Bayes estimators** 
-
-**Bayes estimators:** for data $Y$, unobserved $X$, loss $L$, and possible actions $A$, the Bayes estimator is defined as:
-
-$$\argmin \{ \E[L(a, X) | Y] : a \in A \}$$
-
-**Note:** you are not expected to understand this equation at this point!
-
-### This course
-
-The primary objective of this course is to understand Bayes estimators:
-
-- Why they are so powerful.
-- Their limitations (model misspecification, computational challenges).
-- Important special cases (posterior means, credible intervals, MAP).
-- How to do it in practice
-    - how to build models
-    - how to approximate conditional expectations.
-:::
