@@ -67,11 +67,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -926,10 +955,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#sec-q1" id="toc-sec-q1" class="nav-link" data-scroll-target="#sec-q1">Q.1: sampling from a joint distribution</a></li>
+  <li><a href="#sec-q2" id="toc-sec-q2" class="nav-link" data-scroll-target="#sec-q2">Q.2: computing a conditional</a></li>
+  <li><a href="#sec-q3" id="toc-sec-q3" class="nav-link" data-scroll-target="#sec-q3">Q.3: non uniform prior on coin types</a></li>
+  <li><a href="#sec-q4" id="toc-sec-q4" class="nav-link" data-scroll-target="#sec-q4">Q.4: a first posterior inference algorithm</a></li>
+  <li><a href="#sec-q5" id="toc-sec-q5" class="nav-link" data-scroll-target="#sec-q5">Q.5: generalizing observations</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../exercises/ex01.html">Exercises</a></li></ol></nav>
 <div class="quarto-title">
@@ -970,21 +1011,126 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Grading
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
+<p>Our priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.</p>
+<p>We will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:</p>
+<ul>
+<li>1 point if something reasonable was attempted,</li>
+<li>0 otherwise.</li>
+</ul>
 </div>
 </div>
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<ul>
+<li>Bring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).</li>
+<li>Introduce forward discrete simulation.</li>
+<li>Review expectation and the law of large numbers.</li>
+</ul>
+</section>
+<section id="setup" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>This exercise is centered around the following scenario:</p>
+<ul>
+<li>Imagine a bag with 3 coins each with a different probability parameter <span class="math inline">\(p\)</span></li>
+<li>Coin <span class="math inline">\(i\in \{0, 1, 2\}\)</span> has bias <span class="math inline">\(i/2\)</span>—in other words:
+<ul>
+<li>First coin: bias is <span class="math inline">\(0/2 = 0\)</span> (i.e.&nbsp;both sides are “heads”, <span class="math inline">\(p = 0\)</span>)</li>
+<li>Second coin: bias is <span class="math inline">\(1/2 = 0.5\)</span> (i.e.&nbsp;standard coin, <span class="math inline">\(p = 1/2\)</span>)</li>
+<li>Third coin: bias is <span class="math inline">\(2/2 = 1\)</span> (i.e.&nbsp;both sides are “tails”, <span class="math inline">\(p = 1\)</span>)</li>
+</ul></li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="../images/coinbag.png" class="img-fluid" width="200"></p>
+</div></div><ul>
+<li>Consider the following two steps sampling process
+<ul>
+<li>Step 1: pick one of the three coins, but do not look at it!</li>
+<li>Step 2: flip the coin 4 times</li>
+</ul></li>
+<li>Mathematically, this probability model can be written as follows: <span id="eq-coin-joint"><span class="math display">\[
+\begin{align*}
+X &amp;\sim {\mathrm{Unif}}\{0, 1, 2\} \\
+Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
+\end{align*}
+\tag{1}\]</span></span></li>
+</ul>
+</section>
+<section id="sec-q1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q1">Q.1: sampling from a joint distribution</h2>
+<ol type="1">
+<li>Compute <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span> mathematically (with a precise mathematical derivation).</li>
+<li>Write an R function called <code>forward_sample</code> that samples (“simulates”) from the joint distribution of <span class="math inline">\((X, Y_1, \dots, Y_4)\)</span>. As a general practice, fix the seed, and submit both the code and the output (here, a single sample).</li>
+<li>How can your code and the law of large number be used to approximate <span class="math inline">\(\mathbb{E}[(1+Y_1)^X]\)</span>?</li>
+<li>Compare the approximation from your code with you answer in part 1.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Big idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Part 4 of this question illustrates a big idea in this course:<br>
+strategies to <em>validate</em> inference, i.e.&nbsp;ensuring it is bug-free in both the code and in the math. In a nutshell, this is possible thanks to theory: we use results that provide two ways to do the same thing, and verifying they indeed agree.</p>
+</div>
+</div>
+</section>
+<section id="sec-q2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q2">Q.2: computing a conditional</h2>
+<p>Suppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = <code>[0, 0, 0, 0]</code>. Given that observation, what is the probability that you picked the standard coin (i.e., the one with <span class="math inline">\(p = 1/2\)</span>)?</p>
+<ol type="1">
+<li>Write mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”</li>
+<li>Compute the numerical value of the expression defined in part 1 (with a precise mathematical derivation).</li>
+</ol>
+</section>
+<section id="sec-q3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q3">Q.3: non uniform prior on coin types</h2>
+<p>We now modify the problem as follows: I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.</p>
+<ol type="1">
+<li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint" class="quarto-xref">Equation&nbsp;1</a>. Hint: use a <code>Categorical</code> distribution.</li>
+<li>Compute the probability that you picked one of the fair coins, given you see <code>[0, 0, 0, 0]</code>.</li>
+</ol>
+</section>
+<section id="sec-q4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q4">Q.4: a first posterior inference algorithm</h2>
+<p>We now generalize to having <span class="math inline">\(K + 1\)</span> types of coins such that:</p>
+<ul>
+<li>coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> has bias <span class="math inline">\(k/K\)</span></li>
+<li>the fraction of coins in the bag of type <span class="math inline">\(k\)</span> is <span class="math inline">\(\rho_k\)</span>.</li>
+</ul>
+<p>We consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability <span class="math inline">\(\pi_k\)</span> for all <span class="math inline">\(k\)</span> that we picked coin type <span class="math inline">\(k \in \{0, 1, \dots, K\}\)</span> from the bag given the observation.</p>
+<ol type="1">
+<li>Write an R function called <code>posterior_given_four_heads</code> taking as input a vector <span class="math inline">\(\rho = (\rho_0, \rho_1, \dots, \rho_K)\)</span> and returning <span class="math inline">\(\pi = (\pi_0, \pi_1, \dots, \pi_K)\)</span>.</li>
+<li>Test your code by making sure you can recover the answer in Q. 3 as a special case. Report what values of <span class="math inline">\(K\)</span> and <span class="math inline">\(\rho\)</span> you used.</li>
+<li>Show the output for <span class="math inline">\(\rho \propto (1, 2, 3, \dots, 10)\)</span>. Here <span class="math inline">\(\propto\)</span> means “proportional to”; try to infer what it means in this context.</li>
+</ol>
+</section>
+<section id="sec-q5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-q5">Q.5: generalizing observations</h2>
+<p>We now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe <code>n_heads</code> out of <code>n_observations</code>, where <code>n_heads</code> and <code>n_observations</code> will be additional arguments passed into a new R function.</p>
+<ol type="1">
+<li>Write the joint distribution of this modified model. Use the <span class="math inline">\(\sim\)</span> notation as in <a href="#eq-coin-joint" class="quarto-xref">Equation&nbsp;1</a>. Hint: use a <code>Binomial</code> distribution.</li>
+<li>Write an R function called <code>posterior</code> taking three input arguments in the following order: a vector <span class="math inline">\(\rho\)</span> as in Q. 4, as well as two integers, <code>n_heads</code> and <code>n_observations</code>.</li>
+<li>Test your code by making sure you can recover the answer in Q. 3 as a special case.</li>
+<li>Show the output for <span class="math inline">\(\rho \propto (1, 2, 3, \dots, 10)\)</span> and <code>n_heads = 2</code> and <code>n_observations = 10</code>.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

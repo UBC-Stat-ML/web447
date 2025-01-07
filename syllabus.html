@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -1045,8 +1074,8 @@ Caution
 <ul>
 <li>Participation: 15%
 <ul>
-<li>Weekly reading assignment: each week ask and answer one question about <a href="./schedule.html">the readings or lectures</a> on <a href="https://piazza.com/class/m5lf1vff2dm1iv">Piazza</a>.</li>
-<li>In-class iClicker questions: only participations points (unless your score is indistinguishable from random). Setup iClicker Cloud on <a href="https://canvas.ubc.ca/courses/157974">Canvas</a>.</li>
+<li>Weekly reading assignment: each week ask and answer one question about <a href="./schedule.html">the readings or lectures</a> on <a href="https://piazza.com/class/m5lf1vff2dm1iv">Piazza</a>. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)</li>
+<li>In-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on <a href="https://canvas.ubc.ca/courses/157974">Canvas</a>.</li>
 </ul></li>
 <li>Homework: 15%
 <ul>
@@ -1056,12 +1085,13 @@ Caution
 <li>Quizzes (2 x 20%): 40%
 <ul>
 <li>In-class.</li>
-<li>Dates: <strong>TBD</strong></li>
+<li>Dates: Feb 25 and March 25</li>
 </ul></li>
 <li><a href="./project.html">Final project</a>: 30%</li>
 </ul>
-<p>For the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Keep these for sick days/unforeseen circumstances. No need to ask for permission/provide doctor’s note, this will be done automatically for everyone.</p>
-<p><strong>More details to be posted later</strong></p>
+<p>For the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.</p>
+<p>For exercise grading, I will take the <span class="math inline">\(\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...))\)</span>, where <span class="math inline">\(e_1, e_2, e_3, \dots\)</span> are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first week, but will be automatically applied for everyone so no need to request it.</p>
+<p>Once in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.</p>
 </section>
 <section id="office-hours" class="level2">
 <h2 class="anchored" data-anchor-id="office-hours">Office hours</h2>

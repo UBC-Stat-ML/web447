@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 7\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 9\n\n\n\n\nTue, Jan 14\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 16\n\n\n\n\nTue, Jan 21\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 23\n\n\n\n\nTue, Jan 28\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 30\n\n\n\n\nTue, Feb 4\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 6\n\n\n\n\nTue, Feb 11\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 13\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 20\nReading week.\n\n\n\nTue, Feb 25\nQuiz 1.\n\n\n\nTh, Feb 27\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 4\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 6\n\n\n\n\nTue, Mar 11\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 13\n\n\n\n\nFri, Mar 14\nProject proposal due.\n\n\n\nTue, Mar 18\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 20\n\n\n\n\nTue, Mar 25\nQuiz 2.\n\n\n\nTh, Mar 27\nMCMC developer guide.\n\n\n\nTue, Apr 1\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 3\n\n\n\n\nTue, Apr 8\nMore inference techniques.\nBDA 13.7\n\n\nFri, Apr 19\nFinal project due.",
     "crumbs": [
       "Schedule"
     ]
@@ -281,7 +281,7 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Assessments",
-    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza.\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: TBD\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Keep these for sick days/unforeseen circumstances. No need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nMore details to be posted later",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Feb 25 and March 25\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first week, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
     "crumbs": [
       "Syllabus"
     ]
@@ -498,7 +498,84 @@
     "href": "exercises/ex01.html",
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#goals",
+    "href": "exercises/ex01.html#goals",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Goals",
+    "text": "Goals\n\nBring back to memory discrete probability (axioms, basic properties, conditioning, discrete Bayes rule).\nIntroduce forward discrete simulation.\nReview expectation and the law of large numbers.",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#setup",
+    "href": "exercises/ex01.html#setup",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Setup",
+    "text": "Setup\nThis exercise is centered around the following scenario:\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#sec-q1",
+    "href": "exercises/ex01.html#sec-q1",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.1: sampling from a joint distribution",
+    "text": "Q.1: sampling from a joint distribution\n\nCompute \\(\\mathbb{E}[(1+Y_1)^X]\\) mathematically (with a precise mathematical derivation).\nWrite an R function called forward_sample that samples (“simulates”) from the joint distribution of \\((X, Y_1, \\dots, Y_4)\\). As a general practice, fix the seed, and submit both the code and the output (here, a single sample).\nHow can your code and the law of large number be used to approximate \\(\\mathbb{E}[(1+Y_1)^X]\\)?\nCompare the approximation from your code with you answer in part 1.\n\n\n\n\n\n\n\nBig idea\n\n\n\nPart 4 of this question illustrates a big idea in this course:\nstrategies to validate inference, i.e. ensuring it is bug-free in both the code and in the math. In a nutshell, this is possible thanks to theory: we use results that provide two ways to do the same thing, and verifying they indeed agree.",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#sec-q2",
+    "href": "exercises/ex01.html#sec-q2",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.2: computing a conditional",
+    "text": "Q.2: computing a conditional\nSuppose now that you observe the outcome of the 4 coin flips, but not the type of coin that was picked. Say you observe: “heads”, “heads”, “heads”, “heads” = [0, 0, 0, 0]. Given that observation, what is the probability that you picked the standard coin (i.e., the one with \\(p = 1/2\\))?\n\nWrite mathematically: “Given you observe 4 heads, what is the probability that you picked the standard coin?”\nCompute the numerical value of the expression defined in part 1 (with a precise mathematical derivation).",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#sec-q3",
+    "href": "exercises/ex01.html#sec-q3",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.3: non uniform prior on coin types",
+    "text": "Q.3: non uniform prior on coin types\nWe now modify the problem as follows: I stuffed the bag with 100 coins: 98 standard (fair) coins, 1 coin with only heads, and 1 coin with only tails. The rest is the same: pick one of the coins, flip it 4 times.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Categorical distribution.\nCompute the probability that you picked one of the fair coins, given you see [0, 0, 0, 0].",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#sec-q4",
+    "href": "exercises/ex01.html#sec-q4",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.4: a first posterior inference algorithm",
+    "text": "Q.4: a first posterior inference algorithm\nWe now generalize to having \\(K + 1\\) types of coins such that:\n\ncoin type \\(k \\in \\{0, 1, \\dots, K\\}\\) has bias \\(k/K\\)\nthe fraction of coins in the bag of type \\(k\\) is \\(\\rho_k\\).\n\nWe consider the same observation as before: “you observe 4 heads”. We want to find the conditional probability \\(\\pi_k\\) for all \\(k\\) that we picked coin type \\(k \\in \\{0, 1, \\dots, K\\}\\) from the bag given the observation.\n\nWrite an R function called posterior_given_four_heads taking as input a vector \\(\\rho = (\\rho_0, \\rho_1, \\dots, \\rho_K)\\) and returning \\(\\pi = (\\pi_0, \\pi_1, \\dots, \\pi_K)\\).\nTest your code by making sure you can recover the answer in Q. 3 as a special case. Report what values of \\(K\\) and \\(\\rho\\) you used.\nShow the output for \\(\\rho \\propto (1, 2, 3, \\dots, 10)\\). Here \\(\\propto\\) means “proportional to”; try to infer what it means in this context.",
+    "crumbs": [
+      "Probability essentials",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex01.html#sec-q5",
+    "href": "exercises/ex01.html#sec-q5",
+    "title": "Exercise 1: discrete probabilistic inference",
+    "section": "Q.5: generalizing observations",
+    "text": "Q.5: generalizing observations\nWe now generalize Q. 4 as follows: instead of observing 4 “heads” out of 4 observations, say we observe n_heads out of n_observations, where n_heads and n_observations will be additional arguments passed into a new R function.\n\nWrite the joint distribution of this modified model. Use the \\(\\sim\\) notation as in Equation 1. Hint: use a Binomial distribution.\nWrite an R function called posterior taking three input arguments in the following order: a vector \\(\\rho\\) as in Q. 4, as well as two integers, n_heads and n_observations.\nTest your code by making sure you can recover the answer in Q. 3 as a special case.\nShow the output for \\(\\rho \\propto (1, 2, 3, \\dots, 10)\\) and n_heads = 2 and n_observations = 10.",
     "crumbs": [
       "Probability essentials",
       "Exercises"
