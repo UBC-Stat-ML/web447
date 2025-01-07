@@ -18,7 +18,7 @@ editor:
     - Harder to scale computationally
     - $\Longrightarrow$ shines on small data problems (there a much more of those than the "big data" hype would like you to think)
 - Statistical properties
-    - Optimal if the model is **well-specified**
+    - **Optimal** if the model is **well-specified**
     - Sub-optimal in certain cases when the model is **mis-specified**
         - Thankfully the modelling flexibility makes it easier to build better models
         - Important to make model checks
