@@ -134,7 +134,7 @@
     "href": "w00_intro/topic02_what.html",
     "title": "What?",
     "section": "",
-    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above\n\n\nSo… what is Bayesian Analysis?\n\n\nBayesian Analysis: statistical discipline centered around the use of Bayes estimators\nBayes estimators: for data \\(Y\\), unobserved \\(X\\), loss \\(L\\), and possible actions \\(A\\), the Bayes estimator is defined as:\n\\[\\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\}\\]\nNote: you are not expected to understand this equation at this point!\n\n\n\nThe primary objective of this course is to understand Bayes estimators:\n\nWhy they are so powerful.\nTheir limitations (model misspecification, computational challenges).\nImportant special cases (posterior means, credible intervals, MAP).\nHow to do it in practice\n\nhow to build models\nhow to approximate conditional expectations. :::",
+    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above",
     "crumbs": [
       "Introduction",
       "What?"
@@ -145,7 +145,7 @@
     "href": "w00_intro/topic02_what.html#poll-what-characterizes-bayesian-analysis",
     "title": "What?",
     "section": "",
-    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above\n\n\nSo… what is Bayesian Analysis?\n\n\nBayesian Analysis: statistical discipline centered around the use of Bayes estimators\nBayes estimators: for data \\(Y\\), unobserved \\(X\\), loss \\(L\\), and possible actions \\(A\\), the Bayes estimator is defined as:\n\\[\\operatorname{arg\\,min}\\{ \\mathbb{E}[L(a, X) | Y] : a \\in A \\}\\]\nNote: you are not expected to understand this equation at this point!\n\n\n\nThe primary objective of this course is to understand Bayes estimators:\n\nWhy they are so powerful.\nTheir limitations (model misspecification, computational challenges).\nImportant special cases (posterior means, credible intervals, MAP).\nHow to do it in practice\n\nhow to build models\nhow to approximate conditional expectations. :::",
+    "text": "MAP estimators (maximum a posteriori)\nposterior means\nBayes rule\nmodels where some unknown quantities are treated as random\nnone of the above",
     "crumbs": [
       "Introduction",
       "What?"
@@ -291,7 +291,7 @@
     "href": "syllabus.html#office-hours",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Office hours",
-    "text": "Office hours\n\nInstructor office hour: TBA\nTA office hour: TBA\n\nAvailable by appointment if you are unable to attend drop-in hours.",
+    "text": "Office hours\n\nInstructor office hour: Fridays, 1pm, ESB 3125.\nTA tutorial: Thursdays, 2pm, ESB 1042.\n\nAvailable by appointment if you are unable to attend drop-in hours.",
     "crumbs": [
       "Syllabus"
     ]
@@ -2141,7 +2141,7 @@
     "href": "w01_discrete_inference/topic05_decision_diagrams.html#nodes-and-events",
     "title": "Decision trees",
     "section": "Nodes and events",
-    "text": "Nodes and events\nTo describe the event corresponding to a node \\(v\\) in the tree:\n\ntrace the path from the node \\(v\\) to the root\ntake the intersection of all node labels\n\nExample: find the node in the above tree corresponding to the event \\((X = 1) \\cap (Y_1 = 0)\\).\nProbability notation review:\n\n\\((X = 1) = \\{s \\in S : X(s) = 1\\}\\)\n\\((X = 1, Y_1 = 0) = (X = 1) \\cap (Y_1 = 0)\\)",
+    "text": "Nodes and events\nTo describe the event corresponding to a node \\(v\\) in the tree:\n\ntrace the path from the node \\(v\\) to the root\ntake the intersection of all node labels.\n\nExample: find the node in the above tree corresponding to the event \\((X = 1) \\cap (Y_1 = 0)\\).\nProbability notation review:\n\n\\((X = 1) = \\{s \\in S : X(s) = 1\\}\\)\n\\((X = 1, Y_1 = 0) = (X = 1) \\cap (Y_1 = 0)\\)",
     "crumbs": [
       "Probability essentials",
       "Decision trees"
@@ -2284,7 +2284,18 @@
     "href": "w01_discrete_inference/topic07_conditional.html#intuition-behind-conditioning",
     "title": "Conditioning",
     "section": "Intuition behind conditioning",
-    "text": "Intuition behind conditioning\n\n\n\n\n\n\n\nFor a query even \\(A\\), what should be the updated probability?\nWe want to remove from \\(A\\) all the outcomes that are not compatible with the new information \\(E\\). How?\n\nTake the intersection: \\(A \\cap E\\)\nWe also want: \\(\\mathbb{P}(S | E) = 1\\) (last section)\nHow? Renormalize: \\[\\mathbb{P}(A | E) = \\frac{\\mathbb{P}(A \\cap E)}{\\mathbb{P}(E)}\\]\nIntersection can also be denoted using a comma, for example \\(\\mathbb{P}(A \\cap E) = \\mathbb{P}(A, E)\\)",
+    "text": "Intuition behind conditioning\n\n\n\n\n\n\n\nFor a query even \\(A\\), what should be the updated probability?\nWe want to remove from \\(A\\) all the outcomes that are not compatible with the new information \\(E\\). How?\n\nTake the intersection: \\(A \\cap E\\)\nWe also want: \\(\\mathbb{P}(S | E) = 1\\) (last section)\nHow? Renormalize:1 \\[\\mathbb{P}(A | E) = \\frac{\\mathbb{P}(A, E)}{\\mathbb{P}(E)}\\]",
+    "crumbs": [
+      "Probability essentials",
+      "Conditioning"
+    ]
+  },
+  {
+    "objectID": "w01_discrete_inference/topic07_conditional.html#footnotes",
+    "href": "w01_discrete_inference/topic07_conditional.html#footnotes",
+    "title": "Conditioning",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIn the equation, we use comma to denote intersection, i.e., \\((A \\cap E) = (A, E)\\).↩︎",
     "crumbs": [
       "Probability essentials",
       "Conditioning"
@@ -2340,28 +2351,6 @@
     "title": "Chain rule",
     "section": "Visual intuition",
     "text": "Visual intuition\nChain rule: the probability of a node is the product of the edge labels on the path to the root.\n\n\n\n\n\n\nflowchart TD\nS__and__X_0 -- 1.0 --&gt; S__and__X_0__and__Y1_false[\"Y1=false\"]\nS__and__X_2__and__Y1_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS -- 0.33 --&gt; S__and__X_0[\"X=0\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS -- 0.33 --&gt; S__and__X_1[\"X=1\"]\nS__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false[\"Y3=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_false[\"Y1=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true[\"Y2=true\"]\nS__and__X_0__and__Y1_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false[\"Y2=false\"]\nS__and__X_1__and__Y1_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true[\"Y2=true\"]\nS__and__X_2 -- 1.0 --&gt; S__and__X_2__and__Y1_true[\"Y1=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1 -- 0.5 --&gt; S__and__X_1__and__Y1_true[\"Y1=true\"]\nS -- 0.33 --&gt; S__and__X_2[\"X=2\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_2__and__Y1_true__and__Y2_true -- 1.0 --&gt; S__and__X_2__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_false__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_true__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_true[\"Y3=true\"]\nS__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false -- 0.5 --&gt; S__and__X_1__and__Y1_true__and__Y2_false__and__Y3_false__and__Y4_false[\"Y4=false\"]\nS__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_true__and__Y3_true__and__Y4_true[\"Y4=true\"]\nS__and__X_1__and__Y1_false__and__Y2_false -- 0.5 --&gt; S__and__X_1__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nS__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_false__and__Y2_false__and__Y3_false[\"Y3=false\"]\nstyle S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true fill:#f9f,stroke:#333,stroke-width:4px",
-    "crumbs": [
-      "Probability essentials",
-      "Chain rule"
-    ]
-  },
-  {
-    "objectID": "w01_discrete_inference/topic08_chain.html#poll-what-is-the-probability-of-the-node-in-red",
-    "href": "w01_discrete_inference/topic08_chain.html#poll-what-is-the-probability-of-the-node-in-red",
-    "title": "Chain rule",
-    "section": "Poll: what is the probability of the node in red?",
-    "text": "Poll: what is the probability of the node in red?\n\n1/2\n1/4\n1/8\n1/24\nNone of the above",
-    "crumbs": [
-      "Probability essentials",
-      "Chain rule"
-    ]
-  },
-  {
-    "objectID": "w01_discrete_inference/topic08_chain.html#poll-what-is-the-event-corresponding-to-that-node",
-    "href": "w01_discrete_inference/topic08_chain.html#poll-what-is-the-event-corresponding-to-that-node",
-    "title": "Chain rule",
-    "section": "Poll: what is the event corresponding to that node?",
-    "text": "Poll: what is the event corresponding to that node?\n\n\\((Y_3 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\\)",
     "crumbs": [
       "Probability essentials",
       "Chain rule"

@@ -67,35 +67,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -959,11 +930,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#poll-what-characterizes-bayesian-analysis" id="toc-poll-what-characterizes-bayesian-analysis" class="nav-link active" data-scroll-target="#poll-what-characterizes-bayesian-analysis">Poll: What characterizes “Bayesian Analysis”?</a>
-  <ul class="collapse">
-  <li><a href="#preview-of-key-definitions" id="toc-preview-of-key-definitions" class="nav-link" data-scroll-target="#preview-of-key-definitions">Preview of key definitions</a></li>
-  <li><a href="#this-course" id="toc-this-course" class="nav-link" data-scroll-target="#this-course">This course</a></li>
-  </ul></li>
+  <li><a href="#poll-what-characterizes-bayesian-analysis" id="toc-poll-what-characterizes-bayesian-analysis" class="nav-link active" data-scroll-target="#poll-what-characterizes-bayesian-analysis">Poll: What characterizes “Bayesian Analysis”?</a></li>
   </ul>
 </nav>
     </div>
@@ -1033,32 +1000,38 @@ All these popular answers are misleading and/or very incomplete:
     - Bayes rule is intractable in most practical situations (we use MCMC/variational methods)
 1. models where some unknown quantities are treated as random
     - true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models
-    
+
+
+
+**So... what *is* Bayesian Analysis?**
+
+### Preview of key definitions
+
+**Bayesian Analysis:** statistical discipline centered around the use of **Bayes estimators**. 
+
+**Bayes estimators:** for data $Y$, unobserved $X$, loss $L$, and possible actions $A$, the Bayes estimator is defined as:
+
+$$\argmin \{ \E[L(a, X) | Y] : a \in A \}$$
+
+**Note:** you are not expected to understand this equation at this point!
+
+### This course
+
+The primary objective of this course is to understand Bayes estimators:
+
+- Why they are so powerful.
+- Their limitations (model misspecification, computational challenges).
+- Important special cases (posterior means, credible intervals, MAP).
+- How to do it in practice
+    - how to build models
+    - how to approximate conditional expectations.
+
+
+:::
+
 -->
-<p><strong>So… what <em>is</em> Bayesian Analysis?</strong></p>
-<section id="preview-of-key-definitions" class="level3">
-<h3 class="anchored" data-anchor-id="preview-of-key-definitions">Preview of key definitions</h3>
-<p><strong>Bayesian Analysis:</strong> statistical discipline centered around the use of <strong>Bayes estimators</strong></p>
-<p><strong>Bayes estimators:</strong> for data <span class="math inline">\(Y\)</span>, unobserved <span class="math inline">\(X\)</span>, loss <span class="math inline">\(L\)</span>, and possible actions <span class="math inline">\(A\)</span>, the Bayes estimator is defined as:</p>
-<p><span class="math display">\[\operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \}\]</span></p>
-<p><strong>Note:</strong> you are not expected to understand this equation at this point!</p>
-</section>
-<section id="this-course" class="level3">
-<h3 class="anchored" data-anchor-id="this-course">This course</h3>
-<p>The primary objective of this course is to understand Bayes estimators:</p>
-<ul>
-<li>Why they are so powerful.</li>
-<li>Their limitations (model misspecification, computational challenges).</li>
-<li>Important special cases (posterior means, credible intervals, MAP).</li>
-<li>How to do it in practice
-<ul>
-<li>how to build models</li>
-<li>how to approximate conditional expectations. :::</li>
-</ul></li>
-</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
