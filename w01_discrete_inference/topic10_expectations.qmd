@@ -26,22 +26,24 @@ Recall:
 $$\E[X] = \sum_x x p_X(x),$$
 where the sum is over the point masses of $X$, i.e. $\{x : p_X(x) > 0\}$. 
 
-**Test yourself:** compute $\E[X]$ if $X \sim \distBern(p)$, with $p = 0.8$.  
+**Example:** compute $\E[X]$ if $X \sim \distBern(p)$, with $p = 0.8$.  
 
 {{< include ../blocks/_bern.qmd >}}
 
 
 ## Law of the Unconscious Statistician
 
-**Proposition:** if $g$ is some function,
+**Proposition:** if $g$ is some function, 
 $$\E[g(X)] = \sum_x g(x) p_X(x).$$
 
-**Test yourself:** compute $\E[X^2]$ if $X \sim \distBern(p)$, and hence $\var[X] = \E[X^2] - (\E[X])^2$.  
+**Example:** compute $\E[X^2]$ if $X \sim \distBern(p)$, and hence $\var[X] = \E[X^2] - (\E[X])^2$.  
+
+{{< include ../../clickers/w01/_c04.qmd >}}
 
 
 ## Expectation of a function of several random variables
 
-Let us go back to our running example:
+Let us go back to our running example: 
 
 {{< include ../blocks/_coinbag.qmd >}}
 
@@ -62,4 +64,4 @@ Recall the decision tree, how to visualize the above equation?
 
 {{< include ../blocks/_decisiontree.qmd >}}
 
-
+{{< include ../../clickers/w01/_c05.qmd >}}

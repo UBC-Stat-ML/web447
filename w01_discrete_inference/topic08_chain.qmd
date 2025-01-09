@@ -81,7 +81,7 @@ Y_i | X &\sim \distBern(X/2)
 $$
 i.e. with $\pr(X = x)$ and $\pr(Y_i = y | X = x)$ for all $x$ and $y$. 
 
-**Question:** how did we go from $\pr(Y_2 | X = 1, Y_1 = 1)$ (in our chain rule computation) to $\pr(Y_2 | X = 1)$ (model specification)?
+**Question:** how did we go from $\pr(Y_2 = 1 | X = 1, Y_1 = 1)$ (in our chain rule computation) to $\pr(Y_2 = 1 | X = 1)$ (model specification)?
 
 **Definition:** $V$ and $W$ are conditionally independence given $Z$ if 
 $$\pr(V = v, W = w | Z = z) = \pr(V = v | Z = z) \pr(W = w | Z = z).$$
