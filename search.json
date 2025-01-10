@@ -124,7 +124,77 @@
     "href": "project.html",
     "title": "Final project",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#overview",
+    "href": "project.html#overview",
+    "title": "Final project",
+    "section": "",
+    "text": "The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#logistics",
+    "href": "project.html#logistics",
+    "title": "Final project",
+    "section": "Logistics",
+    "text": "Logistics\n\nTeams of maximum 2 people are strongly encouraged, in which case you should outline the final report who did what.\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, and 6 for a 2-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#project-timeline",
+    "href": "project.html#project-timeline",
+    "title": "Final project",
+    "section": "Project timeline",
+    "text": "Project timeline\nSee schedule.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#core-guideline",
+    "href": "project.html#core-guideline",
+    "title": "Final project",
+    "section": "Core guideline",
+    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!\nIn addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).\nAfter selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.\nSome resources:\n\nVanderbilt Biostatistics datasets\nTidyTuesday\nInter-university Consortium for Political and Social Research\nWHO mortality data\nThe World Bank Data\nMore…\n\nYou should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#menu-of-project-themes",
+    "href": "project.html#menu-of-project-themes",
+    "title": "Final project",
+    "section": "Menu of project themes",
+    "text": "Menu of project themes\nRoughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶’s.\n\nA careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:\n\nApplying a simple model and an improved one on a dataset.\nBayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …\nIs there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?\n\nGoing further on one of… (more details can be provided upon request)\n\nBayesian regression and classification (e.g. sparsity, hierarchical structure, etc)\nmodel selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)\ntime series and state-space models\n🌶 spatial models\n🌶 cross-effect models\n🌶🌶 Bayesian non-parametric models\n🌶🌶 deep generative models\n🌶🌶 topics models\n🌶🌶 variational inference\n\n🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:\n\nTypes of graphs such as matchings\nPhylogenetic trees or networks\nMultiple sequence alignments\nClustering or feature matrices\n\n🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#rubric-for-the-project-proposal",
+    "href": "project.html#rubric-for-the-project-proposal",
+    "title": "Final project",
+    "section": "Rubric for the project proposal",
+    "text": "Rubric for the project proposal\n\nBasic requirements\n\nTeam is identified.\nThe proposal identifies which of the project themes it will address.\nThere is a working link to a public repo containing commits from all team members.\n\nTwo real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or head of a dataframe).\nA short summary of potential approaches to tackle the project theme.\nIf it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.\n\nAs long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.\nTotal: 5%",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#rubric-for-the-final-report",
+    "href": "project.html#rubric-for-the-final-report",
+    "title": "Final project",
+    "section": "Rubric for the final report",
+    "text": "Rubric for the final report\n\nBasic requirements (5%)\n\nThe report fits within the prescribed page limits.\nThere is a working link to a public repo containing commits from all team members.\nThe report follows best practices of technical writing.\nIf it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.\n\nProblem formulation. (15%) The report clearly describes:\n\na real-world inference task/problem,\nsuccinct but sufficient context (e.g. biological terminology) needed to understand the problem,\nthe key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.\n\nThe report contains a literature review: (10%) relevant literature is cited and properly summarized.\nData analysis (40%)\n\nA Bayesian model is precisely described (e.g. using the .. ~ .. notation)\nImplementation code in the appendix (e.g. using Stan)\nPrior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.\nCritical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.\n\nProject theme: methodological/theoretical aspect of the project (20%)\n\nIs the approach sound?\nCreative?\n\nDiscussion (5%)\n\nDoes the report describe key limitations?\n\n\nTotal: 95%",
     "crumbs": [
       "Final project"
     ]
@@ -211,7 +281,7 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
     "crumbs": [
       "Syllabus"
     ]
@@ -220,8 +290,8 @@
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT447C Bayesian Statistics",
-    "section": "Course description",
-    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
+    "section": "",
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
     "crumbs": [
       "Syllabus"
     ]
@@ -241,7 +311,7 @@
     "href": "syllabus.html#teaching-team",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Teaching team",
-    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nNikola Surjanovic (TA)\nTBA",
+    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nNikola Surjanovic (Head TA)\nCaden Hewlett (TA)",
     "crumbs": [
       "Syllabus"
     ]
@@ -2372,7 +2442,7 @@
     "href": "w01_discrete_inference/topic08_chain.html#poll-what-is-the-event-corresponding-to-that-node",
     "title": "Chain rule",
     "section": "Poll: what is the event corresponding to that node?",
-    "text": "Poll: what is the event corresponding to that node?\n\n\\((Y_3 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\\)\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nRecall that the event is the intersection of all node labels to the root, hence the event is \\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\\).\nThe calculation we did visually in the previous clicker question is mathematically: \\[\\mathbb{P}(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \\mathbb{P}(X = 1) \\mathbb{P}(Y_1 | X = 1) \\mathbb{P}(Y_2 | X = 1, Y_1 = 1) \\mathbb{P}(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).\\]",
+    "text": "Poll: what is the event corresponding to that node?\n\n\\((Y_3 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1)\\)\n\\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\\)\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nRecall that the event is the intersection of all node labels to the root, hence the event is \\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\\).\nThe calculation we did visually in the previous clicker question is mathematically: \\[\\mathbb{P}(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \\mathbb{P}(X = 1) \\mathbb{P}(Y_1 = 1 | X = 1) \\mathbb{P}(Y_2 = 1 | X = 1, Y_1 = 1) \\mathbb{P}(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).\\]",
     "crumbs": [
       "Probability essentials",
       "Chain rule"
@@ -4041,7 +4111,7 @@
     "href": "w02_discrete_bayes/topic02_models.html#epistemic-vs-aleatoric-probability",
     "title": "Bayesian models",
     "section": "Epistemic vs aleatoric probability",
-    "text": "Epistemic vs aleatoric probability\n\nIn the bag of coin example, we can replicate the whole “experiment” several times (both prior and likelihood).\nIn the rocket example, we can only replicate launches (likelihood), not the prior sampling part.\nEpistemic probability: the part we cannot replicate.\nAleatoric probability: the part that can be replicated.\nBayesian statistics uses both types of probability,\nwhereas other fields of statistics, e.g. MLE, typically uses only aleatoric.",
+    "text": "Epistemic vs aleatoric probability\n\nIn the bag of coin example, we can replicate the whole “experiment” several times (both prior and likelihood).\nIn the rocket example, we can only replicate launches (likelihood), not the prior sampling part.\n\nTerminology:\n\nEpistemic probability: the part we cannot replicate.\nAleatoric probability: the part that can be replicated.\n\nUses:\n\nBayesian statistics uses both types of probability,\nwhereas other fields of statistics, e.g. MLE, typically uses only aleatoric.",
     "crumbs": [
       "Bayes on a discrete model",
       "Bayesian models"
