@@ -64,9 +64,14 @@ The task of constructing a Bayesian model is often broken down into constructing
 ## Epistemic vs aleatoric probability
 
 - In the bag of coin example, we can replicate the whole "experiment" several times (both prior and likelihood).
-- In the rocket example, we can only replicate launches (likelihood), not the prior sampling part. 
+- In the rocket example, we can only replicate launches (likelihood), not the prior sampling part.
+
+**Terminology:**
+
 - **Epistemic probability**: the part we cannot replicate. 
 - **Aleatoric probability**: the part that can be replicated. 
+
+**Uses:**
 
 - Bayesian statistics uses both types of probability, 
 - whereas other fields of statistics, e.g. MLE, typically uses only aleatoric.
