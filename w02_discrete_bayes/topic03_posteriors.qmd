@@ -58,12 +58,12 @@ Visualization of the **posterior** PMF and how it arises from the decision tree 
 ![](../images/all-in-one-killings.png){width="800"}
 
 - Recall we zero out the contribution of the paths not compatible with the observation (Heads, Heads, Heads). 
-- This gives a list of numbers that do not sum to one, so we renormalize them. 
+- This gives a list of numbers that do not sum to one, so we renormalize them.
 
 
 ### Example 2: rocket insurance
 
-You will construct prior and posterior PMFs in [question 2 of this week's exercises](../exercises/ex02.qmd#sec-q2). 
+You will construct prior and posterior PMFs in [question 2 of this week's exercises](../exercises/ex02.qmd#sec-q2).
 
 
 ## What to do with a posterior?

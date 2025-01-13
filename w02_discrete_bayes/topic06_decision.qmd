@@ -93,7 +93,7 @@ $$L(a) = \ex[L(a, X)] =  -\$ 9 \cdot \ind[a = 1] (1/2) + \$ 10 \cdot \ind[a = 1]
 **How to modify the last section to take into account the data $Y$?** 
 
 - Do everything the same, except:
-- use the conditional PMF $p_{X|Y}$ instead of the PMF $p_X$. 
+- use the conditional PMF $p_{X|Y}$ instead of the PMF $p_X$.
 
 
 ### Definition: the Bayes estimator {#sec-bayes-est}

@@ -38,16 +38,6 @@ where the sum is over $\{x : \pi(x) > 0 \}$.
 
 **Notation:** the posterior mean is denoted $\ex[X | Y = y] = \sum x\ \pi(x)$. 
 
-### Example 1
-
-Compute $\ex[X | Y = (1, 1)]$ in the bag of coin example. 
-
-{{< include ../blocks/_coinbag.qmd >}}
-
-{{< include ../../clickers/w02/_c01.qmd >}}
-
-
-
 ### Posterior mode
 
 The **mode** is the location of the "tallest stick" in the PMF. 
@@ -56,6 +46,18 @@ The **mode** is the location of the "tallest stick" in the PMF.
 
 In the Bayesian context, the mode of a posterior PMF is also known as 
 the Maximum A Posteriori (MAP) estimator. 
+
+## Examples
+
+### Example 1
+
+In the following, we will compute point estimates based on 
+$\pi(x) = \pr(X = x | Y = (1, 2))$ in the bag of coin running example. 
+
+{{< include ../blocks/_coinbag.qmd >}}
+
+{{< include ../../clickers/w02/_c01.qmd >}}
+
 
 
 ### Example 2

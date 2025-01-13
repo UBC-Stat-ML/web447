@@ -6,4 +6,100 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+{{< include ../blocks/_exercise_header.qmd >}} 
+
+## Goals
+
+- Build a probability model for a concrete example.
+- Introduce the concept of Bayes estimators.
+
+## Setup {#sec-setup}
+
+This exercise is centered around the following scenario:
+  
+{{< include ../blocks/_delta.qmd >}}
+
+
+
+## Q.1: define a Bayesian model {#sec-q1}
+
+In order to perform inference on the unknown quantities, we must specify how
+they relate to the data; i.e., we need a *probabilistic model*.
+Assume that every Delta 7925H rocket has the same probability $p$ of success.
+For simplicity, let us assume that $p$ is allowed to take values on an evenly space grid
+$$
+p \in \left\{\frac{k}{K}: k\in \{0,\dots,K\}\right\}
+$$
+for some fixed $K\in\nats$. Furthermore, we have access to a collection of
+numbers $\rho_k\in[0,1]$ such that[^1]
+$$
+\forall k\in\{0,\dots,K\}:\ \pr\left(p=\frac{k}{K}\right) = \rho_k.
+$${#eq-prior} 
+
+[^1]: Notice that in @eq-prior we are using (small cap) $p$ as a random variable, 
+      i.e. starting to move away from the probability theory capitalization 
+      convention towards the Bayesian convention where the same capitalization is 
+      used for both the random variable and its realization, 
+      [as discussed in the first week](../w01_discrete_inference/topic03_random_variables.qmd#sec-conventions-probability-vs-bayesian).
+
+Let $Y_i$ denote a binary variable with $Y_i=1$ encoding a success, and $Y_i=0$ a failure. 
+We assume that,
+conditionally on $p$, the $Y_i$'s are independent of each other.
+
+We will use the following prior:
+$$
+\rho_k \propto \frac{k}{K}\left(1-\frac{k}{K}\right).
+$$ {#eq-parabola-prior} 
+From now on, use $K = 20$. 
+
+1. What are the unknown quantities in this scenario? And what is the data?
+2. Write the joint distribution of this model (use the $\sim$ notation).
+
+
+## Q.2: posterior and point estimates {#sec-q2}
+
+To help you answer the following questions, create the two vectors: 
+
+- `prior_probabilities` where entry $i$ containing the prior probability $\rho_{i-1}$ 
+defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and 
+- `realizations`, a vector of possible realizations of $p$ in the same order, 
+namely $(0, 1/K, 2/K \dots, 1)$. 
+
+1. Plot the prior PMF. Do you think this is a reasonable prior?
+Hint: use the same type of plot as used last week to [plot PMFs](../w01_discrete_inference/topic04_pmfs.qmd#sec-examples). 
+2. Let $\pi_k = \pr(p = k/K | Y_{1:3} = (1, 1, 1))$ denote the posterior probabilities, for 
+$k \in \{0, 1, 2, \dots, K\}$. Create a vector `posterior_probabilities` where entry $i$ is $\pi_{i-1}$. Plot the posterior PMF.
+3. What is the posterior mode? 
+4. Write a function that compute the posterior mean of $p$. 
+Hint: you should obtain $\ex[p | Y_{1:3} = (1, 1, 1)] \approx 0.7$. 
+
+
+## Q.3: Bayes action {#sec-q3}
+
+Let $a\in\{0,1\}$ be a binary variable denoting the decision of buying the
+insurance ($a=1$) or not ($a=0$).
+
+1. Based on the problem description from [the Setup Section](#sec-setup), define a loss function $L(a, y)$ that summarizes the cost of 
+having taken decision $a\in\{0,1\}$ depending on whether the next launch is successful ($y = 1$) or not ($y = 0$).
+Hint: use *indicator functions* (i.e. binary functions taking either the value zero or one).
+2. We now consider the expected loss under the posterior predictive distribution:
+$$
+\mathcal{L}(a) := \ex[L(a,Y_4)|Y_{1:3}=(1, 1, 1)] 
+$$
+Write $\mathcal{L}(a)$ in terms of $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$. 
+**Important:** you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right)$ 
+is the same as the posterior mean, which we computed earlier to be $\approx 0.7$ for our 
+choice of prior.[^2]
+3. Formulate a recommendation to the owner of the satellite (again, you can use without proof that $\pr\left(Y_4=1 \middle| Y_{1:3}=(1, 1, 1) \right) \approx 0.7$).
+
+[^2]: The proof is as follows, where here we do disambiguate between the random variable $P$ and its realization $p$ (not to be confused with $\pr$ and PMF $p(\cdot)$!):
+  $$\begin{align*}
+  \pr(Y_4 = y_4 | Y_{1:3} = \ones) &= \sum_p \pr(P = p, Y_4 = y_4 | Y_{1:3} = \ones) \;\;\text{(additivity axiom)} \\
+  &= \sum_p  \pr(P = p | Y_{1:3} = \ones) \pr(Y_4 = y_4 | P = p, Y_{1:3} = \ones) \;\;\text{(chain rule)} \\
+  &= \sum_p \pi(p) \pr(Y_4 = y_4 | P = p, Y_{1:3} = \ones) \;\;\text{(definition)} \\
+  &= \sum_p \pi(p) \pr(Y_4 = y_4 | P = p) \;\;\text{(conditional independence)} \\
+  &= \sum_p \pi(p) p \;\;\text{(since each flip is assumed to be Bernoulli)} \\
+  &= \ex[p | Y_{1:3} = \ones].
+  \end{align*}$$
+  Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. 
+  We will cover in class the general method to compute predictive distribution, [see lecture notes](../w02_discrete_bayes/topic07_prediction.qmd). 

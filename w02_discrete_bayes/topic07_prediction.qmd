@@ -14,7 +14,6 @@ editor:
 - Prediction using decision trees
 - Example
 
-
 ### Rationale
 
 Often we do not care so much about "parameters" but instead about predicting future observations. 
@@ -42,10 +41,13 @@ last week (decision tree, chain rule, axioms of probability).
 
 ## Example, continued
 
-
 Use the following picture to help you computing $\pr(Y_4 = 1 | Y_{1:3} = \ones)$. 
 
 ![](../images/prediction.png){width="800"}
 
 {{< include ../../clickers/w02/_c03.qmd >}}
+
+{{< include ../../clickers/w02/_c04.qmd >}}
+
+{{< include ../../clickers/w02/_c05.qmd >}}
 
