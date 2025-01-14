@@ -656,7 +656,73 @@
     "href": "exercises/ex02.html",
     "title": "Exercise 2: Bayesian inference first contact",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#goals",
+    "href": "exercises/ex02.html#goals",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Goals",
+    "text": "Goals\n\nBuild a probability model for a concrete example.\nIntroduce the concept of Bayes estimators.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-setup",
+    "href": "exercises/ex02.html#sec-setup",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Setup",
+    "text": "Setup\nThis exercise is centered around the following scenario:\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2025, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q1",
+    "href": "exercises/ex02.html#sec-q1",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.1: define a Bayesian model",
+    "text": "Q.1: define a Bayesian model\nIn order to perform inference on the unknown quantities, we must specify how they relate to the data; i.e., we need a probabilistic model. Assume that every Delta 7925H rocket has the same probability \\(p\\) of success. For simplicity, let us assume that \\(p\\) is allowed to take values on an evenly space grid \\[\np \\in \\left\\{\\frac{k}{K}: k\\in \\{0,\\dots,K\\}\\right\\}\n\\] for some fixed \\(K\\in\\mathbb{N}\\). Furthermore, we have access to a collection of numbers \\(\\rho_k\\in[0,1]\\) such that1 \\[\n\\forall k\\in\\{0,\\dots,K\\}:\\ \\mathbb{P}\\left(p=\\frac{k}{K}\\right) = \\rho_k.\n\\tag{1}\\]\nLet \\(Y_i\\) denote a binary variable with \\(Y_i=1\\) encoding a success, and \\(Y_i=0\\) a failure. We assume that, conditionally on \\(p\\), the \\(Y_i\\)’s are independent of each other.\nWe will use the following prior: \\[\n\\rho_k \\propto \\frac{k}{K}\\left(1-\\frac{k}{K}\\right).\n\\tag{2}\\] From now on, use \\(K = 20\\).\n\nWhat are the unknown quantities in this scenario? And what is the data?\nWrite the joint distribution of this model (use the \\(\\sim\\) notation).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q2",
+    "href": "exercises/ex02.html#sec-q2",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.2: posterior and point estimates",
+    "text": "Q.2: posterior and point estimates\nTo help you answer the following questions, create the two vectors:\n\nprior_probabilities where entry \\(i\\) containing the prior probability \\(\\rho_{i-1}\\) defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and\nrealizations, a vector of possible realizations of \\(p\\) in the same order, namely \\((0, 1/K, 2/K \\dots, 1)\\).\n\n\nPlot the prior PMF. Do you think this is a reasonable prior? Hint: use the same type of plot as used last week to plot PMFs.\nLet \\(\\pi_k = \\mathbb{P}(p = k/K | Y_{1:3} = (1, 1, 1))\\) denote the posterior probabilities, for \\(k \\in \\{0, 1, 2, \\dots, K\\}\\). Create a vector posterior_probabilities where entry \\(i\\) is \\(\\pi_{i-1}\\). Plot the posterior PMF.\nWhat is the posterior mode?\nWrite a function that compute the posterior mean of \\(p\\). Hint: you should obtain \\(\\mathbb{E}[p | Y_{1:3} = (1, 1, 1)] \\approx 0.7\\).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q3",
+    "href": "exercises/ex02.html#sec-q3",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.3: Bayes action",
+    "text": "Q.3: Bayes action\nLet \\(a\\in\\{0,1\\}\\) be a binary variable denoting the decision of buying the insurance (\\(a=1\\)) or not (\\(a=0\\)).\n\nBased on the problem description from the Setup Section, define a loss function \\(L(a, y)\\) that summarizes the cost of having taken decision \\(a\\in\\{0,1\\}\\) depending on whether the next launch is successful (\\(y = 1\\)) or not (\\(y = 0\\)). Hint: use indicator functions (i.e. binary functions taking either the value zero or one).\nWe now consider the expected loss under the posterior predictive distribution: \\[\n\\mathcal{L}(a) := \\mathbb{E}[L(a,Y_4)|Y_{1:3}=(1, 1, 1)]\n\\] Write \\(\\mathcal{L}(a)\\) in terms of \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\). Important: you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\) is the same as the posterior mean, which we computed earlier to be \\(\\approx 0.7\\) for our choice of prior.2\nFormulate a recommendation to the owner of the satellite (again, you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right) \\approx 0.7\\)).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#footnotes",
+    "href": "exercises/ex02.html#footnotes",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNotice that in Equation 1 we are using (small cap) \\(p\\) as a random variable, i.e. starting to move away from the probability theory capitalization convention towards the Bayesian convention where the same capitalization is used for both the random variable and its realization, as discussed in the first week.↩︎\nThe proof is as follows, where here we do disambiguate between the random variable \\(P\\) and its realization \\(p\\) (not to be confused with \\(\\mathbb{P}\\) and PMF \\(p(\\cdot)\\)!): \\[\\begin{align*}\n  \\mathbb{P}(Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) &= \\sum_p \\mathbb{P}(P = p, Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(additivity axiom)} \\\\\n  &= \\sum_p  \\mathbb{P}(P = p | Y_{1:3} = \\boldsymbol{1}) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(chain rule)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(definition)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p) \\;\\;\\text{(conditional independence)} \\\\\n  &= \\sum_p \\pi(p) p \\;\\;\\text{(since each flip is assumed to be Bernoulli)} \\\\\n  &= \\mathbb{E}[p | Y_{1:3} = \\boldsymbol{1}].\n  \\end{align*}\\] Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. We will cover in class the general method to compute predictive distribution, see lecture notes.↩︎",
     "crumbs": [
       "Bayes on a discrete model",
       "Exercises"
@@ -2009,7 +2075,7 @@
     "href": "w02_discrete_bayes/topic06_decision.html#decision-theory-without-data",
     "title": "Decision theory",
     "section": "Decision theory without data",
-    "text": "Decision theory without data\nYour friend proposes the following game (a good model for lottery!):\n\nShe flips a standard coin:\n\nif it’s a “heads”: you give her $10\nif it’s a “tails”: she gives you $9.\n\nYour decision: to play or not to play?\n\n\nMathematical formulation\n\nSet of actions: \\(A = \\{0, 1\\}\\) (\\(1 =\\) play, \\(0 =\\) do not play).\nProbability model: \\(X \\sim {\\mathrm{Bern}}(1/2)\\).\nLoss function:\n\n\\(L(a, x)\\): how much do I lose if I pick action \\(a \\in A\\) and encounter realization \\(X = x\\)?\n\nMathematical solution: minimize over \\(a \\in A\\) the expected loss \\[L(a) = \\mathbb{E}[L(a, X)].\\]\n\n\n\nExample\nCompute \\(\\operatorname{arg\\,min}L(a)\\) and \\(\\min L(a)\\).\nIt is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.\nLet us start by writing the loss function mathematically using indicator function defined as: \\[\\mathbb{1}[\\text{some condition}] = \\left\\{\n\\begin{array}{ll}\n1 & \\text{if the condition is true,} \\\\\n0 & \\text{if the condition is false.}\n\\end{array}\n\\right.\\] This gives us: \\[L(a, x) = \\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, x = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, x = 1] \\cdot (\\$10).\\]\nLet us simplify the expected loss function, i.e. \\[\\mathbb{E}[L(a, X)] = \\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\] o do that simplification, first use linearity of expectation which you will recall from probability theory tells us that for any random variables \\(X_1\\) and \\(X_2\\), we have \\(\\mathbb{E}[X_1 + c X_2] = \\mathbb{E}[X_1] + c \\mathbb{E}[X_2]\\) for any constant \\(c\\).\nIn our context, using linearity with \\(c=1\\) allows us to simplify the above to: \\[\\underbrace{\\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0)]}_0 + \\mathbb{E}[\\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9)] + \\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\]\nTrick 1: To deal with each remaining term, use that: \\(\\mathbb{1}[a = 1, X = 1] = \\mathbb{1}[a = 1]\\mathbb{1}[X = 1]\\) (check!), and then use linearity with \\(c = \\$ 10 \\cdot \\mathbb{1}[a = 1]\\) to get: \\[\\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)] =  \\$ 10 \\cdot \\mathbb{1}[a = 1] \\mathbb{E}[\\mathbb{1}[X = 1]].\\]\nLOTUS: Finally, we have to compute \\(\\mathbb{E}[\\mathbb{1}[X = 1]]\\). From our review of the Law of the Unconscious Statistician, this is done as follows: \\[\\mathbb{E}[\\mathbb{1}[X = 1]] = \\sum_x \\mathbb{1}[x = 1] p_X(x) = 0 + 1 \\cdot p_X(1) = 1/2.\\]\nTrick 2: you will often take expectation of indicator function, you will always find that \\(\\mathbb{E}[\\mathbb{1}[\\text{an event}]] = \\mathbb{P}(\\text{an event})\\).\nPutting it all together: \\[L(a) = \\mathbb{E}[L(a, X)] =  -\\$ 9 \\cdot \\mathbb{1}[a = 1] (1/2) + \\$ 10 \\cdot \\mathbb{1}[a = 1] (1/2) = \\$0.5 \\cdot \\mathbb{1}[a = 1].\\]",
+    "text": "Decision theory without data\nYour friend proposes the following game (a good model for lottery!):\n\nShe flips a standard coin:\n\nif it’s a “heads”: you give her $10\nif it’s a “tails”: she gives you $9.\n\nYour decision: to play or not to play?\n\n\nMathematical formulation\n\nSet of actions: \\(A = \\{0, 1\\}\\) (\\(1 =\\) play, \\(0 =\\) do not play).\nProbability model: \\(X \\sim {\\mathrm{Bern}}(1/2)\\).\nLoss function:\n\n\\(L(a, x)\\): how much do I lose if I pick action \\(a \\in A\\) and encounter realization \\(X = x\\)?\n\nMathematical solution: minimize over \\(a \\in A\\) the expected loss \\[L(a) = \\mathbb{E}[L(a, X)].\\]\n\n\n\nExample\nCompute \\(\\operatorname{arg\\,min}L(a)\\) and \\(\\min L(a)\\).\n\nIt is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.\nLet us start by writing the loss function mathematically using indicator function defined as: \\[\\mathbb{1}[\\text{some condition}] = \\left\\{\n\\begin{array}{ll}\n1 & \\text{if the condition is true,} \\\\\n0 & \\text{if the condition is false.}\n\\end{array}\n\\right.\\] This gives us: \\[L(a, x) = \\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, x = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, x = 1] \\cdot (\\$10).\\]\nLet us simplify the expected loss function, i.e. \\[\\mathbb{E}[L(a, X)] = \\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0) + \\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9) +  \\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\] o do that simplification, first use linearity of expectation which you will recall from probability theory tells us that for any random variables \\(X_1\\) and \\(X_2\\), we have \\(\\mathbb{E}[X_1 + c X_2] = \\mathbb{E}[X_1] + c \\mathbb{E}[X_2]\\) for any constant \\(c\\).\nIn our context, using linearity with \\(c=1\\) allows us to simplify the above to: \\[\\underbrace{\\mathbb{E}[\\mathbb{1}[a = 0] \\cdot (\\$0)]}_0 + \\mathbb{E}[\\mathbb{1}[a = 1, X = 0] \\cdot (-\\$9)] + \\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)].\\]\nTrick 1: To deal with each remaining term, use that: \\(\\mathbb{1}[a = 1, X = 1] = \\mathbb{1}[a = 1]\\mathbb{1}[X = 1]\\) (check!), and then use linearity with \\(c = \\$ 10 \\cdot \\mathbb{1}[a = 1]\\) to get: \\[\\mathbb{E}[\\mathbb{1}[a = 1, X = 1] \\cdot (\\$10)] =  \\$ 10 \\cdot \\mathbb{1}[a = 1] \\mathbb{E}[\\mathbb{1}[X = 1]].\\]\nLOTUS: Finally, we have to compute \\(\\mathbb{E}[\\mathbb{1}[X = 1]]\\). From our review of the Law of the Unconscious Statistician, this is done as follows: \\[\\mathbb{E}[\\mathbb{1}[X = 1]] = \\sum_x \\mathbb{1}[x = 1] p_X(x) = 0 + 1 \\cdot p_X(1) = 1/2.\\]\nTrick 2: you will often take expectation of indicator function, you will always find that \\(\\mathbb{E}[\\mathbb{1}[\\text{an event}]] = \\mathbb{P}(\\text{an event})\\).\nPutting it all together: \\[L(a) = \\mathbb{E}[L(a, X)] =  -\\$ 9 \\cdot \\mathbb{1}[a = 1] (1/2) + \\$ 10 \\cdot \\mathbb{1}[a = 1] (1/2) = \\$0.5 \\cdot \\mathbb{1}[a = 1].\\]",
     "crumbs": [
       "Bayes on a discrete model",
       "Decision theory"
@@ -2053,7 +2119,18 @@
     "href": "w02_discrete_bayes/topic04_point.html#definitions",
     "title": "Point estimates",
     "section": "Definitions",
-    "text": "Definitions\n\nLet \\(\\pi(x) = \\mathbb{P}(X = x | Y = y)\\) denote a posterior PMF.\nPoint estimate: Instead of plotting the full information in \\(\\pi\\), we can report a “location” summary such as the mean of the posterior \\(\\pi\\).\n\n\nPosterior mean\nRecall the mean is computed from a PMF via \\[\\sum_x x\\; \\pi(x),\\] where the sum is over \\(\\{x : \\pi(x) &gt; 0 \\}\\).\nNotation: the posterior mean is denoted \\(\\mathbb{E}[X | Y = y] = \\sum x\\ \\pi(x)\\).\n\n\nExample 1\nCompute \\(\\mathbb{E}[X | Y = (1, 1)]\\) in the bag of coin example.\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\n\n\nPosterior mode\nThe mode is the location of the “tallest stick” in the PMF.\nNotation: \\(\\operatorname{arg\\,max}\\pi(x),\\) i.e. the point that achieves the maximum of \\(\\pi\\).\nIn the Bayesian context, the mode of a posterior PMF is also known as the Maximum A Posteriori (MAP) estimator.\n\n\nExample 2\nYou will practice computing the posterior mean/mode in question 2 of the exercises.",
+    "text": "Definitions\n\nLet \\(\\pi(x) = \\mathbb{P}(X = x | Y = y)\\) denote a posterior PMF.\nPoint estimate: Instead of plotting the full information in \\(\\pi\\), we can report a “location” summary such as the mean of the posterior \\(\\pi\\).\n\n\nPosterior mean\nRecall the mean is computed from a PMF via \\[\\sum_x x\\; \\pi(x),\\] where the sum is over \\(\\{x : \\pi(x) &gt; 0 \\}\\).\nNotation: the posterior mean is denoted \\(\\mathbb{E}[X | Y = y] = \\sum x\\ \\pi(x)\\).\n\n\nPosterior mode\nThe mode is the location of the “tallest stick” in the PMF.\nNotation: \\(\\operatorname{arg\\,max}\\pi(x),\\) i.e. the point that achieves the maximum of \\(\\pi\\).\nIn the Bayesian context, the mode of a posterior PMF is also known as the Maximum A Posteriori (MAP) estimator.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Point estimates"
+    ]
+  },
+  {
+    "objectID": "w02_discrete_bayes/topic04_point.html#examples",
+    "href": "w02_discrete_bayes/topic04_point.html#examples",
+    "title": "Point estimates",
+    "section": "Examples",
+    "text": "Examples\n\nExample 1\nIn the following, we will compute point estimates based on \\(\\pi(x) = \\mathbb{P}(X = x | Y = (1, 2))\\) in the bag of coin running example.\n\nImagine a bag with 3 coins each with a different probability parameter \\(p\\)\nCoin \\(i\\in \\{0, 1, 2\\}\\) has bias \\(i/2\\)—in other words:\n\nFirst coin: bias is \\(0/2 = 0\\) (i.e. both sides are “heads”, \\(p = 0\\))\nSecond coin: bias is \\(1/2 = 0.5\\) (i.e. standard coin, \\(p = 1/2\\))\nThird coin: bias is \\(2/2 = 1\\) (i.e. both sides are “tails”, \\(p = 1\\))\n\n\n\n\n\n\nConsider the following two steps sampling process\n\nStep 1: pick one of the three coins, but do not look at it!\nStep 2: flip the coin 4 times\n\nMathematically, this probability model can be written as follows: \\[\n\\begin{align*}\nX &\\sim {\\mathrm{Unif}}\\{0, 1, 2\\} \\\\\nY_i | X &\\sim {\\mathrm{Bern}}(X/2)\n\\end{align*}\n\\tag{1}\\]\n\n\n\n\n\nExample 2\nYou will practice computing the posterior mean/mode in question 2 of the exercises.",
     "crumbs": [
       "Bayes on a discrete model",
       "Point estimates"
@@ -3891,7 +3968,7 @@
     "href": "w02_discrete_bayes/topic01_bayes_recipe.html#sec-running",
     "title": "The Bayesian recipe",
     "section": "This week’s running example",
-    "text": "This week’s running example\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure.",
+    "text": "This week’s running example\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2025, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure.",
     "crumbs": [
       "Bayes on a discrete model",
       "The Bayesian recipe"
