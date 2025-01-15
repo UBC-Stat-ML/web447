@@ -52,7 +52,7 @@ the Maximum A Posteriori (MAP) estimator.
 ### Example 1
 
 In the following, we will compute point estimates based on 
-$\pi(x) = \pr(X = x | Y = (1, 2))$ in the bag of coin running example. 
+$\pi(x) = \pr(X = x | Y = (1, 1))$ in the bag of coin running example. 
 
 {{< include ../blocks/_coinbag.qmd >}}
 

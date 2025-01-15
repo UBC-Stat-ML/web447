@@ -10,7 +10,7 @@ editor:
 ![](../images/delta.jpeg){width="200"}
 :::
 
-- **Data**: as of Jan 2024, Delta 7925H rockets have been launched 3 times, with
+- **Data**: as of Jan 2025, Delta 7925H rockets have been launched 3 times, with
 0 failed launches <!-- Source: https://space.skyrocket.de/doc_lau_det/delta-7925h.htm -->
   - Note: Delta 7925H is not reusable, so each rocket is "copy- built" from the
   same blueprint
