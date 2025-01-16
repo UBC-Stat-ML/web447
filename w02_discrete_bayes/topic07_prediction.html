@@ -1042,116 +1042,135 @@ https://github.com/trevorcampbell/shortex
 <h2 class="anchored" data-anchor-id="example-continued">Example, continued</h2>
 <p>Use the following picture to help you computing <span class="math inline">\(\mathbb{P}(Y_4 = 1 | Y_{1:3} = \boldsymbol{1})\)</span>.</p>
 <p><img src="../images/prediction.png" class="img-fluid" width="800"></p>
-<!--
-
-**Notation:** let $\gamma(i) = \pr(Y_{1:3} = \ones, Y_4 = i)$. 
-
-**Question:** compute $\gamma(0)$.
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\approx 0.02$
-1. $\approx 0.06$
-1. $\approx 0.52$
-1. $\approx 0.94$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-- There is only one way to get $(Y_{1:3} = \ones, Y_4 = 0)$: this has to be the standard coin, i.e.,
-$$(Y_{1:3} = \ones, Y_4 = 0) = (X = 1, Y_{1:3} = \ones, Y_4 = 0)$$
-- To compute the probability of that path, by chain rule, we can multiply the edge probabilities:
-$$\gamma(0) = \pr(X = 1, Y_{1:3} = \ones, Y_4 = 0) = (1/3) \times (1/2)^4 = 1/48 \approx 0.02.$$
-:::
-
-
--->
-<!--
-
-**Question:** compute $\gamma(1)$.
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\approx 0.11$
-1. $\approx 0.35$
-1. $\approx 0.52$
-1. $\approx 0.94$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-- Twist: two distinct paths are compatible with the event: 
-$$(Y_{1:4} = \ones) = (X = 2, Y_{1:4} = \ones) \cup (X = 1, Y_{1:4} = \ones).$$
-- Sum the probabilities of the paths leading to the same prediction (why can we do this?).
-\begin{align*}
-\pr(Y_{1:4} = \ones) &= \pr(X = 2, Y_{1:4} = \ones) + \pr(X = 1, Y_{1:4} = \ones) \\
-&= 1/48 + 1/3 \approx 0.35.
-\end{align*}
-:::
-
--->
-<!--
-
-**Question:** compute the predictive
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\approx 0.11$
-1. $\approx 0.35$
-1. $\approx 0.52$
-1. $\approx 0.94$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"}
-## Click for answer
-
-1. Add a random variable for the quantity you want to predict (next flip $Y_4$). 
-2. Add one level in the decision tree.
-3. Use Bayes rule. 
-    - Twist: distinct paths are compatible with observations and lead to the same prediction: $(Y_{1:4} = \ones) = (X = 2, Y_{1:4} = \ones) \cup (X = 1, Y_{1:4} = \ones)$. 
-    - Sum the probabilities of the paths leading to the same prediction (why can we do this?).
-        - Let $\gamma(i) = \pr(Y_{1:3} = \ones, Y_4 = i)$. 
-        - Two ways to get $(Y_{1:4} = \ones)$, hence: $\gamma(1) = 1/48 + 1/3$
-        - Only one way to get $(Y_{1:3} = \ones, Y_4 = 0)$: $\gamma(0) = 1/48$
-    - As before, normalize $\gamma$ to get $\pi$:
-    $$\pr(Y_4 = 1|Y_{1:3} = \ones) = \frac{\gamma(1)}{\gamma(0) + \gamma(1)} = 17/18 \approx 0.94$$
-
-**Mathematical details of the above intuitive explanation:**
-
-By definition of conditioning:
-$$\pi(i) := \pr(Y_4 = i | Y_{1:3} = \ones) = \frac{\pr(Y_{1:3} = \ones, Y_4 = i)}{\pr(Y_{1:3} = \ones)} \propto \pr(Y_{1:3} = \ones, Y_4 = i) =: \gamma(i).$$
-Since $\{(X = 0, Y_{1:3} = \ones, Y_4 = i), (X = 1, Y_{1:3} = \ones, Y_4 = i), (X = 2, Y_{1:3} = \ones, Y_4 = i)\}$ is a partition of $(Y_{1:3} = \ones, Y_4 = i)$, 
-from the additivity axiom of probability, [reviewed last week](../w01_discrete_inference/topic02_axioms.qmd), we have:
-$$\gamma(i) = \pr(Y_{1:3} = \ones, Y_4 = i) = \sum_x \pr(X = x, Y_{1:3} = \ones, Y_4 = i).$${#eq-total-pr}
-The above explains why we can "sum the paths leading to the same prediction."
-
-Next, to compute each term in @eq-total-pr, we use [chain rule](../w01_discrete_inference/topic08_chain.qmd) ("multiplying the edge probabilities to find a path probability"):
-$$\pr(X = x, Y_{1:3} = \ones, Y_4 = i) = \pr(X = x) \pr(Y_1 = y_1 | X = x) \pr(Y_2 = y_2 | X = x, Y_1 = y_1) \pr(Y_3 = y_3 | X = x, Y_{1:2} = y_{1:2}) \pr(Y_4 = y_4 | X = x, Y_{1:3} = y_{1:3}).$$
-Note that by [conditional independence](../w01_discrete_inference/topic08_chain.qmd#sec-conditional-independence), these probabilities can be simplified, for example,
-$$\pr(Y_2 = y_2 | X = x, Y_1 = y_1) = \pr(Y_2 = y_2 | X = x),$$
-or in words: "once I know the kind of coin ($X$), knowing 
-the first flips ($Y_1$) does not bring additional information on the second flip ($Y_2$)."
-
-Doing this for each $i$ in @eq-total-pr:
-
-- $\gamma(0) = 0 + 1/48 + 0$ 
-- $\gamma(1) = 0 + 1/48 + 1/3$.
-
-Finally, we renormalize to get a posterior PMF $\pi$:
-$$\pi = \frac{\gamma}{Z},$$
-i.e.:
-$$(\pi(0), \pi(1)) = \frac{(\gamma(0), \gamma(1))}{\gamma(0) + \gamma(1)}.$$
-:::
-
--->
+<p><strong>Notation:</strong> let <span class="math inline">\(\gamma(i) = \mathbb{P}(Y_{1:3} = \boldsymbol{1}, Y_4 = i)\)</span>.</p>
+<p><strong>Question:</strong> compute <span class="math inline">\(\gamma(0)\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\approx 0.02\)</span></li>
+<li><span class="math inline">\(\approx 0.06\)</span></li>
+<li><span class="math inline">\(\approx 0.52\)</span></li>
+<li><span class="math inline">\(\approx 0.94\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>There is only one way to get <span class="math inline">\((Y_{1:3} = \boldsymbol{1}, Y_4 = 0)\)</span>: this has to be the standard coin, i.e., <span class="math display">\[(Y_{1:3} = \boldsymbol{1}, Y_4 = 0) = (X = 1, Y_{1:3} = \boldsymbol{1}, Y_4 = 0)\]</span></li>
+<li>To compute the probability of that path we can multiply the edge probabilities <a href="../w01_discrete_inference/topic08_chain.html">(why?)</a>: <span class="math display">\[\gamma(0) = \mathbb{P}(X = 1, Y_{1:3} = \boldsymbol{1}, Y_4 = 0) = (1/3) \times (1/2)^4 = 1/48 \approx 0.02.\]</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> compute <span class="math inline">\(\gamma(1)\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\approx 0.11\)</span></li>
+<li><span class="math inline">\(\approx 0.35\)</span></li>
+<li><span class="math inline">\(\approx 0.52\)</span></li>
+<li><span class="math inline">\(\approx 0.94\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Twist: two distinct paths are compatible with the event: <span class="math display">\[(Y_{1:4} = \boldsymbol{1}) = (X = 2, Y_{1:4} = \boldsymbol{1}) \cup (X = 1, Y_{1:4} = \boldsymbol{1}).\]</span></li>
+<li>Sum the probabilities of the paths leading to the same prediction <a href="../w01_discrete_inference/topic02_axioms.html">(why can we do this?).</a>: <span class="math display">\[\begin{align*}
+\mathbb{P}(Y_{1:4} = \boldsymbol{1}) &amp;= \mathbb{P}(X = 2, Y_{1:4} = \boldsymbol{1}) + \mathbb{P}(X = 1, Y_{1:4} = \boldsymbol{1}) \\
+&amp;= 1/48 + 1/3 \approx 0.35.
+\end{align*}\]</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> compute the predictive</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\approx 0.94\)</span></li>
+<li><span class="math inline">\(\approx 0.52\)</span></li>
+<li><span class="math inline">\(\approx 0.35\)</span></li>
+<li><span class="math inline">\(\approx 0.11\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let: <span class="math display">\[\pi(i) := \mathbb{P}(Y_4 = i | Y_{1:3} = \boldsymbol{1}).\]</span></p>
+<p>Note: <span class="math display">\[\pi(i) \propto \gamma(i).\]</span></p>
+<p>Hence: <span class="math display">\[(\pi(0), \pi(1)) = \frac{(\gamma(0), \gamma(1))}{\gamma(0) + \gamma(1)}.\]</span> Therefore we get: <span class="math display">\[\mathbb{P}(Y_4 = 1|Y_{1:3} = \boldsymbol{1}) = \frac{\gamma(1)}{\gamma(0) + \gamma(1)} = 17/18 \approx 0.94.\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>
