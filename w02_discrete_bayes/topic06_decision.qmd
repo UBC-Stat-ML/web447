@@ -33,7 +33,7 @@ Your friend proposes the following game (a good model for lottery!):
 - She flips a standard coin:
     - if it's a "heads": you give her \$10 
     - if it's a "tails": she gives you \$9. 
-- Your decision: to play or not to play?
+- Your decision: to play or not to play? 
 
 ### Mathematical formulation
 
@@ -43,6 +43,8 @@ Your friend proposes the following game (a good model for lottery!):
     - $L(a, x)$: how much do I lose if I pick action $a \in A$ and encounter realization $X = x$?
 - Mathematical solution: minimize over $a \in A$ the **expected loss**
 $$L(a) = \ex[L(a, X)].$$
+- Recall, by LOTUS:
+$$\ex[L(a, X)] = \sum_x L(a, x) p_{X}(x).$$
 
 
 ### Example

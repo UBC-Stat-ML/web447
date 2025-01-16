@@ -36,7 +36,7 @@ Consider the setup from last week with 3 coins and 3 flips with $Y = (1, 1, 1)$
 **Idea:** Add $Y_4$ to the unobserved random variables, i.e. set $\tilde X = (X, Y_4)$. 
 
 Then, to compute $\pr(Y_4 = 1 | Y_{1:3} = \ones)$ use same techniques as 
-last week (decision tree, chain rule, axioms of probability). 
+last week (decision tree, chain rule, axioms of probability).
 
 
 ## Example, continued
