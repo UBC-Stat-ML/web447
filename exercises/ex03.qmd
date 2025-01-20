@@ -1,9 +1,101 @@
 ---
-title: "Exercise 3: write your own PPL!"
+title: "Exercise 3: Write your own PPL!"
 editor: 
   mode: source
 ---
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+
+## Goals
+
+- Introduce Monte Carlo integration in continuous spaces.
+- Implement importance sampling.
+- Build a universal probabilistic programming language in <30 lines of code.
+
+
+## Q.1: functions on the unit interval
+
+For this question, use [Simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd). 
+The main twist compared to week one is that you will use a continuous random variable.
+
+1. Write a function `mc_estimate` that takes a function $f:[0,1]\to\reals$ and 
+outputs a Monte Carlo estimate of $\int_0^1 f(x)\dee x$ using $n=10000$ 
+independent samples from $\distUnif(0,1)$.
+
+2. Consider the function $f:[0,1] \to [0,\infty)$ given by 
+$$ 
+f(x) = e^{-x^2}.
+$$
+It is possible to show that
+$$
+\int_0^1 f(x) \, \dee x = \frac{\sqrt{\pi}}{2} \text{erf}(1) \approx 0.7468241,
+$${#eq-integral}
+where $\text{erf}(\cdot)$ is the [error function](https://mathworld.wolfram.com/Erf.html). 
+Test your implementation of `mc_estimate` by checking that it produces an
+answer close to the value in @eq-integral.
+
+3. The integral with $f(x) = 1/(1+x)$ evaluates to
+$$
+\int_0^1 \frac{1}{1+x} \dee x = \ln(2).
+$$
+Estimate its value using `mc_estimate(f)` and compare to the exact value.
+
+<!--
+*** FROM 2024 **
+2. Consider the function $f:[0,1]\to[0,\infty)$ given by
+$$
+f(x) = \frac{1}{\sqrt[3]{x^2(1-x)}}.
+$$
+It is possible to show that
+$$
+\int_0^1 f(x)\dee x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
+$${#eq-integral}
+Test your implementation of `mc_estimate` by checking that it produces an
+answer close to the value in @eq-integral.
+3. The following integral, known as the 
+[sine integral](https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral),
+$$
+\int_0^1 \frac{\sin(t)}{t} \dee t.
+$$
+does not admit a closed-form expression. Estimate its value using `mc_estimate(f)`.
+*** FROM 2024 **
+-->
+
+
+## Q.2: implementing SNIS for simPPLe {#sec-simPPLe}
+
+In this question, you will write the function `posterior` that we used in 
+[the PPL introduction](../w03_ppl/topic01_ppls_intro.qmd). 
+
+1. First, install the package `distr`, which allows us to work with
+distributions as objects---a necessary ingredient of every PPL. Load or install
+it using
+```{r}
+#| eval: false
+if (!require(distr)){
+  install.packages("distr")
+  require(distr)
+}
+```
+2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to 
+submit for this item.
+3. Read the "scaffold code", and use `distr` and two of the functions below to 
+create a fair coin, flip it, and to compute the probability of that flip:
+```r {shortcodes=true, filename="ex03_scaffold.R"}
+{{< include ex03_scaffold.R >}}
+```
+4. Complete the implementation of the function `posterior`: 
+```r
+posterior = function(ppl_function, number_of_iterations) {
+  numerator = 0.0
+  denominator = 0.0
+  for (i in 1:number_of_iterations) {
+    weight <<- 1.0
+    # update numerator and denominator
+  }
+  return(numerator/denominator)
+}
+```
+5. Test your program by checking that you can approximate the posterior probability
+of the fair coin obtained in [exercise 1, Q.2](ex01.qmd#sec-q2).
