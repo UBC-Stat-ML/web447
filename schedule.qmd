@@ -4,6 +4,8 @@ editor:
   mode: source
 ---
 
+{{< include _announce.qmd >}}
+
 | Date | Topics | Readings |
 |----|----|----|
 | Tue, Jan 7 | Overview. Probabilistic inference on discrete spaces. | BDA 1.1-1.10 |

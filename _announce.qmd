@@ -1,0 +1,5 @@
+::: callout-caution
+**Lecture room change!** Effective now (January 20), all lectures will be 
+in [MCML 360](https://learningspaces.ubc.ca/classrooms/mcml-360/). 
+It is a 5 minutes walk from the previous room. 
+:::

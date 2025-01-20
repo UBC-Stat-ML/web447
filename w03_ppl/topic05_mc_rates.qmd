@@ -6,6 +6,8 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+{{< include ../_announce.qmd >}}
+
 <!-- Note: I ended up covering this at the beginning of week 5. Natural fit with the other asymptotic regime (large data) --> 
 
 ## Outline

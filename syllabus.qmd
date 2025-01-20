@@ -5,6 +5,9 @@ editor:
 ---
 
 
+{{< include _announce.qmd >}}
+
+
 ## Course description
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
@@ -85,6 +88,9 @@ For exercise grading, I will take the $\max(\text{mean}(e_1, e_2, ...), \text{me
 The same applies for clicker participation points.
 This is in place to help a couple 
 students travelling in the first week, but will be automatically applied for everyone so no need to request it.
+
+**Update Jan 25:** since a few students still are having problem enrolling, I have added one more week to the max policy described above, 
+so it is now $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...), \text{mean}(e_3, e_4, ...))$. 
 
 Once in a while, I will post some "challenge questions". 
 These are not essential for learning the material and can be skipped. 
