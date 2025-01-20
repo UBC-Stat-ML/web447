@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 7\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 9\n\n\n\n\nTue, Jan 14\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 16\n\n\n\n\nTue, Jan 21\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 23\n\n\n\n\nTue, Jan 28\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 30\n\n\n\n\nTue, Feb 4\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 6\n\n\n\n\nTue, Feb 11\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 13\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 20\nReading week.\n\n\n\nTue, Feb 25\nQuiz 1.\n\n\n\nTh, Feb 27\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 4\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 6\n\n\n\n\nTue, Mar 11\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 13\n\n\n\n\nFri, Mar 14\nProject proposal due.\n\n\n\nTue, Mar 18\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 20\n\n\n\n\nTue, Mar 25\nQuiz 2.\n\n\n\nTh, Mar 27\nMCMC developer guide.\n\n\n\nTue, Apr 1\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 3\n\n\n\n\nTue, Apr 8\nMore inference techniques.\nBDA 13.7\n\n\nFri, Apr 19\nFinal project due.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.\n\n\n\n\n\n\n\n\n\n\nDate\nTopics\nReadings\n\n\n\n\nTue, Jan 7\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 9\n\n\n\n\nTue, Jan 14\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 16\n\n\n\n\nTue, Jan 21\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 23\n\n\n\n\nTue, Jan 28\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 30\n\n\n\n\nTue, Feb 4\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 6\n\n\n\n\nTue, Feb 11\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 13\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 20\nReading week.\n\n\n\nTue, Feb 25\nQuiz 1.\n\n\n\nTh, Feb 27\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 4\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 6\n\n\n\n\nTue, Mar 11\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 13\n\n\n\n\nFri, Mar 14\nProject proposal due.\n\n\n\nTue, Mar 18\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 20\n\n\n\n\nTue, Mar 25\nQuiz 2.\n\n\n\nTh, Mar 27\nMCMC developer guide.\n\n\n\nTue, Apr 1\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 3\n\n\n\n\nTue, Apr 8\nMore inference techniques.\nBDA 13.7\n\n\nFri, Apr 19\nFinal project due.",
     "crumbs": [
       "Schedule"
     ]
@@ -281,7 +281,7 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "Syllabus"
     ]
@@ -290,8 +290,8 @@
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT447C Bayesian Statistics",
-    "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
+    "section": "Course description",
+    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 447C, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.",
     "crumbs": [
       "Syllabus"
     ]
@@ -351,7 +351,7 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus: STAT447C Bayesian Statistics",
     "section": "Assessments",
-    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Feb 25 and March 25\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first week, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: Feb 25 and March 25\n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first week, but will be automatically applied for everyone so no need to request it.\nUpdate Jan 25: since a few students still are having problem enrolling, I have added one more week to the max policy described above, so it is now \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...), \\text{mean}(e_3, e_4, ...))\\).\nOnce in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
     "crumbs": [
       "Syllabus"
     ]
@@ -1789,7 +1789,7 @@
     "href": "w03_ppl/topic06_ess.html",
     "title": "SNIS Effective Sample Size",
     "section": "",
-    "text": "Estimating SNIS’ error based on running it only once.\nUnderlying theoretical guarantee.\n\n\n\n\nSo far we have relied on heuristics to determine the number of Monte Carlo iterations. Here we describe a better approach.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "SNIS Effective Sample Size"
@@ -1799,8 +1799,8 @@
     "objectID": "w03_ppl/topic06_ess.html#outline",
     "href": "w03_ppl/topic06_ess.html#outline",
     "title": "SNIS Effective Sample Size",
-    "section": "",
-    "text": "Estimating SNIS’ error based on running it only once.\nUnderlying theoretical guarantee.\n\n\n\n\nSo far we have relied on heuristics to determine the number of Monte Carlo iterations. Here we describe a better approach.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nEstimating SNIS’ error based on running it only once.\nUnderlying theoretical guarantee.\n\n\n\nRationale\nSo far we have relied on heuristics to determine the number of Monte Carlo iterations. Here we describe a better approach.",
     "crumbs": [
       "A first look at PPLs",
       "SNIS Effective Sample Size"
@@ -1833,7 +1833,7 @@
     "href": "w03_ppl/topic01_ppls_intro.html",
     "title": "What is a PPL?",
     "section": "",
-    "text": "What is a Probabilistic Programming Language (PPL)?\nHow to use a PPL.\n\n\n\n\nPPLs is the main way you will compute posterior distributions in this course. This week you will write your own! This will give you insight on the strengths and limitation of these approaches.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "What is a PPL?"
@@ -1843,8 +1843,8 @@
     "objectID": "w03_ppl/topic01_ppls_intro.html#outline",
     "href": "w03_ppl/topic01_ppls_intro.html#outline",
     "title": "What is a PPL?",
-    "section": "",
-    "text": "What is a Probabilistic Programming Language (PPL)?\nHow to use a PPL.\n\n\n\n\nPPLs is the main way you will compute posterior distributions in this course. This week you will write your own! This will give you insight on the strengths and limitation of these approaches.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nWhat is a Probabilistic Programming Language (PPL)?\nHow to use a PPL.\n\n\n\nRationale\nPPLs is the main way you will compute posterior distributions in this course. This week you will write your own! This will give you insight on the strengths and limitation of these approaches.",
     "crumbs": [
       "A first look at PPLs",
       "What is a PPL?"
@@ -1877,7 +1877,7 @@
     "href": "w03_ppl/topic03_continuous.html",
     "title": "Continuous models",
     "section": "",
-    "text": "Review of key concepts for continuous random variables.\n\nDensity.\nComputing their expectation.\n\nBayes rule with continuous random variables.\n\n\n\n\nSince the parameters of distributions families are continuous, it natural to use continuous random variables for them in Bayesian statistics. For example it lets us get rid of the artificial discretization \\(K\\) we used in last week’s exercise.\nToday we will approach the calculations with both manual mathematic derivation and PPLs. Later we will increasingly rely only on PPLs. But it is still important to understand both methods.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "Continuous models"
@@ -1887,8 +1887,8 @@
     "objectID": "w03_ppl/topic03_continuous.html#outline",
     "href": "w03_ppl/topic03_continuous.html#outline",
     "title": "Continuous models",
-    "section": "",
-    "text": "Review of key concepts for continuous random variables.\n\nDensity.\nComputing their expectation.\n\nBayes rule with continuous random variables.\n\n\n\n\nSince the parameters of distributions families are continuous, it natural to use continuous random variables for them in Bayesian statistics. For example it lets us get rid of the artificial discretization \\(K\\) we used in last week’s exercise.\nToday we will approach the calculations with both manual mathematic derivation and PPLs. Later we will increasingly rely only on PPLs. But it is still important to understand both methods.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nReview of key concepts for continuous random variables.\n\nDensity.\nComputing their expectation.\n\nBayes rule with continuous random variables.\n\n\n\nRationale\nSince the parameters of distributions families are continuous, it natural to use continuous random variables for them in Bayesian statistics. For example it lets us get rid of the artificial discretization \\(K\\) we used in last week’s exercise.\nToday we will approach the calculations with both manual mathematic derivation and PPLs. Later we will increasingly rely only on PPLs. But it is still important to understand both methods.",
     "crumbs": [
       "A first look at PPLs",
       "Continuous models"
@@ -4210,7 +4210,7 @@
     "href": "w03_ppl/topic02_snis.html",
     "title": "Importance sampling",
     "section": "",
-    "text": "What Self-Normalizing Importance Sampling (SNIS) does.\nIntuition on how SNIS does it.\nSNIS pseudo-code.\n\n\n\n\nSince SNIS is the “inference algorithm” used by simPPLe, you will need a basic understanding of SNIS to complete this week’s exercise.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "Importance sampling"
@@ -4220,8 +4220,8 @@
     "objectID": "w03_ppl/topic02_snis.html#outline",
     "href": "w03_ppl/topic02_snis.html#outline",
     "title": "Importance sampling",
-    "section": "",
-    "text": "What Self-Normalizing Importance Sampling (SNIS) does.\nIntuition on how SNIS does it.\nSNIS pseudo-code.\n\n\n\n\nSince SNIS is the “inference algorithm” used by simPPLe, you will need a basic understanding of SNIS to complete this week’s exercise.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nWhat Self-Normalizing Importance Sampling (SNIS) does.\nIntuition on how SNIS does it.\nSNIS pseudo-code.\n\n\n\nRationale\nSince SNIS is the “inference algorithm” used by simPPLe, you will need a basic understanding of SNIS to complete this week’s exercise.",
     "crumbs": [
       "A first look at PPLs",
       "Importance sampling"
@@ -4331,7 +4331,7 @@
     "href": "w03_ppl/topic05_mc_rates.html",
     "title": "Monte Carlo convergence rate",
     "section": "",
-    "text": "Convergence rate of Monte Carlo methods.\nEmpirical scaling laws using physicist’s log-log plot trick.\nMathematical underpinnings.\n\n\n\n\nWhen using Monte Carlo methods, you need to specify the number of iterations (also known as number of samples).\nHow to set the number of iterations?\nWe cover here a heuristic, forming the foundation for more principled methods.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "Monte Carlo convergence rate"
@@ -4341,8 +4341,8 @@
     "objectID": "w03_ppl/topic05_mc_rates.html#outline",
     "href": "w03_ppl/topic05_mc_rates.html#outline",
     "title": "Monte Carlo convergence rate",
-    "section": "",
-    "text": "Convergence rate of Monte Carlo methods.\nEmpirical scaling laws using physicist’s log-log plot trick.\nMathematical underpinnings.\n\n\n\n\nWhen using Monte Carlo methods, you need to specify the number of iterations (also known as number of samples).\nHow to set the number of iterations?\nWe cover here a heuristic, forming the foundation for more principled methods.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nConvergence rate of Monte Carlo methods.\nEmpirical scaling laws using physicist’s log-log plot trick.\nMathematical underpinnings.\n\n\n\nRationale\nWhen using Monte Carlo methods, you need to specify the number of iterations (also known as number of samples).\nHow to set the number of iterations?\nWe cover here a heuristic, forming the foundation for more principled methods.",
     "crumbs": [
       "A first look at PPLs",
       "Monte Carlo convergence rate"
@@ -4419,7 +4419,7 @@
     "href": "w03_ppl/topic04_consistency.html",
     "title": "SNIS consistency",
     "section": "",
-    "text": "Recap of SNIS’ consistency guarantee.\nProof of consistency.\n\n\n\n\nWe go over this proof as it demystifies the form of SNIS’ weights.",
+    "text": "Caution\n\n\n\nLecture room change! Effective now (January 20), all lectures will be in MCML 360. It is a 5 minutes walk from the previous room.",
     "crumbs": [
       "A first look at PPLs",
       "SNIS consistency"
@@ -4429,8 +4429,8 @@
     "objectID": "w03_ppl/topic04_consistency.html#outline",
     "href": "w03_ppl/topic04_consistency.html#outline",
     "title": "SNIS consistency",
-    "section": "",
-    "text": "Recap of SNIS’ consistency guarantee.\nProof of consistency.\n\n\n\n\nWe go over this proof as it demystifies the form of SNIS’ weights.",
+    "section": "Outline",
+    "text": "Outline\n\nTopics\n\nRecap of SNIS’ consistency guarantee.\nProof of consistency.\n\n\n\nRationale\nWe go over this proof as it demystifies the form of SNIS’ weights.",
     "crumbs": [
       "A first look at PPLs",
       "SNIS consistency"
@@ -6097,7 +6097,7 @@
     "href": "w10_modelling/topic06_rao.html#stan-demo",
     "title": "Rao-Blackwellization",
     "section": "Stan demo",
-    "text": "Stan demo\n\nWe revisit the Chernobyl example.\nThis time we implement it in Stan differently to demonstrate Rao-Blackwellization\n\n\n\nCode\nset.seed(1)\n\n# detection limit: value higher than that stay at the limit\nlimit = 1.1 \n\nn_measurements = 10\n\ntrue_mean = 5.6\n\n# data, if we were able to observe perfectly\ny = rexp(n_measurements, 1.0/true_mean)\n\n# number of measurements higher than the detection limit\nn_above_limit = sum(y &gt;= limit)\nn_below_limit = sum(y &lt; limit)\n\n# subset of the measurements that are below the limit:\ndata_below_limit = y[y &lt; limit]\n\n# measurements: those higher than the limit stay at the limit\nmeasurements = ifelse(y &lt; limit, y, limit)\n\n\n\nsuppressPackageStartupMessages(require(rstan))\n\n\ndata {\n  int&lt;lower=0&gt; n_above_limit;\n  int&lt;lower=0&gt; n_below_limit;\n  real&lt;lower=0&gt; limit;\n  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit;\n}\n\nparameters {\n1  real&lt;lower=0&gt; rate;\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n2  target += n_above_limit * exponential_lccdf(limit | rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nNotice that this time we are not including all these \\(H_i\\) above the detection limit! How is this possible?\n\n2\n\nWhat is that exponential_lccdf?!\n\n\n\n\nLet us make sure it works empiricially first:\n\nfit = sampling(\n  chernobyl_rao_blackwellized,\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),       \n  iter = 100000                   \n)\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 1.7e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.17 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.154 seconds (Warm-up)\nChain 1:                0.152 seconds (Sampling)\nChain 1:                0.306 seconds (Total)\nChain 1: \n\n\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n      mean se_mean   sd   2.5%   25%   50%   75% 97.5% n_eff Rhat\nrate  0.39    0.00 0.20   0.11  0.25  0.36  0.50  0.86 17497    1\nmean  3.39    0.02 2.35   1.16  1.99  2.78  4.02  9.25 13206    1\nlp__ -8.24    0.01 0.73 -10.30 -8.40 -7.96 -7.77 -7.72 18171    1\n\nSamples were drawn using NUTS(diag_e) at Tue Mar 19 07:17:10 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\n\nCompare: this to the result from the page on censoring, where we got:\n  ...\n1.258 seconds (Total)\n  ...\nmean  3.35    0.02 2.43   1.16   1.97   2.74   3.96   9.20\n  ...\nConclusion: Essentially the same result (i.e., within MCSE), but about 4x faster! How is this possible?",
+    "text": "Stan demo\n\nWe revisit the Chernobyl example.\nThis time we implement it in Stan differently to demonstrate Rao-Blackwellization\n\n\n\nCode\nset.seed(1)\n\n# detection limit: value higher than that stay at the limit\nlimit = 1.1 \n\nn_measurements = 10\n\ntrue_mean = 5.6\n\n# data, if we were able to observe perfectly\ny = rexp(n_measurements, 1.0/true_mean)\n\n# number of measurements higher than the detection limit\nn_above_limit = sum(y &gt;= limit)\nn_below_limit = sum(y &lt; limit)\n\n# subset of the measurements that are below the limit:\ndata_below_limit = y[y &lt; limit]\n\n# measurements: those higher than the limit stay at the limit\nmeasurements = ifelse(y &lt; limit, y, limit)\n\n\n\nsuppressPackageStartupMessages(require(rstan))\n\n\ndata {\n  int&lt;lower=0&gt; n_above_limit;\n  int&lt;lower=0&gt; n_below_limit;\n  real&lt;lower=0&gt; limit;\n  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit;\n}\n\nparameters {\n1  real&lt;lower=0&gt; rate;\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n2  target += n_above_limit * exponential_lccdf(limit | rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nNotice that this time we are not including all these \\(H_i\\) above the detection limit! How is this possible?\n\n2\n\nWhat is that exponential_lccdf?!\n\n\n\n\nLet us make sure it works empiricially first:\n\nfit = sampling(\n  chernobyl_rao_blackwellized,\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),       \n  iter = 100000                   \n)\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 1.7e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.17 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.154 seconds (Warm-up)\nChain 1:                0.152 seconds (Sampling)\nChain 1:                0.306 seconds (Total)\nChain 1: \n\n\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n      mean se_mean   sd   2.5%   25%   50%   75% 97.5% n_eff Rhat\nrate  0.39    0.00 0.20   0.11  0.25  0.36  0.50  0.86 17497    1\nmean  3.39    0.02 2.35   1.16  1.99  2.78  4.02  9.25 13206    1\nlp__ -8.24    0.01 0.73 -10.30 -8.40 -7.96 -7.77 -7.72 18171    1\n\nSamples were drawn using NUTS(diag_e) at Tue Mar 19 07:17:10 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\n\nCompare: this to the result from the page on censoring, where we got:\n  ...\n1.258 seconds (Total)\n  ...\nmean  3.35    0.02 2.43   1.16   1.97   2.74   3.96   9.20\n  ...\nConclusion: Essentially the same result (i.e., within MCSE), but the new version is faster! How is this possible?",
     "crumbs": [
       "Modelling techniques",
       "Rao-Blackwellization"
