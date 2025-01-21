@@ -1094,6 +1094,24 @@ Click for answer
 </ul></li>
 <li>What function <span class="math inline">\(g(x)\)</span> would you take to compute a <a href="../w02_discrete_bayes/topic04_point.html">posterior mean</a>?</li>
 </ul>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $g(x) = \ind[X = x]$
+1. $g(x) = \ind[x]$
+1. $g(x) = x^2$
+1. $g(x) = x$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+If we set $g(x) = x$, then $\sum x \pi(x) = \ex[X | Y = y]$. 
+:::
+
+-->
 <ul>
 <li>How would you proceed to compute <span class="math inline">\(\operatorname{Var}[X | Y = y]\)</span>?</li>
 </ul>
@@ -1144,6 +1162,33 @@ Click for answer
 <li>Return the ratio <span class="math display">\[\hat G_M = \frac{\sum_{m=1}^M W^{(m)}G^{(m)}}{\sum_{m=1}^M W^{(m)}} .\]</span></li>
 </ul>
 <p><strong>Example:</strong> compute <span class="math inline">\(\hat G_M\)</span> in the bag of coin example if <span class="math inline">\(g(x) = x\)</span>, <span class="math inline">\(X^{(1)} = 1\)</span>, <span class="math inline">\(X^{(2)} = 2\)</span>. Use the decision tree above to help you.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $0$
+1. $1.5$
+1. $\approx 1.89$
+1. $\approx 2.17$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We have:
+
+| $m$ | $X^\parm$ | $W^\parm$ | $W^\parm G^\parm$ |
+|-----|-----------|-----------|-------------------|
+| 1   | 1         | $(1/2)^3$ | $(1/2)^3$         |
+| 2   | 2         | 1         | 2                 |
+
+Hence:
+
+$$\hat G_M = \frac{(1/2)^3 + 2}{(1/2)^3 + 1} \approx 1.89.$$
+:::
+
+-->
 </section>
 <section id="weight-simplification" class="level2">
 <h2 class="anchored" data-anchor-id="weight-simplification">Weight simplification</h2>

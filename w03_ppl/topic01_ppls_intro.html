@@ -1139,11 +1139,12 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_ppl.R"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/sol03_posterior.R"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(my_first_probabilistic_program, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(my_first_probabilistic_program, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03713188</code></pre>
+<pre><code>[1] 0.05913941</code></pre>
 </div>
 </div>
+<p>Compare this to the solution of question 2.2 in <a href="../exercises/ex01.html">exercise 1</a>.</p>
 </section>
 <section id="extension-predicting-the-next-draw" class="level3">
 <h3 class="anchored" data-anchor-id="extension-predicting-the-next-draw">Extension: predicting the next draw</h3>
@@ -1161,9 +1162,9 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(same_as_observed)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(predict_next_flip, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(predict_next_flip, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9690606</code></pre>
+<pre><code>[1] 0.9698703</code></pre>
 </div>
 </div>
 
