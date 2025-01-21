@@ -1058,7 +1058,7 @@ Caution
 </section>
 <section id="joint-densities" class="level2">
 <h2 class="anchored" data-anchor-id="joint-densities">Joint densities</h2>
-<p><strong>Definition:</strong> <span class="math inline">\((X, Y)\)</span> has joint density <span class="math inline">\(f(x, y)\)</span> if <span class="math display">\[\mathbb{P}((X, Y) \in A) = \int \int_A f(x, y) \mathrm{d}x.\]</span></p>
+<p><strong>Definition:</strong> <span class="math inline">\((X, Y)\)</span> has joint density <span class="math inline">\(f(x, y)\)</span> if <span class="math display">\[\mathbb{P}((X, Y) \in A) = \int \int_A f(x, y) \mathrm{d}x \mathrm{d}y.\]</span></p>
 </section>
 <section id="key-properties" class="level2">
 <h2 class="anchored" data-anchor-id="key-properties">Key properties</h2>
@@ -1107,50 +1107,87 @@ Y | X &amp;\sim {\mathrm{Unif}}(0, X).
 <section id="computations-on-the-doomsday-model" class="level3">
 <h3 class="anchored" data-anchor-id="computations-on-the-doomsday-model">Computations on the Doomsday model</h3>
 <p><strong>Joint density:</strong> which of these is the joint density?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\frac{\ind[y < x < 5]}{y - 5} \frac{\ind[0 < y < x]}{x}$
-1. $\frac{\ind[0 < y < 5]}{5} \frac{\ind[0 < x < y]}{y}$
-1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}$
-1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < 5]}{5}$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-We have $$f_X(x) = \frac{\ind[0 < x < 5]}{5}$$ and 
-$$f_{Y|X}(y|x) =  \frac{\ind[0 < y < x]}{x},$$ therefore 
-$$f(x, y) = \frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}.$$
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\frac{\mathbb{1}[y &lt; x &lt; 5]}{y - 5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}\)</span></li>
+<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; y &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; x &lt; y]}{y}\)</span></li>
+<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}\)</span></li>
+<li><span class="math inline">\(\frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; 5]}{5}\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have <span class="math display">\[f_X(x) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5}\]</span> and <span class="math display">\[f_{Y|X}(y|x) =  \frac{\mathbb{1}[0 &lt; y &lt; x]}{x},\]</span> therefore <span class="math display">\[f(x, y) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}.\]</span></p>
+</div>
+</div>
+</div>
 <p><strong>Marginal density:</strong> compute the marginal <span class="math inline">\(f_Y(y)\)</span></p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\frac{1}{5} (\log 5 - \log y)$
-1. $\log 5 - \log y$
-1. $\frac{2}{y^2} - \frac{2}{25}$
-1. $\frac{1}{5} \left( \frac{2}{y^2} - \frac{2}{25} \right)$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-$$\begin{align*}
-f_Y(y) &= \frac{1}{5} \int \frac{ \ind[0 < x < 5] \ind[0 < y < x]}{x} \dee x \\
-&= \frac{1}{5} \int_y^5 \frac{\dee x}{x} \\
-&= \frac{1}{5} (\log 5 - \log y).
-\end{align*}$$
-:::
-
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\frac{1}{5} (\log 5 - \log y)\)</span></li>
+<li><span class="math inline">\(\log 5 - \log y\)</span></li>
+<li><span class="math inline">\(\frac{2}{y^2} - \frac{2}{25}\)</span></li>
+<li><span class="math inline">\(\frac{1}{5} \left( \frac{2}{y^2} - \frac{2}{25} \right)\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\begin{align*}
+f_Y(y) &amp;= \frac{1}{5} \int \frac{ \mathbb{1}[0 &lt; x &lt; 5] \mathbb{1}[0 &lt; y &lt; x]}{x} \mathrm{d}x \\
+&amp;= \frac{1}{5} \int_y^5 \frac{\mathrm{d}x}{x} \\
+&amp;= \frac{1}{5} (\log 5 - \log y).
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 <p><strong>Posterior density:</strong> from our marginal and Bayes’ theorem, we obtain <span class="math display">\[f_{X|Y}(x|y) = \frac{\mathbb{1}[0&lt;x&lt;5] \mathbb{1}[0 &lt; y &lt; x]}{x (\log 5 - \log y)}.\]</span></p>
 <p><strong>Posterior expectation:</strong> compute <span class="math inline">\(\mathbb{E}[X|Y = 0.06]\)</span></p>
 <!--

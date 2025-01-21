@@ -1042,6 +1042,26 @@ https://github.com/trevorcampbell/shortex
 <section id="using-stan-as-a-stand-alone-autodiff-system" class="level2">
 <h2 class="anchored" data-anchor-id="using-stan-as-a-stand-alone-autodiff-system">Using Stan as a stand-alone autodiff system</h2>
 <p>If you just need just the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use <a href="https://github.com/roualdes/bridgestan">BridgeStan</a> (bridges Stan with R, Julia, Rust, etc).</p>
+<!-- Had to remove bridge stan demo.. maybe have to add bridge stan to r env? Error was:
+
+        Quitting from lines  at lines 206-214 [unnamed-chunk-1] (topic13_autodiff.qmd)
+        Error in `library()` at knitr/R/cache.R:84:7:
+        ! there is no package called 'bridgestan'
+        Backtrace:
+          1. global .main()
+          2. execute(...)
+          3. rmarkdown::render(...)
+          4. knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+          5. knitr:::process_file(text, output)
+             ...
+               at knitr/R/block.R:3:3
+         11. cache$library(params$cache.path, save = FALSE)
+               at knitr/R/block.R:102:5
+         14. base::library(p, character.only = TRUE)
+               at knitr/R/cache.R:84:7
+        Execution halted
+
+-->
 
 
 </section>
