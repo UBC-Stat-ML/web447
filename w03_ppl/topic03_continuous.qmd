@@ -100,6 +100,7 @@ Y | X &\sim \distUnif(0, X).
 This is known as the [Doomsday argument](http://en.wikipedia.org/wiki/Doomsday_argument)
 
 
+
 ### Computations on the Doomsday model
 
 **Joint density:** which of these is the joint density?  

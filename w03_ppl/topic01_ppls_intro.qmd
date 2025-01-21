@@ -67,10 +67,10 @@ source("../exercises/ex03_scaffold.R")
 source("../exercises/ex03_ppl.R")
 source("../../solutions/sol03_posterior.R")
 
-posterior(my_first_probabilistic_program, 100)
+posterior(my_first_probabilistic_program, 10000)
 ```
 
-
+Compare this to the solution of question 2.2 in [exercise 1](../exercises/ex01.qmd).
 
 ### Extension: predicting the next draw
 
@@ -90,5 +90,5 @@ predict_next_flip <- function() {
   return(same_as_observed)
 }
 
-posterior(predict_next_flip, 1000)
+posterior(predict_next_flip, 10000)
 ```

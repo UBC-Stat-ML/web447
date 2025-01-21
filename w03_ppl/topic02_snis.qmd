@@ -18,6 +18,7 @@ editor:
 -   Intuition on how SNIS does it.
 -   SNIS pseudo-code.
 
+
 ### Rationale
 
 Since SNIS is the "inference algorithm" used by simPPLe, you will need a
