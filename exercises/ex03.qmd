@@ -35,32 +35,11 @@ where $\text{erf}(\cdot)$ is the [error function](https://mathworld.wolfram.com/
 Test your implementation of `mc_estimate` by checking that it produces an
 answer close to the value in @eq-integral.
 
-3. The integral with $f(x) = 1/(1+x)$ evaluates to
+3. The integral with $f(x) = \sin(\cos(\sin(x)))$ approximately evaluates to
 $$
-\int_0^1 \frac{1}{1+x} \dee x = \ln(2).
+\int_0^1 f(x) \dee x \approx 0.7593064.
 $$
-Estimate its value using `mc_estimate(f)` and compare to the exact value.
-
-<!--
-*** FROM 2024 **
-2. Consider the function $f:[0,1]\to[0,\infty)$ given by
-$$
-f(x) = \frac{1}{\sqrt[3]{x^2(1-x)}}.
-$$
-It is possible to show that
-$$
-\int_0^1 f(x)\dee x = \frac{\pi}{\sin\left(\frac{\pi}{3}\right)}.
-$${#eq-integral}
-Test your implementation of `mc_estimate` by checking that it produces an
-answer close to the value in @eq-integral.
-3. The following integral, known as the 
-[sine integral](https://en.wikipedia.org/wiki/Trigonometric_integral#Sine_integral),
-$$
-\int_0^1 \frac{\sin(t)}{t} \dee t.
-$$
-does not admit a closed-form expression. Estimate its value using `mc_estimate(f)`.
-*** FROM 2024 **
--->
+Estimate its value using `mc_estimate(f)` and compare to the value given above.
 
 
 ## Q.2: implementing SNIS for simPPLe {#sec-simPPLe}
