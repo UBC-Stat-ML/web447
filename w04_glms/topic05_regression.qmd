@@ -6,4 +6,198 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+
+## Outline
+
+### Topics
+
+- A second example of a Bayesian model based on a linear model, this time with a normal likelihood. 
+- Priors on the positive real line.
+- Homoscedasticity and heteroscedasticity. 
+- Marginal posterior.
+
+### Rationale
+
+Together with classification ([previous page](../w04_glms/topic04_classification.qmd)), 
+regression is the other major statistical task frequently encountered. 
+
+We see here that the same approach as we took for classification can be easily modified to do regression. 
+
+This provides us with a second example of [Bayesian GLMs](../w04_glms/topic06_glms.qmd). 
+
+
+## Example
+
+- In the early 20th century, astronomers made the startling observation that pretty much all galaxies are moving away from ours. Why?
+- We now know this is because the universe is expanding.
+- Here is a metaphor to help understand this:
+    - Imagine ants on an inflating balloon. 
+    - You are one of the ants...
+    - ...and you notice that all the others ants are moving away from you...
+        - ...and the further the neighbor ant, the faster it looks like it is moving away from you.
+        
+- In 1929 the astronomer Edwin Hubble published a paper[^1] on the relationship between distance and velocity of galaxies relative to us. 
+- It is now called [Hubble's law](http://en.wikipedia.org/wiki/Hubble's_law). 
+- The estimated slope of the relationship, known as Hubble's constant, leads to an estimate of the age of the universe.
+
+::: column-margin
+![](../images/hubble.jpg){width="200"}
+:::
+
+[^1]: Proceedings of the National Academy of Sciences, Vol. 15, pp. 168–173.
+
+
+### Data 
+
+- We will estimate Hubble's constant using data from the [original data used by Edwin Hubble (in CSV)](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv).
+- To make the numbers less extreme in the following, I will divide the velocities by 1000
+
+**Instructions:**
+
+1. download the [CVS](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv)
+2. copy paste the code below and run it on your computer (after changing the path "`../data`" to the path on your computer)
+
+```{r}
+suppressPackageStartupMessages(require("dplyr"))
+df = read.csv("../data/hubble-1.csv") %>%
+    rename(distance = R..Mpc.) %>%
+    rename(velocity = v..km.sec.)
+df$velocity = df$velocity/1000
+rmarkdown::paged_table(df)
+```
+
+- Here is some EDA on that dataset:  
+
+
+```{r}
+plot(df$distance, df$velocity, xlab = "distance", ylab = "velocity")
+```
+
+
+
+## Building a Bayesian regression model
+
+**Goal:** 
+
+- designing a model containing a "slope" parameter, 
+- from which we will compute $\ex[\text{slope} | \text{data}]$. 
+
+To achieve our goal, we will complete the gap in the following code:
+
+```r
+source("../../solutions/simple.R")
+
+regression = function() {
+  # priors will be defined here
+  # ...
+  for (i in 1:nrow(df)) { 
+    distance = df[i, "distance"]
+    velocity = df[i, "velocity"]
+    # likelihood will be defined here
+  }
+  return(slope)
+}
+
+posterior(regression, 1000)
+```
+
+- **Recall:** to build a model, start with the observations. 
+- Specifically, let us build a model for the observed velocity first. 
+
+**Question:** what would be a reasonable likelihood for the velocity?
+
+{{< include ../../clickers/w04/_c05.qmd >}}
+
+{{< include ../../clickers/w04/_c06.qmd >}}
+
+{{< include ../../clickers/w04/_c07.qmd >}}
+
+{{< include ../../clickers/w04/_c08.qmd >}}
+
+**Question:** complete the code and approximate $\ex[\text{slope} | \text{data}]$. 
+
+{{< include ../../clickers/w04/_c09.qmd >}}
+
+
+## Visualization of the posterior distribution
+
+```{r}
+source("../blocks/simple_utils.R")
+source("../../solutions/simple.R")
+
+posterior = posterior_particles(regression, 10000)
+weighted_scatter_plot(posterior, plot_options = list(xlab="slope parameter", ylab="sd parameter"))
+```
+
+```{r}
+plot(df$distance, df$velocity, xlab = "distance", ylab = "velocity")
+
+xs = seq(0, 2, 0.01)
+samples = posterior$samples 
+norm_weights = posterior$weights / sum(posterior$weights)
+
+for (i in 1:nrow(samples)) {
+  slope     = samples[i, 1]
+  pr = norm_weights[i]
+  lines(xs, slope * xs, col = rgb(red = 0, green = 0, blue = 0, alpha = pr*20))
+}
+```
+
+Here since the scientific question only concerns one parameter, the slope, 
+it is useful to look at the **marginal posterior distribution**. 
+
+- In mathematical expressions, obtained by [marginalization](../w03_ppl/topic03_continuous.qmd):
+  $$p(x_1 | y) = \int p(x_1, x_2 | y) \dee x_2.$$
+- In Monte Carlo methods, much simpler: 
+    - each sample is a pair $x^\parm = (x_1^\parm, x_2^\parm)$
+    - if you are interested in $x_1$ only, *just ignore $x_2$!*
+    
+Here is an example of creating a histogram for the marginal posterior:
+
+```{r}
+#| warning: false
+
+library("ggplot2")
+posterior.as.df <- data.frame(slopes = samples[,1], norm_weights)
+ggplot(posterior.as.df, aes(x = slopes, weight = norm_weights)) + 
+  geom_histogram(binwidth = 0.02) + 
+  xlim(0.2, 0.6) +
+  xlab("slope parameter") + 
+  ylab("probability") +
+  theme_minimal()
+```
+
+**Question:** if you were to use an integral instead of Monte Carlo to create this histogram, 
+  what region of integration in the scatter plot above (the first plot in this subsection) 
+  would be used to compute the height of one histogram bin?
+
+{{< include ../../clickers/w04/_c10.qmd >}}
+
+
+## Model criticism
+
+The answer we obtain is close to Edwin Hubble's original estimate. 
+
+The modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives
+an estimate that is about 10x smaller.
+
+**Discussion:** What went wrong?
+
+::: {.callout-caution collapse="true"} 
+## Click for discussion
+
+In summary: [it is very hard to estimate distance of distant objects](https://en.wikipedia.org/wiki/Cosmic_distance_ladder). 
+
+Not only the model explored today lacks an error model on the distances, but moreover, 
+Hubble's distance estimates had systematic errors (i.e. were all offset by a constant), 
+hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results. 
+
+In fact, even with modern data and statistical methods, 
+systematic errors are still suspected, this is known as the "Hubble tension."
+:::
+
+
+## References
+
+- This example is inspired by William Welch's Stat 305 lecture notes, where the same dataset is analyzed using MLE. 
+- [Learn more about the still on-going research on resolving the "Hubble tension"](https://en.wikipedia.org/wiki/Hubble%27s_law#Hubble_tension).
