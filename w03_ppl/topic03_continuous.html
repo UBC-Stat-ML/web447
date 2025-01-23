@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1019,19 +1053,6 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Lecture room change!</strong> Effective now (January 20), all lectures will be in <a href="https://learningspaces.ubc.ca/classrooms/mcml-360/">MCML 360</a>. It is a 5 minutes walk from the previous room.</p>
-</div>
-</div>
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <section id="topics" class="level3">
@@ -1108,7 +1129,7 @@ Y | X &amp;\sim {\mathrm{Unif}}(0, X).
 <h3 class="anchored" data-anchor-id="computations-on-the-doomsday-model">Computations on the Doomsday model</h3>
 <p><strong>Joint density:</strong> which of these is the joint density?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1117,7 +1138,7 @@ Click for choices
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><span class="math inline">\(\frac{\mathbb{1}[y &lt; x &lt; 5]}{y - 5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}\)</span></li>
@@ -1130,7 +1151,7 @@ Click for choices
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1139,7 +1160,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We have <span class="math display">\[f_X(x) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5}\]</span> and <span class="math display">\[f_{Y|X}(y|x) =  \frac{\mathbb{1}[0 &lt; y &lt; x]}{x},\]</span> therefore <span class="math display">\[f(x, y) = \frac{\mathbb{1}[0 &lt; x &lt; 5]}{5} \frac{\mathbb{1}[0 &lt; y &lt; x]}{x}.\]</span></p>
 </div>
@@ -1147,7 +1168,7 @@ Click for answer
 </div>
 <p><strong>Marginal density:</strong> compute the marginal <span class="math inline">\(f_Y(y)\)</span></p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1156,7 +1177,7 @@ Click for choices
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><span class="math inline">\(\frac{1}{5} (\log 5 - \log y)\)</span></li>
@@ -1169,7 +1190,7 @@ Click for choices
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1178,7 +1199,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[\begin{align*}
 f_Y(y) &amp;= \frac{1}{5} \int \frac{ \mathbb{1}[0 &lt; x &lt; 5] \mathbb{1}[0 &lt; y &lt; x]}{x} \mathrm{d}x \\
@@ -1190,59 +1211,79 @@ f_Y(y) &amp;= \frac{1}{5} \int \frac{ \mathbb{1}[0 &lt; x &lt; 5] \mathbb{1}[0 &
 </div>
 <p><strong>Posterior density:</strong> from our marginal and Bayes’ theorem, we obtain <span class="math display">\[f_{X|Y}(x|y) = \frac{\mathbb{1}[0&lt;x&lt;5] \mathbb{1}[0 &lt; y &lt; x]}{x (\log 5 - \log y)}.\]</span></p>
 <p><strong>Posterior expectation:</strong> compute <span class="math inline">\(\mathbb{E}[X|Y = 0.06]\)</span></p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $1.5$
-1. $\approx 1.23$
-1. $\approx 1.117$
-1. $\approx 0.9714$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-$$\begin{align*}
-f_{X|Y}(x|y) &= \int_y^5 x f_{X|Y}(x|y) \dee x \\
-&= \frac{1}{\log 5 - \log y} \int_y^5 \dee x \\
-&= \frac{1}{\log 5 - \log y} (5 - y) \approx 1.117. \\
-\end{align*}$$
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Comparison with simPPLe
-Compare this to the simPPLe approximation
-
-::: {.cell}
-
-```{.r .cell-code}
-source("../exercises/ex03_scaffold.R")
-source("../../solutions/sol03_posterior.R")
-
-doomsday_model <- function() {
-  x = simulate(Unif(0, 5))
-  observe(0.06, Unif(0, x))
-  return(x)
-}
-
-posterior(doomsday_model, 10000)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 1.125607
-```
-
-
-:::
-:::
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(1.5\)</span></li>
+<li><span class="math inline">\(\approx 1.23\)</span></li>
+<li><span class="math inline">\(\approx 1.117\)</span></li>
+<li><span class="math inline">\(\approx 0.9714\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\begin{align*}
+f_{X|Y}(x|y) &amp;= \int_y^5 x f_{X|Y}(x|y) \mathrm{d}x \\
+&amp;= \frac{1}{\log 5 - \log y} \int_y^5 \mathrm{d}x \\
+&amp;= \frac{1}{\log 5 - \log y} (5 - y) \approx 1.117. \\
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comparison with simPPLe
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Compare this to the simPPLe approximation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_scaffold.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/sol03_posterior.R"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>doomsday_model <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Unif</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="fl">0.06</span>, <span class="fu">Unif</span>(<span class="dv">0</span>, x))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(doomsday_model, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.125607</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
