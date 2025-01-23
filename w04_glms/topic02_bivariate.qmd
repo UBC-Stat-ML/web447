@@ -98,6 +98,7 @@ the y-axis is the second parameter (here $p_B$).
 ```{r}
 # This contains useful functions to visualize the output of simPPLe:
 source("../blocks/simple_utils.R")
+source("../../solutions/simple.R")
 
 bivariate_pair = function() {
   
