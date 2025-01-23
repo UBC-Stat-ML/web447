@@ -8,7 +8,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_announce.qmd >}}
 
 ## Outline
 
@@ -18,6 +17,7 @@ editor:
     - Density. 
     - Computing their expectation. 
 -   Bayes rule with continuous random variables. 
+
 
 ### Rationale
 
@@ -43,7 +43,7 @@ But it is still important to understand both methods.
 ## Joint densities 
 
 **Definition:** $(X, Y)$ has joint density $f(x, y)$ if 
-  $$\pr((X, Y) \in A) = \int \int_A f(x, y) \dee x.$$ 
+  $$\pr((X, Y) \in A) = \int \int_A f(x, y) \dee x \dee y.$$ 
 
 ## Key properties
 

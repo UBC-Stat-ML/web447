@@ -8,7 +8,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_announce.qmd >}}
 
 ## Outline
 
