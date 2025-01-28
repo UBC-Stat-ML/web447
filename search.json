@@ -3308,7 +3308,7 @@
     "href": "w04_glms/topic05_regression.html#building-a-bayesian-regression-model",
     "title": "(Normal) regression",
     "section": "Building a Bayesian regression model",
-    "text": "Building a Bayesian regression model\nGoal:\n\ndesigning a model containing a “slope” parameter,\nfrom which we will compute \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\nTo achieve our goal, we will complete the gap in the following code:\nsource(\"../../solutions/simple.R\")\n\nregression = function() {\n  # priors will be defined here\n  # ...\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    # likelihood will be defined here\n  }\n  return(slope)\n}\n\nposterior(regression, 1000)\n\nRecall: to build a model, start with the observations.\nSpecifically, let us build a model for the observed velocity first.\n\nQuestion: what would be a reasonable likelihood for the velocity?\n\n\n\n\nQuestion: complete the code and approximate \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\n\n\n[1] 0.4284499 0.2240574",
+    "text": "Building a Bayesian regression model\nGoal:\n\ndesigning a model containing a “slope” parameter,\nfrom which we will compute \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).\n\nTo achieve our goal, we will complete the gap in the following code:\nsource(\"../../solutions/simple.R\")\n\nregression = function() {\n  # priors will be defined here\n  # ...\n  for (i in 1:nrow(df)) { \n    distance = df[i, \"distance\"]\n    velocity = df[i, \"velocity\"]\n    # likelihood will be defined here\n  }\n  return(slope)\n}\n\nposterior(regression, 1000)\n\nRecall: to build a model, start with the observations.\nSpecifically, let us build a model for the observed velocity first.\n\nQuestion: what would be a reasonable likelihood for the velocity?\n\n\n\n\n\nQuestion: complete the code and approximate \\(\\mathbb{E}[\\text{slope} | \\text{data}]\\).",
     "crumbs": [
       "The joy of probabilistic modelling",
       "(Normal) regression"
@@ -3330,7 +3330,7 @@
     "href": "w04_glms/topic05_regression.html#model-criticism",
     "title": "(Normal) regression",
     "section": "Model criticism",
-    "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?\n\n\n\n\n\n\nClick for discussion\n\n\n\n\n\nIn summary: it is very hard to estimate distance of distant objects.\nNot only the model explored today lacks an error model on the distances, but moreover, Hubble’s distance estimates had systematic errors (i.e. were all offset by a constant), hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results.\nIn fact, even with modern data and statistical methods, systematic errors are still suspected, this is known as the “Hubble tension.”",
+    "text": "Model criticism\nThe answer we obtain is close to Edwin Hubble’s original estimate.\nThe modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.\nDiscussion: What went wrong?",
     "crumbs": [
       "The joy of probabilistic modelling",
       "(Normal) regression"
@@ -5771,7 +5771,40 @@
     "href": "exercises/ex04.html",
     "title": "Exercise 4: the joy of probabilistic inference",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Make sure to read the simPPLe setup page before you begin.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex04.html#q.1-logistic-rocket-improvement",
+    "href": "exercises/ex04.html#q.1-logistic-rocket-improvement",
+    "title": "Exercise 4: the joy of probabilistic inference",
+    "section": "Q.1: logistic rocket improvement",
+    "text": "Q.1: logistic rocket improvement\nConsider the Ariane 1 data we used this week,\nsuccess_indicators = c(1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1)\nand the model described in the same page.\nRecall that we discussed a model where the reliability of the rocket changes in time. This will allow us to incorporate, for example, the fact that engineering teams implement fixes based on past launches and therefore the probability of success should increase.\n\nWrite a function called logistic_regression containing a simPPLe probabilistic programming description of the model described in class. Your function should return a vector containing 3 elements in the following order:\n\nthe intercept (\\(\\in \\mathbb{R}\\)),\nthe slope (\\(\\in \\mathbb{R}\\)),\na prediction if one more launch would have been successful (1) or a failure (0) (\\(\\in \\{0, 1\\}\\)).\n\nFollow the instructions in the appendix below to get some helper functions. Use these functions to reproduce the lecture’s bivariate posterior plot over the intercept and slope parameters.\nEstimate the probability that the next launch is a success given the data under the logistic model.\nCreate a variant of the same model but where the slope is set to zero. Estimate the probability that the next launch is a success given the data under this simplified model.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex04.html#q.2-choosing-a-model",
+    "href": "exercises/ex04.html#q.2-choosing-a-model",
+    "title": "Exercise 4: the joy of probabilistic inference",
+    "section": "Q.2: choosing a model",
+    "text": "Q.2: choosing a model\nYou debate with your friend whether the logistic model or the simplified model (with slope equals to zero) should be preferred. To stop that debate, write a unified model which gives probability 1/2 to the simplified model, and 1/2 to the logistic model. Estimate the posterior probability that the logistic model is preferred under the unified model given the same data as in Q.1.",
+    "crumbs": [
+      "The joy of probabilistic modelling",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex04.html#sec-utils",
+    "href": "exercises/ex04.html#sec-utils",
+    "title": "Exercise 4: the joy of probabilistic inference",
+    "section": "Appendix",
+    "text": "Appendix\nFor Q.1.2, you will need to copy the following code and paste it in a file called simple_utils.R. We have demonstrated the use of these functions in the lectures.\n\n\nsimple_utils.R\n\n\nposterior_particles = function(ppl_function, number_of_iterations) {\n  weight &lt;&lt;- 1.0\n  sample = ppl_function()\n  dimension = length(sample) \n  samples = matrix(0, nrow = number_of_iterations, ncol = dimension, \n                   dimnames = list(1:number_of_iterations, names(sample)))\n  weights = rep(0, number_of_iterations)\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0       # reset the weight accumulator\n    sample = ppl_function()\n    samples[i,] = sample\n    weights[i]  = weight\n  }\n  return(list(samples=samples, weights=weights))\n}\n\ness = function(particles){\n  w = particles$weights\n  return(effective_sample_size(w))\n}\n\neffective_sample_size = function(w){\n  (sum(w)^2)/sum(w^2)\n}\n\nrepresentative_sample = function(snis_output, percentile=0.9999){\n  ess = effective_sample_size(snis_output$weights)\n  idx_ordered_weights = order(snis_output$weights, decreasing = TRUE)\n  acc_norm_weights = cumsum(snis_output$weights[idx_ordered_weights])/sum(snis_output$weights)\n  reduced_sample_size = max(round(ess), max(which(acc_norm_weights &lt; percentile)))\n  idx_subset = idx_ordered_weights[1:reduced_sample_size]\n  list(samples = snis_output$samples[idx_subset,], weights = snis_output$weights[idx_subset])\n}\nweighted_scatter_plot = function(\n    snis_output,\n    plot_idxs = 1:2,\n    base_color_hex = hcl.colors(1, palette = \"viridis\"),\n    plot_options = list(xlab=\"Param 1\", ylab=\"Param 2\")\n){\n  base_color = col2rgb(base_color_hex)/255\n  \n  # find the subset with almost all the mass\n  snis_subset = representative_sample(snis_output)\n  \n  # linear transform of weights to [0,1]\n  extreme_weights = range(snis_subset$weights, na.rm = T)\n  alphas = (snis_subset$weights-extreme_weights[1])/diff(extreme_weights)\n  \n  # create colors with transparencies and plot\n  points_color_alphas = rgb(base_color[1],base_color[2],base_color[3], alphas)\n  call_args=c(\n    list(x=snis_subset$samples[, plot_idxs], col=points_color_alphas), \n    plot_options\n  )\n  do.call(plot, call_args)\n}",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Exercises"
