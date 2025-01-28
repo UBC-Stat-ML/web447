@@ -7,6 +7,7 @@ editor:
 {{< include ../_macros.qmd >}}
 
 
+
 ## Outline
 
 ### Topics
@@ -106,6 +107,7 @@ posterior(regression, 1000)
 
 **Question:** what would be a reasonable likelihood for the velocity?
 
+
 {{< include ../../clickers/w04/_c05.qmd >}}
 
 {{< include ../../clickers/w04/_c06.qmd >}}
@@ -173,7 +175,6 @@ ggplot(posterior.as.df, aes(x = slopes, weight = norm_weights)) +
 
 {{< include ../../clickers/w04/_c10.qmd >}}
 
-
 ## Model criticism
 
 The answer we obtain is close to Edwin Hubble's original estimate. 
@@ -183,18 +184,7 @@ an estimate that is about 10x smaller.
 
 **Discussion:** What went wrong?
 
-::: {.callout-caution collapse="true"} 
-## Click for discussion
-
-In summary: [it is very hard to estimate distance of distant objects](https://en.wikipedia.org/wiki/Cosmic_distance_ladder). 
-
-Not only the model explored today lacks an error model on the distances, but moreover, 
-Hubble's distance estimates had systematic errors (i.e. were all offset by a constant), 
-hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results. 
-
-In fact, even with modern data and statistical methods, 
-systematic errors are still suspected, this is known as the "Hubble tension."
-:::
+{{< include ../../clickers/w04/_c11.qmd >}}
 
 
 ## References
