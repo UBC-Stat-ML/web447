@@ -1160,194 +1160,241 @@ https://github.com/trevorcampbell/shortex
 <li>Specifically, let us build a model for the observed velocity first.</li>
 </ul>
 <p><strong>Question:</strong> what would be a reasonable likelihood for the velocity?</p>
-<!--
-
-1. velocity $\sim$ [Exponential(...)](https://en.wikipedia.org/wiki/Exponential_distribution)
-1. velocity $\sim$ [Uniform(...)](https://en.wikipedia.org/wiki/Continuous_uniform_distribution)
-1. velocity $\sim$ [t(...)](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
-1. velocity $\sim$ [Normal(...)](https://en.wikipedia.org/wiki/Normal_distribution)
-1. None of the above.
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-We have that velocity $\in \reals$, so the exponential ($\in (0, \infty)$) 
-and the uniform ($\in [a, b]$) are not great choices. 
-
-Both the normal and the t-distribution are reasonable. 
-
-The t-distribution can have fatter tails, so if the data has [outliers](https://en.wikipedia.org/wiki/Outlier) this 
-may be preferable but we will stick with the simpler normal choice today.
-:::
-
--->
+<ol type="1">
+<li>velocity <span class="math inline">\(\sim\)</span> <a href="https://en.wikipedia.org/wiki/Exponential_distribution">Exponential(…)</a></li>
+<li>velocity <span class="math inline">\(\sim\)</span> <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">Uniform(…)</a></li>
+<li>velocity <span class="math inline">\(\sim\)</span> <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">t(…)</a></li>
+<li>velocity <span class="math inline">\(\sim\)</span> <a href="https://en.wikipedia.org/wiki/Normal_distribution">Normal(…)</a></li>
+<li>None of the above.</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have that velocity <span class="math inline">\(\in \mathbb{R}\)</span>, so the exponential (<span class="math inline">\(\in (0, \infty)\)</span>) and the uniform (<span class="math inline">\(\in [a, b]\)</span>) are not great choices.</p>
+<p>Both the normal and the t-distribution are reasonable.</p>
+<p>The t-distribution can have fatter tails, so if the data has <a href="https://en.wikipedia.org/wiki/Outlier">outliers</a> this may be preferable but we will stick with the simpler normal choice today.</p>
+</div>
+</div>
+</div>
 <!--
 **Erratum:** I said in class it might be reasonable to use a uniform distribution 
 where the bounds are the speed of light. It turns out to be incorrect: 
 [galaxies can recede from us faster than the speed of light!](https://en.wikipedia.org/wiki/Faster-than-light)
 -->
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for next step
-
-**Question:**  What should we use as the mean parameter of the normal likelihood?
-
-Use the fact that the scientific question is "to find a linear relationship of the velocity as a function of the distance."
-
-1. velocity $\sim$ Normal(0, ...)
-1. velocity $\sim$ Normal(distance, ...)
-1. velocity $\sim$ Normal(distance * slope, ...)
-1. velocity $\sim$ Normal(distance * slope + intercept, ...)
-1. None of the above.
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Here the best answer is:
-
-velocity $\sim$ Normal(distance * slope, ...).
-
-We do not need an intercept, because we know that by definition, our velocity relative to ourself is zero. 
-:::
-
--->
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for next step
-
-**Question:**  What should we use as the **standard deviation** parameter of the normal likelihood?
-
-1. velocity $\sim$ Normal(..., some constant)
-1. velocity $\sim$ Normal(..., some random variable)
-1. velocity $\sim$ Normal(..., some random variable * distance)
-1. None of the above.
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Using a constant standard deviation is not ideal as the model will be sensitive to that choice.
-
-The other choices are a priori reasonable and more domain knowledge would be needed to pick one. 
-The choice:
-
-velocity $\sim$ Normal(..., some random variable * distance)
-
-means that we expect that the variability of the galaxy velocities increase for galaxies that 
-are further away. This could happen for example if the variability is dominated by measurement 
-error for a measurement technique where errors increase linearly with distance. 
-
-The choice:
-
-velocity $\sim$ Normal(..., some random variable)
-
-would be more reasonable if the measurement error is negligible and the variability comes from 
-other phenomena affecting the velocity of galaxies which are not expected to behave differently 
-for close vs far galaxies (in our metaphor, think of ants walking in random directions at the 
-same time as the balloon is expanding). 
-
-These are examples of 
-[heteroscedasticity (variability changes with input variable) and 
-homoscedasticity (variability is invariant to input)](https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity). 
-
-Let us pick an homoscedasticity model. 
-To summarize what we have so far:
-
-velocity $\sim$ Normal(distance * slope, sd).
-:::
-
--->
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for next step
-
-**Question:**  Pick priors for the "slope" and "sd" parameters
-
-1. slope $\sim$ Normal(...), sd $\sim$ Normal(...)
-1. slope $\sim$ Normal(...), sd $\sim$ Exponential(...)
-1. slope $\sim$ Exponential(...), sd $\sim$ Exponential(...)
-1. None of the above.
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-We do not want a normal for the standard deviation (sd) parameter, because negative sd's are not allowed.
-
-Using an exponential for the slope would violate [Cromwell's rule](../w02_discrete_bayes/topic08_criticism.qmd). 
-
-Hence the best choice here is:
-
-slope $\sim$ Normal(...), sd $\sim$ Exponential(...).
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for next step
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> What should we use as the mean parameter of the normal likelihood?</p>
+<p>Use the fact that the scientific question is “to find a linear relationship of the velocity as a function of the distance.”</p>
+<ol type="1">
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(0, …)</li>
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(distance, …)</li>
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(distance * slope, …)</li>
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(distance * slope + intercept, …)</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here the best answer is:</p>
+<p>velocity <span class="math inline">\(\sim\)</span> Normal(distance * slope, …).</p>
+<p>We do not need an intercept, because we know that by definition, our velocity relative to ourself is zero.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for next step
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> What should we use as the <strong>standard deviation</strong> parameter of the normal likelihood?</p>
+<ol type="1">
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(…, some constant)</li>
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(…, some random variable)</li>
+<li>velocity <span class="math inline">\(\sim\)</span> Normal(…, some random variable * distance)</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using a constant standard deviation is not ideal as the model will be sensitive to that choice.</p>
+<p>The other choices are a priori reasonable and more domain knowledge would be needed to pick one. The choice:</p>
+<p>velocity <span class="math inline">\(\sim\)</span> Normal(…, some random variable * distance)</p>
+<p>means that we expect that the variability of the galaxy velocities increase for galaxies that are further away. This could happen for example if the variability is dominated by measurement error for a measurement technique where errors increase linearly with distance.</p>
+<p>The choice:</p>
+<p>velocity <span class="math inline">\(\sim\)</span> Normal(…, some random variable)</p>
+<p>would be more reasonable if the measurement error is negligible and the variability comes from other phenomena affecting the velocity of galaxies which are not expected to behave differently for close vs far galaxies (in our metaphor, think of ants walking in random directions at the same time as the balloon is expanding).</p>
+<p>These are examples of <a href="https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity">heteroscedasticity (variability changes with input variable) and homoscedasticity (variability is invariant to input)</a>.</p>
+<p>Let us pick an homoscedasticity model. To summarize what we have so far:</p>
+<p>velocity <span class="math inline">\(\sim\)</span> Normal(distance * slope, sd).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for next step
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> Pick priors for the “slope” and “sd” parameters</p>
+<ol type="1">
+<li>slope <span class="math inline">\(\sim\)</span> Normal(…), sd <span class="math inline">\(\sim\)</span> Normal(…)</li>
+<li>slope <span class="math inline">\(\sim\)</span> Normal(…), sd <span class="math inline">\(\sim\)</span> Exponential(…)</li>
+<li>slope <span class="math inline">\(\sim\)</span> Exponential(…), sd <span class="math inline">\(\sim\)</span> Exponential(…)</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We do not want a normal for the standard deviation (sd) parameter, because negative sd’s are not allowed.</p>
+<p>Using an exponential for the slope would violate <a href="../w02_discrete_bayes/topic08_criticism.html">Cromwell’s rule</a>.</p>
+<p>Hence the best choice here is:</p>
+<p>slope <span class="math inline">\(\sim\)</span> Normal(…), sd <span class="math inline">\(\sim\)</span> Exponential(…).</p>
+</div>
+</div>
+</div>
 <p><strong>Question:</strong> complete the code and approximate <span class="math inline">\(\mathbb{E}[\text{slope} | \text{data}]\)</span>.</p>
 <!-- even when hidding, we need to run this code for subsequent plot!!!! -->
 <!--
 
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-Pick the closest:
-
-1. $\approx 0.1$
-1. $\approx 0.5$
-1. $\approx 1$
-1. $\approx 2$
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
 ::: {.cell}
 
-```{.r .cell-code}
-source("../../solutions/simple.R")
-source("../blocks/simple_utils.R")
-
-regression = function() {
-  slope = simulate(Norm(0, 1))
-  sd = simulate(Exp(10))
-  for (i in 1:nrow(df)) { 
-    distance = df[i, "distance"]
-    velocity = df[i, "velocity"]
-    observe(velocity, Norm(distance * slope, sd))
-  }
-  c(slope, sd)
-}
-
-posterior(regression, 1000)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 0.4229426 0.2296217
-```
-
-
-:::
-:::
 :::
 
 -->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pick the closest:</p>
+<ol type="1">
+<li><span class="math inline">\(\approx 0.1\)</span></li>
+<li><span class="math inline">\(\approx 0.5\)</span></li>
+<li><span class="math inline">\(\approx 1\)</span></li>
+<li><span class="math inline">\(\approx 2\)</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/simple_utils.R"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  slope <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Norm</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Exp</span>(<span class="dv">10</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df)) { </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    distance <span class="ot">=</span> df[i, <span class="st">"distance"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    velocity <span class="ot">=</span> df[i, <span class="st">"velocity"</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observe</span>(velocity, <span class="fu">Norm</span>(distance <span class="sc">*</span> slope, sd))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(slope, sd)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(regression, <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4229426 0.2296217</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="visualization-of-the-posterior-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-the-posterior-distribution">Visualization of the posterior distribution</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/simple_utils.R"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="fu">posterior_particles</span>(regression, <span class="dv">10000</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted_scatter_plot</span>(posterior, <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"slope parameter"</span>, <span class="at">ylab=</span><span class="st">"sd parameter"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../blocks/simple_utils.R"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">=</span> <span class="fu">posterior_particles</span>(regression, <span class="dv">10000</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted_scatter_plot</span>(posterior, <span class="at">plot_options =</span> <span class="fu">list</span>(<span class="at">xlab=</span><span class="st">"slope parameter"</span>, <span class="at">ylab=</span><span class="st">"sd parameter"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1357,17 +1404,17 @@ posterior(regression, 1000)
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>distance, df<span class="sc">$</span>velocity, <span class="at">xlab =</span> <span class="st">"distance"</span>, <span class="at">ylab =</span> <span class="st">"velocity"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> posterior<span class="sc">$</span>samples </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>norm_weights <span class="ot">=</span> posterior<span class="sc">$</span>weights <span class="sc">/</span> <span class="fu">sum</span>(posterior<span class="sc">$</span>weights)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(samples)) {</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> samples[i, <span class="dv">1</span>]</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">=</span> norm_weights[i]</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xs, slope <span class="sc">*</span> xs, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">0</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> pr<span class="sc">*</span><span class="dv">20</span>))</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>distance, df<span class="sc">$</span>velocity, <span class="at">xlab =</span> <span class="st">"distance"</span>, <span class="at">ylab =</span> <span class="st">"velocity"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> posterior<span class="sc">$</span>samples </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>norm_weights <span class="ot">=</span> posterior<span class="sc">$</span>weights <span class="sc">/</span> <span class="fu">sum</span>(posterior<span class="sc">$</span>weights)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(samples)) {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  slope     <span class="ot">=</span> samples[i, <span class="dv">1</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">=</span> norm_weights[i]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xs, slope <span class="sc">*</span> xs, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="at">red =</span> <span class="dv">0</span>, <span class="at">green =</span> <span class="dv">0</span>, <span class="at">blue =</span> <span class="dv">0</span>, <span class="at">alpha =</span> pr<span class="sc">*</span><span class="dv">20</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1387,14 +1434,14 @@ posterior(regression, 1000)
 </ul>
 <p>Here is an example of creating a histogram for the marginal posterior:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>posterior.as.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">slopes =</span> samples[,<span class="dv">1</span>], norm_weights)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posterior.as.df, <span class="fu">aes</span>(<span class="at">x =</span> slopes, <span class="at">weight =</span> norm_weights)) <span class="sc">+</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">0.2</span>, <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"slope parameter"</span>) <span class="sc">+</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"probability"</span>) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>posterior.as.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">slopes =</span> samples[,<span class="dv">1</span>], norm_weights)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posterior.as.df, <span class="fu">aes</span>(<span class="at">x =</span> slopes, <span class="at">weight =</span> norm_weights)) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>) <span class="sc">+</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">0.2</span>, <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"slope parameter"</span>) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"probability"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1404,48 +1451,68 @@ posterior(regression, 1000)
 </div>
 </div>
 <p><strong>Question:</strong> if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration in the scatter plot above (the first plot in this subsection) would be used to compute the height of one histogram bin?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. "—"
-1. "|"
-1. "◤"
-1. "◢"
-1. None of the above
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The answer is "|".
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>“—”</li>
+<li>“|”</li>
+<li>“◤”</li>
+<li>“◢”</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The answer is “|”.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="model-criticism" class="level2">
 <h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
 <p>The answer we obtain is close to Edwin Hubble’s original estimate.</p>
 <p>The modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.</p>
 <p><strong>Discussion:</strong> What went wrong?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for discussion
-
-In summary: [it is very hard to estimate distance of distant objects](https://en.wikipedia.org/wiki/Cosmic_distance_ladder). 
-
-Not only the model explored today lacks an error model on the distances, but moreover, 
-Hubble's distance estimates had systematic errors (i.e. were all offset by a constant), 
-hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results. 
-
-In fact, even with modern data and statistical methods, 
-systematic errors are still suspected, this is known as the "Hubble tension."
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for discussion
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In summary: <a href="https://en.wikipedia.org/wiki/Cosmic_distance_ladder">it is very hard to estimate distance of distant objects</a>.</p>
+<p>Not only the model explored today lacks an error model on the distances, but moreover, Hubble’s distance estimates had systematic errors (i.e.&nbsp;were all offset by a constant), hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results.</p>
+<p>In fact, even with modern data and statistical methods, systematic errors are still suspected, this is known as the “Hubble tension.”</p>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
