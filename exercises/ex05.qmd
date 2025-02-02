@@ -6,4 +6,125 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+
+## Q.1: sequential updating
+
+Consider a joint probabilistic model given by
+$$
+\begin{aligned}
+\theta &\sim \rho \\
+x_i|\theta &\distiid \nu_\theta, \quad i\in\{1,\dots,n\}
+\end{aligned}
+$$
+where $\rho$ is a prior distribution for the unknown parameter $\theta$, and
+$\{x_i\}_{i=1}^n$ is a sequence of observations with conditional distribution
+$\nu_\theta$.
+
+1. Write down the posterior distribution of $\theta$ given $\{x_i\}_{i=1}^n$.
+2. Suppose now we get an additional data point $x_{n+1}$ with the same conditional
+distribution $\nu_\theta$. Show that using the posterior from part 1 as *prior* 
+and data equal to just $x_{n+1}$ gives *the same* posterior distribution as
+redoing part 1 with the $n+1$ data points.
+
+
+
+## Q.2: Bayesian inference in the limit of increasing data
+
+We will use the tractability of the Delta 7925H rocket example from Exercise 2 
+to explore the behavior of the
+posterior distribution as the number of observations goes to infinity. Recall
+that its joint distribution is
+$$
+\begin{aligned}
+p &\sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho) \\
+y_i|p &\distiid \distBern(p), \quad i\in\{1,\dots,n\}
+\end{aligned}
+$$ {#eq-posterior-full}
+and we use the convention that $y=1$ is a rocket launch success.
+From now on, we use $K=20$.
+
+1. Load the following code to compute the posterior in @eq-posterior-full. 
+Nothing to submit for this item.
+```{r}
+posterior_distribution = function(rho, n_successes, n_observations) {
+  K = length(rho) - 1
+  gamma = rho * dbinom(n_successes, n_observations, (0:K)/K)
+  normalizing_constant = sum(gamma)
+  gamma/normalizing_constant
+}
+```
+2. Write a function `posterior_mean` that computes the posterior mean given the
+output of `posterior_distribution`.
+3. Write another function with signature
+```r
+simulate_posterior_mean_error = function(rho_true, rho_prior, n_observations){...}
+```
+that performs the following
+
+a. sample $p_\text{true} \sim \distDiscrete(\{0,1/K,2/K,\dots,1\},\rho_\text{true})$
+b. sample the data $y_{1:n_\text{obs}}$ conditional on $p_\text{true}$
+c. call `posterior_distribution` using $\rho_\text{prior}$ and the simulated data
+d. compute the posterior mean $\ex[p|y_{1:n_\text{obs}}]$
+e. return the absolute error between $p_\text{true}$ and the posterior mean
+
+4. Using
+```r
+rho_true = rho_prior = 1:(K+1) 
+```
+and $K=20$, run `simulate_posterior_mean_error` for all `n_observations` values in
+```r
+n_obs_vector <- 2^(0:6)
+```
+Repeat each case 1000 times. Store the error values in a dataframe 
+`experiment_results` that has 
+columns `(n_observations, replication, error)`, with `replication` ranging from 
+1 to 1000. Show the output of `head` and the output of `tail` for your dataframe.
+
+5. Visualize the above data using a log-log plot using the following code
+```r
+ggplot(experiment_results, aes(x=n_observations, y=errors+1e-9)) + # avoid log(0)
+  stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
+  scale_x_log10() +  # Show result in log-log scale
+  scale_y_log10(n.breaks=16) +
+  coord_cartesian(ylim = c(1e-3, 1)) +
+  theme_minimal() +
+  geom_point() +
+  labs(x = "Number of observations",
+       y = "Absolute error of the posterior mean")
+```
+
+6. Do a quick estimate of the slope at the rightmost end of the graph via
+$$
+\frac{y_7-y_5}{x_7-x_5}
+$$
+where $x$ is $\log_{10}(n)$, $y$ is $\log_{10}(\text{error})$, and the subscript indicates
+the column of points from left to right. What can you deduce about the scaling 
+law of the error?
+
+7. Repeat part 4 but now using
+```r
+rho_true = 1:(K+1)
+rho_prior = rep(1, K+1) 
+```
+Store the results in a dataframe called `new_results`. Use the following code to
+plot both sets of results
+```r
+ggplot(all_results, aes(x=n_observations, y=errors+1e-9, # avoid log(0) 
+                        color=prior_type, shape=prior_type)) + 
+  stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
+  scale_x_log10() +  # Show result in log-log scale
+  scale_y_log10(n.breaks=16) +
+  coord_cartesian(ylim = c(1e-3, 1)) +
+  theme_minimal() +
+  geom_point() +
+  labs(x = "Number of observations",
+       y = "Absolute error of the posterior mean")
+```
+where the dataframe `all_results` must be created by 
+
+a. Adding a column `prior_type` to `experiment_results` with constant value
+equal to `Match`
+b. Adding the same column to `new_results` with the value `Different`
+c. Finally, use `rbind` to join both dataframes into one.
+
+Comment on the visual differences between the two sets of results.

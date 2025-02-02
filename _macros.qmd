@@ -1,7 +1,3 @@
----
-editor: 
-  mode: source
----
 
 <!-- First, some macros specific to this course -->
 
