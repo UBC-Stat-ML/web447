@@ -40,24 +40,23 @@ Why? Thanks to autodiff!
 
 If you just need just the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use [BridgeStan](https://github.com/roualdes/bridgestan) (bridges Stan with R, Julia, Rust, etc).
 
-To install it:
+<!-- Had to remove bridge stan demo.. maybe have to add bridge stan to r env? Error was:
 
-```r
-install.packages("remotes")
-require(remotes)
-remotes::install_github("https://github.com/roualdes/bridgestan", subdir="R")
-```
+        Quitting from lines  at lines 206-214 [unnamed-chunk-1] (topic13_autodiff.qmd)
+        Error in `library()` at knitr/R/cache.R:84:7:
+        ! there is no package called 'bridgestan'
+        Backtrace:
+          1. global .main()
+          2. execute(...)
+          3. rmarkdown::render(...)
+          4. knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
+          5. knitr:::process_file(text, output)
+             ...
+               at knitr/R/block.R:3:3
+         11. cache$library(params$cache.path, save = FALSE)
+               at knitr/R/block.R:102:5
+         14. base::library(p, character.only = TRUE)
+               at knitr/R/cache.R:84:7
+        Execution halted
 
-To use it:
-
-```{r}
-# require(bridgestan)
-# model = StanModel$new(
-#   "../blocks/ariane.stan",
-#   "../blocks/ariane.json",
-#   1
-# )
-
-# model$log_density_gradient(c(0.1, 0.2), propto = TRUE, jacobian = TRUE)
-```
-
+-->

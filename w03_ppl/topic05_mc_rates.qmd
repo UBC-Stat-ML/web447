@@ -6,8 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_announce.qmd >}}
-
 <!-- Note: I ended up covering this at the beginning of week 5. Natural fit with the other asymptotic regime (large data) --> 
 
 ## Outline
@@ -17,6 +15,7 @@ editor:
 - Convergence rate of Monte Carlo methods. 
 - Empirical scaling laws using physicist's log-log plot trick. 
 - Mathematical underpinnings.
+
 
 ### Rationale
 
@@ -148,7 +147,7 @@ ggplot(data=df, aes(x=n_iterations, y=errors)) +
 - Result suggests a linear fit in the log-log scale $\underbrace{\log_{10}(\text{error})}_{y} = a\; \underbrace{\log_{10}(\text{number of iterations})}_{x} + b$
 
 - **Questions:**
-    - Eyeball the coefficient $a = \Delta x / \Delta y$. 
+    - Eyeball the coefficient $a = \Delta y / \Delta x$. 
     - What can you this coefficient tell you about the scaling of the error?
 
 {{< include ../../clickers/w03/_c08.qmd >}}
@@ -163,7 +162,7 @@ Based on this extra information, let's try revisit our initial question:
 
 **Notation:** recall $\hat G_M$ is the estimator. Let us denote the truth by $g^* = \ex[g(X, Y)]$. 
 
-**Core of the argument:** use that for independent random variables $V_1, V_2$, $\var[V_1 + V_2] = \var[V_1] + \var[V_2]$! This gives us:
+**Core of the argument:** use that for independent random variables $V_1, V_2$, $\var[V_1 + V_2] = \var[V_1] + \var[V_2]$! Also, $\var[a V] = a^2 \var[V]$. This gives us:
 
 $$\sd(\hat G_M) = \sqrt{\var \frac{1}{M} \sum_{i=1}^M G^\parm} = \sqrt{\frac{M \var G^{(1)}}{M^2}} = \frac{\text{constant}}{\sqrt{M}}$$
 

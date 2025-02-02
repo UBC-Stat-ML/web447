@@ -6,4 +6,60 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+
+
+Make sure to read the [simPPLe setup page](../w04_glms/topic01_simPPLe.qmd) before you begin. 
+
+
+## Q.1: logistic rocket improvement
+
+Consider the [Ariane 1 data we used this week](../w04_glms/topic04_classification.qmd#sec-data), 
+```r
+success_indicators = c(1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1)
+```
+and the [model described in the same page](../w04_glms/topic04_classification.qmd#sec-model). 
+
+Recall that we discussed a model where the reliability of the rocket changes in time. This will allow us to
+incorporate, for example, the fact that engineering teams implement fixes based
+on past launches and therefore the probability of success should increase.
+
+1. Write a function called `logistic_regression` containing a [simPPLe](../w04_glms/topic01_simPPLe.qmd) 
+  probabilistic programming description 
+  of [the model described in class](../w04_glms/topic04_classification.qmd#sec-model). 
+  Your function should return a vector containing 3 elements in the following order:
+    1. the intercept ($\in \reals$),
+    2. the slope ($\in \reals$),
+    3. a prediction if one more launch would have been successful (1) or a failure (0) ($\in \{0, 1\}$).
+2. Follow the instructions in [the appendix below](#sec-utils) to get some helper functions. 
+    Use these functions to reproduce the lecture's bivariate posterior plot over the intercept and slope parameters. 
+3. Estimate the probability that the next launch is a success given the data under the **logistic model**. 
+4. Create a variant of the same model but where the slope is set to zero. 
+    Estimate the probability that the next launch is a success given the data under this **simplified model**. 
+    
+    
+## Q.2: choosing a model
+
+You debate with your friend whether the logistic model or the simplified model (with slope equals to zero) should be preferred. 
+To stop that debate, write a **unified model** which gives probability 1/2 to the simplified model, and 1/2 to the logistic model. 
+Estimate the posterior probability that the logistic model is preferred under the unified model given the same data as in Q.1.
+
+<!--
+## Q.2: change-point improvement
+
+Consider an alternative approach where instead of logistic function, we use a [step function](https://en.wikipedia.org/wiki/Step_function) 
+with 2 steps (think of a mini stair case with two steps). 
+
+Estimate the probability that the next launch is a success given the data under the change point model. 
+-->
+
+
+## Appendix {#sec-utils}
+
+For Q.1.2, you will need to copy the following code and paste it in a file 
+called `simple_utils.R`. We have demonstrated the use of these functions 
+[in the lectures](../w04_glms/topic02_bivariate.qmd).
+
+```r {shortcodes=true, filename="simple_utils.R"}
+{{< include ../blocks/simple_utils.R >}}
+```
+

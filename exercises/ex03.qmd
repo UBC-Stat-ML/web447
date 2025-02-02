@@ -35,12 +35,10 @@ where $\text{erf}(\cdot)$ is the [error function](https://mathworld.wolfram.com/
 Test your implementation of `mc_estimate` by checking that it produces an
 answer close to the value in @eq-integral.
 
-3. The integral with $f(x) = \sin(\cos(\sin(x)))$ approximately evaluates to
+3. Approximate the following integral using `mc_estimate`:
 $$
-\int_0^1 f(x) \dee x \approx 0.7593064.
+\int_0^1 \sin(\cos(\sin(x))) \dee x.
 $$
-Estimate its value using `mc_estimate(f)` and compare to the value given above.
-
 
 ## Q.2: implementing SNIS for simPPLe {#sec-simPPLe}
 

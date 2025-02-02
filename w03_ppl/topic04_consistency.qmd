@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_announce.qmd >}}
 
 ## Outline
 
@@ -18,7 +17,6 @@ editor:
 ### Rationale
 
 We go over this proof as it demystifies the form of SNIS' weights. 
-
 
 ## Notation and setup
 
@@ -46,6 +44,8 @@ We will analyze the numerator and denominator separately. Let's start with the n
 $$\frac{1}{M} \sum_{m=1}^M W^\parm G^\parm \to\; ?$$
  
 {{< include ../../clickers/w03/_c06.qmd >}}
+
+
 
 Now we can simplify the above limit:
 

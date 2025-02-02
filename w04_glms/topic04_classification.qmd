@@ -7,6 +7,7 @@ editor:
 {{< include ../_macros.qmd >}}
 
 
+
 ## Outline
 
 ### Topics
@@ -14,13 +15,14 @@ editor:
 - A first example of a Bayesian model based on a linear model and a Bernoulli likelihood. 
 - Prior construction via prior predictive distribution. 
 - Approximation of the posterior using a PPL. 
-- Visualizing a posterior distribution over functions.   
+- Visualizing a posterior distribution over functions. 
 
 
 ### Rationale
 
 - This is our first example of a Bayesian General Linear Model (GLM). 
 - GLMs are the probably the most common models. 
+
 
 
 ## Example {#sec-data}
