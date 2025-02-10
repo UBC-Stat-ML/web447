@@ -61,20 +61,8 @@ sum(df$numberOfFailures)
 
 **Why merging everything is a bad idea?**
 
-::: {.callout-caution collapse="true"} 
-## Click for answer
+{{< include ../../clickers/w06/_c02.qmd >}}
 
-Some of these types of rockets are very different than the one under study (Delta 7925H). 
-For example some of them are very old, made by different space agencies, etc. 
-
-An indeed, the aggregated failure rate is high compared to what you would expect from modern "workhorse" rockets (<1%):
-
-```{r}
-sum(df$numberOfFailures) / sum(df$numberOfLaunches)
-```
-
-We want to consider the different types of rockets as a **population** and model the variability within that population. 
-:::
 
 
 ### Towards an improved way to use side data
@@ -109,17 +97,11 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
   theme_minimal()
 ```
 
-**Question:** what are the weaknesses of using a prior fitted on this histogram?
+**Question:** what is the weakness of using a prior fitted on this histogram?
 
-::: {.callout-caution collapse="true"} 
-## Click for answer
+{{< include ../../clickers/w06/_c03.qmd >}}
 
-- First, notice the "bumps" at 1/2 (and 1, 1/4, etc)...
-    - Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!
-    - But if you fit a curve to this data, these "bumps" will have a large undesirable effects. 
-    - More broadly, we want to take into account uncertainty in each of these $\hat p_i$'s. 
-- Also: less clear how to generalize this method to handle the pseudo-sample-size $s$. 
-:::
+
 
 ## Hierarchical models: a better way to use side data
 

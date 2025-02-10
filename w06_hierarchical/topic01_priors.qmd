@@ -54,15 +54,11 @@ Often, the choice of prior is approached in two stages
     - Extreme example: 
         - consider a rocket maiden flight, 
         - i.e. there is no observation available yet,
-        - what will be the posterior?
+        - **Question:** what will be the posterior?
         
-::: {.callout-caution collapse="true"} 
-## Click for answer
+{{< include ../../clickers/w06/_c01.qmd >}}
+        
 
-Where there is no observations, the posterior is equal to the prior.
-
-This shows an extreme example of the posterior being sensitive to the choice of prior!
-:::
 
 ## Strategies for constructing priors
 
