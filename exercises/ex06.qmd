@@ -50,17 +50,7 @@ n_\text{v}|e,p &\sim \distBinom(t_\text{v}, p(1-e))
 \end{aligned}
 $$ {#eq-model-one-vac}
 
-<!-- 
-::: {.callout-note}
-When $X$ is a random variable and $f:\reals\to\reals$ is a bijection,
-the statement
-$$
-f(X) \sim \pi
-$$
-means that $X$ is drawn by first sampling $Y\sim\pi$ and then transforming 
-$X = f^{-1}(Y)$.
-:::
--->
+
 
 ```{r}
 #| echo: false
@@ -94,7 +84,5 @@ vaccines = read.csv("vaccines.csv")
 vaccines$groupSizes = as.double(vaccines$groupSizes) # needed due to bug in Binom code
 ```
 4. Run your model in [simPPLe](../w04_glms/topic01_simPPLe.qmd) using `posterior`
-with 25,000 iterations, and report the estimated posterior probability that 
-Moderna is more effective than Pfizer. Is there strong evidence for this claim?
-**Note**: it takes a couple of minutes to run 25,000 iterations. Therefore, for
-prototyping it may be easier to test your implementation with fewer iterations.
+with 10,000 iterations, and report the estimated posterior probability that 
+Moderna is more effective than Pfizer. Is the SNIS approximation reliable?
