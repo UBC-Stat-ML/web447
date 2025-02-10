@@ -6,6 +6,8 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+<!-- Note: short week because 2nd lecture of the week devoted to quiz review... -->
+
 
 ## Outline
 

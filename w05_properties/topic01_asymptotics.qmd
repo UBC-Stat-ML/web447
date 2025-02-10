@@ -49,6 +49,8 @@ including Bayesian estimators and Monte Carlo methods.
 {{< include ../../clickers/w05/_c01.qmd >}}
 
 You will explore this question in [this week's exercises](../exercises/ex05.qmd).
+
+<!--
 To help you preparing for this exercise, we will first go back to the first type 
 of asymptotics (Monte Carlo consistency) [in more depth](../w03_ppl/topic05_mc_rates.qmd).
-
+-->
