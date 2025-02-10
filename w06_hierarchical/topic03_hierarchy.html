@@ -1117,30 +1117,46 @@ https://github.com/trevorcampbell/shortex
 </div>
 </div>
 <p><strong>Why merging everything is a bad idea?</strong></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Some of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.</p>
-<p>An indeed, the aggregated failure rate is high compared to what you would expect from modern “workhorse” rockets (&lt;1%):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures) <span class="sc">/</span> <span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07605435</code></pre>
-</div>
-</div>
-<p>We want to consider the different types of rockets as a <strong>population</strong> and model the variability within that population.</p>
-</div>
-</div>
-</div>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. They are independent.
+1. They are identically distributed.
+1. Some of these types of rockets are very different than the one under study. 
+1. All of the above.
+1. None of the above. 
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Some of these types of rockets are very different than the one under study (Delta 7925H). 
+For example some of them are very old, made by different space agencies, etc. 
+
+An indeed, the aggregated failure rate is high compared to what you would expect from modern "workhorse" rockets (<1%):
+
+::: {.cell}
+
+```{.r .cell-code}
+sum(df$numberOfFailures) / sum(df$numberOfLaunches)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.07605435
+```
+
+
+:::
+:::
+
+We want to consider the different types of rockets as a **population** and model the variability within that population. 
+:::
+
+-->
 </section>
 <section id="towards-an-improved-way-to-use-side-data" class="level3">
 <h3 class="anchored" data-anchor-id="towards-an-improved-way-to-use-side-data">Towards an improved way to use side data</h3>
@@ -1169,14 +1185,14 @@ Click for answer
 <li>Use this distribution <span class="math inline">\(p(\mu)\)</span> as the prior on <span class="math inline">\(\mu\)</span>?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"latex2exp"</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">textrm{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">textrm{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"latex2exp"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">textrm{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">textrm{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1185,31 +1201,30 @@ Click for answer
 </div>
 </div>
 </div>
-<p><strong>Question:</strong> what are the weaknesses of using a prior fitted on this histogram?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>First, notice the “bumps” at 1/2 (and 1, 1/4, etc)…
-<ul>
-<li>Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!</li>
-<li>But if you fit a curve to this data, these “bumps” will have a large undesirable effects.</li>
-<li>More broadly, we want to take into account uncertainty in each of these <span class="math inline">\(\hat p_i\)</span>’s.</li>
-</ul></li>
-<li>Also: less clear how to generalize this method to handle the pseudo-sample-size <span class="math inline">\(s\)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
+<p><strong>Question:</strong> what is the weakness of using a prior fitted on this histogram?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. It does not take into acount the uncertainty of the fitted $\hat p_i$. 
+1. The support should go beyond $[0, 1]$
+1. The density is not continuous.
+1. All of the above.
+1. None of the above. 
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+- First, notice the "bumps" at 1/2 (and 1, 1/4, etc)...
+    - Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!
+    - But if you fit a curve to this data, these "bumps" will have a large undesirable effects. 
+    - More broadly, we want to take into account uncertainty in each of these $\hat p_i$'s. 
+- Also: less clear how to generalize this method to handle the pseudo-sample-size $s$. 
+:::
+
+-->
 </section>
 </section>
 <section id="hierarchical-models-a-better-way-to-use-side-data" class="level2">
