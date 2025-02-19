@@ -3,7 +3,7 @@ suppressPackageStartupMessages(require(ggplot2))
 suppressPackageStartupMessages(require(dplyr))
 
 # data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data
-df = read.csv("../quizzes/q1/covid19_variants.csv")
+df = read.csv("../data/covid19_variants.csv")
 df$date = as.Date(df$date,format="%Y-%m-%d")
 
 init_fun <- function() {

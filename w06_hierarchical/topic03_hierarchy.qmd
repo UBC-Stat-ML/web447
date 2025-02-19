@@ -131,7 +131,7 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
 
 - Share these two "population parameters" across all launch types 
 $$p_i | \mu, s \sim \distBeta(\mu s, (1 - \mu) s)$$
-- Likelihood same as before: $F_i | p_i \sim \distBern(n_i, p_i).$
+- Likelihood same as before: $F_i | p_i \sim \distBinom(n_i, p_i).$
 - We still need to put prior on $\mu$ and $s$...
     - ...but as we'll discuss next, you should expect this prior choice to be less sensitive. 
     - Example: $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$ 

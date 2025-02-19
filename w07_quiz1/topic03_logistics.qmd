@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
 
 
 
@@ -24,9 +23,7 @@ We will start promptly at 9:30 (please arrive on time) and end at 10:45 (75 minu
 ## Distribution reference
 
 The cover page of the exam will have the following table.
-Note that compared to last week's practice, I have added 3 rows, providing 
-two additional parameterizations for the normal, and one additional parameterization 
-for the beta. 
+
 
 
 {{< include ../blocks/_formulae_quiz1.qmd >}}

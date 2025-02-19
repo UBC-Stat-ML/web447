@@ -36,7 +36,7 @@ suppressPackageStartupMessages(require(ggplot2))
 suppressPackageStartupMessages(require(dplyr))
 
 # data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data
-df = read.csv("../../quizzes/q1/covid19_variants.csv")
+df = read.csv("../data/covid19_variants.csv")
 df$date = as.Date(df$date,format="%Y-%m-%d")
 
 df = df %>% filter(date > "2021-12-01" & date < "2021-12-31") %>% filter(variant_name == "Omicron")
@@ -47,7 +47,7 @@ df %>% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + the
 
 ## Model (mathematical notation)
 
-Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters): for $i \in \{1, 2, \dots, N\}$, $N$ being the number of days in December ($N=31$),[^1]
+Recall one possible model for this data: for $i \in \{1, 2, \dots, N\}$, $N$ being the number of days in December ($N=31$),[^1]
 
 [^1]: In the model below, notice we normalize the day by $N$ to put it in the interval $[0, 1]$. This is not strictly necessary, but often,
   bringing covariates in a nice range can make sampling faster when it improves the 
