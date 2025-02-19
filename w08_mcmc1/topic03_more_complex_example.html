@@ -1074,7 +1074,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../../quizzes/q1/covid19_variants.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../data/covid19_variants.csv"</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>date <span class="ot">=</span> <span class="fu">as.Date</span>(df<span class="sc">$</span>date,<span class="at">format=</span><span class="st">"%Y-%m-%d"</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date <span class="sc">&gt;</span> <span class="st">"2021-12-01"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;</span> <span class="st">"2021-12-31"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(variant_name <span class="sc">==</span> <span class="st">"Omicron"</span>)</span>
@@ -1091,7 +1091,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="model-mathematical-notation" class="level2">
 <h2 class="anchored" data-anchor-id="model-mathematical-notation">Model (mathematical notation)</h2>
-<p>Recall one possible model we discussed after the quiz (with slightly different prior hyper-parameters): for <span class="math inline">\(i \in \{1, 2, \dots, N\}\)</span>, <span class="math inline">\(N\)</span> being the number of days in December (<span class="math inline">\(N=31\)</span>),<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Recall one possible model for this data: for <span class="math inline">\(i \in \{1, 2, \dots, N\}\)</span>, <span class="math inline">\(N\)</span> being the number of days in December (<span class="math inline">\(N=31\)</span>),<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span class="math display">\[\begin{align*}
 \theta_0 &amp;\sim {\mathrm{Exp}}(1) \\
 \theta_1 &amp;\sim \mathcal{N}(0, \sigma = 1000) \\
@@ -1231,8 +1231,8 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 3.2e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.32 seconds.
+Chain 1: Gradient evaluation took 2.8e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -1249,9 +1249,9 @@ Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
 Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
 Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.161 seconds (Warm-up)
-Chain 1:                0.197 seconds (Sampling)
-Chain 1:                0.358 seconds (Total)
+Chain 1:  Elapsed Time: 0.141 seconds (Warm-up)
+Chain 1:                0.165 seconds (Sampling)
+Chain 1:                0.306 seconds (Total)
 Chain 1: </code></pre>
 </div>
 </div>
