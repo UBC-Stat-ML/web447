@@ -1,9 +1,71 @@
 ---
-title: "Exercise 7: Intro to MCMC"
+title: "Exercise 7: Introduction to MCMC"
 editor: 
   mode: source
 ---
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+## Q.1: Installing and running Stan
+
+Report the posterior interquartile range in 
+the [mini Stan exercise from the notes](../w08_mcmc1/topic01_installing_stan.qmd#running). 
+
+
+## Q.2: Regression/classification in Stan
+
+In this question, you will analyze the 
+[Ariane 1 data we encountered earlier in the course](../w04_glms/topic04_classification.qmd) 
+but using different priors, and with Stan instead of simPPLe. 
+
+First, access the data as follows:
+
+```r {shortcodes=true, filename="ex07_import_ariane.R"}
+{{< include ex07_import_ariane.R >}}
+```
+
+Second, write a Stan model following the same structure as the model from the
+[last time we analyzed this data](../w04_glms/topic04_classification.qmd) 
+**except** that the following priors should be used:
+
+- for the slope parameter, `student_t(2, 0, 100)`,
+- for the intercept parameter,`student_t(2, 0, 100)`.
+
+Run Stan for 2500 iterations and 
+report a histogram on each quantity of interest separately (i.e., the slope and intercept parameter), 
+as well as a pairplot of both the slope and intercept.
+
+
+## Q.3: A simple MCMC algorithm {#sec-q3}
+
+In this question, you will implement a random-walk Metropolis algorithm with a 
+standard normal proposal. 
+
+Start with the following scaffold code that encodes the posterior distribution of interest. 
+More specifically, this encodes an un-normalized distribution $\gamma(p)$ given by 
+prior times likelihood. 
+
+```r {shortcodes=true, filename="ex07_scaffold.R"}
+{{< include ex07_scaffold.R >}}
+```
+
+Complete the blanks in the following:
+
+```r
+# simple Metropolis-Hastings algorithm (normal proposal)
+simple_mh = function(gamma, initial_point, n_iters) {
+  samples = numeric(n_iters) 
+  dim = length(initial_point)
+  
+  # TODO
+  
+  return(samples)
+}
+```
+
+Use this function to compute the posterior mean and median of the model encoded in `gamma_beta_binomial`. 
+
+Compute the posterior mean and median of $p$ using:
+
+1. 1500 iterations of MCMC,
+2. analytic computations (for the posterior mean only) based on [the practice quiz 1 question](../w07_quiz1/topic02_practice_questions.qmd).
