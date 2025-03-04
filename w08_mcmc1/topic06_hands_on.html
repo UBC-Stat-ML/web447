@@ -1117,6 +1117,129 @@ y_i &amp;\sim {\mathrm{Bern}}(\theta(i))
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// complete this</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+The value closest to the posterior mean of the `slope` parameter is...
+
+1. 0.6
+1. 0.3
+1. 0.1
+1. -0.7
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+::: {.cell output.var='logistic'}
+
+```{.stan .cell-code}
+
+data { 
+  int N; 
+  array[N] int y; 
+}
+
+parameters { 
+  real slope;
+  real intercept;
+}
+
+model {
+  slope ~ normal(0, 10);
+  intercept ~ normal(0, 10);
+  for (i in 1:N) {
+    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
+  }
+}
+
+```
+:::
+
+
+::: {.cell}
+
+```{.r .cell-code}
+fit = sampling(
+  logistic, 
+  data = list( 
+          y = success_indicators, 
+          N = length(success_indicators)
+        ), 
+  chains = 1,
+  iter = 10000       
+)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 5e-06 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 10000 [  0%]  (Warmup)
+Chain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.046 seconds (Warm-up)
+Chain 1:                0.046 seconds (Sampling)
+Chain 1:                0.092 seconds (Total)
+Chain 1: 
+```
+
+
+:::
+:::
+
+
+::: {.cell}
+
+```{.r .cell-code}
+fit
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Inference for Stan model: anon_model.
+1 chains, each with iter=10000; warmup=5000; thin=1; 
+post-warmup draws per chain=5000, total post-warmup draws=5000.
+
+           mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope      0.58    0.01 0.44 -0.12  0.26  0.52  0.82  1.61  1009    1
+intercept -0.71    0.06 1.89 -4.46 -1.90 -0.64  0.55  2.86  1056    1
+lp__      -5.59    0.03 1.19 -8.85 -6.07 -5.23 -4.74 -4.41  1195    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:04:48 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+```
+
+
+:::
+:::
+
+Hence the correct choice was `0.6`. 
+:::
+
+-->
 </section>
 <section id="using-the-posterior" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-posterior">Using the posterior</h2>
@@ -1137,8 +1260,220 @@ Hint
 </div>
 </div>
 </div>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $[-4.5, 2.9]$ 
+1. $[-0.3, 1.4]$ 
+1. $[-0.1, 1.6]$
+1. $[0.2, 0.9]$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Using again the print out of the fit object:
+
+::: {.cell}
+
+```{.r .cell-code}
+fit
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Inference for Stan model: anon_model.
+1 chains, each with iter=10000; warmup=5000; thin=1; 
+post-warmup draws per chain=5000, total post-warmup draws=5000.
+
+           mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope      0.58    0.01 0.44 -0.12  0.26  0.52  0.82  1.61  1009    1
+intercept -0.71    0.06 1.89 -4.46 -1.90 -0.64  0.55  2.86  1056    1
+lp__      -5.59    0.03 1.19 -8.85 -6.07 -5.23 -4.74 -4.41  1195    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:04:48 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+```
+
+
+:::
+:::
+
+We can get a [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval 
+by looking at the columns `2.5%` and `97.5%` (i.e., chopping off 5%/2 on each side): 
+this yields $[-0.12, 1.61]$.
+:::
+
+-->
 <p><strong>Question 3:</strong> translate “your updated belief that the Ariane 1 rockets were improving” into a mathematical expression.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $\ex[\text{slope}| Y = y] > 0$
+1. $\ex[\text{slope}] > 0$
+1. $\pr(\text{slope} > 0 | Y = y)$
+1. $\pr(\text{slope} > 0)$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+"Ariane 1 rockets were improving" translates to the event $(\text{slope} > 0)$. 
+Hence our "updated belief," which is just the posterior probability, is 
+$\pr(\text{slope} > 0 | Y = y)$. 
+:::
+
+-->
 <p><strong>Question 4:</strong> estimate the numerical value of the expression in the last question.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. 0.65
+1. 0.75
+1. 0.85
+1. 0.95
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Here we want to add a new random variable to our model, defined as:
+$$\text{slope\_is\_positive} = \ind[\text{slope} > 0].$$
+Why? Because then the posterior mean of the indicator will yield the required probability:
+$$\ex[\ind[\text{slope} > 0]|Y = y] = \pr(\text{slope} > 0 | Y = y),$$
+and we will be able to read off that mean from the print out of the fit object. 
+
+Now, how to add the slope\_is\_positive random variable to our Stan model?
+
+Since the random variable is defined using "=" rather than "$\sim$", we can do this using 
+a `transformed parameters`, introduced [earlier this week](topic03_more_complex_example.qmd). 
+
+Here though notice that `is_slope_positive` is not used within the model block, 
+in such case, an alternative is to use a `generated quantities`, which we demonstrate here:
+
+::: {.cell output.var='logistic_with_generated'}
+
+```{.stan .cell-code}
+
+data { 
+  int N; 
+  array[N] int y; 
+}
+
+parameters { 
+  real slope;
+  real intercept;
+}
+
+model {
+  slope ~ normal(0, 10);
+  intercept ~ normal(0, 10);
+  for (i in 1:N) {
+    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
+  }
+}
+
+generated quantities {
+  real is_slope_positive = slope > 0 ? 1 : 0;
+}
+
+```
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
+fit = sampling(
+  logistic_with_generated, 
+  data = list( 
+          y = success_indicators, 
+          N = length(success_indicators)
+        ), 
+  chains = 1,
+  iter = 10000       
+)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 5e-06 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 10000 [  0%]  (Warmup)
+Chain 1: Iteration: 1000 / 10000 [ 10%]  (Warmup)
+Chain 1: Iteration: 2000 / 10000 [ 20%]  (Warmup)
+Chain 1: Iteration: 3000 / 10000 [ 30%]  (Warmup)
+Chain 1: Iteration: 4000 / 10000 [ 40%]  (Warmup)
+Chain 1: Iteration: 5000 / 10000 [ 50%]  (Warmup)
+Chain 1: Iteration: 5001 / 10000 [ 50%]  (Sampling)
+Chain 1: Iteration: 6000 / 10000 [ 60%]  (Sampling)
+Chain 1: Iteration: 7000 / 10000 [ 70%]  (Sampling)
+Chain 1: Iteration: 8000 / 10000 [ 80%]  (Sampling)
+Chain 1: Iteration: 9000 / 10000 [ 90%]  (Sampling)
+Chain 1: Iteration: 10000 / 10000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.047 seconds (Warm-up)
+Chain 1:                0.049 seconds (Sampling)
+Chain 1:                0.096 seconds (Total)
+Chain 1: 
+```
+
+
+:::
+:::
+
+
+::: {.cell}
+
+```{.r .cell-code}
+fit
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Inference for Stan model: anon_model.
+1 chains, each with iter=10000; warmup=5000; thin=1; 
+post-warmup draws per chain=5000, total post-warmup draws=5000.
+
+                   mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
+slope              0.57    0.01 0.41 -0.11  0.30  0.53  0.81  1.51  1216    1
+intercept         -0.74    0.05 1.81 -4.30 -1.87 -0.72  0.40  2.74  1314    1
+is_slope_positive  0.95    0.01 0.23  0.00  1.00  1.00  1.00  1.00  1535    1
+lp__              -5.51    0.03 1.12 -8.47 -5.95 -5.21 -4.71 -4.41  1241    1
+
+Samples were drawn using NUTS(diag_e) at Thu Mar  7 11:05:05 2024.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+```
+
+
+:::
+:::
+
+Hence the correct answer is `0.95`, the posterior mean of `is_slope_positive`. 
+:::
+
+-->
 
 
 </section>

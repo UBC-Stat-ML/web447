@@ -1004,6 +1004,7 @@ window.Quarto = {
   <li><a href="#improving-our-model-with-transformed-parameters" id="toc-improving-our-model-with-transformed-parameters" class="nav-link" data-scroll-target="#improving-our-model-with-transformed-parameters">Improving our model with transformed parameters</a></li>
   <li><a href="#running-mcmc" id="toc-running-mcmc" class="nav-link" data-scroll-target="#running-mcmc">Running MCMC</a></li>
   <li><a href="#posterior-visualization" id="toc-posterior-visualization" class="nav-link" data-scroll-target="#posterior-visualization">Posterior visualization</a></li>
+  <li><a href="#model-criticism" id="toc-model-criticism" class="nav-link" data-scroll-target="#model-criticism">Model criticism</a></li>
   </ul>
 </nav>
     </div>
@@ -1066,8 +1067,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
-<p>We revisit the omicron modelling question from quiz 1.</p>
-<p><em>The data consists, for each day in December 2021, of the <strong>percentage</strong> of sequenced COVID-19 samples that are of the Omicron variant.</em></p>
+<p>The data below consists, for each day in December 2021, of the <strong>percentage</strong> of sequenced COVID-19 samples that are of the Omicron variant.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
@@ -1282,20 +1282,21 @@ Chain 1: </code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="model-criticism" class="level2">
+<h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
+<p>What are potential weakness(es) of the model?</p>
 <!--
 
-## Model criticism 
+::: {.callout-caution collapse="true"} 
+## Click for answer
 
-What are potential weakness(es) of the model?
-
-
----
-editor: 
-  mode: source
----
-
-
-
+Many answers possible. For example, the systematic errors in the residuals
+(i.e., many points in a row are smaller at the beginning, and the 
+reversed trend at the end)
+suggest that the logistic function is not quite rich enough to capture the 
+details of the observed curve. 
+:::
 
 -->
 

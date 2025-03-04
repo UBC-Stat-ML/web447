@@ -554,9 +554,42 @@
   {
     "objectID": "exercises/ex07.html",
     "href": "exercises/ex07.html",
-    "title": "Exercise 7: Intro to MCMC",
+    "title": "Exercise 7: Introduction to MCMC",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Report the posterior interquartile range in the mini Stan exercise from the notes.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex07.html#q.1-installing-and-running-stan",
+    "href": "exercises/ex07.html#q.1-installing-and-running-stan",
+    "title": "Exercise 7: Introduction to MCMC",
+    "section": "",
+    "text": "Report the posterior interquartile range in the mini Stan exercise from the notes.",
+    "crumbs": [
+      "Intro to MCMC",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex07.html#q.2-regressionclassification-in-stan",
+    "href": "exercises/ex07.html#q.2-regressionclassification-in-stan",
+    "title": "Exercise 7: Introduction to MCMC",
+    "section": "Q.2: Regression/classification in Stan",
+    "text": "Q.2: Regression/classification in Stan\nIn this question, you will analyze the sun spots data set we encountered earlier in the course but using different priors and with Stan.\nFirst, access the data as follows:\n\n\nex07_import_sunspots.R\n\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\ndf = read.csv(\n  \"https://raw.githubusercontent.com/UBC-Stat-ML/web447/1e345149a5b698ccdf0a7e9b0aeabec2463c50ca/data/sunspots-SN_m_tot_V2.0.csv\",\n  sep = \";\", header=FALSE) %&gt;%\n  mutate(count = ceiling(V4)) %&gt;%\n  rename(year = V3) %&gt;%\n  filter(year &gt; 2005)\n\ncounts = df$count \ntime = df$year\n\nSecond, write a Stan model following the same structure as the model from the last time we analyzed this data except that the following priors should be used:\n\n\\(\\theta_1 \\sim U(0, 200)\\)\n\\(\\theta_2 \\sim U(0,10)\\)\n\\(\\theta_3 \\sim U(0, 2\\pi)\\)\n\nThe likelihood is \\[Y_i \\mid \\theta_1, \\theta_2, \\theta_3 \\sim \\text{Poisson}(\\theta_1 (\\sin(\\theta_2 i + \\theta_3) + 1.1)).\\]\nNotes:\n\nYou should perform regression with counts as the response variable and time as the explanatory variable.\nNote that inside the likelihood we use 1.1 instead of 1.0 as before.\nYou will need to initialize your Stan sampler appropriately. When calling stan(), specify an additional argument init = init_fun, where init_fun() is given below.\nYou may need to restrict the range of your parameters in the parameters{} block. E.g., real&lt;lower=0, upper=2*pi()&gt; theta3;.\n\nHere is a reasonable init_fun() (you may copy this code):\n\ninit_fun &lt;- function() {\n  list(theta1 = 40, theta2 = 1.0, theta3 = 0.25)\n}\n\nRun Stan for 2,500 iterations and report a histogram on each quantity of interest separately (i.e., \\(\\theta_1\\), \\(\\theta_2\\), \\(\\theta_3\\)), as well as a pairplot for each pair of parameters (i.e., three pairplots in total).",
+    "crumbs": [
+      "Intro to MCMC",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex07.html#sec-q3",
+    "href": "exercises/ex07.html#sec-q3",
+    "title": "Exercise 7: Introduction to MCMC",
+    "section": "Q.3: A simple MCMC algorithm",
+    "text": "Q.3: A simple MCMC algorithm\nIn this question, you will implement a random-walk Metropolis algorithm with a standard normal proposal.\nStart with the following scaffold code that encodes the posterior distribution of interest. More specifically, this encodes an un-normalized distribution \\(\\gamma(p)\\) given by prior times likelihood.\n\n\nex07_scaffold.R\n\n# prior: Beta(alpha, beta)\nalpha = 1\nbeta = 2 \n\n# observations: binomial draws\nn_successes = 3 \nn_trials = 3\n\ngamma_beta_binomial = function(p) {\n  if (p &lt; 0 || p &gt; 1) return(0.0)\n  dbeta(p, alpha, beta) * dbinom(x = n_successes, size = n_trials, prob = p)\n}\n\nComplete the blanks in the following:\n# simple Metropolis-Hastings algorithm (normal proposal)\nsimple_mh = function(gamma, initial_point, n_iters) {\n  samples = numeric(n_iters) \n  dim = length(initial_point)\n  \n  # TODO\n  \n  return(samples)\n}\nUse this function to compute the posterior mean and median of the model encoded in gamma_beta_binomial.\nCompute the posterior mean and median of \\(p\\) using:\n\n1500 iterations of MCMC,\nanalytic computations (for the posterior mean only) based on the practice quiz 1 question.",
     "crumbs": [
       "Intro to MCMC",
       "Exercises"
@@ -2716,7 +2749,7 @@
     "href": "w08_mcmc1/topic04_mh.html#visualization",
     "title": "Metropolis-Hastings",
     "section": "Visualization",
-    "text": "Visualization\nIn the exercise this week, you will implement MH with a standard normal proposal.\nOnce your exercise is complete you will be able to call your function as follows:\n\nsource(\"../exercises/ex07_scaffold.R\")\nsource(\"../../solutions/sol07_mh.R\")\n\nsamples = simple_mh(gamma_beta_binomial, 0.5, 1000)\n\n\nTrace plot\nLet us visualize the first 100 samples:\n\nplot(samples[1:100], \n     xlab = \"MCMC iteration\", \n     ylab = \"p\",\n     type = \"o\", \n     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\nQuestion: Notice that many points take exactly the same value, why is that?\nTerminology: the above plot (sample as a function of MCMC iteration) is called a trace plot.\nFull trace plot:\n\nplot(samples, \n     xlab = \"MCMC iteration\", \n     ylab = \"p\",\n     type = \"o\", \n     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\n\n\nHistogram\nAs with Stan (another MCMC algorithm we saw earlier this week), we can use a histogram to summarize the posterior:\n\nhist(samples)\n\n\n\n\n\n\n\n\nTo connect the two pictures, it is useful to visualize the histogram rotated as follows:\n\nsource(\"../blocks/plot_traces_and_hist.R\")\n\nplot_traces_and_hist(samples)",
+    "text": "Visualization\nIn the exercise this week, you will implement MH with a standard normal proposal.\nOnce your exercise is complete you will be able to call your function as follows:\n\nsource(\"../exercises/ex07_scaffold.R\")\nsource(\"../../solutions/sol07_mh.R\")\n\nsamples = simple_mh(gamma_beta_binomial, 0.5, 1000)\n\n\nTrace plot\nLet us visualize the first 100 samples:\n\nplot(samples[1:100], \n     xlab = \"MCMC iteration\", \n     ylab = \"p\",\n     type = \"o\", \n     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\nQuestion: Notice that many points take exactly the same value, why is that?\n\nTerminology: the above plot (sample as a function of MCMC iteration) is called a trace plot.\nFull trace plot:\n\nplot(samples, \n     xlab = \"MCMC iteration\", \n     ylab = \"p\",\n     type = \"o\", \n     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.2))\n\n\n\n\n\n\n\n\n\n\nHistogram\nAs with Stan (another MCMC algorithm we saw earlier this week), we can use a histogram to summarize the posterior:\n\nhist(samples)\n\n\n\n\n\n\n\n\nTo connect the two pictures, it is useful to visualize the histogram rotated as follows:\n\nsource(\"../blocks/plot_traces_and_hist.R\")\n\nplot_traces_and_hist(samples)",
     "crumbs": [
       "Intro to MCMC",
       "Metropolis-Hastings"
@@ -3429,7 +3462,7 @@
     "href": "w08_mcmc1/topic02_stan_basics.html#example",
     "title": "Stan basics",
     "section": "Example",
-    "text": "Example\n\nReview: code in simPPLe and analytic answer\nLet us revisit the Doomsday model, which we wrote in simPPLe as follows:\n\n\n\n\nsource(\"../../solutions/simple.R\")\n\ndoomsday_model &lt;- function() {\n  x = simulate(Unif(0, 5))\n  observe(0.06, Unif(0, x))\n  return(x)\n}\n\nposterior(doomsday_model, 100000)\n\n[1] 1.103447\n\n\nRecall the analytic answer that we computed in clicker questions was: \\(\\approx 1.117\\).\n\n\nCode in Stan\nToday we will re-write this model in Stan instead of simPPLe. The main difference is that:\n\nboth simulate and observe will be denoted by ~in Stan,\n\nto differentiate between observed and latent, Stan instead uses variable declarations (as data or parameters).\n\nFirst, load rstan:\n\nsuppressPackageStartupMessages(require(rstan))\n\nThen, as you did to test your install put the following code into a .stan file:\n\n1data {\n  real y; \n}\n\n2parameters {\n  real&lt;lower=0, upper=5&gt; x;\n}\n\nmodel {\n3  x ~ uniform(0, 5);\n4  y ~ uniform(0, x);\n}\n\n\n1\n\nVariables introduced in a data block will be treated as observed.\n\n2\n\nVariables introduced in a parameters block will be treated as latent, i.e., unobserved.\n\n\n3\n\nSince x is declared latent (i.e., inside a parameters block), Stan will know to treat this as the counterpart of simPPLe’s x = simulate(Unif(0, 5)).\n\n4\n\nSince y is declared observed (i.e., inside a data block), Stan will know to treat this as the counterpart of simPPLe’s observe(0.06, Unif(0, x)).\n\n\n\n\nQuestion: How does Stan gets the actual observed value \\(y = 0.06\\)?\nAnswer: When Stan gets called in R:1\n\n\nfit = sampling(\n  doomsday,         \n1  data = list(y = 0.06),\n  chains = 1,\n2  iter = 100000\n)\n\n\n1\n\nPass in the values taken by the observed random variables.\n\n2\n\nThe number of samples to compute (equivalent to \\(M\\) in our Monte Carlo notation)\n\n\n\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 4e-06 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.253 seconds (Warm-up)\nChain 1:                0.157 seconds (Sampling)\nChain 1:                0.41 seconds (Total)\nChain 1: \n\n\nWe can now compare the approximation provided by Stan:\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat\nx     1.12    0.01 1.25  0.07  0.19  0.55  1.68  4.45 10585    1\nlp__ -0.37    0.01 0.63 -2.21 -0.41 -0.12 -0.04 -0.01  9987    1\n\nSamples were drawn using NUTS(diag_e) at Tue Mar  5 11:45:15 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).",
+    "text": "Example\n\nReview: code in simPPLe and analytic answer\nLet us revisit the Doomsday model, which we wrote in simPPLe as follows:\n\n\n\n\nsource(\"../../solutions/simple.R\")\n\ndoomsday_model &lt;- function() {\n  x = simulate(Unif(0, 5))\n  observe(0.06, Unif(0, x))\n  return(x)\n}\n\nposterior(doomsday_model, 100000)\n\n[1] 1.103447\n\n\nRecall the analytic answer that we computed in clicker questions was: \\(\\approx 1.117\\).\n\n\nCode in Stan\nToday we will re-write this model in Stan instead of simPPLe. The main difference is that:\n\nboth simulate and observe will be denoted by ~ in Stan,\n\nto differentiate between observed and latent, Stan instead uses variable declarations (as data or parameters).\n\nFirst, load rstan:\n\nsuppressPackageStartupMessages(require(rstan))\n\nThen, as you did to test your install put the following code into a .stan file:\n\n1data {\n  real y; \n}\n\n2parameters {\n  real&lt;lower=0, upper=5&gt; x;\n}\n\nmodel {\n3  x ~ uniform(0, 5);\n4  y ~ uniform(0, x);\n}\n\n\n1\n\nVariables introduced in a data block will be treated as observed.\n\n2\n\nVariables introduced in a parameters block will be treated as latent, i.e., unobserved.\n\n\n3\n\nSince x is declared latent (i.e., inside a parameters block), Stan will know to treat this as the counterpart of simPPLe’s x = simulate(Unif(0, 5)).\n\n4\n\nSince y is declared observed (i.e., inside a data block), Stan will know to treat this as the counterpart of simPPLe’s observe(0.06, Unif(0, x)).\n\n\n\n\nQuestion: How does Stan gets the actual observed value \\(y = 0.06\\)?\nAnswer: When Stan gets called in R:1\n\n\nfit = sampling(\n  doomsday,         \n1  data = list(y = 0.06),\n  chains = 1,\n2  iter = 100000\n)\n\n\n1\n\nPass in the values taken by the observed random variables.\n\n2\n\nThe number of samples to compute (equivalent to \\(M\\) in our Monte Carlo notation)\n\n\n\n\n\nSAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 4e-06 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:     1 / 100000 [  0%]  (Warmup)\nChain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)\nChain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)\nChain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)\nChain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)\nChain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)\nChain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)\nChain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)\nChain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)\nChain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)\nChain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)\nChain 1: Iteration: 100000 / 100000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.253 seconds (Warm-up)\nChain 1:                0.157 seconds (Sampling)\nChain 1:                0.41 seconds (Total)\nChain 1: \n\n\nWe can now compare the approximation provided by Stan:\n\nfit\n\nInference for Stan model: anon_model.\n1 chains, each with iter=1e+05; warmup=50000; thin=1; \npost-warmup draws per chain=50000, total post-warmup draws=50000.\n\n      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat\nx     1.12    0.01 1.25  0.07  0.19  0.55  1.68  4.45 10585    1\nlp__ -0.37    0.01 0.63 -2.21 -0.41 -0.12 -0.04 -0.01  9987    1\n\nSamples were drawn using NUTS(diag_e) at Tue Mar  5 11:45:15 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).",
     "crumbs": [
       "Intro to MCMC",
       "Stan basics"
@@ -3451,7 +3484,7 @@
     "href": "w08_mcmc1/topic02_stan_basics.html#interpreting-the-output",
     "title": "Stan basics",
     "section": "Interpreting the output",
-    "text": "Interpreting the output\n\nJust as simple Monte Carlo and SNIS, the output of Stan/MCMC is a list of samples\nIn contrast to SNIS, the samples are equally weighted,\n\nin other words, for MCMC we have \\(W^{(m)}= 1/M\\),\ni.e., their structure is the same as samples from simple Monte Carlo!\n\n\nTo access the samples from a “fit” object when calling Stan, use:\n\nsamples = extract(fit)\n\nhead(samples$x)\n\n[1] 0.7224132 3.7228678 2.2768091 1.0077302 4.9788992 0.6378141\n\n\nAs a sanity check, let’s make sure all the samples are greater than the observed lower bound of \\(0.06\\):\n\nmin(samples$x)\n\n[1] 0.06000474\n\n\nQuestion: denote the samples output from Stan by \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\). What formula should you use to approximate \\(\\mathbb{E}[g(X) | Y = y]\\) based on the Stan output?\n\nPlotting histograms\nSince the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:\n\nhist(samples$x)\n\n\n\n\n\n\n\n\nYou can also use the bayesplot package which will be handy to create more complex plots from MCMC runs:\n\nsuppressPackageStartupMessages(require(bayesplot))\nmcmc_hist(fit, pars = c(\"x\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
+    "text": "Interpreting the output\n\nJust as simple Monte Carlo and SNIS, the output of Stan/MCMC is a list of samples\nIn contrast to SNIS, the samples are equally weighted,\n\nin other words, for MCMC we have \\(W^{(m)}= 1/M\\),\ni.e., their structure is the same as samples from simple Monte Carlo!\n\n\nTo access the samples from a “fit” object when calling Stan, use:\n\nsamples = extract(fit)\n\nhead(samples$x)\n\n[1] 0.7224132 3.7228678 2.2768091 1.0077302 4.9788992 0.6378141\n\n\nAs a sanity check, let’s make sure all the samples are greater than the observed lower bound of \\(0.06\\):\n\nmin(samples$x)\n\n[1] 0.06000474\n\n\nQuestion: denote the samples output from Stan by \\(X^{(1)}, X^{(2)}, \\dots, X^{(M)}\\). What formula should you use to approximate \\(\\mathbb{E}[g(X) | Y = y]\\) based on the Stan output?\n\n\nPlotting histograms\nSince the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:\n\nhist(samples$x)\n\n\n\n\n\n\n\n\nYou can also use the bayesplot package which will be handy to create more complex plots from MCMC runs:\n\nsuppressPackageStartupMessages(require(bayesplot))\nmcmc_hist(fit, pars = c(\"x\"))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.",
     "crumbs": [
       "Intro to MCMC",
       "Stan basics"
@@ -3495,7 +3528,7 @@
     "href": "w08_mcmc1/topic03_more_complex_example.html#example",
     "title": "Stan: going further",
     "section": "Example",
-    "text": "Example\nWe revisit the omicron modelling question from quiz 1.\nThe data consists, for each day in December 2021, of the percentage of sequenced COVID-19 samples that are of the Omicron variant.\n\nsuppressPackageStartupMessages(require(rstan))\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\n# data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data\ndf = read.csv(\"../data/covid19_variants.csv\")\ndf$date = as.Date(df$date,format=\"%Y-%m-%d\")\n\ndf = df %&gt;% filter(date &gt; \"2021-12-01\" & date &lt; \"2021-12-31\") %&gt;% filter(variant_name == \"Omicron\")\n\ndf %&gt;% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + theme_minimal()",
+    "text": "Example\nThe data below consists, for each day in December 2021, of the percentage of sequenced COVID-19 samples that are of the Omicron variant.\n\nsuppressPackageStartupMessages(require(rstan))\nsuppressPackageStartupMessages(require(ggplot2))\nsuppressPackageStartupMessages(require(dplyr))\n\n# data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data\ndf = read.csv(\"../data/covid19_variants.csv\")\ndf$date = as.Date(df$date,format=\"%Y-%m-%d\")\n\ndf = df %&gt;% filter(date &gt; \"2021-12-01\" & date &lt; \"2021-12-31\") %&gt;% filter(variant_name == \"Omicron\")\n\ndf %&gt;% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + theme_minimal()",
     "crumbs": [
       "Intro to MCMC",
       "Stan: going further"
@@ -3551,6 +3584,17 @@
     "title": "Stan: going further",
     "section": "Posterior visualization",
     "text": "Posterior visualization\nWe can extract samples as follows:\n\nsamples = extract(fit)$mu\ndata = df$percentage\nn_samples = nrow(samples)\n\nand plot the posterior distribution over the beta’s mean functions:\n\nxs = 1:length(data) / length(data)\nplot(xs, data/100, \n      xlab = \"Fraction of the month of December, 2021\", \n      ylab = \"Omicron fraction\")\n\nfor (i in 1:n_samples) {\n  lines(xs, samples[i,], col = rgb(red = 0, green = 0, blue = 0, alpha = 0.01))\n}",
+    "crumbs": [
+      "Intro to MCMC",
+      "Stan: going further"
+    ]
+  },
+  {
+    "objectID": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
+    "href": "w08_mcmc1/topic03_more_complex_example.html#model-criticism",
+    "title": "Stan: going further",
+    "section": "Model criticism",
+    "text": "Model criticism\nWhat are potential weakness(es) of the model?",
     "crumbs": [
       "Intro to MCMC",
       "Stan: going further"
@@ -3616,7 +3660,7 @@
     "href": "w08_mcmc1/topic06_hands_on.html#using-the-posterior",
     "title": "Stan: hands on",
     "section": "Using the posterior",
-    "text": "Using the posterior\nQuestion 2: compute a 95% credible interval on the slope parameter.\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse the output of println on the fit object.\n\n\n\nQuestion 3: translate “your updated belief that the Ariane 1 rockets were improving” into a mathematical expression.\nQuestion 4: estimate the numerical value of the expression in the last question.",
+    "text": "Using the posterior\nQuestion 2: compute a 95% credible interval on the slope parameter.\n\n\n\n\n\n\nHint\n\n\n\n\n\nUse the output of println on the fit object.\n\n\n\n\nQuestion 3: translate “your updated belief that the Ariane 1 rockets were improving” into a mathematical expression.\n\nQuestion 4: estimate the numerical value of the expression in the last question.",
     "crumbs": [
       "Intro to MCMC",
       "Stan: hands on"

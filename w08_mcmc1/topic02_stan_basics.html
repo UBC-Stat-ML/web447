@@ -1095,7 +1095,7 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="code-in-stan">Code in Stan</h3>
 <p>Today we will re-write this model in Stan instead of simPPLe. The main difference is that:</p>
 <ul>
-<li>both <code>simulate</code> and <code>observe</code> will be denoted by <code>~</code>in Stan,<br>
+<li>both <code>simulate</code> and <code>observe</code> will be denoted by <code>~</code> in Stan,<br>
 </li>
 <li>to differentiate between observed and latent, Stan instead uses variable declarations (as <code>data</code> or <code>parameters</code>).</li>
 </ul>
@@ -1246,6 +1246,25 @@ convergence, Rhat=1).</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> denote the samples output from Stan by <span class="math inline">\(X^{(1)}, X^{(2)}, \dots, X^{(M)}\)</span>. What formula should you use to approximate <span class="math inline">\(\mathbb{E}[g(X) | Y = y]\)</span> based on the Stan output?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\sum_x p(x) g(x)$ 
+1. $\sum_x f(x) g(x)$ 
+1. $\frac{1}{M} \sum_{m=1}^M g(X^\parm)$ 
+1. $\frac{1}{M} \sum_{m=1}^M f(X^\parm) g(X^\parm)$ 
+1. None of the above
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+As in simple Monte Carlo, use $\frac{1}{M} \sum_{m=1}^M g(X^\parm)$.
+:::
+
+-->
 <section id="plotting-histograms" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-histograms">Plotting histograms</h3>
 <p>Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:</p>
