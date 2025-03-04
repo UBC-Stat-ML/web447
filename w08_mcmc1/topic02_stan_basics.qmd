@@ -48,7 +48,7 @@ Recall the **analytic answer** [that we computed in clicker questions](../w03_pp
 
 Today we will re-write this model in Stan instead of simPPLe. The main difference is that:
 
-- both `simulate` and `observe` will be denoted by `~`in Stan,  
+- both `simulate` and `observe` will be denoted by `~` in Stan,  
 - to differentiate between observed and latent, Stan instead uses variable declarations (as `data` or `parameters`). 
 
 First, load `rstan`:
