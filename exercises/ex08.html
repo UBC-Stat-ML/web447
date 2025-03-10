@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -926,7 +989,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#q.1-calibration-analysis-via-cross-validation" id="toc-q.1-calibration-analysis-via-cross-validation" class="nav-link active" data-scroll-target="#q.1-calibration-analysis-via-cross-validation">Q.1: Calibration analysis via cross-validation</a></li>
+  <li><a href="#q.2-estimating-asymptotic-variance" id="toc-q.2-estimating-asymptotic-variance" class="nav-link" data-scroll-target="#q.2-estimating-asymptotic-variance">Q.2: Estimating asymptotic variance</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -970,21 +1040,128 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="q.1-calibration-analysis-via-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-calibration-analysis-via-cross-validation">Q.1: Calibration analysis via cross-validation</h2>
+<p>We have already discussed the concept of <a href="../w05_properties/topic05_calibration.html">calibration</a> for Bayesian inference, where we reviewed the behavior of both well-specified—the ideal situation—and mis-specified models—the most common case in practice. In the latter case, we demonstrated with a simulation experiment that mis-specification results in credible intervals that are not calibrated. However in practice, these tests are impossible to carry out because we do not have access to the true data-generating distribution.</p>
+<p>One way to approximate the outcome of such an experiment is via <em>cross-validation</em>. In particular, this exercise will teach you how to use leave-one-out cross-validation to assess the calibration of the model for the Hubble dataset. Let’s begin by loading and formatting the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(dplyr))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://github.com/UBC-Stat-ML/web447/raw/0d6eaa346d78abe4cd125e8fc688c9074d6331d9/data/hubble-1.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">distance =</span> R..Mpc.) <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">velocity =</span> v..km.sec.)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">=</span> df<span class="sc">$</span>velocity<span class="sc">/</span><span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
+<p>Consider the following starting point Stan code for the Hubble regression model from <a href="../w04_glms/topic05_regression.html">the previous lectures</a></p>
+<pre><code>data {
+  int&lt;lower=0&gt; N; // number of observations
+  vector[N] xs;   // independent variable
+  vector[N] ys;   // dependent variable
+}
+
+parameters {
+  real slope;
+  real&lt;lower=0&gt; sigma;
+}
+
+model {
+  // prior
+  slope     ~ student_t(3, 0, 100);
+  sigma     ~ exponential(0.001);
+
+  // likelihood
+  ys ~ normal(slope*xs, sigma);
+}</code></pre>
+<ol type="1">
+<li>Modify the Stan code above to include</li>
+</ol>
+<ol type="a">
+<li>In the <code>data</code> block: an additional real-valued argument <code>x_pred</code> for the independent variable for the left-out point.</li>
+<li>In a <code>generated quantities</code> block: generate a value <code>y_pred</code> given <code>x_pred</code> and the parameters <span class="math inline">\((\text{slope, sigma})\)</span>.</li>
+</ol>
+<p>Create a compiled model called <code>hubble_predict</code> by passing the modified stan code to the function <code>stan_model</code>.</p>
+<ol start="2" type="1">
+<li>Test your implementation by fitting the version of the model that leaves out the last row of the dataset. <strong>Hint</strong>: you should pass as data to stan the <code>train_test_dta</code> list defined below</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>N_obs <span class="ot">=</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>N_train <span class="ot">=</span> N_obs<span class="dv">-1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>train_test_dta <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">N  =</span> N_train,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xs =</span> df<span class="sc">$</span>distance[<span class="sc">-</span>N_obs], </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ys =</span> df<span class="sc">$</span>velocity[<span class="sc">-</span>N_obs], </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_pred =</span> df<span class="sc">$</span>distance[N_obs]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Report the leave-one-out 80% credible interval for the left out observation.</p>
+<ol start="3" type="1">
+<li>Repeat step 2 for all observations. That is, construct a matrix of <code>nrow(df)</code> rows and 2 columns called <code>ci_limits</code>, where the <code>i</code>-th row contains an 80% credible interval for the <code>i</code>-th observation left out. Report the plot generated by the following code</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>merged_df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="fu">data.frame</span>(<span class="at">CI_L =</span> ci_limits[,<span class="dv">1</span>], <span class="at">CI_R =</span> ci_limits[,<span class="dv">2</span>])) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Inside_CI =</span> (velocity <span class="sc">&gt;=</span> CI_L <span class="sc">&amp;</span> velocity <span class="sc">&lt;=</span> CI_R)) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>merged_df <span class="sc">%&gt;%</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>N_obs, <span class="at">y =</span> velocity, <span class="at">ymin =</span> CI_L, <span class="at">ymax =</span> CI_R, <span class="at">color=</span>Inside_CI)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>() <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Point"</span>, <span class="at">y =</span> <span class="st">"Velocity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Is the fraction of left-out observations contained in their respective credible intervals similar to the nominal coverage level?</p>
+</section>
+<section id="q.2-estimating-asymptotic-variance" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-estimating-asymptotic-variance">Q.2: Estimating asymptotic variance</h2>
+<p>Consider the code for the random-walk Metropolis–Hastings algorithm from the previous assignment, where we can tune the proposal standard deviation with the parameter <code>proposal_sd</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>simple_mh <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters, <span class="at">proposal_sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iters) {</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    proposal <span class="ot">=</span> <span class="fu">rnorm</span>(dim, <span class="at">mean =</span> current_point, <span class="at">sd =</span> proposal_sd) </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ratio <span class="ot">=</span> <span class="fu">gamma</span>(proposal) <span class="sc">/</span> <span class="fu">gamma</span>(current_point) </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> ratio) {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      current_point <span class="ot">=</span> proposal</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># rejection, nothing to do, i.e. we stay at the current point</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># no matter if we reject or not, accumulate one sample</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    samples[i] <span class="ot">=</span> current_point</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Implement an R function, <code>estimate_asymptotic_variance</code>, that takes as input the parameters:</p>
+<ul>
+<li><p><code>gamma</code> (unnormalized target density)</p></li>
+<li><p><code>proposal_sd</code> (Metropolis–Hastings proposal standard deviation)</p></li>
+<li><p><code>C</code> (number of chains)</p></li>
+<li><p><code>S</code> (number of samples per chain).</p></li>
+</ul>
+<p>The function should return an estimate of the asymptotic variance of <span class="math inline">\(X_1\)</span> for the random-walk Metropolis–Hastings algorithm (<code>simple_mh</code>) based on the procedure outlined <a href="../w09_workflow/topic05_mcmc_ess.html#estimating-the-asymptotic-variance-with-many-chains">this week in the lecture notes</a>.</p>
+<p><strong>Note:</strong> It is important to ensure that each of the <span class="math inline">\(C\)</span> chains is initialized independently. I.e., make sure that each of the <span class="math inline">\(C\)</span> different initial points is drawn from e.g., a standard normal distribution, with each of the chains starting at different values.</p>
+<p>Consider the univariate function <span class="math inline">\(\gamma(x) = \exp(-\frac{1}{2} x^2)\)</span> (i.e., the unnormalized density of the standard normal distribution).<br>
+Evaluate <code>estimate_asymptotic_variance</code> with <span class="math inline">\(C = 100\)</span> and <span class="math inline">\(S = 1000\)</span>. Repeat this for <code>proposal_sd</code> taking on values in <span class="math inline">\(\{2^{-10}, 2^{-9}, \ldots, 2^{9}, 2^{10}\}\)</span> and store the results in a data frame.</p>
+<p>Given a data frame with columns <code>proposal_sd</code> and <code>estimated_mcmc_variance</code>, you may use the following code to plot your results.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> proposal_sd, <span class="at">y =</span> estimated_mcmc_variance)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">"log2"</span>, <span class="at">breaks =</span> proposal_sd_values) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proposal SD (log2 scale)"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Estimated asymptotic variance"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Estimated asymptotic variance vs proposal SD"</span>) <span class="sc">+</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For the target distribution in question, what range of proposal standard deviation choices seems to be optimal (i.e., yields the lowest value of asymptotic variance)?</p>
+<p>Do you think this same proposal standard deviation would be optimal for a target such as <span class="math inline">\(\gamma(x) = \exp(-\frac{1}{2000} x^2)\)</span>? What about <span class="math inline">\(\gamma(x) = \exp(-\frac{1}{2} (x-100)^2)\)</span>? (Hint: You don’t need to run any code to answer these last two questions.)</p>
+<!--## Q.3: Hierarchical models revisited
+
+Modify the [tutorial on tidybayes](../w09_workflow/topic06_grouped_data.qmd) to 
+make the model hierarchical, following the same model as in [exercise 6](ex06.qmd).
+-->
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
