@@ -91,7 +91,7 @@ model {
 
 ::: {.callout-caution collapse="true"} 
 ## Hint
-Use the output of `println` on the `fit` object.
+Use the output of `print` on the `fit` object.
 :::
 
 {{< include ../../clickers/w08/_c06.qmd >}}

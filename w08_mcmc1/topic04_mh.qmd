@@ -196,5 +196,5 @@ plot_traces_and_hist(samples)
 ## Further readings 
 
 - Geyer's course notes on MCMC, [available from the author's website](https://www.stat.umn.edu/geyer/f05/8931/n1998.pdf)
-- [Handbook on MCMC](https://www.mcmchandbook.net/) [Available online via UBC Library]
+- [Handbook on MCMC](https://doi.org/10.1201/b10905) [Available online via UBC Library]
 - [More advanced text on the theory](https://link.springer.com/book/10.1007/978-3-319-97704-1) [Available online via UBC Library]

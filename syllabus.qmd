@@ -107,7 +107,7 @@ I will not post solutions for the challenge questions.
 - Piazza discussion: use of AI tools is prohibited to compose or answer questions, with the exception of spell-checking tools. 
 - Homework: use of AI tools is prohibited, with the exception of spell-checking tools. 
 - Quizzes: use of AI tools is impossible (closed book, pen and paper). 
-- Project: if you think you AI tool will be used, explain the scope of their use in the project proposal. Also describe all 
+- Project: if you think AI tool(s) will be used, explain the scope of their use in the project proposal. Also describe all 
   uses in the final report. 
   
 

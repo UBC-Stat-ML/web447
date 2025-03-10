@@ -23,11 +23,9 @@ next weeks, and the second quiz.
 
 ## Example 
 
-We revisit the omicron modelling question from quiz 1. 
-
-*The data consists, for each day in December 2021,
+The data below consists, for each day in December 2021,
 of the **percentage** of sequenced COVID-19 samples that are of the
-Omicron variant.*
+Omicron variant.
 
 
 ```{r}
@@ -196,7 +194,7 @@ for (i in 1:n_samples) {
 }
 ```
 
-<!--
+
 
 ## Model criticism 
 
@@ -204,4 +202,4 @@ What are potential weakness(es) of the model?
 
 {{< include ../../clickers/w08/_c02.qmd >}}
 
--->
+
