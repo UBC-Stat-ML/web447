@@ -172,8 +172,3 @@ What about $\gamma(x) = \exp(-\frac{1}{2} (x-100)^2)$? (Hint: You don't need to 
 to answer these last two questions.)
 
 
-<!--## Q.3: Hierarchical models revisited
-
-Modify the [tutorial on tidybayes](../w09_workflow/topic06_grouped_data.qmd) to 
-make the model hierarchical, following the same model as in [exercise 6](ex06.qmd).
--->
