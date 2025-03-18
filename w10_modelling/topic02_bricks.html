@@ -1151,6 +1151,138 @@ https://github.com/trevorcampbell/shortex
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that neither of the parameters passed in the likelihood can be interpreted as a mean. However, you are asked to report a mean parameter for the population from which the observations come from. How would you proceed?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Using <code>generated quantities { real next_obs = gamma_rng(shape, rate); }</code>, and reporting the posterior mean of <code>next_obs</code> variable.</li>
+<li>Use the posterior mean of the <code>shape</code> parameter, divided by the posterior mean of the <code>rate</code> parameter.</li>
+<li>Using <code>transformed parameters { real mean_param = shape/rate; }</code>, and reporting the posterior mean of the <code>mean_param</code> variable.</li>
+<li>All of the above</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The most direct is 1, which is in line with what we did for prediction in <a href="../w09_workflow/topic02_goodness_of_fit.html#review-prediction">many examples</a>.</p>
+<p>We will see <a href="../w10_modelling/topic06_rao.html">very soon</a> that 3 is also actually possible, this is known as Rao-Blackwellization. In summary, it is based on the fact that if <span class="math inline">\(Y \sim {\mathrm{Gam}}(\alpha, \beta)\)</span>, then <span class="math inline">\(\mathbb{E}[Y] = \alpha/\beta\)</span>.</p>
+<p>Empirical example that both are equivalent:</p>
+<div class="cell" data-output.var="gamma_with_mean">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n_obs;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt;[n_obs] observations;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; shape;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; rate;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> rao_blackwellized_mean = shape/rate;</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// priors</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  shape ~ exponential(<span class="fl">1.0</span>/<span class="dv">100</span>);</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  rate ~ exponential(<span class="fl">1.0</span>/<span class="dv">100</span>);</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  observations ~ gamma(shape, rate);</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> monte_carlo_mean = gamma_rng(shape, rate);</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>observations <span class="ot">=</span> <span class="fu">rgamma</span>(<span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  gamma_with_mean,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n_obs =</span> <span class="fu">length</span>(observations), <span class="at">observations =</span> observations),       </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">100000</span>                   </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There were 2 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inference for Stan model: anon_model.
+4 chains, each with iter=1e+05; warmup=50000; thin=1; 
+post-warmup draws per chain=50000, total post-warmup draws=2e+05.
+
+                        mean se_mean   sd  2.5%   25%   50%  75% 97.5%  n_eff
+shape                   5.89    0.02 2.87  1.71  3.79  5.42 7.50 12.71  32635
+rate                    6.61    0.02 3.34  1.73  4.15  6.07 8.47 14.58  32888
+rao_blackwellized_mean  0.92    0.00 0.20  0.60  0.79  0.90 1.02  1.38 138264
+monte_carlo_mean        0.92    0.00 0.49  0.23  0.60  0.84 1.15  2.09 184785
+lp__                   -0.65    0.01 1.10 -3.60 -1.07 -0.31 0.13  0.42  40801
+                       Rhat
+shape                     1
+rate                      1
+rao_blackwellized_mean    1
+monte_carlo_mean          1
+lp__                      1
+
+Samples were drawn using NUTS(diag_e) at Mon Mar 17 09:59:31 2025.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<p>Counter example that answer 2, a common misconception,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is incorrect:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fl">5.91</span> <span class="sc">/</span> <span class="fl">6.63</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8914027</code></pre>
+</div>
+</div>
+<p>This is because we are interested in <span class="math inline">\(\mathbb{E}[\text{shape}/\text{rate}|Y]\)</span>, not <span class="math inline">\(\mathbb{E}[\text{shape}|Y]/\mathbb{E}[\text{rate}|Y]\)</span>.</p>
+<p>This can be seen with the law of total expectation:</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb{E}[Y_\text{next}|Y_\text{obs}] &amp;= \mathbb{E}[ \mathbb{E}[Y_\text{next} | \text{shape, rate}]|Y_\text{obs}] \\
+&amp;= \mathbb{E}[ \text{shape}/\text{rate} |Y_\text{obs}].
+\end{align*}\]</span></p>
+<p>An indeed the MC estimates for <span class="math inline">\(\mathbb{E}[\text{shape}/\text{rate}|Y]\)</span> and <span class="math inline">\(\mathbb{E}[\text{shape}|Y]/\mathbb{E}[\text{rate}|Y]\)</span> should be expected to be different:</p>
+<p><span class="math display">\[
+\frac{1}{M} \sum_{m=1}^M \frac{X^{(m)}_\text{shape}}{X^{(m)}_\text{rate}} \neq   \frac{\frac{1}{M}  \sum_{m=1}^M  X^{(m)}_\text{shape}}{ \frac{1}{M}  \sum_{m=1}^M X^{(m)}_\text{rate}}.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="categories" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="categories">Categories</h2>
@@ -1159,7 +1291,7 @@ https://github.com/trevorcampbell/shortex
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_bricks_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_bricks_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div></div></div>
@@ -1238,7 +1370,13 @@ https://github.com/trevorcampbell/shortex
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The root cause of that mis-conception is often an attempt to apply the “plug-in principle” from frequentist statistics to a Bayesian context.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
