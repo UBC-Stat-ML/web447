@@ -1034,7 +1034,7 @@ https://github.com/trevorcampbell/shortex
 <p><strong>To answer the question above:</strong></p>
 <ul>
 <li>we need to study in more details law of large numbers for <strong>Markov chains</strong>.</li>
-<li>We will need a some concepts related to Markov chains</li>
+<li>We will need some concepts related to Markov chains</li>
 </ul>
 <p><strong>Recall:</strong> the random variables <span class="math inline">\(X^{(1)}, X^{(2)}, \dots\)</span> are called a Markov chain if they admit the following “chain” graphical model.</p>
 
@@ -1054,6 +1054,96 @@ https://github.com/trevorcampbell/shortex
 <li>an <strong>acceptance probability</strong> <span class="math inline">\(\alpha(x, x') = \min(1, r(x, x'))\)</span>.</li>
 </ul>
 <p><strong>Question:</strong> write the transition kernel <span class="math inline">\(K(x' | x)\)</span>, assuming <span class="math inline">\(x \neq x'\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(q(x' | x)\)</span></li>
+<li><span class="math inline">\(q(x' | x) \alpha(x, x')\)</span></li>
+<li><span class="math inline">\(\alpha(x, x')\)</span></li>
+<li><span class="math inline">\(\sum_{x'} q(x' | x) (1 - \alpha(x, x'))\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The probability to move to <span class="math inline">\(x' \neq x\)</span> requires both:</p>
+<ol type="1">
+<li>proposing to <span class="math inline">\(x'\)</span>, with probability <span class="math inline">\(q(x'|x)\)</span>, <strong>and</strong>,</li>
+<li>accepting the proposal, with probability <span class="math inline">\(\alpha(x, x')\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The correct answer is <span class="math inline">\(q(x' | x) \alpha(x, x')\)</span>.</p>
+<p><strong>Intuition:</strong> the “<strong>and</strong>” in the hint suggests chain rule hence multiplication.</p>
+<p><strong>Mathematical derivation</strong>: first denote</p>
+<ul>
+<li>the current state by <span class="math inline">\(X\)</span></li>
+<li>the proposed state by <span class="math inline">\(X^* \sim q(\cdot|X)\)</span></li>
+<li>the next state by <span class="math inline">\(X'\)</span> (equal to either <span class="math inline">\(X^*\)</span> if the proposal is accepted, <span class="math inline">\(X\)</span> otherwise).</li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+K(x'|x) &amp;= \mathbb{P}(X' = x' | X = x)  \\
+&amp;= \sum_{x^*} \mathbb{P}(X' = x', X^* = x^* | X = x) \;\;\text{(marginalization)} \\
+&amp;= \sum_{x^*} \mathbb{P}(X^* = x^* | X = x) \mathbb{P}(X' = x' | X^* = x^*, X = x) \;\;\text{(chain rule)}\\
+&amp;= \sum_{x^*} q(x^*|x) \mathbb{P}(X' = x' | X^* = x^*, X = x). \;\;\text{(definition of proposal)}
+\end{align*}\]</span></p>
+<ul>
+<li>Since <span class="math inline">\(x \neq x'\)</span>, we can only get to <span class="math inline">\(x'\)</span> by accepting a proposal…</li>
+<li>…, i.e.&nbsp;when <span class="math inline">\(x' = x^*\)</span>.</li>
+<li>So there is only one term in the sum where <span class="math inline">\(\mathbb{P}(X' = x' | X^* = x^*, X = x) &gt; 0\)</span>…</li>
+<li>…, namely when <span class="math inline">\(x' = x^*\)</span>.</li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+K(x'|x) &amp;= \sum_{x^*} q(x^*|x) \mathbb{P}(X' = x' | X^* = x^*, X = x) \\
+&amp;= q(x'|x) \mathbb{P}(X' = x' | X^* = x', X = x) \;\;\text{(see expl. above)} \\
+&amp;= q(x'|x) \alpha(x, x'). \;\;\text{(definition of accept probability)} \\
+\end{align*}\]</span></p>
+<p><strong>Note:</strong> the case <span class="math inline">\(x = x'\)</span> is a bit more complicated, because there are two situations where MH stays at the same state, namely,</p>
+<ol type="1">
+<li>the proposal tells us to stay at the current state (possible with discrete proposals only) and we accept that proposal, or,</li>
+<li>the proposal tries to go somewhere (including <span class="math inline">\(x\)</span>) but the proposal is rejected.</li>
+</ol>
+<p>Notice that the two situations are disjoint, so using the additivity axiom:</p>
+<p><span class="math display">\[K(x | x) = q(x|x) \alpha(x, x) + \sum_{x'} q(x'|x) ( 1- \alpha(x, x')).\]</span></p>
+<p>The above equation might be impossible to numerically compute in certain situations. Fortunately, we do not need to compute it to run MCMC, we only need to <em>simulate</em> from <span class="math inline">\(K(\cdot | x)\)</span>. Why do we spend time writing expressions for <span class="math inline">\(K(x'|x)\)</span> then? In order to do mathematical analysis, which gives us useful guarantees, such as law of large numbers and central limit theorems.</p>
+</div>
+</div>
+</div>
 
 
 </section>

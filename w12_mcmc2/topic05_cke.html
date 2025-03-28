@@ -1034,14 +1034,13 @@ https://github.com/trevorcampbell/shortex
 <section id="example" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
 <ul>
-<li>Consider a large group of eccentric tourists.</li>
+<li>Consider a large group of identical tourists.</li>
 <li>They travel the world in a finite set of cities (dots).</li>
 <li>Every weekend they can board a plane and go somewhere else.
 <ul>
 <li>They base their choice of destination <strong>only on the current city</strong>.</li>
-<li>They may use randomness.</li>
+<li>They use randomness (e.g., if a tourist is in London, flip a coin to decide to go to Montreal or Stockholm).</li>
 </ul></li>
-<li>The game starts on Monday</li>
 </ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -1049,7 +1048,7 @@ https://github.com/trevorcampbell/shortex
 </div></div><section id="markov-model-for-random-tourists" class="level3">
 <h3 class="anchored" data-anchor-id="markov-model-for-random-tourists">Markov model for random tourists</h3>
 <ul>
-<li><span class="math inline">\(X^{(1)}\)</span>: pick one of the tourists at random, <span class="math inline">\(X^{(1)}\)</span> encodes the city this tourist is in at week 1.</li>
+<li><span class="math inline">\(X^{(1)}\)</span>: pick one of the tourists at random, <span class="math inline">\(X^{(1)}\)</span> encodes the city this tourist is in at week 1 (before taking a first flight).</li>
 <li>Distribution of <span class="math inline">\(X^{(1)}\)</span>: <span class="math inline">\(\mu_1(x)\)</span>.
 <ul>
 <li>Interpretation: for city <span class="math inline">\(x\)</span>, <span class="math inline">\(\mu_1(x)\)</span> tells you the fraction of tourists in city <span class="math inline">\(x\)</span> on the first week.</li>
@@ -1094,6 +1093,51 @@ Click for answer
 <section id="computing-a-marginal" class="level2">
 <h2 class="anchored" data-anchor-id="computing-a-marginal">Computing a marginal</h2>
 <p><strong>Question:</strong> write the marginal distribution at step 2, <span class="math inline">\(\mu_2\)</span> using <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(K\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The marginal <span class="math inline">\(\mu_2(x')\)</span> is given by…</p>
+<ol type="1">
+<li><span class="math inline">\(\mu_1(x) K(x' | x)\)</span></li>
+<li><span class="math inline">\(\mu_1(x') K(x | x')\)</span></li>
+<li><span class="math inline">\(\sum_x \mu_1(x) K(x' | x)\)</span></li>
+<li><span class="math inline">\(\sum_x \mu_1(x') K(x | x')\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have:</p>
+<p><span class="math display">\[\begin{align*}
+\mu_2(x') &amp;= \mathbb{P}(X^{(2)} = x') \\
+&amp;= \sum_x \mathbb{P}(X^{(1)} = x, X^{(2)} = x') \;\;\text{(marginalization)} \\
+&amp;= \sum_x \mathbb{P}(X^{(1)} = x) \mathbb{P}(X^{(2)} = x' | X^{(1)} = x) \;\;\text{(chain rule)} \\
+&amp;= \sum_x \mu_1(x) K(x' | x). \;\;\text{(by definition)} \\
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>

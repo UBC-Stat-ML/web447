@@ -1131,6 +1131,44 @@ p' = \frac{\mathrm{d}p^{(t)}}{\mathrm{d}t} &amp;= - \nabla U(x) \;\;\text{(the v
 <li>Discretization of <span class="math inline">\(x' = p\)</span>: <span class="math display">\[T_\text{drift}(x, p) = (x + \epsilon p, p).\]</span></li>
 </ul>
 <p><strong>Question:</strong> compute the Jacobian determinant of <span class="math inline">\(T_\text{drift}\)</span>.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $x$
+2. $p$
+3. $1$
+4. $xp$
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is 1.
+
+First, we compute the Jacobian matrix:
+
+\begin{align*}
+\nabla \Td(x, p) &= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial p}\\
+    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial p}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+    1 & \epsilon \\
+    0 & 1
+\end{bmatrix}.
+\end{align*}
+
+
+Hence, the Jacobian determinant is 1.
+:::
+
+
+-->
 <p><strong>Kick operator</strong></p>
 <ul>
 <li>Let the steepness of the landscape at current position update the momentum a bit.</li>

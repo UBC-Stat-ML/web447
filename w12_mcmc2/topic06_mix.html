@@ -1214,6 +1214,39 @@ Click for answer
 <section id="methodological-application" class="level2">
 <h2 class="anchored" data-anchor-id="methodological-application">Methodological application</h2>
 <p><strong>Question:</strong> would it be a good idea to use the current state to adapt the mixture proportion (i.e., using <span class="math inline">\(\rho_i(x)\)</span> instead of <span class="math inline">\(\rho_i\)</span>?</p>
+<!--
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. Yes, it would improve mixing. 
+2. Yes, it would reduce the running time. 
+3. No, it would break irreducibility. 
+4. No, it would break invariance.
+5. None of the above.
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+No, it would break $\pi$-invariance. 
+
+Let us rewrite the first few steps of the above invariance argument, with $\rho_i(x)$
+instead of $\rho$, until the 
+argument breaks down:
+\begin{align*}
+\sum_x \pi(x) K(x' | x) &= \sum_x \pi(x) \sum_i \rho_i(x) K_i(x' | x) \expl{def of mixture} \\
+&\neq  \sum_i \rho_i(x)  \sum_x \pi(x)  K_i(x' | x),  \\
+\end{align*}
+where the last line does not make sense, i.e. $\rho_i(x)$ now depends on $x$, 
+so we cannot rearrange the sums in a way that makes it possible to invoke invariance of 
+the $K_i$. Can you identify an explicit counter example?
+:::
+
+-->
 
 
 </section>
