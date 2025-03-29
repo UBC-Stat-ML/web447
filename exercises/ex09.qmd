@@ -8,12 +8,12 @@ editor:
 
 ## Overview
 
-In this exercise, you will implement a custom MCMC sampler for 
+In this exercise you will implement a custom MCMC sampler for 
 a **change point detection** Bayesian model.
 
 ### Getting the data
 
-Copy the blurb below into a file, you will need it in Q3. 
+Copy the blurb below into a file. You will need it in Q3. 
 
 ```{r}
 #| eval: true
@@ -93,7 +93,6 @@ each kernel. Then specify a kernel $K$ based on $K_1$ and $K_2$.
 Note: to get good mixing in Q3, your discrete proposal should have a standard deviation greater than 5. 
 :::
 
-<!-- 2. Prove that the MCMC algorithm you defined in part 1 is $\pi$-invariant.  -->
 
 3. Implement the MCMC algorithm you describe mathematically in R. 
    You should follow the following template:
@@ -194,12 +193,6 @@ located there.
 If it's on each separately, then there could be a common mistake, or the bug could be 
 in the forward simulation (or testing) code. 
 :::
-
-
-<!-- 3. If you identified a bug using this method, show the part of the code that had a bug 
-   (before and after fixing), as well as the p-value (before and after). 
-   If no bugs where found, temporarily create one and report the same thing. 
-   Don't forget to fix all bugs before moving to the next question. -->
 
 
 ## Q.3: Using your sampler for data analysis
