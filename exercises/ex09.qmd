@@ -154,6 +154,19 @@ forward = function(synthetic_data_size) {
 
 ```
 
+**Hint:** In the `forward` function, you should carefully handle synthetic data that 
+are exactly equal to 0 or 5 to avoid issues with the evaluation of the Beta likelihood. For instance, you can include the code chunk inside 
+the definition of `forward`: 
+```{r,eval=FALSE}
+if (y == 5) { 
+  data[i] = 4.99  
+} else if (y == 0) { 
+  data[i] = 0.01 
+} else { 
+  data[i] = y      
+}
+``` 
+
 Recall that each iteration of the exact invariance test starts by forward sampling, followed by 
 either 0 or several rounds of MCMC (we will use 200). We provide this function to do this for you:
 
