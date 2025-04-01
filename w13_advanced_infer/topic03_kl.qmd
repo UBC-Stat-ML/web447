@@ -38,7 +38,7 @@ Given two distribution $\pi$ and $q$, define the **Kullback-Leibler (KL) diverge
 
 We cover the two key reasons below: it captures "closeness" and it can be optimized. 
 
-### Reverse KL captures the notion of "cloness"
+### Reverse KL captures the notion of "closeness"
 
 **Property:** $\KL(q_1 \| q_2 ) \ge 0$ with equality iff $q_1 = q_2$. 
 

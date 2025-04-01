@@ -10,6 +10,6 @@ editor:
 
 Resources when...
 
-- ...the model is complex but data not too large: **tempering methods** (Tuesday, guest lecture),
+- ...the model is complex but data not too large: **tempering methods** (Nikola's tutorial),
 - ...the model is not too complex but data is large: **variational methods** (VI) (today),
-- ...the model is complex and data is large: largely open, we need you!!!
+- ...the model is complex and data is large: largely open, we need more young researchers like you!!!
