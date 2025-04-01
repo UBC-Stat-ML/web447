@@ -1122,7 +1122,7 @@ https://github.com/trevorcampbell/shortex
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mcmc_mixture <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mcmc_alternation <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
 <span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
@@ -1136,7 +1136,7 @@ https://github.com/trevorcampbell/shortex
 <span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
 <span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_mixture</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_alternation</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
@@ -1156,6 +1156,7 @@ https://github.com/trevorcampbell/shortex
 <p><strong>Question:</strong> write a mathematical expression for the alternation <span class="math inline">\(K_\text{alt}\)</span> in terms of <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
 <!--
 
+
 ::: {.callout-caution collapse="true"} 
 ## Click for choices
 
@@ -1166,6 +1167,20 @@ https://github.com/trevorcampbell/shortex
 5. None of the above.
 :::
 
+::: {.callout-caution collapse="true"} 
+## Click for hint
+
+use the following notation:
+
+- $X_1$: state before applying $\Kalt$ 
+- $X_2$: intermediate state obtained from $K_1$ (called `intermediate_point` in the code)
+- $X_3$: state after applying $\Kalt$
+
+We want an expression for $\Kalt(x' | x) = \pr(X_3 = x' | X_1 = x)$. Notice that we need 
+to "add" $X_2$ to this expression, how do we do this?
+:::
+
+
 
 
 ::: {.callout-caution collapse="true"} 
@@ -1173,11 +1188,6 @@ https://github.com/trevorcampbell/shortex
 
 The first one. 
 
-We use the following notation:
-
-- $X_1$: state before applying $\Kalt$ 
-- $X_2$: intermediate state obtained from $K_1$ (called `intermediate_point` in the code)
-- $X_3$: state after applying $\Kalt$
 
 We have:
 
