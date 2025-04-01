@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - Deterministic proposals</title>
+<title>Bayes1@UBC - Challenge questions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,7 +109,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic11_involution.html">Deterministic proposals</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Bayes1@UBC
+      </li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -791,13 +793,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
  <span class="menu-text">MCMC Hacking</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -872,7 +874,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w12_mcmc2/topic11_involution.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w12_mcmc2/topic11_involution.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Deterministic proposals</span></a>
   </div>
 </li>
@@ -955,27 +957,14 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#mh-with-deterministic-proposals" id="toc-mh-with-deterministic-proposals" class="nav-link" data-scroll-target="#mh-with-deterministic-proposals">MH with deterministic proposals</a></li>
-  <li><a href="#examples-of-involution" id="toc-examples-of-involution" class="nav-link" data-scroll-target="#examples-of-involution">Examples of involution</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic11_involution.html">Deterministic proposals</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Deterministic proposals</h1>
+<h1 class="title">Challenge questions</h1>
 </div>
 
 
@@ -1012,172 +1001,36 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
-<ul>
-<li>Deterministic proposals</li>
-<li>Involutions</li>
-<li>Proposal Jacobian determinants</li>
-</ul>
-</section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>In our <a href="../w08_mcmc1/topic04_mh.html">first exposure to MH</a>, we defined the proposal as a probability distribution <span class="math inline">\(q(\cdot|x)\)</span> based on the current point <span class="math inline">\(x\)</span>.</p>
-<p>For HMC, it is more natural to consider the proposal as a deterministic function <span class="math inline">\(T(x)\)</span>.</p>
-<p>We state a version of the MH algorithm based on such deterministic proposal here.</p>
-</section>
-</section>
-<section id="mh-with-deterministic-proposals" class="level2">
-<h2 class="anchored" data-anchor-id="mh-with-deterministic-proposals">MH with deterministic proposals</h2>
-<p><strong>Algorithm:</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Not for grades!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
+</div>
+</div>
+<p>In this question we frame the Metropolis–Hastings random-walk algorithm as an involution on an expanded space. Recall that the standard random-walk MH algorithm for sampling from <span class="math inline">\(\pi(x) \propto \gamma(x)\)</span>, if we are currently at state <span class="math inline">\(X^{(m-1)}\)</span>, proceeds as follows:</p>
 <ol type="1">
-<li>Denote the current state by <span class="math inline">\(x \in \mathbb{R}^d\)</span></li>
-<li><strong>Propose:</strong> <span class="math inline">\(x^* = T(x)\)</span> for some deterministic proposal mapping <span class="math inline">\(T : \mathbb{R}^d \to \mathbb{R}^d\)</span>
-<ul>
-<li><strong>Assume</strong> that <span class="math inline">\(T\)</span> satisfies <span class="math inline">\(T = T^{-1}\)</span>.</li>
-<li>Terminology: <span class="math inline">\(T\)</span> is an <strong>involution</strong>.</li>
-</ul></li>
-<li>Compute the ratio, <span class="math display">\[r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,\]</span> where <span class="math inline">\(| \nabla T(x) |\)</span> denotes the <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant">Jacobian determinant</a>.</li>
-<li>Accept <span class="math inline">\(x^*\)</span> with probability <span class="math inline">\(\alpha(x) = \min(1, r(x))\)</span>, otherwise stay at <span class="math inline">\(x\)</span>.</li>
+<li>Sample <span class="math inline">\(\tilde X^{(m)} \sim \mathcal{N}(X^{(m-1)}, \sigma^2)\)</span>.</li>
+<li>Draw <span class="math inline">\(U \sim {\mathrm{Unif}}(0,1)\)</span> and compute <span class="math display">\[\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)})}{\gamma(X^{(m-1)})}\right\}.\]</span></li>
+<li>If <span class="math inline">\(U \leq \alpha\)</span>, set <span class="math inline">\(X^{(m)} = \tilde X^{(m)}\)</span>. Otherwise, set <span class="math inline">\(X^{(m)} = X^{(m-1)}\)</span>.</li>
 </ol>
-<p><strong>Calculus review:</strong> do you remember what is the Jacobian determinant?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math display">\[\begin{align*}
-\nabla T(x) &amp;= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_1}{\partial x_n}\\
-    \vdots                             &amp; \ddots &amp; \vdots\\
-    \dfrac{\partial T_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_m}{\partial x_n}
-\end{bmatrix} \\
-|\nabla T(x)| &amp;= |\det  \nabla T(x)|.
-\end{align*}\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Proposition:</strong> <a href="https://doi.org/10.1214/aoap/1027961031">(Tierney, 1998)</a> if <span class="math inline">\(T\)</span> is a continuously differentiable involution, then the above algorithm is <span class="math inline">\(\pi\)</span>-invariant.</p>
-</section>
-<section id="examples-of-involution" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="examples-of-involution">Examples of involution</h2>
-<p><strong>Swaps:</strong></p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/swap_involution.png" class="img-fluid" width="150"></p>
-</div></div><ul>
-<li>Set <span class="math inline">\(T(x_1, x_2) = (x_2, x_1)\)</span>.</li>
-<li>To show involution, compute <span class="math inline">\(T^2(x) = T(T(x))\)</span> and show <span class="math inline">\(T^2 = I\)</span>, the identity map.</li>
-<li><span class="math inline">\(T(T(x_1, x_2)) = T(x_2, x_1) = (x_1, x_2)\)</span> ✅</li>
-</ul>
-<p><strong>Multiplicative proposal:</strong> complete the definition of <span class="math inline">\(T\)</span> to make it an involution on <span class="math inline">\(\mathbb{R}\times \mathbb{R}^+\)</span>. <span class="math display">\[T(x_1, x_2) = T(x, m) = (mx, \_\_).\]</span></p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Any choice would work. 
-2. $T(x, m) = T(mx, m)$
-3. $T(x, m) = T(mx, m^2)$
-4. $T(x, m) = T(mx, 1/m)$
-5. None of the above. 
-:::
+<p>To frame it as an involution, consider the expanded target <span class="math inline">\(\bar\pi(x,z)\)</span>, with an additional auxiliary variable <span class="math inline">\(z\)</span>, where <span class="math display">\[ \bar \gamma(x, z) \propto \gamma(x) \cdot \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2} z^2\right).\]</span> That is, the <span class="math inline">\(x\)</span>-marginal of <span class="math inline">\(\gamma(x,z)\)</span> still corresponds to <span class="math inline">\(\pi(x)\)</span>, and the <span class="math inline">\(z\)</span>-marginal corresponds to a standard normal distribution. Consider the following algorithm:</p>
+<ol type="1">
+<li>Sample <span class="math inline">\(Z^{(m)} \sim \mathcal{N}(0, 1)\)</span>.</li>
+<li>Set <span class="math inline">\((\tilde X^{(m)}, \tilde Z^{(m)}) = T_\sigma(X^{(m-1)}, Z^{(m)})\)</span></li>
+<li>Draw <span class="math inline">\(U \sim {\mathrm{Unif}}(0,1)\)</span> and compute <span class="math display">\[\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)}, \tilde Z^{(m)})}{\gamma(X^{(m-1)}, \tilde Z^{(m)})}\right\}.\]</span></li>
+<li>If <span class="math inline">\(U \leq \alpha\)</span>, set <span class="math inline">\(X^{(m)} = \tilde X^{(m)}\)</span>. Otherwise, set <span class="math inline">\(X^{(m)} = X^{(m-1)}\)</span>.</li>
+</ol>
+<p>Specify <span class="math inline">\(T_\sigma: \mathbb{R}\times \mathbb{R}\to \mathbb{R}\times \mathbb{R}\)</span> and prove that it is an involution. It should be chosen such that the random-walk behaviour on the <span class="math inline">\(x\)</span>-space is preserved.</p>
+<p>What is the determinant of the Jacobian of the transformation <span class="math inline">\(T_\sigma(x,z)\)</span>?</p>
 
 
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $T(x, m) = T(mx, 1/m)$, since 
-
-\begin{align*}
-T(T(x, m)) &= T(mx, 1/m) \\
-&= ((1/m)(mx), 1/(1/m)) \\
-&= (x, m).
-\end{align*}
-:::
-
--->
-<p><strong>Question:</strong> Compute the Jacobian determinant of the multiplicative proposal involution.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for hint
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>You should get a <strong>triangular matrix</strong> i.e.&nbsp;in our context of the form</p>
-<p><span class="math display">\[\begin{align*}
-\nabla T &amp;= \begin{bmatrix}
-    a_{11} &amp; a_{12} \\
-    0 &amp; a_{22}
-\end{bmatrix}.
-\end{align*}\]</span></p>
-<p>Now recall that from <a href="https://en.wikipedia.org/wiki/Triangular_matrix#Properties">properties of triangular matrices</a>, this means that to compute it determinant, you just have to compute the product of the diagonal entries, <span class="math inline">\(\det \nabla T = a_{11} a_{22}\)</span>.</p>
-</div>
-</div>
-</div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $1/m$
-2. $1/m^2$
-3. $1/x$
-4. $1/x^2$
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $1/m$.
-
-First, we compute the Jacobian matrix, where we denote $T_1(x, m) = xm$ and $T_2(x, m) = 1/m$:
-
-\begin{align*}
-\nabla T(x, m) &= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial m}\\
-    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial m}
-\end{bmatrix} \\
-&= \begin{bmatrix}
-    m & x \\
-    0 & -1/m^2
-\end{bmatrix}.
-\end{align*}
-
-
-Hence, the Jacobian determinant is $|1/m|$. Since $m \in \reals^+$, $|1/m| = 1/m$.
-:::
-
--->
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ul>
-<li>See <a href="https://doi.org/10.1214/aoap/1027961031">Tierney, 1998</a> for the introduction of the notion of involutions and deterministic proposals to the MCMC literature.</li>
-<li>See <a href="https://doi.org/10.1093/biomet/82.4.711">Green, 1995</a> for early use of the multivariate change of variable formula in MH acceptance ratios.</li>
-</ul>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
