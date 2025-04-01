@@ -53,11 +53,11 @@ change point models have a different cluster membership mechanism, defined as fo
 **Our mathematical description:**
 
 \begin{align*}
-\mu_i &\sim \distUnif(0, 1), \text{ for }i \in \{1, 2\}, \expl{parameters for 2 clusters} \\
+\mu_i &\sim \distUnif(0.1, 0.9), \text{ for }i \in \{1, 2\}, \expl{parameters for 2 clusters} \\
 C &\sim \distUnif\{1, 2, \dots `r length(food_data)`\}, \expl{change point} \\ 
 Y_d/5 &\sim \text{BetaMP}(\mu_{\ind[d < C] + 1}, 5), \text{ for }d \in \{1, 2, \dots, `r length(food_data)`\} \expl{likelihood}.
 \end{align*}
-Note that we model $Y_d / 5$, as average weekly food item ratings are in the range $[0,5]$. 
+Note that we model $Y_d / 5$, as average weekly food item ratings are in the range $[0, 5]$. 
 
 **R implementation:**
 
@@ -154,18 +154,6 @@ forward = function(synthetic_data_size) {
 
 ```
 
-**Hint:** In the `forward` function, you should carefully handle synthetic data that 
-are exactly equal to 0 or 5 to avoid issues with the evaluation of the Beta likelihood. For instance, you can include the code chunk inside 
-the definition of `forward`: 
-```{r,eval=FALSE}
-if (y == 5) { 
-  data[i] = 4.99  
-} else if (y == 0) { 
-  data[i] = 0.01 
-} else { 
-  data[i] = y      
-}
-``` 
 
 Recall that each iteration of the exact invariance test starts by forward sampling, followed by 
 either 0 or several rounds of MCMC (we will use 200). We provide this function to do this for you:

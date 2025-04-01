@@ -3,12 +3,12 @@ set.seed(1)
 log_joint = function(means, change_point, y) {
   
   # Return log(0.0) if parameters are outside of the support
-  if (means[[1]] < 0 | means[[2]] < 0 | means[[1]] > 1 | means[[2]] > 1 | change_point < 1 | change_point > length(y)) 
+  if (means[[1]] < 0.1 | means[[2]] < 0.1 | means[[1]] > 0.9 | means[[2]] > 0.9 | change_point < 1 | change_point > length(y)) 
     return(-Inf)
   
   log_prior = 
-    dunif(means[[1]], 0, 1, log = TRUE) + 
-    dunif(means[[2]], 0, 1, log = TRUE)
+    dunif(means[[1]], 0.1, 0.9, log = TRUE) + 
+    dunif(means[[2]], 0.1, 0.9, log = TRUE)
   
   log_likelihood = 0.0
   for (i in 1:length(y)) {
