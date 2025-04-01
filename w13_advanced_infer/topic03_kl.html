@@ -967,7 +967,7 @@ window.Quarto = {
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
   <li><a href="#why-variational-inference-uses-the-reverse-kl" id="toc-why-variational-inference-uses-the-reverse-kl" class="nav-link" data-scroll-target="#why-variational-inference-uses-the-reverse-kl">Why variational inference uses the reverse KL?</a>
   <ul class="collapse">
-  <li><a href="#reverse-kl-captures-the-notion-of-cloness" id="toc-reverse-kl-captures-the-notion-of-cloness" class="nav-link" data-scroll-target="#reverse-kl-captures-the-notion-of-cloness">Reverse KL captures the notion of “cloness”</a></li>
+  <li><a href="#reverse-kl-captures-the-notion-of-closeness" id="toc-reverse-kl-captures-the-notion-of-closeness" class="nav-link" data-scroll-target="#reverse-kl-captures-the-notion-of-closeness">Reverse KL captures the notion of “closeness”</a></li>
   <li><a href="#reverse-kl-can-be-optimized" id="toc-reverse-kl-can-be-optimized" class="nav-link" data-scroll-target="#reverse-kl-can-be-optimized">Reverse KL can be optimized</a></li>
   </ul></li>
   <li><a href="#towards-optimization-of-the-reverse-kl" id="toc-towards-optimization-of-the-reverse-kl" class="nav-link" data-scroll-target="#towards-optimization-of-the-reverse-kl">Towards optimization of the reverse KL</a></li>
@@ -1044,8 +1044,8 @@ https://github.com/trevorcampbell/shortex
 <section id="why-variational-inference-uses-the-reverse-kl" class="level2">
 <h2 class="anchored" data-anchor-id="why-variational-inference-uses-the-reverse-kl">Why variational inference uses the reverse KL?</h2>
 <p>We cover the two key reasons below: it captures “closeness” and it can be optimized.</p>
-<section id="reverse-kl-captures-the-notion-of-cloness" class="level3">
-<h3 class="anchored" data-anchor-id="reverse-kl-captures-the-notion-of-cloness">Reverse KL captures the notion of “cloness”</h3>
+<section id="reverse-kl-captures-the-notion-of-closeness" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-kl-captures-the-notion-of-closeness">Reverse KL captures the notion of “closeness”</h3>
 <p><strong>Property:</strong> <span class="math inline">\(\operatorname{KL}(q_1 \| q_2 ) \ge 0\)</span> with equality iff <span class="math inline">\(q_1 = q_2\)</span>.</p>
 <p><strong>Proof:</strong> since <span class="math inline">\(\log\)</span> is a concave function, by <a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality">Jensen’s inequality</a>,</p>
 <p><span class="math display">\[\begin{align*}

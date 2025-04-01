@@ -930,7 +930,7 @@
     "href": "w13_advanced_infer/topic03_kl.html#why-variational-inference-uses-the-reverse-kl",
     "title": "The KL divergence",
     "section": "Why variational inference uses the reverse KL?",
-    "text": "Why variational inference uses the reverse KL?\nWe cover the two key reasons below: it captures “closeness” and it can be optimized.\n\nReverse KL captures the notion of “cloness”\nProperty: \\(\\operatorname{KL}(q_1 \\| q_2 ) \\ge 0\\) with equality iff \\(q_1 = q_2\\).\nProof: since \\(\\log\\) is a concave function, by Jensen’s inequality,\n\\[\\begin{align*}\n\\operatorname{KL}(q_1 \\| q_2 ) &= \\int q_1(x) \\log \\frac{q_1(x)}{q_2(x)} \\mathrm{d}x \\;\\;\\text{(definition)} \\\\\n&= - \\int q_1(x) \\log \\frac{q_2(x)}{q_1(x)} \\mathrm{d}x \\;\\;\\text{($-\\log a = \\log a^{-1}$)} \\\\\n&\\ge - \\log \\int {\\color{red} q_1(x)} \\frac{q_2(x)}{{\\color{red} q_1(x)}} \\mathrm{d}x \\;\\;\\text{(Jensen's)} \\\\\n&= - \\log \\int q_2(x) \\mathrm{d}x \\;\\;\\text{(red factors cancel)} \\\\\n&= 0 \\;\\;\\text{($q_2$ is a probability density)}.\n\\end{align*}\\]\n\n\nReverse KL can be optimized\nRequirement: we want to be able to optimize the objective function without having to compute the intractable normalization constant \\(Z\\).\nMany other notions of distribution “closeness” do not satisfy this.",
+    "text": "Why variational inference uses the reverse KL?\nWe cover the two key reasons below: it captures “closeness” and it can be optimized.\n\nReverse KL captures the notion of “closeness”\nProperty: \\(\\operatorname{KL}(q_1 \\| q_2 ) \\ge 0\\) with equality iff \\(q_1 = q_2\\).\nProof: since \\(\\log\\) is a concave function, by Jensen’s inequality,\n\\[\\begin{align*}\n\\operatorname{KL}(q_1 \\| q_2 ) &= \\int q_1(x) \\log \\frac{q_1(x)}{q_2(x)} \\mathrm{d}x \\;\\;\\text{(definition)} \\\\\n&= - \\int q_1(x) \\log \\frac{q_2(x)}{q_1(x)} \\mathrm{d}x \\;\\;\\text{($-\\log a = \\log a^{-1}$)} \\\\\n&\\ge - \\log \\int {\\color{red} q_1(x)} \\frac{q_2(x)}{{\\color{red} q_1(x)}} \\mathrm{d}x \\;\\;\\text{(Jensen's)} \\\\\n&= - \\log \\int q_2(x) \\mathrm{d}x \\;\\;\\text{(red factors cancel)} \\\\\n&= 0 \\;\\;\\text{($q_2$ is a probability density)}.\n\\end{align*}\\]\n\n\nReverse KL can be optimized\nRequirement: we want to be able to optimize the objective function without having to compute the intractable normalization constant \\(Z\\).\nMany other notions of distribution “closeness” do not satisfy this.",
     "crumbs": [
       "Advanced inference",
       "The KL divergence"
@@ -5785,7 +5785,7 @@
     "href": "w13_advanced_infer/topic01_intro.html",
     "title": "Overview",
     "section": "",
-    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Tuesday, guest lecture),\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need you!!!",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Nikola’s tutorial),\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
     "crumbs": [
       "Advanced inference",
       "Overview"
@@ -5796,7 +5796,7 @@
     "href": "w13_advanced_infer/topic01_intro.html#this-weeks-outline",
     "title": "Overview",
     "section": "",
-    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Tuesday, guest lecture),\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need you!!!",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods (Nikola’s tutorial),\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
     "crumbs": [
       "Advanced inference",
       "Overview"
