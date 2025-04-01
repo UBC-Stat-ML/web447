@@ -42,7 +42,7 @@ We can now complete [the **plan** laid earlier](topic03_markov_lln.qmd).
 &= \pi(x) q(x'|x) \min(1, \pi(x') / \pi(x)) \expl{by definition}. \\
 \end{align*}
 
-Now note that $a \min(1, b) = \min(a, ab)$, hence,
+Now note that when $a \ge 0$, we have $a \min(1, b) = \min(a, ab)$, hence using this identity with $a = \pi(x) \ge 0$,
 
 \begin{align*}
 &=  q(x'|x) \min(\pi(x), \pi(x')).
