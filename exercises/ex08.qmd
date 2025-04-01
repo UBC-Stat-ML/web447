@@ -6,6 +6,11 @@ editor:
   
 {{< include ../_macros.qmd >}}
 
+<!-- Note: add something about not creating huge files because of Stan output 
+
+Most people did fine, but some submissions were very tough to grade due to 30+ pages of Stan output. Would it be possible to remind students to use verbose=FALSE or edit their RMarkdown cells with message = FALSE, results = 'hide' going forward? 
+
+-->
 
 ## Q.1: Calibration analysis via cross-validation
 

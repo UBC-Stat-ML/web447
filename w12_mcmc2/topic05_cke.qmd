@@ -21,12 +21,11 @@ To check invariance we need formulas to write marginals of Markov chains.
 
 ## Example
 
-- Consider a large group of eccentric tourists.
+- Consider a large group of identical tourists.
 - They travel the world in a finite set of cities (dots). 
 - Every weekend they can board a plane and go somewhere else. 
     - They base their choice of destination **only on the current city**.
-    - They may use randomness. 
-- The game starts on Monday
+    - They use randomness (e.g., if a tourist is in London, flip a coin to decide to go to Montreal or Stockholm). 
 
 ::: column-margin
 ![](../images/tourists-detailed.png){width="300"}
@@ -35,7 +34,7 @@ To check invariance we need formulas to write marginals of Markov chains.
 
 ### Markov model for random tourists
 
-- $X^{(1)}$: pick one of the tourists at random,  $X^{(1)}$ encodes the city this tourist is in at week 1.
+- $X^{(1)}$: pick one of the tourists at random,  $X^{(1)}$ encodes the city this tourist is in at week 1 (before taking a first flight).
 - Distribution of $X^{(1)}$: $\mu_1(x)$. 
   - Interpretation: for city $x$, $\mu_1(x)$ tells you the fraction of tourists in city $x$ on the first week. 
   - Size of the dots in the figure is the fraction of tourists in the city. 

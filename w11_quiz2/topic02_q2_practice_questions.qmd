@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
 
 ## Outline
 
@@ -19,6 +18,7 @@ editor:
 
 Make sure to practice the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
 since quiz 2 will cover that material as well. 
+
 
 
 ### Libraries needed to run the example below
@@ -148,7 +148,7 @@ an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$.
 
 ## Stan-based prediction
 
-Consider the code you wrote in [Exercise 7](../exercises/ex07.qmd) to 
+Consider the following code to 
 perform Bayesian linear regression on galaxy distances and velocities:
 
 

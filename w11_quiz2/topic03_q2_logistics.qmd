@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
 
 ## What to bring?
 

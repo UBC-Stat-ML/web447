@@ -28,7 +28,7 @@ We continue our [eccentric tourists example](topic05_cke.qmd)...
 **Intuition:** $\pi$-invariance in this context just means the fraction of tourists in each city will stay constant over time.
 
 a. Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (see figure, planes always full). 
-b. A **tour** where a fixed number of planes, equal to the number of cities, go around the world on a common route (see figure, again, planes always full). 
+b. A **tour** where a fixed number of planes, equal to the number of cities, go around the world on a common route. 
 c. A central "hub", where all flights land at the hub (see figure, again, planes always full). 
 
 ::: column-margin

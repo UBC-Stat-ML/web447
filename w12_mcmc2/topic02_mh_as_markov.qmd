@@ -30,7 +30,7 @@ If we modified the MH ratio, would MCMC still "work"?
 **To answer the question above:**
 
 - we need to study in more details law of large numbers for **Markov chains**. 
-- We will need a some concepts related to Markov chains
+- We will need some concepts related to Markov chains
 
 **Recall:** the random variables $X^{(1)}, X^{(2)}, \dots$ are called a Markov chain 
     if they admit the following "chain" graphical model.

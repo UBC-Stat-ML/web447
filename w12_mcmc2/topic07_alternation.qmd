@@ -62,7 +62,7 @@ standard deviations 1 and 2 respectively.
 ```{r}
 
 # simple Metropolis-Hastings algorithm (normal proposal)
-mcmc_mixture = function(gamma, initial_point, n_iters) {
+mcmc_alternation = function(gamma, initial_point, n_iters) {
   samples = numeric(n_iters) 
   dim = length(initial_point)
   current_point = initial_point
@@ -76,7 +76,7 @@ mcmc_mixture = function(gamma, initial_point, n_iters) {
   return(samples)
 }
 
-samples = mcmc_mixture(gamma_beta_binomial, 0.5,  1000)
+samples = mcmc_alternation(gamma_beta_binomial, 0.5,  1000)
 ```
 1. Sample from $K_1$.
 2. Sample from $K_2$ from the state output by $K_1$. 

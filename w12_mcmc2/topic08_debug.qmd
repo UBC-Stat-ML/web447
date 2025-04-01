@@ -133,6 +133,7 @@ exact_invariance = function(joint) {
 - **Key property:** if they have different distributions, we can conclude that the code is not $\pi$-invariant, i.e., buggy. 
 - How to check this?
     - Let's use frequentist tools!
+        - Here `ks.test`, the Kolmogorov-Smirnov test, but a 2-samples, unpaired `t.test` would have worked too. 
     - One of the rare situations where a "point-null hypothesis" makes perfect sense.
         - i.e., exact equality of the distribution is precisely what we would expect if the code is correct. 
 
