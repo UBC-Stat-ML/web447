@@ -1001,8 +1001,11 @@ window.Quarto = {
   <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
   <li><a href="#inspiration-from-physics" id="toc-inspiration-from-physics" class="nav-link" data-scroll-target="#inspiration-from-physics">Inspiration from physics</a></li>
   <li><a href="#flip-trick" id="toc-flip-trick" class="nav-link" data-scroll-target="#flip-trick">Flip trick</a></li>
+  <li><a href="#discretization" id="toc-discretization" class="nav-link" data-scroll-target="#discretization">Discretization</a>
+  <ul class="collapse">
   <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
   <li><a href="#leap-frog-integrator" id="toc-leap-frog-integrator" class="nav-link" data-scroll-target="#leap-frog-integrator">Leap frog integrator</a></li>
+  </ul></li>
   <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
   <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
   </ul>
@@ -1112,8 +1115,15 @@ p' = \frac{\mathrm{d}p^{(t)}}{\mathrm{d}t} &amp;= - \nabla U(x) \;\;\text{(the v
 </ul></li>
 </ul>
 </section>
-<section id="notation" class="level2">
-<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<section id="discretization" class="level2">
+<h2 class="anchored" data-anchor-id="discretization">Discretization</h2>
+<ul>
+<li>we typically do not have close form solution for the ODE of motion</li>
+<li>we want to discretize it in a way that preserves the involution property</li>
+<li>solution: “leap frog integrator”</li>
+</ul>
+<section id="notation" class="level3">
+<h3 class="anchored" data-anchor-id="notation">Notation</h3>
 <ul>
 <li>let <span class="math inline">\(\epsilon\)</span> denote a small time interval (discretization),</li>
 <li>let <span class="math inline">\(L\)</span> denote the number of small steps we will use,
@@ -1122,8 +1132,8 @@ p' = \frac{\mathrm{d}p^{(t)}}{\mathrm{d}t} &amp;= - \nabla U(x) \;\;\text{(the v
 </ul></li>
 </ul>
 </section>
-<section id="leap-frog-integrator" class="level2">
-<h2 class="anchored" data-anchor-id="leap-frog-integrator">Leap frog integrator</h2>
+<section id="leap-frog-integrator" class="level3">
+<h3 class="anchored" data-anchor-id="leap-frog-integrator">Leap frog integrator</h3>
 <p><strong>Key idea:</strong> update only one of <span class="math inline">\(\{x, p\}\)</span> at the time to get <a href="../w12_mcmc2/topic11_involution.html#examples-of-involution">triangular Jacobian matrices</a> (easier to analyze).</p>
 <p><strong>Drift operator</strong></p>
 <ul>
@@ -1303,6 +1313,7 @@ Hence, the Jacobian determinant is 1.
 <p><strong>Proof idea:</strong> use the property <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span> we encountered (and similar one for the drift) and the fact that <span class="math inline">\(T_\text{leap-frog}^l\)</span> is a <strong>palindrome</strong> (can be read both ways, like “madam” or “nurses run”).</p>
 <p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span> has Jacobian one.</p>
 <p><strong>Proof idea:</strong> show that each constituent has Jacobian determinant one, so the product of these is also one.</p>
+</section>
 </section>
 <section id="putting-it-all-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>

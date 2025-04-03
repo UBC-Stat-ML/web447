@@ -1025,7 +1025,7 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>In our <a href="../w08_mcmc1/topic04_mh.html">first exposure to MH</a>, we defined the proposal as a probability distribution <span class="math inline">\(q(\cdot|x)\)</span> based on the current point <span class="math inline">\(x\)</span>.</p>
-<p>For HMC, it is more natural to consider the proposal as a deterministic function <span class="math inline">\(T(x)\)</span>.</p>
+<p>For HMC, it is more natural to consider the proposal as a deterministic function <span class="math inline">\(T(x)\)</span> (namely, <a href="../w12_mcmc2/topic10_hmc_intuition.html">as we saw</a>, the proposal is to “let the ball roll the ball a little bit”).</p>
 <p>We state a version of the MH algorithm based on such deterministic proposal here.</p>
 </section>
 </section>
@@ -1080,36 +1080,52 @@ Click for answer
 <li><span class="math inline">\(T(T(x_1, x_2)) = T(x_2, x_1) = (x_1, x_2)\)</span> ✅</li>
 </ul>
 <p><strong>Multiplicative proposal:</strong> complete the definition of <span class="math inline">\(T\)</span> to make it an involution on <span class="math inline">\(\mathbb{R}\times \mathbb{R}^+\)</span>. <span class="math display">\[T(x_1, x_2) = T(x, m) = (mx, \_\_).\]</span></p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Any choice would work. 
-2. $T(x, m) = T(mx, m)$
-3. $T(x, m) = T(mx, m^2)$
-4. $T(x, m) = T(mx, 1/m)$
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $T(x, m) = T(mx, 1/m)$, since 
-
-\begin{align*}
-T(T(x, m)) &= T(mx, 1/m) \\
-&= ((1/m)(mx), 1/(1/m)) \\
-&= (x, m).
-\end{align*}
-:::
-
--->
-<p><strong>Question:</strong> Compute the Jacobian determinant of the multiplicative proposal involution.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Any choice would work.</li>
+<li><span class="math inline">\(T(x, m) = T(mx, m)\)</span></li>
+<li><span class="math inline">\(T(x, m) = T(mx, m^2)\)</span></li>
+<li><span class="math inline">\(T(x, m) = T(mx, 1/m)\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct answer is <span class="math inline">\(T(x, m) = T(mx, 1/m)\)</span>, since</p>
+<p><span class="math display">\[\begin{align*}
+T(T(x, m)) &amp;= T(mx, 1/m) \\
+&amp;= ((1/m)(mx), 1/(1/m)) \\
+&amp;= (x, m).
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> Compute the Jacobian determinant of the multiplicative proposal involution.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1118,7 +1134,7 @@ Click for hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You should get a <strong>triangular matrix</strong> i.e.&nbsp;in our context of the form</p>
 <p><span class="math display">\[\begin{align*}
@@ -1131,43 +1147,56 @@ Click for hint
 </div>
 </div>
 </div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $1/m$
-2. $1/m^2$
-3. $1/x$
-4. $1/x^2$
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $1/m$.
-
-First, we compute the Jacobian matrix, where we denote $T_1(x, m) = xm$ and $T_2(x, m) = 1/m$:
-
-\begin{align*}
-\nabla T(x, m) &= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial m}\\
-    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial m}
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(1/m\)</span></li>
+<li><span class="math inline">\(1/m^2\)</span></li>
+<li><span class="math inline">\(1/x\)</span></li>
+<li><span class="math inline">\(1/x^2\)</span></li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct answer is <span class="math inline">\(1/m\)</span>.</p>
+<p>First, we compute the Jacobian matrix, where we denote <span class="math inline">\(T_1(x, m) = xm\)</span> and <span class="math inline">\(T_2(x, m) = 1/m\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+\nabla T(x, m) &amp;= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x}  &amp; \dfrac{\partial T_1}{\partial m}\\
+    \dfrac{\partial T_2}{\partial x} &amp; \dfrac{\partial T_2}{\partial m}
 \end{bmatrix} \\
-&= \begin{bmatrix}
-    m & x \\
-    0 & -1/m^2
+&amp;= \begin{bmatrix}
+    m &amp; x \\
+    0 &amp; -1/m^2
 \end{bmatrix}.
-\end{align*}
-
-
-Hence, the Jacobian determinant is $|1/m|$. Since $m \in \reals^+$, $|1/m| = 1/m$.
-:::
-
--->
+\end{align*}\]</span></p>
+<p>Hence, the Jacobian determinant is <span class="math inline">\(|1/m|\)</span>. Since <span class="math inline">\(m \in \mathbb{R}^+\)</span>, <span class="math inline">\(|1/m| = 1/m\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
