@@ -1,0 +1,21 @@
+---
+title: "Challenge questions"
+editor: 
+  mode: source
+---
+  
+{{< include ../_macros.qmd >}}
+
+{{< include ../blocks/_challenge_header.qmd >}}
+
+In this challenge question, we obtain an even more general result than the one presented in Q1 of Homework 10. For this question, recall that a family of distributions $\{q_\phi : \phi \in \Phi\}$ is an exponential family if the density can be written in the form 
+$$ q_\phi(x) = h(x) \exp(\eta(\phi)^\top T(x) - A(\eta(\phi))), $$
+where $h$ is the *base measure*, $\eta$ is the *natural parameter*, and $T$ is the *sufficient statistic*. (Note that this is the fully general form, where $x$ and $\phi$ may be vectors.)
+
+Show that 
+$$ \nabla_\phi \text{KL}(\pi || q_\phi) = \mathbb{E}_{q_\phi}[\eta(X)] - \mathbb{E}_\pi[\eta(X)].$$ 
+
+**Hints:** Note that $A(\eta(\phi))$ acts as a normalizing constant for a given $\phi$. Use the fact that $\int q_\phi(x) \, dx = 1$ and 
+$\nabla \log \int f = \frac{\int \nabla f}{\int f}$
+to show that 
+$$ \nabla_\phi A(\eta(\phi)) = \mathbb{E}_{q_\phi}[\eta(X)].$$  

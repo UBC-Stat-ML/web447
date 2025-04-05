@@ -1,9 +1,127 @@
 ---
-title: "Exercise 10: advanced inference"
+title: "Exercise 10: Advanced inference"
 editor: 
   mode: source
 ---
   
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
+::: {.callout-tip}
+## This week it's enough to answer only one question
+
+To give more time for the project, the grade for this last exercise will be the maximum of 
+question 1, question 2, and question 3. I.e., you can solve only one of the three questions 
+and get a full grade. 
+:::
+
+
+## Q1: Forward KL optimization 
+
+Here we explore an alternative to the reverse KL divergence for variational 
+inference. Recall that the reverse KL divergence is defined as 
+$$ \text{KL}(q_\phi || \pi) = \int q_\phi(x) \log \frac{q_\phi(x)}{\pi(x)} \, dx.$$
+The *forward KL* is given by
+$$ \text{KL}(\pi || q_\phi) = \int \pi(x) \log \frac{\pi(x)}{q_\phi(x)} \, dx.$$
+
+Consider the variational approximation 
+$$q_\phi(x) = \frac{1}{\sqrt{2\pi}} \exp\left(\frac{-1}{2} (x - \phi)^2 \right).$$
+That is, our variational approximation $q_\phi$ is a $\distNorm(\phi, 1)$ 
+distribution. Our goal is to use this distribution to approximation $\pi$ using stochastic gradient descent. 
+
+1. Prove that 
+$$ \nabla_\phi \text{KL}(\pi || q_\phi) = \phi - \mathbb{E}_\pi[X].$$ 
+
+2. Are all of the quantities in the expression above known? If not, how might we estimate the unknown quantities?
+
+
+## Q2: Asymmetric proposal
+
+Suppose you have a proposal $q(x' | x)$ which is not symmetric. We show here 
+how to generalize MH to handle that case. 
+
+- Our goal is to sample from $\pi(x)$, $x \in \states$. 
+- We will use an [augmented distribution](../w12_mcmc2/topic10_hmc_intuition.qmd#augmentation) $\bar \pi(x, v) = \pi(x) q(v | x)$, where $v \in \states$. 
+- Alternate between two kernels $K_1$ and $K_2$:
+  - $K_1$ consists in a [deterministic proposal MH](../w12_mcmc2/topic11_involution.qmd) with a swap proposal, $T(x, v) = (v, x)$. 
+  - $K_2$ keeps $x$ constant and samples a new value for $v$ from $q(\cdot|x)$. 
+  
+1. Write the MH ratio corresponding to the swap proposal in terms of $\pi$ and $q$. 
+2. Modify the proof [here](../w12_mcmc2/topic10_hmc_intuition.qmd#sampling-a-new-momentum) to show that $K_2$ is $\bar \pi$-invariant.
+   You may assume $\states$ is discrete (this makes the notation simpler, but the result is the same in continuous space).
+
+
+## Q3: Implementing HMC
+
+Read [how HMC can be viewed as MH with a deterministic proposal](../w12_mcmc2/topic12_hmc_as_involution.html).
+That page provides code for a proposal. 
+
+1. Complete the code to obtain an HMC algorithm. Use the following templates: 
+
+(*note the function "gamma" was renamed "log_gamma" to be more descriptive on April 10*)
+
+```r
+set.seed(1234)
+
+log_gamma = function(x) {
+  -x^2 # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5
+}
+
+# code from the notes:
+
+gradient = function(x) {
+  -2*x
+}
+
+epsilon = 0.1
+
+kick = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x, p + epsilon * gradient(x) / 2)
+}
+
+drift = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x + epsilon * p, p)
+}
+
+flip = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  c(x, -p)
+}
+
+L = 5
+
+hmc_proposal = function(s) {
+  for (i in 1:L) {
+    s = kick(s)
+    s = drift(s)
+    s = kick(s)
+  }
+  flip(s)
+}
+
+# part to complete below
+
+hamiltonian = function(s) {
+  x = s[[1]]
+  p = s[[2]]
+  # TODO
+}
+
+hmc = function(initial_x, n_iteration) {
+  current_x = initial_x
+  samples = numeric(n_iterations)
+  for (i in 1:n_iteration) {
+    # TODO
+  }
+  return(samples)
+}
+```
+
+
+2. Compute 10000 iterations and report the mean and variance of the samples. 
+
+
