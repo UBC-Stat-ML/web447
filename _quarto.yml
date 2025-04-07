@@ -67,6 +67,8 @@ website:
           - auto: "w09_workflow/*"
           - text: "Exercises"
             file: exercises/ex08.qmd
+          - text: "Challenge"
+            file: challenges/ch08.qmd
       - section: "Modelling techniques"
         contents: 
           - auto: "w10_modelling/*"
@@ -78,11 +80,15 @@ website:
           - auto: "w12_mcmc2/*"
           - text: "Exercises"
             file: exercises/ex09.qmd
+          - text: "Challenge"
+            file: challenges/ch09.qmd
       - section: "Advanced inference"
         contents: 
           - auto: "w13_advanced_infer/*"
           - text: "Exercises"
             file: exercises/ex10.qmd
+          - text: "Challenge"
+            file: challenges/ch10.qmd
 
 
 format:
