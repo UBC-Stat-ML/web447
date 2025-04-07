@@ -19,17 +19,17 @@ and get a full grade.
 
 Here we explore an alternative to the reverse KL divergence for variational 
 inference. Recall that the reverse KL divergence is defined as 
-$$ \text{KL}(q_\phi || \pi) = \int q_\phi(x) \log \frac{q_\phi(x)}{\pi(x)} \, dx.$$
+$$ \KL(q_\phi \| \pi) = \int q_\phi(x) \log \frac{q_\phi(x)}{\pi(x)} \, \dee x.$$
 The *forward KL* is given by
-$$ \text{KL}(\pi || q_\phi) = \int \pi(x) \log \frac{\pi(x)}{q_\phi(x)} \, dx.$$
+$$ \KL(\pi \| q_\phi) = \int \pi(x) \log \frac{\pi(x)}{q_\phi(x)} \, \dee x.$$
 
 Consider the variational approximation 
-$$q_\phi(x) = \frac{1}{\sqrt{2\pi}} \exp\left(\frac{-1}{2} (x - \phi)^2 \right).$$
+$$q_\phi(x) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2} (x - \phi)^2 \right).$$
 That is, our variational approximation $q_\phi$ is a $\distNorm(\phi, 1)$ 
 distribution. Our goal is to use this distribution to approximation $\pi$ using stochastic gradient descent. 
 
 1. Prove that 
-$$ \nabla_\phi \text{KL}(\pi || q_\phi) = \phi - \mathbb{E}_\pi[X].$$ 
+$$ \nabla_\phi \KL(\pi \| q_\phi) = \phi - \mathbb{E}_\pi[X].$$ 
 
 2. Are all of the quantities in the expression above known? If not, how might we estimate the unknown quantities?
 
@@ -57,7 +57,6 @@ That page provides code for a proposal.
 
 1. Complete the code to obtain an HMC algorithm. Use the following templates: 
 
-(*note the function "gamma" was renamed "log_gamma" to be more descriptive on April 10*)
 
 ```r
 set.seed(1234)
