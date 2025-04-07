@@ -64,14 +64,20 @@ the direction of steepest ascent.
     - i.e. this is just a device for theoretical analysis in the vanilla HMC algorithm. 
 
 
-## Notation 
+## Discretization
+
+- we typically do not have close form solution for the ODE of motion
+- we want to discretize it in a way that preserves the involution property
+- solution: "leap frog integrator"
+
+### Notation 
 
 - let $\epsilon$ denote a small time interval (discretization),
 - let $L$ denote the number of small steps we will use,
     - hence, $t = \epsilon L$. 
 
 
-## Leap frog integrator
+### Leap frog integrator
 
 **Key idea:** update only one of $\{x, p\}$ at the time to get [triangular Jacobian matrices](topic11_involution.qmd#examples-of-involution) (easier to analyze). 
 

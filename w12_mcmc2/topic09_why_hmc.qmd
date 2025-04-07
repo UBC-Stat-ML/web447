@@ -28,7 +28,7 @@ We start by motivating HMC.
 
 ## Why is HMC popular: the short answer
 
-For many models, HMC is less computationally costly than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
+For many models, HMC is less *computationally costly* than the basic MH algorithm [we saw earlier](../w08_mcmc1/topic04_mh.qmd). 
 
 
 
@@ -45,7 +45,7 @@ reasonable notion of computational cost for MCMC algorithms?
 - No, it is incomplete.
 - For example, according to this incomplete metric, an algorithm with proposal $q(x' | x) = \ind[x = x']$, would be really fast (can skip the MH ratio calculation!)...
     - ... but is useless because its effective sample size will be 1 no matter how long you run it.
-- What you care about: how long does it take to get to a certain [Monte Carlo standard error](../w09_workflow/topic05_mcmc_ess.qmd).
+- What we care about: how long does it take to get to a certain [Monte Carlo standard error](../w09_workflow/topic05_mcmc_ess.qmd).
     - i.e.: **seconds per effective sample** (seconds/ESS; lower is better). 
 :::
 
