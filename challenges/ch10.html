@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bayes1@UBC - HMC as involution</title>
+<title>Bayes1@UBC - Challenge questions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -134,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,7 +109,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic12_hmc_as_involution.html">HMC as involution</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic01_intro.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../challenges/ch10.html">Challenge</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -831,13 +797,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
  <span class="menu-text">MCMC Hacking</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -918,7 +884,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w12_mcmc2/topic12_hmc_as_involution.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w12_mcmc2/topic12_hmc_as_involution.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">HMC as involution</span></a>
   </div>
 </li>
@@ -944,13 +910,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true">
  <span class="menu-text">Advanced inference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w13_advanced_infer/topic01_intro.html" class="sidebar-item-text sidebar-link">
@@ -995,7 +961,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../challenges/ch10.html" class="sidebar-item-text sidebar-link">
+  <a href="../challenges/ch10.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Challenge</span></a>
   </div>
 </li>
@@ -1007,34 +973,14 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#plan" id="toc-plan" class="nav-link" data-scroll-target="#plan">Plan</a></li>
-  <li><a href="#inspiration-from-physics" id="toc-inspiration-from-physics" class="nav-link" data-scroll-target="#inspiration-from-physics">Inspiration from physics</a></li>
-  <li><a href="#flip-trick" id="toc-flip-trick" class="nav-link" data-scroll-target="#flip-trick">Flip trick</a></li>
-  <li><a href="#discretization" id="toc-discretization" class="nav-link" data-scroll-target="#discretization">Discretization</a>
-  <ul class="collapse">
-  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
-  <li><a href="#leap-frog-integrator" id="toc-leap-frog-integrator" class="nav-link" data-scroll-target="#leap-frog-integrator">Leap frog integrator</a></li>
-  </ul></li>
-  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
-  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference">Reference</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w12_mcmc2/topic01_intro.html">MCMC Hacking</a></li><li class="breadcrumb-item"><a href="../w12_mcmc2/topic12_hmc_as_involution.html">HMC as involution</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w13_advanced_infer/topic01_intro.html">Advanced inference</a></li><li class="breadcrumb-item"><a href="../challenges/ch10.html">Challenge</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">HMC as involution</h1>
+<h1 class="title">Challenge questions</h1>
 </div>
 
 
@@ -1071,283 +1017,24 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
-<ul>
-<li>Inspiration from continuous time dynamics</li>
-<li>Leap-frog integrator</li>
-<li>“Flip trick”</li>
-</ul>
-</section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>We can complete our goal of writing formally HMC, as a special case of the MH with <a href="../w12_mcmc2/topic11_involution.html">deterministic proposal we just saw</a>.</p>
-</section>
-</section>
-<section id="plan" class="level2">
-<h2 class="anchored" data-anchor-id="plan">Plan</h2>
-<ul>
-<li>How to build and <a href="../w12_mcmc2/topic11_involution.html">involution</a> for <a href="../w12_mcmc2/topic10_hmc_intuition.html">“rolling a ball for time <span class="math inline">\(t\)</span> starting at current location and momentum”</a>?</li>
-<li>Start with an exact description of the ball’s motion (in continuous time).</li>
-<li>Discretize time carefully to be able to compute trajectory while maintaining the involution property.</li>
-</ul>
-</section>
-<section id="inspiration-from-physics" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="inspiration-from-physics">Inspiration from physics</h2>
-<ul>
-<li>Physics gives us precise expression for quantifying the notion of “rolling a ball”.</li>
-<li>As often, it is easier to describe how <strong>things change</strong> rather than how thing are,
-<ul>
-<li>i.e.&nbsp;to provide an <strong>ordinary differential equation</strong> (ODE).</li>
-</ul></li>
-<li>ODE for the continuous time evolution of frictionless ball’s position and momentum <span class="math inline">\((x^{(t)}, p^{(t)})\)</span>: <span class="math display">\[\begin{align*}
-x' = \frac{\mathrm{d}x^{(t)}}{\mathrm{d}t} &amp;= p \;\;\text{(in a small time interval the change in position is equal to the momentum)} \\
-p' = \frac{\mathrm{d}p^{(t)}}{\mathrm{d}t} &amp;= - \nabla U(x) \;\;\text{(the velocity decreases proportionally to the steepness of the landscape)}.
-\end{align*}\]</span></li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/3d-gradient-cos.svg" class="img-fluid" width="150"></p>
-</div></div><p><strong>Recall:</strong> the gradient <span class="math inline">\(\nabla U(x) = (\partial U/\partial x_1, \dots, \partial U/\partial x_d)\)</span> is a vector pointing towards the direction of steepest ascent.</p>
-</section>
-<section id="flip-trick" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="flip-trick">Flip trick</h2>
-<ul>
-<li>At the very end of the trajectory, in the analysis we flip the momentum: <span class="math display">\[T_\text{flip}(x, p) = (x, -p).\]</span></li>
-</ul>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="../images/flip.png" class="img-fluid" width="500"></p>
-</div></div><ul>
-<li>This will allow us to prove the involution property:
-<ul>
-<li>After the momentum sign flip,</li>
-<li>the ball will retrace its step!</li>
-</ul></li>
-<li>Since we <a href="../w12_mcmc2/topic07_alternation.html">alternate</a> between an HMC kernel and <a href="../w12_mcmc2/topic10_hmc_intuition.html">sampling a new momentum</a>…
-<ul>
-<li>…this flipped momentum will be overwritten right away,</li>
-<li>i.e.&nbsp;this is just a device for theoretical analysis in the vanilla HMC algorithm.</li>
-</ul></li>
-</ul>
-</section>
-<section id="discretization" class="level2">
-<h2 class="anchored" data-anchor-id="discretization">Discretization</h2>
-<ul>
-<li>we typically do not have close form solution for the ODE of motion</li>
-<li>we want to discretize it in a way that preserves the involution property</li>
-<li>solution: “leap frog integrator”</li>
-</ul>
-<section id="notation" class="level3">
-<h3 class="anchored" data-anchor-id="notation">Notation</h3>
-<ul>
-<li>let <span class="math inline">\(\epsilon\)</span> denote a small time interval (discretization),</li>
-<li>let <span class="math inline">\(L\)</span> denote the number of small steps we will use,
-<ul>
-<li>hence, <span class="math inline">\(t = \epsilon L\)</span>.</li>
-</ul></li>
-</ul>
-</section>
-<section id="leap-frog-integrator" class="level3">
-<h3 class="anchored" data-anchor-id="leap-frog-integrator">Leap frog integrator</h3>
-<p><strong>Key idea:</strong> update only one of <span class="math inline">\(\{x, p\}\)</span> at the time to get <a href="../w12_mcmc2/topic11_involution.html#examples-of-involution">triangular Jacobian matrices</a> (easier to analyze).</p>
-<p><strong>Drift operator</strong></p>
-<ul>
-<li>Let the current momentum move the current position a bit.</li>
-<li>Discretization of <span class="math inline">\(x' = p\)</span>: <span class="math display">\[T_\text{drift}(x, p) = (x + \epsilon p, p).\]</span></li>
-</ul>
-<p><strong>Question:</strong> compute the Jacobian determinant of <span class="math inline">\(T_\text{drift}\)</span>.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $x$
-2. $p$
-3. $1$
-4. $xp$
-5. None of the above. 
-:::
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Not for grades!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
+</div>
+</div>
+<p>In this challenge question, we obtain an even more general result than the one presented in Q1 of Homework 10. For this question, recall that a family of distributions <span class="math inline">\(\{q_\phi : \phi \in \Phi\}\)</span> is an exponential family if the density can be written in the form <span class="math display">\[ q_\phi(x) = h(x) \exp(\eta(\phi)^\top T(x) - A(\eta(\phi))), \]</span> where <span class="math inline">\(h\)</span> is the <em>base measure</em>, <span class="math inline">\(\eta\)</span> is the <em>natural parameter</em>, and <span class="math inline">\(T\)</span> is the <em>sufficient statistic</em>. (Note that this is the fully general form, where <span class="math inline">\(x\)</span> and <span class="math inline">\(\phi\)</span> may be vectors.)</p>
+<p>Show that <span class="math display">\[ \nabla_\phi \operatorname{KL}(\pi \| q_\phi) = \mathbb{E}_{q_\phi}[\eta(X)] - \mathbb{E}_\pi[\eta(X)].\]</span></p>
+<p><strong>Hints:</strong> Note that <span class="math inline">\(A(\eta(\phi))\)</span> acts as a normalizing constant for a given <span class="math inline">\(\phi\)</span>. Use the fact that <span class="math inline">\(\int q_\phi(x) \, dx = 1\)</span> and <span class="math inline">\(\nabla \log \int f = \frac{\int \nabla f}{\int f}\)</span> to show that <span class="math display">\[ \nabla_\phi A(\eta(\phi)) = \mathbb{E}_{q_\phi}[\eta(X)].\]</span></p>
 
 
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is 1.
-
-First, we compute the Jacobian matrix:
-
-\begin{align*}
-\nabla \Td(x, p) &= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial p}\\
-    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial p}
-\end{bmatrix} \\
-&= \begin{bmatrix}
-    1 & \epsilon \\
-    0 & 1
-\end{bmatrix}.
-\end{align*}
-
-
-Hence, the Jacobian determinant is 1.
-:::
-
--->
-<p><strong>Kick operator</strong></p>
-<ul>
-<li>Let the steepness of the landscape at current position update the momentum a bit.</li>
-<li>Discretization of <span class="math inline">\(p' = - \nabla U\)</span>: <span class="math display">\[T_\text{kick}(x, p) = \left(x, p + \frac{\epsilon}{2} \nabla \log \pi(x)\right).\]</span></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example: a normal</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This function return gradient_x of log pi(x)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gradient <span class="ot">=</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>x <span class="co"># = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>epsilon <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>kick <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, p <span class="sc">+</span> epsilon <span class="sc">*</span> <span class="fu">gradient</span>(x) <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>flip <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, <span class="sc">-</span>p)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>initial <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.3</span>) </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># flip o kick o flip o kick</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   where 'o' denotes 'function composition',</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   which recall are read right to left</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>newpoint <span class="ot">=</span> <span class="fu">kick</span>(initial) </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>flipped <span class="ot">=</span> <span class="fu">flip</span>(newpoint)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>traceback <span class="ot">=</span> <span class="fu">kick</span>(flipped)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>fipped_again <span class="ot">=</span> <span class="fu">flip</span>(traceback)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>initial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>newpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.10 2.19</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.10 -2.19</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>traceback</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.1 -2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fipped_again</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-</div>
-<p>Ah! Ah! we come back where we started!</p>
-<p>I.e., the code above illustrates that <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span>, which is easy to show and a building block for showing that the full proposal is an involution. (And a great way to check correctness of involution-based MH algorithms!)</p>
-<p>We have the same property for drifts:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>drift <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> s[[<span class="dv">1</span>]]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">=</span> s[[<span class="dv">2</span>]]</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x <span class="sc">+</span> epsilon <span class="sc">*</span> p, p)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>initial <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">2.3</span>) </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># flip o kick o flip o kick</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>newpoint <span class="ot">=</span> <span class="fu">drift</span>(initial) </span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>flipped <span class="ot">=</span> <span class="fu">flip</span>(newpoint)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>traceback <span class="ot">=</span> <span class="fu">drift</span>(flipped)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>fipped_again <span class="ot">=</span> <span class="fu">flip</span>(traceback)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>initial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>newpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.33 2.30</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>flipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.33 -2.30</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>traceback</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.1 -2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fipped_again</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-</div>
-<p><strong>Leap frog</strong>:</p>
-<ul>
-<li>Alternate between kick and drift.</li>
-<li>Do so in a palindromic fashion to obtain involution after flip. <span class="math display">\[T_\text{leap-frog}= T_\text{kick}\circ T_\text{drift}\circ T_\text{kick}.\]</span></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>hmc_proposal <span class="ot">=</span> <span class="cf">function</span>(s) {</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>L) {</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">drift</span>(s)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">=</span> <span class="fu">kick</span>(s)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flip</span>(s)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>newpoint <span class="ot">=</span> <span class="fu">hmc_proposal</span>(initial) </span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>apply_twice <span class="ot">=</span> <span class="fu">hmc_proposal</span>(newpoint)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>initial </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>newpoint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1.8957642 -0.7389151</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>apply_twice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.1 2.3</code></pre>
-</div>
-</div>
-<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span> is an involution, where <span class="math inline">\(T^n = T^{n-1} \circ T\)</span>.</p>
-<p><strong>Proof idea:</strong> use the property <span class="math inline">\(T_\text{flip}\circ T_\text{kick}\circ T_\text{flip}\circ T_\text{kick}= I\)</span> we encountered (and similar one for the drift) and the fact that <span class="math inline">\(T_\text{leap-frog}^l\)</span> is a <strong>palindrome</strong> (can be read both ways, like “madam” or “nurses run”).</p>
-<p><strong>Proposition:</strong> <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span> has Jacobian one.</p>
-<p><strong>Proof idea:</strong> show that each constituent has Jacobian determinant one, so the product of these is also one.</p>
-</section>
-</section>
-<section id="putting-it-all-together" class="level2">
-<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
-<p>Recall the high-level organization of HMC is the deterministic alternation of:</p>
-<ul>
-<li>a complicated kernel <span class="math inline">\(K_\text{hmc}\)</span>: “rolling the ball”,</li>
-<li>a simple kernel <span class="math inline">\(K_\text{gibbs}\)</span>: <a href="../w12_mcmc2/topic10_hmc_intuition.html#sampling-a-new-momentum">sampling the momentum</a>.</li>
-</ul>
-<p>We can now define <span class="math inline">\(K_\text{hmc}\)</span>: it it the <a href="../w12_mcmc2/topic11_involution.html">deterministic proposal MH</a> with proposal <span class="math inline">\(T = T_\text{flip}\circ T_\text{leap-frog}^L\)</span>.</p>
-</section>
-<section id="reference" class="level2">
-<h2 class="anchored" data-anchor-id="reference">Reference</h2>
-<p>See <a href="http://arxiv.org/abs/1206.1901">Neal, 2012</a> for an in-depth tutorial on HMC, in particular how to tune it.</p>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
