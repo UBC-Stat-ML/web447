@@ -13,9 +13,9 @@ $$ q_\phi(x) = h(x) \exp(\eta(\phi)^\top T(x) - A(\eta(\phi))), $$
 where $h$ is the *base measure*, $\eta$ is the *natural parameter*, and $T$ is the *sufficient statistic*. (Note that this is the fully general form, where $x$ and $\phi$ may be vectors.)
 
 Show that 
-$$ \nabla_\phi \text{KL}(\pi || q_\phi) = \mathbb{E}_{q_\phi}[\eta(X)] - \mathbb{E}_\pi[\eta(X)].$$ 
+$$ \nabla_\phi \, \text{KL}(\pi || q_\phi) = \nabla_\phi \eta(\phi) \cdot \left[\mathbb{E}_{q_\phi}[T(X)] - \mathbb{E}_\pi[T(X)]\right].$$ 
 
 **Hints:** Note that $A(\eta(\phi))$ acts as a normalizing constant for a given $\phi$. Use the fact that $\int q_\phi(x) \, dx = 1$ and 
 $\nabla \log \int f = \frac{\int \nabla f}{\int f}$
 to show that 
-$$ \nabla_\phi A(\eta(\phi)) = \mathbb{E}_{q_\phi}[\eta(X)].$$  
+$$ \nabla_\phi \, A(\eta(\phi)) = \nabla_\phi \eta(\phi) \cdot \mathbb{E}_{q_\phi}[T(X)].$$  
