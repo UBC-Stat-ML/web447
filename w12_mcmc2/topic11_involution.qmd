@@ -21,7 +21,8 @@ In our [first exposure to MH](../w08_mcmc1/topic04_mh.qmd), we defined the propo
 $q(\cdot|x)$ based on the current point $x$. 
 
 For HMC, it is more natural to consider 
-the proposal as a deterministic function $T(x)$. 
+the proposal as a deterministic function $T(x)$ 
+(namely, [as we saw](topic10_hmc_intuition.qmd), the proposal is to "let the ball roll the ball a little bit").
 
 We state a version of the MH algorithm based on such deterministic proposal here.  
 
