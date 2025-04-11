@@ -1031,8 +1031,8 @@ Not for grades!
 </div>
 </div>
 <p>In this challenge question, we obtain an even more general result than the one presented in Q1 of Homework 10. For this question, recall that a family of distributions <span class="math inline">\(\{q_\phi : \phi \in \Phi\}\)</span> is an exponential family if the density can be written in the form <span class="math display">\[ q_\phi(x) = h(x) \exp(\eta(\phi)^\top T(x) - A(\eta(\phi))), \]</span> where <span class="math inline">\(h\)</span> is the <em>base measure</em>, <span class="math inline">\(\eta\)</span> is the <em>natural parameter</em>, and <span class="math inline">\(T\)</span> is the <em>sufficient statistic</em>. (Note that this is the fully general form, where <span class="math inline">\(x\)</span> and <span class="math inline">\(\phi\)</span> may be vectors.)</p>
-<p>Show that <span class="math display">\[ \nabla_\phi \operatorname{KL}(\pi \| q_\phi) = \mathbb{E}_{q_\phi}[\eta(X)] - \mathbb{E}_\pi[\eta(X)].\]</span></p>
-<p><strong>Hints:</strong> Note that <span class="math inline">\(A(\eta(\phi))\)</span> acts as a normalizing constant for a given <span class="math inline">\(\phi\)</span>. Use the fact that <span class="math inline">\(\int q_\phi(x) \, dx = 1\)</span> and <span class="math inline">\(\nabla \log \int f = \frac{\int \nabla f}{\int f}\)</span> to show that <span class="math display">\[ \nabla_\phi A(\eta(\phi)) = \mathbb{E}_{q_\phi}[\eta(X)].\]</span></p>
+<p>Show that <span class="math display">\[ \nabla_\phi \, \operatorname{KL}(\pi \| q_\phi) = \nabla_\phi \eta(\phi) \cdot \left[\mathbb{E}_{q_\phi}[T(X)] - \mathbb{E}_\pi[T(X)]\right].\]</span></p>
+<p><strong>Hints:</strong> Note that <span class="math inline">\(A(\eta(\phi))\)</span> acts as a normalizing constant for a given <span class="math inline">\(\phi\)</span>. Use the fact that <span class="math inline">\(\int q_\phi(x) \, dx = 1\)</span> and <span class="math inline">\(\nabla \log \int f = \frac{\int \nabla f}{\int f}\)</span> to show that <span class="math display">\[ \nabla_\phi \, A(\eta(\phi)) = \nabla_\phi \eta(\phi) \cdot \mathbb{E}_{q_\phi}[T(X)].\]</span></p>
 
 
 
