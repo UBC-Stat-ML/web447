@@ -1,5 +1,5 @@
 ---
-title: "Syllabus: STAT447C Bayesian Statistics"
+title: "Syllabus: STAT405 Bayesian Statistics"
 editor: 
   mode: source
 ---
@@ -7,34 +7,39 @@ editor:
 
 {{< include _announce.qmd >}}
 
+{{< include _construction.qmd >}}
+
 
 ## Course description
 
 Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.
 
-In **STAT 447C**, you will:
+In **STAT 405**, you will:
 
 -   design probabilistic models to approach real-world inferential problems;
 -   perform inference using Bayesian modelling languages;
 -   critically assess, debug, and iteratively improve Bayesian workflows;
 -   develop and analyze custom posterior approximation machinery.
 
+Note: this course was called 447C in previous years. 
+
 ## Lecture time and place
 
-**Lecture dates:** January 7, 2025 to April 8, 2025. [Detailed schedule](schedule.qmd)
+**Lecture dates:** Tuesday and Thursday, 9:30-11:00. See {{< var canvas >}} for location. [Detailed schedule](schedule.qmd)
 
-Tuesday and Thursday, 9:30-11:00. 
 
 ## Teaching team
 
 -   [Alexandre Bouchard-Côté (Instructor)](https://www.stat.ubc.ca/~bouchard/index.html)
--   [Nikola Surjanovic (Head TA)](https://nikola-sur.netlify.app/)
 -   [Caden Hewlett (TA)](https://ca.linkedin.com/in/caden-hewlett-841558168)
+-   Junsong Tang (TA)
+
+
 
 ## Prerequisite
 
--   Probability: STAT 302, MATH 302 or equivalent. I will do a review of the relevant concepts, but Bayesian statistics is entirely built on top of probability theory so prior exposure to probability is the key prerequisite for this course.
--   Basic background in linear algebra (e.g. matrix multiplication, eigenvectors) and calculus (see STAT 302's prerequisites for example)
+-   Probability: One of MATH 302, STAT 302, or MATH 418
+-   Inference: either STAT 305 or STAT 460 
 -   Computing: we will use R in the homework and during lectures. If you know another programming language but not R, you can still take this course but be prepared to spend a bit of extra time to get familiar with the R syntax. We will have special office hours sessions at the beginning of the term to help you doing that.
 
 Come talk to me at the end of the first lecture if you are unsure about your preparation for this course.
@@ -79,18 +84,15 @@ Click on each item for details.
     -   Released and submitted on {{< var canvas >}}.
 -   Quizzes (2 x 20%): 40%
     -   In-class.
-    -   Dates: Feb 25 and March 25
+    -   Dates: TBD <!-- Feb 25 and March 25 -->
 -   [Final project](project.qmd): 30%
 
 For the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor's note, this will be done automatically for everyone.
 
-For exercise grading, I will take the $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...))$, where $e_1, e_2, e_3, \dots$ are the scores for the different exercises.
+For exercise grading, I will take the $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...)), \text{mean}(e_3, e_4, ...))$, where $e_1, e_2, e_3, \dots$ are the scores for the different exercises.
 The same applies for clicker participation points.
 This is in place to help a couple 
-students travelling in the first week, but will be automatically applied for everyone so no need to request it.
-
-**Update Jan 20:** since a few students still are having problem enrolling, I have added one more week to the max policy described above, 
-so it is now $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...), \text{mean}(e_3, e_4, ...))$. 
+students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.
 
 Once in a while, I will post some "challenge questions". 
 These are not essential for learning the material and can be skipped. 
@@ -102,8 +104,6 @@ I will not post solutions for the challenge questions.
 
 ## Policy on the use of AI tools (ChatGPT, etc)
 
-**Update Jan 20:** effective starting tomorrow at the end of the lecture, note the following policy. 
-
 - Piazza discussion: use of AI tools is prohibited to compose or answer questions, with the exception of spell-checking tools. 
 - Homework: use of AI tools is prohibited, with the exception of spell-checking tools. 
 - Quizzes: use of AI tools is impossible (closed book, pen and paper). 
@@ -114,10 +114,16 @@ I will not post solutions for the challenge questions.
 
 ## Office hours
 
+TBA
+
+<!--
+
 -   Instructor office hour: Fridays, 1pm, ESB 3125.
 -   TA tutorial: Thursdays, 2pm, ESB 1042.
 
 Available by appointment if you are unable to attend drop-in hours.
+
+-->
 
 ## Course communication
 
@@ -129,4 +135,4 @@ Course announcements will be posted on {{< var canvas >}}.
 
 Use {{< var piazza >}} for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.
 
-Use private piazza questions if, and only if the question is about a personal matter.
+Use canvas messages if, and only if the question is about a personal matter.

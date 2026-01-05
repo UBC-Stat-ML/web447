@@ -6,6 +6,10 @@ editor:
 
 {{< include _announce.qmd >}}
 
+{{< include _construction.qmd >}}
+
+<!--
+
 | Date | Topics | Readings |
 |----|----|----|
 | Tue, Jan 7 | Overview. Probabilistic inference on discrete spaces. | BDA 1.1-1.10 |
@@ -36,6 +40,8 @@ editor:
 | Tue, Apr 1 | MCMC developer guide. | BDA 12.1-12.6 |
 | Th, Apr 3 |  |  |
 | Tue, Apr 8 | More inference techniques. | BDA 13.7 |
-| Fri, Apr 19 | **Final project due.** |  |
+| Sat, Apr 19 | **Final project due.** |  |
 
 : {.striped .hover tbl-colwidths="\[15,65,20\]"}
+
+-->
