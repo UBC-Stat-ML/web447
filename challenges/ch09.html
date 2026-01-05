@@ -67,35 +67,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -1030,21 +1001,19 @@ Not for grades!
 <p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
 </div>
 </div>
-<p>In this question we frame the Metropolis–Hastings random-walk algorithm as an involution on an expanded space. Recall that the standard random-walk MH algorithm for sampling from <span class="math inline">\(\pi(x) \propto \gamma(x)\)</span>, if we are currently at state <span class="math inline">\(X^{(m-1)}\)</span>, proceeds as follows:</p>
-<ol type="1">
-<li>Sample <span class="math inline">\(\tilde X^{(m)} \sim \mathcal{N}(X^{(m-1)}, \sigma^2)\)</span>.</li>
-<li>Draw <span class="math inline">\(U \sim {\mathrm{Unif}}(0,1)\)</span> and compute <span class="math display">\[\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)})}{\gamma(X^{(m-1)})}\right\}.\]</span></li>
-<li>If <span class="math inline">\(U \leq \alpha\)</span>, set <span class="math inline">\(X^{(m)} = \tilde X^{(m)}\)</span>. Otherwise, set <span class="math inline">\(X^{(m)} = X^{(m-1)}\)</span>.</li>
-</ol>
-<p>To frame it as an involution, consider the expanded target <span class="math inline">\(\bar\pi(x,z)\)</span>, with an additional auxiliary variable <span class="math inline">\(z\)</span>, where <span class="math display">\[ \bar \gamma(x, z) \propto \gamma(x) \cdot \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2} z^2\right).\]</span> That is, the <span class="math inline">\(x\)</span>-marginal of <span class="math inline">\(\gamma(x,z)\)</span> still corresponds to <span class="math inline">\(\pi(x)\)</span>, and the <span class="math inline">\(z\)</span>-marginal corresponds to a standard normal distribution. Consider the following algorithm:</p>
-<ol type="1">
-<li>Sample <span class="math inline">\(Z^{(m)} \sim \mathcal{N}(0, 1)\)</span>.</li>
-<li>Set <span class="math inline">\((\tilde X^{(m)}, \tilde Z^{(m)}) = T_\sigma(X^{(m-1)}, Z^{(m)})\)</span></li>
-<li>Draw <span class="math inline">\(U \sim {\mathrm{Unif}}(0,1)\)</span> and compute <span class="math display">\[\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)}, \tilde Z^{(m)})}{\gamma(X^{(m-1)}, \tilde Z^{(m)})}\right\}.\]</span></li>
-<li>If <span class="math inline">\(U \leq \alpha\)</span>, set <span class="math inline">\(X^{(m)} = \tilde X^{(m)}\)</span>. Otherwise, set <span class="math inline">\(X^{(m)} = X^{(m-1)}\)</span>.</li>
-</ol>
-<p>Specify <span class="math inline">\(T_\sigma: \mathbb{R}\times \mathbb{R}\to \mathbb{R}\times \mathbb{R}\)</span> and prove that it is an involution. It should be chosen such that the random-walk behaviour on the <span class="math inline">\(x\)</span>-space is preserved.</p>
-<p>What is the determinant of the Jacobian of the transformation <span class="math inline">\(T_\sigma(x,z)\)</span>?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Page under construction: information on this page may change.</p>
+</div>
+</div>
 
 
 

@@ -67,35 +67,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -1030,9 +1001,19 @@ Not for grades!
 <p>These are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.</p>
 </div>
 </div>
-<p>In this challenge question, we obtain an even more general result than the one presented in Q1 of Homework 10. For this question, recall that a family of distributions <span class="math inline">\(\{q_\phi : \phi \in \Phi\}\)</span> is an exponential family if the density can be written in the form <span class="math display">\[ q_\phi(x) = h(x) \exp(\eta(\phi)^\top T(x) - A(\eta(\phi))), \]</span> where <span class="math inline">\(h\)</span> is the <em>base measure</em>, <span class="math inline">\(\eta\)</span> is the <em>natural parameter</em>, and <span class="math inline">\(T\)</span> is the <em>sufficient statistic</em>. (Note that this is the fully general form, where <span class="math inline">\(x\)</span> and <span class="math inline">\(\phi\)</span> may be vectors.)</p>
-<p>Show that <span class="math display">\[ \nabla_\phi \, \operatorname{KL}(\pi \| q_\phi) = \nabla_\phi \eta(\phi) \cdot \left[\mathbb{E}_{q_\phi}[T(X)] - \mathbb{E}_\pi[T(X)]\right].\]</span></p>
-<p><strong>Hints:</strong> Note that <span class="math inline">\(A(\eta(\phi))\)</span> acts as a normalizing constant for a given <span class="math inline">\(\phi\)</span>. Use the fact that <span class="math inline">\(\int q_\phi(x) \, dx = 1\)</span> and <span class="math inline">\(\nabla \log \int f = \frac{\int \nabla f}{\int f}\)</span> to show that <span class="math display">\[ \nabla_\phi \, A(\eta(\phi)) = \nabla_\phi \eta(\phi) \cdot \mathbb{E}_{q_\phi}[T(X)].\]</span></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Page under construction: information on this page may change.</p>
+</div>
+</div>
 
 
 

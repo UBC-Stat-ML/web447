@@ -2074,7 +2074,7 @@
     "href": "challenges/ch05.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nConsider the following regression model:\n\nsuppressPackageStartupMessages(require(rstan))\n\n\ndata {\n  matrix[3,2] design_matrix; // number of successes\n  vector[3] observations;\n}\n\nparameters {\n  vector[2] coefficients;\n}\n\nmodel {\n  coefficients[1] ~ cauchy(0, 1);\n  coefficients[2] ~ cauchy(0, 1);\n  \n  for (i in 1:3) {\n    observations[i] ~ normal(design_matrix[i] * coefficients, 1);\n  }\n}\n\nWe now run it on a simple synthetic dataset (note the zeros in the design matrix):\n\nmatrix = rbind(\n  c(0.1, 0),\n  c(-0.3, 0),\n  c(0, 0)\n)\nobs = c(0.2, 0.1, -0.4)\nfit = sampling(\n  cauchy,\n  seed = 1,\n  refresh = 0,\n  data = list(design_matrix = matrix, observations = obs),        \n  iter = 10000                   \n)\n\nWarning: There were 71 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See\nhttps://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded\n\n\nWarning: There were 1 chains where the estimated Bayesian Fraction of Missing Information was low. See\nhttps://mc-stan.org/misc/warnings.html#bfmi-low\n\n\nWarning: Examine the pairs() plot to diagnose sampling problems\n\n\n…and look at the trace plots…\n\nsuppressPackageStartupMessages(require(bayesplot))\nsuppressPackageStartupMessages(require(ggplot2))\nmcmc_trace(fit, pars = c(\"coefficients[1]\", \"coefficients[2]\")) + theme_minimal()\n\n\n\n\n\n\n\n\nWhat is going on with the second coefficient? Would you get a different behaviour if you used i.i.d. samples?",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Some theory",
       "Challenge"
@@ -2085,29 +2085,7 @@
     "href": "challenges/ch04.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Challenge"
-    ]
-  },
-  {
-    "objectID": "challenges/ch04.html#q.1-modelling",
-    "href": "challenges/ch04.html#q.1-modelling",
-    "title": "Challenge questions",
-    "section": "Q.1 Modelling",
-    "text": "Q.1 Modelling\nDesign a Bayesian model to infer the total number of copies in circulation. Motivate all choices you make.",
-    "crumbs": [
-      "The joy of probabilistic modelling",
-      "Challenge"
-    ]
-  },
-  {
-    "objectID": "challenges/ch04.html#q.2-posterior-computation",
-    "href": "challenges/ch04.html#q.2-posterior-computation",
-    "title": "Challenge questions",
-    "section": "Q.2 Posterior computation",
-    "text": "Q.2 Posterior computation\nApproximate the posterior distribution and produce:\n\nA posterior PMF.\nA point estimate.\nA 95% highest probability set.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Challenge"
@@ -2118,7 +2096,7 @@
     "href": "challenges/ch03.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nRecall the decision tree visualization we introduced in the first week.\nCreate a variant of simPPLe which draws decision trees automatically.\nSpecifically, your code should include a function decision_tree which takes as input a simPPLe probabilistic program, and output a mermaid string which can be rendered in your browser as a diagram.\nDemonstrate your code on two examples: one in class, and one not from the class.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "A first look at PPLs",
       "Challenge"
@@ -2129,7 +2107,7 @@
     "href": "challenges/ch09.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nIn this question we frame the Metropolis–Hastings random-walk algorithm as an involution on an expanded space. Recall that the standard random-walk MH algorithm for sampling from \\(\\pi(x) \\propto \\gamma(x)\\), if we are currently at state \\(X^{(m-1)}\\), proceeds as follows:\n\nSample \\(\\tilde X^{(m)} \\sim \\mathcal{N}(X^{(m-1)}, \\sigma^2)\\).\nDraw \\(U \\sim {\\mathrm{Unif}}(0,1)\\) and compute \\[\\alpha = \\min\\left\\{1, \\frac{\\gamma(\\tilde X^{(m)})}{\\gamma(X^{(m-1)})}\\right\\}.\\]\nIf \\(U \\leq \\alpha\\), set \\(X^{(m)} = \\tilde X^{(m)}\\). Otherwise, set \\(X^{(m)} = X^{(m-1)}\\).\n\nTo frame it as an involution, consider the expanded target \\(\\bar\\pi(x,z)\\), with an additional auxiliary variable \\(z\\), where \\[ \\bar \\gamma(x, z) \\propto \\gamma(x) \\cdot \\frac{1}{\\sqrt{2\\pi}} \\exp\\left(-\\frac{1}{2} z^2\\right).\\] That is, the \\(x\\)-marginal of \\(\\gamma(x,z)\\) still corresponds to \\(\\pi(x)\\), and the \\(z\\)-marginal corresponds to a standard normal distribution. Consider the following algorithm:\n\nSample \\(Z^{(m)} \\sim \\mathcal{N}(0, 1)\\).\nSet \\((\\tilde X^{(m)}, \\tilde Z^{(m)}) = T_\\sigma(X^{(m-1)}, Z^{(m)})\\)\nDraw \\(U \\sim {\\mathrm{Unif}}(0,1)\\) and compute \\[\\alpha = \\min\\left\\{1, \\frac{\\gamma(\\tilde X^{(m)}, \\tilde Z^{(m)})}{\\gamma(X^{(m-1)}, \\tilde Z^{(m)})}\\right\\}.\\]\nIf \\(U \\leq \\alpha\\), set \\(X^{(m)} = \\tilde X^{(m)}\\). Otherwise, set \\(X^{(m)} = X^{(m-1)}\\).\n\nSpecify \\(T_\\sigma: \\mathbb{R}\\times \\mathbb{R}\\to \\mathbb{R}\\times \\mathbb{R}\\) and prove that it is an involution. It should be chosen such that the random-walk behaviour on the \\(x\\)-space is preserved.\nWhat is the determinant of the Jacobian of the transformation \\(T_\\sigma(x,z)\\)?",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "MCMC Hacking",
       "Challenge"
@@ -3967,7 +3945,7 @@
     "href": "challenges/ch08.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nFit a hierarchical model in Stan. E.g., modify the tutorial on tidybayes to make the model hierarchical, following the same model as in exercise 6. (You may also use a different example if you find a data set and describe the model.)",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayesian workflow",
       "Challenge"
@@ -3978,7 +3956,7 @@
     "href": "challenges/ch02.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\).",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayes on a discrete model",
       "Challenge"
@@ -3989,7 +3967,7 @@
     "href": "challenges/ch06.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\nImplement in Stan the hierarchical model for rockets described in the lectures.\nThe full data is available at https://github.com/UBC-Stat-ML/web447/raw/main/data/launches.csv\nDescribe and implement one improvement to the model.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Hierarchical models",
       "Challenge"
@@ -4000,7 +3978,7 @@
     "href": "challenges/ch10.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nIn this challenge question, we obtain an even more general result than the one presented in Q1 of Homework 10. For this question, recall that a family of distributions \\(\\{q_\\phi : \\phi \\in \\Phi\\}\\) is an exponential family if the density can be written in the form \\[ q_\\phi(x) = h(x) \\exp(\\eta(\\phi)^\\top T(x) - A(\\eta(\\phi))), \\] where \\(h\\) is the base measure, \\(\\eta\\) is the natural parameter, and \\(T\\) is the sufficient statistic. (Note that this is the fully general form, where \\(x\\) and \\(\\phi\\) may be vectors.)\nShow that \\[ \\nabla_\\phi \\, \\operatorname{KL}(\\pi \\| q_\\phi) = \\nabla_\\phi \\eta(\\phi) \\cdot \\left[\\mathbb{E}_{q_\\phi}[T(X)] - \\mathbb{E}_\\pi[T(X)]\\right].\\]\nHints: Note that \\(A(\\eta(\\phi))\\) acts as a normalizing constant for a given \\(\\phi\\). Use the fact that \\(\\int q_\\phi(x) \\, dx = 1\\) and \\(\\nabla \\log \\int f = \\frac{\\int \\nabla f}{\\int f}\\) to show that \\[ \\nabla_\\phi \\, A(\\eta(\\phi)) = \\nabla_\\phi \\eta(\\phi) \\cdot \\mathbb{E}_{q_\\phi}[T(X)].\\]",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Advanced inference",
       "Challenge"
