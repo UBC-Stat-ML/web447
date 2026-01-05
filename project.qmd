@@ -4,6 +4,7 @@ title: "Final project"
 
 {{< include _construction.qmd >}}
 
+
 ## Overview
 
 The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.
