@@ -1069,52 +1069,47 @@ L(\phi) &amp;= \int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] 
 \nabla \mathbb{E}_\phi[h(\phi, X)] &amp;= \mathbb{E}_\phi[\nabla h(\phi, X)] \;\;\text{(interchange of $\nabla$ and $\mathbb{E}$)} \\
 &amp;\approx \underbrace{ \frac{1}{M} \sum_{m=1}^M \nabla h(\phi, X^{(m)})}_{\text{broken stochastic gradient estimator}} \;\;\text{(simple Monte Carlo)}.
 \end{align*}\]</span></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Product rule on <span class="math inline">\(q_\phi(x) \log q_\phi(x)\)</span> leads to a missing term.</li>
-<li>One can never interchange <span class="math inline">\(\nabla\)</span> and <span class="math inline">\(\mathbb{E}\)</span>.</li>
-<li>Simple Monte Carlo cannot be applied because <span class="math inline">\(q\)</span> is intractable.</li>
-<li>Simple Monte Carlo cannot be applied because of some other reason.</li>
-<li>None of the above.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Correct answer is 1. Recall the product rule is <span class="math inline">\((u  v)' = u' v + u v'\)</span>.</p>
-<p>Regarding 2: while the interchange needs to be justified mathematically, it does hold under certain conditions for example when the function <span class="math inline">\(h\)</span> is bounded and differentiable everywhere, see <a href="https://www.stat.ubc.ca/~bouchard/pub/probability-illustrated-april-2024.pdf">547C lecture notes, Section 6.8</a> for more details.</p>
-<p>Here is the details of where the missing term comes from (assuming interchange is justified):</p>
-<p><span class="math display">\[\begin{align*}
-\nabla \mathbb{E}_\phi[ h(\phi, X)] &amp;= \nabla \int q_\phi(x) h(\phi, x) \mathrm{d}x \\
-&amp;= \int \nabla[q_\phi(x) h(\phi, x)] \mathrm{d}x \\
-&amp;= \underbrace{\int q_\phi(x) \nabla  h(\phi, x) \mathrm{d}x}_{\mathbb{E}_\phi[\nabla h(\phi, X)]} + \underbrace{\int h(\phi, x) \nabla q_\phi(x) \mathrm{d}x.}_\text{term missing in the above "broken estimator"}
-\end{align*}\]</span></p>
-<p>Note the missing term is “annoying” because it no longer has the <span class="math inline">\(q_\phi(x)\)</span> factor making it less straightforward to write as an expectation and hence approximated using simple Monte Carlo.</p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. Product rule on $q_\phi(x) \log q_\phi(x)$ leads to a missing term. 
+2. One can never interchange $\nabla$ and $\ex$.
+3. Simple Monte Carlo cannot be applied because $q$ is intractable. 
+4. Simple Monte Carlo cannot be applied because of some other reason. 
+5. None of the above.
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is 1. Recall the product rule is $(u  v)' = u' v + u v'$. 
+
+Regarding 2: while the interchange needs to be justified mathematically, it 
+does hold under certain conditions for example when the function $h$ is bounded and differentiable 
+everywhere, see [547C lecture notes, Section 6.8](https://www.stat.ubc.ca/~bouchard/pub/probability-illustrated-april-2024.pdf) 
+for more details.
+
+Here is the details of where the missing term comes from (assuming interchange is justified):
+
+\begin{align*}
+\nabla \ex_\phi[ h(\phi, X)] &= \nabla \int q_\phi(x) h(\phi, x) \dee x \\ 
+&= \int \nabla[q_\phi(x) h(\phi, x)] \dee x \\
+&= \underbrace{\int q_\phi(x) \nabla  h(\phi, x) \dee x}_{\ex_\phi[\nabla h(\phi, X)]} + \underbrace{\int h(\phi, x) \nabla q_\phi(x) \dee x.}_\text{term missing in the above "broken estimator"}
+\end{align*}
+
+Note the missing term is "annoying" because it no longer has the $q_\phi(x)$ factor making it less straightforward 
+to write as an expectation and hence approximated using simple Monte Carlo. 
+:::
+
+
+-->
 </section>
 <section id="solution-reparameterization" class="level2">
 <h2 class="anchored" data-anchor-id="solution-reparameterization">Solution: reparameterization</h2>

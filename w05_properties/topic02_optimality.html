@@ -1089,23 +1089,19 @@ https://github.com/trevorcampbell/shortex
 <li>This cannot happen unless the loss function is non-convex</li>
 <li>This cannot happen because of some other reason</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Correct answer is: “This cannot happen because of some other reason.”</p>
-<p><strong>Intuition:</strong> Bayes estimator is designed to minimize the average loss. So you cannot beat Bayes at its game!</p>
-</div>
-</div>
-</div>
+<!--
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is: "This cannot happen because of some other reason."
+
+**Intuition:** Bayes estimator is designed to minimize the average loss. 
+    So you cannot beat Bayes at its game!
+:::
+
+-->
 </section>
 <section id="optimality-of-bayesian-estimators-theorem" class="level1">
 <h1>Optimality of Bayesian estimators: theorem</h1>
@@ -1123,31 +1119,28 @@ Click for answer
 \end{align*}
 \]</span></p>
 <p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for possible answers
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A key factor to take into account:</p>
-<ul>
-<li>If the estimator <span class="math inline">\(\delta_{\text{B}}\)</span> is based on an approximation of the posterior (e.g.&nbsp;SNIS), then the optimality property may not hold!</li>
-</ul>
-<p>Some other more “practical” factors to keep in mind:</p>
-<ul>
-<li>Software defects (more frequent than you may think—we will talk more about them later).</li>
-<li><a href="https://en.wikipedia.org/wiki/Publication_bias">Publication bias</a> or even, academic dishonesty (e.g.&nbsp;repeating simulation until a desired result is obtained).</li>
-</ul>
-<p>Also, keep in mind this page implicitly assumes the model is well-specified (since we generate data from the joint distribution). The situation is more complex in mis-specified models (asymptotics becomes critical in that case).</p>
-</div>
-</div>
-</div>
+<!--
+
+
+::: {.callout-caution collapse="true"} 
+## Click for possible answers
+
+A key factor to take into account:
+
+- If the estimator $\best$ is based on an approximation of the posterior (e.g. SNIS), 
+    then the optimality property may not hold!
+
+Some other more "practical" factors to keep in mind:
+
+- Software defects (more frequent than you may think---we will talk more about them later).
+- [Publication bias](https://en.wikipedia.org/wiki/Publication_bias) or even, academic dishonesty (e.g. repeating simulation until a desired result is obtained).
+
+Also, keep in mind this page implicitly assumes the model is well-specified 
+(since we generate data from the joint distribution). The situation is more 
+complex in mis-specified models (asymptotics becomes critical in that case).
+:::
+
+-->
 
 
 </section>

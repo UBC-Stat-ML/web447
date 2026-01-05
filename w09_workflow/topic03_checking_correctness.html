@@ -1021,46 +1021,39 @@ https://github.com/trevorcampbell/shortex
 <li>However we identified several factors that can lead to a “warning”.</li>
 </ul>
 <p><strong>Question:</strong> how can we modify <a href="../w09_workflow/topic02_goodness_of_fit.html">last page’s check</a> to exclude “model mis-specification” as a potential cause?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Use simulated data.</li>
-<li>Use a smaller dataset.</li>
-<li>Use a larger dataset.</li>
-<li>Repeat the test several times.</li>
-<li>None of the above.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Best answer is to use <a href="../w01_discrete_inference/topic06_forward_sampling.html">simulated data</a>. When the code is correct, simulated data leads to the well-specified case. In that case, <a href="../w05_properties/topic06_calibration_well_specified.html">we know credible interval are calibrated</a>.</p>
-<p>If the code is incorrect, that guarantee is not present anymore.</p>
-<p>Using a larger dataset will lead to only approximate calibration. Hence when we hit a warning we cannot be completely sure if it is because we need to use even more data or if there is an actual bug. Larger datasets also mean the test will take a long time to run, which is undesirable.</p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. Use simulated data. 
+2. Use a smaller dataset. 
+3. Use a larger dataset. 
+4. Repeat the test several times. 
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Best answer is to 
+use [simulated data](../w01_discrete_inference/topic06_forward_sampling.qmd). 
+When the code is correct, simulated data leads to the well-specified case. 
+In that case, [we know credible interval are calibrated](../w05_properties/topic06_calibration_well_specified.qmd). 
+
+If the code is incorrect, that guarantee is not present anymore.
+
+Using a larger dataset will lead to only approximate calibration. Hence when we hit a warning
+we cannot be completely sure if it is because we need to use even more data or if there is an actual bug. 
+Larger datasets also mean the test will take a long time to run, which is undesirable.
+
+:::
+
+
+-->
 </section>
 <section id="additional-references" class="level2">
 <h2 class="anchored" data-anchor-id="additional-references">Additional references</h2>

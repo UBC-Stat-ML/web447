@@ -1150,28 +1150,22 @@ Y | X &amp;\sim {\mathrm{Bern}}(X/2)
 <li>Suppose I want one more digit of accuracy…</li>
 </ul>
 <p><strong>By how much should I increase the number of iteration to get one more digit of accuracy?</strong></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>10 times more iterations</li>
-<li>100 times more iterations</li>
-<li>1000 times more iterations</li>
-<li>there is no way to answer this questions</li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. 10 times more iterations
+1. 100 times more iterations
+1. 1000 times more iterations
+1. there is no way to answer this questions
+1. None of the above
+:::
+
+
+
+-->
 </section>
 <section id="empirical-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="empirical-scaling">Empirical scaling</h2>
@@ -1230,95 +1224,64 @@ Click for choices
 <li>What can you this coefficient tell you about the scaling of the error?</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(2\)</span></li>
-<li><span class="math inline">\(1/2\)</span></li>
-<li><span class="math inline">\(1\)</span></li>
-<li><span class="math inline">\(-1/2\)</span></li>
-<li><span class="math inline">\(-2\)</span></li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Get <span class="math inline">\(a \approx -1/2\)</span></p></li>
-<li><p>Hence taking power on each side of</p></li>
-</ul>
-<p><span class="math inline">\(\underbrace{\log_{10}(\text{error})}_{y} = a \underbrace{\log_{10}(\text{number of iterations})}_{x} + b\)</span></p>
-<ul>
-<li>we get that the error will scale like <span class="math display">\[\frac{\text{constant}}{\sqrt{\text{number of iterations}}}\]</span></li>
-</ul>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $2$
+1. $1/2$
+1. $1$
+1. $-1/2$
+1. $-2$
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+- Get $a \approx -1/2$
+
+- Hence taking power on each side of 
+
+$\underbrace{\log_{10}(\text{error})}_{y} = a \underbrace{\log_{10}(\text{number of iterations})}_{x} + b$
+
+- we get that the error will scale like 
+$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
+:::
+
+
+
+-->
 <p>Based on this extra information, let’s try revisit our initial question: <strong>By how much should I increase the number of iteration to get one more digit of accuracy?</strong></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>10 times more iterations</li>
-<li>100 times more iterations</li>
-<li>1000 times more iterations</li>
-<li>there is no way to answer this questions</li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>since we now know that the error will scale like <span class="math display">\[\frac{\text{constant}}{\sqrt{\text{number of iterations}}}\]</span></p></li>
-<li><p>… if we want to reduce it by factor 10 (i.e.&nbsp;“gain one significant digit”), we need 100x more iterations</p></li>
-<li><p>To gain 2 more significant digits: need 10,000x more iterations, etc</p></li>
-<li><p>What we did here is an example of an (empirical) <strong>asymptotic analysis</strong>.</p></li>
-</ul>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. 10 times more iterations
+1. 100 times more iterations
+1. 1000 times more iterations
+1. there is no way to answer this questions
+1. None of the above
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+- since we now know that the error will scale like 
+$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
+
+- ... if we want to reduce it by factor 10 (i.e. "gain one significant digit"), we need 100x more iterations
+- To gain 2 more significant digits: need 10,000x more iterations, etc
+
+- What we did here is an example of an (empirical) **asymptotic analysis**.
+:::
+
+-->
 </section>
 <section id="mathematical-underpinnings" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>

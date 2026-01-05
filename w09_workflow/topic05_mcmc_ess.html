@@ -1111,47 +1111,43 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="bayesian-statisticians-using-central-limit-theorems">Bayesian statisticians using central limit theorems?</h3>
 <p>Earlier on, when building <a href="../w05_properties/topic04_decision_to_set.html">credible interval</a>, (a Bayesian measure of <em>statistical error</em>) we avoided central limit theorems.</p>
 <p><strong>Question:</strong> why are Bayesians OK with using central limit theorems for MCMC error analysis (i.e., for <em>computational error</em>)?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Actually, Bayesians sometimes use CLTs for building credible intervals.</li>
-<li>Because it is often harder to increase the number of MCMC iterations <span class="math inline">\(M\)</span> compared to the number of data points.</li>
-<li>Because it is often easier to increase the number of MCMC iterations <span class="math inline">\(M\)</span> compared to the number of data points.</li>
-<li>MCMC error analysis is less important.</li>
-<li>Bayesians are not completely happy with CLT-based MCMC error analysis.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Best answer is: #3.</p>
-<p>In fact, in some situation it may be <em>impossible</em> to increase the number of data points. For example, in the <a href="../w04_glms/topic04_classification.html">Ariane 1 success rate analysis</a> we will never get more datapoints since this type of rocket is discontinued.</p>
-<p>Answer #1 is also acceptable: some approaches use the <a href="https://en.wikipedia.org/wiki/Laplace%27s_approximation">Laplace approximation</a> instead of MCMC, which is motivated by the central limit theorem (more precisely, the <a href="../w05_properties/topic07_calibration_mis_specified_files/">Bernstein-von Mises theorem</a>).</p>
-<p>Answer #5 is also acceptable: there is indeed ongoing research on so called “non-asymptotic” approaches to bound the error of MCMC algorithms. See for example <a href="https://arxiv.org/pdf/1106.4739.pdf">Latuszynski et al., 2013</a> and <a href="https://doi.org/10.1214/EJP.v20-4039">Paulin, 2015</a>.</p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. Actually, Bayesians sometimes use CLTs for building credible intervals.
+2. Because it is often harder to increase the number of MCMC iterations $M$ compared to the number of data points. 
+3. Because it is often easier to increase the number of MCMC iterations $M$ compared to the number of data points. 
+4. MCMC error analysis is less important.
+5. Bayesians are not completely happy with CLT-based MCMC error analysis. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Best answer is: #3. 
+
+In fact, in some situation it may be *impossible* to increase the number of data points. 
+For example, in the [Ariane 1 success rate analysis](../w04_glms/topic04_classification.qmd)
+we will never get more datapoints since this type of rocket is discontinued. 
+
+Answer #1 is also acceptable: some approaches use the 
+  [Laplace approximation](https://en.wikipedia.org/wiki/Laplace%27s_approximation) instead of MCMC, 
+  which is motivated by the central limit theorem (more precisely, the [Bernstein-von Mises theorem](../w05_properties/topic07_calibration_mis_specified_files/)).
+  
+Answer #5 is also acceptable: there is indeed ongoing research on so called "non-asymptotic" approaches to 
+  bound the error of MCMC algorithms. See for example 
+  [Latuszynski et al., 2013](https://arxiv.org/pdf/1106.4739.pdf) and 
+  [Paulin, 2015](https://doi.org/10.1214/EJP.v20-4039). 
+  
+
+:::
+
+-->
 </section>
 </section>
 <section id="executive-version" class="level2 page-columns page-full">
@@ -1211,50 +1207,40 @@ convergence, Rhat=1).</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> construct a 95% confidence interval for the posterior mean of <span class="math inline">\(X\)</span>. Is the <a href="../w03_ppl/topic03_continuous.html">true value</a> contained in the interval?</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\([1.16 \pm 0.03]\)</span>, and the true value is contained in the interval</li>
-<li><span class="math inline">\([1.16 \pm 0.03]\)</span>, and the true value is not contained in the interval</li>
-<li><span class="math inline">\([1.16 \pm 0.06]\)</span>, and the true value is contained in the interval</li>
-<li><span class="math inline">\([1.16 \pm 0.06]\)</span>, and the true value is not contained in the interval</li>
-<li>None of the above</li>
-</ol>
-<p>In the above: <span class="math inline">\([x \pm r]\)</span> denotes the confidence interval <span class="math inline">\([x - r, x + r]\)</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Reading off this table we have:</p>
-<ul>
-<li>Estimate is <code>1.16</code>,</li>
-<li>twice the standard error gives <code>0.06</code> (from the column <code>se_mean</code>, which stands for “standard error for the posterior mean”).</li>
-</ul>
-<p>From <a href="../w03_ppl/topic03_continuous.html">previous calculations</a>, we know the true answer is <span class="math inline">\(1.117\)</span>, so the true error is <span class="math inline">\(0.043\)</span>, hence the true value is contained in the interval, as expected for approximately<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 95% of the random seeds passed to Stan.</p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $[1.16 \pm 0.03]$, and the true value is contained in the interval
+1. $[1.16 \pm 0.03]$, and the true value is not contained in the interval
+1. $[1.16 \pm 0.06]$, and the true value is contained in the interval
+1. $[1.16 \pm 0.06]$, and the true value is not contained in the interval
+1. None of the above
+
+In the above: $[x \pm r]$ denotes the confidence interval $[x - r, x + r]$
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Reading off this table we have:
+
+- Estimate is `1.16`, 
+- twice the standard error gives `0.06` (from the column `se_mean`, which stands for "standard error for the posterior mean").
+
+From [previous calculations](../w03_ppl/topic03_continuous.qmd), we know the true answer is $1.117$, so the 
+true error is $0.043$, hence the true value is contained in the interval, as expected for approximately[^2] 95\% of the random seeds passed to Stan. 
+
+[^2]: It is only approximate, since as we shall see the standard error estimator uses central limit theorem approximations. 
+
+:::
+
+
+-->
 </section>
 <section id="mathematical-underpinnings" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>
@@ -1270,7 +1256,7 @@ Click for answer
 <li>Recall the central limit theorem (CLT) for independent and identically distributed (i.i.d.) random variables:
 <ul>
 <li>if some random variables <span class="math inline">\(V_i\)</span>’s are i.i.d. and</li>
-<li>each has finite variance, then we have<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span id="eq-clt-iid"><span class="math display">\[\sqrt{n}(\bar V - \mu) \to \mathcal{N}(0, \operatorname{SD}[V]), \tag{1}\]</span></span> where <span class="math inline">\(\bar V = \frac{1}{n} \sum_{i=1}^n V_i\)</span> and <span class="math inline">\(\mu = \mathbb{E}[V]\)</span>.</li>
+<li>each has finite variance, then we have<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span id="eq-clt-iid"><span class="math display">\[\sqrt{n}(\bar V - \mu) \to \mathcal{N}(0, \operatorname{SD}[V]), \tag{1}\]</span></span> where <span class="math inline">\(\bar V = \frac{1}{n} \sum_{i=1}^n V_i\)</span> and <span class="math inline">\(\mu = \mathbb{E}[V]\)</span>.</li>
 </ul></li>
 <li>From the central limit theorem, recall that standard frequentist arguments give: <span id="eq-ci"><span class="math display">\[\mathbb{P}(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%, \tag{2}\]</span></span> where: the Standard Error (SE) is given by <span class="math inline">\(\text{SE} = \operatorname{SD}[V] / \sqrt{n}\)</span>.</li>
 </ul>
@@ -1300,7 +1286,7 @@ Click for answer
 <li>Let <span class="math inline">\(\bar X\)</span> denote our MCMC estimator, i.e., the average of the samples.</li>
 </ul></li>
 </ul>
-<p><strong>Theorem:</strong> assuming <span class="math inline">\(\sigma^2 = \int (x - \mu)^2 \pi(x) \mathrm{d}x &lt; \infty\)</span> (in our context: posterior variance is finite) and under appropriate <a href="../w09_workflow/topic04_mcmc_diagnostics.html">fast mixing conditions</a>,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <span id="eq-clt-mc"><span class="math display">\[\sqrt{n}(\bar X - \mu) \to \mathcal{N}(0, \sigma_a), \tag{3}\]</span></span> where the constant <span class="math inline">\(\sigma^2_a &gt; 0\)</span> is known as the <strong>asymptotic variance.</strong></p>
+<p><strong>Theorem:</strong> assuming <span class="math inline">\(\sigma^2 = \int (x - \mu)^2 \pi(x) \mathrm{d}x &lt; \infty\)</span> (in our context: posterior variance is finite) and under appropriate <a href="../w09_workflow/topic04_mcmc_diagnostics.html">fast mixing conditions</a>,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span id="eq-clt-mc"><span class="math display">\[\sqrt{n}(\bar X - \mu) \to \mathcal{N}(0, \sigma_a), \tag{3}\]</span></span> where the constant <span class="math inline">\(\sigma^2_a &gt; 0\)</span> is known as the <strong>asymptotic variance.</strong></p>
 </section>
 <section id="asymptotic-variance" class="level3">
 <h3 class="anchored" data-anchor-id="asymptotic-variance">Asymptotic variance</h3>
@@ -1309,14 +1295,14 @@ Click for answer
 <li>For i.i.d. CLT: variance of the limiting distribution is equal to the variance of <span class="math inline">\(X_1\)</span>.</li>
 <li>For Markov CLT: we left the variance of the limiting distribution more vague (<span class="math inline">\(\sigma_a^2\)</span>).</li>
 </ul>
-<p><strong>Intuition:</strong> because of the dependences between MCMC iterations, the noise of the approximation can be larger compared to the i.i.d. setting.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><strong>Intuition:</strong> because of the dependences between MCMC iterations, the noise of the approximation can be larger compared to the i.i.d. setting.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="effective-sample-size" class="level3">
 <h3 class="anchored" data-anchor-id="effective-sample-size">Effective sample size</h3>
 <p>The MCMC Effective Sample Size (ESS) is an answer to the following:</p>
-<p><strong>Question:</strong> How many i.i.d. samples <span class="math inline">\(n_e\)</span> would be equivalent<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> to my <span class="math inline">\(M\)</span> samples obtained from MCMC?</p>
+<p><strong>Question:</strong> How many i.i.d. samples <span class="math inline">\(n_e\)</span> would be equivalent<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> to my <span class="math inline">\(M\)</span> samples obtained from MCMC?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1325,54 +1311,54 @@ Click for hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Apply the following formula, <span class="math inline">\(\operatorname{Var}[a X + b] = a^2 \operatorname{Var}[X]\)</span> to both the CLT for i.i.d. samples, and then the CLT for Markov chains.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math display">\[n_e = \frac{\sigma^2}{\sigma_a^2} M.\]</span></li>
-<li><span class="math display">\[n_e = \frac{\sigma}{\sigma_a} M.\]</span></li>
-<li><span class="math display">\[n_e = \frac{\sigma_a^2}{\sigma^2} M.\]</span></li>
-<li><span class="math display">\[n_e = \frac{\sigma_a}{\sigma} M.\]</span></li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>CLT for Markov chains gives: <span class="math display">\[\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,\]</span> where <span class="math inline">\(G\)</span> is standard normal.</p>
-<p>Taking the variance on both sides: <span class="math display">\[M \operatorname{Var}[\bar X_\text{Markov}] \approx \sigma_a^2.\]</span></p>
-<p>CLT for i.i.d. gives: <span class="math display">\[\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G\]</span></p>
-<p>Taking the variance on both sides (we could actually bypass the CLT argument and show the equality below directly in the i.i.d. case): <span class="math display">\[n_e \operatorname{Var}[\bar X_\text{iid}] \approx \sigma^2.\]</span></p>
-<p>We have <span class="math inline">\(n_e\)</span> is defined as having the property that <span class="math inline">\(\operatorname{Var}[\bar X_\text{iid}] = \operatorname{Var}[\bar X_\text{Markov}]\)</span>, so after some algebra: <span class="math display">\[n_e = \frac{\sigma^2}{\sigma_a^2} M.\]</span></p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $$n_e = \frac{\sigma^2}{\sigma_a^2} M.$$
+1. $$n_e = \frac{\sigma}{\sigma_a} M.$$
+1. $$n_e = \frac{\sigma_a^2}{\sigma^2} M.$$
+1. $$n_e = \frac{\sigma_a}{\sigma} M.$$
+1. None of the above
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+
+CLT for Markov chains gives:
+$$\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,$$
+where $G$ is standard normal. 
+
+Taking the variance on both sides:
+$$M \var[\bar X_\text{Markov}] \approx \sigma_a^2.$$
+
+CLT for i.i.d. gives:
+$$\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G$$
+
+
+Taking the variance on both sides (we could actually bypass the CLT argument and show the equality below directly in the i.i.d. case):
+$$n_e \var[\bar X_\text{iid}] \approx \sigma^2.$$
+
+
+
+We have $n_e$ is defined as having the property that $\var[\bar X_\text{iid}] = \var[\bar X_\text{Markov}]$, 
+so after some algebra:
+$$n_e = \frac{\sigma^2}{\sigma_a^2} M.$$
+:::
+
+
+-->
 </section>
 <section id="estimating-the-asymptotic-variance-with-many-chains" class="level3">
 <h3 class="anchored" data-anchor-id="estimating-the-asymptotic-variance-with-many-chains">Estimating the asymptotic variance with many chains</h3>
@@ -1392,45 +1378,31 @@ Click for answer
 <li>Second, since the <span class="math inline">\(E_1, \dots, E_C\)</span> are i.i.d., <span id="eq-by-iid"><span class="math display">\[\operatorname{Var}[E_c] \approx \frac{1}{C} \sum_{c=1}^C (E_c - E)^2. \tag{5}\]</span></span></li>
 </ul>
 <p><strong>Question:</strong> combine <a href="#eq-by-clt" class="quarto-xref">Equation&nbsp;4</a> and <a href="#eq-by-iid" class="quarto-xref">Equation&nbsp;5</a> to obtain an estimator for the asymptotic variance.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math display">\[\sigma_a \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)\]</span></li>
-<li><span class="math display">\[\sigma_a \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)\]</span></li>
-<li><span class="math display">\[\sigma_a^2 \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)\]</span></li>
-<li><span class="math display">\[\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)\]</span></li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Combining the two equations, we obtain:</p>
-<p><span class="math display">\[\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right).\]</span></p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $$\sigma_a \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)$$
+2. $$\sigma_a \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)$$
+3. $$\sigma_a^2 \approx C \left( \frac{1}{S} \sum_{c=1}^C (E_c - E)^2\right)$$
+4. $$\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right)$$
+5. None of the above
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Combining the two equations, we obtain:
+
+$$\sigma_a^2 \approx S \left( \frac{1}{C} \sum_{c=1}^C (E_c - E)^2\right).$$
+:::
+
+
+-->
 </section>
 <section id="estimating-the-asymptotic-variance-with-one-chain" class="level3">
 <h3 class="anchored" data-anchor-id="estimating-the-asymptotic-variance-with-one-chain">Estimating the asymptotic variance with one chain</h3>
@@ -1463,11 +1435,10 @@ Click for answer
 </div>
 </div>
 <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></li>
-<li id="fn2"><p>It is only approximate, since as we shall see the standard error estimator uses central limit theorem approximations.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>In this page, <span class="math inline">\(\to\)</span> refers to <a href="https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution">convergence in distribution</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Several different conditions can be used to state the central limit theorem for Markov chains, see <a href="https://doi.org/10.1214/154957804100000051">Jones, 2004</a> for a review. For example, Corollary 4 in that review can be used since the MH algorithm is <a href="https://en.wikipedia.org/wiki/Detailed_balance">reversible</a> as we will see soon. Corollary 4 requires the following conditions: reversibility, a finite variance, <span class="math inline">\(\sigma^2 &lt; \infty\)</span> (reasonable, as the CLT for i.i.d. requires this as well), <a href="https://arxiv.org/pdf/2203.04395.pdf">geometric ergodicity</a> (which we discussed in a footnote of <a href="../w09_workflow/topic04_mcmc_diagnostics.html">MCMC diagnostics</a>), and Harris ergodicity, which is more of a technical condition that would be covered in a Markov chain course.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Interestingly, the noise can also be lower in certain situations! These are called super-efficient MCMC algorithms. Consider for example an MH algorithm over the state space <span class="math inline">\(\{1, 2, 3\}\)</span> that proposes, at each iteration, uniformly over <span class="math inline">\(\{1, 2, 3\}\)</span> <em>while excluding its current position</em>. It can be shown that this algorithm will have lower variance compared to the i.i.d. simple Monte Carlo algorithm.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>By equivalent, we mean: “have the same variance”.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In this page, <span class="math inline">\(\to\)</span> refers to <a href="https://en.wikipedia.org/wiki/Convergence_of_random_variables#Convergence_in_distribution">convergence in distribution</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Several different conditions can be used to state the central limit theorem for Markov chains, see <a href="https://doi.org/10.1214/154957804100000051">Jones, 2004</a> for a review. For example, Corollary 4 in that review can be used since the MH algorithm is <a href="https://en.wikipedia.org/wiki/Detailed_balance">reversible</a> as we will see soon. Corollary 4 requires the following conditions: reversibility, a finite variance, <span class="math inline">\(\sigma^2 &lt; \infty\)</span> (reasonable, as the CLT for i.i.d. requires this as well), <a href="https://arxiv.org/pdf/2203.04395.pdf">geometric ergodicity</a> (which we discussed in a footnote of <a href="../w09_workflow/topic04_mcmc_diagnostics.html">MCMC diagnostics</a>), and Harris ergodicity, which is more of a technical condition that would be covered in a Markov chain course.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Interestingly, the noise can also be lower in certain situations! These are called super-efficient MCMC algorithms. Consider for example an MH algorithm over the state space <span class="math inline">\(\{1, 2, 3\}\)</span> that proposes, at each iteration, uniformly over <span class="math inline">\(\{1, 2, 3\}\)</span> <em>while excluding its current position</em>. It can be shown that this algorithm will have lower variance compared to the i.i.d. simple Monte Carlo algorithm.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>By equivalent, we mean: “have the same variance”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

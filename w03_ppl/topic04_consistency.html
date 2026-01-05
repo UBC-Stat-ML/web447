@@ -1056,45 +1056,32 @@ https://github.com/trevorcampbell/shortex
 \end{align*}\]</span></p>
 <p>We will analyze the numerator and denominator separately. Let’s start with the numerator.</p>
 <p><strong>Question:</strong> use the <a href="../w01_discrete_inference/topic11_monte_carlo.html#sec-lln">Law of large number</a> to find the limit: <span class="math display">\[\frac{1}{M} \sum_{m=1}^M W^{(m)}G^{(m)}\to\; ?\]</span></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(\mathbb{E}_q[W^{(1)} G^{(1)}]\)</span></li>
-<li><span class="math inline">\(\mathbb{E}_\pi[W^{(1)} G^{(1)}]\)</span></li>
-<li><span class="math inline">\(\mathbb{E}_q[G^{(1)}]\)</span></li>
-<li><span class="math inline">\(\mathbb{E}_\pi[G^{(1)}]\)</span></li>
-<li>None of the above</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Recall the LLN: for <span class="math inline">\(Z_i\)</span> with <span class="math inline">\(\mathbb{E}|Z_1| &lt; \infty\)</span>, <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_1].\]</span></p>
-<p>Here taking <span class="math inline">\(Z_m = W^{(m)}G^{(m)}\)</span> gives: <span class="math display">\[\frac{1}{M} \sum_{m=1}^M W^{(m)}G^{(m)}\to \mathbb{E}_q[W^{(1)} G^{(1)}],\]</span> where the subscript <span class="math inline">\(q\)</span> denotes that the random variables <span class="math inline">\(X^{(m)}\sim q\)</span> in SNIS.</p>
-</div>
-</div>
-</div>
+<!--
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\ex_q[W^{(1)} G^{(1)}]$
+1. $\ex_\pi[W^{(1)} G^{(1)}]$
+1. $\ex_q[G^{(1)}]$
+1. $\ex_\pi[G^{(1)}]$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Recall the LLN: for $Z_i$ \iid with $\ex|Z_1| < \infty$,
+$$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_1].$$
+
+Here taking $Z_m = W^\parm G^\parm$ gives:
+$$\frac{1}{M} \sum_{m=1}^M W^\parm G^\parm \to \ex_q[W^{(1)} G^{(1)}],$$
+where the subscript $q$ denotes that the random variables $X^\parm \sim q$ in SNIS. 
+:::
+
+
+-->
 <p>Now we can simplify the above limit:</p>
 <p><span class="math display">\[\begin{align*}
 \mathbb{E}_q[W^{(1)} G^{(1)}] &amp;= \int ( w(x) g(x) ) q(x) \mathrm{d}x \;\;\text{(by LOTUS)} \\

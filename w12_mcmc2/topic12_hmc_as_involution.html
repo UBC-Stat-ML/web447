@@ -1159,56 +1159,47 @@ p' = \frac{\mathrm{d}p^{(t)}}{\mathrm{d}t} &amp;= - \nabla U(x) \;\;\text{(the v
 <li>Discretization of <span class="math inline">\(x' = p\)</span>: <span class="math display">\[T_\text{drift}(x, p) = (x + \epsilon p, p).\]</span></li>
 </ul>
 <p><strong>Question:</strong> compute the Jacobian determinant of <span class="math inline">\(T_\text{drift}\)</span>.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for choices
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><span class="math inline">\(x\)</span></li>
-<li><span class="math inline">\(p\)</span></li>
-<li><span class="math inline">\(1\)</span></li>
-<li><span class="math inline">\(xp\)</span></li>
-<li>None of the above.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Correct answer is 1.</p>
-<p>First, we compute the Jacobian matrix:</p>
-<p><span class="math display">\[\begin{align*}
-\nabla T_\text{drift}(x, p) &amp;= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  &amp; \dfrac{\partial T_1}{\partial p}\\
-    \dfrac{\partial T_2}{\partial x} &amp; \dfrac{\partial T_2}{\partial p}
+<!--
+
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $x$
+2. $p$
+3. $1$
+4. $xp$
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is 1.
+
+First, we compute the Jacobian matrix:
+
+\begin{align*}
+\nabla \Td(x, p) &= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial p}\\
+    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial p}
 \end{bmatrix} \\
-&amp;= \begin{bmatrix}
-    1 &amp; \epsilon \\
-    0 &amp; 1
+&= \begin{bmatrix}
+    1 & \epsilon \\
+    0 & 1
 \end{bmatrix}.
-\end{align*}\]</span></p>
-<p>Hence, the Jacobian determinant is 1.</p>
-</div>
-</div>
-</div>
+\end{align*}
+
+
+Hence, the Jacobian determinant is 1.
+:::
+
+
+-->
 <p><strong>Kick operator</strong></p>
 <ul>
 <li>Let the steepness of the landscape at current position update the momentum a bit.</li>
