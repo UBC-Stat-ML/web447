@@ -4,6 +4,7 @@ title: "Final project"
 
 {{< include _construction.qmd >}}
 
+<!-- 
 
 ## Overview
 
@@ -103,4 +104,4 @@ As long as the team submits a reasonable project proposal, I will give full grad
 
 **Total: 95%**
 
-
+-->

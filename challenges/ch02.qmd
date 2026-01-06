@@ -8,8 +8,4 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-After doing Exercise 2 consider the following problem:
-
-1. Write a function that takes as input `posterior_probabilities` and builds the highest probability set for any 
-$\alpha\in[0,1]$. 
-1. Report a $75\%$ highest probability set, making sure that the posterior probability of the set you return does not fall below $75\%$. 
+{{< include ../_construction.qmd >}}

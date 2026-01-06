@@ -6,7 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include _construction.qmd >}}
+{{< include ../_construction.qmd >}}
 
 
 

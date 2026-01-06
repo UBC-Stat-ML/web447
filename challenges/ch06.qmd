@@ -8,6 +8,4 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-- Implement in Stan the hierarchical model for rockets [described in the lectures](../w06_hierarchical/topic03_hierarchy.qmd).
-- The full data is available at [https://github.com/UBC-Stat-ML/web447/raw/main/data/launches.csv](https://github.com/UBC-Stat-ML/web447/raw/main/data/launches.csv)
-- Describe and implement one improvement to the model. 
+{{< include ../_construction.qmd >}}

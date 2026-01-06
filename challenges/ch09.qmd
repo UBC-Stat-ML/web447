@@ -8,31 +8,4 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-In this question we frame the Metropolis--Hastings random-walk algorithm 
-as an involution on an expanded space. Recall that the standard random-walk MH 
-algorithm for sampling from $\pi(x) \propto \gamma(x)$, if we are currently at state $X^{(m-1)}$, proceeds as follows:
-
-1. Sample $\tilde X^{(m)} \sim \distNorm(X^{(m-1)}, \sigma^2)$. 
-2. Draw $U \sim \distUnif(0,1)$ and compute 
-$$\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)})}{\gamma(X^{(m-1)})}\right\}.$$
-3. If $U \leq \alpha$, set $X^{(m)} = \tilde X^{(m)}$. Otherwise, set 
-$X^{(m)} = X^{(m-1)}$. 
-
-To frame it as an involution, consider the expanded target $\bar\pi(x,z)$, with 
-an additional auxiliary variable $z$, where 
-$$ \bar \gamma(x, z) \propto \gamma(x) \cdot \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2} z^2\right).$$
-That is, the $x$-marginal of $\gamma(x,z)$ still corresponds to $\pi(x)$, and 
-the $z$-marginal corresponds to a standard normal distribution.
-Consider the following algorithm: 
-
-1. Sample $Z^{(m)} \sim \distNorm(0, 1)$. 
-2. Set $(\tilde X^{(m)}, \tilde Z^{(m)}) = T_\sigma(X^{(m-1)}, Z^{(m)})$
-3. Draw $U \sim \distUnif(0,1)$ and compute 
-$$\alpha = \min\left\{1, \frac{\gamma(\tilde X^{(m)}, \tilde Z^{(m)})}{\gamma(X^{(m-1)}, \tilde Z^{(m)})}\right\}.$$
-4. If $U \leq \alpha$, set $X^{(m)} = \tilde X^{(m)}$. Otherwise, set 
-$X^{(m)} = X^{(m-1)}$. 
-
-Specify $T_\sigma: \reals \times \reals \to \reals \times \reals$ and prove that it is an involution.
-It should be chosen such that the random-walk behaviour on the $x$-space is preserved. 
-
-What is the determinant of the Jacobian of the transformation $T_\sigma(x,z)$?
+{{< include ../_construction.qmd >}}

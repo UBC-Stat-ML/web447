@@ -76,28 +76,34 @@ Additional readings and case studies will be drawn from other textbooks that are
 
 Click on each item for details.
 
--   Participation: 15%
-    -   Weekly reading assignment: each week ask and answer one question about [the readings or lectures](schedule.qmd) on {{< var piazza >}}. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)
-    -   In-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on {{< var canvas >}}.
--   Homework: 15%
-    -   Weekly.
-    -   Released and submitted on {{< var canvas >}}.
--   Quizzes (2 x 20%): 40%
+-   **Participation**: 7%. Each week, do at least **one** of:
+    - Weekly reading assignment: ask one thoughtful question, or participate meaningfully in an answer/discussion thread about [**the readings**](schedule.qmd) on {{< var piazza >}}, or,
+    - go to a **lab** or **office hour* on that week and fill the sign up sheet, or,
+    - if you really do not have any question, post a comment, e.g., website you found useful to learn the material.
+-   **Low-stake questions**: 8%. In-class iClicker questions: binary participation points (attempted vs not), unless your score is indistinguishable from random.[^1] Setup iClicker Cloud on {{< var canvas >}}. See also **challenge questions** below. 
+-   **Homework exercises**: 15%
+    -   Weekly (look for the 'Exercises' page for the corresponding week on this website).
+    -   Submit on {{< var canvas >}}.
+-   **Quizzes** (2 x 20%): 40%
     -   In-class.
     -   Dates: TBD <!-- Feb 25 and March 25 -->
--   [Final project](project.qmd): 30%
+-   [**Final project**](project.qmd): 30%
 
-For the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor's note, this will be done automatically for everyone.
+[^1]: How is it possible to determine if a score is indistinguishable from random? This is exactly the kind of 
+      problem you will be able to solve after taking this course. We will cover a Bayesian hierarchical model that 
+      can do that in week 10 of this course. 
+
+For the participation and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor's note, this will be done automatically for everyone.
 
 For exercise grading, I will take the $\max(\text{mean}(e_1, e_2, ...), \text{mean}(e_2, e_3, ...)), \text{mean}(e_3, e_4, ...))$, where $e_1, e_2, e_3, \dots$ are the scores for the different exercises.
 The same applies for clicker participation points.
 This is in place to help a couple 
 students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.
 
-Once in a while, I will post some "challenge questions". 
+Once in a while, I will post some **challenge questions**. 
 These are not essential for learning the material and can be skipped. 
 Submit your answer at any time. 
-For each that you successfully solve, a week of participation activity will be waived 
+For each that you successfully solve, a week of iClicker participation will be waived 
 (it does not have to be the same week you submit the challenge question). 
 I will not post solutions for the challenge questions.
 
@@ -114,16 +120,10 @@ I will not post solutions for the challenge questions.
 
 ## Office hours
 
-TBA
-
-<!--
-
--   Instructor office hour: Fridays, 1pm, ESB 3125.
--   TA tutorial: Thursdays, 2pm, ESB 1042.
+Friday, 1pm, ESB 3125.
 
 Available by appointment if you are unable to attend drop-in hours.
 
--->
 
 ## Course communication
 

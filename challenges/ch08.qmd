@@ -8,7 +8,4 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-Fit a hierarchical model in Stan. E.g.,
-modify the [tutorial on tidybayes](../w09_workflow/topic06_grouped_data.qmd) to 
-make the model hierarchical, following the same model as in [exercise 6](../exercises/ex06.qmd).
-(You may also use a different example if you find a data set and describe the model.)
+{{< include ../_construction.qmd >}}
