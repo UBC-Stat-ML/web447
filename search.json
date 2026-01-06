@@ -211,7 +211,7 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
     "crumbs": [
       "Syllabus"
     ]
@@ -220,8 +220,8 @@
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT405 Bayesian Statistics",
-    "section": "Course description",
-    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
+    "section": "",
+    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
     "crumbs": [
       "Syllabus"
     ]
