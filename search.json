@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 6\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 8\n\n\n\n\nTue, Jan 13\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 15\n\n\n\n\nTue, Jan 20\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 22\n\n\n\n\nTue, Jan 27\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 29\n\n\n\n\nTue, Feb 3\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 5\n\n\n\n\nTue, Feb 10\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 12\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 19\nReading week.\n\n\n\nTue, Feb 24\nQuiz 1.\n\n\n\nTh, Feb 26\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 3\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 5\n\n\n\n\nTue, Mar 10\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 12\n\n\n\n\nFri, Mar 13\nProject proposal due.\n\n\n\nTue, Mar 17\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 19\n\n\n\n\nTue, Mar 24\nQuiz 2.\n\n\n\nTh, Mar 26\nMCMC developer guide.\n\n\n\nTue, Mar 31\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 2\n\n\n\n\nTue, Apr 7\nMore inference techniques.\nBDA 13.7\n\n\nTh, Apr 9\n\n\n\n\nSat, Apr 18\nFinal project due.",
     "crumbs": [
       "Schedule"
     ]
@@ -281,17 +281,17 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Assessments",
-    "text": "Assessments\nClick on each item for details.\n\nParticipation: 7%. Each week, do at least one of:\n\nWeekly reading assignment: ask one thoughtful question, or participate meaningfully in an answer/discussion thread about the readings on Piazza, or,\ngo to a lab or **office hour* on that week and fill the sign up sheet, or,\nif you really do not have any question, post a comment, e.g., website you found useful to learn the material.\n\nLow-stake questions: 8%. In-class iClicker questions: binary participation points (attempted vs not), unless your score is indistinguishable from random.1 Setup iClicker Cloud on Canvas. See also challenge questions below.\nHomework exercises: 15%\n\nWeekly (look for the ‘Exercises’ page for the corresponding week on this website).\nSubmit on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: TBD \n\nFinal project: 30%\n\nFor the participation and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...)), \\text{mean}(e_3, e_4, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some challenge questions. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of iClicker participation will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation: 7%. Each week, do at least one of:\n\nWeekly reading assignment: ask one thoughtful question, or participate meaningfully in an answer/discussion thread about the readings on Piazza, or,\ngo to a lab or **office hour* on that week and fill the sign up sheet, or,\nif you really do not have any question, post a comment, e.g., website you found useful to learn the material.\n\nLow-stake questions: 8%. In-class iClicker questions: binary participation points (attempted vs not), unless your score is indistinguishable from random.1 Setup iClicker Cloud on Canvas. See also challenge questions below.\nHomework exercises: 15%\n\nWeekly (look for the ‘Exercises’ page for the corresponding week on this website).\nSubmit on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: February 24 and March 24\n\nFinal project: 30%\n\nFor the participation and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...)), \\text{mean}(e_3, e_4, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some challenge questions. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of iClicker participation will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
     "crumbs": [
       "Syllabus"
     ]
   },
   {
-    "objectID": "syllabus.html#policy-on-the-use-of-ai-tools-chatgpt-etc",
-    "href": "syllabus.html#policy-on-the-use-of-ai-tools-chatgpt-etc",
+    "objectID": "syllabus.html#policy-on-the-use-of-ai-tools",
+    "href": "syllabus.html#policy-on-the-use-of-ai-tools",
     "title": "Syllabus: STAT405 Bayesian Statistics",
-    "section": "Policy on the use of AI tools (ChatGPT, etc)",
-    "text": "Policy on the use of AI tools (ChatGPT, etc)\n\nPiazza discussion: use of AI tools is prohibited to compose or answer questions, with the exception of spell-checking tools.\nHomework: use of AI tools is prohibited, with the exception of spell-checking tools.\nQuizzes: use of AI tools is impossible (closed book, pen and paper).\nProject: if you think AI tool(s) will be used, explain the scope of their use in the project proposal. Also describe all uses in the final report.",
+    "section": "Policy on the use of AI tools",
+    "text": "Policy on the use of AI tools\n\nPiazza discussion: use of AI tools is prohibited to compose or answer questions, with the exception of spell-checking tools.\nHomework: use of AI tools is prohibited, with the exception of spell-checking tools.\nQuizzes: use of AI tools is impossible (closed book, pen and paper).\nProject: if you think AI tool(s) will be used, explain the scope of their use in the project proposal. Also describe all uses in the final report.",
     "crumbs": [
       "Syllabus"
     ]
@@ -518,7 +518,7 @@
     "href": "exercises/ex01.html",
     "title": "Exercise 1: discrete probabilistic inference",
     "section": "",
-    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
+    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following participation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
     "crumbs": [
       "Probability essentials",
       "Exercises"
@@ -606,7 +606,7 @@
     "href": "exercises/ex02.html",
     "title": "Exercise 2: Bayesian inference first contact",
     "section": "",
-    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following particiation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following participation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayes on a discrete model",
       "Exercises"
