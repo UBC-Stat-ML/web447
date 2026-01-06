@@ -11,7 +11,7 @@ an incentive to stay on top of the material so that lectures can
 be more effective.
 
 We will select one or more questions that will be graded in more detail. 
-For the other question(s), we will use the following particiation-centric binary scheme: 
+For the other question(s), we will use the following participation-centric binary scheme: 
 
 - 1 point if something reasonable was attempted, 
 - 0 otherwise.

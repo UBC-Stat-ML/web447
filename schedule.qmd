@@ -6,42 +6,41 @@ editor:
 
 {{< include _announce.qmd >}}
 
-{{< include _construction.qmd >}}
 
-<!--
 
 | Date | Topics | Readings |
 |----|----|----|
-| Tue, Jan 7 | Overview. Probabilistic inference on discrete spaces. | BDA 1.1-1.10 |
-| Th, Jan 9 |  |  |
-| Tue, Jan 14 | A tour of Bayesian inference (on discrete spaces). | BDA 2.1-2.5 |
-| Th, Jan 16 |  |  |
-| Tue, Jan 21 | Universal probabilistic inference via importance sampling. | BDA 9.1-9.5 (going further on Decision Theory) |
-| Th, Jan 23 |  |  |
-| Tue, Jan 28 | Bayesian classification, regression, GLMs, and beyond. | BDA 14.1-14.5 |
-| Th, Jan 30 |  |  |
-| Tue, Feb 4 | Properties of Bayesian models. | BDA 4.1-4.5 |
-| Th, Feb 6 |  |  |
-| Tue, Feb 11 | Hierarchical models. | BDA 5.1-5.7 |
-| Th, Feb 13 |  |  |
+| Tue, Jan 6 | Overview. Probabilistic inference on discrete spaces. | BDA 1.1-1.10 |
+| Th, Jan 8 |  |  |
+| Tue, Jan 13 | A tour of Bayesian inference (on discrete spaces). | BDA 2.1-2.5 |
+| Th, Jan 15 |  |  |
+| Tue, Jan 20 | Universal probabilistic inference via importance sampling. | BDA 9.1-9.5 (going further on Decision Theory) |
+| Th, Jan 22 |  |  |
+| Tue, Jan 27 | Bayesian classification, regression, GLMs, and beyond. | BDA 14.1-14.5 |
+| Th, Jan 29 |  |  |
+| Tue, Feb 3 | Properties of Bayesian models. | BDA 4.1-4.5 |
+| Th, Feb 5 |  |  |
+| Tue, Feb 10 | Hierarchical models. | BDA 5.1-5.7 |
+| Th, Feb 12 |  |  |
 | Tue, Feb 18 | *Reading week.* | BDA 16.1-16.7 |
-| Th, Feb 20 | *Reading week.* |  |
-| Tue, Feb 25 | **Quiz 1.** |  |
-| Th, Feb 27 | Quiz debrief. Stan basics. Project logistics. |  |
-| Tue, Mar 4 | MCMC user guide (via Stan). | BDA 11.1-11.6 |
-| Th, Mar 6 |  |  |
-| Tue, Mar 11 | Bayesian workflow. | BDA 6.1-6.5 |
-| Th, Mar 13 |  |  |
-| Fri, Mar 14 | **Project proposal due.** |  |
-| Tue, Mar 18 | Modelling techniques (selected from prior design, mixtures, imputation, complex data collection). | BDA 8.1-8.7 |
-| Th, Mar 20 |  |  |
-| Tue, Mar 25 | **Quiz 2.** |  |
-| Th, Mar 27 | MCMC developer guide. |  |
-| Tue, Apr 1 | MCMC developer guide. | BDA 12.1-12.6 |
-| Th, Apr 3 |  |  |
-| Tue, Apr 8 | More inference techniques. | BDA 13.7 |
-| Sat, Apr 19 | **Final project due.** |  |
+| Th, Feb 19 | *Reading week.* |  |
+| Tue, Feb 24 | **Quiz 1.** |  |
+| Th, Feb 26 | Quiz debrief. Stan basics. Project logistics. |  |
+| Tue, Mar 3 | MCMC user guide (via Stan). | BDA 11.1-11.6 |
+| Th, Mar 5 |  |  |
+| Tue, Mar 10 | Bayesian workflow. | BDA 6.1-6.5 |
+| Th, Mar 12 |  |  |
+| Fri, Mar 13 | **Project proposal due.** |  |
+| Tue, Mar 17 | Modelling techniques (selected from prior design, mixtures, imputation, complex data collection). | BDA 8.1-8.7 |
+| Th, Mar 19 |  |  |
+| Tue, Mar 24 | **Quiz 2.** |  |
+| Th, Mar 26 | MCMC developer guide. |  |
+| Tue, Mar 31 | MCMC developer guide. | BDA 12.1-12.6 |
+| Th, Apr 2 |  |  |
+| Tue, Apr 7 | More inference techniques. | BDA 13.7 |
+| Th, Apr 9 |  |  |
+| Sat, Apr 18 | **Final project due.** |  |
 
 : {.striped .hover tbl-colwidths="\[15,65,20\]"}
 
--->
+

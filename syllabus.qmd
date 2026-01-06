@@ -7,7 +7,6 @@ editor:
 
 {{< include _announce.qmd >}}
 
-{{< include _construction.qmd >}}
 
 
 ## Course description
@@ -78,15 +77,15 @@ Click on each item for details.
 
 -   **Participation**: 7%. Each week, do at least **one** of:
     - Weekly reading assignment: ask one thoughtful question, or participate meaningfully in an answer/discussion thread about [**the readings**](schedule.qmd) on {{< var piazza >}}, or,
-    - go to a **lab** or **office hour* on that week and fill the sign up sheet, or,
+    - go to a **lab** or **office hour** on that week and fill the sign up sheet, or,
     - if you really do not have any question, post a comment, e.g., website you found useful to learn the material.
 -   **Low-stake questions**: 8%. In-class iClicker questions: binary participation points (attempted vs not), unless your score is indistinguishable from random.[^1] Setup iClicker Cloud on {{< var canvas >}}. See also **challenge questions** below. 
 -   **Homework exercises**: 15%
     -   Weekly (look for the 'Exercises' page for the corresponding week on this website).
     -   Submit on {{< var canvas >}}.
 -   **Quizzes** (2 x 20%): 40%
-    -   In-class.
-    -   Dates: TBD <!-- Feb 25 and March 25 -->
+    -   In-class, closed-book. 
+    -   Dates: February 24 and March 24
 -   [**Final project**](project.qmd): 30%
 
 [^1]: How is it possible to determine if a score is indistinguishable from random? This is exactly the kind of 
@@ -108,7 +107,7 @@ For each that you successfully solve, a week of iClicker participation will be w
 I will not post solutions for the challenge questions.
 
 
-## Policy on the use of AI tools (ChatGPT, etc)
+## Policy on the use of AI tools
 
 - Piazza discussion: use of AI tools is prohibited to compose or answer questions, with the exception of spell-checking tools. 
 - Homework: use of AI tools is prohibited, with the exception of spell-checking tools. 
