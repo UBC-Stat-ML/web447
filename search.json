@@ -130,76 +130,6 @@
     ]
   },
   {
-    "objectID": "project.html#overview",
-    "href": "project.html#overview",
-    "title": "Final project",
-    "section": "Overview",
-    "text": "Overview\nThe course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#logistics",
-    "href": "project.html#logistics",
-    "title": "Final project",
-    "section": "Logistics",
-    "text": "Logistics\n\nTeams of maximum 2 people are strongly encouraged, in which case you should outline the final report who did what.\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, and 6 for a 2-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#project-timeline",
-    "href": "project.html#project-timeline",
-    "title": "Final project",
-    "section": "Project timeline",
-    "text": "Project timeline\nSee schedule.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#core-guideline",
-    "href": "project.html#core-guideline",
-    "title": "Final project",
-    "section": "Core guideline",
-    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!\nIn addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).\nAfter selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.\nSome resources:\n\nVanderbilt Biostatistics datasets\nTidyTuesday\nInter-university Consortium for Political and Social Research\nWHO mortality data\nThe World Bank Data\nMore…\n\nYou should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#menu-of-project-themes",
-    "href": "project.html#menu-of-project-themes",
-    "title": "Final project",
-    "section": "Menu of project themes",
-    "text": "Menu of project themes\nRoughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶’s.\n\nA careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:\n\nApplying a simple model and an improved one on a dataset.\nBayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …\nIs there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?\n\nGoing further on one of… (more details can be provided upon request)\n\nBayesian regression and classification (e.g. sparsity, hierarchical structure, etc)\nmodel selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)\ntime series and state-space models\n🌶 spatial models\n🌶 cross-effect models\n🌶🌶 Bayesian non-parametric models\n🌶🌶 deep generative models\n🌶🌶 topics models\n🌶🌶 variational inference\n\n🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:\n\nTypes of graphs such as matchings\nPhylogenetic trees or networks\nMultiple sequence alignments\nClustering or feature matrices\n\n🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#rubric-for-the-project-proposal",
-    "href": "project.html#rubric-for-the-project-proposal",
-    "title": "Final project",
-    "section": "Rubric for the project proposal",
-    "text": "Rubric for the project proposal\n\nBasic requirements\n\nTeam is identified.\nThe proposal identifies which of the project themes it will address.\nThere is a working link to a public repo containing commits from all team members.\n\nTwo real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or head of a dataframe).\nA short summary of potential approaches to tackle the project theme.\nIf it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.\n\nAs long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.\nTotal: 5%",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#rubric-for-the-final-report",
-    "href": "project.html#rubric-for-the-final-report",
-    "title": "Final project",
-    "section": "Rubric for the final report",
-    "text": "Rubric for the final report\n\nBasic requirements (5%)\n\nThe report fits within the prescribed page limits.\nThere is a working link to a public repo containing commits from all team members.\nThe report follows best practices of technical writing.\nIf it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.\n\nProblem formulation. (15%) The report clearly describes:\n\na real-world inference task/problem,\nsuccinct but sufficient context (e.g. biological terminology) needed to understand the problem,\nthe key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.\n\nThe report contains a literature review: (10%) relevant literature is cited and properly summarized.\nData analysis (40%)\n\nA Bayesian model is precisely described (e.g. using the .. ~ .. notation)\nImplementation code in the appendix (e.g. using Stan)\nPrior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.\nCritical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.\n\nProject theme: methodological/theoretical aspect of the project (20%)\n\nIs the approach sound?\nCreative?\n\nDiscussion (5%)\n\nDoes the report describe key limitations?\n\n\nTotal: 95%",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
     "objectID": "w00_intro/topic02_what.html",
     "href": "w00_intro/topic02_what.html",
     "title": "What?",
@@ -351,7 +281,7 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Assessments",
-    "text": "Assessments\nClick on each item for details.\n\nParticipation: 15%\n\nWeekly reading assignment: each week ask and answer one question about the readings or lectures on Piazza. (or post a private comment stating the date you came to office hour this week, or if you really do not have any question, post a comment, e.g., website you found useful to learn the material) (7%)\nIn-class iClicker questions: only participations points (unless your score is indistinguishable from random). (8%) Setup iClicker Cloud on Canvas.\n\nHomework: 15%\n\nWeekly.\nReleased and submitted on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: TBD \n\nFinal project: 30%\n\nFor the reading assignment and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...)), \\text{mean}(e_3, e_4, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some “challenge questions”. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
+    "text": "Assessments\nClick on each item for details.\n\nParticipation: 7%. Each week, do at least one of:\n\nWeekly reading assignment: ask one thoughtful question, or participate meaningfully in an answer/discussion thread about the readings on Piazza, or,\ngo to a lab or **office hour* on that week and fill the sign up sheet, or,\nif you really do not have any question, post a comment, e.g., website you found useful to learn the material.\n\nLow-stake questions: 8%. In-class iClicker questions: binary participation points (attempted vs not), unless your score is indistinguishable from random.1 Setup iClicker Cloud on Canvas. See also challenge questions below.\nHomework exercises: 15%\n\nWeekly (look for the ‘Exercises’ page for the corresponding week on this website).\nSubmit on Canvas.\n\nQuizzes (2 x 20%): 40%\n\nIn-class.\nDates: TBD \n\nFinal project: 30%\n\nFor the participation and homework, we will drop the lowest week. For the iClicker, we will automatically skip up to two missed lectures. Do not ask for additional accommodations, this is the accommodation, i.e., keep these for sick days/unforeseen circumstances. On the positive side, no need to ask for permission/provide doctor’s note, this will be done automatically for everyone.\nFor exercise grading, I will take the \\(\\max(\\text{mean}(e_1, e_2, ...), \\text{mean}(e_2, e_3, ...)), \\text{mean}(e_3, e_4, ...))\\), where \\(e_1, e_2, e_3, \\dots\\) are the scores for the different exercises. The same applies for clicker participation points. This is in place to help a couple students travelling in the first two weeks, but will be automatically applied for everyone so no need to request it.\nOnce in a while, I will post some challenge questions. These are not essential for learning the material and can be skipped. Submit your answer at any time. For each that you successfully solve, a week of iClicker participation will be waived (it does not have to be the same week you submit the challenge question). I will not post solutions for the challenge questions.",
     "crumbs": [
       "Syllabus"
     ]
@@ -371,7 +301,7 @@
     "href": "syllabus.html#office-hours",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Office hours",
-    "text": "Office hours\nTBA",
+    "text": "Office hours\nFriday, 1pm, ESB 3125.\nAvailable by appointment if you are unable to attend drop-in hours.",
     "crumbs": [
       "Syllabus"
     ]
@@ -382,6 +312,16 @@
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Course communication",
     "text": "Course communication\n\nAnnouncements\nCourse announcements will be posted on Canvas.\n\n\nQuestions\nUse Piazza for questions about the material, logistics, etc. Use public posts as much as possible so that other students can learn from the discussion.\nUse canvas messages if, and only if the question is about a personal matter.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "Syllabus: STAT405 Bayesian Statistics",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHow is it possible to determine if a score is indistinguishable from random? This is exactly the kind of problem you will be able to solve after taking this course. We will cover a Bayesian hierarchical model that can do that in week 10 of this course.↩︎",
     "crumbs": [
       "Syllabus"
     ]

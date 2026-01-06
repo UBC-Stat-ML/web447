@@ -944,19 +944,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#logistics" id="toc-logistics" class="nav-link" data-scroll-target="#logistics">Logistics</a></li>
-  <li><a href="#project-timeline" id="toc-project-timeline" class="nav-link" data-scroll-target="#project-timeline">Project timeline</a></li>
-  <li><a href="#core-guideline" id="toc-core-guideline" class="nav-link" data-scroll-target="#core-guideline">Core guideline</a></li>
-  <li><a href="#menu-of-project-themes" id="toc-menu-of-project-themes" class="nav-link" data-scroll-target="#menu-of-project-themes">Menu of project themes</a></li>
-  <li><a href="#rubric-for-the-project-proposal" id="toc-rubric-for-the-project-proposal" class="nav-link" data-scroll-target="#rubric-for-the-project-proposal">Rubric for the project proposal</a></li>
-  <li><a href="#rubric-for-the-final-report" id="toc-rubric-for-the-final-report" class="nav-link" data-scroll-target="#rubric-for-the-final-report">Rubric for the final report</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -993,124 +981,109 @@ Caution
 <p>Page under construction: information on this page may change.</p>
 </div>
 </div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.</p>
-</section>
-<section id="logistics" class="level2">
-<h2 class="anchored" data-anchor-id="logistics">Logistics</h2>
-<ul>
-<li>Teams of maximum 2 people are <strong>strongly</strong> encouraged, in which case you should outline the final report who did what.</li>
-<li>Submit on canvas, a pdf document of maximum 4 pages for a 1 person project, and 6 for a 2-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.</li>
-<li>Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.</li>
-</ul>
-</section>
-<section id="project-timeline" class="level2">
-<h2 class="anchored" data-anchor-id="project-timeline">Project timeline</h2>
-<p>See <a href="./schedule.html">schedule</a>.</p>
-</section>
-<section id="core-guideline" class="level2">
-<h2 class="anchored" data-anchor-id="core-guideline">Core guideline</h2>
-<p>Every project should contain a component where <strong>Bayesian inference is applied to a real problem and a real dataset</strong>. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!</p>
-<p>In addition, each team should pick one of the “project themes” listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).</p>
-<p>After selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.</p>
-<p>Some resources:</p>
-<ul>
-<li><a href="https://hbiostat.org/data/">Vanderbilt Biostatistics datasets</a></li>
-<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
-<li><a href="https://www.icpsr.umich.edu/web/pages/ICPSR/index.html">Inter-university Consortium for Political and Social Research</a></li>
-<li><a href="https://platform.who.int/mortality/themes/theme-details/topics/indicator-groups/indicator-group-details/MDB/road-traffic-accidents">WHO mortality data</a></li>
-<li><a href="https://data.worldbank.org/">The World Bank Data</a></li>
-<li><a href="https://github.com/awesomedata/awesome-public-datasets">More…</a></li>
-</ul>
-<p>You should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.</p>
-</section>
-<section id="menu-of-project-themes" class="level2">
-<h2 class="anchored" data-anchor-id="menu-of-project-themes">Menu of project themes</h2>
-<p>Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶’s.</p>
-<ul>
-<li>A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:
-<ul>
-<li>Applying a simple model and an improved one on a dataset.</li>
-<li>Bayesian vs frequentist… regression/classification, feature selection, density estimation, survival analysis, …</li>
-<li>Is there some structure that can be exploited (e.g.&nbsp;informed by the data types for the covariates/features, groups of related features i.e.&nbsp;feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?</li>
-</ul></li>
-<li>Going further on one of… (more details can be provided upon request)
-<ul>
-<li>Bayesian regression and classification (e.g.&nbsp;sparsity, hierarchical structure, etc)</li>
-<li>model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)</li>
-<li>time series and state-space models</li>
-<li>🌶 spatial models</li>
-<li>🌶 cross-effect models</li>
-<li>🌶🌶 Bayesian non-parametric models</li>
-<li>🌶🌶 deep generative models</li>
-<li>🌶🌶 topics models</li>
-<li>🌶🌶 variational inference</li>
-</ul></li>
-<li>🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
-<ul>
-<li>Types of graphs such as matchings</li>
-<li>Phylogenetic trees or networks</li>
-<li>Multiple sequence alignments</li>
-<li>Clustering or feature matrices</li>
-</ul></li>
-<li>🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.</li>
-</ul>
-</section>
-<section id="rubric-for-the-project-proposal" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-the-project-proposal">Rubric for the project proposal</h2>
-<ul>
-<li>Basic requirements
-<ul>
-<li>Team is identified.</li>
-<li>The proposal identifies which of the project themes it will address.</li>
-<li>There is a working link to a public repo containing commits from all team members.</li>
-</ul></li>
-<li>Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g.&nbsp;a URL, showing the structure or <code>head</code> of a dataframe).</li>
-<li>A short summary of potential approaches to tackle the project theme.</li>
-<li>If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.</li>
-</ul>
-<p>As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e.&nbsp;certainly before the last lecture.</p>
-<p><strong>Total: 5%</strong></p>
-</section>
-<section id="rubric-for-the-final-report" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-the-final-report">Rubric for the final report</h2>
-<ul>
-<li>Basic requirements (5%)
-<ul>
-<li>The report fits within the prescribed page limits.</li>
-<li>There is a working link to a public repo containing commits from all team members.</li>
-<li>The report follows best practices of technical writing.</li>
-<li>If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.</li>
-</ul></li>
-<li>Problem formulation. (15%) The report clearly describes:
-<ul>
-<li>a real-world inference task/problem,</li>
-<li>succinct but sufficient context (e.g.&nbsp;biological terminology) needed to understand the problem,</li>
-<li>the key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.</li>
-</ul></li>
-<li>The report contains a literature review: (10%) relevant literature is cited and properly summarized.</li>
-<li>Data analysis (40%)
-<ul>
-<li>A Bayesian model is precisely described (e.g.&nbsp;using the <code>.. ~ ..</code> notation)</li>
-<li>Implementation code in the appendix (e.g.&nbsp;using Stan)</li>
-<li>Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.</li>
-<li>Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.</li>
-</ul></li>
-<li>Project theme: methodological/theoretical aspect of the project (20%)
-<ul>
-<li>Is the approach sound?</li>
-<li>Creative?</li>
-</ul></li>
-<li>Discussion (5%)
-<ul>
-<li>Does the report describe key limitations?</li>
-</ul></li>
-</ul>
-<p><strong>Total: 95%</strong></p>
+<!-- 
+
+## Overview
+
+The course project involves independent work on a topic selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.
+
+## Logistics
+
+-   Teams of maximum 2 people are **strongly** encouraged, in which case you should outline the final report who did what. 
+-   Submit on canvas, a pdf document of maximum 4 pages for a 1 person project, and 6 for a 2-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading. 
+-   Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.
+
+## Project timeline
+
+See [schedule](schedule.qmd).
+
+## Core guideline
+
+Every project should contain a component where **Bayesian inference is applied to a real problem and a real dataset**.
+This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!
+
+In addition, each team should pick one of the "project themes" listed below, exploring topics building and going beyond what we will cover during the course. If two project proposals are too similar, I reserve the right to assign changes to one of the projects (typically the one with the last proposal submission date).
+
+After selection of a project theme, you should start hunting for a few real-world candidate datasets appropriate for the selected theme. Two potential datasets should be listed in the proposal. The final report should analyze at least one real dataset.
+
+Some resources:
+
+-   [Vanderbilt Biostatistics datasets](https://hbiostat.org/data/)
+-   [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+-   [Inter-university Consortium for Political and Social Research](https://www.icpsr.umich.edu/web/pages/ICPSR/index.html)
+-   [WHO mortality data](https://platform.who.int/mortality/themes/theme-details/topics/indicator-groups/indicator-group-details/MDB/road-traffic-accidents)
+-   [The World Bank Data](https://data.worldbank.org/)
+-   [More...](https://github.com/awesomedata/awesome-public-datasets)
+
+You should not pick a dataset that has already been analyzed using the same approach as you. Provide references for the closest analyses of the same data and explain how they differ from yours.
+
+## Menu of project themes
+
+Roughly in increasing order of complexity. During grading I will take into account the complexity of the selected project theme. For example, if considerable coding is required in the project, it may be possible to use only synthetic data instead of real data (consult me and document this request in the proposal). The hot peppers icons below, 🌶, mean the topic may be more difficult, roughly linearly in the number of 🌶's. 
+
+-   A careful and scientific comparison of a Bayesian estimator with another one, either Bayesian or non-Bayesian. Review the literature on both sides so as to be fair and critical to both sides of the comparison. State and defend the criteria you use. Consider calibration and mis-specified setups. Examples:
+    -   Applying a simple model and an improved one on a dataset.
+    -   Bayesian vs frequentist... regression/classification, feature selection, density estimation, survival analysis, ...
+    -   Is there some structure that can be exploited (e.g. informed by the data types for the covariates/features, groups of related features i.e. feature templates, hierarchical approaches, etc), to get better Bayesian methods on these generic classes of inference problems?
+-   Going further on one of... (more details can be provided upon request)
+    -   Bayesian regression and classification (e.g. sparsity, hierarchical structure, etc)
+    -   model selection (advanced computational approaches to Bayes factors, alternatives to Bayes factors, comparisons)
+    -   time series and state-space models
+    -   🌶 spatial models
+    -   🌶 cross-effect models
+    -   🌶🌶 Bayesian non-parametric models
+    -   🌶🌶 deep generative models
+    -   🌶🌶 topics models
+    -   🌶🌶 variational inference
+-   🌶🌶🌶️ A Bayesian inference method over a non-standard data type. Acquire or write an efficient posterior inference method, either using a PPL or from scratch. Develop a novel Bayes estimator and implement it. Benchmark the Bayes estimator on synthetic data, comparing the performance with a naive baseline such as MAP. Examples:
+    -   Types of graphs such as matchings
+    -   Phylogenetic trees or networks
+    -   Multiple sequence alignments
+    -   Clustering or feature matrices
+-   🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.
+
+## Rubric for the project proposal
+
+-   Basic requirements
+    -   Team is identified.
+    -   The proposal identifies which of the project themes it will address.
+    -   There is a working link to a public repo containing commits from all team members. 
+-   Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or `head` of a dataframe).
+-   A short summary of potential approaches to tackle the project theme.
+-   If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.
+
+As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.
+
+**Total: 5%**
+
+## Rubric for the final report
+
+-   Basic requirements (5%)
+    -   The report fits within the prescribed page limits.
+    -   There is a working link to a public repo containing commits from all team members. 
+    -   The report follows best practices of technical writing.
+    -   If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.
+-   Problem formulation. (15%) The report clearly describes:
+    -   a real-world inference task/problem,
+    -   succinct but sufficient context (e.g. biological terminology) needed to understand the problem,
+    -   the key modelling/methodological/challenge, clearly associating it with one of the items under "menu of project themes" above.
+-   The report contains a literature review: (10%) relevant literature is cited and properly summarized.
+-   Data analysis (40%)
+    -   A Bayesian model is precisely described (e.g. using the `.. ~ ..` notation)
+    -   Implementation code in the appendix (e.g. using Stan)
+    -   Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.
+    -   Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.
+-   Project theme: methodological/theoretical aspect of the project (20%)
+    -   Is the approach sound?
+    -   Creative?
+-   Discussion (5%)
+    -   Does the report describe key limitations?
+
+**Total: 95%**
+
+-->
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
