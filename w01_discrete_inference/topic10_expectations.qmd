@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-Expectation si the main tool to translate a posterior distribution into 
+Expectation is the main tool to translate a posterior distribution into 
 the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action). 
 
 
