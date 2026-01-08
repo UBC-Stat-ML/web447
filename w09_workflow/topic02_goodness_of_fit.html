@@ -1069,21 +1069,6 @@ https://github.com/trevorcampbell/shortex
 <li>only approximately calibrated for both small and large data</li>
 <li>none of the above</li>
 </ol>
-<!--
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Recall: **in a Bayesian well-specified context, calibration holds for all dataset sizes!**
-
-This suggests calibration could be useful to detect mis-specification...
-:::
-
-
--->
 </section>
 <section id="from-calibration-to-goodness-of-fit" class="level2">
 <h2 class="anchored" data-anchor-id="from-calibration-to-goodness-of-fit">From calibration to goodness-of-fit</h2>
@@ -1092,21 +1077,6 @@ This suggests calibration could be useful to detect mis-specification...
 <li>Yes</li>
 <li>No</li>
 </ol>
-<!--
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-**No:** in a real data analysis scenario, $x$ is unknown, so we cannot check if $x$ is contained in a corresponding credible interval.
-
-**Suggestions?**
-:::
-
-
--->
 <section id="review-prediction" class="level3">
 <h3 class="anchored" data-anchor-id="review-prediction">Review: prediction</h3>
 <ul>
@@ -1124,25 +1094,6 @@ This suggests calibration could be useful to detect mis-specification...
 <li>Yes</li>
 <li>No</li>
 </ol>
-<!--
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-**Yes:** using a **leave-one-out** technique: 
-
-- instead of giving all $n$ data points to Stan, give only the first $n-1$ data points, 
-- leave data point $n$ out (hence the name).
-- Compute, say a $99\%$ credible interval $C$ predicting the $n$-th observation based on data $y_1, \dots, y_{n-1}$.
-- If $y_n \notin C$: output a warning.
-
-:::
-
-
--->
 </section>
 <section id="posterior-predictive-check" class="level3">
 <h3 class="anchored" data-anchor-id="posterior-predictive-check">Posterior predictive check</h3>
@@ -1161,42 +1112,6 @@ This suggests calibration could be useful to detect mis-specification...
 <li>Bad luck.</li>
 <li>Software defect.</li>
 </ol>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. a, b
-1. a, b, c
-1. a, c, e
-1. a, c, d, e
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-a. Model mis-specification.
-    - Yes, as the name of this page suggests!
-b. Posterior is not approximately normal. 
-    - No, that's irrelevant to the present situation.
-c. MCMC too slow and/or not enough samples. 
-    - Yes, and we will talk more about it [this week](topic04_mcmc_diagnostics.qmd).
-d. Bad luck.
-    - Yes, even in the well-specified case, there is a (100-99)\% chance that the warning is issued 
-      (related to so-called ["type I error"](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors) in frequentist statistics).
-e. Software defect. 
-    - Yes, and we will talk more about it [this week](topic03_checking_correctness).
-    
-- So the correct answer is `a, c, d, e`. 
-- As you can see, there are many other choices (`c, d, e`) on top of the one we are interested in (`a`)
-  - ...which complicates the interpretation of posterior predictive checks. 
-  - We will see next some strategies to address `c` and `e`. 
-:::
-
-
--->
 
 
 </section>

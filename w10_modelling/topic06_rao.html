@@ -1244,72 +1244,7 @@ Y &amp;= C L + (1 - C) H.
 </ul></li>
 </ul>
 <p><strong>Question:</strong> how to define <span class="math inline">\(\gamma(x)\)</span> from <span class="math inline">\(\gamma(x, h)\)</span> so that the result on <span class="math inline">\(x\)</span> stay the same?</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\max_x \gamma(x, h)$
-2. $\max_h \gamma(x, h)$
-3. $\int \gamma(x, h) \dee x$
-4. $\int \gamma(x, h) \dee h$
-5. None of the above. 
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is 4: 
-
-\begin{align*}
-\int \gamma(x, h) \dee h &= \int f(x, h, y) \dee h \\
-&= f(x, y) = \gamma(x). 
-\end{align*}
-:::
-
-
--->
 <p><strong>Question:</strong> compute <span class="math inline">\(\gamma(x)\)</span> in our simplified example, <a href="#eq-simplified" class="quarto-xref">Equation&nbsp;1</a>.</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $f(x) F(L; x)$
-2. $f(x) (1 - F(L; x))$
-3. $f(x) F(x; L)$
-4. $f(x) (1 - F(x; L))$
-5. None of the above. 
-
-Where $F(h; x)$ is the cumulative distribution function of the 
-likelihood given parameters $x$. 
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Since $y = L$, the detection limit,
-
-\begin{align*}
-\gamma(x) &= \int \gamma(x, h) \dee h \\
-&= \int f(x, h, y) \dee h \\
-&= \int f(x) f(h | x) f(y | h) \dee h \\
-&=  f(x) \int f(h | x) \ind[L \le h] \dee h \\ 
-&= f(x) (1 - F(L; x)). 
-\end{align*}
-
-Note that in the Stan code above, $1 - F(L; x)$ is implemented with 
-`exponential_lccdf(limit | rate)` ("lccdf" stands for "log complement of cumulative distribution function"). 
-:::
-
-
--->
 
 
 </section>

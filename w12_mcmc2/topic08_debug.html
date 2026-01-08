@@ -1189,41 +1189,6 @@ Click for answer
 </ul></li>
 </ul>
 <p><strong>Question:</strong> if the code is correct, what is the distribution <span class="math inline">\(\mu_2\)</span> of the chain after one iteration, i.e., the distribution of <span class="math inline">\((X^{(2)}, Y^{(2)})\)</span>?</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. It is intractable. 
-2. It is approximately $\pi(x, y)$. 
-3. It is exactly $\pi(x, y)$. 
-4. It is approximately normal. 
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-It is **exactly** $\pi(x, y)$. 
-
-First, from our results on [marginals of Markov chains](topic05_cke.qmd), we have 
-$$\mu_2(x', y') = \sum_x \mu_1(x, y) K(x', y' | x, y).$$
-
-But since $\mu_1(x, y) = \pi(x, y)$, we have, under the assumption that the code is $\pi$-invariant, that [global balance](topic06_mh_invariance.qmd) holds:
-$$\mu_2(x', y') = \sum_x \pi(x, y) K(x', y' | x, y) = \pi(x, y).$$
-
-Using the same argument recursively, we get that $\mu_m = \pi$ for all $m$. 
-
-Here we will use specifically that this is true after $m = 200$ MCMC iteration (if the code is correct!):
-$$\mu_{200} = \pi.$$
-:::
-
-
--->
 </section>
 <section id="repeat-2000-times" class="level3">
 <h3 class="anchored" data-anchor-id="repeat-2000-times">Repeat 2000 times</h3>

@@ -1150,22 +1150,6 @@ Y | X &amp;\sim {\mathrm{Bern}}(X/2)
 <li>Suppose I want one more digit of accuracy…</li>
 </ul>
 <p><strong>By how much should I increase the number of iteration to get one more digit of accuracy?</strong></p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. 10 times more iterations
-1. 100 times more iterations
-1. 1000 times more iterations
-1. there is no way to answer this questions
-1. None of the above
-:::
-
-
-
--->
 </section>
 <section id="empirical-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="empirical-scaling">Empirical scaling</h2>
@@ -1224,64 +1208,7 @@ Y | X &amp;\sim {\mathrm{Bern}}(X/2)
 <li>What can you this coefficient tell you about the scaling of the error?</li>
 </ul></li>
 </ul>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $2$
-1. $1/2$
-1. $1$
-1. $-1/2$
-1. $-2$
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-- Get $a \approx -1/2$
-
-- Hence taking power on each side of 
-
-$\underbrace{\log_{10}(\text{error})}_{y} = a \underbrace{\log_{10}(\text{number of iterations})}_{x} + b$
-
-- we get that the error will scale like 
-$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
-:::
-
-
-
--->
 <p>Based on this extra information, let’s try revisit our initial question: <strong>By how much should I increase the number of iteration to get one more digit of accuracy?</strong></p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. 10 times more iterations
-1. 100 times more iterations
-1. 1000 times more iterations
-1. there is no way to answer this questions
-1. None of the above
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-- since we now know that the error will scale like 
-$$\frac{\text{constant}}{\sqrt{\text{number of iterations}}}$$
-
-- ... if we want to reduce it by factor 10 (i.e. "gain one significant digit"), we need 100x more iterations
-- To gain 2 more significant digits: need 10,000x more iterations, etc
-
-- What we did here is an example of an (empirical) **asymptotic analysis**.
-:::
-
--->
 </section>
 <section id="mathematical-underpinnings" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-underpinnings">Mathematical underpinnings</h2>

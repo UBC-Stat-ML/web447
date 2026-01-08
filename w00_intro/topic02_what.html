@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -1003,51 +1032,62 @@ https://github.com/trevorcampbell/shortex
 <li>models where some unknown quantities are treated as random</li>
 <li>none of the above</li>
 </ol>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-All these popular answers are misleading and/or very incomplete:
-
-1. MAP estimators (maximum a posteriori)
-    - MAP is seldom used by expert Bayesians (mode is misleading in high dimensions)
-1. posterior means
-    - the posterior mean is often undefined (e.g. Bayesian analysis over combinatorial objects such as graphs)
-1. Bayes rule
-    - Bayes rule is intractable in most practical situations (we use MCMC/variational methods)
-1. models where some unknown quantities are treated as random
-    - true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models
-
-
-
-**So... what *is* Bayesian Analysis?**
-
-### Preview of key definitions
-
-**Bayesian Analysis:** statistical discipline centered around the use of **Bayes estimators**. 
-
-**Bayes estimators:** for data $Y$, unobserved $X$, loss $L$, and possible actions $A$, the Bayes estimator is defined as:
-
-$$\argmin \{ \E[L(a, X) | Y] : a \in A \}$$
-
-**Note:** you are not expected to understand this equation at this point!
-
-### This course
-
-The primary objective of this course is to understand Bayes estimators:
-
-- Why they are so powerful.
-- Their limitations (model misspecification, computational challenges).
-- Important special cases (posterior means, credible intervals, MAP).
-- How to do it in practice
-    - how to build models
-    - how to approximate conditional expectations.
-
-
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>All these popular answers are misleading and/or very incomplete:</p>
+<ol type="1">
+<li>MAP estimators (maximum a posteriori)
+<ul>
+<li>MAP is seldom used by expert Bayesians (mode is misleading in high dimensions)</li>
+</ul></li>
+<li>posterior means
+<ul>
+<li>the posterior mean is often undefined (e.g.&nbsp;Bayesian analysis over combinatorial objects such as graphs)</li>
+</ul></li>
+<li>Bayes rule
+<ul>
+<li>Bayes rule is intractable in most practical situations (we use MCMC/variational methods)</li>
+</ul></li>
+<li>models where some unknown quantities are treated as random
+<ul>
+<li>true for Bayesian models, but also for many non-Bayesian models, e.g., random effect models</li>
+</ul></li>
+</ol>
+<p><strong>So… what <em>is</em> Bayesian Analysis?</strong></p>
+<section id="preview-of-key-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="preview-of-key-definitions">Preview of key definitions</h3>
+<p><strong>Bayesian Analysis:</strong> statistical discipline centered around the use of <strong>Bayes estimators</strong>.</p>
+<p><strong>Bayes estimators:</strong> for data <span class="math inline">\(Y\)</span>, unobserved <span class="math inline">\(X\)</span>, loss <span class="math inline">\(L\)</span>, and possible actions <span class="math inline">\(A\)</span>, the Bayes estimator is defined as:</p>
+<p><span class="math display">\[\operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \}\]</span></p>
+<p><strong>Note:</strong> you are not expected to understand this equation at this point!</p>
+</section>
+<section id="this-course" class="level3">
+<h3 class="anchored" data-anchor-id="this-course">This course</h3>
+<p>The primary objective of this course is to understand Bayes estimators:</p>
+<ul>
+<li>Why they are so powerful.</li>
+<li>Their limitations (model misspecification, computational challenges).</li>
+<li>Important special cases (posterior means, credible intervals, MAP).</li>
+<li>How to do it in practice
+<ul>
+<li>how to build models</li>
+<li>how to approximate conditional expectations.</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
 
 
 </section>

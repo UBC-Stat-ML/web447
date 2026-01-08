@@ -1069,47 +1069,6 @@ L(\phi) &amp;= \int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] 
 \nabla \mathbb{E}_\phi[h(\phi, X)] &amp;= \mathbb{E}_\phi[\nabla h(\phi, X)] \;\;\text{(interchange of $\nabla$ and $\mathbb{E}$)} \\
 &amp;\approx \underbrace{ \frac{1}{M} \sum_{m=1}^M \nabla h(\phi, X^{(m)})}_{\text{broken stochastic gradient estimator}} \;\;\text{(simple Monte Carlo)}.
 \end{align*}\]</span></p>
-<!--
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Product rule on $q_\phi(x) \log q_\phi(x)$ leads to a missing term. 
-2. One can never interchange $\nabla$ and $\ex$.
-3. Simple Monte Carlo cannot be applied because $q$ is intractable. 
-4. Simple Monte Carlo cannot be applied because of some other reason. 
-5. None of the above.
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is 1. Recall the product rule is $(u  v)' = u' v + u v'$. 
-
-Regarding 2: while the interchange needs to be justified mathematically, it 
-does hold under certain conditions for example when the function $h$ is bounded and differentiable 
-everywhere, see [547C lecture notes, Section 6.8](https://www.stat.ubc.ca/~bouchard/pub/probability-illustrated-april-2024.pdf) 
-for more details.
-
-Here is the details of where the missing term comes from (assuming interchange is justified):
-
-\begin{align*}
-\nabla \ex_\phi[ h(\phi, X)] &= \nabla \int q_\phi(x) h(\phi, x) \dee x \\ 
-&= \int \nabla[q_\phi(x) h(\phi, x)] \dee x \\
-&= \underbrace{\int q_\phi(x) \nabla  h(\phi, x) \dee x}_{\ex_\phi[\nabla h(\phi, X)]} + \underbrace{\int h(\phi, x) \nabla q_\phi(x) \dee x.}_\text{term missing in the above "broken estimator"}
-\end{align*}
-
-Note the missing term is "annoying" because it no longer has the $q_\phi(x)$ factor making it less straightforward 
-to write as an expectation and hence approximated using simple Monte Carlo. 
-:::
-
-
--->
 </section>
 <section id="solution-reparameterization" class="level2">
 <h2 class="anchored" data-anchor-id="solution-reparameterization">Solution: reparameterization</h2>

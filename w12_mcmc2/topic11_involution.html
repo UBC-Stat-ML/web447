@@ -1098,37 +1098,6 @@ Click for answer
 <li><span class="math inline">\(T(T(x_1, x_2)) = T(x_2, x_1) = (x_1, x_2)\)</span> ✅</li>
 </ul>
 <p><strong>Multiplicative proposal:</strong> complete the definition of <span class="math inline">\(T\)</span> to make it an involution on <span class="math inline">\(\mathbb{R}\times \mathbb{R}^+\)</span>. <span class="math display">\[T(x_1, x_2) = T(x, m) = (mx, \_\_).\]</span></p>
-<!--
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Any choice would work. 
-2. $T(x, m) = T(mx, m)$
-3. $T(x, m) = T(mx, m^2)$
-4. $T(x, m) = T(mx, 1/m)$
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $T(x, m) = T(mx, 1/m)$, since 
-
-\begin{align*}
-T(T(x, m)) &= T(mx, 1/m) \\
-&= ((1/m)(mx), 1/(1/m)) \\
-&= (x, m).
-\end{align*}
-:::
-
-
--->
 <p><strong>Question:</strong> Compute the Jacobian determinant of the multiplicative proposal involution.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1153,46 +1122,6 @@ Click for hint
 </div>
 </div>
 </div>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $1/m$
-2. $1/m^2$
-3. $1/x$
-4. $1/x^2$
-5. None of the above. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is $1/m$.
-
-First, we compute the Jacobian matrix, where we denote $T_1(x, m) = xm$ and $T_2(x, m) = 1/m$:
-
-\begin{align*}
-\nabla T(x, m) &= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial m}\\
-    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial m}
-\end{bmatrix} \\
-&= \begin{bmatrix}
-    m & x \\
-    0 & -1/m^2
-\end{bmatrix}.
-\end{align*}
-
-
-Hence, the Jacobian determinant is $|1/m|$. Since $m \in \reals^+$, $|1/m| = 1/m$.
-:::
-
-
--->
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

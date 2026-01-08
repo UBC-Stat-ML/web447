@@ -1056,36 +1056,6 @@ https://github.com/trevorcampbell/shortex
 <li>A central “hub”, where all flights land at the hub (see figure, again, planes always full).</li>
 </ol>
 
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. a only.
-2. b only. 
-3. c only. 
-4. a, b only. 
-5. b, c only. 
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is 1. Answer 4 is also accepted.
-
-**Intuition:** in (a) there is always the same number of planes leaving and arriving each airport on a given weekend. 
-
-On the other hand, with the "hub" model, (c) it is easy to see that the city with the hub airport will have a number of people in it increasing over time, 
-hence not invariant.
-
-For (b), it depends: if the initial distribution is uniform, then we have invariance, otherwise, we do not. 
-:::
-
--->
 <div class="no-row-height column-margin column-container"><div class="">
 <p>a: <img src="../images/tourists-detailed.png" class="img-fluid" width="300"> b: <img src="../images/tourists-global.png" class="img-fluid" width="300"> c: <img src="../images/tourists-hub.png" class="img-fluid" width="300"></p>
 </div></div></section>
@@ -1098,115 +1068,14 @@ For (b), it depends: if the initial distribution is uniform, then we have invari
 <li><a href="../w12_mcmc2/topic05_cke.html">the formula we derived for the marginals of a Markov chain</a>, i.e., <span class="math display">\[\mu_2(x') = \sum_x \mu_1(x) K(x' | x),\]</span></li>
 </ul>
 <p>to get an equation characterizing <span class="math inline">\(\pi\)</span>-invariance in terms of <span class="math inline">\(K\)</span>.</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\pi(x) K(x' | x) = \pi(x') K(x | x')$ 
-2. $\pi(x) K(x' | x) = \sum_x \pi(x) K(x' | x)$
-3. $\pi(x)  = \sum_{x'} \pi(x) K(x | x')$
-4. $\pi(x') = \sum_x \pi(x) K(x' | x)$ 
-5. None of the above.
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is 4. 
-
-This equation, $\pi(x') = \sum_x \pi(x) K(x' | x)$ is called **global balance.**
-:::
-
--->
 </section>
 <section id="detailed-balance" class="level2">
 <h2 class="anchored" data-anchor-id="detailed-balance">Detailed balance</h2>
 <p><strong>Question:</strong> write mathematically “pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (planes always full).”</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\pi(x) K(x' | x) = \pi(x') K(x | x')$ 
-2. $\pi(x) K(x' | x) = \sum_x \pi(x) K(x' | x)$
-3. $\pi(x)  = \sum_{x'} \pi(x) K(x | x')$
-3. $\pi(x') = \sum_x \pi(x) K(x' | x)$ 
-5. None of the above.
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The correct answer is 1. 
-
-- We want the number of tourist moving from city 1 to 2 to be the same as from city 2 to 1. 
-- Flow from city 1 to 2:
-  - The fraction of tourist in city 1: $\pi(x)$
-  - The fraction of those going to city 2: $K(x' | x)$
-  - Therefore the flow in one direction: $\pi(x) K(x' | x)$. 
-- By a similar argument, flow from 2 to 1: $\pi(x') K(x | x')$
-
-This equation, $\pi(x) K(x' | x) = \pi(x') K(x | x')$ is called **detailed balance**.
-:::
-
--->
 </section>
 <section id="relationship-between-detailed-and-global-balance" class="level2">
 <h2 class="anchored" data-anchor-id="relationship-between-detailed-and-global-balance">Relationship between detailed and global balance</h2>
 <p><strong>Question:</strong> what is the relationship between local and global balance? Does one imply the other?</p>
-<!--
-
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. Global balance implies local balance (converse is false).
-2. Local balance implies global balance (converse is false).
-3. Local balance holds iff global balance holds.
-4. Additional conditions are needed. 
-5. None of the above ever hold.
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Local balance implies global balance (converse is false).
-
-**Proposition:** if local balance holds
-$$\pi(x) K(x' | x) = \pi(x') K(x | x'),$$
-then global balance holds
-$$\pi(x') = \sum_x \pi(x) K(x' | x).$$
-
-**Proof:** Suppose local balance holds, then
-
-\begin{align*}
-\sum_x \pi(x) K(x' | x) &= \sum_x \pi(x') K(x | x') \expl{by local balance} \\
-&= \pi(x') \sum_x  K(x | x') \\
-&= \pi(x'). \expl{since $K(\cdot|x')$ is a probability} 
-\end{align*}
-
-**Reverse implication does not hold:** The "**tour**" travelling scheme shows that 
-there are situations where global balance holds but not detailed balance. 
-
-
-:::
-
-
--->
 
 
 </section>

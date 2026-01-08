@@ -1044,7 +1044,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Expectation si the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action).</p>
+<p>Expectation is the main tool to translate a posterior distribution into the various outputs of Bayesian inference (point estimate, credible intervals, prediction, action).</p>
 </section>
 </section>
 <section id="expectation-of-a-single-random-variable" class="level2 page-columns page-full">
@@ -1072,36 +1072,48 @@ S -- 0.8 --&gt; S__and__X_true["X=true"]
 <h2 class="anchored" data-anchor-id="law-of-the-unconscious-statistician">Law of the Unconscious Statistician</h2>
 <p><strong>Proposition:</strong> if <span class="math inline">\(g\)</span> is some function, <span class="math display">\[\mathbb{E}[g(X)] = \sum_x g(x) p_X(x).\]</span></p>
 <p><strong>Example:</strong> compute <span class="math inline">\(\mathbb{E}[X^2]\)</span> if <span class="math inline">\(X \sim {\mathrm{Bern}}(p)\)</span>, and hence <span class="math inline">\(\operatorname{Var}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2\)</span>.</p>
-<!--
-
-
-
-
-
-**Question:** Compute $\E[1/(X+1)]$, where $X \sim \distBern(1/3)$. 
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. 3/5
-1. 3/4
-1. 5/6
-1. 1/3
-1. None of the above
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Use $g(x) = 1/(x+1)$ in LOTUS:
-
-$$
-\E[1/(X+1)] = \sum_{x\in\{0, 1\}} g(x) p(x) = \frac{2}{3} \frac{1}{0+1} + \frac{1}{3}\frac{1}{1+1} = \frac{5}{6}.
-$$
-:::
-
--->
+<p><strong>Question:</strong> Compute <span class="math inline">\(\mathbb{E}[1/(X+1)]\)</span>, where <span class="math inline">\(X \sim {\mathrm{Bern}}(1/3)\)</span>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>3/5</li>
+<li>3/4</li>
+<li>5/6</li>
+<li>1/3</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <span class="math inline">\(g(x) = 1/(x+1)\)</span> in LOTUS:</p>
+<p><span class="math display">\[
+\mathbb{E}[1/(X+1)] = \sum_{x\in\{0, 1\}} g(x) p(x) = \frac{2}{3} \frac{1}{0+1} + \frac{1}{3}\frac{1}{1+1} = \frac{5}{6}.
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="expectation-of-a-function-of-several-random-variables" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="expectation-of-a-function-of-several-random-variables">Expectation of a function of several random variables</h2>
@@ -1197,37 +1209,49 @@ S__and__X_0__and__Y1_false__and__Y2_false -- 1.0 --&gt; S__and__X_0__and__Y1_fal
 </div>
 </div>
 </div>
-<!--
-
-**Question:** Assuming the path are summed left to right in the above diagram, what is 
-the last term in the LOTUS' iterated sum? Use the convention 'false' = 0, 
-'true' = 1. 
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. 4/3
-2. 3/4
-3. 4
-4. 1/3
-5. None of the above.
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The last term, $g(x, y_1, y_2, y_3, y_4) p(x, y_1, y_2, y_3, y_4)$, for 
-$x = 2, y_1 = y_2 = y_3 = y_4 = 1$ is the product of:
-$$
+<p><strong>Question:</strong> Assuming the path are summed left to right in the above diagram, what is the last term in the LOTUS’ iterated sum? Use the convention ‘false’ = 0, ‘true’ = 1.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>4/3</li>
+<li>3/4</li>
+<li>4</li>
+<li>1/3</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The last term, <span class="math inline">\(g(x, y_1, y_2, y_3, y_4) p(x, y_1, y_2, y_3, y_4)\)</span>, for <span class="math inline">\(x = 2, y_1 = y_2 = y_3 = y_4 = 1\)</span> is the product of: <span class="math display">\[
 g(2, 1, 1, 1, 1) = 2(1 + 1) = 4,
-$$
-and, via chain rule,
-$$
+\]</span> and, via chain rule, <span class="math display">\[
 p(x, y_1, y_2, y_3, y_4) = \frac{1}{3} \times 1 \times 1 \times 1 \times 1 = 1/3
-$$
-:::
-
--->
+\]</span></p>
+</div>
+</div>
+</div>
 
 
 </section>

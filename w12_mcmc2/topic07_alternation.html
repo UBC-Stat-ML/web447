@@ -1172,55 +1172,6 @@ https://github.com/trevorcampbell/shortex
 <section id="mathematical-notation-for-kernel-mixtures" class="level3">
 <h3 class="anchored" data-anchor-id="mathematical-notation-for-kernel-mixtures">Mathematical notation for kernel mixtures</h3>
 <p><strong>Question:</strong> write a mathematical expression for the alternation <span class="math inline">\(K_\text{alt}\)</span> in terms of <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\Kalt(x' | x) = \sum_{\check x} K_1(\check x | x) K_2(x' | \check x)$
-2. $\Kalt(x' | x) = \sum_{\check x} K_1(\check x | x') K_2(x | \check x)$
-3. $\Kalt(x' | x) = \sum_{i=1}^2 0.5 K_i(x' | x).$
-4. $\Kalt(x' | x) = \sum_{i=1}^2 0.5 K_i(x | x').$
-5. None of the above.
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for hint
-
-use the following notation:
-
-- $X_1$: state before applying $\Kalt$ 
-- $X_2$: intermediate state obtained from $K_1$ (called `intermediate_point` in the code)
-- $X_3$: state after applying $\Kalt$
-
-We want an expression for $\Kalt(x' | x) = \pr(X_3 = x' | X_1 = x)$. Notice that we need 
-to "add" $X_2$ to this expression, how do we do this?
-:::
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The first one. 
-
-
-We have:
-
-\begin{align*}
-\Kalt(x' | x) &= \pr(X_3 = x' | X_1 = x) \\
-&= \sum_{\check x} \pr(X_3 = x', X_2 = \check x | X_1 = x) \expl{marginalization} \\
-&= \sum_{\check x} \pr(X_2 = \check x | X_1 = x) \pr(X_3 = x' | X_2 = \check x,  X_1 = x) \expl{chain rule} \\
-&= \sum_{\check x} \pr(X_2 = \check x | X_1 = x) \pr(X_3 = x' | X_2 = \check x) \expl{Markov assumption} \\
-&= \sum_{\check x} K_1(\check x | x) K_2(x' | \check x) \expl{by definition}.
-\end{align*}
-:::
-
-
--->
 </section>
 </section>
 <section id="invariance-result" class="level2">

@@ -1128,27 +1128,6 @@ y_j | p_j &amp;\sim {\mathrm{Binom}}(n_j, p_j),
 <li>“Would you rather get strapped to…”</li>
 <li>“Should you show A or B?”</li>
 </ul>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\pr(p_A = 1)$
-1. $\pr(p_A = 1 | Y = y)$
-1. $\pr(p_A > p_B)$
-1. $\pr(p_A > p_B | Y = y)$
-1. None of the above
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-$\pr(p_A > p_B | Y = y)$: in words, is the chance of success of A greater than B, given the data?
-:::
-
--->
 <p><strong>Modify the code below to approximate that probability.</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -1163,54 +1142,6 @@ $\pr(p_A > p_B | Y = y)$: in words, is the chance of success of A greater than B
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  return <span class="co"># what is the "test function"?</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(bivariate, <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $\approx 0.1$
-1. $\approx 0.3$
-1. $\approx 0.6$
-1. $\approx 0.9$
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-::: {.cell}
-
-```{.r .cell-code}
-source("../../solutions/simple.R")
-set.seed(1)
-
-bivariate = function() {
-  
-  p_A = simulate(Beta(1, 1))
-  observe(1, Binom(size = 1, prob = p_A)) 
-  
-  p_B = simulate(Beta(1, 1))
-  observe(98, Binom(size = 100, prob = p_B)) 
-  
-  return(ifelse(p_A > p_B, 1, 0))
-}
-posterior(bivariate, 10000)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 0.06909026
-```
-
-
-:::
-:::
-:::
-
-
--->
 </section>
 <section id="visualization-of-a-bivariate-joint-posterior" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-a-bivariate-joint-posterior">Visualization of a bivariate joint posterior</h2>
@@ -1245,7 +1176,7 @@ posterior(bivariate, 10000)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_bivariate_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_bivariate_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1255,26 +1186,6 @@ posterior(bivariate, 10000)
 <li>We encode its associated weight <span class="math inline">\(w^{(m)}\)</span> by the transparency (<code>alpha</code>) of the point.</li>
 </ul>
 <p><strong>Question:</strong> What region of integration should you use to compute <span class="math inline">\(\mathbb{P}(p_A &gt; p_B | Y = y)\)</span>?</p>
-<!--
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. ◤
-1. ◥
-1. ◢
-1. ◣
-:::
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-◢
-:::
-
--->
 <!-- TODO: marginals + some high level description -->
 <!-- TODO: KDE + some high level description -->
 

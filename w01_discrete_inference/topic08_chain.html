@@ -988,6 +988,8 @@ window.Quarto = {
   <li><a href="#proposition" id="toc-proposition" class="nav-link" data-scroll-target="#proposition">Proposition</a></li>
   <li><a href="#sec-chain-rule" id="toc-sec-chain-rule" class="nav-link" data-scroll-target="#sec-chain-rule">Generalization</a></li>
   <li><a href="#visual-intuition" id="toc-visual-intuition" class="nav-link" data-scroll-target="#visual-intuition">Visual intuition</a></li>
+  <li><a href="#poll-what-is-the-probability-of-the-node-in-red" id="toc-poll-what-is-the-probability-of-the-node-in-red" class="nav-link" data-scroll-target="#poll-what-is-the-probability-of-the-node-in-red">Poll: what is the probability of the node in red?</a></li>
+  <li><a href="#poll-what-is-the-event-corresponding-to-that-node" id="toc-poll-what-is-the-event-corresponding-to-that-node" class="nav-link" data-scroll-target="#poll-what-is-the-event-corresponding-to-that-node">Poll: what is the event corresponding to that node?</a></li>
   <li><a href="#joint-pmf" id="toc-joint-pmf" class="nav-link" data-scroll-target="#joint-pmf">Joint PMF</a></li>
   <li><a href="#conditional-pmf" id="toc-conditional-pmf" class="nav-link" data-scroll-target="#conditional-pmf">Conditional PMF</a></li>
   <li><a href="#sec-conditional-independence" id="toc-sec-conditional-independence" class="nav-link" data-scroll-target="#sec-conditional-independence">Conditional independence</a></li>
@@ -1122,52 +1124,59 @@ style S__and__X_1__and__Y1_true__and__Y2_true__and__Y3_true fill:#f9f,stroke:#33
 </div>
 </div>
 </div>
-<!--
-
-
-
-## Poll: what is the probability of the node in red?
-
-1. 1/2
-1. 1/4
-1. 1/8
-1. 1/24
-1. None of the above
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Multiplying the four edge leading to the node we get: $1/2 \cdot 1/2 \cdot 1/2 \cdot 1/3 = 1/24$.
-:::
-
--->
-<!--
-
-
-
-## Poll: what is the event corresponding to that node?
-
-1. $(Y_3 = 1)$
-1. $(Y_3 = 1, Y_2 = 1)$
-1. $(Y_3 = 1, Y_2 = 1)$
-1. $(Y_3 = 1, Y_2 = 1, Y_1 = 1)$
-1. $(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)$
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Recall that the event is the intersection of all node labels to the root, hence 
-the event is $(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)$. 
-
-The calculation we did visually in the  previous clicker question is mathematically:
-$$\pr(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \pr(X = 1) \pr(Y_1 = 1 | X = 1) \pr(Y_2 = 1 | X = 1, Y_1 = 1) \pr(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).$$
-:::
-
--->
+</section>
+<section id="poll-what-is-the-probability-of-the-node-in-red" class="level2">
+<h2 class="anchored" data-anchor-id="poll-what-is-the-probability-of-the-node-in-red">Poll: what is the probability of the node in red?</h2>
+<ol type="1">
+<li>1/2</li>
+<li>1/4</li>
+<li>1/8</li>
+<li>1/24</li>
+<li>None of the above</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Multiplying the four edge leading to the node we get: <span class="math inline">\(1/2 \cdot 1/2 \cdot 1/2 \cdot 1/3 = 1/24\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="poll-what-is-the-event-corresponding-to-that-node" class="level2">
+<h2 class="anchored" data-anchor-id="poll-what-is-the-event-corresponding-to-that-node">Poll: what is the event corresponding to that node?</h2>
+<ol type="1">
+<li><span class="math inline">\((Y_3 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1)\)</span></li>
+<li><span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\)</span></li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Recall that the event is the intersection of all node labels to the root, hence the event is <span class="math inline">\((Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1)\)</span>.</p>
+<p>The calculation we did visually in the previous clicker question is mathematically: <span class="math display">\[\mathbb{P}(Y_3 = 1, Y_2 = 1, Y_1 = 1, X = 1) = \mathbb{P}(X = 1) \mathbb{P}(Y_1 = 1 | X = 1) \mathbb{P}(Y_2 = 1 | X = 1, Y_1 = 1) \mathbb{P}(Y_3 = 1 | X = 1, Y_1 = 1, Y_2 = 1).\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="joint-pmf" class="level2">
 <h2 class="anchored" data-anchor-id="joint-pmf">Joint PMF</h2>

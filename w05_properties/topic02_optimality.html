@@ -1089,19 +1089,6 @@ https://github.com/trevorcampbell/shortex
 <li>This cannot happen unless the loss function is non-convex</li>
 <li>This cannot happen because of some other reason</li>
 </ol>
-<!--
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is: "This cannot happen because of some other reason."
-
-**Intuition:** Bayes estimator is designed to minimize the average loss. 
-    So you cannot beat Bayes at its game!
-:::
-
--->
 </section>
 <section id="optimality-of-bayesian-estimators-theorem" class="level1">
 <h1>Optimality of Bayesian estimators: theorem</h1>
@@ -1119,28 +1106,6 @@ Correct answer is: "This cannot happen because of some other reason."
 \end{align*}
 \]</span></p>
 <p><strong>Discussion:</strong> Why do you think the presenter observed <span class="math inline">\(\mathbb{E}[L(\delta_{\text{B}}(Y), X)] {\color{red} &gt;} \mathbb{E}[L(\delta_{\text{o}}(Y), X)]\)</span> in their experiment?</p>
-<!--
-
-
-::: {.callout-caution collapse="true"} 
-## Click for possible answers
-
-A key factor to take into account:
-
-- If the estimator $\best$ is based on an approximation of the posterior (e.g. SNIS), 
-    then the optimality property may not hold!
-
-Some other more "practical" factors to keep in mind:
-
-- Software defects (more frequent than you may think---we will talk more about them later).
-- [Publication bias](https://en.wikipedia.org/wiki/Publication_bias) or even, academic dishonesty (e.g. repeating simulation until a desired result is obtained).
-
-Also, keep in mind this page implicitly assumes the model is well-specified 
-(since we generate data from the joint distribution). The situation is more 
-complex in mis-specified models (asymptotics becomes critical in that case).
-:::
-
--->
 
 
 </section>
