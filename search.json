@@ -606,7 +606,73 @@
     "href": "exercises/ex02.html",
     "title": "Exercise 2: Bayesian inference first contact",
     "section": "",
-    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following participation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Grading\n\n\n\nOur priority with the weekly exercises is to provide timely feedback and an incentive to stay on top of the material so that lectures can be more effective.\nWe will select one or more questions that will be graded in more detail. For the other question(s), we will use the following participation-centric binary scheme:\n\n1 point if something reasonable was attempted,\n0 otherwise.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#goals",
+    "href": "exercises/ex02.html#goals",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Goals",
+    "text": "Goals\n\nBuild a probability model for a concrete example.\nIntroduce the concept of Bayes estimators.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-setup",
+    "href": "exercises/ex02.html#sec-setup",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Setup",
+    "text": "Setup\nThis exercise is centered around the following scenario:\n\nYou are consulting for a satellite operator\nThey are about to send a $100M satellite on a Delta 7925H rocket\n\n\n\n\n\nData: as of Jan 2025, Delta 7925H rockets have been launched 3 times, with 0 failed launches \n\nNote: Delta 7925H is not reusable, so each rocket is “copy- built” from the same blueprint\n\nShould you recommend buying a $2M insurance policy?\n\nConvention: use 1 for a success, 0 for a failure.",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q1",
+    "href": "exercises/ex02.html#sec-q1",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.1: define a Bayesian model",
+    "text": "Q.1: define a Bayesian model\nIn order to perform inference on the unknown quantities, we must specify how they relate to the data; i.e., we need a probabilistic model. Assume that every Delta 7925H rocket has the same probability \\(p\\) of success. For simplicity, let us assume that \\(p\\) is allowed to take values on an evenly space grid \\[\np \\in \\left\\{\\frac{k}{K}: k\\in \\{0,\\dots,K\\}\\right\\}\n\\] for some fixed \\(K\\in\\mathbb{N}\\). Furthermore, we have access to a collection of numbers \\(\\rho_k\\in[0,1]\\) such that1 \\[\n\\forall k\\in\\{0,\\dots,K\\}:\\ \\mathbb{P}\\left(p=\\frac{k}{K}\\right) = \\rho_k.\n\\tag{1}\\]\nLet \\(Y_i\\) denote a binary variable with \\(Y_i=1\\) encoding a success, and \\(Y_i=0\\) a failure. We assume that, conditionally on \\(p\\), the \\(Y_i\\)’s are independent of each other.\nWe will use the following prior: \\[\n\\rho_k \\propto \\frac{k}{K}\\left(1-\\frac{k}{K}\\right).\n\\tag{2}\\] From now on, use \\(K = 20\\).\n\nWhat are the unknown quantities in this scenario? And what is the data?\nWrite the joint distribution of this model (use the \\(\\sim\\) notation).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q2",
+    "href": "exercises/ex02.html#sec-q2",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.2: posterior and point estimates",
+    "text": "Q.2: posterior and point estimates\nTo help you answer the following questions, create the two vectors:\n\nprior_probabilities where entry \\(i\\) containing the prior probability \\(\\rho_{i-1}\\) defined in Q1 (the minus one reflects the fact that R uses indexing starting at 1), and\nrealizations, a vector of possible realizations of \\(p\\) in the same order, namely \\((0, 1/K, 2/K \\dots, 1)\\).\n\n\nPlot the prior PMF. Do you think this is a reasonable prior? Hint: use the same type of plot as used last week to plot PMFs.\nLet \\(\\pi_k = \\mathbb{P}(p = k/K | Y_{1:3} = (1, 1, 1))\\) denote the posterior probabilities, for \\(k \\in \\{0, 1, 2, \\dots, K\\}\\). Create a vector posterior_probabilities where entry \\(i\\) is \\(\\pi_{i-1}\\). Plot the posterior PMF.\nWhat is the posterior mode?\nWrite a function that compute the posterior mean of \\(p\\). Hint: you should obtain \\(\\mathbb{E}[p | Y_{1:3} = (1, 1, 1)] \\approx 0.7\\).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#sec-q3",
+    "href": "exercises/ex02.html#sec-q3",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Q.3: Bayes action",
+    "text": "Q.3: Bayes action\nLet \\(a\\in\\{0,1\\}\\) be a binary variable denoting the decision of buying the insurance (\\(a=1\\)) or not (\\(a=0\\)).\n\nBased on the problem description from the Setup Section, define a loss function \\(L(a, y)\\) that summarizes the cost of having taken decision \\(a\\in\\{0,1\\}\\) depending on whether the next launch is successful (\\(y = 1\\)) or not (\\(y = 0\\)). Hint: use indicator functions (i.e. binary functions taking either the value zero or one).\nWe now consider the expected loss under the posterior predictive distribution: \\[\n\\mathcal{L}(a) := \\mathbb{E}[L(a,Y_4)|Y_{1:3}=(1, 1, 1)]\n\\] Write \\(\\mathcal{L}(a)\\) in terms of \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\). Important: you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right)\\) is the same as the posterior mean, which we computed earlier to be \\(\\approx 0.7\\) for our choice of prior.2\nFormulate a recommendation to the owner of the satellite (again, you can use without proof that \\(\\mathbb{P}\\left(Y_4=1 \\middle| Y_{1:3}=(1, 1, 1) \\right) \\approx 0.7\\)).",
+    "crumbs": [
+      "Bayes on a discrete model",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex02.html#footnotes",
+    "href": "exercises/ex02.html#footnotes",
+    "title": "Exercise 2: Bayesian inference first contact",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNotice that in Equation 1 we are using (small cap) \\(p\\) as a random variable, i.e. starting to move away from the probability theory capitalization convention towards the Bayesian convention where the same capitalization is used for both the random variable and its realization, as discussed in the first week.↩︎\nThe proof is as follows, where here we do disambiguate between the random variable \\(P\\) and its realization \\(p\\) (not to be confused with \\(\\mathbb{P}\\) and PMF \\(p(\\cdot)\\)!): \\[\\begin{align*}\n  \\mathbb{P}(Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) &= \\sum_p \\mathbb{P}(P = p, Y_4 = y_4 | Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(additivity axiom)} \\\\\n  &= \\sum_p  \\mathbb{P}(P = p | Y_{1:3} = \\boldsymbol{1}) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(chain rule)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p, Y_{1:3} = \\boldsymbol{1}) \\;\\;\\text{(definition)} \\\\\n  &= \\sum_p \\pi(p) \\mathbb{P}(Y_4 = y_4 | P = p) \\;\\;\\text{(conditional independence)} \\\\\n  &= \\sum_p \\pi(p) p \\;\\;\\text{(since each flip is assumed to be Bernoulli)} \\\\\n  &= \\mathbb{E}[p | Y_{1:3} = \\boldsymbol{1}].\n  \\end{align*}\\] Note however that this argument is very specific to this Bernoulli likelihood model and will not generalize. We will cover in class the general method to compute predictive distribution, see lecture notes.↩︎",
     "crumbs": [
       "Bayes on a discrete model",
       "Exercises"
@@ -3918,7 +3984,7 @@
     "href": "challenges/ch02.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\).",
     "crumbs": [
       "Bayes on a discrete model",
       "Challenge"
