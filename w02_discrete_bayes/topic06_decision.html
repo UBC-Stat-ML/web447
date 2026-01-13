@@ -1086,6 +1086,33 @@ https://github.com/trevorcampbell/shortex
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
 <p>Compute <span class="math inline">\(\operatorname{arg\,min}L(a)\)</span> and <span class="math inline">\(\min L(a)\)</span>.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1.  $1$ and $1$
+2.  $1$ and $-1/2$
+3.  $1$ and $1/2$
+4.  $0$ and $0$
+5.  None of the above
+:::
+
+::: {.callout-caution collapse="true"}
+## Click for answer
+
+The loss function is given by:
+
+|                 | Do not play ($a = 0$) | Play ($a = 1$) |
+|-----------------|-----------------------|----------------|
+| Heads ($x = 1$) | $0$                   | $10$          |
+| Tails ($x = 0$) | $0$                   | $-9$            |
+
+So we have $L(0) = 0$ and $L(1) = 10/2 + (-9)/2 = 1/2$. 
+
+Therefore, the action that minimizes $L(a)$ is $a = 0$ (i.e., $a = 0$ is the "argmin") and gives value $L(0) = 0$.
+:::
+
+-->
 <p>It is useful and important to answer this easy question in excruciating mathematical details. This will prepare us for more complex decision scenarios.</p>
 <p>Let us start by writing the loss function mathematically using <strong>indicator function</strong> defined as: <span class="math display">\[\mathbb{1}[\text{some condition}] = \left\{
 \begin{array}{ll}
