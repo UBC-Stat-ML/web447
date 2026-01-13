@@ -130,6 +130,46 @@
     ]
   },
   {
+    "objectID": "project.html#overview",
+    "href": "project.html#overview",
+    "title": "Final project",
+    "section": "Overview",
+    "text": "Overview\nThe course project involves independent work on topics selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#logistics",
+    "href": "project.html#logistics",
+    "title": "Final project",
+    "section": "Logistics",
+    "text": "Logistics\n\nTeams of maximum 2-3 people are strongly encouraged (we will provide help forming teams)\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#project-timeline",
+    "href": "project.html#project-timeline",
+    "title": "Final project",
+    "section": "Project timeline",
+    "text": "Project timeline\nSee schedule.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#core-guideline",
+    "href": "project.html#core-guideline",
+    "title": "Final project",
+    "section": "Core guideline",
+    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!\nMore detailed structure and rubric will be posted soon.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
     "objectID": "w00_intro/topic02_what.html",
     "href": "w00_intro/topic02_what.html",
     "title": "What?",
