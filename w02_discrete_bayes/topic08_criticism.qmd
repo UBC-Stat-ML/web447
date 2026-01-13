@@ -13,7 +13,7 @@ editor:
 
 - What is a model mis-specification?
 - What are the consequences?
-- What to do about it. 
+- What to do about it.
 
 
 ### Rationale

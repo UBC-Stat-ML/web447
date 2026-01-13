@@ -9,7 +9,7 @@ editor:
 
 ## Outline
 
-### Topics
+### Topics 
 
 - Introduce the Bayesian Recipe (synonym for the Bayes estimator)
 - Illustrate it using this week's running example
