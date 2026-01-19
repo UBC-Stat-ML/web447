@@ -2142,7 +2142,7 @@
     "href": "challenges/ch03.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nRecall the decision tree visualization we introduced in the first week.\nCreate a variant of simPPLe which draws decision trees automatically.\nSpecifically, your code should include a function decision_tree which takes as input a simPPLe probabilistic program, and output a mermaid string which can be rendered in your browser as a diagram.\nDemonstrate your code on two examples: one in class, and one not from the class.",
     "crumbs": [
       "A first look at PPLs",
       "Challenge"
@@ -5718,7 +5718,40 @@
     "href": "exercises/ex03.html",
     "title": "Exercise 3: Write your own PPL!",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Introduce Monte Carlo integration in continuous spaces.\nImplement importance sampling.\nBuild a universal probabilistic programming language in &lt;30 lines of code.",
+    "crumbs": [
+      "A first look at PPLs",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex03.html#goals",
+    "href": "exercises/ex03.html#goals",
+    "title": "Exercise 3: Write your own PPL!",
+    "section": "",
+    "text": "Introduce Monte Carlo integration in continuous spaces.\nImplement importance sampling.\nBuild a universal probabilistic programming language in &lt;30 lines of code.",
+    "crumbs": [
+      "A first look at PPLs",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
+    "href": "exercises/ex03.html#q.1-functions-on-the-unit-interval",
+    "title": "Exercise 3: Write your own PPL!",
+    "section": "Q.1: functions on the unit interval",
+    "text": "Q.1: functions on the unit interval\nFor this question, use Simple Monte Carlo. The main twist compared to week one is that you will use a continuous random variable.\n\nWrite a function mc_estimate that takes a function \\(f:[0,1]\\to\\mathbb{R}\\) and outputs a Monte Carlo estimate of \\(\\int_0^1 f(x)\\mathrm{d}x\\) using \\(n=10000\\) independent samples from \\({\\mathrm{Unif}}(0,1)\\).\nConsider the function \\(f:[0,1] \\to [0,\\infty)\\) given by \\[\nf(x) = e^{-x^2}.\n\\] It is possible to show that \\[\n\\int_0^1 f(x) \\, \\mathrm{d}x = \\frac{\\sqrt{\\pi}}{2} \\text{erf}(1) \\approx 0.7468241,\n\\tag{1}\\] where \\(\\text{erf}(\\cdot)\\) is the error function. Test your implementation of mc_estimate by checking that it produces an answer close to the value in Equation 1.\nApproximate the following integral using mc_estimate: \\[\n\\int_0^1 \\sin(\\cos(\\sin(x))) \\mathrm{d}x.\n\\]",
+    "crumbs": [
+      "A first look at PPLs",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex03.html#sec-simPPLe",
+    "href": "exercises/ex03.html#sec-simPPLe",
+    "title": "Exercise 3: Write your own PPL!",
+    "section": "Q.2: implementing SNIS for simPPLe",
+    "text": "Q.2: implementing SNIS for simPPLe\nIn this question, you will write the function posterior that we used in the PPL introduction.\n\nFirst, install the package distr, which allows us to work with distributions as objects—a necessary ingredient of every PPL. Load or install it using\n\n\nif (!require(distr)){\n  install.packages(\"distr\")\n  require(distr)\n}\n\n\nRead this short tutorial on distr. Nothing to submit for this item.\nRead the “scaffold code”, and use distr and two of the functions below to create a fair coin, flip it, and to compute the probability of that flip:\n\n\n\nex03_scaffold.R\n\nsuppressPackageStartupMessages(library(distr))\n\n## Utilities to make the distr library a bit nicer to use\n\np &lt;- function(distribution, realization) {\n  d(distribution)(realization) # return the PMF or density \n}\n\nBern = function(probability_to_get_one) {\n  DiscreteDistribution(supp = 0:1, prob = c(1-probability_to_get_one, probability_to_get_one))\n}\n\n## Key functions called by simPPLe programs\n\n# Use simulate(distribution) for unobserved random variables\nsimulate &lt;- function(distribution) {\n  r(distribution)(1) # sample once from the given distribution\n}\n\n# Use observe(realization, distribution) for observed random variables\nobserve = function(realization, distribution) {\n  # `&lt;&lt;-` lets us modify variables that live in the global scope from inside a function\n  weight &lt;&lt;- weight * p(distribution, realization) \n}\n\n\nComplete the implementation of the function posterior:\n\nposterior = function(ppl_function, number_of_iterations) {\n  numerator = 0.0\n  denominator = 0.0\n  for (i in 1:number_of_iterations) {\n    weight &lt;&lt;- 1.0\n    # update numerator and denominator\n  }\n  return(numerator/denominator)\n}\n\nTest your program by checking that you can approximate the posterior probability of the fair coin obtained in exercise 1, Q.2.s",
     "crumbs": [
       "A first look at PPLs",
       "Exercises"
