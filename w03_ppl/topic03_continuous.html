@@ -1112,9 +1112,103 @@ Y | X &amp;\sim {\mathrm{Unif}}(0, X).
 <section id="computations-on-the-doomsday-model" class="level3">
 <h3 class="anchored" data-anchor-id="computations-on-the-doomsday-model">Computations on the Doomsday model</h3>
 <p><strong>Joint density:</strong> which of these is the joint density?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\frac{\ind[y < x < 5]}{y - 5} \frac{\ind[0 < y < x]}{x}$
+1. $\frac{\ind[0 < y < 5]}{5} \frac{\ind[0 < x < y]}{y}$
+1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}$
+1. $\frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < 5]}{5}$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We have $$f_X(x) = \frac{\ind[0 < x < 5]}{5}$$ and 
+$$f_{Y|X}(y|x) =  \frac{\ind[0 < y < x]}{x},$$ therefore 
+$$f(x, y) = \frac{\ind[0 < x < 5]}{5} \frac{\ind[0 < y < x]}{x}.$$
+:::
+-->
 <p><strong>Marginal density:</strong> compute the marginal <span class="math inline">\(f_Y(y)\)</span></p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $\frac{1}{5} (\log 5 - \log y)$
+1. $\log 5 - \log y$
+1. $\frac{2}{y^2} - \frac{2}{25}$
+1. $\frac{1}{5} \left( \frac{2}{y^2} - \frac{2}{25} \right)$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+$$\begin{align*}
+f_Y(y) &= \frac{1}{5} \int \frac{ \ind[0 < x < 5] \ind[0 < y < x]}{x} \dee x \\
+&= \frac{1}{5} \int_y^5 \frac{\dee x}{x} \\
+&= \frac{1}{5} (\log 5 - \log y).
+\end{align*}$$
+:::
+
+-->
 <p><strong>Posterior density:</strong> from our marginal and Bayes’ theorem, we obtain <span class="math display">\[f_{X|Y}(x|y) = \frac{\mathbb{1}[0&lt;x&lt;5] \mathbb{1}[0 &lt; y &lt; x]}{x (\log 5 - \log y)}.\]</span></p>
 <p><strong>Posterior expectation:</strong> compute <span class="math inline">\(\mathbb{E}[X|Y = 0.06]\)</span></p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. $1.5$
+1. $\approx 1.23$
+1. $\approx 1.117$
+1. $\approx 0.9714$
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+$$\begin{align*}
+f_{X|Y}(x|y) &= \int x f_{X|Y}(x|y) \dee x \\
+&= \frac{1}{\log 5 - \log y} \int_y^5 \dee x \\
+&= \frac{1}{\log 5 - \log y} (5 - y) \approx 1.117. \\
+\end{align*}$$
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Comparison with simPPLe
+Compare this to the simPPLe approximation
+
+::: {.cell}
+
+```{.r .cell-code}
+source("../exercises/ex03_scaffold.R")
+source("../../solutions/sol03_posterior.R")
+
+doomsday_model <- function() {
+  x = simulate(Unif(0, 5))
+  observe(0.06, Unif(0, x))
+  return(x)
+}
+
+posterior(doomsday_model, 10000)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1.125607
+```
+
+
+:::
+:::
+:::
+
+-->
 
 
 </section>
