@@ -1178,8 +1178,186 @@ https://github.com/trevorcampbell/shortex
 <li>Specifically, let us build a model for the observed velocity first.</li>
 </ul>
 <p><strong>Question:</strong> what would be a reasonable likelihood for the velocity?</p>
+<!--
+
+1. velocity $\sim$ [Exponential(...)](https://en.wikipedia.org/wiki/Exponential_distribution)
+1. velocity $\sim$ [Uniform(...)](https://en.wikipedia.org/wiki/Continuous_uniform_distribution)
+1. velocity $\sim$ [t(...)](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+1. velocity $\sim$ [Normal(...)](https://en.wikipedia.org/wiki/Normal_distribution)
+1. None of the above.
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We have that velocity $\in \reals$, so the exponential ($\in (0, \infty)$) 
+and the uniform ($\in [a, b]$) are not great choices. 
+
+Both the normal and the t-distribution are reasonable. 
+
+The t-distribution can have fatter tails, so if the data has [outliers](https://en.wikipedia.org/wiki/Outlier) this 
+may be preferable but we will stick with the simpler normal choice today.
+:::
+
+-->
+<!--
+**Erratum:** I said in class it might be reasonable to use a uniform distribution 
+where the bounds are the speed of light. It turns out to be incorrect: 
+[galaxies can recede from us faster than the speed of light!](https://en.wikipedia.org/wiki/Faster-than-light)
+-->
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for next step
+
+**Question:**  What should we use as the mean parameter of the normal likelihood?
+
+Use the fact that the scientific question is "to find a linear relationship of the velocity as a function of the distance."
+
+1. velocity $\sim$ Normal(0, ...)
+1. velocity $\sim$ Normal(distance, ...)
+1. velocity $\sim$ Normal(distance * slope, ...)
+1. velocity $\sim$ Normal(distance * slope + intercept, ...)
+1. None of the above.
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Here the best answer is:
+
+velocity $\sim$ Normal(distance * slope, ...).
+
+We do not need an intercept, because we know that by definition, our velocity relative to ourself is zero. 
+:::
+
+-->
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for next step
+
+**Question:**  What should we use as the **standard deviation** parameter of the normal likelihood?
+
+1. velocity $\sim$ Normal(..., some constant)
+1. velocity $\sim$ Normal(..., some random variable)
+1. velocity $\sim$ Normal(..., some random variable * distance)
+1. None of the above.
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Using a constant standard deviation is not ideal as the model will be sensitive to that choice.
+
+The other choices are a priori reasonable and more domain knowledge would be needed to pick one. 
+The choice:
+
+velocity $\sim$ Normal(..., some random variable * distance)
+
+means that we expect that the variability of the galaxy velocities increase for galaxies that 
+are further away. This could happen for example if the variability is dominated by measurement 
+error for a measurement technique where errors increase linearly with distance. 
+
+The choice:
+
+velocity $\sim$ Normal(..., some random variable)
+
+would be more reasonable if the measurement error is negligible and the variability comes from 
+other phenomena affecting the velocity of galaxies which are not expected to behave differently 
+for close vs far galaxies (in our metaphor, think of ants walking in random directions at the 
+same time as the balloon is expanding). 
+
+These are examples of 
+[heteroscedasticity (variability changes with input variable) and 
+homoscedasticity (variability is invariant to input)](https://en.wikipedia.org/wiki/Homoscedasticity_and_heteroscedasticity). 
+
+Let us pick an homoscedasticity model. 
+To summarize what we have so far:
+
+velocity $\sim$ Normal(distance * slope, sd).
+:::
+
+-->
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for next step
+
+**Question:**  Pick priors for the "slope" and "sd" parameters
+
+1. slope $\sim$ Normal(...), sd $\sim$ Normal(...)
+1. slope $\sim$ Normal(...), sd $\sim$ Exponential(...)
+1. slope $\sim$ Exponential(...), sd $\sim$ Exponential(...)
+1. None of the above.
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+We do not want a normal for the standard deviation (sd) parameter, because negative sd's are not allowed.
+
+Using an exponential for the slope would violate [Cromwell's rule](../w02_discrete_bayes/topic08_criticism.qmd). 
+
+Hence the best choice here is:
+
+slope $\sim$ Normal(...), sd $\sim$ Exponential(...).
+:::
+
+-->
 <p><strong>Question:</strong> complete the code and approximate <span class="math inline">\(\mathbb{E}[\text{slope} | \text{data}]\)</span>.</p>
 <!-- even when hidding, we need to run this code for subsequent plot!!!! -->
+<!--
+
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+Pick the closest:
+
+1. $\approx 0.1$
+1. $\approx 0.5$
+1. $\approx 1$
+1. $\approx 2$
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+::: {.cell}
+
+```{.r .cell-code}
+source("../../solutions/simple.R")
+source("../blocks/simple_utils.R")
+
+regression = function() {
+  slope = simulate(Norm(0, 1))
+  sd = simulate(Exp(10))
+  for (i in 1:nrow(df)) { 
+    distance = df[i, "distance"]
+    velocity = df[i, "velocity"]
+    observe(velocity, Norm(distance * slope, sd))
+  }
+  c(slope, sd)
+}
+
+posterior(regression, 1000)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.4312079 0.2373624
+```
+
+
+:::
+:::
+:::
+
+-->
 </section>
 <section id="visualization-of-the-posterior-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-the-posterior-distribution">Visualization of the posterior distribution</h2>
@@ -1192,7 +1370,7 @@ https://github.com/trevorcampbell/shortex
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic05_regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic05_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1212,7 +1390,7 @@ https://github.com/trevorcampbell/shortex
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic05_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic05_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1239,18 +1417,54 @@ https://github.com/trevorcampbell/shortex
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic05_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic05_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Question:</strong> if you were to use an integral instead of Monte Carlo to create this histogram, what region of integration in the scatter plot above (the first plot in this subsection) would be used to compute the height of one histogram bin?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. "—"
+1. "|"
+1. "◤"
+1. "◢"
+1. None of the above
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The answer is "|".
+:::
+
+-->
 </section>
 <section id="model-criticism" class="level2">
 <h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
 <p>The answer we obtain is close to Edwin Hubble’s original estimate.</p>
 <p>The modern estimate based on state-of-the-art measurements (space telescopes, advanced statistical models) gives an estimate that is about 10x smaller.</p>
 <p><strong>Discussion:</strong> What went wrong?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for discussion
+
+In summary: [it is very hard to estimate distance of distant objects](https://en.wikipedia.org/wiki/Cosmic_distance_ladder). 
+
+Not only the model explored today lacks an error model on the distances, but moreover, 
+Hubble's distance estimates had systematic errors (i.e. were all offset by a constant), 
+hence any model on this dataset (Bayesian or otherwise) would have likely lead to misleading results. 
+
+In fact, even with modern data and statistical methods, 
+systematic errors are still suspected, this is known as the "Hubble tension."
+:::
+
+-->
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
