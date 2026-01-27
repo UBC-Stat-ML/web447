@@ -44,7 +44,7 @@ First I will show you what simPPLe can do.
 Let us start with something we are familiar with: our bag of coin problem...
 
 
-### Mathematical description
+### Mathematical description 
 
 Recall our "bag of coins" model can be written as:
 
@@ -64,7 +64,7 @@ After solving this week's exercise, you will be able to compute this probability
 ```{r}
 source("../exercises/ex03_scaffold.R")
 source("../exercises/ex03_ppl.R")
-source("../../solutions/sol03_posterior.R")
+source("../../solutions/sol03_posterior.R") 
 
 posterior(my_first_probabilistic_program, 10000)
 ```
@@ -82,11 +82,10 @@ predict_next_flip <- function() {
   coin_index = simulate(DiscreteDistribution(supp = 0:2))
   prob_heads = coin_index/2
   for (i in seq_along(coin_flips)) { 
-    observe(coin_flips[i], Bern(1 - prob_heads)) 
+    observe(coin_flips[i], Bern(prob_heads)) 
   }
-  next_flip = simulate(Bern(1 - prob_heads))
-  same_as_observed = 1 - next_flip
-  return(same_as_observed)
+  next_flip = simulate(Bern(prob_heads))
+  return(ifelse(next_flip == 0, 1, 0))
 }
 
 posterior(predict_next_flip, 10000)

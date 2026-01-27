@@ -8,6 +8,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+<!-- 2026: I'm going over this page in office hour instead.. --> 
 
 ## Outline
 
@@ -31,7 +32,7 @@ derivation and PPLs. Later we will increasingly rely only on PPLs.
 But it is still important to understand both methods. 
 
 
-## Densities
+## Densities 
 
 **Definition:** $X$ has density $f(x)$ if 
   $$\pr(X \in A) = \int_A f(x) \dee x.$$ 

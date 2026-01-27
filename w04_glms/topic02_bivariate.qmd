@@ -10,7 +10,7 @@ editor:
 
 ## Outline
 
-### Topics
+### Topics 
 
 - Posterior distribution on two parameters (bivariate). 
 

@@ -60,7 +60,7 @@ $$\frac{1}{M} \sum_{m=1}^M W^\parm \to \int \gamma(x) \dee x = Z.$$
 
 Now to combine the convergence of numerator and denominator in one, we use this proposition from probability theory:
 
-**Proposition:** if $S_i \to S$ and $T_i \to T$ then $S_i / T_i \to S / T$.[^2]
+**Proposition:**[^2] if $S_i \to S$ and $T_i \to T$ then $S_i / T_i \to S / T$.
 
 [^2]: This is true in probability and almost sure. In the case of almost sure the proof is trivial but outside of the scope of this course. 
 

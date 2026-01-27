@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
-- Quick review of the normal distribution.
+- Quick review of the normal distribution. 
 - Different parameterizations. 
 
 

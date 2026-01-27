@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-<!-- not yet covered (2025) -->
 
 
 ## Outline

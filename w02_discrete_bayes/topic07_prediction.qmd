@@ -9,7 +9,7 @@ editor:
 
 ## Outline
 
-### Topics 
+### Topics
 
 - Prediction using decision trees
 - Example

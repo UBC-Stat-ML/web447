@@ -61,9 +61,8 @@ specifying a **query.**
 
 -   Let's say you want to approximate $\pr(X = 1 | Y = y)$.
     -   We can do this with SNIS by picking the right $g$!
-    -   From [last week's "trick
-        2"](../w02_discrete_bayes/topic06_decision.qmd), if we take
-        $g(x) = \ind[X = 1]$, $\pi(x) = p(x | y)$,
+    -   From [last week's "trick 2"](../w02_discrete_bayes/topic06_decision.qmd), if we take
+        $g(x) = \ind[x = 1]$, $\pi(x) = p(x | y)$,
         $$\ex_\pi[g(X)] = \sum \pi(x) g(x) = \ex[\ind[X = 1] | Y = y] = \pr(X = 1 | Y = y).$$
 -   What function $g(x)$ would you take to compute a [posterior
     mean](../w02_discrete_bayes/topic04_point.qmd)?

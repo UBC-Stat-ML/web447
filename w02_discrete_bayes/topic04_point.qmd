@@ -52,9 +52,27 @@ the Maximum A Posteriori (MAP) estimator.
 ### Example 1
 
 In the following, we will compute point estimates based on 
-$\pi(x) = \pr(X = x | Y = (1, 1))$ in the bag of coin running example. 
+$\pi(x) = \pr(X = x | Y = (1, 1))$ in the bag of coin running example (notice we observe only **two coin flips** here). 
 
-{{< include ../blocks/_coinbag.qmd >}}
+-   Imagine a bag with 3 coins each with a different probability parameter $p$
+-   Coin $i\in \{0, 1, 2\}$ has bias $i/2$---in other words:
+    -   First coin: bias is $0/2 = 0$ (i.e. both sides are "heads", $p = 0$)
+    -   Second coin: bias is $1/2 = 0.5$ (i.e. standard coin, $p = 1/2$)
+    -   Third coin: bias is $2/2 = 1$ (i.e. both sides are "tails", $p = 1$)
+
+::: column-margin
+![](../images/coinbag.png){width="200"}
+:::
+
+-   Consider the following two steps sampling process
+    -   Step 1: pick one of the three coins, but do not look at it!
+    -   Step 2: flip the coin **2** times
+-   Mathematically, this probability model can be written as follows: $$
+    \begin{align*}
+    X &\sim \distUnif\{0, 1, 2\} \\
+    Y_i | X &\sim \distBern(X/2)
+    \end{align*}
+    $$ {#eq-coin-joint}
 
 {{< include ../../clickers/w02/_c01.qmd >}}
 

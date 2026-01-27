@@ -7,7 +7,7 @@ editor:
 {{< include ../_macros.qmd >}}
 
 
-## Outline 
+## Outline
 
 ### Topics
 

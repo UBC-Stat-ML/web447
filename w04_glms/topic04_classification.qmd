@@ -15,7 +15,7 @@ editor:
 - A first example of a Bayesian model based on a linear model and a Bernoulli likelihood. 
 - Prior construction via prior predictive distribution. 
 - Approximation of the posterior using a PPL. 
-- Visualizing a posterior distribution over functions. 
+- Visualizing a posterior distribution over functions.
 
 
 ### Rationale
@@ -86,7 +86,7 @@ plot(success_indicators, xlab = "Launch index i")
     2. simulate a slope,
     3. this determines $\theta(i)$ for each $i \in \{1, 2, \dots, 11\}$. 
     4. Simulate $y_i \sim \distBern(\theta(i))$ independently but not identically. 
-- I.e. we have reduce the problem to that of sampling two real numbers. 
+- I.e. we have reduced the problem to that of sampling two real numbers. 
     - Reasonable prior for a first try: [the normal distribution](../w04_glms/topic03_normal.qmd).
     
     

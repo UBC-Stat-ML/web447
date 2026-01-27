@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-We will use simPPLe this week to do probabilistic modelling. 
+We will use simPPLe this week to do probabilistic modelling.
 
 
 ## Background

@@ -4,6 +4,7 @@ title: "Final project"
 
 {{< include _construction.qmd >}}
 
+<!-- idea: might want to ask to do one scaling law as part or separate to the Bayesian analysis? -->
 
 
 ## Overview
