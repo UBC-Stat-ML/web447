@@ -55,7 +55,7 @@ This provides us with a second example of [Bayesian GLMs](../w04_glms/topic06_gl
 
 **Instructions:**
 
-1. download the [CVS](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv)
+1. download the [CSV](https://github.com/UBC-Stat-ML/web447/blob/main/data/hubble-1.csv)
 2. copy paste the code below and run it on your computer (after changing the path "`../data`" to the path on your computer)
 
 ```{r}
@@ -116,7 +116,7 @@ posterior(regression, 1000)
 
 {{< include ../../clickers/w04/_c08.qmd >}}
 
-**Question:** complete the code and approximate $\ex[\text{slope} | \text{data}]$. 
+**Question:** complete the code and approximate $\ex[\text{slope} | \text{data}]$.
 
 {{< include ../../clickers/w04/_c09.qmd >}}
 
