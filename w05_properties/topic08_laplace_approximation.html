@@ -1022,6 +1022,7 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#laplace-approximation-input-and-output" id="toc-laplace-approximation-input-and-output" class="nav-link" data-scroll-target="#laplace-approximation-input-and-output">Laplace approximation: input and output</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#taylor-expansion" id="toc-taylor-expansion" class="nav-link" data-scroll-target="#taylor-expansion">Taylor expansion</a></li>
@@ -1089,6 +1090,12 @@ https://github.com/trevorcampbell/shortex
 <p>Laplace approximation is a useful tool for some (but not all) Bayesian models. The Laplace approximation is attractive because it is sometimes very cheap to compute and accurate. Understanding that approximation will also help understanding the BvM theorem introduced in the previous page.</p>
 </section>
 </section>
+<section id="laplace-approximation-input-and-output" class="level2">
+<h2 class="anchored" data-anchor-id="laplace-approximation-input-and-output">Laplace approximation: input and output</h2>
+<p><strong>Input:</strong> an un-normalized density <span class="math inline">\(\gamma(x)\)</span>, where <span class="math inline">\(x\)</span> is real-valued (or vector valued).</p>
+<p><strong>Output:</strong> an approximation <span class="math inline">\(q(x)\)</span> for <span class="math inline">\(\gamma\)</span> for which the normalization constant can be computed easily.</p>
+<p>Think about it as an alternative to SNIS.</p>
+</section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
 <p>We use the same example as this week’s lab:</p>
@@ -1133,10 +1140,11 @@ Y|X &amp;\sim {\mathrm{Binom}}(n, X).
 <pre><code>[1] 640</code></pre>
 </div>
 </div>
+<p>In the real world, we would not need the Laplace here since we know the posterior is a Beta distribution (by conjugacy, covered in the lab this week). But in real problem, it is rare that you can use conjugacy calculation, it is a fragile property.</p>
 </section>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>Let us look at the log density near the mode of the posterior</p>
+<p>Let us look at the log density near the mode of the posterior:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">=</span> <span class="fu">maximize</span>(lab5logdensity, <span class="fl">0.5</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1195,7 +1203,7 @@ Click for answer
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The second term is zero, since <span class="math inline">\(\ell'(\hat x) = 0\)</span>. This is because <span class="math inline">\(\hat x\)</span> is the location of the maximum. Hence assuming that <span class="math inline">\(\hat x\)</span> is an interior point, the derivative at this point is zero.</p>
-<p>So removing the zero term and ignoring the residual, we obtain Laplace approximation:</p>
+<p>So removing the zero term and ignoring the residual, we obtain the Laplace approximation:</p>
 <p><span class="math display">\[
 \ell(x) \approx \ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2.
 \]</span></p>
@@ -1309,6 +1317,12 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 <p>Hence we have to match the above with the parametrization of a normal, given by:</p>
 <p><span class="math display">\[\text{constant} \times \exp\left( - \frac{(x - \mu)^2}{2\sigma^2}\right).\]</span></p>
 <p>Hence we have <span class="math inline">\(\mu = \hat x\)</span> and <span class="math inline">\(\sigma^2 = -1/\ell''(\hat x)\)</span>.</p>
+<p>Now what is that constant? The painful way to find it would be to use the fact that a density should integrate to one, and to compute:</p>
+<p><span class="math display">\[\int \exp\left( - \frac{(x - \mu)^2}{2\sigma^2}\right) \mathrm{d}x = 1/\text{constant}.\]</span></p>
+<p>But there is a shortcut!</p>
+<p>The key ingredient of the shortcut is (the proof of it is reviewed in the lab this week):</p>
+<p><strong>Proposition:</strong> if two densities are proportional, <span class="math inline">\(f_1 \propto f_2\)</span> then they are equal, <span class="math inline">\(f_1 = f_2\)</span>.</p>
+<p>So since we know that <span class="math inline">\(q\)</span> is proportional to a normal, it is a normal, and so that means we can look at wikipedia page to get the value of that constant. You will find it is <span class="math inline">\(1/\sqrt{2\pi\sigma^2}\)</span>. In other words, someone solved the above integral for you (and that’s good because that integral is tricky to work out!).</p>
 </div>
 </div>
 </div>
@@ -1321,7 +1335,13 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 <li>Recall that the asymptotic normal distribution in BvM had variance <span class="math inline">\(-I_n^{-1}\)</span>.</li>
 </ul>
 <p><strong>Note:</strong> <span class="math inline">\(\lim_{n\to\infty} \sigma^2_n / (-I_n^{-1}) = 1\)</span>.</p>
-<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(S = -(\log p(\cdot))''(\hat x)\)</span>, and the observed information <span class="math inline">\(I_n\)</span>, hence</p>
+<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(-S = (\log p(\cdot))''(\hat x)\)</span>, and the observed information <span class="math inline">\(-I_n\)</span>: <span class="math display">\[\begin{align*}
+\log \gamma(x) &amp;= \log p(x, y) \\
+&amp;= \log p(x) p(y|x) \\
+&amp;= \log p(x) + \log p(y | x), \\
+\Longrightarrow \underbrace{\frac{\partial^2}{\partial x^2} \log \gamma(x) }_{\ell''(x)} &amp;= \underbrace{\frac{\partial^2}{\partial x^2} \log p(x)}_{-S} + \underbrace{\frac{\partial^2}{\partial x^2} \log p(y | x)}_{-I_n}.
+\end{align*}\]</span></p>
+<p>hence</p>
 <p><span class="math display">\[
 \lim \frac{\sigma^2_n}{-I_n^{-1}} = \lim \frac{I_n}{S + I_n} = \lim \frac{\frac{1}{n} I_n}{\frac{1}{n} S + \frac{1}{n} I_n}.
 \]</span> Finally, <span class="math inline">\(\frac{1}{n}S\)</span> converges to zero, while by the law of large numbers, <span class="math inline">\(\frac{1}{n} I_n\)</span> converges to a constant, namely the Fisher information, <span class="math inline">\(\mathbb{E}[I_n]\)</span>.</p>
@@ -1333,17 +1353,17 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 </section>
 <section id="estimating-expectation-from-a-laplace-approximation" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-expectation-from-a-laplace-approximation">Estimating expectation from a Laplace approximation</h2>
-<p><strong>Option 0:</strong> for some test functions <span class="math inline">\(g\)</span>, you can use known expression from the normal (e.g.&nbsp;to compute posterior mean, variance).</p>
-<p><strong>Option 1:</strong> use simple Monte Carlo, where the i.i.d. samples come from the Laplace approximation. (good option if you think <span class="math inline">\(n\)</span> is large enough and BvM applies).</p>
-<p><strong>Option 2:</strong> use the Laplace approximation as a proposal in SNIS.</p>
-<p>With SNIS+Laplace, even for finite <span class="math inline">\(n\)</span>, the errors in the Laplace approximation get corrected in the large <span class="math inline">\(M\)</span> regime.</p>
+<p><strong>Option 1:</strong> for some test functions <span class="math inline">\(g\)</span>, you can use known expression from the normal (e.g.&nbsp;to compute posterior mean, variance).</p>
+<p><strong>Option 2:</strong> use simple Monte Carlo, where the i.i.d. samples come from the Laplace approximation.</p>
+<p><strong>Option 3:</strong> use the Laplace approximation as a proposal in SNIS.</p>
+<p>With SNIS+Laplace, even for finite <span class="math inline">\(n\)</span>, the error in the Laplace approximation gets corrected in the large <span class="math inline">\(M\)</span> regime.</p>
 </section>
 <section id="multivariate-version" class="level2">
 <h2 class="anchored" data-anchor-id="multivariate-version">Multivariate version</h2>
 <p>The second derivatives is simply replaced by the Hessian matrix <span class="math inline">\(M\)</span> at <span class="math inline">\(\hat x\)</span>,</p>
 <p><span class="math display">\[q(x) = \mathcal{N}(\text{mean} = \hat x, \text{covariance matrix} = -M^{-1}),\]</span></p>
 <p>where</p>
-<p><span class="math display">\[M_{i,j} = \frac{\partial^2}{\partial x_i \partial x_j} \gamma(x).\]</span></p>
+<p><span class="math display">\[M_{i,j} = \frac{\partial^2}{\partial x_i \partial x_j} \log \gamma(x).\]</span></p>
 </section>
 <section id="typical-failure-mode" class="level2">
 <h2 class="anchored" data-anchor-id="typical-failure-mode">Typical failure mode</h2>
