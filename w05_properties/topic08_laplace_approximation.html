@@ -1027,6 +1027,8 @@ window.Quarto = {
   <li><a href="#taylor-expansion" id="toc-taylor-expansion" class="nav-link" data-scroll-target="#taylor-expansion">Taylor expansion</a></li>
   <li><a href="#implemetation" id="toc-implemetation" class="nav-link" data-scroll-target="#implemetation">Implemetation</a></li>
   <li><a href="#asymptotic-analysis-of-laplaces-approximation-quality" id="toc-asymptotic-analysis-of-laplaces-approximation-quality" class="nav-link" data-scroll-target="#asymptotic-analysis-of-laplaces-approximation-quality">Asymptotic analysis of Laplace’s approximation quality</a></li>
+  <li><a href="#estimating-expectation-from-a-laplace-approximation" id="toc-estimating-expectation-from-a-laplace-approximation" class="nav-link" data-scroll-target="#estimating-expectation-from-a-laplace-approximation">Estimating expectation from a Laplace approximation</a></li>
+  <li><a href="#multivariate-version" id="toc-multivariate-version" class="nav-link" data-scroll-target="#multivariate-version">Multivariate version</a></li>
   <li><a href="#typical-failure-mode" id="toc-typical-failure-mode" class="nav-link" data-scroll-target="#typical-failure-mode">Typical failure mode</a></li>
   </ul>
 </nav>
@@ -1244,28 +1246,49 @@ Click for answer
 \ell(x) \approx \underbrace{\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2}_{\log q(x)}.
 \]</span></p>
 <p><strong>Question:</strong> can you interpret <span class="math inline">\(q(x)\)</span> as a density?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for Hint
-
-- Take the $\exp$. 
-- Ignore multiplicative constants that do not depend on $x$. 
-
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. Normal with mean $\hat x$ and standard deviation $\ell''(\hat x) / 2$
-1. Normal with mean $\hat x$ and standard deviation $-1/\ell''(\hat x)$
-1. Exponential with rate $\ell''(\hat x)$. 
-1. Exponential with rate $\ell(\hat x)$. 
-1. None of the above. 
-:::
-
--->
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Take the <span class="math inline">\(\exp\)</span>.</li>
+<li>Ignore multiplicative constants that do not depend on <span class="math inline">\(x\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Normal with mean <span class="math inline">\(\hat x\)</span> and variance <span class="math inline">\(\ell''(\hat x) / 2\)</span></li>
+<li>Normal with mean <span class="math inline">\(\hat x\)</span> and variance <span class="math inline">\(-1/\ell''(\hat x)\)</span></li>
+<li>Exponential with rate <span class="math inline">\(\ell''(\hat x)\)</span>.</li>
+<li>Exponential with rate <span class="math inline">\(\ell(\hat x)\)</span>.</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1274,7 +1297,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We know by construction that the log density is a quadratic function. This characterizes normal densities.</p>
 <p>Now let us obtain the mean and variance parameters of that normal…</p>
@@ -1284,8 +1307,8 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 &amp;\propto \exp\left(\frac{\ell''(\hat x)}{2}(x - \hat x)^2\right).
 \end{align*}\]</span></p>
 <p>Hence we have to match the above with the parametrization of a normal, given by:</p>
-<p><span class="math display">\[\text{constant} \times \exp\left( - \frac{(x - \mu)^2}{2\sigma}\right).\]</span></p>
-<p>Hence we have <span class="math inline">\(\mu = \hat x\)</span> and <span class="math inline">\(\sigma = -1/\ell''(\hat x)\)</span>.</p>
+<p><span class="math display">\[\text{constant} \times \exp\left( - \frac{(x - \mu)^2}{2\sigma^2}\right).\]</span></p>
+<p>Hence we have <span class="math inline">\(\mu = \hat x\)</span> and <span class="math inline">\(\sigma^2 = -1/\ell''(\hat x)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1298,15 +1321,29 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 <li>Recall that the asymptotic normal distribution in BvM had variance <span class="math inline">\(-I_n^{-1}\)</span>.</li>
 </ul>
 <p><strong>Note:</strong> <span class="math inline">\(\lim_{n\to\infty} \sigma^2_n / (-I_n^{-1}) = 1\)</span>.</p>
-<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(H = -(\log p(\cdot))''(\hat x)\)</span>, and the observed information <span class="math inline">\(I_n\)</span>, hence</p>
+<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(S = -(\log p(\cdot))''(\hat x)\)</span>, and the observed information <span class="math inline">\(I_n\)</span>, hence</p>
 <p><span class="math display">\[
-\lim \frac{\sigma^2_n}{-I_n^{-1}} = \lim \frac{I_n}{H + I_n} = \lim \frac{\frac{1}{n} I_n}{\frac{1}{n} H + \frac{1}{n} I_n}.
-\]</span> Finally, <span class="math inline">\(\frac{1}{n}H\)</span> converges to zero, while by the law of large numbers, <span class="math inline">\(\frac{1}{n} I_n\)</span> converges to a constant, namely the Fisher information, <span class="math inline">\(\mathbb{E}[I_n]\)</span>.</p>
+\lim \frac{\sigma^2_n}{-I_n^{-1}} = \lim \frac{I_n}{S + I_n} = \lim \frac{\frac{1}{n} I_n}{\frac{1}{n} S + \frac{1}{n} I_n}.
+\]</span> Finally, <span class="math inline">\(\frac{1}{n}S\)</span> converges to zero, while by the law of large numbers, <span class="math inline">\(\frac{1}{n} I_n\)</span> converges to a constant, namely the Fisher information, <span class="math inline">\(\mathbb{E}[I_n]\)</span>.</p>
 <p><strong>Conclusion:</strong></p>
 <ul>
 <li>The Laplace approximation converges to the same normal as the one appearing in BvM.</li>
 <li>Hence, when BvM applies, the Laplace approximation also gets arbitrarily accurate as <span class="math inline">\(n \to \infty\)</span>.</li>
 </ul>
+</section>
+<section id="estimating-expectation-from-a-laplace-approximation" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-expectation-from-a-laplace-approximation">Estimating expectation from a Laplace approximation</h2>
+<p><strong>Option 0:</strong> for some test functions <span class="math inline">\(g\)</span>, you can use known expression from the normal (e.g.&nbsp;to compute posterior mean, variance).</p>
+<p><strong>Option 1:</strong> use simple Monte Carlo, where the i.i.d. samples come from the Laplace approximation. (good option if you think <span class="math inline">\(n\)</span> is large enough and BvM applies).</p>
+<p><strong>Option 2:</strong> use the Laplace approximation as a proposal in SNIS.</p>
+<p>With SNIS+Laplace, even for finite <span class="math inline">\(n\)</span>, the errors in the Laplace approximation get corrected in the large <span class="math inline">\(M\)</span> regime.</p>
+</section>
+<section id="multivariate-version" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-version">Multivariate version</h2>
+<p>The second derivatives is simply replaced by the Hessian matrix <span class="math inline">\(M\)</span> at <span class="math inline">\(\hat x\)</span>,</p>
+<p><span class="math display">\[q(x) = \mathcal{N}(\text{mean} = \hat x, \text{covariance matrix} = -M^{-1}),\]</span></p>
+<p>where</p>
+<p><span class="math display">\[M_{i,j} = \frac{\partial^2}{\partial x_i \partial x_j} \gamma(x).\]</span></p>
 </section>
 <section id="typical-failure-mode" class="level2">
 <h2 class="anchored" data-anchor-id="typical-failure-mode">Typical failure mode</h2>
@@ -1350,6 +1387,14 @@ Y|X_1, X_2 &amp;\sim {\mathrm{Binom}}(n, X).
 <p><strong>Question:</strong> which of BvM’s key assumptions is violated here?</p>
 <!--
 
+---
+editor: 
+  mode: source
+---
+
+
+
+
 ::: {.callout-caution collapse="true"} 
 ## Click for choices
 1. the prior $p(x)$ is a density assumed to be non-zero in a neighborhood of the true parameter
@@ -1376,6 +1421,8 @@ I.e., there are $x$ and $x'$, such that $x \neq x'$, yet $p(y | x) = p(y | x')$.
 Hence we cannot hope that as the data size gets larger, the vector of posterior means, $\E[(X_1, X_2) | Y]$, would 
 converge to the true $x^* = (x_1^*, x_2^*)$ that was used to generated the data. 
 :::
+
+
 
 -->
 
