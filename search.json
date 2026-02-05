@@ -1702,7 +1702,7 @@
     "href": "w05_properties/topic08_laplace_approximation.html#multivariate-version",
     "title": "Laplace approximation",
     "section": "Multivariate version",
-    "text": "Multivariate version\nThe second derivatives is simply replaced by the Hessian matrix \\(M\\) at \\(\\hat x\\),\n\\[q(x) = \\mathcal{N}(\\text{mean} = \\hat x, \\text{covariance matrix} = -M^{-1}),\\]\nwhere\n\\[M_{i,j} = \\frac{\\partial^2}{\\partial x_i \\partial x_j} \\log \\gamma(x)\\Bigg|_{\\hat x}.\\]",
+    "text": "Multivariate version\nThe second derivative is simply replaced by the Hessian matrix \\(M\\) at \\(\\hat x\\),\n\\[q(x) = \\mathcal{N}(\\text{mean} = \\hat x, \\text{covariance matrix} = -M^{-1}),\\]\nwhere\n\\[M_{i,j} = \\frac{\\partial^2}{\\partial x_i \\partial x_j} \\log \\gamma(x)\\Bigg|_{\\hat x}.\\]",
     "crumbs": [
       "Some theory",
       "Laplace approximation"
