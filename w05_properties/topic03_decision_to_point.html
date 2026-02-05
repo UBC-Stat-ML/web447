@@ -1062,8 +1062,8 @@ https://github.com/trevorcampbell/shortex
 \begin{aligned}
 \delta_{\text{B}}(Y) &amp;= \operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \} \\
 &amp;=  \operatorname{arg\,min}\{ \mathbb{E}[(X - a)^2 | Y] : a \in A \} \\
-&amp;=  \operatorname{arg\,min}\{ \mathbb{E}[X^2 | Y] - 2a\mathbb{E}[X | Y]] + a^2 : a \in A \} \\
-&amp;=  \operatorname{arg\,min}\{ - 2a\mathbb{E}[X | Y]] + a^2 : a \in A \}
+&amp;=  \operatorname{arg\,min}\{ \mathbb{E}[X^2 | Y] - 2a\mathbb{E}[X | Y] + a^2 : a \in A \} \\
+&amp;=  \operatorname{arg\,min}\{ - 2a\mathbb{E}[X | Y] + a^2 : a \in A \}
 \end{aligned}
 \]</span></p>
 <p><strong>Question:</strong> under a square loss, <span class="math inline">\(\delta_{\text{B}}\)</span> can be simplified to…</p>

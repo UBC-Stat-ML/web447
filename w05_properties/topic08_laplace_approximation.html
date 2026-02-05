@@ -1026,7 +1026,7 @@ window.Quarto = {
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#taylor-expansion" id="toc-taylor-expansion" class="nav-link" data-scroll-target="#taylor-expansion">Taylor expansion</a></li>
-  <li><a href="#implemetation" id="toc-implemetation" class="nav-link" data-scroll-target="#implemetation">Implemetation</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
   <li><a href="#asymptotic-analysis-of-laplaces-approximation-quality" id="toc-asymptotic-analysis-of-laplaces-approximation-quality" class="nav-link" data-scroll-target="#asymptotic-analysis-of-laplaces-approximation-quality">Asymptotic analysis of Laplace’s approximation quality</a></li>
   <li><a href="#estimating-expectation-from-a-laplace-approximation" id="toc-estimating-expectation-from-a-laplace-approximation" class="nav-link" data-scroll-target="#estimating-expectation-from-a-laplace-approximation">Estimating expectation from a Laplace approximation</a></li>
   <li><a href="#multivariate-version" id="toc-multivariate-version" class="nav-link" data-scroll-target="#multivariate-version">Multivariate version</a></li>
@@ -1087,7 +1087,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Laplace approximation is a useful tool for some (but not all) Bayesian models. The Laplace approximation is attractive because it is sometimes very cheap to compute and accurate. Understanding that approximation will also help understanding the BvM theorem introduced in the previous page.</p>
+<p>Laplace approximation is a useful tool for some (but not all) Bayesian models. The Laplace approximation is attractive because it is sometimes very cheap to compute and accurate. Understanding that approximation will also help understand the BvM theorem introduced in the previous page.</p>
 </section>
 </section>
 <section id="laplace-approximation-input-and-output" class="level2">
@@ -1140,7 +1140,7 @@ Y|X &amp;\sim {\mathrm{Binom}}(n, X).
 <pre><code>[1] 640</code></pre>
 </div>
 </div>
-<p>In the real world, we would not need the Laplace here since we know the posterior is a Beta distribution (by conjugacy, covered in the lab this week). But in real problem, it is rare that you can use conjugacy calculation, it is a fragile property.</p>
+<p>In the real world, we would not need the Laplace here since we know the posterior is a Beta distribution (by conjugacy, covered in the lab this week). But in real problems, it is rare that you can use conjugacy calculation, it is a fragile property.</p>
 </section>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
@@ -1211,8 +1211,8 @@ Click for answer
 </div>
 </div>
 </section>
-<section id="implemetation" class="level2">
-<h2 class="anchored" data-anchor-id="implemetation">Implemetation</h2>
+<section id="implementation" class="level2">
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
 <p>All the ingredients in the Taylor approximation can be obtained using an optimizer package. For the second derivative, either <a href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> or <a href="https://en.wikipedia.org/wiki/Finite_difference">finite differences</a> can be used.</p>
 <p>Here is a simple implementation:</p>
 <div class="cell">
@@ -1249,7 +1249,7 @@ Click for answer
 </div>
 </div>
 <p>As you can see, the approximation is quite good where it matters (near the mode)!</p>
-<p>Let use denote the Laplace approximation by <span class="math inline">\(\log q\)</span>:</p>
+<p>Let us denote the Laplace approximation by <span class="math inline">\(\log q\)</span>:</p>
 <p><span class="math display">\[
 \ell(x) \approx \underbrace{\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2}_{\log q(x)}.
 \]</span></p>
@@ -1339,7 +1339,7 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 \log \gamma(x) &amp;= \log p(x, y) \\
 &amp;= \log p(x) p(y|x) \\
 &amp;= \log p(x) + \log p(y | x), \\
-\Longrightarrow \underbrace{\frac{\partial^2}{\partial x^2} \log \gamma(x) }_{\ell''(x)} &amp;= \underbrace{\frac{\partial^2}{\partial x^2} \log p(x)}_{-S} + \underbrace{\frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x)}_{-I_n}.
+\Longrightarrow \underbrace{\frac{\partial^2}{\partial x^2} \log \gamma(x) }_{\ell''(x)} &amp;= \underbrace{\frac{\partial^2}{\partial x^2} \log p(x)}_{-S} + \underbrace{\frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x)}_{\to -I_n}.
 \end{align*}\]</span></p>
 <p>hence</p>
 <p><span class="math display">\[

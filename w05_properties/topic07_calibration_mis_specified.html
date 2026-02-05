@@ -1084,7 +1084,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Model mis-specification is the norm. What happen to calibration in that case?</p>
+<p>Model mis-specification is the norm. What happens to calibration in that case?</p>
 </section>
 </section>
 <section id="misspecified-models-and-calibration" class="level2">
@@ -1095,7 +1095,7 @@ https://github.com/trevorcampbell/shortex
 <li>Now suppose we are using the “wrong prior”, i.e.:
 <ul>
 <li>data generation uses uniform prior…</li>
-<li>…but we base or posterior computation on a different, non-uniform prior.</li>
+<li>…but we base our posterior computation on a different, non-uniform prior.</li>
 </ul></li>
 <li>Similarly to the last page, let’s do it for small (10 launches), medium (100), and large datasets (1000), plotting the <strong>nominal coverage</strong> (dashed) against the <strong>actual coverage</strong> (solid line)</li>
 </ul>
@@ -1176,8 +1176,8 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>Bad news: for small datasets we are no longer calibrated, in the worst possible way
 <ul>
-<li>Higher than dash line: would have meant inference is being <strong>conservative</strong>, i.e.&nbsp;more right than it actually claimed. That’s not too bad.</li>
-<li>Lower than dash line: we are being <strong>overconfident</strong> or <strong>anti-conservative</strong>, which in some case can be reckless</li>
+<li>Higher than the dashed line: would have meant inference is being <strong>conservative</strong>, i.e.&nbsp;more right than it actually claimed. That’s not too bad.</li>
+<li>Lower than the dashed line: we are being <strong>overconfident</strong> or <strong>anti-conservative</strong>, which in some cases can be reckless</li>
 </ul></li>
 <li>Good news: in this case, the problem gets quickly corrected as the dataset gets larger. <strong>Why?</strong></li>
 </ul>
@@ -1226,7 +1226,7 @@ d(\Pi_n, \mathcal{N}(x^*, I_n^{-1})) \to 0, \text{ as }n\to \infty.
 <ul>
 <li><span class="math inline">\(d\)</span> is a distance between distributions called the <a href="https://en.wikipedia.org/wiki/Total_variation_distance_of_probability_measures">total variation distance</a>,</li>
 <li>the observed information <span class="math inline">\(I_n\)</span> is given by <span class="math display">\[
-I_n = - \frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x),
+I_n = - \frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x)\Bigg|_{x^*},
 \]</span></li>
 <li>convergence is in probability, with respect to the distribution <span class="math inline">\(p(\cdot | x^*)\)</span>.</li>
 </ul>
