@@ -12,11 +12,11 @@ editor:
 ### Topics
 
 - Guarantees when the model is mis-specified.
-- The Bernstein-von Mises theorem.
+- The Bernstein-von Mises (**BvM**) theorem. 
 
 ### Rationale
 
-Model mis-specification is the norm. What happen to calibration in that case?
+Model mis-specification is the norm. What happens to calibration in that case?
 
 
 ## Misspecified models and calibration
@@ -25,9 +25,12 @@ Model mis-specification is the norm. What happen to calibration in that case?
 
 One obvious possibility is to make the model better. But in the following we show that under certain conditions, another possibility is to collect more data. 
 
-- Now suppose we are using the "wrong prior", i.e. data generation uses uniform prior but we base or posterior computation on a different, non-uniform prior.
+- Now suppose we are using the "wrong prior", i.e.:
+    - data generation uses uniform prior...
+    - ...but we base our posterior computation on a different, non-uniform prior.
 
 - Similarly to the last page, let's do it for small (10 launches), medium (100), and large datasets (1000), plotting the **nominal coverage** (dashed) against the **actual coverage** (solid line)
+
 
 ```{r}
 #| code-fold: true
@@ -97,36 +100,69 @@ ggplot(data=df, aes(x=n_observations, y=coverage_pr)) +
 ```
 
 - Bad news: for small datasets we are no longer calibrated, in the worst possible way
-    - Higher than dash line: would have meant inference is being **conservative**, i.e. more right than it actually claimed. That's not too bad.
-    - Lower than dash line: we are being **overconfident** or **anti-conservative**, which in some case can be reckless
-- Good news: this gets quickly corrected as dataset gets larger. Why?
+    - Higher than the dashed line: would have meant inference is being **conservative**, i.e. more right than it actually claimed. That's not too bad.
+    - Lower than the dashed line: we are being **overconfident** or **anti-conservative**, which in some cases can be reckless
+- Good news: in this case, the problem gets quickly corrected as the dataset gets larger. **Why?**
 
-# Asymptotic calibration under certain misspecification
+
+# Asymptotic calibration under misspecification of the prior
 
 - There is no general calibration theory for misspecified models, only special cases (outside of that, use simulation studies or cross-validation techniques)
-- Setup in which we have a theorem: when the data points $y_i$ are iid given the parameters $x$. 
+- An example where we do have some theory: when the data points $y_i$ are iid given the parameters $x$. 
 
-**Bernstein-von Mises:** under certain conditions, even when the prior is misspecified, the actual coverage of credible intervals converges to the nominal coverage. 
+**Proposition:** under certain conditions (outlined below), even when the prior is misspecified, the actual coverage of credible intervals converges to the nominal coverage. 
 
-Conditions include, but are not limited to:
+**Outline:** 
 
-1. $x$ needs to live in a continuous rather than discrete space! I.e.: $x \subset \reals^d$
-    - Intuition: Bernstein-von Mises actually proves something stronger: convergence of the rescaled, centered posterior to a normal distribution, which is a continuous distribution (can you guess the scaling?)
-    - "Bayesian Central Limit Theorem"
-2. $p(x)$ (the **prior**) is a **density**, 
-    - we assume it is non-zero in a neighborhood of the true parameter
-3. we assume the posterior mean is **consistent**
-    - recall: that means the error goes to zero as number of data points increases (something you will explore in this week's exercise)
-4. we assume the model is **parametric**:
-    - $x$ is allowed to be a vector, but you are not allowed to make it bigger as the number of observations increases.
+- the above proposition is a consequence of a stronger result: **Bernstein–von Mises theorem** (BvM). 
+- BvM theorems provide conditions where the posterior converges to a normal as the data size increases. 
+    - Crucially, the parameters of the limiting normal do not depend on the prior!
+    - As a result, when BvM holds, prior misspecification is eventually washed out by the likelihood.
+
+
+## BvM Theorem
+
+**Setup:**
+
+- Assume there is a single true $x^*$. 
+- Generate datasets of increasing size $n$, 
+    - $Y_{1:2}, Y_{1:3}, \dots$, 
+    - $Y_{1:n} = (Y_1, \dots, Y_n)$, 
+    - $Y_i \sim p(\cdot | x^*)$.
+- Consider the sequence of (random) posteriors $\Pi_n = p(\cdot | Y_{1:n})$
+
+**Result:** $\Pi_n$ approaches a normal distribution. 
+
+- Which normal distribution?
+- The same normal that the maximum likelihood estimator converges to!
+    - Centered at $x^*$,
+    - variance is the inverse of the observed information. 
+
+$$
+d(\Pi_n, \distNorm(x^*, I_n^{-1})) \to 0, \text{ as }n\to \infty.
+$$
+where:
+
+- $d$ is a distance between distributions called the [total variation distance](https://en.wikipedia.org/wiki/Total_variation_distance_of_probability_measures),
+- the observed information $I_n$ is given by
+$$
+I_n = - \frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x)\Bigg|_{x^*},
+$$
+- convergence is in probability, with respect to the distribution $p(\cdot | x^*)$. 
+
+
+**Conditions** include the following highlights:
+
+1. the prior $p(x)$ is a density assumed to be non-zero in a neighborhood of the true parameter,
+1. we assume the posterior mean is **consistent** as $n\to\infty$ (something you will explore in this week's exercise and lab),
+1. we assume the model is **parametric**:
+    - $x$ is allowed to be a vector...
+    - ...but you are not allowed to make it longer as the number of observations increases.
     
   
-**Practical consequence:** 
+## References
 
-- for large datasets, and under certain condition, the prior is "washed away" by the likelihood.
-    - The conditions are not crazy and hold in some situations of interest.
-    - But there are also simple practical situations where the conditions do not hold (e.g. prior assigning zero mass to important regions).
-    
-
+- BDA, Section 2 and Appendix B (note however that they use a non-standard definition of observed information).
+- Full technical conditions in e.g., van der Vaart, A. W. (1998). Asymptotic Statistics. Cambridge University Press. ISBN 0-521-49603-9.
 
 

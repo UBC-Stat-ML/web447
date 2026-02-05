@@ -9,7 +9,7 @@ editor:
 
 ## Outline
 
-### Topics
+### Topics 
 
 - Bayesian calibration. 
 - Guarantees when the model is well-specified.
@@ -45,7 +45,7 @@ then, for mis-specified models ([next page](../w05_properties/topic07_calibratio
 1. computes the posterior $\pi(\cdot | y)$, and 
 2. selects left and right end points, $l$, $r$ such that $\int_l^r \pi(x | y) \dee x = 0.9$. 
 
-Recall an examples of credible interval we discussed: [quantile-based intervals](../w02_discrete_bayes/topic05_credible.qmd).
+Recall an example of credible interval we discussed: [quantile-based intervals](../w02_discrete_bayes/topic05_credible.qmd).
 
 **What do we mean by "90% of the time"?** 
 
@@ -71,7 +71,7 @@ Recall an examples of credible interval we discussed: [quantile-based intervals]
 - For now: focus on the well-specified setup.
 
 
-## Numerical exploration
+## Numerical exploration 
 
 Using the discrete model for Delta launches from [Exercise 2](../exercises/ex02.qmd), 
 we will now implement and run the algorithm described above under "What do we mean by 90% of the time?"...
@@ -160,7 +160,7 @@ ggplot(data=df, aes(x=n_observations, y=coverage_pr)) +
 
 
 ::: column-margin
-![](../images/partition.png){width="100"}
+![](../images/partition-with-A.png){width="100"}
 :::
 
 - Recall the law of total probability: 

@@ -30,7 +30,7 @@ This page provides a general framework to answer the question:
 The [decision theoretic setup from week 2](../w02_discrete_bayes/topic06_decision.qmd).
 
 
-## Example
+## Example 
 
 **Assume:** a *square loss,* $L(a, p) = (a - p)^2$, where $a \in A = \reals$.
 
@@ -40,8 +40,8 @@ $$
 \begin{aligned}
 \best(Y) &= \argmin \{ \E[L(a, X) | Y] : a \in A \} \\
 &=  \argmin \{ \E[(X - a)^2 | Y] : a \in A \} \\
-&=  \argmin \{ \E[X^2 | Y] - 2a\E[X | Y]] + a^2 : a \in A \} \\
-&=  \argmin \{ - 2a\E[X | Y]] + a^2 : a \in A \}
+&=  \argmin \{ \E[X^2 | Y] - 2a\E[X | Y] + a^2 : a \in A \} \\
+&=  \argmin \{ - 2a\E[X | Y] + a^2 : a \in A \}
 \end{aligned}
 $$
 

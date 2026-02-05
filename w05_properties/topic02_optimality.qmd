@@ -82,7 +82,7 @@ $$\Oscr(a) = \E[L(a, X) | Y].$$
 
 Note: by definition, we can rewrite our Bayes estimator by:
 $$\best = \argmin_a \Oscr(a),$$
-and hence:
+and hence: 
 $$\red{\E[L(\best(Y), X) | Y]} = \Oscr(\best) = \Oscr(\argmin_a \Oscr(a)).$${#eq-rewrite}
 Plugging-in @eq-rewrite into @eq-lte, we get:
 

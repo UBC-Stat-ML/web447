@@ -62,7 +62,7 @@ $$
 
 Here we assume the posterior has a continuous density $f$ to change $<$ into $\le$. 
 
-As we did with [point estimation](../w05_properties/topic03_decision_to_point.qmd), we take the derivative with respect to $c$ and set to zero (then will do the same thing for $d$). 
+As we did with [point estimation](../w05_properties/topic03_decision_to_point.qmd), we take the derivative with respect to $c$ and set to zero (then will do the same thing for $d$).
 
 Notice that $\Pr[X \le c|Y]$ is the posterior cumulative distribution function (CDF)[^1], so taking the derivative with respect to $c$ yields a density:[^2]
 
