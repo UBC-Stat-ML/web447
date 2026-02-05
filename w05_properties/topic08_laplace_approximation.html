@@ -1335,11 +1335,11 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 <li>Recall that the asymptotic normal distribution in BvM had variance <span class="math inline">\(-I_n^{-1}\)</span>.</li>
 </ul>
 <p><strong>Note:</strong> <span class="math inline">\(\lim_{n\to\infty} \sigma^2_n / (-I_n^{-1}) = 1\)</span>.</p>
-<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(-S = (\log p(\cdot))''(\hat x)\)</span>, and the observed information <span class="math inline">\(-I_n\)</span>: <span class="math display">\[\begin{align*}
+<p>To see why, notice that the second derivative of <span class="math inline">\(\ell\)</span> is the sum of the prior’s second derivative at <span class="math inline">\(\hat x\)</span>, denoted <span class="math inline">\(-S = (\log p)''(\hat x)\)</span>, and the observed information <span class="math inline">\(-I_n\)</span>: <span class="math display">\[\begin{align*}
 \log \gamma(x) &amp;= \log p(x, y) \\
 &amp;= \log p(x) p(y|x) \\
 &amp;= \log p(x) + \log p(y | x), \\
-\Longrightarrow \underbrace{\frac{\partial^2}{\partial x^2} \log \gamma(x) }_{\ell''(x)} &amp;= \underbrace{\frac{\partial^2}{\partial x^2} \log p(x)}_{-S} + \underbrace{\frac{\partial^2}{\partial x^2} \log p(y | x)}_{-I_n}.
+\Longrightarrow \underbrace{\frac{\partial^2}{\partial x^2} \log \gamma(x) }_{\ell''(x)} &amp;= \underbrace{\frac{\partial^2}{\partial x^2} \log p(x)}_{-S} + \underbrace{\frac{\partial^2}{\partial x^2} \log p(Y_{1:n} | x)}_{-I_n}.
 \end{align*}\]</span></p>
 <p>hence</p>
 <p><span class="math display">\[
@@ -1363,7 +1363,7 @@ q(x) &amp;= \exp\left(\ell(\hat x) + \frac{\ell''(\hat x)}{2}(x - \hat x)^2\righ
 <p>The second derivatives is simply replaced by the Hessian matrix <span class="math inline">\(M\)</span> at <span class="math inline">\(\hat x\)</span>,</p>
 <p><span class="math display">\[q(x) = \mathcal{N}(\text{mean} = \hat x, \text{covariance matrix} = -M^{-1}),\]</span></p>
 <p>where</p>
-<p><span class="math display">\[M_{i,j} = \frac{\partial^2}{\partial x_i \partial x_j} \log \gamma(x).\]</span></p>
+<p><span class="math display">\[M_{i,j} = \frac{\partial^2}{\partial x_i \partial x_j} \log \gamma(x)\Bigg|_{\hat x}.\]</span></p>
 </section>
 <section id="typical-failure-mode" class="level2">
 <h2 class="anchored" data-anchor-id="typical-failure-mode">Typical failure mode</h2>
