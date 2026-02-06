@@ -2395,7 +2395,7 @@
     "href": "challenges/ch10.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Advanced inference",
       "Challenge"
@@ -2406,7 +2406,7 @@
     "href": "challenges/ch06.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Hierarchical models",
       "Challenge"
@@ -2417,7 +2417,7 @@
     "href": "challenges/ch02.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\).",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\nAfter doing Exercise 2 consider the following problem:\n\nWrite a function that takes as input posterior_probabilities and builds the highest probability set for any \\(\\alpha\\in[0,1]\\).\nReport a \\(75\\%\\) highest probability set, making sure that the posterior probability of the set you return does not fall below \\(75\\%\\).",
     "crumbs": [
       "Bayes on a discrete model",
       "Challenge"
@@ -2428,7 +2428,7 @@
     "href": "challenges/ch08.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Bayesian workflow",
       "Challenge"
@@ -4288,7 +4288,7 @@
     "href": "challenges/ch09.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "MCMC Hacking",
       "Challenge"
@@ -4299,7 +4299,7 @@
     "href": "challenges/ch03.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\nRecall the decision tree visualization we introduced in the first week.\nCreate a variant of simPPLe which draws decision trees automatically.\nSpecifically, your code should include a function decision_tree which takes as input a simPPLe probabilistic program, and output a mermaid string which can be rendered in your browser as a diagram.\nDemonstrate your code on two examples: one in class, and one not from the class.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\nRecall the decision tree visualization we introduced in the first week.\nCreate a variant of simPPLe which draws decision trees automatically.\nSpecifically, your code should include a function decision_tree which takes as input a simPPLe probabilistic program, and output a mermaid string which can be rendered in your browser as a diagram.\nDemonstrate your code on two examples: one in class, and one not from the class.",
     "crumbs": [
       "A first look at PPLs",
       "Challenge"
@@ -4310,7 +4310,7 @@
     "href": "challenges/ch04.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.",
     "crumbs": [
       "The joy of probabilistic modelling",
       "Challenge"
@@ -4343,7 +4343,7 @@
     "href": "challenges/ch05.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. If you successfully solve one set of problem, a week of participation activity will be waived (it does not have to be the same week you submit the challenge question). Submit your answer at any time. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Some theory",
       "Challenge"
