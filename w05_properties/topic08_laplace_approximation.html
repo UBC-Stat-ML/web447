@@ -1144,7 +1144,7 @@ Y|X &amp;\sim {\mathrm{Binom}}(n, X).
 </section>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>Let us look at the log density near the mode of the posterior:</p>
+<p>Let us look at the log density near the mode of the posterior:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">=</span> <span class="fu">maximize</span>(lab5logdensity, <span class="fl">0.5</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1449,7 +1449,13 @@ converge to the true $x^* = (x_1^*, x_2^*)$ that was used to generated the data.
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Why taking the log? Superficially, we will see in this example that this makes the density function easier to approximate. Other transforms may work better in specific cases, but there is a deeper reason connected to BvM covered in this page. Roughly, the log is special because it changes products into sums. The products come from chain rule of probability, and turning them into sums will let the law of large number and central limit theorem kick in, which are theorems about sums.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1647,7 +1647,7 @@
     "href": "w05_properties/topic08_laplace_approximation.html#motivation",
     "title": "Laplace approximation",
     "section": "Motivation",
-    "text": "Motivation\nLet us look at the log density near the mode of the posterior:\n\nopt = maximize(lab5logdensity, 0.5)\n\nsecond_derivative = opt$second_derivative\nzoomed_width = 4 / sqrt(-second_derivative)\ncenter = opt$argmax \nleft = center - zoomed_width\nright = center + zoomed_width\n\ncurve(lab5logdensity, from = left, to = right, col = \"blue\", ylab = \"log density\")\n\n\n\n\n\n\n\n\nQuestion: How would you approximate such a function?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nA quadratic function seems a good candidate.\nSpecifically, a common way to do so is to do a Taylor expansion up to the second degree polynomial, centered at the mode.\nWhy the mode? For regular targets, this is where most of the posterior mass is concentrated (as shown in the lab this week). So we want our approximation to be good around the mode.",
+    "text": "Motivation\nLet us look at the log density near the mode of the posterior:1\n\nopt = maximize(lab5logdensity, 0.5)\n\nsecond_derivative = opt$second_derivative\nzoomed_width = 4 / sqrt(-second_derivative)\ncenter = opt$argmax \nleft = center - zoomed_width\nright = center + zoomed_width\n\ncurve(lab5logdensity, from = left, to = right, col = \"blue\", ylab = \"log density\")\n\n\n\n\n\n\n\n\nQuestion: How would you approximate such a function?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nA quadratic function seems a good candidate.\nSpecifically, a common way to do so is to do a Taylor expansion up to the second degree polynomial, centered at the mode.\nWhy the mode? For regular targets, this is where most of the posterior mass is concentrated (as shown in the lab this week). So we want our approximation to be good around the mode.",
     "crumbs": [
       "Some theory",
       "Laplace approximation"
@@ -1714,6 +1714,17 @@
     "title": "Laplace approximation",
     "section": "Typical failure mode",
     "text": "Typical failure mode\nConsider the following model:\n\\[\\begin{align*}\nX_1 &\\sim {\\mathrm{Unif}}(0, 1) \\\\\nX_2 &\\sim {\\mathrm{Unif}}(0, 1) \\\\\nX &= X_1 X_2 \\\\\nY|X_1, X_2 &\\sim {\\mathrm{Binom}}(n, X).\n\\end{align*}\\]\nLet us use simPPLe to approximate the posterior given a fairly large number of observations (\\(n = 800\\)):\n\nsource(\"../../solutions/simple.R\")\nsource(\"../blocks/simple_utils.R\")\n\nunid_size = 800\n\nunidentifiable = function() {\n  x1 = simulate(Unif(0, 1))\n  x2 = simulate(Unif(0, 1)) \n  x = x1 * x2\n  observe(unid_size / 8, Binom(unid_size, x)) \n  return(c(x1, x2))\n}\n\nposterior = posterior_particles(unidentifiable, 10000)\nweighted_scatter_plot(posterior, plot_options = list(xlab=\"x1\", ylab=\"x2\"))\n\n\n\n\n\n\n\n\n\nIn 2 dimensions, the Laplace approximation is a bivariate normal.\nHence the contour lines of Laplace approximations are restricted to ellipses.\nThis means that the Laplace approximation would be very poor here.\n\nQuestion: which of BvM’s key assumptions is violated here?",
+    "crumbs": [
+      "Some theory",
+      "Laplace approximation"
+    ]
+  },
+  {
+    "objectID": "w05_properties/topic08_laplace_approximation.html#footnotes",
+    "href": "w05_properties/topic08_laplace_approximation.html#footnotes",
+    "title": "Laplace approximation",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nWhy taking the log? Superficially, we will see in this example that this makes the density function easier to approximate. Other transforms may work better in specific cases, but there is a deeper reason connected to BvM covered in this page. Roughly, the log is special because it changes products into sums. The products come from chain rule of probability, and turning them into sums will let the law of large number and central limit theorem kick in, which are theorems about sums.↩︎",
     "crumbs": [
       "Some theory",
       "Laplace approximation"
