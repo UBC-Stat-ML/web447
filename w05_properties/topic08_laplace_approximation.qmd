@@ -6,7 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-## Outline 
+## Outline
 
 ### Topics
 
@@ -300,8 +300,8 @@ weighted_scatter_plot(posterior, plot_options = list(xlab="x1", ylab="x2"))
 
 **Question:** which of BvM's key assumptions is violated here?
 
-<!--
+
 {{< include ../../clickers/w05/_c08.qmd >}}
--->
+
 
 

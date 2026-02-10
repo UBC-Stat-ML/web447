@@ -34,8 +34,8 @@ This provides us with a second example of [Bayesian GLMs](../w04_glms/topic06_gl
 - Here is a metaphor to help understand this:
     - Imagine ants on an inflating balloon. 
     - You are one of the ants...
-    - ...and you notice that all the others ants are moving away from you...
-        - ...and the further the neighbor ant, the faster it looks like it is moving away from you.
+    - ...and you notice that all the other ants are moving away from you...
+        - ...and the farther the neighbor ant, the faster it looks like it is moving away from you.
         
 - In 1929 the astronomer Edwin Hubble published a paper[^1] on the relationship between distance and velocity of galaxies relative to us. 
 - It is now called [Hubble's law](http://en.wikipedia.org/wiki/Hubble's_law). 

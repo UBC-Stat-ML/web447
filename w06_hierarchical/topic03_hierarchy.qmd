@@ -31,7 +31,7 @@ to decrease prior sensitivity even when the dataset of interest is of limited si
 
 **Key idea:** use "**side data**" to inform the prior...
 
-- For example: success/failure launch data from other **other types** of rockets.
+- For example: success/failure launch data from **other types** of rockets.
 - Can we use the following rocket launch dataset to inform prediction for a single rocket type of interest?
 
 
@@ -75,7 +75,7 @@ sum(df$numberOfFailures)
     - $\mu$: mean of the Beta
     - $s$: measure of "peakiness" of the density, higher $s$ corresponds to more peaked; roughly, $s \approx$ number of data points that would make the posterior peaked like that. 
 
-- Why we did this reparameterization? 
+- Why did we do this reparameterization? 
     - $\to$ it should now be more intuitive how we can use "side data" to inform $\mu$...
 
 
@@ -103,7 +103,7 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
 
 
 
-## Hierarchical models: a better way to use side data
+## Hierarchical models: a better way to use side data 
 
 **Solution:** go fully Bayesian!
 
@@ -119,7 +119,7 @@ ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
 
 **What it means here:** we model the launcher type's population parameters ($\mu, s$) as random variables. 
   We are not interested in these other launcher types, but they help us inform inference about the type 
-  of rocket we are interested in (i.e., "nuisance" parameters). 
+  of rocket we are interested in. 
 
 
 ### Graphical model
@@ -134,13 +134,11 @@ $$p_i | \mu, s \sim \distBeta(\mu s, (1 - \mu) s)$$
 - Likelihood same as before: $F_i | p_i \sim \distBinom(n_i, p_i).$
 - We still need to put prior on $\mu$ and $s$...
     - ...but as we'll discuss next, you should expect this prior choice to be less sensitive. 
-    - Example: $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$ 
+    - Example:[^1] $\mu \sim \distBeta(1,1) = \distUnif(0, 1)$, $s \sim \distExp(1/10000)$ 
     
-PS: why we pick such a small value, $1/10000$? 
-
-- Recall the parameter of an exponential is a rate which is 1/mean.
-- So a mean of 10000 encodes we put significant mass to values up to $O(10000)$.
-- This is sometimes described as a "vague prior". 
+[^1]: why do we pick such a small value, $1/10000$? Recall the parameter of an exponential is a rate which is 1/mean.
+      So a mean of 10000 encodes we put significant mass to values up to $O(10000)$.
+      This is sometimes described as a "vague prior". 
     
     
 ### Decrease prior choice sensitivity
@@ -164,4 +162,4 @@ Note: $p$ is connected to only a small number of observations.
 
 ![](../images/hierarchical-gm-after.jpg){height="250"}
 
-Note: $\mu, s$ is connected to a large population of $p_i$'s, each linked with data. 
+Note: each of $\mu, s$ is connected to a large population of $p_i$'s, which in turn are linked with data. 

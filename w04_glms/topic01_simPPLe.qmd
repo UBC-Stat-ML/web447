@@ -28,7 +28,7 @@ sure to read [the introduction to PPLs](../w03_ppl/topic01_ppls_intro.qmd).
 ## Setting up simPPLe on your computer
 
 - Let us combine the "scaffold" files and the answer of last week's Q2 into one 
-file. Copy paste the code below into a file called `simple.R`: 
+file. Copy and paste the code below into a file called `simple.R`: 
 
 ```r {shortcodes=true, filename="simple.R"}
 {{< include ../../solutions/simple.R >}}

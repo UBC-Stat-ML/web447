@@ -20,16 +20,16 @@ editor:
 
 ### Rationale
 
-- This is our first example of a Bayesian General Linear Model (GLM). 
-- GLMs are the probably the most common models. 
+- This is our first example of a Bayesian Generalized Linear Model (GLM). 
+- GLMs are probably some of the most common models. 
 
 
 
 ## Example {#sec-data}
 
-- The [Ariane 1](https://en.wikipedia.org/wiki/Ariane_1) is an expandable rocket 
+- The [Ariane 1](https://en.wikipedia.org/wiki/Ariane_1) is an expendable rocket 
 launched 11 times between 1979 and 1986.
-- It failed 2 times and was successful the 9 other launches. 
+- It failed 2 times and was successful the other 9 launches. 
 - So far [our models treat the launches as iid given the success probability $p$](../exercises/ex02.qmd).
 - Can we do better?
 
@@ -85,8 +85,8 @@ plot(success_indicators, xlab = "Launch index i")
     1. simulate an intercept,
     2. simulate a slope,
     3. this determines $\theta(i)$ for each $i \in \{1, 2, \dots, 11\}$. 
-    4. Simulate $y_i \sim \distBern(\theta(i))$ independently but not identically. 
-- I.e. we have reduced the problem to that of sampling two real numbers. 
+    4. Simulate $y_i \sim \distBern(\theta(i))$ independently but not identically,
+- i.e., we have reduced the problem to that of sampling two real numbers. 
     - Reasonable prior for a first try: [the normal distribution](../w04_glms/topic03_normal.qmd).
     
     
@@ -118,7 +118,7 @@ lines(intercept + slope * xs)
 ## Click for answer
 
 - The function $\theta(i)$ can take values smaller than zero or greater than one. 
-- This creates problem when we feed the parameter to the Bernoulli, which expects a number between 0 and 1. 
+- This creates a problem when we feed the parameter to the Bernoulli, which expects a number between 0 and 1. 
 :::
 
 **Fix:** 
@@ -197,7 +197,7 @@ for (i in 1:50) {
 ## Posterior distribution
 
 - In this week's exercise, you will implement the model described above in simPPLe. 
-- Here is a peak of the posterior distribution you should obtain:
+- Here is a peek of the posterior distribution you should obtain:
 
 ```{r}
 source("../../solutions/sol04_logistic_regression.R")

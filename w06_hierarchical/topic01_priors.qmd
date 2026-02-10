@@ -27,19 +27,19 @@ introduced this week.
 ## Example
 
 Consider the problem of selecting a prior for a parameter defined on $[0, 1]$, e.g. $p$ in the 
-basic rocket launch success probability example (iid, continuous):
+basic rocket launch success probability example:
 $$\begin{align*}
 p &\sim \;\text{???} \\
 y | p &\sim \distBinom(n, p).
 \end{align*}$$
 
-## General approach
+## General approach 
 
 Often, the choice of prior is approached in two stages
 
 - First, pick a distribution **family** 
     - in our example: let us pick say $\red{\distBeta}(\cdot, \cdot)$, 
-        - a common starting point for distribution with support $[0, 1]$
+        - a common starting point for distributions with support $[0, 1]$
         - but not the only choice, e.g., an alternative is the [Kumaraswamy distribution](https://en.wikipedia.org/wiki/Kumaraswamy_distribution).
 - Then, pick one member of this family  
     - e.g. Beta$(\red{1}, \red{2})$, but how to pick these "magic" numbers (called hyper-parameters)?
@@ -65,7 +65,7 @@ Often, the choice of prior is approached in two stages
 - "Informative priors": use expert knowledge to determine the prior ("prior elicitation")
     - e.g.: when we build rockets, there is a lot of quality control, so it would be surprising to see very low values for the success probability parameter $p$.
     - Many prior elicitation techniques developed, see [Petrus et al, 2021](http://arxiv.org/abs/2112.01380) for a recent review,
-    - but the state of that literature not completely satisfactory. 
+    - but the state of that literature is not completely satisfactory. 
 - "Non-informative priors": use properties of the likelihood to determine prior 
     - more advanced, see [Robert, Sections 3.5](../syllabus.qmd),
     - not automated, case-by-case mathematical derivation often intractable.
@@ -84,7 +84,7 @@ y | p &\sim \distBinom(n, p).
 \end{align*}$$
 
 Again the numbers to fill in the "?" are known as **hyper-parameters**, i.e., 
-  an hyper-parameter is a parameter of a prior. 
+  a hyper-parameter is a parameter of a prior. 
   
 **Expert elicitation:**
 

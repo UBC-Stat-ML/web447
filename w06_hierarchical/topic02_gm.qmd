@@ -13,9 +13,9 @@ editor:
 
 - Directed graphical models. 
 
-### Rationale
+### Rationale 
 
-Graphical models help understanding complex models such as hierarchical ones 
+Graphical models help understand complex models such as hierarchical ones 
 
 
 ## Directed graphical model
@@ -34,7 +34,7 @@ A graphical model is a discrete graph showing the dependencies involved in a
 
 ### Exchangeable observations
 
-Many simples models can be written as:
+Many simple models can be written as:
 
 ::: column-margin
 ![](../images/naive-bayes.png){width="200"}
@@ -56,9 +56,9 @@ Time series are often modelled as follows:
 ![](../images/hmm.png){width="200"}
 :::
 
-- there is an unobserved state $x_t$ changing at each time step $t \in \{1, 2, \dots\}$
+- there is an unobserved state $x_i$ changing at each time step $i \in \{1, 2, \dots\}$
     - e.g. true location of a plane,
-- we have noisy observations $y_t$ from this true position,
+- we have noisy observations $y_i$ from this true position,
     - e.g. information from a radar. 
     
 Simplest HMM example:
@@ -73,7 +73,7 @@ where $\sigma_1$ controls the amount of variability in the dynamics, and $\sigma
 
 ## Conditioning
 
-Shaded nodes in a directed graphical models indicate what we condition on (i.e. what we observe). 
+Shaded nodes in a directed graphical model indicate what we condition on (i.e. what we observe). 
 
 ![](../images/conditioning-gm.png){width="500"}
 

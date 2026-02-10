@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-There is typically more than one unknown variables. Going from one unknown to 
+There are typically more than one unknown variables. Going from one unknown to 
 two unknowns is the biggest leap.
 
 

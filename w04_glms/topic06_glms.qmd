@@ -19,7 +19,7 @@ We have seen two models that share the same general structure:
 
 - Look at the data type of the output variable, this will guide the choice of likelihood model
 - Are you trying to predict..
-    - a real number? us a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)
+    - a real number? use a normal likelihood (or better: fat tail distribution such as t distribution, for robustness to outliers)
     - a non-negative integer? Replace Bernoulli by Poisson (or Negative Binomial, or other integer valued distribution)
     - etc
 - General pattern: 
