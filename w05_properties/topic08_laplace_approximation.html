@@ -1405,46 +1405,48 @@ Y|X_1, X_2 &amp;\sim {\mathrm{Binom}}(n, X).
 <li>This means that the Laplace approximation would be very poor here.</li>
 </ul>
 <p><strong>Question:</strong> which of BvM’s key assumptions is violated here?</p>
-<!--
-
----
-editor: 
-  mode: source
----
-
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. the prior $p(x)$ is a density assumed to be non-zero in a neighborhood of the true parameter
-1. we assume the posterior mean is consistent
-1. we assume the model is parametric
-1. we assume that the dataset size is large
-1. None of the above. 
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-The posterior mean would not be consistent here. 
-
-The core issue is (lack of) **parameter identification**. Many combinations of 
-$(x_1, x_2)$ will have the same likelihood values (since the likelihood only 
-depends on their product). 
-
-For example both $(x_1, x_2) = (1/6, 1/2)$ and $(1/4, 1/3)$ lead to the same value 
-of $x = 1/12$. 
-
-I.e., there are $x$ and $x'$, such that $x \neq x'$, yet $p(y | x) = p(y | x')$. 
-
-Hence we cannot hope that as the data size gets larger, the vector of posterior means, $\E[(X_1, X_2) | Y]$, would 
-converge to the true $x^* = (x_1^*, x_2^*)$ that was used to generated the data. 
-:::
-
-
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>the prior <span class="math inline">\(p(x)\)</span> is a density assumed to be non-zero in a neighborhood of the true parameter</li>
+<li>we assume the posterior mean is consistent</li>
+<li>we assume the model is parametric</li>
+<li>we assume that the dataset size is large</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The posterior mean would not be consistent here.</p>
+<p>The core issue is (lack of) <strong>parameter identification</strong>. Many combinations of <span class="math inline">\((x_1, x_2)\)</span> will have the same likelihood values (since the likelihood only depends on their product).</p>
+<p>For example both <span class="math inline">\((x_1, x_2) = (1/6, 1/2)\)</span> and <span class="math inline">\((1/4, 1/3)\)</span> lead to the same value of <span class="math inline">\(x = 1/12\)</span>.</p>
+<p>I.e., there are <span class="math inline">\(x\)</span> and <span class="math inline">\(x'\)</span>, such that <span class="math inline">\(x \neq x'\)</span>, yet <span class="math inline">\(p(y | x) = p(y | x')\)</span>.</p>
+<p>Hence we cannot hope that as the data size gets larger, the vector of posterior means, <span class="math inline">\(\mathbb{E}[(X_1, X_2) | Y]\)</span>, would converge to the true <span class="math inline">\(x^* = (x_1^*, x_2^*)\)</span> that was used to generated the data.</p>
+</div>
+</div>
+</div>
 
 
 </section>

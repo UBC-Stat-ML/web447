@@ -1141,6 +1141,52 @@ https://github.com/trevorcampbell/shortex
 </div>
 </div>
 <p><strong>Why merging everything is a bad idea?</strong></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>They are independent.</li>
+<li>They are identically distributed.</li>
+<li>Some of these types of rockets are very different than the one under study.</li>
+<li>All of the above.</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Some of these types of rockets are very different than the one under study (Delta 7925H). For example some of them are very old, made by different space agencies, etc.</p>
+<p>An indeed, the aggregated failure rate is high compared to what you would expect from modern “workhorse” rockets (&lt;1%):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>numberOfFailures) <span class="sc">/</span> <span class="fu">sum</span>(df<span class="sc">$</span>numberOfLaunches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07605435</code></pre>
+</div>
+</div>
+<p>We want to consider the different types of rockets as a <strong>population</strong> and model the variability within that population.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="towards-an-improved-way-to-use-side-data" class="level3">
 <h3 class="anchored" data-anchor-id="towards-an-improved-way-to-use-side-data">Towards an improved way to use side data</h3>
@@ -1169,23 +1215,69 @@ https://github.com/trevorcampbell/shortex
 <li>Use this distribution <span class="math inline">\(p(\mu)\)</span> as the prior on <span class="math inline">\(\mu\)</span>?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"latex2exp"</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">textrm{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">textrm{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"ggplot2"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"latex2exp"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> numberOfFailures <span class="sc">/</span> numberOfLaunches)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">hat{p}_i = </span><span class="sc">\\</span><span class="st">textrm{numberOfFailures}_i / </span><span class="sc">\\</span><span class="st">textrm{numberOfLaunches}_i$"</span>)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic03_hierarchy_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic03_hierarchy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Question:</strong> what is the weakness of using a prior fitted on this histogram?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>It does not take into acount the uncertainty of the fitted <span class="math inline">\(\hat p_i\)</span>.</li>
+<li>The support should go beyond <span class="math inline">\([0, 1]\)</span></li>
+<li>The density is not continuous.</li>
+<li>All of the above.</li>
+<li>None of the above.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>First, notice the “bumps” at 1/2 (and 1, 1/4, etc)…
+<ul>
+<li>Most of the counts at 1/2 correspond to types of rockets with 1 failure out of 2 launches!</li>
+<li>But if you fit a curve to this data, these “bumps” will have a large undesirable effects.</li>
+<li>More broadly, we want to take into account uncertainty in each of these <span class="math inline">\(\hat p_i\)</span>’s.</li>
+</ul></li>
+<li>Also: less clear how to generalize this method to handle the pseudo-sample-size <span class="math inline">\(s\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="hierarchical-models-a-better-way-to-use-side-data" class="level2">
@@ -1205,7 +1297,7 @@ https://github.com/trevorcampbell/shortex
 <li>Compute the posterior distribution conditionally on the actual data at hand</li>
 <li>Use the posterior distribution to make a decision</li>
 </ol>
-<p><strong>What it means here:</strong> we model the launcher type’s population parameters (<span class="math inline">\(\mu, s\)</span>) as random variables. We are not interested in these other launcher types, but they help us inform inference about the type of rocket we are interested in (i.e., “nuisance” parameters).</p>
+<p><strong>What it means here:</strong> we model the launcher type’s population parameters (<span class="math inline">\(\mu, s\)</span>) as random variables. We are not interested in these other launcher types, but they help us inform inference about the type of rocket we are interested in.</p>
 <section id="graphical-model" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-model">Graphical model</h3>
 <p><img src="../images/hierarchical-gm.png" class="img-fluid" width="500"></p>
@@ -1218,14 +1310,8 @@ https://github.com/trevorcampbell/shortex
 <li>We still need to put prior on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(s\)</span>…
 <ul>
 <li>…but as we’ll discuss next, you should expect this prior choice to be less sensitive.</li>
-<li>Example: <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span></li>
+<li>Example:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\mu \sim {\mathrm{Beta}}(1,1) = {\mathrm{Unif}}(0, 1)\)</span>, <span class="math inline">\(s \sim {\mathrm{Exp}}(1/10000)\)</span></li>
 </ul></li>
-</ul>
-<p>PS: why we pick such a small value, <span class="math inline">\(1/10000\)</span>?</p>
-<ul>
-<li>Recall the parameter of an exponential is a rate which is 1/mean.</li>
-<li>So a mean of 10000 encodes we put significant mass to values up to <span class="math inline">\(O(10000)\)</span>.</li>
-<li>This is sometimes described as a “vague prior”.</li>
 </ul>
 </section>
 <section id="decrease-prior-choice-sensitivity" class="level3">
@@ -1248,7 +1334,13 @@ https://github.com/trevorcampbell/shortex
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>why do we pick such a small value, <span class="math inline">\(1/10000\)</span>? Recall the parameter of an exponential is a rate which is 1/mean. So a mean of 10000 encodes we put significant mass to values up to <span class="math inline">\(O(10000)\)</span>. This is sometimes described as a “vague prior”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
