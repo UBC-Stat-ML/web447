@@ -1052,7 +1052,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Graphical models help understanding complex models such as hierarchical ones</p>
+<p>Graphical models help understand complex models such as hierarchical ones</p>
 </section>
 </section>
 <section id="directed-graphical-model" class="level2">
@@ -1068,7 +1068,7 @@ https://github.com/trevorcampbell/shortex
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <section id="exchangeable-observations" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="exchangeable-observations">Exchangeable observations</h3>
-<p>Many simples models can be written as:</p>
+<p>Many simple models can be written as:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="../images/naive-bayes.png" class="img-fluid" width="200"></p>
@@ -1085,11 +1085,11 @@ y_i | \theta &amp;\sim \text{SomeLikelihood}(\theta).
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="../images/hmm.png" class="img-fluid" width="200"></p>
 </div></div><ul>
-<li>there is an unobserved state <span class="math inline">\(x_t\)</span> changing at each time step <span class="math inline">\(t \in \{1, 2, \dots\}\)</span>
+<li>there is an unobserved state <span class="math inline">\(x_i\)</span> changing at each time step <span class="math inline">\(i \in \{1, 2, \dots\}\)</span>
 <ul>
 <li>e.g.&nbsp;true location of a plane,</li>
 </ul></li>
-<li>we have noisy observations <span class="math inline">\(y_t\)</span> from this true position,
+<li>we have noisy observations <span class="math inline">\(y_i\)</span> from this true position,
 <ul>
 <li>e.g.&nbsp;information from a radar.</li>
 </ul></li>
@@ -1104,7 +1104,7 @@ y_i | x_i &amp;\sim \mathcal{N}(x_{i}, \sigma_2),
 </section>
 <section id="conditioning" class="level2">
 <h2 class="anchored" data-anchor-id="conditioning">Conditioning</h2>
-<p>Shaded nodes in a directed graphical models indicate what we condition on (i.e.&nbsp;what we observe).</p>
+<p>Shaded nodes in a directed graphical model indicate what we condition on (i.e.&nbsp;what we observe).</p>
 <p><img src="../images/conditioning-gm.png" class="img-fluid" width="500"></p>
 </section>
 <section id="plates" class="level2 page-columns page-full">

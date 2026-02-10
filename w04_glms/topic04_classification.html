@@ -1094,16 +1094,16 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <ul>
-<li>This is our first example of a Bayesian General Linear Model (GLM).</li>
-<li>GLMs are the probably the most common models.</li>
+<li>This is our first example of a Bayesian Generalized Linear Model (GLM).</li>
+<li>GLMs are probably some of the most common models.</li>
 </ul>
 </section>
 </section>
 <section id="sec-data" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-data">Example</h2>
 <ul>
-<li>The <a href="https://en.wikipedia.org/wiki/Ariane_1">Ariane 1</a> is an expandable rocket launched 11 times between 1979 and 1986.</li>
-<li>It failed 2 times and was successful the 9 other launches.</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Ariane_1">Ariane 1</a> is an expendable rocket launched 11 times between 1979 and 1986.</li>
+<li>It failed 2 times and was successful the other 9 launches.</li>
 <li>So far <a href="../exercises/ex02.html">our models treat the launches as iid given the success probability <span class="math inline">\(p\)</span></a>.</li>
 <li>Can we do better?</li>
 </ul>
@@ -1185,9 +1185,9 @@ Click for answer
 <li>simulate an intercept,</li>
 <li>simulate a slope,</li>
 <li>this determines <span class="math inline">\(\theta(i)\)</span> for each <span class="math inline">\(i \in \{1, 2, \dots, 11\}\)</span>.</li>
-<li>Simulate <span class="math inline">\(y_i \sim {\mathrm{Bern}}(\theta(i))\)</span> independently but not identically.</li>
+<li>Simulate <span class="math inline">\(y_i \sim {\mathrm{Bern}}(\theta(i))\)</span> independently but not identically,</li>
 </ol></li>
-<li>I.e. we have reduced the problem to that of sampling two real numbers.
+<li>i.e., we have reduced the problem to that of sampling two real numbers.
 <ul>
 <li>Reasonable prior for a first try: <a href="../w04_glms/topic03_normal.html">the normal distribution</a>.</li>
 </ul></li>
@@ -1235,7 +1235,7 @@ Click for answer
 <div class="callout-body-container callout-body">
 <ul>
 <li>The function <span class="math inline">\(\theta(i)\)</span> can take values smaller than zero or greater than one.</li>
-<li>This creates problem when we feed the parameter to the Bernoulli, which expects a number between 0 and 1.</li>
+<li>This creates a problem when we feed the parameter to the Bernoulli, which expects a number between 0 and 1.</li>
 </ul>
 </div>
 </div>
@@ -1346,7 +1346,7 @@ Click for answer
 <h2 class="anchored" data-anchor-id="posterior-distribution">Posterior distribution</h2>
 <ul>
 <li>In this week’s exercise, you will implement the model described above in simPPLe.</li>
-<li>Here is a peak of the posterior distribution you should obtain:</li>
+<li>Here is a peek of the posterior distribution you should obtain:</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/sol04_logistic_regression.R"</span>)</span>

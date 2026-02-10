@@ -1104,7 +1104,7 @@ https://github.com/trevorcampbell/shortex
 </div></div><p><strong>Example:</strong> predicting the probability of failure of the next Delta 7925H launch (so far, we observed this type of rocket has been launched 3 times, with 0 failed launches).</p>
 <p><strong>Key idea:</strong> use “<strong>side data</strong>” to inform the prior…</p>
 <ul>
-<li>For example: success/failure launch data from other <strong>other types</strong> of rockets.</li>
+<li>For example: success/failure launch data from <strong>other types</strong> of rockets.</li>
 <li>Can we use the following rocket launch dataset to inform prediction for a single rocket type of interest?</li>
 </ul>
 <div class="cell">
@@ -1201,7 +1201,7 @@ Click for answer
 <li><span class="math inline">\(\mu\)</span>: mean of the Beta</li>
 <li><span class="math inline">\(s\)</span>: measure of “peakiness” of the density, higher <span class="math inline">\(s\)</span> corresponds to more peaked; roughly, <span class="math inline">\(s \approx\)</span> number of data points that would make the posterior peaked like that.</li>
 </ul></li>
-<li>Why we did this reparameterization?
+<li>Why did we do this reparameterization?
 <ul>
 <li><span class="math inline">\(\to\)</span> it should now be more intuitive how we can use “side data” to inform <span class="math inline">\(\mu\)</span>…</li>
 </ul></li>
@@ -1328,7 +1328,7 @@ Click for answer
 <p>Note: <span class="math inline">\(p\)</span> is connected to only a small number of observations.</p>
 <p><strong>After going hierarchical:</strong></p>
 <p><img src="../images/hierarchical-gm-after.jpg" height="250"></p>
-<p>Note: <span class="math inline">\(\mu, s\)</span> is connected to a large population of <span class="math inline">\(p_i\)</span>’s, each linked with data.</p>
+<p>Note: each of <span class="math inline">\(\mu, s\)</span> is connected to a large population of <span class="math inline">\(p_i\)</span>’s, which in turn are linked with data.</p>
 
 
 </section>
