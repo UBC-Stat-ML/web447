@@ -81,7 +81,14 @@ it is rare that you can use conjugacy calculation, it is a fragile property.
 
 ## Motivation 
 
-Let us look at the log density near the mode of the posterior:
+Let us look at the log density near the mode of the posterior:[^1]
+
+[^1]: Why taking the log? Superficially, we will see in this example that this makes the density function 
+  easier to approximate. Other transforms may work better in specific cases, but there is a deeper reason 
+  connected to BvM covered in this page. 
+  Roughly, the log is special because it changes products into sums. The products come from chain rule of 
+  probability, and turning them into sums will let the law of large number and central limit theorem kick in, which 
+  are theorems about sums.
 
 ```{r}
 #| warning: false
