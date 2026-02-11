@@ -6026,7 +6026,62 @@
     "href": "exercises/ex06.html",
     "title": "Exercise 6: Hierarchical models",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "We consider the same model as in the hierarchical model lecture, except that we change the rate of the exponential from \\(1/10000\\) into \\(1/1000\\) to avoid issues specific to the Laplace approximation.1",
+    "crumbs": [
+      "Hierarchical models",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex06.html#q.1-change-of-variable",
+    "href": "exercises/ex06.html#q.1-change-of-variable",
+    "title": "Exercise 6: Hierarchical models",
+    "section": "Q.1: Change of variable",
+    "text": "Q.1: Change of variable\nThe parameters in the model are constrained: for \\(p_i\\), \\(\\mu\\), they have to be in \\((0, 1)\\), and for \\(s\\), we have \\(s &gt; 0\\). So if we sampled from a Laplace approximation performed on the \\((p, \\mu, s)\\) parameterization, we would sometimes hit samples violating the constraints. In fact, the probability that the Laplace approximation’s samples give valid parameters might be vanishingly small.\nTo avoid this, we will perform a change of variable. Consider the following constraining transformation \\(c(\\cdot)\\):\n\nlogistic = plogis\n\nconstrain = function(unconstrained_params) {\n  n = length(unconstrained_params) - 2\n  c(\n    # first n+1: transform to (0, 1)\n    logistic(unconstrained_params[1:(n+1)]), \n    # last one: to (0, inf)\n    exp(unconstrained_params[n+2])\n  )\n}\n\nThe inverse of this mapping, \\(c^{-1}\\), defines an unconstrained reparameterization. Determine the density of the prior under the unconstrained parameterization. In other words, if say \\(S \\sim {\\mathrm{Exp}}(1/1000)\\), what is the density of \\(c^{-1}(S)\\)? Do the same for the other parameters.\nNote that in both the constrained and unconstrained parameterizations, we will use the same ordering of the parameters: \\((p_1, \\dots, p_n, \\mu, s)\\).\nHint: use a change of variable as used in integration or STAT 302 for transformations of random variables.",
+    "crumbs": [
+      "Hierarchical models",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex06.html#q.2-laplace-approximation-of-a-hierarchical-model",
+    "href": "exercises/ex06.html#q.2-laplace-approximation-of-a-hierarchical-model",
+    "title": "Exercise 6: Hierarchical models",
+    "section": "Q.2 Laplace approximation of a hierarchical model",
+    "text": "Q.2 Laplace approximation of a hierarchical model\nWe will use a subset of the launch data shown in class: download it here\nsuppressPackageStartupMessages(require(\"dplyr\"))\ndf = read.csv(\"failure_counts.csv\") %&gt;% \n      filter(grepl(\"^Delta\", LV.Type)) \nNotice that we have subsetted to only the rocket types with the prefix Delta in their name.\nCreate a function called build_objective following this template:\nbuild_objective = function(df) {\n  n = nrow(df)\n  function(unconstrained_params) {\n    # compute log gamma\n    # TODO\n    return(log_gamma)\n  }\n}",
+    "crumbs": [
+      "Hierarchical models",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex06.html#q.3-interpretation",
+    "href": "exercises/ex06.html#q.3-interpretation",
+    "title": "Exercise 6: Hierarchical models",
+    "section": "Q.3 Interpretation",
+    "text": "Q.3 Interpretation\nWe provide the following code which computes the Laplace approximation, and then samples from it. Make sure you understand what the code does and run it. Interpret the results. Are the different posterior means on the \\(p_i\\) very different or similar? Does that make sense in the current context?\nlaplace = function(df) {\n  n = nrow(df)\n  init = numeric(n + 2) \n  sample_laplace(maximize(build_objective(df), init), 1000)\n}\n\nmaximize = function(objective, start) {\n  res = nlm(f = function(x) -objective(x), start, hessian = TRUE) \n  # the negative signs here is because nlm minimizes, so we negated the objective, \n  # and we convert back below...\n  list(\n    max = -res$minimum,\n    argmax = res$estimate, \n    hessian = -res$hessian\n  )\n}\n\nsample_laplace = function(opt, M) {\n  mu = opt$argmax\n  k  = length(mu)\n  sigma = solve(-opt$hessian)\n  L = t(chol(sigma)) \n\n  constrained_samples = matrix(NA, nrow = M, ncol = k)\n  \n  for (i in 1:M) {\n    z = rnorm(k)\n    unconstrained_sample = mu + (L %*% z)\n    constrained_samples[i, ] = constrain(unconstrained_sample)\n  }\n  \n  return(constrained_samples)\n}\n\ns = laplace(df)\ncolMeans(s)",
+    "crumbs": [
+      "Hierarchical models",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex06.html#q.4-adding-an-outlier",
+    "href": "exercises/ex06.html#q.4-adding-an-outlier",
+    "title": "Exercise 6: Hierarchical models",
+    "section": "Q.4 Adding an outlier",
+    "text": "Q.4 Adding an outlier\nWe now add an artificial outlier and rerun the inference. Comment on the new results. Do they differ from the previous question? Does that make sense?\ndf2 = rbind(df,\n            data.frame(\n              numberOfFailures = 100,\n              numberOfLaunches = 100,\n              LV.Type = \"Fake-Delta\"\n            ))\n\ns = laplace(df2)\ncolMeans(s)",
+    "crumbs": [
+      "Hierarchical models",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex06.html#footnotes",
+    "href": "exercises/ex06.html#footnotes",
+    "title": "Exercise 6: Hierarchical models",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nMore specifically, for the choice \\(1/10000\\), the Hessian is not a definite matrix. This means that we would need MCMC to approximate the original model.↩︎",
     "crumbs": [
       "Hierarchical models",
       "Exercises"

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -950,7 +1013,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#q.1-change-of-variable" id="toc-q.1-change-of-variable" class="nav-link active" data-scroll-target="#q.1-change-of-variable">Q.1: Change of variable</a></li>
+  <li><a href="#q.2-laplace-approximation-of-a-hierarchical-model" id="toc-q.2-laplace-approximation-of-a-hierarchical-model" class="nav-link" data-scroll-target="#q.2-laplace-approximation-of-a-hierarchical-model">Q.2 Laplace approximation of a hierarchical model</a></li>
+  <li><a href="#q.3-interpretation" id="toc-q.3-interpretation" class="nav-link" data-scroll-target="#q.3-interpretation">Q.3 Interpretation</a></li>
+  <li><a href="#q.4-adding-an-outlier" id="toc-q.4-adding-an-outlier" class="nav-link" data-scroll-target="#q.4-adding-an-outlier">Q.4 Adding an outlier</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -994,23 +1066,108 @@ https://github.com/trevorcampbell/shortex
 <!-- calculus -->
 <!-- general purpose math -->
 <!-- divergences -->
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>We consider the same model as in <a href="https://ubc-stat-ml.github.io/web447/w06_hierarchical/topic03_hierarchy.html#hierarchical-models-a-better-way-to-use-side-data">the hierarchical model lecture</a>, except that we change the rate of the exponential from <span class="math inline">\(1/10000\)</span> into <span class="math inline">\(1/1000\)</span> to avoid issues specific to the Laplace approximation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="q.1-change-of-variable" class="level2">
+<h2 class="anchored" data-anchor-id="q.1-change-of-variable">Q.1: Change of variable</h2>
+<p>The parameters in the model are constrained: for <span class="math inline">\(p_i\)</span>, <span class="math inline">\(\mu\)</span>, they have to be in <span class="math inline">\((0, 1)\)</span>, and for <span class="math inline">\(s\)</span>, we have <span class="math inline">\(s &gt; 0\)</span>. So if we sampled from a Laplace approximation performed on the <span class="math inline">\((p, \mu, s)\)</span> parameterization, we would sometimes hit samples violating the constraints. In fact, the probability that the Laplace approximation’s samples give valid parameters might be vanishingly small.</p>
+<p>To avoid this, we will perform a change of variable. Consider the following constraining transformation <span class="math inline">\(c(\cdot)\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">=</span> plogis</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>constrain <span class="ot">=</span> <span class="cf">function</span>(unconstrained_params) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(unconstrained_params) <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first n+1: transform to (0, 1)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">logistic</span>(unconstrained_params[<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">+</span><span class="dv">1</span>)]), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># last one: to (0, inf)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(unconstrained_params[n<span class="sc">+</span><span class="dv">2</span>])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Page under construction: information on this page may change.</p>
-</div>
-</div>
+<p>The inverse of this mapping, <span class="math inline">\(c^{-1}\)</span>, defines an unconstrained reparameterization. Determine the density of the prior under the unconstrained parameterization. In other words, if say <span class="math inline">\(S \sim {\mathrm{Exp}}(1/1000)\)</span>, what is the density of <span class="math inline">\(c^{-1}(S)\)</span>? Do the same for the other parameters.</p>
+<p>Note that in both the constrained and unconstrained parameterizations, we will use the same ordering of the parameters: <span class="math inline">\((p_1, \dots, p_n, \mu, s)\)</span>.</p>
+<p>Hint: use a change of variable as used in integration or STAT 302 for transformations of random variables.</p>
+</section>
+<section id="q.2-laplace-approximation-of-a-hierarchical-model" class="level2">
+<h2 class="anchored" data-anchor-id="q.2-laplace-approximation-of-a-hierarchical-model">Q.2 Laplace approximation of a hierarchical model</h2>
+<p>We will use a subset of the launch data shown in class: download it <a href="https://github.com/UBC-Stat-ML/web447/blob/main/data/failure_counts.csv">here</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"failure_counts.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"^Delta"</span>, LV.Type)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that we have subsetted to <strong>only</strong> the rocket types with the prefix <em>Delta</em> in their name.</p>
+<p>Create a function called <code>build_objective</code> following this template:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>build_objective <span class="ot">=</span> <span class="cf">function</span>(df) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(unconstrained_params) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute log gamma</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(log_gamma)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="q.3-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="q.3-interpretation">Q.3 Interpretation</h2>
+<p>We provide the following code which computes the Laplace approximation, and then samples from it. Make sure you understand what the code does and run it. Interpret the results. Are the different posterior means on the <span class="math inline">\(p_i\)</span> very different or similar? Does that make sense in the current context?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>laplace <span class="ot">=</span> <span class="cf">function</span>(df) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  init <span class="ot">=</span> <span class="fu">numeric</span>(n <span class="sc">+</span> <span class="dv">2</span>) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_laplace</span>(<span class="fu">maximize</span>(<span class="fu">build_objective</span>(df), init), <span class="dv">1000</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>maximize <span class="ot">=</span> <span class="cf">function</span>(objective, start) {</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">=</span> <span class="fu">nlm</span>(<span class="at">f =</span> <span class="cf">function</span>(x) <span class="sc">-</span><span class="fu">objective</span>(x), start, <span class="at">hessian =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the negative signs here is because nlm minimizes, so we negated the objective, </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># and we convert back below...</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="sc">-</span>res<span class="sc">$</span>minimum,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">argmax =</span> res<span class="sc">$</span>estimate, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">hessian =</span> <span class="sc">-</span>res<span class="sc">$</span>hessian</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>sample_laplace <span class="ot">=</span> <span class="cf">function</span>(opt, M) {</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> opt<span class="sc">$</span>argmax</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  k  <span class="ot">=</span> <span class="fu">length</span>(mu)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">=</span> <span class="fu">solve</span>(<span class="sc">-</span>opt<span class="sc">$</span>hessian)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">=</span> <span class="fu">t</span>(<span class="fu">chol</span>(sigma)) </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  constrained_samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> M, <span class="at">ncol =</span> k)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">=</span> <span class="fu">rnorm</span>(k)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    unconstrained_sample <span class="ot">=</span> mu <span class="sc">+</span> (L <span class="sc">%*%</span> z)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    constrained_samples[i, ] <span class="ot">=</span> <span class="fu">constrain</span>(unconstrained_sample)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(constrained_samples)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">laplace</span>(df)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="q.4-adding-an-outlier" class="level2">
+<h2 class="anchored" data-anchor-id="q.4-adding-an-outlier">Q.4 Adding an outlier</h2>
+<p>We now add an artificial outlier and rerun the inference. Comment on the new results. Do they differ from the previous question? Does that make sense?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="fu">rbind</span>(df,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">data.frame</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">numberOfFailures =</span> <span class="dv">100</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">numberOfLaunches =</span> <span class="dv">100</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">LV.Type =</span> <span class="st">"Fake-Delta"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            ))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">laplace</span>(df2)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>More specifically, for the choice <span class="math inline">\(1/10000\)</span>, the Hessian is not a definite matrix. This means that we would need MCMC to approximate the original model.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
