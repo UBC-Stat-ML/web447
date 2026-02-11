@@ -1072,17 +1072,19 @@ https://github.com/trevorcampbell/shortex
 <p>The parameters in the model are constrained: for <span class="math inline">\(p_i\)</span>, <span class="math inline">\(\mu\)</span>, they have to be in <span class="math inline">\((0, 1)\)</span>, and for <span class="math inline">\(s\)</span>, we have <span class="math inline">\(s &gt; 0\)</span>. So if we sampled from a Laplace approximation performed on the <span class="math inline">\((p, \mu, s)\)</span> parameterization, we would sometimes hit samples violating the constraints. In fact, the probability that the Laplace approximation’s samples give valid parameters might be vanishingly small.</p>
 <p>To avoid this, we will perform a change of variable. Consider the following constraining transformation <span class="math inline">\(c(\cdot)\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">=</span> plogis</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">=</span> plogis <span class="co"># alias - more intuitive name for logistic fct</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>constrain <span class="ot">=</span> <span class="cf">function</span>(unconstrained_params) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(unconstrained_params) <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first n+1: transform to (0, 1)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">logistic</span>(unconstrained_params[<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">+</span><span class="dv">1</span>)]), </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># last one: to (0, inf)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(unconstrained_params[n<span class="sc">+</span><span class="dv">2</span>])</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># here, n coincides with the number of rows in the </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data frame (i.e., the number of rocket types)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(unconstrained_params) <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first n+1: transform to (0, 1)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">logistic</span>(unconstrained_params[<span class="dv">1</span><span class="sc">:</span>(n<span class="sc">+</span><span class="dv">1</span>)]), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># last one: to (0, inf)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(unconstrained_params[n<span class="sc">+</span><span class="dv">2</span>])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The inverse of this mapping, <span class="math inline">\(c^{-1}\)</span>, defines an unconstrained reparameterization. Determine the density of the prior under the unconstrained parameterization. In other words, if say <span class="math inline">\(S \sim {\mathrm{Exp}}(1/1000)\)</span>, what is the density of <span class="math inline">\(c^{-1}(S)\)</span>? Do the same for the other parameters.</p>
 <p>Note that in both the constrained and unconstrained parameterizations, we will use the same ordering of the parameters: <span class="math inline">\((p_1, \dots, p_n, \mu, s)\)</span>.</p>
@@ -1098,12 +1100,13 @@ https://github.com/trevorcampbell/shortex
 <p>Create a function called <code>build_objective</code> following this template:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>build_objective <span class="ot">=</span> <span class="cf">function</span>(df) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(unconstrained_params) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute log gamma</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(log_gamma)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the objective function:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(unconstrained_params) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute log gamma</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(log_gamma)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="q.3-interpretation" class="level2">
 <h2 class="anchored" data-anchor-id="q.3-interpretation">Q.3 Interpretation</h2>
@@ -1128,22 +1131,25 @@ https://github.com/trevorcampbell/shortex
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>sample_laplace <span class="ot">=</span> <span class="cf">function</span>(opt, M) {</span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> opt<span class="sc">$</span>argmax</span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  k  <span class="ot">=</span> <span class="fu">length</span>(mu)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">=</span> <span class="fu">solve</span>(<span class="sc">-</span>opt<span class="sc">$</span>hessian)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">=</span> <span class="fu">t</span>(<span class="fu">chol</span>(sigma)) </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  constrained_samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> M, <span class="at">ncol =</span> k)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">=</span> <span class="fu">rnorm</span>(k)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    unconstrained_sample <span class="ot">=</span> mu <span class="sc">+</span> (L <span class="sc">%*%</span> z)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    constrained_samples[i, ] <span class="ot">=</span> <span class="fu">constrain</span>(unconstrained_sample)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(constrained_samples)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">laplace</span>(df)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># hint: to understand these steps, compare to the univariate case</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">=</span> <span class="fu">solve</span>(<span class="sc">-</span>opt<span class="sc">$</span>hessian)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">=</span> <span class="fu">t</span>(<span class="fu">chol</span>(sigma)) <span class="co"># &lt;- this is like taking the square root</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  constrained_samples <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> M, <span class="at">ncol =</span> k)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">=</span> <span class="fu">rnorm</span>(k)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># again, use the univariate case to understand this:</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    unconstrained_sample <span class="ot">=</span> mu <span class="sc">+</span> (L <span class="sc">%*%</span> z)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    constrained_samples[i, ] <span class="ot">=</span> <span class="fu">constrain</span>(unconstrained_sample)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(constrained_samples)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>s <span class="ot">=</span> <span class="fu">laplace</span>(df)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(s) <span class="co"># report the mean over M samples for each parameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="q.4-adding-an-outlier" class="level2">
 <h2 class="anchored" data-anchor-id="q.4-adding-an-outlier">Q.4 Adding an outlier</h2>
