@@ -1087,13 +1087,13 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Representative example of questions to prep for Quiz 1.</li>
+<li>Representative examples of questions to prep for Quiz 1.</li>
 </ul>
 </section>
 <section id="important-note" class="level3">
 <h3 class="anchored" data-anchor-id="important-note">Important note</h3>
-<p>The quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.</p>
-<p>But try to answer before looking at the possible choices to get a more realistic practice!</p>
+<p>The quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it possible to use some of them during office hours and/or lectures.</p>
+<p>So try to answer <strong>before</strong> looking at the possible choices to get a more realistic practice!</p>
 </section>
 </section>
 <section id="snis" class="level2">
@@ -1202,7 +1202,7 @@ Click for answer
 </section>
 <section id="normal-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="normal-distributions">Normal distributions</h2>
-<p>The variability of the normal can be parameterized with the standard derivation, variance, or precision.</p>
+<p>The variability of the normal can be parameterized with the standard deviation, variance, or precision.</p>
 <p>Which of the three has the same units of measurement as the mean parameter?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -1383,7 +1383,7 @@ Click for answer
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Several possible answers are possible, here is an example:</p>
+<p>Several answers are possible, here is an example:</p>
 <p><span class="math display">\[\begin{align*}
 \theta_1 &amp;\sim {\mathrm{Exp}}(1/1000) \\
 \theta_2 &amp;\sim {\mathrm{Exp}}(1/1000) \\
@@ -1397,7 +1397,7 @@ y_i | \theta &amp;\sim {\mathrm{Poisson}}(\theta_1 (\sin(\theta_2 i + \theta_3) 
 <li>The model is sufficiently flexible to capture the pattern observed in EDA.</li>
 </ul>
 <p><a href="../w04_glms/topic05_regression.html">See the page on the step-by-step construction of a GLM</a>.</p>
-<p>Many answers possible for <a href="../w02_discrete_bayes/topic08_criticism.html">model mis-specification</a>. For example, the Poisson distribution will force the mean and variance to be equal, which often does not hold in practice (in this specific example, this might be especially problematic for values <span class="math inline">\(i\)</span> where <span class="math inline">\(\sin(\theta_2 i + \theta_3) + 1\)</span> is zero or close to zero).</p>
+<p>Many answers possible for <a href="../w02_discrete_bayes/topic08_criticism.html">model mis-specification</a>. For example, the Poisson distribution will force the mean and variance to be equal, which often does not hold in practice (in this specific example, this might be especially problematic for values <span class="math inline">\(i\)</span> where <span class="math inline">\(\sin(\theta_2 i + \theta_3) + 1\)</span> are zero or close to zero).</p>
 </div>
 </div>
 </div>
@@ -1601,7 +1601,7 @@ Click for answer
 <li>There is a drastic treatment, which always cures the disease, but costs 1M (in terms of medical facility use and/or physical toll).</li>
 <li>If left uncured, the disease will lead to death which <a href="https://en.wikipedia.org/wiki/Micromort">a policy-maker might model as a loss of 10M</a>.</li>
 </ul>
-<p>Let <span class="math inline">\(D\)</span> denote the indicator function on the disease, and <span class="math inline">\(Y\)</span>, data from diagnostic. You posterior gives <span class="math inline">\(\mathbb{E}[D | Y = y] = 0.2\)</span>.</p>
+<p>Let <span class="math inline">\(D\)</span> denote the indicator function on the disease, and <span class="math inline">\(Y\)</span>, data from diagnostics. Your posterior gives <span class="math inline">\(\mathbb{E}[D | Y = y] = 0.2\)</span>.</p>
 <p>What would a Bayesian recommend?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
@@ -1895,7 +1895,7 @@ Click for answer
 </div>
 <div id="callout-29" class="callout-29-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The bias is defined as <span class="math inline">\(\hat G_M - g^*\)</span>.</p>
+<p>The bias is defined as <span class="math inline">\(\mathbb{E}[\hat G_M] - g^*\)</span>.</p>
 <p>From our discussion on <a href="../w03_ppl/topic05_mc_rates.html">Monte Carlo convergence rate</a>, simple Monte Carlo has a bias of zero, while SNIS is biased.</p>
 </div>
 </div>

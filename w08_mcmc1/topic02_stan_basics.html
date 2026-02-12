@@ -1163,7 +1163,7 @@ https://github.com/trevorcampbell/shortex
 </dl>
 </div>
 </div>
-<p><strong>Question:</strong> How does Stan gets the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
+<p><strong>Question:</strong> How does Stan get the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
 <p><strong>Answer:</strong> When Stan gets called in R:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <!-- Note: dependson=knitr::dep_prev() needed as otherwise updates in the model will not invalidate the knitr cache properly -->
 <div class="cell">
@@ -1181,7 +1181,7 @@ https://github.com/trevorcampbell/shortex
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2">The number of samples to compute (equivalent to <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2">The number of samples to compute (a cousin of <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
 </dd>
 </dl>
 </div>
@@ -1246,7 +1246,7 @@ convergence, Rhat=1).</code></pre>
 <section id="interpreting-the-output" class="level2">
 <h2 class="anchored" data-anchor-id="interpreting-the-output">Interpreting the output</h2>
 <ul>
-<li>Just as <a href="../w01_discrete_inference/topic11_monte_carlo.html">simple Monte Carlo</a> and <a href="../w03_ppl/topic02_snis.html">SNIS</a>, the output of Stan/MCMC is a list of <em>samples</em></li>
+<li>Just as with <a href="../w01_discrete_inference/topic11_monte_carlo.html">simple Monte Carlo</a> and <a href="../w03_ppl/topic02_snis.html">SNIS</a>, the output of Stan/MCMC is a list of <em>samples</em></li>
 <li>In contrast to SNIS, the samples are <strong>equally weighted</strong>,
 <ul>
 <li>in other words, for MCMC we have <span class="math inline">\(W^{(m)}= 1/M\)</span>,</li>

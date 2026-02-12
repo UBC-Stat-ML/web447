@@ -1052,12 +1052,11 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>What is Stan?</li>
 <li>Links to install.</li>
-<li>Peak of next week’s exercise first question (running Stan on your laptop).</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>SNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>.</p>
+<p>SNIS and simPPLe are very flexible and relatively easy to understand, but it can be very slow.</p>
 <p>Stan is an alternative way to approximate posterior distributions, with complementary properties:</p>
 <table class="table">
 <thead>
@@ -1085,7 +1084,7 @@ https://github.com/trevorcampbell/shortex
 </tr>
 </tbody>
 </table>
-<p>From a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one has to use Stan, or some other advanced inference method, due to the poor scalability of SNIS.</p>
+<p>From a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, one would typically use Stan, or some other advanced inference method, due to the poor scalability of SNIS.</p>
 </section>
 </section>
 <section id="what-is-stan" class="level2">
@@ -1095,24 +1094,24 @@ https://github.com/trevorcampbell/shortex
 <li><a href="../w03_ppl/topic01_ppls_intro.html">Review the notes on “what is a PPL.”</a></li>
 <li>Stan uses <strong>Markov chain Monte Carlo (MCMC)</strong> to approximate the posterior distribution.
 <ul>
-<li>Think of MCMC has a drop-in replacement for SNIS.</li>
+<li>Think of MCMC as a drop-in replacement for SNIS.</li>
 <li>We will talk about it in more detail soon.</li>
 </ul></li>
 </ul>
 </section>
 <section id="installing-stan" class="level2">
 <h2 class="anchored" data-anchor-id="installing-stan">Installing Stan</h2>
-<p>You will need Stan installed to complete next week’s exercise. <strong>Don’t wait until next week, install it today!</strong></p>
+<p>You will need Stan installed to complete the exercises and clicker questions after the quiz. <strong>Don’t wait until the last minute, install it today!</strong></p>
 <p>There are two main steps to install Stan:</p>
 <ol type="1">
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain">Configuring a C++ Toolchains</a></li>
+<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain">Configuring a C++ Toolchain</a></li>
 <li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan">Installing RStan</a></li>
 </ol>
-<p>Let us know on Piazza if you encounter any issues! This week, our priority will be resolving Stan installation issues. Next week, our priority will be replying questions about the material.</p>
+<p>Let us know on Piazza if you encounter any issues!</p>
 </section>
 <section id="running" class="level2">
 <h2 class="anchored" data-anchor-id="running">Running Stan</h2>
-<p>We present two methods for running Stan in the next two section: either from an R script, or from a notebook.</p>
+<p>We present two methods for running Stan in the next two sections: either from an R script, or from a notebook.</p>
 <p><strong>Template:</strong> to quickly get started, download the <a href="https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip">following templates</a> which you can use as a starting point for either R script or notebook.</p>
 <section id="from-a-r-script" class="level3">
 <h3 class="anchored" data-anchor-id="from-a-r-script">From a R script</h3>
@@ -1147,7 +1146,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first question of next week’s exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
+<p>The first question of the next exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="from-a-notebook" class="level3">
@@ -1162,9 +1161,9 @@ https://github.com/trevorcampbell/shortex
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>For example, for the model used in the <a href="../exercises/ex06.html">exercise on hierarchical models</a>, Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Often MCMC algorithms such as stan scale polynomially in dimension while SNIS scales exponentially.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>simPPLe is a few dozen lines of codes, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>simPPLe is a few dozen lines of code, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
