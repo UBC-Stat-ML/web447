@@ -1095,14 +1095,29 @@ https://github.com/trevorcampbell/shortex
 <td>Rate <span class="math inline">\(\lambda\)</span> (<span class="math inline">\(=1/\)</span>mean)</td>
 </tr>
 <tr class="even">
+<td>Poisson</td>
+<td><span class="math inline">\({\mathrm{Poisson}}(\lambda)\)</span></td>
+<td>Mean <span class="math inline">\(\lambda &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
 <td>Beta</td>
 <td><span class="math inline">\({\mathrm{Beta}}(\alpha, \beta)\)</span></td>
 <td>Shape parameters <span class="math inline">\(\alpha &gt; 0\)</span> and <span class="math inline">\(\beta &gt; 0\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td><span class="math inline">\({\mathrm{Beta}}(\mu, s)\)</span></td>
 <td>Mean parameter <span class="math inline">\(\mu \in (0, 1)\)</span> and concentration <span class="math inline">\(s&gt;0\)</span></td>
+</tr>
+<tr class="odd">
+<td>Categorical</td>
+<td><span class="math inline">\({\mathrm{Categorical}}(p_1, \dots, p_K)\)</span></td>
+<td>Probabilities <span class="math inline">\(p_k &gt; 0\)</span>, <span class="math inline">\(\sum_k p_k = 1\)</span></td>
+</tr>
+<tr class="even">
+<td>Multivariate Normal</td>
+<td><span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span></td>
+<td>Mean vector <span class="math inline">\(\mu \in \mathbb{R}^K\)</span>, covariance matrix <span class="math inline">\(\Sigma \succ 0\)</span></td>
 </tr>
 </tbody>
 </table>
