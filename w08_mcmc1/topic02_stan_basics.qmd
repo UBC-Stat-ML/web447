@@ -79,7 +79,7 @@ model {
 3. Since `x` is declared latent (i.e., inside a `parameters` block), Stan will know to treat this as the counterpart of simPPLe's `x = simulate(Unif(0, 5))`.
 4. Since `y` is declared observed (i.e., inside a `data` block), Stan will know to treat this as the counterpart of simPPLe's `observe(0.06, Unif(0, x))`.
 
-**Question:** How does Stan gets the actual observed value $y = 0.06$? 
+**Question:** How does Stan get the actual observed value $y = 0.06$? 
 
 **Answer:** When Stan gets called in R:[^1]
 
@@ -95,7 +95,7 @@ fit = sampling(
 )
 ```
 1. Pass in the values taken by the observed random variables. 
-2. The number of samples to compute (equivalent to $M$ in our [Monte Carlo notation](../w01_discrete_inference/topic11_monte_carlo.qmd))
+2. The number of samples to compute (a cousin of $M$ in our [Monte Carlo notation](../w01_discrete_inference/topic11_monte_carlo.qmd))
 
 We can now compare the approximation provided by Stan:
 
@@ -113,7 +113,7 @@ fit
     
 ## Interpreting the output 
 
-- Just as [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) and [SNIS](../w03_ppl/topic02_snis.qmd), the output of Stan/MCMC is a list of *samples* 
+- Just as with [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd) and [SNIS](../w03_ppl/topic02_snis.qmd), the output of Stan/MCMC is a list of *samples* 
 - In contrast to SNIS, the samples are **equally weighted**, 
     - in other words, for MCMC we have $W^\parm = 1/M$,
     - i.e., their structure is the same as samples from [simple Monte Carlo](../w01_discrete_inference/topic11_monte_carlo.qmd)!

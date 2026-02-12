@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
 
 
 
@@ -14,14 +13,14 @@ editor:
 
 ### Topics
 
--   Representative example of questions to prep for Quiz 1.
+-   Representative examples of questions to prep for Quiz 1.
 
 ### Important note
 
 The quiz will not focus on multiple choice questions---we use mostly multiple choice in this page just 
-to make it easier to pace the questions during the lecture.
+to make it possible to use some of them during office hours and/or lectures.
 
-But try to answer before looking at the possible choices to get a more realistic practice!
+So try to answer **before** looking at the possible choices to get a more realistic practice!
 
 ## SNIS
 
@@ -102,7 +101,7 @@ Compute $\pr(|\theta_1 - \theta_2| > 0.1 | y_1, y_2)$.
 
 ## Normal distributions
 
-The variability of the normal can be parameterized with the standard derivation, variance, or precision.
+The variability of the normal can be parameterized with the standard deviation, variance, or precision.
 
 Which of the three has the same units of measurement as the mean parameter?
 
@@ -213,7 +212,7 @@ Also describe at least one potential source of model mis-specification.
 ::: {.callout-caution collapse="true"}
 ## Click for answer
 
-Several possible answers are possible, here is an example:
+Several answers are possible, here is an example:
 
 $$\begin{align*}
 \theta_1 &\sim \distExp(1/1000) \\
@@ -233,7 +232,7 @@ Some things we look at:
 Many answers possible for [model mis-specification](../w02_discrete_bayes/topic08_criticism.qmd). 
 For example, the Poisson distribution 
 will force the mean and variance to be equal, which often does not hold in practice (in this specific example, 
-this might be especially problematic for values $i$ where $\sin(\theta_2 i + \theta_3) + 1$ is zero or close to zero).
+this might be especially problematic for values $i$ where $\sin(\theta_2 i + \theta_3) + 1$ are zero or close to zero).
 :::
 
 
@@ -396,7 +395,7 @@ The HDI interval, [by definition](../w02_discrete_bayes/topic05_credible.qmd).
 -   There is a drastic treatment, which always cures the disease, but costs 1M (in terms of medical facility use and/or physical toll).
 -   If left uncured, the disease will lead to death which [a policy-maker might model as a loss of 10M](https://en.wikipedia.org/wiki/Micromort).
 
-Let $D$ denote the indicator function on the disease, and $Y$, data from diagnostic. You posterior gives $\ex[D | Y = y] = 0.2$.
+Let $D$ denote the indicator function on the disease, and $Y$, data from diagnostics. Your posterior gives $\ex[D | Y = y] = 0.2$.
 
 What would a Bayesian recommend?
 
@@ -592,7 +591,7 @@ Which one has the smallest bias?
 ::: {.callout-caution collapse="true"}
 ## Click for answer
 
-The bias is defined as $\hat G_M - g^*$.
+The bias is defined as $\E[\hat G_M] - g^*$.
 
 From our discussion on [Monte Carlo convergence rate](../w03_ppl/topic05_mc_rates.qmd), 
 simple Monte Carlo has a bias of zero, while SNIS is biased. 

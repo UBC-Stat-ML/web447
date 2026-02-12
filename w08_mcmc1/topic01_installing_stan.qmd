@@ -12,11 +12,10 @@ editor:
 
 -   What is Stan?
 -   Links to install.
--   Peak of next week's exercise first question (running Stan on your laptop).
 
 ### Rationale
 
-SNIS and simPPLe is very flexible and relatively easy to understand, but it can be very slow as we experienced in the [exercise on hierarchical models](../exercises/ex06.qmd).
+SNIS and simPPLe are very flexible and relatively easy to understand, but it can be very slow.
 
 Stan is an alternative way to approximate posterior distributions, with complementary properties:
 
@@ -26,14 +25,14 @@ Stan is an alternative way to approximate posterior distributions, with compleme
 | Flexibility         | Very flexible | Less flexible[^2] |
 | Easy to understand? | Simple        | More complex[^3]  |
 
-[^1]: For example, for the model used in the [exercise on hierarchical models](../exercises/ex06.qmd), Stan can extract 1000 effective samples in less than a second, whereas doing so with SNIS/simPPLe required several minutes! 
+[^1]: Often MCMC algorithms such as stan scale polynomially in dimension while SNIS scales exponentially.
 
 [^2]: For example, Stan does not support latent integer-value random variables, whereas simPPLe does.
 
-[^3]: simPPLe is a few dozen lines of codes, whereas [Stan has millions of lines of code](https://github.com/stan-dev/stanc3/graphs/contributors).
+[^3]: simPPLe is a few dozen lines of code, whereas [Stan has millions of lines of code](https://github.com/stan-dev/stanc3/graphs/contributors).
 
 From a pedagogical point of view, it is useful to first learn about SNIS, however for real-world models, 
-one has to use Stan, or some other advanced inference method, due to the poor 
+one would typically use Stan, or some other advanced inference method, due to the poor 
 scalability of SNIS. 
 
 
@@ -42,27 +41,26 @@ scalability of SNIS.
 -   Stan is [the most popular PPL as of 2024.](https://projecteuclid.org/journals/statistical-science/volume-39/issue-1/Past-Present-and-Future-of-Software-for-Bayesian-Inference/10.1214/23-STS907.full)
 -   [Review the notes on "what is a PPL."](../w03_ppl/topic01_ppls_intro.qmd)
 -   Stan uses **Markov chain Monte Carlo (MCMC)** to approximate the posterior distribution.
-    - Think of MCMC has a drop-in replacement for SNIS.
+    - Think of MCMC as a drop-in replacement for SNIS.
     - We will talk about it in more detail soon.
 
 
 ## Installing Stan
 
-You will need Stan installed to complete next week's exercise. **Don't wait until next week, install it today!**
+You will need Stan installed to complete the exercises and clicker questions after the quiz. 
+**Don't wait until the last minute, install it today!**
 
 There are two main steps to install Stan:
 
-1. [Configuring a C++ Toolchains](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain)
+1. [Configuring a C++ Toolchain](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain)
 2. [Installing RStan](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan)
 
 Let us know on Piazza if you encounter any issues! 
-This week, our priority will be resolving Stan installation issues. 
-Next week, our priority will be replying questions about the material. 
 
 
 ## Running Stan {#running}
 
-We present two methods for running Stan in the next two section: either from an R script, 
+We present two methods for running Stan in the next two sections: either from an R script, 
 or from a notebook.
 
 **Template:** to quickly get started, download the [following templates](https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip) which you can 
@@ -90,7 +88,7 @@ fit = stan(
 )
 ```
 
-The first question of next week's exercise will be to report the posterior median,
+The first question of the next exercise will be to report the posterior median,
 which can be obtained under the column "50%" of the output of the following R command:
 
 ```r
