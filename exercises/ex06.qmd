@@ -26,9 +26,11 @@ samples give valid parameters might be vanishingly small.
 To avoid this, we will perform a change of variable. Consider the following constraining transformation $c(\cdot)$: 
 
 ```{r}
-logistic = plogis
+logistic = plogis # alias - more intuitive name for logistic fct
 
 constrain = function(unconstrained_params) {
+  # here, n coincides with the number of rows in the 
+  # data frame (i.e., the number of rocket types)
   n = length(unconstrained_params) - 2
   c(
     # first n+1: transform to (0, 1)
@@ -52,9 +54,6 @@ Hint: use a change of variable as used in integration or STAT 302 for transforma
 
 
 
-
-
-
 ## Q.2 Laplace approximation of a hierarchical model
 
 We will use a subset of the launch data shown in class: download it [here](https://github.com/UBC-Stat-ML/web447/blob/main/data/failure_counts.csv)
@@ -73,6 +72,7 @@ Create a function called `build_objective` following this template:
 ```r
 build_objective = function(df) {
   n = nrow(df)
+  # return the objective function:
   function(unconstrained_params) {
     # compute log gamma
     # TODO
@@ -112,13 +112,16 @@ maximize = function(objective, start) {
 sample_laplace = function(opt, M) {
   mu = opt$argmax
   k  = length(mu)
+  
+  # hint: to understand these steps, compare to the univariate case
   sigma = solve(-opt$hessian)
-  L = t(chol(sigma)) 
+  L = t(chol(sigma)) # <- this is like taking the square root
 
   constrained_samples = matrix(NA, nrow = M, ncol = k)
   
   for (i in 1:M) {
     z = rnorm(k)
+    # again, use the univariate case to understand this:
     unconstrained_sample = mu + (L %*% z)
     constrained_samples[i, ] = constrain(unconstrained_sample)
   }
@@ -127,7 +130,7 @@ sample_laplace = function(opt, M) {
 }
 
 s = laplace(df)
-colMeans(s)
+colMeans(s) # report the mean over M samples for each parameter
 ```
 
 
