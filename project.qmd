@@ -2,32 +2,104 @@
 title: "Final project"
 ---
 
-{{< include _construction.qmd >}}
-
-<!-- idea: might want to ask to do one scaling law as part or separate to the Bayesian analysis? -->
 
 
-## Overview
-
-The course project involves independent work on topics selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.
 
 ## Logistics
 
--   Teams of maximum 2-3 people are **strongly** encouraged (we will provide help forming teams)
+-   Teams of maximum 2-3 people are **strongly** encouraged
 -   You should outline in the final report who did what 
 -   Submit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading. 
--   Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.
+-   Both proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.
+
+
+
+## Description
+
+Every project should contain a component where **Bayesian inference is applied to a real problem and a real dataset**.
+This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!
+
+A key requirement is that your report should **demonstrate that you have mastered the key techniques covered in this course.** 
+As an extreme (and unlikely) example, a report relying exclusively on non-Bayesian techniques would get a failing grade, 
+even if the execution was flawless. 
+
+There is a special emphasis on requiring to use techniques covered after Quiz 2.
+This is because these techniques are not examined in a quiz so the report is important to evaluate your understanding of those. 
+
+You should compute a posterior using  **at least two different methods** and make a comparison between the two approaches. 
+Determining how to perform the comparison is part of the project and again should be done in the optic of incorporating 
+techniques covered in the course.
+
+Your report should contain **at least two models:** often a naive model and one a bit more complex capturing 
+additional features. 
+
+This still leaves a lot of room for creativity, and we hope, for a fun experience. 
+
+
 
 ## Project timeline
 
 See [schedule](schedule.qmd).
 
-## Core guideline
 
-Every project should contain a component where **Bayesian inference is applied to a real problem and a real dataset**.
-This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!
 
-**More detailed structure and rubric will be posted soon.**
+## How to choose a real problem / real dataset?
+
+- The best projects are usually based on data collected/assembled/scraped specifically for the project. 
+    - But also plan a safer, back-up option in case the data collection does not pan out. 
+    - If you use an existing dataset, you need to take an angle that is different from what is out there. (different question, combining it with another source of data, etc)
+- Start with something simple. 
+- Come to office hours to bounce ideas. I can help brainstorm. 
+- Just data is not enough, think also of an interesting question associated with it, a question that can be explored in a Bayesian way. 
+
+
+
+## Rubric for the project proposal
+
+-   Basic requirements
+    -   Team is identified.
+    -   There is a working link to a public repo containing commits from all team members. 
+-   Two related real-world candidate datasets appropriate for the selected theme are clearly described (one main, one back-up) 
+    - Show the structure or `head` of the dataframe.
+    - Provide a URL to the data, or explain why it is not possible to provide a URL. 
+    - If you are collecting data yourself, it is OK if you do not have the full data yet but you should have at least a prototype. 
+-   Explain the scientific questions you would want to approach using Bayesian methods. 
+-   Outline a plan for the methodology you will use.
+-   If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.
+
+As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.
+
+**Total: 5%**
+
+## Rubric for the final report
+
+-   Basic requirements (5%)
+    -   The report fits within the prescribed page limits.
+    -   There is a working link to a public repo containing commits from all team members. 
+    -   The report follows best practices of technical writing.
+    -   If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.
+-   Problem formulation. (5%) The report clearly describes:
+    -   a real-world inference task/problem,
+    -   succinct but sufficient context (e.g. biological terminology) needed to understand the problem,
+    -   the key modelling/methodological/challenge, clearly associating it with one of the items under "menu of project themes" above.
+-   The report contains a literature review: (5%) relevant literature is cited and properly summarized.
+    -   If you are using a publicly available dataset, you should clearly identify the most closely related reference and clearly explain how your report differs from it. 
+-   Core requirements:
+    - Bayesian inference is applied to a real problem and a real dataset (15%)
+    - The report demonstrates mastery of the key techniques covered in this course (25%)
+    - Techniques from after quiz 2 are used.
+    - At least two methods are used to compute the posterior. (15%)
+        -   Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets, scaling laws and other validation strategies.
+        -   Strategies to ensure correctness of the code is discussed and implemented. 
+    - At least two models are described (15%)
+        -   A Bayesian model is precisely described (e.g. using the `.. ~ ..` notation)
+        -   Implementation code in the appendix (e.g. using Stan)
+        -   Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.
+-   Creativity and originality (5%)
+-   Discussion of, e.g., key limitations, implication of results in the broad context (5%)
+    
+
+**Total: 95%**
 
 <!--
 
@@ -71,43 +143,6 @@ Roughly in increasing order of complexity. During grading I will take into accou
     -   Clustering or feature matrices
 -   🌶🌶🌶 Create a twist on an existing MCMC sampling algorithm, or a novel one. Show it is invariant with respect to the distribution of interest. Benchmark the performance of the method against one baseline using best practices.
 
-## Rubric for the project proposal
 
--   Basic requirements
-    -   Team is identified.
-    -   The proposal identifies which of the project themes it will address.
-    -   There is a working link to a public repo containing commits from all team members. 
--   Two real-world candidate datasets appropriate for the selected theme are clearly described (e.g. a URL, showing the structure or `head` of a dataframe).
--   A short summary of potential approaches to tackle the project theme.
--   If it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.
-
-As long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.
-
-**Total: 5%**
-
-## Rubric for the final report
-
--   Basic requirements (5%)
-    -   The report fits within the prescribed page limits.
-    -   There is a working link to a public repo containing commits from all team members. 
-    -   The report follows best practices of technical writing.
-    -   If it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.
--   Problem formulation. (15%) The report clearly describes:
-    -   a real-world inference task/problem,
-    -   succinct but sufficient context (e.g. biological terminology) needed to understand the problem,
-    -   the key modelling/methodological/challenge, clearly associating it with one of the items under "menu of project themes" above.
--   The report contains a literature review: (10%) relevant literature is cited and properly summarized.
--   Data analysis (40%)
-    -   A Bayesian model is precisely described (e.g. using the `.. ~ ..` notation)
-    -   Implementation code in the appendix (e.g. using Stan)
-    -   Prior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.
-    -   Critical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets and other validation strategies.
--   Project theme: methodological/theoretical aspect of the project (20%)
-    -   Is the approach sound?
-    -   Creative?
--   Discussion (5%)
-    -   Does the report describe key limitations?
-
-**Total: 95%**
 
 -->
