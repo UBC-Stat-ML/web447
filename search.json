@@ -124,17 +124,7 @@
     "href": "project.html",
     "title": "Final project",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
-    "crumbs": [
-      "Final project"
-    ]
-  },
-  {
-    "objectID": "project.html#overview",
-    "href": "project.html#overview",
-    "title": "Final project",
-    "section": "Overview",
-    "text": "Overview\nThe course project involves independent work on topics selected from a menu of project themes. These projects leave freedom for creativity within constraints designed for pedagogical and fair evaluation.",
+    "text": "Teams of maximum 2-3 people are strongly encouraged\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.",
     "crumbs": [
       "Final project"
     ]
@@ -143,8 +133,18 @@
     "objectID": "project.html#logistics",
     "href": "project.html#logistics",
     "title": "Final project",
-    "section": "Logistics",
-    "text": "Logistics\n\nTeams of maximum 2-3 people are strongly encouraged (we will provide help forming teams)\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. For team projects, make sure each team member commit their change using their account to document the contributions of each team member.",
+    "section": "",
+    "text": "Teams of maximum 2-3 people are strongly encouraged\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#description",
+    "href": "project.html#description",
+    "title": "Final project",
+    "section": "Description",
+    "text": "Description\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!\nA key requirement is that your report should demonstrate that you have mastered the key techniques covered in this course. As an extreme (and unlikely) example, a report relying exclusively on non-Bayesian techniques would get a failing grade, even if the execution was flawless.\nThere is a special emphasis on requiring to use techniques covered after Quiz 2. This is because these techniques are not examined in a quiz so the report is important to evaluate your understanding of those.\nYou should compute a posterior using at least two different methods and make a comparison between the two approaches. Determining how to perform the comparison is part of the project and again should be done in the optic of incorporating techniques covered in the course.\nYour report should contain at least two models: often a naive model and one a bit more complex capturing additional features.\nThis still leaves a lot of room for creativity, and we hope, for a fun experience.",
     "crumbs": [
       "Final project"
     ]
@@ -160,11 +160,31 @@
     ]
   },
   {
-    "objectID": "project.html#core-guideline",
-    "href": "project.html#core-guideline",
+    "objectID": "project.html#how-to-choose-a-real-problem-real-dataset",
+    "href": "project.html#how-to-choose-a-real-problem-real-dataset",
     "title": "Final project",
-    "section": "Core guideline",
-    "text": "Core guideline\nEvery project should contain a component where Bayesian inference is applied to a real problem and a real dataset. This is important: unless you have not received explicit permission in the proposal phase to deviate from this you may be severely penalized if you do not do this!\nMore detailed structure and rubric will be posted soon.",
+    "section": "How to choose a real problem / real dataset?",
+    "text": "How to choose a real problem / real dataset?\n\nThe best projects are usually based on data collected/assembled/scraped specifically for the project.\n\nBut also plan a safer, back-up option in case the data collection does not pan out.\nIf you use an existing dataset, you need to take an angle that is different from what is out there. (different question, combining it with another source of data, etc)\n\nStart with something simple.\nCome to office hours to bounce ideas. I can help brainstorm.\nJust data is not enough, think also of a interesting question associated with it, a question that can be explored in a Bayesian way.",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#rubric-for-the-project-proposal",
+    "href": "project.html#rubric-for-the-project-proposal",
+    "title": "Final project",
+    "section": "Rubric for the project proposal",
+    "text": "Rubric for the project proposal\n\nBasic requirements\n\nTeam is identified.\nThere is a working link to a public repo containing commits from all team members.\n\nTwo related real-world candidate datasets appropriate for the selected theme are clearly described (one main, one back-up)\n\nShow the structure or head of the dataframe.\nProvide a URL to the data, or explain why it is not possible to provide a URL.\nIf you are collecting data yourself, it is OK if you do not have the full data yet but you should have at least a prototype.\n\nExplain the scientific questions you would want to approach using Bayesian methods.\nOutline a plan for the methodology you will use.\nIf it is a team project, the proposal contains a short plan for ensuring the two team members will contribute roughly equally.\n\nAs long as the team submits a reasonable project proposal, I will give full grade (5/5) (along with some feedback). I will remove one point if the git requirement is not fully satisfied. Late submission within 2 days will receive max grade of 4/5, and 0/5 after the grace period. Details of the project can change after submission of the proposals. Larger changes are allowed but with my permission, so they should not be discussed at the last minute, i.e. certainly before the last lecture.\nTotal: 5%",
+    "crumbs": [
+      "Final project"
+    ]
+  },
+  {
+    "objectID": "project.html#rubric-for-the-final-report",
+    "href": "project.html#rubric-for-the-final-report",
+    "title": "Final project",
+    "section": "Rubric for the final report",
+    "text": "Rubric for the final report\n\nBasic requirements (5%)\n\nThe report fits within the prescribed page limits.\nThere is a working link to a public repo containing commits from all team members.\nThe report follows best practices of technical writing.\nIf it is a team project, a short paragraph clearly explains and quantifies the contributions of each team member.\n\nProblem formulation. (5%) The report clearly describes:\n\na real-world inference task/problem,\nsuccinct but sufficient context (e.g. biological terminology) needed to understand the problem,\nthe key modelling/methodological/challenge, clearly associating it with one of the items under “menu of project themes” above.\n\nThe report contains a literature review: (5%) relevant literature is cited and properly summarized.\n\nIf you are using a publicly available dataset, you should clearly identify the most closely related reference and clearly explain how you report differs from it.\n\nCore requirements:\n\nBayesian inference is applied to a real problem and a real dataset (15%)\nThe report demonstrates mastery of the key techniques covered in this course (25%)\nTechniques from after quiz 2 are used.\nAt least two methods are used to compute the posterior. (15%)\n\nCritical evaluation of the posterior approximation. An appropriate combination of diagnostics, synthetic datasets, scaling laws and other validation strategies.\nStrategies to ensure correctness of the code is discussed and implemented.\n\nAt least two models are described (15%)\n\nA Bayesian model is precisely described (e.g. using the .. ~ .. notation)\nImplementation code in the appendix (e.g. using Stan)\nPrior choice is motivated. If appropriate, several choices are compared or sensitivity analysis is performed.\n\n\nCreativity and originality (5%)\nDiscussion of, e.g., key limitations, implication of results in the broad context (5%)\n\nTotal: 95%",
     "crumbs": [
       "Final project"
     ]
@@ -6120,7 +6140,7 @@
     "href": "w07_quiz1/topic02_practice_questions.html",
     "title": "Practice questions",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Representative example of questions to prep for Quiz 1.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
     "crumbs": [
       "Quiz 1",
       "Practice questions"
@@ -6130,8 +6150,8 @@
     "objectID": "w07_quiz1/topic02_practice_questions.html#outline",
     "href": "w07_quiz1/topic02_practice_questions.html#outline",
     "title": "Practice questions",
-    "section": "Outline",
-    "text": "Outline\n\nTopics\n\nRepresentative example of questions to prep for Quiz 1.\n\n\n\nImportant note\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
+    "section": "",
+    "text": "Representative example of questions to prep for Quiz 1.\n\n\n\n\nThe quiz will not focus on multiple choice questions—we use mostly multiple choice in this page just to make it easier to pace the questions during the lecture.\nBut try to answer before looking at the possible choices to get a more realistic practice!",
     "crumbs": [
       "Quiz 1",
       "Practice questions"
