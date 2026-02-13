@@ -133,7 +133,7 @@ min(samples$x)
 ```
 
 **Question:** denote the samples output from Stan by $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. What formula should you use to approximate 
-$\ex[g(X) | Y = y]$ based on the Stan output?
+$\ex[g(X) | Y = y]$ based on the Stan output? 
     
 {{< include ../../clickers/w08/_c01.qmd >}}
 

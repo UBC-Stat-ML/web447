@@ -11,7 +11,7 @@ editor:
 
 ## Outline
 
-### Topics
+### Topics 
 
 -   Representative examples of questions to prep for Quiz 1.
 

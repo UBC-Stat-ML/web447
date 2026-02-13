@@ -7,5 +7,9 @@
 |             | $\distNorm(\mu, \sigma^2)$ | Mean $\mu \in \reals$ and variance $\sigma^2 > 0$                  |
 |             | $\distNorm(\mu, \tau)$     | Mean $\mu \in \reals$ and precision $\tau = 1/\sigma^2 > 0$        |
 | Exponential | $\distExp(\lambda)$        | Rate $\lambda$ ($=1/$mean)                                         |
+| Poisson     | $\distPoiss(\lambda)$      | Mean $\lambda > 0$                                                 |
 | Beta        | $\distBeta(\alpha, \beta)$ | Shape parameters $\alpha > 0$ and $\beta > 0$                      |
 |             | $\distBeta(\mu, s)$        | Mean parameter $\mu \in (0, 1)$ and concentration $s>0$            |
+| Categorical | $\distCat(p_1, \dots, p_K)$  | Probabilities $p_k > 0$, $\sum_k p_k = 1$                          |
+| Multivariate Normal | $\distNorm(\mu, \Sigma)$              | Mean vector $\mu \in \reals^K$, covariance matrix $\Sigma \succ 0$ |
+

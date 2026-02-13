@@ -27,4 +27,3 @@ The cover page of the exam will have the following table.
 
 
 {{< include ../blocks/_formulae_quiz1.qmd >}}
-
