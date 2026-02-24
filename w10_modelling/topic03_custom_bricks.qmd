@@ -17,7 +17,7 @@ editor:
 
 ### Rationale
 
-Even though Stan has a long list of built-in distribution, you will eventually run into a situation where you 
+Even though Stan has a long list of built-in distributions, you will eventually run into a situation where you 
 need a distribution not in the list. 
 
 While learning how to do so, we will need to look more deeply at how Stan works under the hood. 
@@ -40,7 +40,7 @@ where $x \in (0, 1)$ and $a, b$ are positive parameters.
 ## Executive version
 
 - In the `model` block:
-    - Use `target += [logarithm (base e) of the log density]`
+    - Use `target += [logarithm (base e) of the density]`
     - Applying this to our Kumaraswamy example:
       $$\log(f(x)) = \log(a) + \log(b) + (a-1) \log(x) + (b-1) \log(1 - x^a).$$
       
@@ -68,8 +68,8 @@ model {
                                                     // ^ log1p(z) = log(1+z)
 }
 ```
-1. Support enforced. 
-2. Contribution of the Kumaraswamy log density added the log joint density.
+1. Support is enforced. 
+2. Contribution of the Kumaraswamy log density added to the log joint density.
 
 ```{r dependson=knitr::dep_prev()}
 fit = sampling(
@@ -81,7 +81,7 @@ fit = sampling(
 )
 ```
 
-Checking that the histogram roughly matches the one from the wikipedia article (see [top of page Figure](topic03_custom_bricks.qmd), purple line).
+Checking that the histogram roughly matches the one from the Wikipedia article (see [top of page Figure](topic03_custom_bricks.qmd), purple line).
 
 ```{r message=FALSE, warning=FALSE}
 #| column: margin
@@ -98,10 +98,10 @@ mcmc_hist(fit, pars = c("x")) + theme_minimal()
 
 **Question:** why is Stan computing the **logarithm** of $\gamma(x)$?
 
-**Key fact:** Stan, like most numerical methods, use [double-precision floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) approximation of real numbers. 
+**Key fact:** Stan, like most numerical methods, uses [double-precision floating point](https://en.wikipedia.org/wiki/Floating-point_arithmetic) approximation of real numbers. 
 
 - Suppose you have 500 observations.
-- Each have a likelihood of about $1/10$. 
+- Each has a likelihood of about $1/10$. 
 - What is the joint likelihood?
 
 ```{r}
@@ -112,13 +112,13 @@ for (i in 1:500) {
 likelihood
 ```
 
-**Question:** Why R returns zero?
+**Question:** Why does R return zero?
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
-- Because $(1/10)^{500}$ is smaller than the smallest positive number representeable in double precision ($\approx 10^{-300}$)
+- Because $(1/10)^{500}$ is smaller than the smallest positive number representable in double precision ($\approx 10^{-300}$)
     - So it gets rounded to zero.
-    - This is called **an underflow**
+    - This is called **an underflow**.
 :::
     
 **Log-scale computation:** let us say we store instead the **log**-likelihood:
@@ -162,7 +162,7 @@ model {
 ```
 1. The `function` block allows you to create custom functions. See [the Stan documentation for more details.](https://mc-stan.org/docs/stan-users-guide/user-functions.html#basic-functions.section)
 2. For Stan to pick up your function in its `~` syntax, you must use the special suffix `_lpdf` for your function name, which stands for "log probability density function."
-3. Then you can use your distribution name using `~` as usual (notice we do not include the `_lpdf` when we do such call). From this it is apparent that Stan's `~` notation is just a shortcut for `target += distributionName_lpdf(...)`. 
+3. Then you can use your distribution name using `~` as usual (notice we do not include the `_lpdf` when we make such call). From this it is apparent that Stan's `~` notation is just a shortcut for `target += distributionName_lpdf(...)`. 
 
 ```{r echo=FALSE, dependson=knitr::dep_prev()}
 fit = sampling(

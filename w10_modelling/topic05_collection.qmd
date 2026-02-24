@@ -42,7 +42,7 @@ Y &= \{ H_i : I_i = 1 \}.
 - Here $I_i$ is an "inclusion indicator". 
 - Bayesian analysis will be based on $X | Y$
 
-**Example:** CRISPR-Cas9 unique molecular identifier (UMI) family size. "Families of cells" that left zero progenies are not observed!
+**Example:** CRISPR-Cas9 unique molecular identifier (UMI) family size. "Families of cells" that left zero progeny are not observed!
 
 
 ![](../images/UMIs.png){width="600"}

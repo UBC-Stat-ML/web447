@@ -32,7 +32,7 @@ distribution families.
 - We look at a dataset from [Albert and Hu, 2020](https://bayesball.github.io/BOOK/case-studies.html#latent-class-modeling). 
 - We have scores for 30 students on a test. 
 - The test has 20 questions. 
-- All questions are TRUE/FALSE with same weight. 
+- All questions are TRUE/FALSE with the same weight. 
 - Every student attempted every question. 
 
 ```{r}
@@ -62,8 +62,8 @@ plot(data$Score,
 
 - Suppose first that we have the score for only one student.
 - E.g.: first one, who got 9/20. 
-- You want a model to put a probability on: "is this student is guessing at random?"
-    - Real application: analysis of clicker scores where grade is participation-based. 
+- You want a model to put a probability on: "is this student guessing at random?"
+    - Real application: analysis of clicker scores where the grade is participation-based. 
 
 
 ### Mathematical model
@@ -89,7 +89,7 @@ plot(data$Score,
   $$Y \sim \distBinom(20, 0.5).$$
 - The likelihood given $G = 0$ (trying at the best of their ability) is slightly trickier:
     - what is "the best of their ability"?
-    - **Bayesian recipe:** treat it as an unknown ability parameters $A$
+    - **Bayesian recipe:** treat it as an unknown ability parameter $A$
     
 **Full model:**
 
@@ -102,7 +102,7 @@ Y &\sim \distBinom(20, 0.5 G + A(1-G)).
 
 ### Marginalization
 
-- Stan does not support discrete latent random variables like $G$
+- Stan does not support discrete latent random variables like $G$.
 - Therefore we use [Rao-Blackwellization](topic06_rao.qmd):
     - Joint distribution before Rao-Blackwellization:
       $$\gamma(a, g, y) = p(a) p(g) p(y|a, g).$$
@@ -154,19 +154,19 @@ generated quantities {
 5. Stan statement 5
 
 
-### Re-instatiation
+### Re-instantiation
 
 - We care about the posterior mean of $G$, $\ex[G | Y = y]$...
 - ...but we have marginalized $G$ 🙁
 - To compute the posterior mean, we first use the law of total expectation:
   $$\ex[G | Y] = \ex[\red{\ex[G | A, Y]} | Y],$$
 - Let us look at the part in red, and see how we can compute it at every MCMC iteration based on the current value of $A^\parm$...
-    - Using the fact the mean of a Bernoulli is the probability that it takes value 1:
+    - Using the fact that the mean of a Bernoulli is the probability that it takes value 1:
       $$\ex[G | A, Y] = \pr(G = 1 | A, Y).$$
-    - By Bayes rule (noting that a conditional probability like $\pr(\cdot | A)$ [is a probability](../w01_discrete_inference/topic07_conditional.qmd#a-conditional-probability-is-a-probability)):
+    - By Bayes' rule (noting that a conditional probability like $\pr(\cdot | A)$ [is a probability](../w01_discrete_inference/topic07_conditional.qmd#a-conditional-probability-is-a-probability)):
       $$\pr(G = 1 | A, Y = y) = \frac{\pr(G = 1, Y = y | A)}{\pr(G = 0, Y = y | A) + \pr(G = 1, Y = y | A)}.$$
     - This is what gets computed in statement ⑤ in the above Stan code. 
-- Now, recall from the [LLN for Markov chains](../w08_mcmc1/topic05_mcmc_consistency.qmd) gives us condition so that for a test function $h$, we have that the Monte Carlo samples, $A^{(1)}, A^{(2)}, \dots, A^{(M)}$ satisfy,
+- Now, recall from the [LLN for Markov chains](../w08_mcmc1/topic05_mcmc_consistency.qmd) gives us conditions so that for a test function $h$, we have that the Monte Carlo samples, $A^{(1)}, A^{(2)}, \dots, A^{(M)}$ satisfy,
 $$\frac{1}{M} \sum_{m=1}^M h(A^\parm) \to \ex[h(A) | Y = y],$$
 with probability one.
 - Therefore from taking $h(A^\parm) = \pr(G = 1 | A^\parm, Y = y)$, we obtain,
@@ -216,7 +216,7 @@ With some assumptions (unimodality of the students abilities) we can avoid this 
 
 
 
-## Full model: getting rid of key limitation
+## Full model: getting rid of the key limitation
 
 - **Idea:** use a [hierarchical model](../w06_hierarchical/topic03_hierarchy.qmd)! 
 - Random variables that are student-specific:
@@ -224,7 +224,7 @@ With some assumptions (unimodality of the students abilities) we can avoid this 
     - $A_i \sim \distBeta(\mu, S)$
     - $G_i \sim \distBern(F)$
 - Random variables that are global:
-    - Population fraction that are guessing: $F \sim \distUnif(0, 1)$,
+    - Population fraction of students who are guessing: $F \sim \distUnif(0, 1)$,
     - Population parameters for the abilities:
         - $\mu \sim \distUnif(0, 1)$ 
         - $S \sim \distExp(1/100)$. 
@@ -297,7 +297,7 @@ mcmc_intervals(fit, regex_pars = c("guessing_probabilities.*")) +
 
 ```{r message=FALSE, warning=FALSE}
 
-mcmc_areas_ridges(fit, regex_pars = c("predictive_score_non_guessing*")) + 
+mcmc_areas_ridges(fit, regex_pars = c("predictive_score_non_guessing")) + 
   theme_minimal() + 
   scale_x_continuous(limits = c(0, 20)) 
 ```

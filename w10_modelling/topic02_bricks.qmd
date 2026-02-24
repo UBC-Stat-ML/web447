@@ -20,10 +20,10 @@ editor:
 
 Recall our model building strategy: 
 
-- start with observation, and find a distribution that "match its data type" (this creates the likelihood),
+- start with observation, and find a distribution that "matches its data type" (this creates the likelihood),
     - i.e. such that [**support**](../w01_discrete_inference/topic04_pmfs.qmd) of the distribution $=$ observation data type
 - then look at the data types of each of the parameters of the distribution you just picked... 
-    - ...and search for a distributions that match each the parameters' data type (this creates the prior),
+    - ...and search for a distribution that matches each of the parameters' data type (this creates the prior),
 - in the case of hierarchical models, recurse this process.
 
 There are a few common data types for which we do not have talked much about distributions having 
@@ -64,7 +64,7 @@ realizations of that datatype. We now fill this gap.
 
 - More common choice is the [**gamma distribution**](https://en.wikipedia.org/wiki/Gamma_distribution):
     - $\distGam(\alpha, \beta)$
-    - Parameters: Shape parameters $\alpha > 0$ and rate $\beta > 0$.
+    - Parameters: Shape parameter $\alpha > 0$ and rate $\beta > 0$.
     - [Stan doc.](https://mc-stan.org/docs/functions-reference/positive_continuous_distributions.html#gamma-distribution)
 
 
@@ -116,7 +116,7 @@ ps = c(0.2, 0.3, 0.1, 0.2, 0.1)
 plot(xs, ps, type = 'h', xlab = "realization", ylab = "probability", ylim = c(0, 0.5))
 ```
 
-- Support: $\{0, 1, 2, 3, \dots, K\}$, for some number of categories $K$. 
+- Support: $\{1, 2, 3, \dots, K\}$, for some number of categories $K$. 
 - All such distributions captured by the [**categorical distribution**](https://en.wikipedia.org/wiki/Categorical_distribution)
 - We first discussed it in [Exercise 3](../exercises/ex03.qmd).
     - $\distCat(p_1, \dots, p_K)$

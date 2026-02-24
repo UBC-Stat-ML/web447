@@ -42,7 +42,7 @@ We will see a case study where ignoring the data collection process literally co
 - A [dosimeter](https://en.wikipedia.org/wiki/Dosimeter) is a device measuring ionizing radiation.
     - Unit: roentgens per second (R/s).
 - Suppose that:
-    - If ionizing radiation is **greater** than 1.5 R/s $\Rightarrow$ we think the reactor is breached (radiation coming out of reactor core).
+    - If ionizing radiation is **greater** than 1.5 R/s $\Rightarrow$ we think the reactor is breached (radiation coming out of the reactor core).
     - If ionizing radiation is **smaller** than 1.5 R/s $\Rightarrow$ we think the reactor is not breached. 
 - We send `r n_measurements` workers each with a dosimeter.
 - The average over the `r n_measurements` readings is:
@@ -79,7 +79,7 @@ measurements
 ### Mathematical description
 
 - Let $L$ denote a detection limit (here $L = 1.1$)
-- Let $X$ denote the unknown parameter (here, the true mean we try to recover). 
+- Let $X$ denote the unknown parameter. 
 - Let $i$ denote the observation index (worker $i \in \{1, 2, \dots, 10\}$ in our example)
 - Let $H_i$ denote the measurements **before censoring** (i.e., if we had a perfect measurement device immune to saturation effects). 
 - Let $C_i$ denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).
@@ -94,7 +94,7 @@ C_i &= \ind[H_i \ge L], \\
 Y_i &= C_i L + (1 - C_i) H_i.
 \end{align*}
 
-The goal is to compute $\ex[X | Y]$. 
+The goal is to compute $\ex[\text{mean parameter} | Y] = \ex[1/X | Y]$. 
 
 
 ### Stan implementation

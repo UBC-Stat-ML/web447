@@ -19,9 +19,9 @@ editor:
 
 Rao-Blackwellization is an important technique for two reasons:
 
-- It can speed-up MCMC considerably. 
+- It can speed up MCMC considerably. 
 - In languages that do not support discrete latent variables ([for example, Stan](https://mc-stan.org/docs/stan-users-guide/latent-discrete.html)), 
-  this is they only way to implement certain model (e.g. mixture models, coming next)
+  this is the only way to implement certain models (e.g. mixture models, coming next)
 
 
 ## Stan demo
@@ -63,7 +63,7 @@ generated quantities {
 1. Notice that this time we are not including all these $H_i$ above the detection limit! How is this possible?
 2. What is that `exponential_lccdf`?!
 
-**Let us make sure it works empiricially first:**
+**Let us make sure it works empirically first:**
 
 ```{r dependson=knitr::dep_prev()}
 fit = sampling(
@@ -114,9 +114,9 @@ Y &= C L + (1 - C) H.
 - **Key idea behind Rao-Blackwellization:** 
     - Reduce the problem to a target over $x$ only, $\gamma(x)$. 
     - This is because we do not care much about $h$: it is a *nuisance variable*. 
-    - But we would like to do so in such as way that the result of inference on $x$ is the same with $\gamma(x, h)$ and $\gamma(x)$ (just faster with Rao-Blackwellization). 
+    - But we would like to do so in such a way that the result of inference on $x$ is the same with $\gamma(x, h)$ and $\gamma(x)$ (just faster with Rao-Blackwellization). 
     
-**Question:** how to define $\gamma(x)$ from $\gamma(x, h)$ so that the result on $x$ stay the same?
+**Question:** how to define $\gamma(x)$ from $\gamma(x, h)$ so that the result on $x$ stays the same?
 
 {{< include ../../clickers/w10/_c03.qmd >}}
 

@@ -81,7 +81,11 @@ build_objective = function(df) {
 }
 ```
 
+Hint: for the binomial likelihood, make sure that its realization is the 
+number of failures (rather than the number of successes).[^2]
 
+[^2]: Failure rates are expected to be small, and floating point operations are 
+      more accurate in the neighbourhood of zero compared to the neighbourhood of one.
 
 
 ## Q.3 Interpretation
