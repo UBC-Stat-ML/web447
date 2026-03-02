@@ -994,12 +994,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
   <li><a href="#what-is-stan" id="toc-what-is-stan" class="nav-link" data-scroll-target="#what-is-stan">What is Stan?</a></li>
-  <li><a href="#installing-stan" id="toc-installing-stan" class="nav-link" data-scroll-target="#installing-stan">Installing Stan</a></li>
-  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan</a>
-  <ul class="collapse">
-  <li><a href="#from-a-r-script" id="toc-from-a-r-script" class="nav-link" data-scroll-target="#from-a-r-script">From a R script</a></li>
-  <li><a href="#from-a-notebook" id="toc-from-a-notebook" class="nav-link" data-scroll-target="#from-a-notebook">From a notebook</a></li>
-  </ul></li>
+  <li><a href="#installing-stan-and-cmdstanr4" id="toc-installing-stan-and-cmdstanr4" class="nav-link" data-scroll-target="#installing-stan-and-cmdstanr4">Installing Stan and CmdStanR</a></li>
+  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan</a></li>
   </ul>
 </nav>
     </div>
@@ -1099,62 +1095,66 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 </ul>
 </section>
-<section id="installing-stan" class="level2">
-<h2 class="anchored" data-anchor-id="installing-stan">Installing Stan</h2>
+<section id="installing-stan-and-cmdstanr4" class="level2">
+<h2 class="anchored" data-anchor-id="installing-stan-and-cmdstanr4">Installing Stan and CmdStanR<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
 <p>You will need Stan installed to complete the exercises and clicker questions after the quiz. <strong>Don’t wait until the last minute, install it today!</strong></p>
-<p>There are two main steps to install Stan:</p>
-<ol type="1">
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain">Configuring a C++ Toolchain</a></li>
-<li><a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan">Installing RStan</a></li>
-</ol>
+<p>Go to the <a href="https://mc-stan.org/install/">Stan instruction page</a> and <strong>make sure to select CmdStanR</strong>.</p>
+<p><strong>Note:</strong> the documentation says that you should use</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"stan-dev/cmdstanr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>however, this will only work if you have the R package <code>remotes</code> installed. You can instead just use:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cmdstanr"</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://stan-dev.r-universe.dev'</span>, <span class="fu">getOption</span>(<span class="st">"repos"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let us know on Piazza if you encounter any issues!</p>
 </section>
 <section id="running" class="level2">
 <h2 class="anchored" data-anchor-id="running">Running Stan</h2>
-<p>We present two methods for running Stan in the next two sections: either from an R script, or from a notebook.</p>
-<p><strong>Template:</strong> to quickly get started, download the <a href="https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip">following templates</a> which you can use as a starting point for either R script or notebook.</p>
-<section id="from-a-r-script" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-r-script">From a R script</h3>
 <p>First, copy and paste the following code into a file called <code>beta_binomial.stan</code>:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>beta_binomial.stan</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-shortcodes="true," data-filename="beta_binomial.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n;         <span class="co">// number of trials</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=n&gt; k; <span class="co">// number of successes</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; p;</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  p ~ beta(<span class="dv">1</span>,<span class="dv">1</span>);</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  k ~ binomial(n, p);</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-shortcodes="true," data-filename="beta_binomial.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n;         <span class="co">// number of trials</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=n&gt; k; <span class="co">// number of successes</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>,<span class="kw">upper</span>=<span class="dv">1</span>&gt; p;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// prior</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  p ~ beta(<span class="dv">1</span>,<span class="dv">1</span>);</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// likelihood</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  k ~ binomial(n, p);</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Second, run Stan as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(rstan)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">stan</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"beta_binomial.stan"</span>,  <span class="co"># Stan program</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>),        <span class="co"># named list of data</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">1000</span>                   <span class="co"># number of samples to draw</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"beta_binomial.stan"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>)        <span class="co"># named list of data</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 1 chain...
+
+Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
+Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 1 finished in 0.0 seconds.</code></pre>
+</div>
+</div>
 <p>The first question of the next exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="from-a-notebook" class="level3">
-<h3 class="anchored" data-anchor-id="from-a-notebook">From a notebook</h3>
-<p>To see an example of how to integrate Stan code inside quarto (R markdown would work the same), see the source code used for the next page in the notes, <a href="https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd">available on github</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-</section>
 </section>
 
 
@@ -1164,6 +1164,7 @@ https://github.com/trevorcampbell/shortex
 <li id="fn1"><p>Often MCMC algorithms such as stan scale polynomially in dimension while SNIS scales exponentially.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>simPPLe is a few dozen lines of code, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Older version of these instructions were using <code>RStan</code> instead of <code>cmdstanr</code>. Unfortunately, the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and development seems to have migrated from <code>RStan</code> into <code>cmdstanr</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

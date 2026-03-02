@@ -1110,7 +1110,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(doomsday_model, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.103447</code></pre>
+<pre><code>[1] 1.115687</code></pre>
 </div>
 </div>
 <p>Recall the <strong>analytic answer</strong> <a href="../w03_ppl/topic03_continuous.html">that we computed in clicker questions</a> was: <span class="math inline">\(\approx 1.117\)</span>.</p>
@@ -1123,112 +1123,81 @@ https://github.com/trevorcampbell/shortex
 </li>
 <li>to differentiate between observed and latent, Stan instead uses variable declarations (as <code>data</code> or <code>parameters</code>).</li>
 </ul>
-<p>First, load <code>rstan</code>:</p>
+<p>First, put the following code into a file called <code>doomsday.stan</code>:</p>
+<div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> y; </span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">5</span>&gt; x;</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-10" class="code-annotation-target"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a>  x ~ uniform(<span class="dv">0</span>, <span class="dv">5</span>);</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-11" class="code-annotation-target"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a>  y ~ uniform(<span class="dv">0</span>, x);</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Variables introduced in a <code>data</code> block will be treated as observed.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="2">Variables introduced in a <code>parameters</code> block will be treated as latent, i.e., unobserved.<br>
+</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="10" data-code-annotation="3">Since <code>x</code> is declared latent (i.e., inside a <code>parameters</code> block), Stan will know to treat this as the counterpart of simPPLe’s <code>x = simulate(Unif(0, 5))</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="4">Since <code>y</code> is declared observed (i.e., inside a <code>data</code> block), Stan will know to treat this as the counterpart of simPPLe’s <code>observe(0.06, Unif(0, x))</code>.</span>
+</dd>
+</dl>
+<p><strong>Question:</strong> How does Stan get the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
+<p><strong>Answer:</strong> When Stan gets called in R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then, <a href="../w08_mcmc1/topic01_installing_stan.html#running">as you did to test your install</a> put the following code into a <code>.stan</code> file:</p>
-<div class="cell" data-output.var="doomsday">
-<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> y; </span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=<span class="dv">5</span>&gt; x;</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  x ~ uniform(<span class="dv">0</span>, <span class="dv">5</span>);</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>  y ~ uniform(<span class="dv">0</span>, x);</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"doomsday.stan"</span>)</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">50000</span>,</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"doomsday_out"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>),</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">100000</span>,</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1">Variables introduced in a <code>data</code> block will be treated as observed.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="1">Pass in the values taken by the observed random variables.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">Variables introduced in a <code>parameters</code> block will be treated as latent, i.e., unobserved.<br>
-</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="3">Since <code>x</code> is declared latent (i.e., inside a <code>parameters</code> block), Stan will know to treat this as the counterpart of simPPLe’s <code>x = simulate(Unif(0, 5))</code>.</span>
-</dd>
-<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="4">Since <code>y</code> is declared observed (i.e., inside a <code>data</code> block), Stan will know to treat this as the counterpart of simPPLe’s <code>observe(0.06, Unif(0, x))</code>.</span>
-</dd>
-</dl>
-</div>
-</div>
-<p><strong>Question:</strong> How does Stan get the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
-<p><strong>Answer:</strong> When Stan gets called in R:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<!-- Note: dependson=knitr::dep_prev() needed as otherwise updates in the model will not invalidate the knitr cache properly -->
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>  doomsday,         </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>),</span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">100000</span></span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="1">Pass in the values taken by the observed random variables.</span>
-</dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2">The number of samples to compute (a cousin of <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="10" data-code-annotation="2">The number of samples to compute (a cousin of <span class="math inline">\(M\)</span> in our <a href="../w01_discrete_inference/topic11_monte_carlo.html">Monte Carlo notation</a>)</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 4e-06 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:     1 / 100000 [  0%]  (Warmup)
-Chain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)
-Chain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)
-Chain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)
-Chain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)
-Chain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)
-Chain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)
-Chain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)
-Chain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)
-Chain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)
-Chain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)
-Chain 1: Iteration: 100000 / 100000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.253 seconds (Warm-up)
-Chain 1:                0.157 seconds (Sampling)
-Chain 1:                0.41 seconds (Total)
-Chain 1: </code></pre>
+<pre><code>Running MCMC with 1 chain...
+
+Chain 1 Iteration:      1 / 101000 [  0%]  (Warmup) 
+Chain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) 
+Chain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 101000 / 101000 [100%]  (Sampling) 
+Chain 1 finished in 0.6 seconds.</code></pre>
 </div>
 </div>
 <p>We can now compare the approximation provided by Stan:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Inference for Stan model: anon_model.
-1 chains, each with iter=1e+05; warmup=50000; thin=1; 
-post-warmup draws per chain=50000, total post-warmup draws=50000.
-
-      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-x     1.12    0.01 1.25  0.07  0.19  0.55  1.68  4.45 10585    1
-lp__ -0.37    0.01 0.63 -2.21 -0.41 -0.12 -0.04 -0.01  9987    1
-
-Samples were drawn using NUTS(diag_e) at Tue Mar  5 11:45:15 2024.
-For each parameter, n_eff is a crude measure of effective sample size,
-and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+<pre><code> variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
+     lp__ -0.37  -0.12 0.64 0.14 -1.62 -0.02 1.00    19501    24505
+     x     1.11   0.55 1.25 0.65  0.07  4.01 1.00    19501    24505</code></pre>
 </div>
 </div>
 </section>
@@ -1255,18 +1224,15 @@ convergence, Rhat=1).</code></pre>
 </ul>
 <p>To access the samples from a “fit” object when calling Stan, use:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">extract</span>(fit)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7224132 3.7228678 2.2768091 1.0077302 4.9788992 0.6378141</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> fit<span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"list"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="fu">as.vector</span>(fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As a sanity check, let’s make sure all the samples are greater than the observed lower bound of <span class="math inline">\(0.06\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(xs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06000474</code></pre>
+<pre><code>[1] 0.06001702</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> denote the samples output from Stan by <span class="math inline">\(X^{(1)}, X^{(2)}, \dots, X^{(M)}\)</span>. What formula should you use to approximate <span class="math inline">\(\mathbb{E}[g(X) | Y = y]\)</span> based on the Stan output?</p>
@@ -1312,26 +1278,26 @@ Click for answer
 <h3 class="anchored" data-anchor-id="plotting-histograms">Plotting histograms</h3>
 <p>Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samples<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(xs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You can also use the <code>bayesplot</code> package which will be handy to create more complex plots from MCMC runs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(fit, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(fit<span class="sc">$</span><span class="fu">draws</span>(), <span class="at">par =</span> <span class="fu">c</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic02_stan_basics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1341,13 +1307,7 @@ Click for answer
 </section>
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>when calling Stan from an R script, use <code>stan(file = ...)</code>, but when calling Stan from R Markdown (as we do here), use <code>sampling(name, ...)</code>, where the first argument, <code>name</code> matches the code block argument <code>output.var = "name"</code> (see the <a href="https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd">source of this page</a> for an example).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1085,7 +1085,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Even though Stan has a long list of built-in distribution, you will eventually run into a situation where you need a distribution not in the list.</p>
+<p>Even though Stan has a long list of built-in distributions, you will eventually run into a situation where you need a distribution not in the list.</p>
 <p>While learning how to do so, we will need to look more deeply at how Stan works under the hood.</p>
 </section>
 </section>
@@ -1102,7 +1102,7 @@ https://github.com/trevorcampbell/shortex
 <ul>
 <li>In the <code>model</code> block:
 <ul>
-<li>Use <code>target += [logarithm (base e) of the log density]</code></li>
+<li>Use <code>target += [logarithm (base e) of the density]</code></li>
 <li>Applying this to our Kumaraswamy example: <span class="math display">\[\log(f(x)) = \log(a) + \log(b) + (a-1) \log(x) + (b-1) \log(1 - x^a).\]</span></li>
 </ul></li>
 <li>In the <code>parameters</code> block:
@@ -1131,11 +1131,11 @@ https://github.com/trevorcampbell/shortex
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="1">Support enforced.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="1">Support is enforced.</span>
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="2">Contribution of the Kumaraswamy log density added the log joint density.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="11" data-code-annotation="2">Contribution of the Kumaraswamy log density added to the log joint density.</span>
 </dd>
 </dl>
 </div>
@@ -1149,7 +1149,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>                   </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Checking that the histogram roughly matches the one from the wikipedia article (see <a href="../w10_modelling/topic03_custom_bricks.html">top of page Figure</a>, purple line).</p>
+<p>Checking that the histogram roughly matches the one from the Wikipedia article (see <a href="../w10_modelling/topic03_custom_bricks.html">top of page Figure</a>, purple line).</p>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
@@ -1168,10 +1168,10 @@ https://github.com/trevorcampbell/shortex
 <section id="log-scale-computation" class="level3">
 <h3 class="anchored" data-anchor-id="log-scale-computation">Log-scale computation</h3>
 <p><strong>Question:</strong> why is Stan computing the <strong>logarithm</strong> of <span class="math inline">\(\gamma(x)\)</span>?</p>
-<p><strong>Key fact:</strong> Stan, like most numerical methods, use <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">double-precision floating point</a> approximation of real numbers.</p>
+<p><strong>Key fact:</strong> Stan, like most numerical methods, uses <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">double-precision floating point</a> approximation of real numbers.</p>
 <ul>
 <li>Suppose you have 500 observations.</li>
-<li>Each have a likelihood of about <span class="math inline">\(1/10\)</span>.</li>
+<li>Each has a likelihood of about <span class="math inline">\(1/10\)</span>.</li>
 <li>What is the joint likelihood?</li>
 </ul>
 <div class="cell">
@@ -1184,7 +1184,7 @@ https://github.com/trevorcampbell/shortex
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p><strong>Question:</strong> Why R returns zero?</p>
+<p><strong>Question:</strong> Why does R return zero?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1198,10 +1198,10 @@ Click for answer
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Because <span class="math inline">\((1/10)^{500}\)</span> is smaller than the smallest positive number representeable in double precision (<span class="math inline">\(\approx 10^{-300}\)</span>)
+<li>Because <span class="math inline">\((1/10)^{500}\)</span> is smaller than the smallest positive number representable in double precision (<span class="math inline">\(\approx 10^{-300}\)</span>)
 <ul>
 <li>So it gets rounded to zero.</li>
-<li>This is called <strong>an underflow</strong></li>
+<li>This is called <strong>an underflow</strong>.</li>
 </ul></li>
 </ul>
 </div>
@@ -1262,7 +1262,7 @@ Click for answer
 </dd>
 <dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="17" data-code-annotation="3">Then you can use your distribution name using <code>~</code> as usual (notice we do not include the <code>_lpdf</code> when we do such call). From this it is apparent that Stan’s <code>~</code> notation is just a shortcut for <code>target += distributionName_lpdf(...)</code>.</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="17" data-code-annotation="3">Then you can use your distribution name using <code>~</code> as usual (notice we do not include the <code>_lpdf</code> when we make such call). From this it is apparent that Stan’s <code>~</code> notation is just a shortcut for <code>target += distributionName_lpdf(...)</code>.</span>
 </dd>
 </dl>
 </div>

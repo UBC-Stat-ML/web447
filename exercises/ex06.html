@@ -1107,6 +1107,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(log_gamma)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Hint: for the binomial likelihood, make sure that its realization is the number of failures (rather than the number of successes).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </section>
 <section id="q.3-interpretation" class="level2">
 <h2 class="anchored" data-anchor-id="q.3-interpretation">Q.3 Interpretation</h2>
@@ -1172,6 +1173,7 @@ https://github.com/trevorcampbell/shortex
 
 <ol>
 <li id="fn1"><p>More specifically, for the choice <span class="math inline">\(1/10000\)</span>, the Hessian is not a definite matrix. This means that we would need MCMC to approximate the original model.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Failure rates are expected to be small, and floating point operations are more accurate in the neighbourhood of zero compared to the neighbourhood of one.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

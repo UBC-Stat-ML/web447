@@ -1142,7 +1142,7 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 <li>Suppose that:
 <ul>
-<li>If ionizing radiation is <strong>greater</strong> than 1.5 R/s <span class="math inline">\(\Rightarrow\)</span> we think the reactor is breached (radiation coming out of reactor core).</li>
+<li>If ionizing radiation is <strong>greater</strong> than 1.5 R/s <span class="math inline">\(\Rightarrow\)</span> we think the reactor is breached (radiation coming out of the reactor core).</li>
 <li>If ionizing radiation is <strong>smaller</strong> than 1.5 R/s <span class="math inline">\(\Rightarrow\)</span> we think the reactor is not breached.</li>
 </ul></li>
 <li>We send 10 workers each with a dosimeter.</li>
@@ -1192,7 +1192,7 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="mathematical-description">Mathematical description</h3>
 <ul>
 <li>Let <span class="math inline">\(L\)</span> denote a detection limit (here <span class="math inline">\(L = 1.1\)</span>)</li>
-<li>Let <span class="math inline">\(X\)</span> denote the unknown parameter (here, the true mean we try to recover).</li>
+<li>Let <span class="math inline">\(X\)</span> denote the unknown parameter.</li>
 <li>Let <span class="math inline">\(i\)</span> denote the observation index (worker <span class="math inline">\(i \in \{1, 2, \dots, 10\}\)</span> in our example)</li>
 <li>Let <span class="math inline">\(H_i\)</span> denote the measurements <strong>before censoring</strong> (i.e., if we had a perfect measurement device immune to saturation effects).</li>
 <li>Let <span class="math inline">\(C_i\)</span> denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).</li>
@@ -1205,7 +1205,7 @@ H_i &amp;\sim {\mathrm{Exp}}(X) \\
 C_i &amp;= \mathbb{1}[H_i \ge L], \\
 Y_i &amp;= C_i L + (1 - C_i) H_i.
 \end{align*}\]</span></p>
-<p>The goal is to compute <span class="math inline">\(\mathbb{E}[X | Y]\)</span>.</p>
+<p>The goal is to compute <span class="math inline">\(\mathbb{E}[\text{mean parameter} | Y] = \mathbb{E}[1/X | Y]\)</span>.</p>
 </section>
 <section id="stan-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="stan-implementation">Stan implementation</h3>

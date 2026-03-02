@@ -1083,8 +1083,8 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>Rao-Blackwellization is an important technique for two reasons:</p>
 <ul>
-<li>It can speed-up MCMC considerably.</li>
-<li>In languages that do not support discrete latent variables (<a href="https://mc-stan.org/docs/stan-users-guide/latent-discrete.html">for example, Stan</a>), this is they only way to implement certain model (e.g.&nbsp;mixture models, coming next)</li>
+<li>It can speed up MCMC considerably.</li>
+<li>In languages that do not support discrete latent variables (<a href="https://mc-stan.org/docs/stan-users-guide/latent-discrete.html">for example, Stan</a>), this is the only way to implement certain models (e.g.&nbsp;mixture models, coming next)</li>
 </ul>
 </section>
 </section>
@@ -1160,7 +1160,7 @@ https://github.com/trevorcampbell/shortex
 </dl>
 </div>
 </div>
-<p><strong>Let us make sure it works empiricially first:</strong></p>
+<p><strong>Let us make sure it works empirically first:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  chernobyl_rao_blackwellized,</span>
@@ -1246,10 +1246,10 @@ Y &amp;= C L + (1 - C) H.
 <ul>
 <li>Reduce the problem to a target over <span class="math inline">\(x\)</span> only, <span class="math inline">\(\gamma(x)\)</span>.</li>
 <li>This is because we do not care much about <span class="math inline">\(h\)</span>: it is a <em>nuisance variable</em>.</li>
-<li>But we would like to do so in such as way that the result of inference on <span class="math inline">\(x\)</span> is the same with <span class="math inline">\(\gamma(x, h)\)</span> and <span class="math inline">\(\gamma(x)\)</span> (just faster with Rao-Blackwellization).</li>
+<li>But we would like to do so in such a way that the result of inference on <span class="math inline">\(x\)</span> is the same with <span class="math inline">\(\gamma(x, h)\)</span> and <span class="math inline">\(\gamma(x)\)</span> (just faster with Rao-Blackwellization).</li>
 </ul></li>
 </ul>
-<p><strong>Question:</strong> how to define <span class="math inline">\(\gamma(x)\)</span> from <span class="math inline">\(\gamma(x, h)\)</span> so that the result on <span class="math inline">\(x\)</span> stay the same?</p>
+<p><strong>Question:</strong> how to define <span class="math inline">\(\gamma(x)\)</span> from <span class="math inline">\(\gamma(x, h)\)</span> so that the result on <span class="math inline">\(x\)</span> stays the same?</p>
 <p><strong>Question:</strong> compute <span class="math inline">\(\gamma(x)\)</span> in our simplified example, <a href="#eq-simplified" class="quarto-xref">Equation&nbsp;1</a>.</p>
 
 

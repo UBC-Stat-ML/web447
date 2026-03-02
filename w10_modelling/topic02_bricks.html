@@ -1091,13 +1091,13 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>Recall our model building strategy:</p>
 <ul>
-<li>start with observation, and find a distribution that “match its data type” (this creates the likelihood),
+<li>start with observation, and find a distribution that “matches its data type” (this creates the likelihood),
 <ul>
 <li>i.e.&nbsp;such that <a href="../w01_discrete_inference/topic04_pmfs.html"><strong>support</strong></a> of the distribution <span class="math inline">\(=\)</span> observation data type</li>
 </ul></li>
 <li>then look at the data types of each of the parameters of the distribution you just picked…
 <ul>
-<li>…and search for a distributions that match each the parameters’ data type (this creates the prior),</li>
+<li>…and search for a distribution that matches each of the parameters’ data type (this creates the prior),</li>
 </ul></li>
 <li>in the case of hierarchical models, recurse this process.</li>
 </ul>
@@ -1146,7 +1146,7 @@ https://github.com/trevorcampbell/shortex
 <li>More common choice is the <a href="https://en.wikipedia.org/wiki/Gamma_distribution"><strong>gamma distribution</strong></a>:
 <ul>
 <li><span class="math inline">\({\mathrm{Gam}}(\alpha, \beta)\)</span></li>
-<li>Parameters: Shape parameters <span class="math inline">\(\alpha &gt; 0\)</span> and rate <span class="math inline">\(\beta &gt; 0\)</span>.</li>
+<li>Parameters: Shape parameter <span class="math inline">\(\alpha &gt; 0\)</span> and rate <span class="math inline">\(\beta &gt; 0\)</span>.</li>
 <li><a href="https://mc-stan.org/docs/functions-reference/positive_continuous_distributions.html#gamma-distribution">Stan doc.</a></li>
 </ul></li>
 </ul>
@@ -1188,7 +1188,7 @@ https://github.com/trevorcampbell/shortex
 </div>
 </div></div></div>
 <ul>
-<li>Support: <span class="math inline">\(\{0, 1, 2, 3, \dots, K\}\)</span>, for some number of categories <span class="math inline">\(K\)</span>.</li>
+<li>Support: <span class="math inline">\(\{1, 2, 3, \dots, K\}\)</span>, for some number of categories <span class="math inline">\(K\)</span>.</li>
 <li>All such distributions captured by the <a href="https://en.wikipedia.org/wiki/Categorical_distribution"><strong>categorical distribution</strong></a></li>
 <li>We first discussed it in <a href="../exercises/ex03.html">Exercise 3</a>.
 <ul>
