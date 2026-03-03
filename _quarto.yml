@@ -89,6 +89,9 @@ website:
             file: exercises/ex10.qmd
           - text: "Challenge"
             file: challenges/ch10.qmd
+      - section: "Annexes"
+        contents: 
+          - auto: "annexes/*"
 
 
 format:

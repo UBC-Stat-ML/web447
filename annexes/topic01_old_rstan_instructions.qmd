@@ -1,0 +1,55 @@
+---
+title: "Old RStan Instruction "
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+For reference, we keep here the old instructions for RStan. 
+They may still 
+work on some plate-forms. But we are now migrating to 
+[cmdstanr](../w08_mcmc1/topic01_installing_stan.qmd).
+
+
+
+## Installing (old RStan method)
+
+There are two main steps to install Stan:
+
+1. [Configuring a C++ Toolchain](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain)
+2. [Installing RStan](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan)
+
+
+## Running Stan (old RStan method)
+
+Download the [following templates](https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip) which you can 
+use as a starting point for either R script or notebook.
+
+For example:
+
+```r
+require(rstan)
+fit = stan(
+  seed = 123,
+  file = "../w08_mcmc1/beta_binomial.stan",  # Stan program
+  data = list(n=3, k=3),        # named list of data
+  iter = 1000                   # number of samples to draw
+```
+
+
+## Extracting draws
+
+```r
+samples = extract(fit)
+```
+
+## Histograms with bayesplots
+
+```r
+mcmc_hist(fit)
+```
+
+

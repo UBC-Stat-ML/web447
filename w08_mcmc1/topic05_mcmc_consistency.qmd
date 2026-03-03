@@ -11,7 +11,7 @@ editor:
 ### Topics
 
 - MH's consistency guarantee. 
-- Notion of irreducibility. 
+- Notion of irreducibility.
 
 ### Rationale
 

@@ -11,3 +11,7 @@ blocks/_coinbag_files
 *_files*
 .~lock.hubble-1.csv#
 *.rds
+omicron
+w08_mcmc1/stan_out
+beta_binomial
+doomsday

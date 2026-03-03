@@ -12,7 +12,7 @@ editor:
 
 -   Metropolis-Hastings (MH) algorithm with symmetric proposal
 -   Trace plots from MH
--   Histograms from MH
+-   Histograms from MH 
 
 
 ### Rationale
@@ -133,7 +133,7 @@ MH requires a **proposal** $q(x' | x)$:
 
 ## Visualization 
 
-In the exercise this week, you will [implement MH with a standard normal proposal](../exercises/ex07.qmd#sec-q3). 
+In the exercise coming up soon, you will implement MH with a standard normal proposal. 
 
 Once your exercise is complete you will be able to call your function as follows:
 

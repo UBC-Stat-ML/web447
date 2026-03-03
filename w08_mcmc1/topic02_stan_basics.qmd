@@ -6,6 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
+
 ## Outline
 
 ### Topics
@@ -15,7 +16,7 @@ editor:
 
 ### Rationale
 
-We will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process.
+We will write many Stan models in the coming weeks, so we will cover here the key concepts needed to write in Stan. Similarities with simPPLe will help in this process. 
 
 
 ## Example
@@ -51,47 +52,32 @@ Today we will re-write this model in Stan instead of simPPLe. The main differenc
 - both `simulate` and `observe` will be denoted by `~` in Stan,  
 - to differentiate between observed and latent, Stan instead uses variable declarations (as `data` or `parameters`). 
 
-First, load `rstan`:
+First, put the following code into a file called `doomsday.stan`:
 
-```{r}
-suppressPackageStartupMessages(require(rstan))
-```
-
-Then, [as you did to test your install](topic01_installing_stan.qmd#running) put the following code into a `.stan` file:
-
-```{stan output.var = "doomsday"}
-data { # <1>
-  real y; 
-}
-
-parameters { # <2>
-  real<lower=0, upper=5> x;
-}
-
-model {
-  x ~ uniform(0, 5); # <3>
-  y ~ uniform(0, x); # <4>
-}
-
+```stan {shortcodes=true, filename="doomsday.stan"}
+{{< include doomsday.stan >}}
 ```
 1. Variables introduced in a `data` block will be treated as observed. 
 2. Variables introduced in a `parameters` block will be treated as latent, i.e., unobserved.   
 3. Since `x` is declared latent (i.e., inside a `parameters` block), Stan will know to treat this as the counterpart of simPPLe's `x = simulate(Unif(0, 5))`.
 4. Since `y` is declared observed (i.e., inside a `data` block), Stan will know to treat this as the counterpart of simPPLe's `observe(0.06, Unif(0, x))`.
 
-**Question:** How does Stan get the actual observed value $y = 0.06$? 
+**Question:** How does Stan get the actual observed value $y = 0.06$?
 
-**Answer:** When Stan gets called in R:[^1]
+**Answer:** When Stan gets called in R:
 
-[^1]: when calling Stan from an R script, use `stan(file = ...)`, but when calling Stan from R Markdown (as we do here), use `sampling(name, ...)`, where the first argument, `name` matches the code block argument `output.var = "name"` (see the [source of this page](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd) for an example).
+```{r message=FALSE, warning=FALSE, results=FALSE}
 
-<!-- Note: dependson=knitr::dep_prev() needed as otherwise updates in the model will not invalidate the knitr cache properly -->
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
-fit = sampling(
-  doomsday,         
-  data = list(y = 0.06), # <1>
+suppressPackageStartupMessages(require(cmdstanr))
+mod <- cmdstan_model("doomsday.stan")
+fit = mod$sample(
+  seed = 1,
   chains = 1,
-  iter = 100000       # <2>
+  refresh = 50000,
+  output_dir = "stan_out",
+  data = list(y = 0.06), # <1>
+  iter_warmup = 1000,
+  iter_sampling = 100000,   # <2>
 )
 ```
 1. Pass in the values taken by the observed random variables. 
@@ -121,15 +107,13 @@ fit
 To access the samples from a "fit" object when calling Stan, use:
 
 ```{r}
-samples = extract(fit)
-
-head(samples$x)
+xs = as.vector(fit$draws("x"))
 ```
 
 As a sanity check, let's make sure all the samples are greater than the observed lower bound of $0.06$:
 
 ```{r}
-min(samples$x)
+min(xs)
 ```
 
 **Question:** denote the samples output from Stan by $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. What formula should you use to approximate 
@@ -143,13 +127,14 @@ $\ex[g(X) | Y = y]$ based on the Stan output?
 Since the samples are equally weighted, this makes it simpler to create plots, e.g., for a histogram:
 
 ```{r}
-hist(samples$x)
+hist(xs)
 ```
 
 You can also use the `bayesplot` package which will be handy to create more complex plots from MCMC runs:
 
 ```{r}
 suppressPackageStartupMessages(require(bayesplot))
-mcmc_hist(fit, pars = c("x"))
+mcmc_hist(fit$draws(), par = c("x"))
 ```
+
 

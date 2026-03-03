@@ -10,7 +10,7 @@ editor:
 ## Outline 
 
 We revisit [the time-varying Ariane 1 rocket failure probability model](../w04_glms/topic04_classification.qmd)
-to practice the Stan syntax introduced this week. 
+to practice the Stan syntax introduced this week.
 
 ::: column-margin
 ![](../images/ariane1.jpg){width="200"}

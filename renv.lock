@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.3",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -334,6 +334,24 @@
       ],
       "Hash": "0aaa05204035dc43ea0004b9c76611dd"
     },
+    "cmdstanr": {
+      "Package": "cmdstanr",
+      "Version": "0.9.0",
+      "Source": "Repository",
+      "Repository": "https://stan-dev.r-universe.dev",
+      "Requirements": [
+        "R",
+        "R6",
+        "checkmate",
+        "data.table",
+        "jsonlite",
+        "posterior",
+        "processx",
+        "rlang",
+        "withr"
+      ],
+      "Hash": "2844a882aac53e74d6e20bb257e60d0d"
+    },
     "coda": {
       "Package": "coda",
       "Version": "0.19-4.1",
@@ -390,6 +408,17 @@
         "utils"
       ],
       "Hash": "e8a1e41acf02548751f45c718d55aa6a"
+    },
+    "data.table": {
+      "Package": "data.table",
+      "Version": "1.18.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "methods"
+      ],
+      "Hash": "df99cd4333ce592df5173d6ad39b5c14"
     },
     "desc": {
       "Package": "desc",
@@ -1390,13 +1419,14 @@
     },
     "startupmsg": {
       "Package": "startupmsg",
-      "Version": "0.9.6.1",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
-        "R"
+        "R",
+        "utils"
       ],
-      "Hash": "99b8b3f5e8815e38d714c09472a4152c"
+      "Hash": "accf7adb4a53e9c15d04f993400b61e4"
     },
     "stringi": {
       "Package": "stringi",

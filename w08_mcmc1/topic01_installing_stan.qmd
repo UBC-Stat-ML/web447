@@ -45,29 +45,35 @@ scalability of SNIS.
     - We will talk about it in more detail soon.
 
 
-## Installing Stan
+## Installing Stan and CmdStanR[^4]
+
+[^4]: Older version of these instructions were using `RStan` instead of `cmdstanr`. Unfortunately, 
+      the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and 
+      development seems to have migrated from  `RStan` into `cmdstanr`. As a result, we are currently 
+      migrating from `RStan` into `cmdstanr`.
 
 You will need Stan installed to complete the exercises and clicker questions after the quiz. 
 **Don't wait until the last minute, install it today!**
 
-There are two main steps to install Stan:
+Go to the [Stan instruction page](https://mc-stan.org/install/) and **make sure to select CmdStanR**. 
 
-1. [Configuring a C++ Toolchain](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#configuring-c-toolchain)
-2. [Installing RStan](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#installing-rstan)
+**Note:** the documentation says that you should use
+
+```r
+remotes::install_github("stan-dev/cmdstanr")
+```
+
+however, this will only work if you have the R package `remotes` installed. You can instead just use:
+
+```r
+install.packages("cmdstanr", repos = c('https://stan-dev.r-universe.dev', getOption("repos")))
+```
 
 Let us know on Piazza if you encounter any issues! 
 
 
-## Running Stan {#running}
+## Running Stan via CmdStanR {#running}
 
-We present two methods for running Stan in the next two sections: either from an R script, 
-or from a notebook.
-
-**Template:** to quickly get started, download the [following templates](https://github.com/UBC-Stat-ML/web447/raw/main/blocks/stan_templates.zip) which you can 
-use as a starting point for either R script or notebook.
-
-
-### From a R script
 
 First, copy and paste the following code into a file called `beta_binomial.stan`:
 
@@ -75,16 +81,21 @@ First, copy and paste the following code into a file called `beta_binomial.stan`
 {{< include beta_binomial.stan >}}
 ```
 
-Second, run Stan as follows:
+Second, run Stan as follows: 
 
-```r
-require(rstan)
+```{r}
+suppressPackageStartupMessages(require(cmdstanr))
+mod <- cmdstan_model("beta_binomial.stan")
 
-fit = stan(
-  seed = 123,
-  file = "beta_binomial.stan",  # Stan program
-  data = list(n=3, k=3),        # named list of data
-  iter = 1000                   # number of samples to draw
+# create a directory where the samples will be saved 
+dir.create(file.path("stan_out"), showWarnings = FALSE)
+
+fit = mod$sample(
+  seed = 1,
+  chains = 1,
+  refresh = 500, # how often to report iteration progress
+  output_dir = "stan_out", # where the samples will be saved
+  data = list(n=3, k=3) # named list of data
 )
 ```
 
@@ -95,8 +106,13 @@ which can be obtained under the column "50%" of the output of the following R co
 print(fit)
 ```
 
-### From a notebook
 
-To see an example of how to integrate Stan code inside quarto (R markdown would work the same), see the source code used for the next page in the notes, [available on github](https://github.com/UBC-Stat-ML/web447/blob/main/w08_mcmc1/topic02_stan_basics.qmd).
+## Old method: RStan
+
+For reference, we archive [here](../annexes/topic01_old_rstan_instructions.qmd) the old instructions for RStan. 
+They may still 
+work on some plate-forms. 
+
+
 
 
