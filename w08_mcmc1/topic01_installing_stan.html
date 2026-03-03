@@ -978,6 +978,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false">
+ <span class="menu-text">Annexes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../annexes/topic01_old_rstan_instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Old RStan Instruction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -995,7 +1012,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#what-is-stan" id="toc-what-is-stan" class="nav-link" data-scroll-target="#what-is-stan">What is Stan?</a></li>
   <li><a href="#installing-stan-and-cmdstanr4" id="toc-installing-stan-and-cmdstanr4" class="nav-link" data-scroll-target="#installing-stan-and-cmdstanr4">Installing Stan and CmdStanR</a></li>
-  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan</a></li>
+  <li><a href="#running" id="toc-running" class="nav-link" data-scroll-target="#running">Running Stan via CmdStanR</a></li>
+  <li><a href="#old-method-rstan" id="toc-old-method-rstan" class="nav-link" data-scroll-target="#old-method-rstan">Old method: RStan</a></li>
   </ul>
 </nav>
     </div>
@@ -1106,7 +1124,7 @@ https://github.com/trevorcampbell/shortex
 <p>Let us know on Piazza if you encounter any issues!</p>
 </section>
 <section id="running" class="level2">
-<h2 class="anchored" data-anchor-id="running">Running Stan</h2>
+<h2 class="anchored" data-anchor-id="running">Running Stan via CmdStanR</h2>
 <p>First, copy and paste the following code into a file called <code>beta_binomial.stan</code>:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1133,12 +1151,17 @@ https://github.com/trevorcampbell/shortex
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"beta_binomial.stan"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>)        <span class="co"># named list of data</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a directory where the samples will be saved </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(<span class="st">"stan_out"</span>), <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="co"># how often to report iteration progress</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>, <span class="co"># where the samples will be saved</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">n=</span><span class="dv">3</span>, <span class="at">k=</span><span class="dv">3</span>) <span class="co"># named list of data</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 1 chain...
 
@@ -1153,6 +1176,10 @@ Chain 1 finished in 0.0 seconds.</code></pre>
 </div>
 <p>The first question of the next exercise will be to report the posterior median, which can be obtained under the column “50%” of the output of the following R command:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="old-method-rstan" class="level2">
+<h2 class="anchored" data-anchor-id="old-method-rstan">Old method: RStan</h2>
+<p>For reference, we archive <a href="../annexes/topic01_old_rstan_instructions.html">here</a> the old instructions for RStan. They may still work on some plate-forms.</p>
 
 
 </section>
@@ -1164,7 +1191,7 @@ Chain 1 finished in 0.0 seconds.</code></pre>
 <li id="fn1"><p>Often MCMC algorithms such as stan scale polynomially in dimension while SNIS scales exponentially.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>simPPLe is a few dozen lines of code, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Older version of these instructions were using <code>RStan</code> instead of <code>cmdstanr</code>. Unfortunately, the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and development seems to have migrated from <code>RStan</code> into <code>cmdstanr</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Older version of these instructions were using <code>RStan</code> instead of <code>cmdstanr</code>. Unfortunately, the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and development seems to have migrated from <code>RStan</code> into <code>cmdstanr</code>. As a result, we are currently migrating from <code>RStan</code> into <code>cmdstanr</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

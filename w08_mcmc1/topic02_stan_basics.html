@@ -1007,6 +1007,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false">
+ <span class="menu-text">Annexes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../annexes/topic01_old_rstan_instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Old RStan Instruction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -1170,7 +1187,7 @@ https://github.com/trevorcampbell/shortex
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
 <span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
 <span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">50000</span>,</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"doomsday_out"</span>,</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>,</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>),</span>
 <span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-10" class="code-annotation-target"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">100000</span>,</span>
@@ -1194,7 +1211,7 @@ Chain 1 Iteration:      1 / 101000 [  0%]  (Warmup)
 Chain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) 
 Chain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 101000 / 101000 [100%]  (Sampling) 
-Chain 1 finished in 1.0 seconds.</code></pre>
+Chain 1 finished in 0.9 seconds.</code></pre>
 </div>
 </div>
 <p>We can now compare the approximation provided by Stan:</p>
@@ -1230,8 +1247,7 @@ Chain 1 finished in 1.0 seconds.</code></pre>
 </ul>
 <p>To access the samples from a “fit” object when calling Stan, use:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> fit<span class="sc">$</span><span class="fu">draws</span>(<span class="at">format =</span> <span class="st">"list"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="fu">as.vector</span>(fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">=</span> <span class="fu">as.vector</span>(fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As a sanity check, let’s make sure all the samples are greater than the observed lower bound of <span class="math inline">\(0.06\)</span>:</p>
 <div class="cell">
