@@ -2341,7 +2341,7 @@
     "href": "challenges/ch05.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\nConsider the following regression model:\n\n\ncauchy.stan\n\ndata {\n  matrix[3,2] design_matrix; // number of successes\n  vector[3] observations;\n}\n\nparameters {\n  vector[2] coefficients;\n}\n\nmodel {\n  coefficients[1] ~ cauchy(0, 1);\n  coefficients[2] ~ cauchy(0, 1);\n  \n  for (i in 1:3) {\n    observations[i] ~ normal(design_matrix[i] * coefficients, 1);\n  }\n}\n\nWe now run it on a simple synthetic dataset (note the zeros in the design matrix):\n\nsuppressPackageStartupMessages(require(cmdstanr))\nmod = cmdstan_model(\"cauchy.stan\")\nmatrix = rbind(\n  c(0.1, 0),\n  c(-0.3, 0),\n  c(0, 0)\n)\nobs = c(0.2, 0.1, -0.4)\nfit = mod$sample(\n  seed = 1,\n  output_dir = \"stan_out\",\n  data = list(design_matrix = matrix, observations = obs),        \n  iter_sampling = 10000,\n  refresh = 0\n)\n\n…and look at the trace plots…\n\nsuppressPackageStartupMessages(require(bayesplot))\nsuppressPackageStartupMessages(require(ggplot2))\nmcmc_trace(fit$draws(), pars = c(\"coefficients[1]\", \"coefficients[2]\")) + theme_minimal()\n\n\n\n\n\n\n\n\nWhat is going on with the second coefficient? Would you get a different behaviour if you used i.i.d. samples?",
     "crumbs": [
       "Some theory",
       "Challenge"
@@ -4258,7 +4258,7 @@
     "href": "challenges/ch06.html",
     "title": "Challenge questions",
     "section": "",
-    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "Not for grades!\n\n\n\nThese are not essential for learning the material and can be skipped without affecting your grade. See syllabus for more information. I will not post solutions for the challenge questions.\n\n\n\nImplement in Stan the hierarchical model for rockets described in the lectures.\nThe full data is available at https://github.com/UBC-Stat-ML/web447/raw/main/data/launches.csv\nDescribe and implement one improvement to the model.",
     "crumbs": [
       "Hierarchical models",
       "Challenge"
@@ -6387,7 +6387,7 @@
     "href": "syllabus.html#software",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Software",
-    "text": "Software\nAll software used is free and open source. Some key tools we will use:\n\nR\nRStudio\nRStan\n\nWe assume you have a laptop on which you can install these tools, if not, you may be able to borrow one from UBC library.",
+    "text": "Software\nAll software used is free and open source. Some key tools we will use:\n\nR\nRStudio\ncmdstanr\n\nWe assume you have a laptop on which you can install these tools, if not, you may be able to borrow one from UBC library.",
     "crumbs": [
       "Syllabus"
     ]
