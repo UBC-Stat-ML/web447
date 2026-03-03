@@ -1065,12 +1065,12 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>What is Stan?</li>
-<li>Links to install.</li>
+<li>Installing Stan.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>SNIS and simPPLe are very flexible and relatively easy to understand, but it can be very slow.</p>
+<p>SNIS and simPPLe are very flexible and relatively easy to understand, but they can be very slow.</p>
 <p>Stan is an alternative way to approximate posterior distributions, with complementary properties:</p>
 <table class="table">
 <thead>
@@ -1150,7 +1150,7 @@ https://github.com/trevorcampbell/shortex
 <p>Second, run Stan as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"beta_binomial.stan"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"beta_binomial.stan"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a directory where the samples will be saved </span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(<span class="st">"stan_out"</span>), <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
@@ -1179,7 +1179,7 @@ Chain 1 finished in 0.0 seconds.</code></pre>
 </section>
 <section id="old-method-rstan" class="level2">
 <h2 class="anchored" data-anchor-id="old-method-rstan">Old method: RStan</h2>
-<p>For reference, we archive <a href="../annexes/topic01_old_rstan_instructions.html">here</a> the old instructions for RStan. They may still work on some plate-forms.</p>
+<p>For reference, we archive <a href="../annexes/topic01_old_rstan_instructions.html">here</a> the old instructions for RStan. They may still work on some platforms.</p>
 
 
 </section>
@@ -1191,7 +1191,7 @@ Chain 1 finished in 0.0 seconds.</code></pre>
 <li id="fn1"><p>Often MCMC algorithms such as stan scale polynomially in dimension while SNIS scales exponentially.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For example, Stan does not support latent integer-value random variables, whereas simPPLe does.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>simPPLe is a few dozen lines of code, whereas <a href="https://github.com/stan-dev/stanc3/graphs/contributors">Stan has millions of lines of code</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Older version of these instructions were using <code>RStan</code> instead of <code>cmdstanr</code>. Unfortunately, the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and development seems to have migrated from <code>RStan</code> into <code>cmdstanr</code>. As a result, we are currently migrating from <code>RStan</code> into <code>cmdstanr</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Older versions of these instructions were using <code>RStan</code> instead of <code>cmdstanr</code>. Unfortunately, the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and development seems to have migrated from <code>RStan</code> to <code>cmdstanr</code>. As a result, we are currently migrating from <code>RStan</code> into <code>cmdstanr</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

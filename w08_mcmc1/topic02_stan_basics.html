@@ -1119,7 +1119,7 @@ https://github.com/trevorcampbell/shortex
 </div></div><div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../../solutions/simple.R"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>doomsday_model <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>doomsday_model <span class="ot">=</span> <span class="cf">function</span>() {</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">simulate</span>(<span class="fu">Unif</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>(<span class="fl">0.06</span>, <span class="fu">Unif</span>(<span class="dv">0</span>, x))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
@@ -1127,7 +1127,7 @@ https://github.com/trevorcampbell/shortex
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior</span>(doomsday_model, <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.115687</code></pre>
+<pre><code>[1] 1.105568</code></pre>
 </div>
 </div>
 <p>Recall the <strong>analytic answer</strong> <a href="../w03_ppl/topic03_continuous.html">that we computed in clicker questions</a> was: <span class="math inline">\(\approx 1.117\)</span>.</p>
@@ -1179,10 +1179,10 @@ https://github.com/trevorcampbell/shortex
 </dd>
 </dl>
 <p><strong>Question:</strong> How does Stan get the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
-<p><strong>Answer:</strong> When Stan gets called in R:</p>
+<p><strong>Answer:</strong> When Stan gets called from R:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
-<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"doomsday.stan"</span>)</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"doomsday.stan"</span>)</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
 <span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
@@ -1228,8 +1228,8 @@ Chain 1 finished in 0.9 seconds.</code></pre>
 <section id="tips-and-tricks" class="level2">
 <h2 class="anchored" data-anchor-id="tips-and-tricks">Tips and tricks</h2>
 <ul>
-<li>Notice statements in Stan have to end in semicolumns, <code>;</code></li>
-<li>To find out Stan’s name for distributions, see <a href="https://mc-stan.org/docs/functions-reference/index.html">Stan’s documentation</a>,
+<li>Notice statements in Stan have to end in semicolons, <code>;</code></li>
+<li>To find out Stan’s names for distributions, see <a href="https://mc-stan.org/docs/functions-reference/index.html">Stan’s documentation</a>,
 <ul>
 <li>e.g., <a href="https://mc-stan.org/docs/functions-reference/uniform-distribution.html">this is the documentation</a> for <code>uniform</code>.</li>
 </ul></li>

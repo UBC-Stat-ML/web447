@@ -1108,7 +1108,7 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>The vast majority of MCMC algorithms are based on the Metropolis-Hastings (MH) algorithm.</p>
-<p>Learning MH is the first step towards understanding <em>why</em> MCMC algorithms such as Stan work. Some knowledge of how MCMC works is useful to identify when it fails (“MCMC diagnostic”). There are also situations where you will have to write your own MCMC algorithm (something we will practice more in the last weeks of the course).</p>
+<p>Learning MH is the first step towards understanding <em>why</em> MCMC algorithms such as Stan work. Some knowledge of how MCMC works is useful to identify when it fails (“MCMC diagnostics”). There are also situations where you will have to write your own MCMC algorithm (something we will practice more in the last weeks of the course).</p>
 </section>
 </section>
 <section id="goal" class="level2">
@@ -1159,27 +1159,45 @@ Click for answer
 <li>…what function <span class="math inline">\(g(x)\)</span> would you take?</li>
 </ul></li>
 </ul>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. $g(x) = \ind[x = 1]$
-1. $g(x) = x \ind[x = 1]$
-1. $g(x) = x$ 
-1. $g(x) = x^2$ 
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Recall: take $g(x) = \ind[x = 1]$, then we have
-
-$$\ex_\pi[g(X)] = \sum \pi(x) g(x) = \ex[\ind[X = 1] | Y = y] = \pr(X = 1 | Y = y),$$
-where $\pi(x) = p(x | y)$.
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(g(x) = \mathbb{1}[x = 1]\)</span></li>
+<li><span class="math inline">\(g(x) = x \mathbb{1}[x = 1]\)</span></li>
+<li><span class="math inline">\(g(x) = x\)</span></li>
+<li><span class="math inline">\(g(x) = x^2\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Recall: take <span class="math inline">\(g(x) = \mathbb{1}[x = 1]\)</span>, then we have</p>
+<p><span class="math display">\[\mathbb{E}_\pi[g(X)] = \sum \pi(x) g(x) = \mathbb{E}[\mathbb{1}[X = 1] | Y = y] = \mathbb{P}(X = 1 | Y = y),\]</span> where <span class="math inline">\(\pi(x) = p(x | y)\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="mhs-extra-ingredient-the-proposal" class="level2">
 <h2 class="anchored" data-anchor-id="mhs-extra-ingredient-the-proposal">MH’s extra ingredient: the proposal</h2>
@@ -1201,8 +1219,8 @@ where $\pi(x) = p(x | y)$.
 </ul>
 <p><strong>Today:</strong></p>
 <ul>
-<li>we assume <span class="math inline">\(q\)</span> is symmetric, i.e., <span class="math inline">\(q(x | x') = q(x' | x)\)</span>.</li>
-<li>We will relax this later.</li>
+<li>We assume <span class="math inline">\(q\)</span> is symmetric, i.e., <span class="math inline">\(q(x | x') = q(x' | x)\)</span>.</li>
+<li>The lab will show this can be relaxed.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 </ul>
 </section>
 <section id="symmetric-proposal-mh-algorithm" class="level2">
@@ -1218,7 +1236,7 @@ where $\pi(x) = p(x | y)$.
 <li>Sample an <strong>acceptance Bernoulli</strong>: <span class="math display">\[A^{(m)}\sim {\mathrm{Bern}}(\min(1, R^{(m)})).\]</span>
 <ul>
 <li>If <span class="math inline">\(A^{(m)}= 1\)</span>, we <strong>accept</strong> the proposed sample: <span class="math display">\[X^{(m)}= \tilde X^{(m)},\]</span></li>
-<li>Else, <span class="math inline">\(A^{(m)}= 0\)</span>, and we <strong>reject</strong> the proposed sample and stay at previous position: <span class="math display">\[X^{(m)}= X^{(m-1)}.\]</span></li>
+<li>Else, <span class="math inline">\(A^{(m)}= 0\)</span>, and we <strong>reject</strong> the proposed sample and stay at the previous position: <span class="math display">\[X^{(m)}= X^{(m-1)}.\]</span></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1228,26 +1246,26 @@ where $\pi(x) = p(x | y)$.
 <section id="intuition" class="level2">
 <h2 class="anchored" data-anchor-id="intuition">Intuition</h2>
 <ul>
-<li>When proposing to a <strong>higher point</strong> under the posterior density, we have:
+<li>When proposing to a point with <strong>higher</strong> posterior density, we have:
 <ul>
 <li><span class="math inline">\(\gamma(\tilde X^{(m)}) &gt; \gamma(X^{(m-1)})\)</span></li>
 <li>hence <span class="math inline">\(R^{(m)}&gt; 1\)</span>,</li>
 <li>so <span class="math inline">\(\min(1, R^{(m)}) = 1\)</span>,</li>
 <li>and <span class="math inline">\(A^{(m)}\)</span> is always one, i.e.&nbsp;always accepted!</li>
 </ul></li>
-<li>When proposing to a <strong>lower point</strong> under the posterior density, we have:
+<li>When proposing to a point with <strong>lower</strong> posterior density, we have:
 <ul>
 <li><span class="math inline">\(\gamma(\tilde X^{(m)}) &lt; \gamma(X^{(m-1)})\)</span></li>
 <li>hence <span class="math inline">\(R^{(m)}&lt; 1\)</span>,</li>
 <li>so <span class="math inline">\(\min(1, R^{(m)}) = R^{(m)}\)</span>,</li>
 <li><span class="math inline">\(A^{(m)}\sim {\mathrm{Bern}}(\gamma(\tilde X^{(m)})/\gamma(X^{(m-1)}))\)</span>,</li>
-<li>i.e., acceptance probability is a ratio of posterior densities at two points (proposed vs previous).</li>
+<li>i.e., acceptance probability is a ratio of target densities at two points (proposed vs previous).</li>
 </ul></li>
 </ul>
 </section>
 <section id="visualization" class="level2">
 <h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
-<p>In the exercise coming up soon, you will implement MH with a standard normal proposal.</p>
+<p>In this week’s exercise, you will implement MH with a standard normal proposal.</p>
 <p>Once your exercise is complete you will be able to call your function as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex07_scaffold.R"</span>)</span>
@@ -1273,26 +1291,45 @@ where $\pi(x) = p(x | y)$.
 </div>
 </div>
 <p><strong>Question:</strong> Notice that many points take exactly the same value, why is that?</p>
-<!--
-
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. It is a software defect (bug)
-1. These are the points where the acceptance ratio was smaller than 1. 
-1. These are the points where the acceptance ratio was greater than 1. 
-1. These are the points where $A^\parm = 1$.
-1. These are the points where $A^\parm = 0$.
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-These are the points where $A^\parm = 0$, i.e. the rejected points.
-:::
-
--->
-<p><strong>Terminology:</strong> the above plot (sample as a function of MCMC iteration) is called a <strong>trace plot.</strong></p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>It is a software defect (bug)</li>
+<li>These are the points where the acceptance ratio was smaller than 1.</li>
+<li>These are the points where the acceptance ratio was greater than 1.</li>
+<li>These are the points where <span class="math inline">\(A^{(m)}= 1\)</span>.</li>
+<li>These are the points where <span class="math inline">\(A^{(m)}= 0\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>These are the points where <span class="math inline">\(A^{(m)}= 0\)</span>, i.e.&nbsp;the rejected points.</p>
+</div>
+</div>
+</div>
+<p><strong>Terminology:</strong> the above plot (samples as a function of MCMC iteration) is called a <strong>trace plot.</strong></p>
 <p>Full trace plot:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples, </span>
@@ -1348,7 +1385,13 @@ These are the points where $A^\parm = 0$, i.e. the rejected points.
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This relaxation yields a generalization of the algorithm covered in the lecture today.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1184,6 +1184,47 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <span data-code-cell="annotated-cell-2" data-code-lines="25" data-code-annotation="1">Here, <code>beta_proportion</code> corresponds to the <a href="https://mc-stan.org/docs/functions-reference/continuous_distributions_on_0_1.html#beta-proportion-distribution">mean-concentration parameterization</a> we discussed <a href="../w06_hierarchical/topic03_hierarchy.html">in the lecture on hierarchical models</a>.</span>
 </dd>
 </dl>
+<p><strong>Question:</strong> how do you think Stan will use the parameters’ type constraints? (e.g., <code>&lt;lower=0&gt;</code> in <code>real&lt;lower=0&gt; concentration</code>)?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>To validate input data</li>
+<li>To validate MCMC initialization</li>
+<li>To perform a change of variable</li>
+<li>To perform a change of variable and validate input data</li>
+<li>To perform a change of variable and validate MCMC initialization</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct answer is to perform a change of variable and validate MCMC initialization.</p>
+<p>In Stan, we use a version of HMC that works best when the state space to be unconstrained. So internally Stan will get rid of the constraints using a transform suited for each type of constraints offered in the Stan language.</p>
+<p>What about the Jacobian involved in the change of variable? Stan will compute that for you using automatic differentiation. Much less painful than when we did it manually for the Laplace approximation!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="improving-our-model-with-transformed-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="improving-our-model-with-transformed-parameters">Improving our model with transformed parameters</h2>
@@ -1233,11 +1274,11 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="1">Whenever in the mathematical notation a latent random variable is defined using an <strong>equality</strong> (“<span class="math inline">\(=\)</span>”), input it in the <code>transformed parameters</code> block.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="12" data-code-annotation="1">Whenever in the mathematical notation a latent random variable is defined using an <strong>equality</strong> (“<span class="math inline">\(=\)</span>”), and you want to have it as part of the output, write it in the <code>transformed parameters</code> block.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="22" data-code-annotation="2">Whenever in the mathematical notation a latent random variable is defined using a <strong>distribution statement</strong> (“<span class="math inline">\(\sim\)</span>”), input it in the <code>model</code> block.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="22" data-code-annotation="2">Whenever in the mathematical notation a latent random variable is defined using a <strong>distribution statement</strong> (“<span class="math inline">\(\sim\)</span>”), write it in the <code>model</code> block.</span>
 </dd>
 </dl>
 </section>
@@ -1247,7 +1288,7 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>data_without_zeros <span class="ot">=</span> <span class="fu">pmax</span>(<span class="fu">pmin</span>(df<span class="sc">$</span>percentage<span class="sc">/</span><span class="dv">100</span>,<span class="fl">0.999</span>),<span class="fl">0.001</span>)</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"omicron.stan"</span>)</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"omicron.stan"</span>)</span>
 <span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
 <span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> data_without_zeros, </span>
@@ -1266,7 +1307,7 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="9" data-code-annotation="2">The <code>chains</code> options can be used to simulate several independent MCMC chains, more precisely, this is available after calling the function <code>options(mc.cores = parallel::detectCores())</code>.</span>
+<span data-code-cell="annotated-cell-4" data-code-lines="9" data-code-annotation="2">The <code>chains</code> option can be used to simulate several independent MCMC chains, moreover, they can be sampled in parallel using instead <code>parallel_chains</code> in <code>mod$sample(...)</code>.</span>
 </dd>
 </dl>
 </div>
@@ -1337,8 +1378,8 @@ details of the observed curve.
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>In the model below, notice we normalize the day by <span class="math inline">\(N\)</span> to put it in the interval <span class="math inline">\([0, 1]\)</span>. This is not strictly necessary, but often, bringing covariates in a nice range can make sampling faster when it improves the <a href="https://mc-stan.org/docs/stan-users-guide/efficiency-tuning.html#unit-scales-without-correlation">condition number of the sampling problem</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In the model below, notice we normalize the day by <span class="math inline">\(N\)</span> to put it in the interval <span class="math inline">\([0, 1]\)</span>. This is not strictly necessary, but often, bringing covariates into a nice range can make sampling faster when it reduces the <a href="https://mc-stan.org/docs/stan-users-guide/efficiency-tuning.html#unit-scales-without-correlation">condition number of the sampling problem</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>note that we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
