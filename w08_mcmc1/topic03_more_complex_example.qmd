@@ -70,6 +70,11 @@ Let us translate the mathematical notation into Stan:
 ```
 1. Here, `beta_proportion` corresponds to the [mean-concentration parameterization](https://mc-stan.org/docs/functions-reference/continuous_distributions_on_0_1.html#beta-proportion-distribution) we discussed [in the lecture on hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd).
 
+**Question:** how do you think Stan will use the parameters' type constraints? (e.g., `<lower=0>` in `real<lower=0> concentration`)?
+
+{{< include ../../clickers/w08/_c01.qmd >}}
+
+
 
 ## Improving our model with transformed parameters
 
@@ -82,8 +87,9 @@ Let us translate the mathematical notation into Stan:
 ```stan {shortcodes=true, filename="omicron.stan"}
 {{< include omicron.stan >}}
 ```
-1. Whenever in the mathematical notation a latent random variable is defined using an **equality** ("$=$"), input it in the `transformed parameters` block.
-2. Whenever in the mathematical notation a latent random variable is defined using a **distribution statement** ("$\sim$"), input it in the `model` block. 
+1. Whenever in the mathematical notation a latent random variable is defined using an **equality** ("$=$"), and you want to have it as part of 
+the output, write it in the `transformed parameters` block.
+2. Whenever in the mathematical notation a latent random variable is defined using a **distribution statement** ("$\sim$"), write it in the `model` block. 
 
 
 ## Running MCMC

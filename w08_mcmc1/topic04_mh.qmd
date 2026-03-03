@@ -88,8 +88,11 @@ MH requires a **proposal** $q(x' | x)$:
       
 **Today:** 
 
-- we assume $q$ is symmetric, i.e., $q(x | x') = q(x' | x)$. 
-- We will relax this later.
+- We assume $q$ is symmetric, i.e., $q(x | x') = q(x' | x)$. 
+- The lab will show this can be relaxed.[^1] 
+
+[^1]: This relaxation yields a generalization of the algorithm covered in the lecture today.
+
       
       
 ## Symmetric proposal MH algorithm
