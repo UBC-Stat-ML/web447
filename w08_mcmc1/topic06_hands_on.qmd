@@ -63,7 +63,7 @@ logistic_regression = function() {
 
 ## Translation into Stan
 
-**Question 1:** use the template below to translate the above model into Stan. 
+**Question 1:** use the template below to translate the above model into Stan.
   Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter.
   
 ```stan
@@ -102,7 +102,9 @@ Use the output of `print` on the `fit` object.
 {{< include ../../clickers/w08/_c07.qmd >}}
 
 
+
 **Question 4:** estimate the numerical value of the expression in the last question. 
 
 {{< include ../../clickers/w08/_c08.qmd >}}
+
 

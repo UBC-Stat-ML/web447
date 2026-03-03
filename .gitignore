@@ -15,3 +15,5 @@ omicron
 w08_mcmc1/stan_out
 beta_binomial
 doomsday
+logistic
+logistic_with_generated
