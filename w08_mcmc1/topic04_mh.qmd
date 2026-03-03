@@ -20,7 +20,7 @@ editor:
 The vast majority of MCMC algorithms are based on the Metropolis-Hastings (MH) algorithm.
 
 Learning MH is the first step towards understanding *why* MCMC algorithms such as Stan work. 
-Some knowledge of how MCMC works is useful to identify when it fails ("MCMC diagnostic"). 
+Some knowledge of how MCMC works is useful to identify when it fails ("MCMC diagnostics"). 
 There are also situations where you will have to write your own MCMC algorithm
 (something we will practice more in the last weeks of the course).
 
@@ -108,7 +108,7 @@ MH requires a **proposal** $q(x' | x)$:
       $$A^\parm \sim \distBern(\min(1, R^\parm)).$$
         - If $A^\parm = 1$, we **accept** the proposed sample:
           $$X^\parm = \tilde X^\parm,$$
-        - Else, $A^\parm = 0$, and we **reject** the proposed sample and stay at previous position:
+        - Else, $A^\parm = 0$, and we **reject** the proposed sample and stay at the previous position:
           $$X^\parm = X^{(m-1)}.$$ 
           
 **Output:** equally weighted samples $X^{(1)}, X^{(2)}, \dots, X^{(M)}$. 
@@ -118,22 +118,22 @@ MH requires a **proposal** $q(x' | x)$:
 
 ## Intuition
 
-- When proposing to a **higher point** under the posterior density, we have:
+- When proposing to a point with **higher** posterior density, we have:
     - $\gamma(\tilde X^\parm) > \gamma(X^{(m-1)})$
     - hence $R^\parm > 1$, 
     - so $\min(1, R^\parm) = 1$, 
     - and $A^\parm$ is always one, i.e. always accepted!
-- When proposing to a **lower point** under the posterior density, we have:
+- When proposing to a point with **lower** posterior density, we have:
     - $\gamma(\tilde X^\parm) < \gamma(X^{(m-1)})$
     - hence $R^\parm < 1$, 
     - so $\min(1, R^\parm) = R^\parm$,
     - $A^\parm \sim \distBern(\gamma(\tilde X^\parm)/\gamma(X^{(m-1)}))$,
-    - i.e., acceptance probability is a ratio of posterior densities at two points (proposed vs previous). 
+    - i.e., acceptance probability is a ratio of target densities at two points (proposed vs previous). 
 
 
 ## Visualization 
 
-In the exercise coming up soon, you will implement MH with a standard normal proposal. 
+In this week's exercise, you will implement MH with a standard normal proposal. 
 
 Once your exercise is complete you will be able to call your function as follows:
 
@@ -162,7 +162,7 @@ plot(samples[1:100],
 {{< include ../../clickers/w08/_c04.qmd >}}
 
 
-**Terminology:** the above plot (sample as a function of MCMC iteration) is called a **trace plot.**
+**Terminology:** the above plot (samples as a function of MCMC iteration) is called a **trace plot.**
 
 Full trace plot:
 

@@ -32,7 +32,7 @@ Let us revisit the [Doomsday model](../w03_ppl/topic03_continuous.qmd), which we
 ```{r}
 source("../../solutions/simple.R")
 
-doomsday_model <- function() {
+doomsday_model = function() {
   x = simulate(Unif(0, 5))
   observe(0.06, Unif(0, x))
   return(x)
@@ -64,12 +64,12 @@ First, put the following code into a file called `doomsday.stan`:
 
 **Question:** How does Stan get the actual observed value $y = 0.06$?
 
-**Answer:** When Stan gets called in R:
+**Answer:** When Stan gets called from R:
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 
 suppressPackageStartupMessages(require(cmdstanr))
-mod <- cmdstan_model("doomsday.stan")
+mod = cmdstan_model("doomsday.stan")
 fit = mod$sample(
   seed = 1,
   chains = 1,
@@ -92,8 +92,8 @@ fit
 
 ## Tips and tricks
 
-- Notice statements in Stan have to end in semicolumns, `;` 
-- To find out Stan's name for distributions, see [Stan's documentation](https://mc-stan.org/docs/functions-reference/index.html), 
+- Notice statements in Stan have to end in semicolons, `;` 
+- To find out Stan's names for distributions, see [Stan's documentation](https://mc-stan.org/docs/functions-reference/index.html), 
     - e.g., [this is the documentation](https://mc-stan.org/docs/functions-reference/uniform-distribution.html) for `uniform`. 
     
     

@@ -11,11 +11,11 @@ editor:
 ### Topics
 
 -   What is Stan?
--   Links to install.
+-   Installing Stan.
 
 ### Rationale
 
-SNIS and simPPLe are very flexible and relatively easy to understand, but it can be very slow.
+SNIS and simPPLe are very flexible and relatively easy to understand, but they can be very slow.
 
 Stan is an alternative way to approximate posterior distributions, with complementary properties:
 
@@ -47,9 +47,9 @@ scalability of SNIS.
 
 ## Installing Stan and CmdStanR[^4]
 
-[^4]: Older version of these instructions were using `RStan` instead of `cmdstanr`. Unfortunately, 
+[^4]: Older versions of these instructions were using `RStan` instead of `cmdstanr`. Unfortunately, 
       the former seems to have abruptly stopped working (at least on my machine) circa MacOS 15.7.4, and 
-      development seems to have migrated from  `RStan` into `cmdstanr`. As a result, we are currently 
+      development seems to have migrated from  `RStan` to `cmdstanr`. As a result, we are currently 
       migrating from `RStan` into `cmdstanr`.
 
 You will need Stan installed to complete the exercises and clicker questions after the quiz. 
@@ -85,7 +85,7 @@ Second, run Stan as follows:
 
 ```{r}
 suppressPackageStartupMessages(require(cmdstanr))
-mod <- cmdstan_model("beta_binomial.stan")
+mod = cmdstan_model("beta_binomial.stan")
 
 # create a directory where the samples will be saved 
 dir.create(file.path("stan_out"), showWarnings = FALSE)
@@ -111,7 +111,7 @@ print(fit)
 
 For reference, we archive [here](../annexes/topic01_old_rstan_instructions.qmd) the old instructions for RStan. 
 They may still 
-work on some plate-forms. 
+work on some platforms. 
 
 
 

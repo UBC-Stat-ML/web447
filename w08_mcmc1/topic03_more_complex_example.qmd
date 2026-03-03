@@ -48,7 +48,7 @@ df %>% ggplot(aes(x = date, y = percentage)) + geom_point() + ylim(0, 100) + the
 One possible model for this data: for $i \in \{1, 2, \dots, N\}$, $N$ being the number of days in December ($N=31$),[^1]
 
 [^1]: In the model below, notice we normalize the day by $N$ to put it in the interval $[0, 1]$. This is not strictly necessary, but often,
-  bringing covariates in a nice range can make sampling faster when it improves the 
+  bringing covariates into a nice range can make sampling faster when it reduces the 
   [condition number of the sampling problem](https://mc-stan.org/docs/stan-users-guide/efficiency-tuning.html#unit-scales-without-correlation).
 
 \begin{align*}
@@ -90,12 +90,12 @@ Let us translate the mathematical notation into Stan:
 
 Running MCMC on the model is done as before:[^2] 
 
-[^2]: note we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
+[^2]: note that we make sure no datapoints have value zero or one as under certain parameter values of the beta distribution, this can lead to a zero density point which Stan is not able to handle. 
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 data_without_zeros = pmax(pmin(df$percentage/100,0.999),0.001)
 
-mod <- cmdstan_model("omicron.stan")
+mod = cmdstan_model("omicron.stan")
 fit = mod$sample(
   data = list( # <1>
           y = data_without_zeros, 
@@ -108,9 +108,8 @@ fit = mod$sample(
 )
 ```
 1. Each variable in Stan's `data` block needs to be fed a value when called from R.
-2. The `chains` options can be used to simulate several independent MCMC chains, more 
-    precisely, this is available after calling the function 
-    `options(mc.cores = parallel::detectCores())`. 
+2. The `chains` option can be used to simulate several independent MCMC chains, moreover, they 
+    can be sampled in parallel using instead `parallel_chains` in `mod$sample(...)`. 
 
 
 ## Posterior visualization
