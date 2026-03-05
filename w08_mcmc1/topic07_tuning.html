@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>STAT 405 - Simple Monte Carlo</title>
+<title>STAT 405 - Tuning MCMC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -134,7 +100,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,7 +109,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic11_monte_carlo.html">Simple Monte Carlo</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic07_tuning.html">Tuning MCMC</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,13 +196,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">Probability essentials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w01_discrete_inference/topic01_outcomes.html" class="sidebar-item-text sidebar-link">
@@ -299,7 +265,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w01_discrete_inference/topic11_monte_carlo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simple Monte Carlo</span></a>
   </div>
 </li>
@@ -643,13 +609,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
  <span class="menu-text">Intro to MCMC</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w08_mcmc1/topic01_installing_stan.html" class="sidebar-item-text sidebar-link">
@@ -688,7 +654,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w08_mcmc1/topic07_tuning.html" class="sidebar-item-text sidebar-link">
+  <a href="../w08_mcmc1/topic07_tuning.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tuning MCMC</span></a>
   </div>
 </li>
@@ -1040,24 +1006,22 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a>
-  <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
-  </ul></li>
-  <li><a href="#approximation-of-expectations-using-forward-simulation" id="toc-approximation-of-expectations-using-forward-simulation" class="nav-link" data-scroll-target="#approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</a></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
-  <li><a href="#sec-lln" id="toc-sec-lln" class="nav-link" data-scroll-target="#sec-lln">Guarantees from the Law of Large Numbers</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#notion-of-optimality" id="toc-notion-of-optimality" class="nav-link" data-scroll-target="#notion-of-optimality">Notion of optimality</a></li>
+  <li><a href="#example-of-surrogate" id="toc-example-of-surrogate" class="nav-link" data-scroll-target="#example-of-surrogate">Example of surrogate</a></li>
+  <li><a href="#tuning-algorithm" id="toc-tuning-algorithm" class="nav-link" data-scroll-target="#tuning-algorithm">Tuning algorithm</a></li>
+  <li><a href="#further-readings" id="toc-further-readings" class="nav-link" data-scroll-target="#further-readings">Further readings</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic01_outcomes.html">Probability essentials</a></li><li class="breadcrumb-item"><a href="../w01_discrete_inference/topic11_monte_carlo.html">Simple Monte Carlo</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w08_mcmc1/topic01_installing_stan.html">Intro to MCMC</a></li><li class="breadcrumb-item"><a href="../w08_mcmc1/topic07_tuning.html">Tuning MCMC</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Simple Monte Carlo</h1>
+<h1 class="title">Tuning MCMC</h1>
 </div>
 
 
@@ -1096,85 +1060,65 @@ https://github.com/trevorcampbell/shortex
 <!-- divergences -->
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Simple Monte Carlo method</li>
-<li>Theoretical guarantee from the Law of Large Numbers</li>
+<li>Objective and example of surrogate for MCMC tuning</li>
+<li>Connection with stochastic optimization</li>
 </ul>
 </section>
-<section id="rationale" class="level3">
-<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g.&nbsp;Importance Sampling and Markov chain Monte Carlo (MCMC))</p>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>While MH is <a href="../w08_mcmc1/topic05_mcmc_consistency.html">consistent</a> under weak conditions, its rate of convergence is highly dependent on the choice of <a href="../w08_mcmc1/topic04_mh.html">MH proposal</a> <span class="math inline">\(q(x'|x)\)</span>.</p>
 </section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Suppose we have a family of proposals, <span class="math inline">\(\mathscr{Q}= \{q_\phi\}\)</span>, for example consider normal proposals with different standard deviations:</p>
+<p><span class="math display">\[q_\phi(x' | x) \propto \exp\left( - \frac{(x - x')^2}{2 \phi^2}\right),\]</span></p>
+<p>which one is <strong>optimal</strong>, i.e., will give faster convergence of Monte Carlo averages?</p>
 </section>
-<section id="approximation-of-expectations-using-forward-simulation" class="level2">
-<h2 class="anchored" data-anchor-id="approximation-of-expectations-using-forward-simulation">Approximation of expectations using forward simulation</h2>
+<section id="notion-of-optimality" class="level2">
+<h2 class="anchored" data-anchor-id="notion-of-optimality">Notion of optimality</h2>
+<p><strong>Ideally:</strong> we would use the mean square error of the Monte Carlo estimator <span class="math inline">\(\operatorname{MSE}(\hat G_M)\)</span>.</p>
+<p>…but it is not obvious how to optimize (we do not know the truth, <span class="math inline">\(g^*\)</span>!).</p>
+<p><strong>Surrogate:</strong> find some other objective function that can be optimized, and hopefully as aligned as possible with <span class="math inline">\(\operatorname{MSE}(\hat G_M)\)</span>.</p>
+</section>
+<section id="example-of-surrogate" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-surrogate">Example of surrogate</h2>
+<p><strong>Recall:</strong> MH has a notion of proposal rejection/acceptance.</p>
+<p>For our example of tuning the proposal standard deviation, we have the following heuristic:</p>
+<p><strong>Heuristic:</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <ul>
-<li>As before, we want to compute an expectation <span class="math inline">\(\mathbb{E}[g(X, Y)]\)</span></li>
-<li>Imagine a very large <a href="../w01_discrete_inference/topic05_decision_diagrams.html">decision tree</a>, but where most branches have very low probability and only few have large probability</li>
-<li>In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will <em>approximate</em> expectations using forward simulation (a method know as <strong>simple Monte Carlo</strong>)</li>
-<li>This is done as follows:
+<li>avoid a proposal that always rejects (not moving)</li>
+<li>avoid a proposal that always accepts (typically that means <span class="math inline">\(\phi\)</span> is too small, so moving really slow).</li>
+</ul>
+<p><strong>Mathematical formulation:</strong></p>
 <ul>
-<li>Call your forward simulator <span class="math inline">\(M\)</span> times.
+<li>for <span class="math inline">\(X^{(0)} \sim \pi\)</span>, let <span class="math inline">\(\alpha(\phi) = \mathbb{P}_\phi(A^{(1)} = 1)\)</span>,
 <ul>
-<li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}, Y^{(m)}) \sim p_{X, Y}(\cdot)\]</span></li>
-<li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(G^{(m)}\)</span> <span class="math display">\[G^{(m)}= g(X^{(m)}, Y^{(m)}).\]</span></li>
+<li>i.e., <span class="math inline">\(\alpha(\phi)\)</span> is the probability of acceptance if we had initialized the chain at the target, and used <span class="math inline">\(\phi\)</span> as the proposal standard deviation.</li>
 </ul></li>
-<li>Return the average <span class="math display">\[\hat G_M = \frac{1}{M} \sum_{m=1}^M G^{(m)}.\]</span></li>
+<li>Then we seek to find a proposal standard deviation <span class="math inline">\(\phi\)</span> such that <span class="math display">\[\alpha(\phi) = \text{some constant} \in (0, 1).\]</span></li>
+</ul>
+<p>Typically the constant is taken<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to be <span class="math inline">\(\approx 1/4\)</span>.</p>
+</section>
+<section id="tuning-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="tuning-algorithm">Tuning algorithm</h2>
+<ul>
+<li>The challenge is that <span class="math inline">\(\alpha(\phi)\)</span> cannot be computed in closed form!</li>
+<li>But we can estimate it from the MCMC output, by looking at the list of acceptance probabilities produced in past iterations, <span class="math display">\[\min\left\{1, R^{(m)}\right\}.\]</span></li>
+<li><strong>Main idea</strong>: use stochastic optimization methods.
+<ul>
+<li>Basic example: <a href="https://en.wikipedia.org/wiki/Stochastic_approximation">Robbins-Monro algorithm</a>.</li>
+<li>In practice, you would reparameterize the standard deviation to deal with the positivity constraint: <span class="math inline">\(\tilde \phi = \log(\phi)\)</span>.</li>
+<li>For example, Stan uses <em>Dual averaging</em>, a type of stochastic optimization, during the “warm-up” phase.</li>
 </ul></li>
 </ul>
-<p>Intuitively, the output <span class="math inline">\(\hat G_M\)</span> has the nice property: <span id="eq-mc"><span class="math display">\[\hat G_M \approx \mathbb{E}[g(X, Y)]. \tag{1}\]</span></span></p>
 </section>
-<section id="example-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-1">Example 1</h2>
-<p><a href="../exercises/ex01.html#sec-q1">Question 1.2 in the exercise.</a></p>
-</section>
-<section id="example-2" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="example-2">Example 2</h2>
-<p>Consider the following model:</p>
-<p><span class="math display">\[
-\begin{align*}
-X &amp;\sim {\mathrm{Unif}}\{1, 2, 3, 4\} \\
-Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
-\end{align*}
-\]</span></p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Dice_%28typical_role_playing_game_dice%29.jpg" class="img-fluid" width="200"></p>
-</div></div><p><strong>Interpretation:</strong> you roll a D&amp;D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.</p>
-<p>Let us use Monte Carlo to estimate <span class="math inline">\(\mathbb{E}[X^Y]\)</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(extraDistr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: extraDistr</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall our forward simulation code from earlier:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>forward_simulate_roll_and_pick <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">4</span>) <span class="co"># 1 uniform between 1-6, i.e. a dice</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span>x)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, y) <span class="co"># return a vector with these two realizations</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>n_iterations <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (iteration <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iterations) {</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">forward_simulate_roll_and_pick</span>()</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> sum <span class="sc">+</span> sample[<span class="dv">1</span>]<span class="sc">^</span>sample[<span class="dv">2</span>]</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum<span class="sc">/</span>n_iterations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 25.7831</code></pre>
-</div>
-</div>
-</section>
-<section id="sec-lln" class="level2">
-<h2 class="anchored" data-anchor-id="sec-lln">Guarantees from the Law of Large Numbers</h2>
-<p><strong>Question:</strong> How can we make <span class="math inline">\(\approx\)</span> more formal in <a href="#eq-mc" class="quarto-xref">Equation&nbsp;1</a>?</p>
-<p><strong>Proposition (Law of Large Numbers, LLN):</strong> if <span class="math inline">\(Z_1, Z_2, \dots\)</span> are i.i.d. random variables with <span class="math inline">\(\mathbb{E}|Z_i| &lt; \infty\)</span>, then<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math display">\[ \frac{1}{M} \sum_{m=1}^M Z_m \to \mathbb{E}[Z_1].\]</span></p>
-<p>Picking <span class="math inline">\(Z_m = G^{(m)}\)</span> we arrive to the following formalization of <span class="math inline">\(\approx\)</span>: for any approximation error tolerance, we can find a number of iterations <span class="math inline">\(M\)</span> large enough such that we will be within that error tolerance with high probability after <span class="math inline">\(M\)</span> iterations.</p>
+<section id="further-readings" class="level2">
+<h2 class="anchored" data-anchor-id="further-readings">Further readings</h2>
+<ul>
+<li><a href="https://doi.org/10.1201/b10905">Handbook on MCMC</a> [Available online via UBC Library]</li>
+<li><a href="https://people.eecs.berkeley.edu/~jordan/sail/readings/andrieu-thoms.pdf">Some of the theory behind adaptive MCMC</a></li>
+</ul>
 
 
 </section>
@@ -1183,7 +1127,8 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Here “<span class="math inline">\(\to\)</span>” denotes a suitable notion of convergence of random variables. In STAT 302 you may have seen LLN with “convergence in probability”, but this can be strengthen to “convergence almost sure.” The difference between these notions of convergence will not matter in this course.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>That heuristic is motivated by analyzing MCMC on “model targets”, i.e., problems that are not in themselves realistic, but model the characteristics of some (but not all) real-world problems where MCMC is used.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The precise value of that number should not be taken too seriously, the main point is that it should be away from zero and one. Again, the value of <span class="math inline">\(\approx 1/4\)</span> is motivated by analyzing MCMC on “model targets”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

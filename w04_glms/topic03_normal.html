@@ -654,6 +654,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic07_tuning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tuning MCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -1005,8 +1011,10 @@ window.Quarto = {
   <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
   <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   </ul></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
   <li><a href="#examples-of-normal-densities" id="toc-examples-of-normal-densities" class="nav-link" data-scroll-target="#examples-of-normal-densities">Examples of normal densities</a></li>
   <li><a href="#parameterizations" id="toc-parameterizations" class="nav-link" data-scroll-target="#parameterizations">Parameterizations</a></li>
+  <li><a href="#multivariate-version" id="toc-multivariate-version" class="nav-link" data-scroll-target="#multivariate-version">Multivariate version</a></li>
   </ul>
 </nav>
     </div>
@@ -1066,6 +1074,11 @@ https://github.com/trevorcampbell/shortex
 <p>The normal distribution is often used in Bayesian analysis when one needs a prior over an unknown <span class="math inline">\(x\)</span> such that <span class="math inline">\(x \in (-\infty, \infty) = \mathbb{R}\)</span>.</p>
 </section>
 </section>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<p>A probability density <span class="math inline">\(f\)</span> is <strong>normal</strong> (or Gaussian) when its logarithm is a degree two polynomial:</p>
+<p><span class="math display">\[f(x) \propto \exp(\text{polynomial of degree two in }x).\]</span></p>
+</section>
 <section id="examples-of-normal-densities" class="level2">
 <h2 class="anchored" data-anchor-id="examples-of-normal-densities">Examples of normal densities</h2>
 <p><img src="../images/Normal_Distribution_PDF.svg" class="img-fluid" width="600"></p>
@@ -1086,6 +1099,29 @@ https://github.com/trevorcampbell/shortex
 <li>the only one that has the same units as <span class="math inline">\(x\)</span> (e.g.&nbsp;if <span class="math inline">\(x\)</span> is in meters, so is <span class="math inline">\(\sigma\)</span>).</li>
 </ul></li>
 </ul>
+<p><strong>Density</strong> for variance <span class="math inline">\(\sigma^2\)</span> and mean <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[f(x) \propto \exp\left( - \frac{(x - \mu)^2}{2\sigma^2}  \right).\]</span></p>
+</section>
+<section id="multivariate-version" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-version">Multivariate version</h2>
+<p><strong>Exact same definition:</strong> A joint probability density <span class="math inline">\(f\)</span> is <strong>multivariate normal</strong> when its logarithm is a degree two polynomial:</p>
+<p><span class="math display">\[f(x_1, x_2, \dots, x_d) \propto \exp(\text{polynomial of degree two in }x_1, x_2, \dots, x_d).\]</span></p>
+<p>In the multivariate case the most popular parametrization is the generalization of variance, the covariance matrix.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning: notation trap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unfortunately, the covariance is almost always denoted <span class="math inline">\(\Sigma\)</span>, which is the capital letter for <span class="math inline">\(\sigma\)</span>, but really it is the generalization of <span class="math inline">\(\sigma^2\)</span>, not of <span class="math inline">\(\sigma\)</span>! We will stick to the standard notation.</p>
+</div>
+</div>
+<p><strong>Density:</strong> where <span class="math inline">\(x = (x_1, x_2, \dots, x_d)\)</span>,</p>
+<p><span class="math display">\[f(x) \propto \exp\left( - \frac{1}{2} (x - \mu)^{\text{T}} \Sigma^{-1} (x - \mu)  \right).\]</span></p>
 
 
 </section>

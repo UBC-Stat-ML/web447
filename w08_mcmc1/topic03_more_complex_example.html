@@ -688,6 +688,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../w08_mcmc1/topic07_tuning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tuning MCMC</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../exercises/ex07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
@@ -1185,32 +1191,46 @@ y_i &amp;\sim {\mathrm{Beta}}(\mu_i, \theta_0) \\
 </dd>
 </dl>
 <p><strong>Question:</strong> how do you think Stan will use the parameters’ type constraints? (e.g., <code>&lt;lower=0&gt;</code> in <code>real&lt;lower=0&gt; concentration</code>)?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-1. To validate input data
-1. To validate MCMC initialization 
-1. To perform a change of variable
-1. To perform a change of variable and validate input data
-1. To perform a change of variable and validate MCMC initialization 
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is to perform a change of variable and validate MCMC initialization.
-
-In Stan, we use a version of HMC that works best when the state space to be unconstrained.
-So internally Stan will get rid of the constraints using a transform suited for each 
-type of constraints offered in the Stan language.
-
-What about the Jacobian involved in the change of variable? Stan will compute that 
-for you using automatic differentiation. 
-Much less painful than when we did it manually for the Laplace approximation!
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>To validate input data</li>
+<li>To validate MCMC initialization</li>
+<li>To perform a change of variable</li>
+<li>To perform a change of variable and validate input data</li>
+<li>To perform a change of variable and validate MCMC initialization</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct answer is to perform a change of variable and validate MCMC initialization.</p>
+<p>In Stan, we use a version of HMC that works best when the state space to be unconstrained. So internally Stan will get rid of the constraints using a transform suited for each type of constraints offered in the Stan language.</p>
+<p>What about the Jacobian involved in the change of variable? Stan will compute that for you using automatic differentiation. Much less painful than when we did it manually for the Laplace approximation!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="improving-our-model-with-transformed-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="improving-our-model-with-transformed-parameters">Improving our model with transformed parameters</h2>
@@ -1343,19 +1363,22 @@ Chain 1 finished in 0.4 seconds.</code></pre>
 <section id="model-criticism" class="level2">
 <h2 class="anchored" data-anchor-id="model-criticism">Model criticism</h2>
 <p>What are potential weakness(es) of the model?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Many answers possible. For example, the systematic errors in the residuals
-(i.e., many points in a row are smaller at the beginning, and the 
-reversed trend at the end)
-suggest that the logistic function is not quite rich enough to capture the 
-details of the observed curve. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Many answers possible. For example, the systematic errors in the residuals (i.e., many points in a row are smaller at the beginning, and the reversed trend at the end) suggest that the logistic function is not quite rich enough to capture the details of the observed curve.</p>
+</div>
+</div>
+</div>
 
 
 </section>
