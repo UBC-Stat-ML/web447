@@ -64,7 +64,7 @@ logistic_regression = function() {
 ## Translation into Stan
 
 **Question 1:** use the template below to translate the above model into Stan.
-  Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter.
+  Set the seed to 1, run 10000 MCMC iterations, and report the posterior mean of the slope parameter. 
   
 ```stan
 data { 
@@ -87,7 +87,7 @@ model {
 
 ## Using the posterior
 
-**Question 2:** compute a 95% credible interval on the `slope` parameter. 
+**Question 2:** compute a 90% credible interval on the `slope` parameter. 
 
 ::: {.callout-caution collapse="true"} 
 ## Hint
@@ -97,7 +97,7 @@ Use the output of `print` on the `fit` object.
 {{< include ../../clickers/w08/_c06.qmd >}}
 
 
-**Question 3:** translate "your updated belief that the Ariane 1 rockets were improving" into a mathematical expression. 
+**Question 3:** translate "your updated belief that the Ariane 1 rockets were improving" into a mathematical expression.
 
 {{< include ../../clickers/w08/_c07.qmd >}}
 

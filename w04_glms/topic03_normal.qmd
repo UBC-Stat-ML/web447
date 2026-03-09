@@ -19,6 +19,11 @@ editor:
 
 The normal distribution is often used in Bayesian analysis when one needs a prior over an unknown $x$ such that $x \in (-\infty, \infty) = \reals$. 
 
+## Definition 
+
+A probability density $f$ is **normal** (or Gaussian) when its logarithm is a degree two polynomial:
+
+$$f(x) \propto \exp(\text{polynomial of degree two in }x).$$
 
 ## Examples of normal densities
 
@@ -34,3 +39,28 @@ The normal distribution is often used in Bayesian analysis when one needs a prio
 - Standard deviation is the most intuitive:
     - it is the width of the bell,
     - the only one that has the same units as $x$ (e.g. if $x$ is in meters, so is $\sigma$). 
+  
+**Density** for variance $\sigma^2$ and mean $\mu$:
+    
+$$f(x) \propto \exp\left( - \frac{(x - \mu)^2}{2\sigma^2}  \right).$$
+
+## Multivariate version 
+
+**Exact same definition:** A joint probability density $f$ is **multivariate normal** when its logarithm is a degree two polynomial:
+
+
+$$f(x_1, x_2, \dots, x_d) \propto \exp(\text{polynomial of degree two in }x_1, x_2, \dots, x_d).$$
+
+In the multivariate case the most popular parametrization is the generalization of variance, the covariance matrix. 
+
+::: {.callout-caution}
+## Warning: notation trap
+
+Unfortunately, the covariance is almost always denoted $\Sigma$, which is the capital letter for $\sigma$, but 
+really it is the generalization of $\sigma^2$, not of $\sigma$! We will stick to the standard notation.
+:::
+
+**Density:** where $x = (x_1, x_2, \dots, x_d)$,
+
+$$f(x) \propto \exp\left( - \frac{1}{2} (x - \mu)^{\text{T}} \Sigma^{-1} (x - \mu)  \right).$$
+

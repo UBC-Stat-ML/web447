@@ -115,7 +115,7 @@ fit = mod$sample(
 ```
 1. Each variable in Stan's `data` block needs to be fed a value when called from R.
 2. The `chains` option can be used to simulate several independent MCMC chains, moreover, they 
-    can be sampled in parallel using instead `parallel_chains` in `mod$sample(...)`. 
+    can be sampled in parallel using instead `parallel_chains` in `mod$sample(...)`.
 
 
 ## Posterior visualization
@@ -143,11 +143,11 @@ for (i in 1:n_samples) {
 }
 ```
 
-
+ 
 
 ## Model criticism 
 
-What are potential weakness(es) of the model?
+What are potential weakness(es) of the model? 
 
 {{< include ../../clickers/w08/_c02.qmd >}}
 

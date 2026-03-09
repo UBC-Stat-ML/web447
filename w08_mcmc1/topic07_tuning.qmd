@@ -1,0 +1,86 @@
+---
+title: "Tuning MCMC"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+
+## Outline 
+
+- Objective and example of surrogate for MCMC tuning
+- Connection with stochastic optimization
+
+## Motivation 
+
+While MH is [consistent](topic05_mcmc_consistency.qmd) under weak conditions, its 
+rate of convergence is highly dependent on the choice of [MH proposal](topic04_mh.qmd) $q(x'|x)$. 
+
+
+## Setup 
+
+Suppose we have a family of proposals, $\family = \{q_\phi\}$, for example 
+consider normal proposals with different standard deviations:
+
+$$q_\phi(x' | x) \propto \exp\left( - \frac{(x - x')^2}{2 \phi^2}\right),$$
+
+which one is **optimal**, i.e., will give faster convergence of Monte Carlo averages?
+
+
+## Notion of optimality 
+
+**Ideally:** we would use the mean square error of the Monte Carlo estimator $\mse(\hat G_M)$. 
+
+...but it is not obvious how to optimize (we do not know the truth, $g^*$!), but also, the optimum 
+would be different for different test functions $g$.
+
+**Surrogate:** find some other objective function that can be optimized, and hopefully as aligned as 
+  possible with $\mse(\hat G_M)$. 
+
+
+## Example of surrogate 
+
+**Recall:** MH has a notion of proposal rejection/acceptance.
+
+For our example of tuning the proposal standard deviation, we have the following heuristic:
+
+**Heuristic:**[^1]
+
+- avoid a proposal that always rejects (not moving)
+- avoid a proposal that always accepts (typically that means $\phi$ is too small, so moving really slow). 
+
+[^1]: That heuristic is motivated by analyzing MCMC on "model targets", i.e., problems that are not in 
+    themselves realistic, but model the characteristics of some (but not all) real-world problems where 
+    MCMC is used. 
+    
+    
+**Mathematical formulation:** 
+
+- for $X^{(0)} \sim \pi$, let $\alpha(\phi) = \pr_\phi(A^{(1)} = 1)$, 
+  - i.e., $\alpha(\phi)$ is the probability of 
+  acceptance if we had initialized the chain at the target, and used $\phi$ as the proposal standard deviation. 
+- Then we seek to find a proposal standard deviation $\phi$ such that
+$$\alpha(\phi) = \text{some constant} \in (0, 1).$$
+
+Typically the constant is taken[^2] to be $\approx 1/4$.
+
+[^2]: The precise value of that number should not be taken too seriously, the main point is that it should be away from zero and one. 
+  Again, the value of $\approx 1/4$ is motivated by analyzing MCMC on "model targets".
+  
+  
+## Tuning algorithm 
+
+- The challenge is that $\alpha(\phi)$ cannot be computed in closed form!
+- But we can estimate it from the MCMC output, by looking at the list of acceptance probabilities produced in past iterations,
+$$\min\left\{1, R^{(m)}\right\}.$$
+- **Main idea**: use stochastic optimization methods. 
+  - Basic example: [Robbins-Monro algorithm](https://en.wikipedia.org/wiki/Stochastic_approximation). 
+  - In practice, you would reparameterize the standard deviation to deal with the positivity constraint: $\tilde \phi = \log(\phi)$. 
+  - For example, Stan uses *Dual averaging*, a type of stochastic optimization, during the "warm-up" phase. 
+  
+
+## Further readings 
+
+- [Handbook on MCMC](https://doi.org/10.1201/b10905) [Available online via UBC Library]
+- [Some of the theory behind adaptive MCMC](https://people.eecs.berkeley.edu/~jordan/sail/readings/andrieu-thoms.pdf)
