@@ -46,6 +46,6 @@ editor:
 
 ## Intuition: randomized algorithms
 
-- An algorithm is "randomized" if it has access to virtual dices/coins.
+- An algorithm is "randomized" if it has access to virtual dice/coins.
 - In practice this is done using [pseudorandom number generators](https://en.wikipedia.org/wiki/Pseudorandom_number_generator).
 - In this context an outcome is a [random seed](https://en.wikipedia.org/wiki/Random_seed), i.e. the initialization of the pseudorandom number generator.

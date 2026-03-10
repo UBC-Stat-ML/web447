@@ -17,9 +17,9 @@ editor:
 
 ### Rationale
 
-PPLs is the main way you will compute posterior distributions in this course. 
+PPLs are the main way you will compute posterior distributions in this course. 
 This week you will write your own! This will give you insight on the 
-strengths and limitation of these approaches. 
+strengths and limitations of these approaches. 
 
 
 ## PPL in a nutshell
@@ -36,12 +36,12 @@ strengths and limitation of these approaches.
 
 We created possibly the simplest possible PPL for this course. 
 Let's call it *simPPLe*. 
-The exercise this week will be to understand simPPLe by filling-in a couple 
+The exercise this week will be to understand simPPLe by filling in a couple 
 of key lines of code.
 
 First I will show you what simPPLe can do.
 
-Let us start with something we are familiar with: our bag of coin problem...
+Let us start with something we are familiar with: our bag of coins problem...
 
 
 ### Mathematical description 
@@ -53,13 +53,13 @@ Recall our "bag of coins" model can be written as:
 
 ### PPL description of the same model
 
-Here is how to code up the "bag of coin" model in simPPLe for the purpose of computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
+Here is how to code up the "bag of coins" model in simPPLe for the purpose of computing $\pr(X = 1 | Y = (0, 0, 0, 0))$:
 
 ```r {shortcodes=true, filename="ex03_ppl.R"}
 {{< include ../exercises/ex03_ppl.R >}}
 ```
 
-After solving this week's exercise, you will be able to compute this probability as follows:
+After solving this week's exercise, you will be able to approximate this probability as follows:
 
 ```{r}
 source("../exercises/ex03_scaffold.R")

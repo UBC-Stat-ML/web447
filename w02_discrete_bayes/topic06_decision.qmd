@@ -11,10 +11,10 @@ editor:
 
 ### Topics
 
-- Decision theory: making decision in the face of uncertainty. 
+- Decision theory: making decisions in the face of uncertainty. 
     - First, without observed data. 
     - Second, incorporating observed data.
-- Review of property of expectation useful for decision theory calculations.
+- Review of properties of expectation useful for decision theory calculations.
 
 ### Rationale
 
@@ -68,7 +68,7 @@ $$L(a, x) = \ind[a = 0] \cdot (\$0) + \ind[a = 1, x = 0] \cdot (-\$9) +  \ind[a 
 
 Let us simplify the expected loss function, i.e.
 $$\ex[L(a, X)] = \ex[\ind[a = 0] \cdot (\$0) + \ind[a = 1, X = 0] \cdot (-\$9) +  \ind[a = 1, X = 1] \cdot (\$10)].$$
-o do that simplification, first use **linearity of expectation** which you will recall from probability theory tells us that 
+To do that simplification, first use **linearity of expectation** which you will recall from probability theory tells us that 
 for any random variables $X_1$ and $X_2$, we have $\ex[X_1 + c X_2] = \ex[X_1] + c \ex[X_2]$ for any constant $c$. 
 
 In our context, using linearity with $c=1$ allows us to simplify the above to:

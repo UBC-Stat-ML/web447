@@ -28,7 +28,7 @@ editor:
 
 ![](../images/conditioning-intuition.png){width="400"}
 
-We will explore this perspective in much more details next week. 
+We will explore this perspective in much more detail next week. 
 
 
 ## A conditional probability is a probability
@@ -48,7 +48,7 @@ when viewed as a function of the first argument for any fixed $E$.
 ![](../images/conditioning.png){width="200"}
 :::
 
-- For a query even $A$, what should be the updated probability?
+- For a query event $A$, what should be the updated probability?
 - We want to remove from $A$ all the outcomes that are not compatible with the new information $E$. How?
     - Take the intersection: $A \cap E$
     - We also want: $\pr(S | E) = 1$ (last section)

@@ -19,7 +19,7 @@ editor:
 ### Rationale
 
 It is often necessary to summarize the posterior distribution with a single "best guess", 
-even though as we will see this hides important information namely our uncertainty 
+even though as we will see this hides important information, namely our uncertainty 
 about that guess. 
 
 

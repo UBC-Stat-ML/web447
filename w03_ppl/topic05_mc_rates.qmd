@@ -94,7 +94,7 @@ simple_monte_carlo(10)
 - OK.. the first digit seems "stabilized" but not the second digit. 
 - Suppose I want one more digit of accuracy... 
 
-**By how much should I increase the number of iteration to get one more digit of accuracy?**
+**By how much should I increase the number of iterations to get one more digit of accuracy?**
 
 {{< include ../../clickers/w03/_c07.qmd >}}
 
@@ -104,7 +104,7 @@ simple_monte_carlo(10)
 Continuing on the same example (where we know the truth!), we will now:
 
 - vary the number of iterations ($10^1, 10^{1.5}, 10^2, 10^{2.5}, 10^3$),
-    - for each number of iteration `n_iterations`, we run `simple_monte_carlo(n_iterations)` 500 times,
+    - for each number of iterations `n_iterations`, we run `simple_monte_carlo(n_iterations)` 500 times,
     - and plot the errors in log-log scale.
     
 First, a function to compute the approximation error of one call to `simple_monte_carlo(n_iterations)`:
@@ -152,7 +152,7 @@ ggplot(data=df, aes(x=n_iterations, y=errors)) +
 
 {{< include ../../clickers/w03/_c08.qmd >}}
 
-Based on this extra information, let's try revisit our initial question:
+Based on this extra information, let's revisit our initial question:
 **By how much should I increase the number of iteration to get one more digit of accuracy?**
 
 {{< include ../../clickers/w03/_c09.qmd >}}

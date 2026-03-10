@@ -13,7 +13,7 @@ editor:
 ## Plan
 
 - First week: probability essentials (foundations for steps 1 and 2 of the Bayesian Recipe)
-- Second week: steps 1, 2, 3 for one specific discrete probability models
+- Second week: steps 1, 2, 3 for one specific discrete probability model
 - Third week and beyond: step 1, 2, 3 for arbitrary models
 
 

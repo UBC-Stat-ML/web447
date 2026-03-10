@@ -22,7 +22,7 @@ editor:
 - Sampling is the main way Bayesian inference is performed nowadays. 
 - We introduce here the simplest flavour of sampling, *forward sampling*. 
 - Bayesian inference mostly uses a more complicated type of sampling called *posterior sampling* which we will cover later. 
-- But forward sampling is still helpful to help debug Bayesian inference software as we will see soon.
+- But forward sampling is still helpful to debug Bayesian inference software as we will see soon.
 
 
 ## Forward sampling as depth-first traversal

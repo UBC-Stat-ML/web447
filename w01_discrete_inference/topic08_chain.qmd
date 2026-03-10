@@ -21,7 +21,7 @@ editor:
 
 The chain rule allows us to compute a probability that the forward sampling function takes a given path.
 
-The chain rule seem innocent but is used heavily in Bayesian statistics. 
+The chain rule seems innocent but is used heavily in Bayesian statistics. 
 It is also the building block for Bayes rule. 
 
 ## Proposition 
@@ -52,7 +52,7 @@ $$\pr(E_1, E_2, E_3 \dots) = \pr(E_1) \pr(E_2 | E_1) \pr(E_3 | E_1, E_2) \dots.$
 
 ## Joint PMF
 
-We will often encounter expression of the form of a conjunction (intersection/and) of several variables. 
+We will often encounter expressions of the form of a conjunction (intersection/and) of several variables. 
 A handy notation for that is the **joint PMF** 
 
 For example, here is the joint PMF of $(X, Y_1, Y_2, Y_3)$:
@@ -83,7 +83,7 @@ i.e. with $\pr(X = x)$ and $\pr(Y_i = y | X = x)$ for all $x$ and $y$.
 
 **Question:** how did we go from $\pr(Y_2 = 1 | X = 1, Y_1 = 1)$ (in our chain rule computation) to $\pr(Y_2 = 1 | X = 1)$ (model specification)?
 
-**Definition:** $V$ and $W$ are conditionally independence given $Z$ if 
+**Definition:** $V$ and $W$ are conditionally independent given $Z$ if 
 $$\pr(V = v, W = w | Z = z) = \pr(V = v | Z = z) \pr(W = w | Z = z).$$
 
 **Exercise:** show the above definition is equivalent to:

@@ -24,10 +24,10 @@ Recipe and is therefore encountered (at least implicitly) in all full Bayesian p
 
 ## Definition
 
-The conditional PMF of the unknowns $X$ given the observation $Y$ is the called the **posterior PMF**.[^1]
+The conditional PMF of the unknowns $X$ given the observation $Y$ is called the **posterior PMF**.[^1]
 
 [^1]: if the unknown quantity is continuous, the posterior will be expressed using a density. 
-  A term that captures both the continuous and discrete case is "distribution" 
+  A term that captures both the continuous and discrete cases is "distribution" 
   i.e. "posterior distribution". 
   
   
@@ -68,7 +68,7 @@ You will construct prior and posterior PMFs in [question 2 of this week's exerci
 
 ## What to do with a posterior?
 
-- Show a visualiation (posterior PMF). 
+- Show a visualization (posterior PMF). 
 - Compute a **summary** of the PMF:
     - **point estimate:** single "best guess", or 
     - **a credible region:** a set of "guesses". 

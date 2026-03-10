@@ -24,7 +24,7 @@ Often we do not care so much about "parameters" but instead about predicting fut
 Consider the setup from last week with 3 coins and 3 flips with $Y = (1, 1, 1)$ 
 (in the following, let $\ones$ denote a vector of 1's). 
 
-**Question:** given you have see 3 heads, what is the probability that the next one is also heads?
+**Question:** given you have seen 3 heads, what is the probability that the next one is also heads?
 
 **Mathematically:** $\pr(Y_4 = 1 | Y_{1:3} = \ones)$. This is known as "prediction".
 

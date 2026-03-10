@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
-- What is a model mis-specification?
+- What is model mis-specification?
 - What are the consequences?
 - What to do about it.
 
@@ -40,7 +40,7 @@ we have introduced Bayesian regression models.
 
 **Recall our notation:** $\rho$ prior PMF, $\pi$ posterior PMF. 
 
-- Suppose we put zero prior mass to having a fair dice. What happens on the posterior?
+- Suppose we put zero prior mass to having a fair die What happens on the posterior?
 
 ![](../images/all-in-one-killings-bad-prior.png){width="800"}
 

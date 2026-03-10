@@ -64,7 +64,7 @@ rmse_estimate = 2 / sqrt(ess_estimate)
 rmse_estimate
 ```
 
-As you can see, this is **pessimistic**, i.e. the actually error (roughly estimated from our 3 independent runs) seems lower than the estimate 
+As you can see, this is **pessimistic**, i.e. the actual error (roughly estimated from our 3 independent runs) seems lower than the estimate 
 derived from the formula $2/\sqrt{\text{ESS}}$. 
 
 

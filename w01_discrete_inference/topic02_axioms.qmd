@@ -21,7 +21,7 @@ editor:
 
 ## Axioms of probability {#sec-axioms}
 
-- A **probability** is a function $\pr$ that satisfy the following constraints:
+- A **probability** is a function $\pr$ that satisfies the following constraints:
     - $\pr$ should take events as input and return a number between zero and one:
       $$\pr(E) \in [0, 1].$$
     - *Additivity axiom*: if $E_1, E_2, \dots$ is a partition of $E$, then $$\pr(E) = \sum_i \pr(E_i).$$

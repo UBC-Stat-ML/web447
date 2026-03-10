@@ -22,12 +22,12 @@ editor:
 
 ### Rationale
 
-Since the parameters of distributions families are continuous, it 
+Since the parameters of distributions families are continuous, it is 
 natural to use continuous random variables for them in Bayesian statistics. 
 For example it lets us get rid of the artificial discretization $K$ 
 we used in [last week's exercise](../exercises/ex02.qmd). 
 
-Today we will approach the calculations with both manual mathematic 
+Today we will approach the calculations with both manual mathematical 
 derivation and PPLs. Later we will increasingly rely only on PPLs. 
 But it is still important to understand both methods. 
 
@@ -78,9 +78,9 @@ Y | X &\sim \distUnif(0, X).
 
 ### Interpretation 1
 
-- I have a measuring tape, but you do not know how long is it.
+- I have a measuring tape, but you do not know how long it is.
   - Length of tape: $X$.
-  - Let's say we think it’s less than 5m.
+  - Let's say we think it's less than 5m.
 - I go in a separate room, unroll it fully, and pick a number at random from the tape.
   - Random point on tape: $Y$
   
@@ -96,7 +96,7 @@ Y | X &\sim \distUnif(0, X).
 ![](../images/doomsday.png){width="200"}
 :::
 
-**Goal:** Can we guess (probabilistically) how many more human there will ever be in total? 
+**Goal:** Can we guess (probabilistically) how many more humans there will ever be in total? 
 
 This is known as the [Doomsday argument](http://en.wikipedia.org/wiki/Doomsday_argument)
 

@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-This week, we will give a new interpretation to the "bag of coin" example 
+This week, we will give a new interpretation to the "bag of coins" example 
 (where the uncertainty is "aleatoric"), turning it into a Bayesian model 
 (where the uncertainty is "epistemic").
 Mathematically this is the same model but with a different interpretation. 
@@ -37,7 +37,7 @@ A **Bayesian model** is a probability model equipped with:
 ## From coins to rockets
 
 For this week's rocket example, 
-we will use the exact same probability model as the bag of coin example from last week. 
+we will use the exact same probability model as the bag of coins example from last week. 
 
 Use the following correspondence to link last week's example with this week's:
 
@@ -63,7 +63,7 @@ The task of constructing a Bayesian model is often broken down into constructing
   
 ## Epistemic vs aleatoric probability
 
-- In the bag of coin example, we can replicate the whole "experiment" several times (both prior and likelihood).
+- In the bag of coins example, we can replicate the whole "experiment" several times (both prior and likelihood).
 - In the rocket example, we can only replicate launches (likelihood), not the prior sampling part.
 
 **Terminology:**

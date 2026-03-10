@@ -20,7 +20,7 @@ editor:
 ### Rationale
 
 As [we have seen at the beginning](../w00_intro/topic01_why.qmd) one motivation for Bayesian methods is that 
-they allow us to quantify uncertainty in our predictions. Credible sets is 
+they allow us to quantify uncertainty in our predictions. Credible sets are 
 one way to convey this uncertainty quantification. 
 
 
@@ -28,8 +28,8 @@ one way to convey this uncertainty quantification.
 
 The "nominal coverage" is the basic property that we use to construct credible sets:
 
-- You are given a level, typically $95\%$ or $90\%$, denoted $1-\alpha = 0.95$ or $1-\alpha = 0.9$
-    - Intuition: we want to find a set $T$ such that we are $95\%$ sure that the true $x$ is in $T$. 
+- You are given a level, often $95\%$ or $90\%$, denoted $1-\alpha = 0.95$ or $1-\alpha = 0.9$
+    - Intuition: we want to find a set $T$ such that we are $90\%$ sure that the true $x$ is in $T$. 
 - Ideally, we would want to find a set $T$ such that $\sum_{x \in T} p(x) = 0.9$
     - For discrete distributions, there may not be a solution, but let us ignore that issue for now (suppose each probability is very small and replace $=$ by $\approx$ up to an error bounded by the largest individual probability)
     - For continuous distributions that will not be an issue

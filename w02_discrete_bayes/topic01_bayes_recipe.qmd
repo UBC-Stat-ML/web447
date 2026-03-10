@@ -27,7 +27,7 @@ This week we apply it to an example that builds on last week's review.
 
 ## The Bayesian recipe 
 
-The goal this week is to undersand the 3 steps in the Bayesian recipe:
+The goal this week is to understand the 3 steps in the Bayesian recipe:
 
 {{< include ../blocks/_recipe.qmd >}}
 

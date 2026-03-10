@@ -17,7 +17,7 @@ editor:
 
 ### Rationale
 
-Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))
+Simple Monte Carlo is the foundation for more complex Monte Carlo methods used by Bayesian practitioners (e.g. Importance Sampling and Markov chain Monte Carlo (MCMC))
 
 
 ## Approximation of expectations using forward simulation
@@ -25,7 +25,7 @@ Simple Monte Carlo is the foundation for more complex Monte Carlo methods used b
 
 - As before, we want to compute an expectation $\ex[g(X, Y)]$
 - Imagine a very large [decision tree](topic05_decision_diagrams.qmd), but where most branches have very low probability and only few have large probability
-- In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will *approximate* expectations using forward simulation (a method know as **simple Monte Carlo**)
+- In this case, instead of computing the exact expectation by iterating over each of the leaves as before, we will *approximate* expectations using forward simulation (a method known as **simple Monte Carlo**)
 - This is done as follows:
     - Call your forward simulator $M$ times.
         - Denote the output at iteration $m \in \{1, 2, \dots M\}$ by:
@@ -79,7 +79,7 @@ $$ \frac{1}{M} \sum_{m=1}^M Z_m \to \ex[Z_1].$$
 
 [^1]: Here "$\to$" denotes a suitable notion of convergence of random variables. 
     In STAT 302 you may have seen LLN with "convergence in probability", but this can 
-    be strengthen to "convergence almost sure." 
+    be strengthened to "almost sure convergence." 
     The difference between these notions of convergence will not matter in this course. 
 
 Picking $Z_m = G^\parm$ we arrive to the following formalization of $\approx$: 

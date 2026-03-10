@@ -14,7 +14,7 @@ editor:
 - denoted by $p$ (not to be confused by $\pr$),
 - defined by: $$p(x) = \pr(X = x).$$
 - Terminology: $\{x : p(x) > 0\}$ is called the **support**.
-- If there are several random variables, we use a subscript to disambiguate the PMFS, e.g.,
+- If there are several random variables, we use a subscript to disambiguate the PMFs, e.g.,
     - $p_X$ for the PMF of the latent random variable,
     - $p_Y$ for the PMF of the observed random variable.
 
@@ -28,7 +28,7 @@ editor:
 
 - PMF of fair coin: $p(0) = p(1) = 1/2$
 - Generalization: the family of **Bernoulli PMFs**
-- Recall: when you flip a "Biased" coin 
+- Recall: when you flip a "biased" coin 
     - get a 1 with probability $p \in [0, 1]$ 
     - get a 0 with probability $1 - p$
 - $p$ is an example of what is called a PMF's *parameter*

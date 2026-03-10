@@ -74,7 +74,7 @@ specifying a **query.**
 ## SNIS' extra ingredient: the proposal
 
 In addition to the unnormalized distribution $\gamma$ and test function
-$f$, SNIS requires a **proposal** $q(x)$.
+$g$, SNIS requires a **proposal** $q(x)$.
 
 -   The proposal will help SNIS explore the space of possible values
     that $X$ can take.
@@ -98,7 +98,7 @@ $f$, SNIS requires a **proposal** $q(x)$.
         the data!
         -   Call these "forced choices."
     -   We keep track of the probability of the "forced choices",
-        -   the product of these probability will be the un-normalized
+        -   the product of these probabilities will be the un-normalized
             weight of the sample.
 
 ![](../images/all-in-one-killings.png){width="800"}
@@ -112,7 +112,7 @@ $f$, SNIS requires a **proposal** $q(x)$.
         $$G^\parm = g(X^\parm).$$
     -   Compute also an un-normalized weight for each of the $M$
         outputs: $$W^\parm = w(X^\parm) = \frac{\gamma(X^\parm)}{q(X^\parm)}.$$
-            - Here $w(x)$ is a weighing function.
+            - Here $w(x)$ is a weighting function.
 -   Return the ratio
     $$\hat G_M = \frac{\sum_{m=1}^M W^\parm G^\parm}{\sum_{m=1}^M W^\parm} .$$
 
@@ -142,10 +142,10 @@ such that we will be within that error tolerance with high probability after $M$
   as $M$ goes to $\infty$. 
 
 [^1]: Here "$\to$" can be taken to be "convergence in probability", or this can 
-    be strengthen to "convergence almost sure." 
+    be strengthened to "almost sure convergence." 
 
 
 ## Further readings 
 
-- Art Owen's notes, [available form the author's website](https://artowen.su.domains/mc/Ch-var-is.pdf)
+- Art Owen's notes, [available from the author's website](https://artowen.su.domains/mc/Ch-var-is.pdf)
 - [Chopin and Papaspiliopoulos, Chapter 8](https://link.springer.com/book/10.1007/978-3-030-47845-2) [Available online via UBC Library]
