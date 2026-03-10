@@ -87,7 +87,7 @@ model {
 
 ## Using the posterior
 
-**Question 2:** compute a 90% credible interval on the `slope` parameter. 
+**Question 2:** compute a 90% credible interval on the `slope` parameter.
 
 ::: {.callout-caution collapse="true"} 
 ## Hint

@@ -98,10 +98,9 @@ fit = mod$sample(
   iter_sampling = 20000
 )
 ```
-
-
+  
 ```{r}
-fit
+fit$summary(NULL, c("mean", "sd", "mcse_mean", "ess_bulk"))
 ```
 
 **Question:** construct a 95\% confidence interval for the posterior mean of $X$. Is the [true value](../w03_ppl/topic03_continuous.qmd) contained in the interval?

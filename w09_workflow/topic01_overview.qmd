@@ -46,7 +46,11 @@ workflow, but these should be combined with generic data analysis workflow pract
 - Organizing your files in a project specific folder. 
 - Using version control. 
 - Capturing library dependency versions for reproducibility. 
+    - e.g., [`renv`](https://rstudio.github.io/renv/), [`Pkg`](https://docs.julialang.org/en/v1.12/), [`uv`](https://github.com/astral-sh/uv)
 - Follow good coding practices. 
+    - Short function
+    - Formal-ish tests
+    - [Avoid comments](https://blog.codinghorror.com/coding-without-comments/) (but document)
 - etc.
 
 See, e.g., the [software carpentry lessons](https://software-carpentry.org/lessons/). 
