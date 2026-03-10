@@ -59,7 +59,7 @@ Informally, there are two possible situations to distinguish:
 - ... but it is still a good idea to use them unless theory provides guarantees (e.g. [log-concave distributions](https://jmlr.org/papers/volume20/19-306/19-306.pdf)).
 
 
-### Example of fast and slow mixing chains
+### Examples
 
 ```{r}
 suppressPackageStartupMessages(require(cmdstanr))

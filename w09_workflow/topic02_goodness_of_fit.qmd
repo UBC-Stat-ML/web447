@@ -45,7 +45,7 @@ To understand today's material we need to review the notion of
 
 ## From calibration to goodness-of-fit
 
-**Question:** Can we do goodness-of-fit check calibration on latent variables $X$?
+**Question:** Can we do goodness-of-fit check on a latent variables $X$?
 
 **No:** in a real data analysis scenario, $x$ is unknown, so we cannot check if $x$ is contained in a corresponding credible interval.
 
@@ -62,7 +62,7 @@ To understand today's material we need to review the notion of
     - [in the first quiz](../w07_quiz1/topic02_practice_questions.qmd),
     - and in this week's exercise you will do it in Stan using [generated quantities](../w08_mcmc1/topic06_hands_on.qmd).
 
-**Question:** Can we do goodness-of-fit check calibration on a prediction?
+**Question:** Can we do goodness-of-fit check on a prediction?
 
 {{< include ../../clickers/w09/_c03.qmd >}}
 
