@@ -1074,12 +1074,12 @@ https://github.com/trevorcampbell/shortex
 <section id="topics" class="level3">
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
-<li>Decision theory: making decision in the face of uncertainty.
+<li>Decision theory: making decisions in the face of uncertainty.
 <ul>
 <li>First, without observed data.</li>
 <li>Second, incorporating observed data.</li>
 </ul></li>
-<li>Review of property of expectation useful for decision theory calculations.</li>
+<li>Review of properties of expectation useful for decision theory calculations.</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
@@ -1183,7 +1183,7 @@ Click for answer
 0 &amp; \text{if the condition is false.}
 \end{array}
 \right.\]</span> This gives us: <span class="math display">\[L(a, x) = \mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, x = 0] \cdot (-\$9) +  \mathbb{1}[a = 1, x = 1] \cdot (\$10).\]</span></p>
-<p>Let us simplify the expected loss function, i.e. <span class="math display">\[\mathbb{E}[L(a, X)] = \mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, X = 0] \cdot (-\$9) +  \mathbb{1}[a = 1, X = 1] \cdot (\$10)].\]</span> o do that simplification, first use <strong>linearity of expectation</strong> which you will recall from probability theory tells us that for any random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, we have <span class="math inline">\(\mathbb{E}[X_1 + c X_2] = \mathbb{E}[X_1] + c \mathbb{E}[X_2]\)</span> for any constant <span class="math inline">\(c\)</span>.</p>
+<p>Let us simplify the expected loss function, i.e. <span class="math display">\[\mathbb{E}[L(a, X)] = \mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0) + \mathbb{1}[a = 1, X = 0] \cdot (-\$9) +  \mathbb{1}[a = 1, X = 1] \cdot (\$10)].\]</span> To do that simplification, first use <strong>linearity of expectation</strong> which you will recall from probability theory tells us that for any random variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, we have <span class="math inline">\(\mathbb{E}[X_1 + c X_2] = \mathbb{E}[X_1] + c \mathbb{E}[X_2]\)</span> for any constant <span class="math inline">\(c\)</span>.</p>
 <p>In our context, using linearity with <span class="math inline">\(c=1\)</span> allows us to simplify the above to: <span class="math display">\[\underbrace{\mathbb{E}[\mathbb{1}[a = 0] \cdot (\$0)]}_0 + \mathbb{E}[\mathbb{1}[a = 1, X = 0] \cdot (-\$9)] + \mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (\$10)].\]</span></p>
 <p><strong>Trick 1:</strong> To deal with each remaining term, use that: <span class="math inline">\(\mathbb{1}[a = 1, X = 1] = \mathbb{1}[a = 1]\mathbb{1}[X = 1]\)</span> (check!), and then use linearity with <span class="math inline">\(c = \$ 10 \cdot \mathbb{1}[a = 1]\)</span> to get: <span class="math display">\[\mathbb{E}[\mathbb{1}[a = 1, X = 1] \cdot (\$10)] =  \$ 10 \cdot \mathbb{1}[a = 1] \mathbb{E}[\mathbb{1}[X = 1]].\]</span></p>
 <p><strong>LOTUS:</strong> Finally, we have to compute <span class="math inline">\(\mathbb{E}[\mathbb{1}[X = 1]]\)</span>. From <a href="../w01_discrete_inference/topic10_expectations.html">our review of the Law of the Unconscious Statistician</a>, this is done as follows: <span class="math display">\[\mathbb{E}[\mathbb{1}[X = 1]] = \sum_x \mathbb{1}[x = 1] p_X(x) = 0 + 1 \cdot p_X(1) = 1/2.\]</span></p>

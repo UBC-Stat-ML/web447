@@ -1108,7 +1108,7 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
-<p>PPLs is the main way you will compute posterior distributions in this course. This week you will write your own! This will give you insight on the strengths and limitation of these approaches.</p>
+<p>PPLs are the main way you will compute posterior distributions in this course. This week you will write your own! This will give you insight on the strengths and limitations of these approaches.</p>
 </section>
 </section>
 <section id="ppl-in-a-nutshell" class="level2">
@@ -1128,9 +1128,9 @@ https://github.com/trevorcampbell/shortex
 </section>
 <section id="ppl-an-example-using-simpple" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="ppl-an-example-using-simpple">PPL: an example using <em>simPPLe</em></h2>
-<p>We created possibly the simplest possible PPL for this course. Let’s call it <em>simPPLe</em>. The exercise this week will be to understand simPPLe by filling-in a couple of key lines of code.</p>
+<p>We created possibly the simplest possible PPL for this course. Let’s call it <em>simPPLe</em>. The exercise this week will be to understand simPPLe by filling in a couple of key lines of code.</p>
 <p>First I will show you what simPPLe can do.</p>
-<p>Let us start with something we are familiar with: our bag of coin problem…</p>
+<p>Let us start with something we are familiar with: our bag of coins problem…</p>
 <section id="mathematical-description" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="mathematical-description">Mathematical description</h3>
 <p>Recall our “bag of coins” model can be written as:</p>
@@ -1146,7 +1146,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 </section>
 <section id="ppl-description-of-the-same-model" class="level3">
 <h3 class="anchored" data-anchor-id="ppl-description-of-the-same-model">PPL description of the same model</h3>
-<p>Here is how to code up the “bag of coin” model in simPPLe for the purpose of computing <span class="math inline">\(\mathbb{P}(X = 1 | Y = (0, 0, 0, 0))\)</span>:</p>
+<p>Here is how to code up the “bag of coins” model in simPPLe for the purpose of computing <span class="math inline">\(\mathbb{P}(X = 1 | Y = (0, 0, 0, 0))\)</span>:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>ex03_ppl.R</strong></pre>
@@ -1167,7 +1167,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">ifelse</span>(coin_index <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After solving this week’s exercise, you will be able to compute this probability as follows:</p>
+<p>After solving this week’s exercise, you will be able to approximate this probability as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_scaffold.R"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../exercises/ex03_ppl.R"</span>)</span>

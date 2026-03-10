@@ -1172,7 +1172,7 @@ Click for answer
 </section>
 <section id="snis-extra-ingredient-the-proposal" class="level2">
 <h2 class="anchored" data-anchor-id="snis-extra-ingredient-the-proposal">SNIS’ extra ingredient: the proposal</h2>
-<p>In addition to the unnormalized distribution <span class="math inline">\(\gamma\)</span> and test function <span class="math inline">\(f\)</span>, SNIS requires a <strong>proposal</strong> <span class="math inline">\(q(x)\)</span>.</p>
+<p>In addition to the unnormalized distribution <span class="math inline">\(\gamma\)</span> and test function <span class="math inline">\(g\)</span>, SNIS requires a <strong>proposal</strong> <span class="math inline">\(q(x)\)</span>.</p>
 <ul>
 <li>The proposal will help SNIS explore the space of possible values that <span class="math inline">\(X\)</span> can take.</li>
 <li>This week, we will use the prior as the proposal, <span class="math inline">\(q(x) = \rho(x)\)</span>.
@@ -1198,7 +1198,7 @@ Click for answer
 </ul></li>
 <li>We keep track of the probability of the “forced choices”,
 <ul>
-<li>the product of these probability will be the un-normalized weight of the sample.</li>
+<li>the product of these probabilities will be the un-normalized weight of the sample.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1211,7 +1211,7 @@ Click for answer
 <ul>
 <li>Denote the output at iteration <span class="math inline">\(m \in \{1, 2, \dots M\}\)</span> by: <span class="math display">\[(X^{(m)}) \sim q(\cdot)\]</span></li>
 <li>Compute <span class="math inline">\(g\)</span> on each, call each of the <span class="math inline">\(M\)</span> outputs <span class="math inline">\(G^{(m)}\)</span> <span class="math display">\[G^{(m)}= g(X^{(m)}).\]</span></li>
-<li>Compute also an un-normalized weight for each of the <span class="math inline">\(M\)</span> outputs: <span class="math display">\[W^{(m)}= w(X^{(m)}) = \frac{\gamma(X^{(m)})}{q(X^{(m)})}.\]</span> - Here <span class="math inline">\(w(x)\)</span> is a weighing function.</li>
+<li>Compute also an un-normalized weight for each of the <span class="math inline">\(M\)</span> outputs: <span class="math display">\[W^{(m)}= w(X^{(m)}) = \frac{\gamma(X^{(m)})}{q(X^{(m)})}.\]</span> - Here <span class="math inline">\(w(x)\)</span> is a weighting function.</li>
 </ul></li>
 <li>Return the ratio <span class="math display">\[\hat G_M = \frac{\sum_{m=1}^M W^{(m)}G^{(m)}}{\sum_{m=1}^M W^{(m)}} .\]</span></li>
 </ul>
@@ -1300,7 +1300,7 @@ Click for answer
 <section id="further-readings" class="level2">
 <h2 class="anchored" data-anchor-id="further-readings">Further readings</h2>
 <ul>
-<li>Art Owen’s notes, <a href="https://artowen.su.domains/mc/Ch-var-is.pdf">available form the author’s website</a></li>
+<li>Art Owen’s notes, <a href="https://artowen.su.domains/mc/Ch-var-is.pdf">available from the author’s website</a></li>
 <li><a href="https://link.springer.com/book/10.1007/978-3-030-47845-2">Chopin and Papaspiliopoulos, Chapter 8</a> [Available online via UBC Library]</li>
 </ul>
 
@@ -1311,7 +1311,7 @@ Click for answer
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Here “<span class="math inline">\(\to\)</span>” can be taken to be “convergence in probability”, or this can be strengthen to “convergence almost sure.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Here “<span class="math inline">\(\to\)</span>” can be taken to be “convergence in probability”, or this can be strengthened to “almost sure convergence.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

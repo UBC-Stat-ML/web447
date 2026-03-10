@@ -1085,7 +1085,7 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>Data organized in various groups is a frequent feature of Bayesian models, in particular in <a href="../w06_hierarchical/topic03_hierarchy.html">hierarchical models</a>.</p>
-<p>Getting grouped data into stan is tedious and error prone. The package <code>tidybayes</code> automates much of this.</p>
+<p>Getting grouped data into stan is tedious and error-prone. The package <code>tidybayes</code> automates much of this.</p>
 </section>
 </section>
 <section id="pre-reading" class="level2">
@@ -1150,7 +1150,7 @@ $n
 </section>
 <section id="stan-model" class="level3">
 <h3 class="anchored" data-anchor-id="stan-model">Stan model</h3>
-<p>Here we consider a simple, non-hierarchical model but fitting all the data at once. As an exercise, think about you can modify this model to be hierarchical.</p>
+<p>Here we consider a simple, non-hierarchical model but fitting all the data at once. As an exercise, think about how you can modify this model to be hierarchical.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>vaccines.stan</strong></pre>
@@ -1186,7 +1186,7 @@ $n
 </section>
 <section id="fitting" class="level3">
 <h3 class="anchored" data-anchor-id="fitting">Fitting</h3>
-<p>The fit object returned by <code>sampling</code> does not know about the string labels attached to each trial integer index. We use <code>fit %&lt;&gt;% recover_types(data)</code> to add back that information:</p>
+<p>The fit object returned by <code>sample()</code> does not know about the string labels attached to each trial integer index. We use <code>fit %&lt;&gt;% recover_types(data)</code> to add back that information:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"vaccines.stan"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>

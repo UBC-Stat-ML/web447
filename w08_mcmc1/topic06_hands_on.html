@@ -1358,7 +1358,12 @@ Since the random variable is defined using "=" rather than "$\sim$", we can do t
 a `transformed parameters`, introduced [earlier this week](topic03_more_complex_example.qmd). 
 
 Here though notice that `is_slope_positive` is not used within the model block, 
-in such case, an alternative is to use a `generated quantities`, which we demonstrate here:
+in such case, an alternative is to use a `generated quantities`, which we demonstrate below.
+Compared to `transformed parameters`, one advantage of `generated quantities` is 
+that it is faster (because it only needs to be computed when a sample is collected, for example, 
+if a point is rejected, Stan will skip the 
+computation of the `generated quantities` for that point, similarly, when the proposal requires 
+intermediate computation as in HMC, `generated quantities` can be skipped).
 
 ```stan {filename="logistic_with_generated.stan"}
 data { 

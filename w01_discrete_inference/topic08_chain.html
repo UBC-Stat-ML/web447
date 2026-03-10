@@ -1081,7 +1081,7 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>The chain rule allows us to compute a probability that the forward sampling function takes a given path.</p>
-<p>The chain rule seem innocent but is used heavily in Bayesian statistics. It is also the building block for Bayes rule.</p>
+<p>The chain rule seems innocent but is used heavily in Bayesian statistics. It is also the building block for Bayes rule.</p>
 </section>
 </section>
 <section id="proposition" class="level2">
@@ -1209,7 +1209,7 @@ Click for answer
 </section>
 <section id="joint-pmf" class="level2">
 <h2 class="anchored" data-anchor-id="joint-pmf">Joint PMF</h2>
-<p>We will often encounter expression of the form of a conjunction (intersection/and) of several variables. A handy notation for that is the <strong>joint PMF</strong></p>
+<p>We will often encounter expressions of the form of a conjunction (intersection/and) of several variables. A handy notation for that is the <strong>joint PMF</strong></p>
 <p>For example, here is the joint PMF of <span class="math inline">\((X, Y_1, Y_2, Y_3)\)</span>:</p>
 <p><span class="math display">\[p(x, y_1, y_2, y_3) = \mathbb{P}(X = x, Y_1 = y_1, Y_2 = y_2, Y_3 = y_3).\]</span></p>
 <p>Sometimes we put the random variables in question as subscript, for example <span class="math inline">\(p_{X, Y_1}(x, y)\)</span> for the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y_1\)</span>.</p>
@@ -1228,7 +1228,7 @@ Y_i | X &amp;\sim {\mathrm{Bern}}(X/2)
 \end{align*}
 \]</span> i.e.&nbsp;with <span class="math inline">\(\mathbb{P}(X = x)\)</span> and <span class="math inline">\(\mathbb{P}(Y_i = y | X = x)\)</span> for all <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
 <p><strong>Question:</strong> how did we go from <span class="math inline">\(\mathbb{P}(Y_2 = 1 | X = 1, Y_1 = 1)\)</span> (in our chain rule computation) to <span class="math inline">\(\mathbb{P}(Y_2 = 1 | X = 1)\)</span> (model specification)?</p>
-<p><strong>Definition:</strong> <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> are conditionally independence given <span class="math inline">\(Z\)</span> if <span class="math display">\[\mathbb{P}(V = v, W = w | Z = z) = \mathbb{P}(V = v | Z = z) \mathbb{P}(W = w | Z = z).\]</span></p>
+<p><strong>Definition:</strong> <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> are conditionally independent given <span class="math inline">\(Z\)</span> if <span class="math display">\[\mathbb{P}(V = v, W = w | Z = z) = \mathbb{P}(V = v | Z = z) \mathbb{P}(W = w | Z = z).\]</span></p>
 <p><strong>Exercise:</strong> show the above definition is equivalent to:</p>
 <p><span class="math display">\[\mathbb{P}(V = v | W = w, Z = z) = \mathbb{P}(V = v | Z = z).\]</span></p>
 

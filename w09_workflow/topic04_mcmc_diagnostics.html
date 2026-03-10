@@ -1048,7 +1048,7 @@ window.Quarto = {
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#heuristics-to-detect-slow-mixing-chains" id="toc-heuristics-to-detect-slow-mixing-chains" class="nav-link" data-scroll-target="#heuristics-to-detect-slow-mixing-chains">Heuristics to detect slow mixing chains</a>
   <ul class="collapse">
-  <li><a href="#example-of-fast-and-slow-mixing-chains" id="toc-example-of-fast-and-slow-mixing-chains" class="nav-link" data-scroll-target="#example-of-fast-and-slow-mixing-chains">Example of fast and slow mixing chains</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1101,7 +1101,7 @@ https://github.com/trevorcampbell/shortex
 <h3 class="anchored" data-anchor-id="topics">Topics</h3>
 <ul>
 <li>Notion of mixing.</li>
-<li>Heuristics to detect pathological behaviour:</li>
+<li>Heuristics to detect pathological behaviour</li>
 </ul>
 </section>
 <section id="rationale" class="level3">
@@ -1126,7 +1126,7 @@ https://github.com/trevorcampbell/shortex
 <p><strong>Slow/torpid mixing:</strong></p>
 <ul>
 <li>Terminology: <strong>slow/torpid mixing</strong>.</li>
-<li>MCMC still consistent, but you may have to wait for years to get usable answer!</li>
+<li>MCMC still consistent, but you may have to wait for years to get a usable answer!</li>
 <li>In this case, changes have to be made to the sampler.</li>
 <li>We will cover two alternatives to consider for these difficult targets:
 <ul>
@@ -1150,8 +1150,8 @@ https://github.com/trevorcampbell/shortex
 <li>These are not bullet-proof methods…</li>
 <li>… but it is still a good idea to use them unless theory provides guarantees (e.g.&nbsp;<a href="https://jmlr.org/papers/volume20/19-306/19-306.pdf">log-concave distributions</a>).</li>
 </ul>
-<section id="example-of-fast-and-slow-mixing-chains" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="example-of-fast-and-slow-mixing-chains">Example of fast and slow mixing chains</h3>
+<section id="examples" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>

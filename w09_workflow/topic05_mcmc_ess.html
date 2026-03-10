@@ -1187,10 +1187,13 @@ Answer #5 is also acceptable: there is indeed ongoing research on so called "non
 </ol>
 <p><strong>Example:</strong> our simple <a href="../w03_ppl/topic03_continuous.html">doomsday model</a>…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-output.var="doomsday">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>doomsday.stan</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-shortcodes="true," data-filename="doomsday.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> y; </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1207,30 +1210,24 @@ Answer #5 is also acceptable: there is indeed ongoing research on so called "non
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="../images/doomsday.png" class="img-fluid" width="200"></p>
 </div></div><div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  doomsday,         </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"doomsday.stan"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(       </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fl">0.06</span>), </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>, </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">20000</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">0</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">20000</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>, <span class="st">"mcse_mean"</span>, <span class="st">"ess_bulk"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Inference for Stan model: anon_model.
-1 chains, each with iter=20000; warmup=10000; thin=1; 
-post-warmup draws per chain=10000, total post-warmup draws=10000.
-
-      mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat
-x     1.16    0.03 1.29  0.07  0.18  0.57  1.76  4.56  1624    1
-lp__ -0.39    0.02 0.68 -2.44 -0.43 -0.12 -0.04 -0.01  1580    1
-
-Samples were drawn using NUTS(diag_e) at Tue Mar 12 22:45:46 2024.
-For each parameter, n_eff is a crude measure of effective sample size,
-and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+<pre><code># A tibble: 2 × 5
+  variable   mean    sd mcse_mean ess_bulk
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 lp__     -0.365 0.640    0.0105    3716.
+2 x         1.11  1.25     0.0198    3716.</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> construct a 95% confidence interval for the posterior mean of <span class="math inline">\(X\)</span>. Is the <a href="../w03_ppl/topic03_continuous.html">true value</a> contained in the interval?</p>
@@ -1238,10 +1235,10 @@ convergence, Rhat=1).</code></pre>
 
 ::: {.callout-caution collapse="true"} 
 ## Click for choices
-1. $[1.16 \pm 0.03]$, and the true value is contained in the interval
-1. $[1.16 \pm 0.03]$, and the true value is not contained in the interval
-1. $[1.16 \pm 0.06]$, and the true value is contained in the interval
-1. $[1.16 \pm 0.06]$, and the true value is not contained in the interval
+1. $[1.11 \pm 0.01]$, and the true value is contained in the interval
+1. $[1.11 \pm 0.01]$, and the true value is not contained in the interval
+1. $[1.11 \pm 0.04]$, and the true value is contained in the interval
+1. $[1.11 \pm 0.04]$, and the true value is not contained in the interval
 1. None of the above
 
 In the above: $[x \pm r]$ denotes the confidence interval $[x - r, x + r]$
@@ -1254,11 +1251,10 @@ In the above: $[x \pm r]$ denotes the confidence interval $[x - r, x + r]$
 
 Reading off this table we have:
 
-- Estimate is `1.16`, 
-- twice the standard error gives `0.06` (from the column `se_mean`, which stands for "standard error for the posterior mean").
+- Estimate is `1.11`, 
+- twice the standard error gives `0.04` (from the column `se_mean`, which stands for "standard error for the posterior mean").
 
-From [previous calculations](../w03_ppl/topic03_continuous.qmd), we know the true answer is $1.117$, so the 
-true error is $0.043$, hence the true value is contained in the interval, as expected for approximately[^2] 95\% of the random seeds passed to Stan. 
+From [previous calculations](../w03_ppl/topic03_continuous.qmd), we know the true answer is $\approx 1.117$, hence the true value is contained in the interval, as expected for approximately[^2] 95\% of the random seeds passed to Stan. 
 
 [^2]: It is only approximate, since as we shall see the standard error estimator uses central limit theorem approximations. 
 
@@ -1279,7 +1275,7 @@ true error is $0.043$, hence the true value is contained in the interval, as exp
 <ul>
 <li>Recall the central limit theorem (CLT) for independent and identically distributed (i.i.d.) random variables:
 <ul>
-<li>if some random variables <span class="math inline">\(V_i\)</span>’s are i.i.d. and</li>
+<li>if some random variables <span class="math inline">\(V_i\)</span> are i.i.d. and</li>
 <li>each has finite variance, then we have<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span id="eq-clt-iid"><span class="math display">\[\sqrt{n}(\bar V - \mu) \to \mathcal{N}(0, \operatorname{SD}[V]), \tag{1}\]</span></span> where <span class="math inline">\(\bar V = \frac{1}{n} \sum_{i=1}^n V_i\)</span> and <span class="math inline">\(\mu = \mathbb{E}[V]\)</span>.</li>
 </ul></li>
 <li>From the central limit theorem, recall that standard frequentist arguments give: <span id="eq-ci"><span class="math display">\[\mathbb{P}(\mu \in [\bar V \pm 1.96 \text{SE}]) \approx 95\%, \tag{2}\]</span></span> where: the Standard Error (SE) is given by <span class="math inline">\(\text{SE} = \operatorname{SD}[V] / \sqrt{n}\)</span>.</li>
@@ -1319,7 +1315,7 @@ true error is $0.043$, hence the true value is contained in the interval, as exp
 <li>For i.i.d. CLT: variance of the limiting distribution is equal to the variance of <span class="math inline">\(X_1\)</span>.</li>
 <li>For Markov CLT: we left the variance of the limiting distribution more vague (<span class="math inline">\(\sigma_a^2\)</span>).</li>
 </ul>
-<p><strong>Intuition:</strong> because of the dependences between MCMC iterations, the noise of the approximation can be larger compared to the i.i.d. setting.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><strong>Intuition:</strong> because of the dependence between MCMC iterations, the noise of the approximation can be larger compared to the i.i.d. setting.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="effective-sample-size" class="level3">
 <h3 class="anchored" data-anchor-id="effective-sample-size">Effective sample size</h3>
@@ -1385,7 +1381,7 @@ $$n_e = \frac{\sigma^2}{\sigma_a^2} M.$$
 <h3 class="anchored" data-anchor-id="estimating-the-asymptotic-variance-with-many-chains">Estimating the asymptotic variance with many chains</h3>
 <ul>
 <li>There are many ways to estimate the asymptotic variance (see references below).</li>
-<li>We start here with the simplest possible scenario:
+<li>We start with the simplest possible scenario:
 <ul>
 <li>suppose we have <span class="math inline">\(C\)</span> independent chains</li>
 <li>each with <span class="math inline">\(S\)</span> MCMC samples.</li>
