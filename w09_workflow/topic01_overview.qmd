@@ -13,7 +13,7 @@ editor:
 - Overview of the Bayesian workflow.
 - Pointer to resources on generic data science workflows. 
 
-### Rationale
+### Rationale 
 
 End-to-end Bayesian analysis contains many steps. 
 This week covers some of the key steps with an emphasis on software tools 
@@ -46,7 +46,7 @@ workflow, but these should be combined with generic data analysis workflow pract
 - Organizing your files in a project specific folder. 
 - Using version control. 
 - Capturing library dependency versions for reproducibility. 
-- Follow good coding practice. 
+- Follow good coding practices. 
 - etc.
 
 See, e.g., the [software carpentry lessons](https://software-carpentry.org/lessons/). 

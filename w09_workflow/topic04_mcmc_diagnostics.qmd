@@ -6,12 +6,12 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-## Outline
+## Outline 
 
 ### Topics
 
 - Notion of mixing.
-- Heuristics to detect pathological behaviour: 
+- Heuristics to detect pathological behaviour 
 
 ### Rationale
 
@@ -41,7 +41,7 @@ Informally, there are two possible situations to distinguish:
 **Slow/torpid mixing:**
 
 - Terminology: **slow/torpid mixing**. 
-- MCMC still consistent, but you may have to wait for years to get usable answer!
+- MCMC still consistent, but you may have to wait for years to get a usable answer!
 - In this case, changes have to be made to the sampler. 
 - We will cover two alternatives to consider for these difficult targets:
     - Tempering methods (week 12).

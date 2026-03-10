@@ -82,7 +82,7 @@ model {
 }
 ```
   
-{{< include ../../clickers/w08/_c05.qmd >}}
+{{< include ../../clickers/w08/_c05.qmd >}} 
 
 
 ## Using the posterior

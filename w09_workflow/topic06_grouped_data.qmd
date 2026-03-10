@@ -6,7 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-## Outline
+## Outline 
 
 ### Topics
 
@@ -17,7 +17,7 @@ editor:
 Data organized in various groups is a frequent feature of Bayesian models, 
 in particular in [hierarchical models](../w06_hierarchical/topic03_hierarchy.qmd). 
 
-Getting grouped data into stan is tedious and error prone.
+Getting grouped data into stan is tedious and error-prone.
 The package `tidybayes` automates much of this. 
 
 
@@ -62,7 +62,7 @@ stan_converted
 ### Stan model 
 
 Here we consider a simple, non-hierarchical model but fitting all the data 
-at once. As an exercise, think about you can modify this model to be hierarchical. 
+at once. As an exercise, think about how you can modify this model to be hierarchical. 
 
 ```stan {shortcodes=true, filename="vaccines.stan"}
 {{< include vaccines.stan >}}
@@ -70,7 +70,7 @@ at once. As an exercise, think about you can modify this model to be hierarchica
 
 ### Fitting
 
-The fit object returned by `sampling` does not know about the string labels attached to
+The fit object returned by `sample()` does not know about the string labels attached to
 each trial integer index. We use `fit %<>% recover_types(data)` to add back that information:
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}

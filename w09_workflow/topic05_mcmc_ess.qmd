@@ -6,7 +6,7 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-## Outline
+## Outline 
 
 ### Topics
 
@@ -75,37 +75,27 @@ We now show how to determine how many digits are reliable:
 **Example:** our simple [doomsday model](../w03_ppl/topic03_continuous.qmd)...
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 ```
 
-```{stan output.var = "doomsday"}
-data { 
-  real y; 
-}
-
-parameters { 
-  real<lower=0, upper=5> x;
-}
-
-model {
-  x ~ uniform(0, 5); 
-  y ~ uniform(0, x); 
-}
-
+```stan {shortcodes=true, filename="doomsday.stan"}
+{{< include doomsday.stan >}}
 ```
+
 
 ::: column-margin
 ![](../images/doomsday.png){width="200"}
 :::
 
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
-fit = sampling(
-  doomsday,         
+```{r message=FALSE, warning=FALSE, results=FALSE}
+mod = cmdstan_model("doomsday.stan")
+fit = mod$sample(       
   data = list(y = 0.06), 
+  output_dir = "stan_out",
   chains = 1,
   seed = 1,
   refresh = 0, 
-  iter = 20000
+  iter_sampling = 20000
 )
 ```
 
@@ -131,7 +121,7 @@ Along the way we define the notion of Effective Sample Size (ESS) for MCMC.
 ### Background
 
 - Recall the central limit theorem (CLT) for independent and identically distributed (i.i.d.) random variables: 
-    - if some random variables $V_i$'s are i.i.d. and
+    - if some random variables $V_i$ are i.i.d. and
     - each has finite variance, then we have[^3]
         $$\sqrt{n}(\bar V - \mu) \to \distNorm(0, \sd[V]),$$ {#eq-clt-iid}
   where $\bar V = \frac{1}{n} \sum_{i=1}^n V_i$ and $\mu = \ex[V]$. 
@@ -186,7 +176,7 @@ Along the way we define the notion of Effective Sample Size (ESS) for MCMC.
 - For i.i.d. CLT: variance of the limiting distribution is equal to the variance of $X_1$. 
 - For Markov CLT: we left the variance of the limiting distribution more vague ($\sigma_a^2$). 
 
-**Intuition:** because of the dependences between MCMC iterations, the noise of the approximation can be larger compared to the 
+**Intuition:** because of the dependence between MCMC iterations, the noise of the approximation can be larger compared to the 
   i.i.d. setting.[^5]
   
 [^5]: Interestingly, the noise can also be lower in certain situations! These are called super-efficient MCMC algorithms. 
@@ -216,7 +206,7 @@ CLT for i.i.d. samples, and then the CLT for Markov chains.
 ### Estimating the asymptotic variance with many chains
 
 - There are many ways to estimate the asymptotic variance (see references below).
-- We start here with the simplest possible scenario:
+- We start with the simplest possible scenario:
     - suppose we have $C$ independent chains 
     - each with $S$ MCMC samples. 
 - Since we have $C$ chains, we get $C$ different Monte Carlo estimators:
@@ -238,9 +228,6 @@ CLT for i.i.d. samples, and then the CLT for Markov chains.
 - View a trace of length $M$ as $C$ subsequent batches of length $S$ for $M = C \cdot S$.
 - Common choice: $C = S = \sqrt{M}$. 
 - This is known as the **batch mean** estimator. 
-
-
-
 
 
 ## Additional references
