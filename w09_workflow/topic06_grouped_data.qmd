@@ -32,7 +32,7 @@ First, install the packages `magrittr` and `tidybayes` (and `ggplot2` if you hav
 then import them:
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 suppressPackageStartupMessages(require(magrittr))
 suppressPackageStartupMessages(require(tidybayes))
 suppressPackageStartupMessages(require(ggplot2))
@@ -41,7 +41,7 @@ suppressPackageStartupMessages(require(ggplot2))
 
 ### Data prep
 
-We load the data used in [exercise 6](../exercises/ex06.qmd):
+We load data modelling covid vaccines efficacy:
 
 ```{r}
 data = read.csv(url("https://raw.githubusercontent.com/UBC-Stat-ML/web447/main/exercises/ex06_assets/vaccines_full.csv"))
@@ -62,55 +62,29 @@ stan_converted
 ### Stan model 
 
 Here we consider a simple, non-hierarchical model but fitting all the data 
-at once. In the exercise, you will modify this model to follow the hierarchical 
-structure of [exercise 6](../exercises/ex06.qmd).
+at once. As an exercise, think about you can modify this model to be hierarchical. 
 
-```{stan output.var = "vaccines"}
-data {
-  int n;
-  int n_trials;
-  array[n] int<lower=1,upper=n_trials> trials;
-  array[n] int arms;
-  int n_arms;
-  array[n] int groupSizes;
-  array[n] int numbersOfCases;
-  array[n] int is_vaccinated;
-}
-
-parameters {
-  vector<lower=0,upper=1>[n_trials] efficiencies;
-  vector<lower=0,upper=1>[n_trials] prevalences;
-}
-
-model {
-
-  for (trial in 1:n_trials) {
-    efficiencies[trial] ~ beta(1, 1);
-    prevalences[trial] ~ beta(1, 1);
-  }
-
-  for (i in 1:n) {
-    numbersOfCases[i] ~ binomial(groupSizes[i], prevalences[trials[i]] * (is_vaccinated[i] == 1 ? 1.0 - efficiencies[trials[i]] : 1.0));
-  }
-}
+```stan {shortcodes=true, filename="vaccines.stan"}
+{{< include vaccines.stan >}}
 ```
-
 
 ### Fitting
 
 The fit object returned by `sampling` does not know about the string labels attached to
 each trial integer index. We use `fit %<>% recover_types(data)` to add back that information:
 
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
-fit = sampling(
-  vaccines,
+```{r message=FALSE, warning=FALSE, results=FALSE}
+mod = cmdstan_model("vaccines.stan")
+fit = mod$sample(
   seed = 1,
   data = stan_converted, 
+  output_dir = "stan_out",
   refresh = 0,
-  iter = 10000                  
+  iter_sampling = 10000                  
 )
 fit %<>% recover_types(data)
 ```
+
 
 
 ### Getting draws

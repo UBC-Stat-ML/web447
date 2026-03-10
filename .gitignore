@@ -19,3 +19,7 @@ logistic
 logistic_with_generated
 challenges/stan_out
 cauchy
+w09_workflow/stan_out
+betabinom
+unid
+vaccines

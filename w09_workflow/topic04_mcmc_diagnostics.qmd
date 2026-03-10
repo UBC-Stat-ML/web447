@@ -62,7 +62,7 @@ Informally, there are two possible situations to distinguish:
 ### Example of fast and slow mixing chains
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 suppressPackageStartupMessages(require(ggplot2))
 suppressPackageStartupMessages(require(bayesplot))
 ```
@@ -70,20 +70,9 @@ suppressPackageStartupMessages(require(bayesplot))
 
 **Easy problem:** a familiar beta-binomial problem.
 
-```{stan output.var = "betabinom"}
-data {
-  int<lower=0> n_trials;
-  int<lower=0> n_successes;
-}
-parameters {
-  real<lower=0, upper=1> p;
-}
-
-model {
-  p ~ uniform(0, 1);
-  n_successes ~ binomial(n_trials, p);
-}
-``` 
+```stan {shortcodes=true, filename="betabinom.stan"}
+{{< include betabinom.stan >}}
+```
 
 **Challenging problem:** binomial likelihood, but with "too many parameters."
 
@@ -95,52 +84,42 @@ model {
 ![](../images/ridge.png){width="300"}
 :::
 
-```{stan output.var = "unid"}
-data {
-  int<lower=0> n_trials;
-  int<lower=0> n_successes;
-}
-parameters {
-  real<lower=0, upper=1> p1;
-  real<lower=0, upper=1> p2;
-}
-
-model {
-  p1 ~ uniform(0, 1);
-  p2 ~ uniform(0, 1);
-  n_successes ~ binomial(n_trials, p1 * p2);
-}
-``` 
+```stan {shortcodes=true, filename="unid.stan"}
+{{< include unid.stan >}}
+```
 
 - We run both easy and hard problems with 2 parallel chains each.
 - In practice use more than 2. 
 
-```{r message=FALSE, warning=FALSE, results=FALSE, dependson=knitr::dep_prev()}
-fit_easy = sampling(
-  betabinom,
-  seed = 1,
-  chains = 2,
-  refresh = 0,
-  data = list(n_trials=10000000, n_successes=10000000/2),       
-  iter = 1000                   
-)
 
-fit_hard = sampling(
-  unid,
+```{r message=FALSE, warning=FALSE, results=FALSE}
+
+hard = cmdstan_model("unid.stan")
+easy = cmdstan_model("betabinom.stan")
+dat = list(n_trials=10000000, n_successes=10000000/2)
+fit_easy = easy$sample(
   seed = 1,
   chains = 2,
   refresh = 0,
-  data = list(n_trials=10000000, n_successes=10000000/2),       
-  iter = 1000                   
+  output_dir = "stan_out",
+  data = dat, 
+)
+fit_hard = hard$sample(
+  seed = 1,
+  chains = 2,
+  refresh = 0,
+  output_dir = "stan_out",
+  data = dat, 
 )
 ```
+
 
 **Trace plots:** spot the difference between the easy and hard problems 
 (each line in a given plot is an independent chain).
 
 ```{r}
-mcmc_trace(fit_easy, pars = c("p")) + theme_minimal()
-mcmc_trace(fit_hard, pars = c("p1")) + theme_minimal()
+mcmc_trace(fit_easy$draws("p")) + theme_minimal()
+mcmc_trace(fit_hard$draws("p1")) + theme_minimal()
 ```
 
 **Rank histogram:** 
@@ -150,6 +129,6 @@ mcmc_trace(fit_hard, pars = c("p1")) + theme_minimal()
 - In the fast mixing case, all histograms should be approximately uniform.
 
 ```{r}
-mcmc_rank_hist(fit_easy, pars = c("p")) + theme_minimal()
-mcmc_rank_hist(fit_hard, pars = c("p1")) + theme_minimal()
+mcmc_rank_hist(fit_easy$draws("p")) + theme_minimal()
+mcmc_rank_hist(fit_hard$draws("p1")) + theme_minimal()
 ```
