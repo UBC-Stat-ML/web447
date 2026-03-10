@@ -40,11 +40,6 @@ To understand today's material we need to review the notion of
 
 **Question:** for well-specified models, credible intervals are...
 
-1. calibrated for small data, calibrated for large data
-2. not calibrated for small data, calibrated for large data
-3. only approximately calibrated for both small and large data
-4. none of the above
-
 {{< include ../../clickers/w09/_c01.qmd >}}
 
 
@@ -52,10 +47,10 @@ To understand today's material we need to review the notion of
 
 **Question:** Can we do goodness-of-fit check calibration on latent variables $X$?
 
-1. Yes
-2. No
+**No:** in a real data analysis scenario, $x$ is unknown, so we cannot check if $x$ is contained in a corresponding credible interval.
 
-{{< include ../../clickers/w09/_c02.qmd >}}
+**Suggestions?**
+
 
 
 ### Review: prediction 
@@ -68,9 +63,6 @@ To understand today's material we need to review the notion of
     - and in this week's exercise you will do it in Stan using [generated quantities](../w08_mcmc1/topic06_hands_on.qmd).
 
 **Question:** Can we do goodness-of-fit check calibration on a prediction?
-
-1. Yes
-2. No
 
 {{< include ../../clickers/w09/_c03.qmd >}}
 
@@ -90,10 +82,6 @@ $$\pr(Y_n \in C(Y_{\backslash n})) = 99\%.$$
 
 **Question:** what are potential cause(s) of a posterior predictive "warning", (i.e., $y_n \notin C(y_{\backslash n})$):
 
-a. Model mis-specification.
-b. Posterior is not approximately normal. 
-c. MCMC too slow and/or not enough samples. 
-d. Bad luck. 
-e. Software defect.
+
 
 {{< include ../../clickers/w09/_c04.qmd >}}
