@@ -1092,20 +1092,33 @@ https://github.com/trevorcampbell/shortex
 <div class="no-row-height column-margin column-container"><div class="">
 <p><img src="../images/calibration.png" class="img-fluid" width="200"></p>
 </div></div><p><strong>Question:</strong> for well-specified models, credible intervals are…</p>
-<ol type="1">
-<li>calibrated for small data, calibrated for large data</li>
-<li>not calibrated for small data, calibrated for large data</li>
-<li>only approximately calibrated for both small and large data</li>
-<li>none of the above</li>
-</ol>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. calibrated for small data, calibrated for large data
+2. not calibrated for small data, calibrated for large data
+3. only approximately calibrated for both small and large data
+4. none of the above
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Recall: **in a Bayesian well-specified context, calibration holds for all dataset sizes!**
+
+This suggests calibration could be useful to detect mis-specification...
+:::
+
+
+-->
 </section>
 <section id="from-calibration-to-goodness-of-fit" class="level2">
 <h2 class="anchored" data-anchor-id="from-calibration-to-goodness-of-fit">From calibration to goodness-of-fit</h2>
 <p><strong>Question:</strong> Can we do goodness-of-fit check calibration on latent variables <span class="math inline">\(X\)</span>?</p>
-<ol type="1">
-<li>Yes</li>
-<li>No</li>
-</ol>
+<p><strong>No:</strong> in a real data analysis scenario, <span class="math inline">\(x\)</span> is unknown, so we cannot check if <span class="math inline">\(x\)</span> is contained in a corresponding credible interval.</p>
+<p><strong>Suggestions?</strong></p>
 <section id="review-prediction" class="level3">
 <h3 class="anchored" data-anchor-id="review-prediction">Review: prediction</h3>
 <ul>
@@ -1119,10 +1132,28 @@ https://github.com/trevorcampbell/shortex
 </ul></li>
 </ul>
 <p><strong>Question:</strong> Can we do goodness-of-fit check calibration on a prediction?</p>
-<ol type="1">
-<li>Yes</li>
-<li>No</li>
-</ol>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+1. Yes
+2. No
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+**Yes:** using a **leave-one-out** technique: 
+
+- instead of giving all $n$ data points to Stan, give only the first $n-1$ data points, 
+- leave data point $n$ out (hence the name).
+- Compute, say a $99\%$ credible interval $C$ predicting the $n$-th observation based on data $y_1, \dots, y_{n-1}$.
+- If $y_n \notin C$: output a warning.
+
+:::
+
+
+-->
 </section>
 <section id="posterior-predictive-check" class="level3">
 <h3 class="anchored" data-anchor-id="posterior-predictive-check">Posterior predictive check</h3>
@@ -1134,13 +1165,47 @@ https://github.com/trevorcampbell/shortex
 <p><strong>Proposition:</strong> if the model is well-specified, <span class="math display">\[\mathbb{P}(Y_n \in C(Y_{\backslash n})) = 99\%.\]</span></p>
 <p><strong>Proof:</strong> special case of our <a href="../w05_properties/topic06_calibration_well_specified.html">generic result on calibration of credible intervals.</a>.</p>
 <p><strong>Question:</strong> what are potential cause(s) of a posterior predictive “warning”, (i.e., <span class="math inline">\(y_n \notin C(y_{\backslash n})\)</span>):</p>
-<ol type="a">
-<li>Model mis-specification.</li>
-<li>Posterior is not approximately normal.</li>
-<li>MCMC too slow and/or not enough samples.</li>
-<li>Bad luck.</li>
-<li>Software defect.</li>
-</ol>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+a. Model mis-specification.
+b. Posterior is not approximately normal. 
+c. MCMC too slow and/or not enough samples. 
+d. Bad luck. 
+e. Software defect.
+
+
+1. a, b
+1. a, b, c
+1. a, c, e
+1. a, c, d, e
+1. None of the above
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+a. Model mis-specification.
+    - Yes, as the name of this page suggests!
+b. Posterior is not approximately normal. 
+    - No, that's irrelevant to the present situation.
+c. MCMC too slow and/or not enough samples. 
+    - Yes, and we will talk more about it [this week](topic04_mcmc_diagnostics.qmd).
+d. Bad luck.
+    - Yes, even in the well-specified case, there is a (100-99)\% chance that the warning is issued 
+      (related to so-called ["type I error"](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors) in frequentist statistics).
+e. Software defect. 
+    - Yes, and we will talk more about it [this week](topic03_checking_correctness).
+    
+- So the correct answer is `a, c, d, e`. 
+- As you can see, there are many other choices (`c, d, e`) on top of the one we are interested in (`a`)
+  - ...which complicates the interpretation of posterior predictive checks. 
+  - We will see next some strategies to address `c` and `e`. 
+:::
+
+-->
 
 
 </section>
