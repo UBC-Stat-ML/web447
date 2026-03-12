@@ -1210,7 +1210,7 @@ https://github.com/trevorcampbell/shortex
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hard <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"unid.stan"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>easy <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"betabinom.stan"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">list</span>(<span class="at">n_trials=</span><span class="dv">10000000</span>, <span class="at">n_successes=</span><span class="dv">10000000</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">list</span>(<span class="at">n_trials=</span><span class="dv">1000000000</span>, <span class="at">n_successes=</span><span class="dv">1000000000</span><span class="sc">/</span><span class="dv">2</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fit_easy <span class="ot">=</span> easy<span class="sc">$</span><span class="fu">sample</span>(</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>,</span>
@@ -1247,12 +1247,12 @@ https://github.com/trevorcampbell/shortex
 </div>
 <p><strong>Rank histogram:</strong></p>
 <ul>
-<li>First look at the chains combined and compute ranks.</li>
+<li>First look at the chains combined and compute ranks (i.e.&nbsp;sort the values of one parameter <span class="math inline">\(\{p_1^{(m,1)}\} \cup \{p_1^{(m,2)}\}\)</span> where <span class="math inline">\(\{p_1^{(m,c)}\}\)</span> are the samples for chain <span class="math inline">\(c\)</span>, here <span class="math inline">\(c\in\{1, 2\}\)</span>).</li>
 <li>Display for each chain the rank distribution for the samples in that chain.</li>
 <li>In the fast mixing case, all histograms should be approximately uniform.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_rank_hist</span>(fit_easy<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"p"</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_rank_hist</span>(fit_easy<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"p"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"number of MCMC samples with these ranks"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1260,7 +1260,7 @@ https://github.com/trevorcampbell/shortex
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_rank_hist</span>(fit_hard<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"p1"</span>)) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_rank_hist</span>(fit_hard<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"p1"</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"number of MCMC samples with these ranks"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

@@ -1164,94 +1164,98 @@ y_i &amp;\sim {\mathrm{Bern}}(\theta(i))
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// complete this</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-The value closest to the posterior mean of the `slope` parameter is...
-
-1. 0.6
-1. 0.3
-1. 0.1
-1. -0.7
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-```stan {filename="logistic.stan"}
-data { 
-  int N; 
-  array[N] int y; 
-}
-
-parameters { 
-  real slope;
-  real intercept;
-}
-
-model {
-  slope ~ normal(0, 10);
-  intercept ~ normal(0, 10);
-  for (i in 1:N) {
-    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
-  }
-}
-
-
-```
-
-
-::: {.cell}
-
-```{.r .cell-code}
-suppressPackageStartupMessages(require(cmdstanr))
-mod <- cmdstan_model("logistic.stan")
-fit = mod$sample(
-  seed = 1,
-  chains = 1,
-  refresh = 1000,
-  output_dir = "stan_out",
-  data = list( 
-          y = success_indicators, 
-          N = length(success_indicators)
-        ), 
-  iter_sampling = 10000
-)
-```
-:::
-
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-  variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The value closest to the posterior mean of the <code>slope</code> parameter is…</p>
+<ol type="1">
+<li>0.6</li>
+<li>0.3</li>
+<li>0.1</li>
+<li>-0.7</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>logistic.stan</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="logistic.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> N; </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">int</span> y; </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> intercept;</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  slope ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  intercept ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    y[i] ~ bernoulli(inv_logit(intercept + slope * i));</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"logistic.stan"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">1000</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>( </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> success_indicators, </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="fu">length</span>(success_indicators)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        ), </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">10000</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
  lp__      -5.50  -5.17 1.09 0.79 -7.72 -4.44 1.00     2757     3378
  slope      0.56   0.50 0.42 0.39 -0.02  1.33 1.00     2121     2708
- intercept -0.65  -0.65 1.80 1.72 -3.69  2.27 1.00     2265     2840
-```
-
-
-:::
-:::
-
-Hence the correct choice was `0.6`. 
-:::
-
--->
+ intercept -0.65  -0.65 1.80 1.72 -3.69  2.27 1.00     2265     2840</code></pre>
+</div>
+</div>
+<p>Hence the correct choice was <code>0.6</code>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="using-the-posterior" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-posterior">Using the posterior</h2>
 <p><strong>Question 2:</strong> compute a 90% credible interval on the <code>slope</code> parameter.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1260,190 +1264,197 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use the output of <code>print</code> on the <code>fit</code> object.</p>
 </div>
 </div>
 </div>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $[-4.5, 3.0]$ 
-1. $[0.0, 1.3]$
-1. $[-0.1, 1.6]$
-1. $[0.3, 1.0]$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Using again the print out of the fit object:
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-  variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\([-4.5, 3.0]\)</span></li>
+<li><span class="math inline">\([0.0, 1.3]\)</span></li>
+<li><span class="math inline">\([-0.1, 1.6]\)</span></li>
+<li><span class="math inline">\([0.3, 1.0]\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using again the print out of the fit object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
  lp__      -5.50  -5.17 1.09 0.79 -7.72 -4.44 1.00     2757     3378
  slope      0.56   0.50 0.42 0.39 -0.02  1.33 1.00     2121     2708
- intercept -0.65  -0.65 1.80 1.72 -3.69  2.27 1.00     2265     2840
-```
-
-
-:::
-:::
-
-We can get a [quantile-based](../w02_discrete_bayes/topic05_credible.qmd) credible interval 
-by looking at the columns `q5` and `q95` (i.e., chopping off 10%/2 on each side): 
-this yields $[-0.02, 1.33]$.
-:::
-
--->
+ intercept -0.65  -0.65 1.80 1.72 -3.69  2.27 1.00     2265     2840</code></pre>
+</div>
+</div>
+<p>We can get a <a href="../w02_discrete_bayes/topic05_credible.html">quantile-based</a> credible interval by looking at the columns <code>q5</code> and <code>q95</code> (i.e., chopping off 10%/2 on each side): this yields <span class="math inline">\([-0.02, 1.33]\)</span>.</p>
+</div>
+</div>
+</div>
 <p><strong>Question 3:</strong> translate “your updated belief that the Ariane 1 rockets were improving” into a mathematical expression.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. $\ex[\text{slope}| Y = y] > 0$
-1. $\ex[\text{slope}] > 0$
-1. $\pr(\text{slope} > 0 | Y = y)$
-1. $\pr(\text{slope} > 0)$
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-"Ariane 1 rockets were improving" translates to the event $(\text{slope} > 0)$. 
-Hence our "updated belief," which is just the posterior probability, is 
-$\pr(\text{slope} > 0 | Y = y)$. 
-:::
-
--->
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(\mathbb{E}[\text{slope}| Y = y] &gt; 0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}[\text{slope}] &gt; 0\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0 | Y = y)\)</span></li>
+<li><span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0)\)</span></li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>“Ariane 1 rockets were improving” translates to the event <span class="math inline">\((\text{slope} &gt; 0)\)</span>. Hence our “updated belief,” which is just the posterior probability, is <span class="math inline">\(\mathbb{P}(\text{slope} &gt; 0 | Y = y)\)</span>.</p>
+</div>
+</div>
+</div>
 <p><strong>Question 4:</strong> estimate the numerical value of the expression in the last question.</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. 0.65
-1. 0.75
-1. 0.85
-1. 0.94
-1. None of the above
-:::
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Here we want to add a new random variable to our model, defined as:
-$$\text{slope\_is\_positive} = \ind[\text{slope} > 0].$$
-Why? Because then the posterior mean of the indicator will yield the required probability:
-$$\ex[\ind[\text{slope} > 0]|Y = y] = \pr(\text{slope} > 0 | Y = y),$$
-and we will be able to read off that mean from the print out of the fit object. 
-
-Now, how to add the slope\_is\_positive random variable to our Stan model?
-
-Since the random variable is defined using "=" rather than "$\sim$", we can do this using 
-a `transformed parameters`, introduced [earlier this week](topic03_more_complex_example.qmd). 
-
-Here though notice that `is_slope_positive` is not used within the model block, 
-in such case, an alternative is to use a `generated quantities`, which we demonstrate below.
-Compared to `transformed parameters`, one advantage of `generated quantities` is 
-that it is faster (because it only needs to be computed when a sample is collected, for example, 
-if a point is rejected, Stan will skip the 
-computation of the `generated quantities` for that point, similarly, when the proposal requires 
-intermediate computation as in HMC, `generated quantities` can be skipped).
-
-```stan {filename="logistic_with_generated.stan"}
-data { 
-  int N; 
-  array[N] int y; 
-}
-
-parameters { 
-  real slope;
-  real intercept;
-}
-
-model {
-  slope ~ normal(0, 10);
-  intercept ~ normal(0, 10);
-  for (i in 1:N) {
-    y[i] ~ bernoulli(inv_logit(intercept + slope * i));
-  }
-}
-
-generated quantities {
-  real is_slope_positive = slope > 0 ? 1 : 0;
-}
-
-
-```
-
-::: {.cell}
-
-```{.r .cell-code}
-suppressPackageStartupMessages(require(cmdstanr))
-mod <- cmdstan_model("logistic_with_generated.stan")
-fit = mod$sample(
-  seed = 1,
-  chains = 1,
-  refresh = 1000,
-  output_dir = "stan_out",
-  data = list( 
-          y = success_indicators, 
-          N = length(success_indicators)
-        ), 
-  iter_sampling = 10000
-)
-```
-:::
-
-
-::: {.cell}
-
-```{.r .cell-code}
-fit
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: NAs introduced by coercion
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-          variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>0.65</li>
+<li>0.75</li>
+<li>0.85</li>
+<li>0.94</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here we want to add a new random variable to our model, defined as: <span class="math display">\[\text{slope\_is\_positive} = \mathbb{1}[\text{slope} &gt; 0].\]</span> Why? Because then the posterior mean of the indicator will yield the required probability: <span class="math display">\[\mathbb{E}[\mathbb{1}[\text{slope} &gt; 0]|Y = y] = \mathbb{P}(\text{slope} &gt; 0 | Y = y),\]</span> and we will be able to read off that mean from the print out of the fit object.</p>
+<p>Now, how to add the slope_is_positive random variable to our Stan model?</p>
+<p>Since the random variable is defined using “=” rather than “<span class="math inline">\(\sim\)</span>”, we can do this using a <code>transformed parameters</code>, introduced <a href="../w08_mcmc1/topic03_more_complex_example.html">earlier this week</a>.</p>
+<p>Here though notice that <code>is_slope_positive</code> is not used within the model block, in such case, an alternative is to use a <code>generated quantities</code>, which we demonstrate below. Compared to <code>transformed parameters</code>, one advantage of <code>generated quantities</code> is that it is faster (because it only needs to be computed when a sample is collected, for example, if a point is rejected, Stan will skip the computation of the <code>generated quantities</code> for that point, similarly, when the proposal requires intermediate computation as in HMC, <code>generated quantities</code> can be skipped).</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>logistic_with_generated.stan</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="logistic_with_generated.stan"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> { </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> N; </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">int</span> y; </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> { </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> slope;</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> intercept;</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  slope ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  intercept ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    y[i] ~ bernoulli(inv_logit(intercept + slope * i));</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> is_slope_positive = slope &gt; <span class="dv">0</span> ? <span class="dv">1</span> : <span class="dv">0</span>;</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(<span class="st">"logistic_with_generated.stan"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">1000</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>( </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> success_indicators, </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="fu">length</span>(success_indicators)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        ), </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">10000</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          variable  mean median   sd  mad    q5   q95 rhat ess_bulk ess_tail
  lp__              -5.50  -5.17 1.09 0.79 -7.72 -4.44 1.00     2757     3378
  slope              0.56   0.50 0.42 0.39 -0.02  1.33 1.00     2121     2708
  intercept         -0.65  -0.65 1.80 1.72 -3.69  2.27 1.00     2265     2840
- is_slope_positive  0.94   1.00 0.24 0.00  0.00  1.00 1.00     2935       NA
-```
-
-
-:::
-:::
-
-Hence the correct answer is `0.94`, the posterior mean of `is_slope_positive`. 
-:::
-
--->
+ is_slope_positive  0.94   1.00 0.24 0.00  0.00  1.00 1.00     2935       NA</code></pre>
+</div>
+</div>
+<p>Hence the correct answer is <code>0.94</code>, the posterior mean of <code>is_slope_positive</code>.</p>
+</div>
+</div>
+</div>
 
 
 </section>
