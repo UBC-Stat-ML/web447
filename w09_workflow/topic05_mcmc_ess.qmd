@@ -62,7 +62,7 @@ Suppose you are approximating a posterior mean in Stan.
 We now show how to determine how many digits are reliable:
 
 1. print the `fit` object,
-2. roughly twice[^1] the column `se_mean` provides the radius of a 95% confidence interval.
+2. roughly twice[^1] the column `mcse_mean` provides the radius of a 95% confidence interval.
 
 [^1]: Where does "twice" come from? More precisely, it is $1.96$, which comes 
     from the [quantile function](../w01_discrete_inference/topic04_pmfs.qmd#sec-simulate-pmf) 
@@ -111,7 +111,7 @@ fit$summary(NULL, c("mean", "sd", "mcse_mean", "ess_bulk"))
 
 We answer two questions:
 
-- How can we compute Monte Carlo Standard Errors (MCSE) (i.e., numbers such as in `se_mean`)?
+- How can we compute Monte Carlo Standard Errors (MCSE) (i.e., numbers such as in `mcse_mean`)?
 - What underlying theory justifies that computation?
 
 Along the way we define the notion of Effective Sample Size (ESS) for MCMC.

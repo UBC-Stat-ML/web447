@@ -67,7 +67,6 @@ First, put the following code into a file called `doomsday.stan`:
 **Answer:** When Stan gets called from R:
 
 ```{r message=FALSE, warning=FALSE, results=FALSE}
-
 suppressPackageStartupMessages(require(cmdstanr))
 mod = cmdstan_model("doomsday.stan")
 fit = mod$sample(

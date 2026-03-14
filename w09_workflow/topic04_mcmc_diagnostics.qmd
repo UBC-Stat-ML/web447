@@ -96,7 +96,7 @@ suppressPackageStartupMessages(require(bayesplot))
 
 hard = cmdstan_model("unid.stan")
 easy = cmdstan_model("betabinom.stan")
-dat = list(n_trials=10000000, n_successes=10000000/2)
+dat = list(n_trials=1000000000, n_successes=1000000000/2)
 fit_easy = easy$sample(
   seed = 1,
   chains = 2,
@@ -124,11 +124,11 @@ mcmc_trace(fit_hard$draws("p1")) + theme_minimal()
 
 **Rank histogram:** 
 
-- First look at the chains combined and compute ranks.
+- First look at the chains combined and compute ranks (i.e. sort the values of one parameter $\{p_1^{(m,1)}\} \cup \{p_1^{(m,2)}\}$ where $\{p_1^{(m,c)}\}$ are the samples for chain $c$, here $c\in\{1, 2\}$).
 - Display for each chain the rank distribution for the samples in that chain. 
 - In the fast mixing case, all histograms should be approximately uniform.
 
 ```{r}
-mcmc_rank_hist(fit_easy$draws("p")) + theme_minimal()
-mcmc_rank_hist(fit_hard$draws("p1")) + theme_minimal()
+mcmc_rank_hist(fit_easy$draws("p")) + ylab("number of MCMC samples with these ranks") + theme_minimal()
+mcmc_rank_hist(fit_hard$draws("p1")) + ylab("number of MCMC samples with these ranks") + theme_minimal()
 ```
