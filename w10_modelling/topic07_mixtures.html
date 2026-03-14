@@ -1366,6 +1366,7 @@ is the correct answer.
 <section id="testing-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="testing-the-model">Testing the model</h3>
 <p><strong>Probably guessing:</strong> feeding a score of <strong>9</strong> out of 20, we get:</p>
+<!-- we need to show the output of this one! -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"students_guessing_simplified.stan"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
@@ -1387,6 +1388,7 @@ Chain 1 finished in 0.0 seconds.</code></pre>
 </div>
 </div>
 <p><strong>Probably not guessing:</strong> feeding a score of <strong>19</strong> out of 20, we get:</p>
+<!-- we need to show the output of this one! -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>

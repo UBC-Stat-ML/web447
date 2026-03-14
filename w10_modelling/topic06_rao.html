@@ -1219,23 +1219,23 @@ Chain 1 finished in 0.5 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"sd"</span>, <span class="st">"mad"</span>, <span class="st">"rhat"</span>, <span class="st">"ess_bulk"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"mcse_mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 7
-  variable   mean median    sd   mad  rhat ess_bulk
-  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-1 lp__     -8.24  -7.96  0.745 0.324  1.00   40900.
-2 rate      0.395  0.362 0.198 0.184  1.00   33732.
-3 mean      3.38   2.76  2.46  1.36   1.00   33732.</code></pre>
+<pre><code># A tibble: 3 × 3
+  variable   mean mcse_mean
+  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 lp__     -8.24    0.00395
+2 rate      0.395   0.00100
+3 mean      3.38    0.0150 </code></pre>
 </div>
 </div>
 <p><strong>Compare:</strong> this to the result from <a href="../w10_modelling/topic04_censoring.html">the page on censoring</a>, where we got:</p>
 <pre><code>  ...
 Chain 1 finished in 1.6 seconds.
   ...
-   variable               mean  median    sd   mad  rhat ess_bulk
+   variable               mean mcse_mean
   ...
-    mean                  3.41    2.77  2.61  1.37   1.00   37126  ...</code></pre>
+10 mean                  3.41   0.0178  </code></pre>
 <p><strong>Conclusion:</strong> Essentially the same result (i.e., within <a href="../w09_workflow/topic05_mcmc_ess.html">MCSE</a>), but the new version is faster! How is this possible?</p>
 </section>
 <section id="mathematical-underpinnings" class="level2">

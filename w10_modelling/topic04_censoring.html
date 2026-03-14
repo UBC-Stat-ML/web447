@@ -1313,6 +1313,7 @@ Y_i &amp;= C_i L + (1 - C_i) H_i.
 <span data-code-cell="annotated-cell-6" data-code-lines="11" data-code-annotation="4">The <span class="math inline">\(H_i\)</span>’s above the limit are not observed, so they go in the <code>parameters</code> block (a better name would have been “latent block”).</span>
 </dd>
 </dl>
+<!-- we need to show the output of this one! (used in RB page) -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"chernobyl_naive.stan"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
@@ -1347,21 +1348,21 @@ Chain 1 finished in 1.6 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"sd"</span>, <span class="st">"mad"</span>, <span class="st">"rhat"</span>, <span class="st">"ess_bulk"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"mcse_mean"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 7
-   variable               mean  median    sd   mad  rhat ess_bulk
-   &lt;chr&gt;                 &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
- 1 lp__                -19.3   -18.9   2.26  2.12   1.00   35607.
- 2 rate                  0.393   0.361 0.197 0.184  1.00   37126.
- 3 data_above_limit[1]   4.54    3.03  5.46  2.10   1.00   55872.
- 4 data_above_limit[2]   4.52    3.04  5.00  2.10   1.00   40542.
- 5 data_above_limit[3]   4.49    3.03  4.93  2.09   1.00   48875.
- 6 data_above_limit[4]   4.51    3.03  4.80  2.11   1.00   47362.
- 7 data_above_limit[5]   4.48    3.02  5.12  2.09   1.00   44712.
- 8 data_above_limit[6]   4.53    3.03  4.99  2.11   1.00   47429.
- 9 data_above_limit[7]   4.52    3.02  5.24  2.10   1.00   50976.
-10 mean                  3.41    2.77  2.61  1.37   1.00   37126.</code></pre>
+<pre><code># A tibble: 10 × 3
+   variable               mean mcse_mean
+   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;
+ 1 lp__                -19.3    0.0123  
+ 2 rate                  0.393  0.000927
+ 3 data_above_limit[1]   4.54   0.0249  
+ 4 data_above_limit[2]   4.52   0.0244  
+ 5 data_above_limit[3]   4.49   0.0236  
+ 6 data_above_limit[4]   4.51   0.0214  
+ 7 data_above_limit[5]   4.48   0.0260  
+ 8 data_above_limit[6]   4.53   0.0234  
+ 9 data_above_limit[7]   4.52   0.0243  
+10 mean                  3.41   0.0178  </code></pre>
 </div>
 </div>
 <div class="cell">
