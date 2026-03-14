@@ -8,4 +8,9 @@ editor:
 
 {{< include ../blocks/_challenge_header.qmd >}}
 
-{{< include ../_construction.qmd >}}
+Find a new error (not just typo) on the course material, and file 
+an issue on the [github Issues page](https://github.com/UBC-Stat-ML/web447/issues). 
+Make sure to look first in the [closed issues page](https://github.com/UBC-Stat-ML/web447/issues?q=is%3Aissue%20state%3Aclosed) 
+since only previously unreported errors will be considered. 
+
+Issues for typos are welcome too, but will not count towards this challenge. 
