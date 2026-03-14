@@ -7,7 +7,7 @@ editor:
 {{< include ../_macros.qmd >}}
 
 
-**Note:** make sure you avoid very long Stan output (use ùverbose=FALSEù or edit the RMarkdown cells with `message = FALSE, results = 'hide'`)
+**Note:** make sure you avoid very long Stan output (use `verbose=FALSE` or edit the RMarkdown cells with `message = FALSE, results = 'hide'`)
 
 
 ## Q.1: Calibration analysis via cross-validation
