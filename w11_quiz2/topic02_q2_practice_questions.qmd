@@ -6,7 +6,6 @@ editor:
 
 {{< include ../_macros.qmd >}}
 
-{{< include ../_construction.qmd >}}
 
 
 
@@ -14,17 +13,17 @@ editor:
 
 ### Topics
 
--   Representative example of questions to prep for Quiz 2.
+-   Representative examples of questions to prep for Quiz 2.
 
 
 ### Important note
 
-Make sure to practice the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
+Make sure to practice on the [similar page for Quiz 1](../w07_quiz1/topic02_practice_questions.qmd)
 since quiz 2 will cover that material as well. 
 
 
 
-### Libraries needed to run the example below
+### Libraries needed to run several examples below
 
 ```{r}
 suppressPackageStartupMessages(require(rstan))
@@ -38,7 +37,7 @@ suppressPackageStartupMessages(require(rstan))
 Consider the following setup
 
 - You have a cohort of 15 unemployed persons who are all starting a job search process at the same time. 
-- For each participant, you have collected 2 covariates: their age and their number of years of education. 
+- For each participant, you have collected two covariates: their age and their number of years of education. 
 - You contact the participants each day for 10 days and record the day they secured a new job.
 - At the end of your study, 3 of the participants are still looking for a job. 
 
@@ -50,7 +49,7 @@ for each its data type, if it observed or not.
 
 {{< include ../../clickers/w11/_c02.qmd >}}
 
-### Rao-blackwellization
+### Rao-Blackwellization
 
 Write the joint density of the model in the last part, before and after Rao-Blackwellization.
 You can introduce symbols for densities and CDFs, for example leave the density of the 
@@ -72,7 +71,7 @@ Suppose you observed the following:
 
 1. $y_n \notin C(y_{\backslash n})$
 2. $\check y_n \notin C(\check y_{\backslash n})$
-3. On both synthetic and real data, trace plots and ESS both look good. 
+3. On both synthetic and real data, trace plots and ESS look good. 
 4. You replicated these experiments several times and always get the same results. 
 
 What would you do next? Justify your answer. 
@@ -120,7 +119,7 @@ and Rhat is the potential scale reduction factor on split chains (at
 convergence, Rhat=1).
 ```
 
-1. Report a 80% confidence interval to capture the Monte Carlo error for the posterior mean of the `prediction` parameter. 
+1. Report an 80% confidence interval to capture the Monte Carlo error for the posterior mean of the `prediction` parameter. 
 
 Some of the following will be helpful in answering that question:
 
@@ -142,7 +141,7 @@ an approximation for an intractable expectation, $g^* = \ex_\pi[g(X)]$.
 
 1. Define the notion of bias. 
 2. Define the notion of consistency. 
-3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasness) or consistency? Why?
+3. In the context of Monte Carlo methods, what is more important, a bias of zero (unbiasedness) or consistency? Why?
 
 {{< include ../../clickers/w11/_c01.qmd >}}
 
@@ -278,7 +277,7 @@ How would you proceed if you want to decrease Monte Carlo Standard Error (MCSE)?
 
 ## Debugging 
 
-You wish to write Stan model for logistic regression with normal priors 
+You wish to write a Stan model for logistic regression with normal priors 
 on the parameters with prior variance 100. 
 
 Consider the following draft of a Stan model:
@@ -305,7 +304,7 @@ Identify as many bugs as you can, and correct each.
 
 ## Effective sample size from asymptotic variance
 
-Recall that the CLT for i.i.d. and Markov chains give us the following approximations:
+Recall that the CLT for i.i.d. samples and Markov chains give us the following approximations:
 
 - $\sqrt{M} (\bar X_\text{Markov} - \mu) \approx \sigma_a G,$
 - $\sqrt{n_e} (\bar X_\text{iid} - \mu) \approx \sigma G,$

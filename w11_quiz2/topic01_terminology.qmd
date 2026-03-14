@@ -92,9 +92,9 @@ note additional distributions have been introduced [see the list](topic03_q2_log
 - MCSE 
 - Effective sample size (ESS)
 - Central Limit Theorem (CLT) for IID: writing the result and assumptions formally. 
-- Central Limit Theorem (CLT) for Markov chain: writing the result formally and stating at least informally the conditions.
+- Central Limit Theorem (CLT) for Markov chains: writing the result formally and stating at least informally the conditions.
 - Asymptotic variance
-- Batch mean estimator
+- Batch means estimator
 
 ## Implementing custom distributions
 
