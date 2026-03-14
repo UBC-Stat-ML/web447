@@ -1203,6 +1203,36 @@ https://github.com/trevorcampbell/shortex
 </div>
 </div>
 <p><strong>Question:</strong> is this concerning?</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. No concerns, all good. Let's go in the reactor to inspect.  
+2. It is unusual that there are many repeated measured values, but this can happen when measuring discrete distributions. 
+3. It is unusual that there are many repeated measured values, this is due to high noise. 
+4. It is concerning that there are repeated measured values, this could be due to the dosimeters having a detection limit. 
+5. None of the above. 
+:::
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The correct answer is 4: dosimeters can suffer from a saturation effect, i.e. if the radiation is 
+stronger than the detection limit, the measurement can underestimate the true value (potentially by a huge amount).
+
+Sadly, in reality the reactor crew chief A. Akimov [picked option 1](https://en.wikipedia.org/wiki/Chernobyl_disaster#Radiation_levels). 
+In reality, the effect was even more extreme: the detection limit of the dosimeters available was 0.001 R/s whereas in the worst hit 
+region the true value was round 5.6 R/s. A lethal dose is around 500 R. 
+
+A. Akimov and his crew went in the reactor. Most, including Akimov, died from radiation exposure within 3 weeks. 
+
+Go back to the generating code, @sec-generation, to see how I generated the data. 
+:::
+
+
+-->
 </section>
 </section>
 <section id="bayesian-approach-to-censoring" class="level2">
@@ -1233,20 +1263,23 @@ Y_i &amp;= C_i L + (1 - C_i) H_i.
 <section id="stan-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="stan-implementation">Stan implementation</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(rstan))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-output.var="chernobyl_naive">
-<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n_above_limit;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n_below_limit;</span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>chernobyl_naive.stan</strong></pre>
+</div>
+<div class="sourceCode" id="annotated-cell-6" data-shortcodes="true," data-filename="chernobyl_naive.stan"><pre class="sourceCode stan code-annotation-code code-with-copy code-annotated"><code class="sourceCode stan"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n_above_limit; <span class="co">//</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; n_below_limit; <span class="co">//</span></span>
 <span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; limit;</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">upper</span>=limit&gt;[n_below_limit] data_below_limit;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">upper</span>=limit&gt;[n_below_limit] data_below_limit; <span class="co">//</span></span>
 <span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
 <span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; rate; </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-11" class="code-annotation-target"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=limit&gt;[n_above_limit] data_above_limit;</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-11" class="code-annotation-target"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>&lt;<span class="kw">lower</span>=limit&gt;[n_above_limit] data_above_limit; <span class="co">//</span></span>
 <span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="annotated-cell-6-13"><a href="#annotated-cell-6-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-6-14"><a href="#annotated-cell-6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
@@ -1261,7 +1294,7 @@ Y_i &amp;= C_i L + (1 - C_i) H_i.
 <span id="annotated-cell-6-23"><a href="#annotated-cell-6-23" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
 <span id="annotated-cell-6-24"><a href="#annotated-cell-6-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> mean = <span class="fl">1.0</span>/rate;</span>
 <span id="annotated-cell-6-25"><a href="#annotated-cell-6-25" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
+</div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
@@ -1280,11 +1313,9 @@ Y_i &amp;= C_i L + (1 - C_i) H_i.
 <span data-code-cell="annotated-cell-6" data-code-lines="11" data-code-annotation="4">The <span class="math inline">\(H_i\)</span>’s above the limit are not observed, so they go in the <code>parameters</code> block (a better name would have been “latent block”).</span>
 </dd>
 </dl>
-</div>
-</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">sampling</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  chernobyl_naive,</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"chernobyl_naive.stan"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">1</span>,</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
@@ -1292,94 +1323,68 @@ Y_i &amp;= C_i L + (1 - C_i) H_i.
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_above_limit =</span> n_above_limit, </span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_below_limit =</span> n_below_limit,</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">data_below_limit =</span> data_below_limit</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>          ),       </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">100000</span>                   </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>          ),  </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_dir =</span> <span class="st">"stan_out"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh =</span> <span class="dv">10000</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter_sampling =</span> <span class="dv">100000</span>                   </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 1.6e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:     1 / 100000 [  0%]  (Warmup)
-Chain 1: Iteration: 10000 / 100000 [ 10%]  (Warmup)
-Chain 1: Iteration: 20000 / 100000 [ 20%]  (Warmup)
-Chain 1: Iteration: 30000 / 100000 [ 30%]  (Warmup)
-Chain 1: Iteration: 40000 / 100000 [ 40%]  (Warmup)
-Chain 1: Iteration: 50000 / 100000 [ 50%]  (Warmup)
-Chain 1: Iteration: 50001 / 100000 [ 50%]  (Sampling)
-Chain 1: Iteration: 60000 / 100000 [ 60%]  (Sampling)
-Chain 1: Iteration: 70000 / 100000 [ 70%]  (Sampling)
-Chain 1: Iteration: 80000 / 100000 [ 80%]  (Sampling)
-Chain 1: Iteration: 90000 / 100000 [ 90%]  (Sampling)
-Chain 1: Iteration: 100000 / 100000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.538 seconds (Warm-up)
-Chain 1:                0.72 seconds (Sampling)
-Chain 1:                1.258 seconds (Total)
-Chain 1: </code></pre>
+<pre><code>Running MCMC with 1 chain...
+
+Chain 1 Iteration:      1 / 101000 [  0%]  (Warmup) 
+Chain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) 
+Chain 1 Iteration:  11000 / 101000 [ 10%]  (Sampling) 
+Chain 1 Iteration:  21000 / 101000 [ 20%]  (Sampling) 
+Chain 1 Iteration:  31000 / 101000 [ 30%]  (Sampling) 
+Chain 1 Iteration:  41000 / 101000 [ 40%]  (Sampling) 
+Chain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) 
+Chain 1 Iteration:  61000 / 101000 [ 60%]  (Sampling) 
+Chain 1 Iteration:  71000 / 101000 [ 70%]  (Sampling) 
+Chain 1 Iteration:  81000 / 101000 [ 80%]  (Sampling) 
+Chain 1 Iteration:  91000 / 101000 [ 90%]  (Sampling) 
+Chain 1 Iteration: 101000 / 101000 [100%]  (Sampling) 
+Chain 1 finished in 1.6 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span><span class="fu">summary</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"sd"</span>, <span class="st">"mad"</span>, <span class="st">"rhat"</span>, <span class="st">"ess_bulk"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Inference for Stan model: anon_model.
-1 chains, each with iter=1e+05; warmup=50000; thin=1; 
-post-warmup draws per chain=50000, total post-warmup draws=50000.
-
-                      mean se_mean   sd   2.5%    25%    50%    75%  97.5%
-rate                  0.40    0.00 0.20   0.11   0.25   0.36   0.51   0.86
-data_above_limit[1]   4.44    0.03 4.74   1.17   1.86   3.01   5.23  16.18
-data_above_limit[2]   4.44    0.03 4.87   1.16   1.85   2.99   5.23  16.30
-data_above_limit[3]   4.44    0.03 5.01   1.16   1.84   2.96   5.20  16.40
-data_above_limit[4]   4.42    0.03 4.78   1.17   1.86   3.01   5.21  16.00
-data_above_limit[5]   4.45    0.03 5.04   1.16   1.86   3.00   5.25  16.24
-data_above_limit[6]   4.43    0.03 4.60   1.16   1.85   3.00   5.23  16.10
-data_above_limit[7]   4.45    0.03 4.97   1.16   1.83   2.99   5.29  16.26
-mean                  3.35    0.02 2.43   1.16   1.97   2.74   3.96   9.20
-lp__                -19.27    0.02 2.25 -24.59 -20.55 -18.92 -17.61 -15.96
-                    n_eff Rhat
-rate                29917    1
-data_above_limit[1] 31929    1
-data_above_limit[2] 29991    1
-data_above_limit[3] 30474    1
-data_above_limit[4] 30375    1
-data_above_limit[5] 29617    1
-data_above_limit[6] 29820    1
-data_above_limit[7] 33738    1
-mean                17755    1
-lp__                16351    1
-
-Samples were drawn using NUTS(diag_e) at Mon Mar 18 23:08:34 2024.
-For each parameter, n_eff is a crude measure of effective sample size,
-and Rhat is the potential scale reduction factor on split chains (at 
-convergence, Rhat=1).</code></pre>
+<pre><code># A tibble: 10 × 7
+   variable               mean  median    sd   mad  rhat ess_bulk
+   &lt;chr&gt;                 &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+ 1 lp__                -19.3   -18.9   2.26  2.12   1.00   35607.
+ 2 rate                  0.393   0.361 0.197 0.184  1.00   37126.
+ 3 data_above_limit[1]   4.54    3.03  5.46  2.10   1.00   55872.
+ 4 data_above_limit[2]   4.52    3.04  5.00  2.10   1.00   40542.
+ 5 data_above_limit[3]   4.49    3.03  4.93  2.09   1.00   48875.
+ 6 data_above_limit[4]   4.51    3.03  4.80  2.11   1.00   47362.
+ 7 data_above_limit[5]   4.48    3.02  5.12  2.09   1.00   44712.
+ 8 data_above_limit[6]   4.53    3.03  4.99  2.11   1.00   47429.
+ 9 data_above_limit[7]   4.52    3.02  5.24  2.10   1.00   50976.
+10 mean                  3.41    2.77  2.61  1.37   1.00   37126.</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(ggplot2))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"mean"</span>)) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"mean"</span>)) <span class="sc">+</span> </span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="topic04_censoring_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="topic04_censoring_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Back to the question of whether the radiation is greater than 1.5 R/s:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">extract</span>(fit)<span class="sc">$</span>mean</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">as.vector</span>(fit<span class="sc">$</span><span class="fu">draws</span>(<span class="st">"mean"</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(samples <span class="sc">&gt;</span> <span class="fl">1.5</span>) <span class="sc">/</span> <span class="fu">length</span>(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.90094</code></pre>
+<pre><code>[1] 0.90655</code></pre>
 </div>
 </div>
 
