@@ -112,7 +112,7 @@ suppressPackageStartupMessages(require(cmdstanr))
 3. The $H_i$'s below the limit are observed, so they go in the `data` block.
 4. The $H_i$'s above the limit are not observed, so they go in the `parameters` block (a better name would have been "latent block").
 
-
+<!-- we need to show the output of this one! (used in RB page) -->
 ```{r warning=FALSE}
 mod = cmdstan_model("chernobyl_naive.stan")
 fit = mod$sample(
@@ -131,7 +131,7 @@ fit = mod$sample(
 ```
 
 ```{r}
-fit$summary(NULL, c("mean", "median", "sd", "mad", "rhat", "ess_bulk"))
+fit$summary(NULL, c("mean", "mcse_mean"))
 ```
 
 ```{r message=FALSE, warning=FALSE}

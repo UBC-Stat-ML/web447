@@ -62,7 +62,7 @@ fit = mod$sample(
 
 
 ```{r}
-fit$summary(NULL, c("mean", "median", "sd", "mad", "rhat", "ess_bulk"))
+fit$summary(NULL, c("mean", "mcse_mean"))
 ```
 
 **Compare:** this to the result from [the page on censoring](topic04_censoring.qmd), where we got:
@@ -71,9 +71,9 @@ fit$summary(NULL, c("mean", "median", "sd", "mad", "rhat", "ess_bulk"))
   ...
 Chain 1 finished in 1.6 seconds.
   ...
-   variable               mean  median    sd   mad  rhat ess_bulk
+   variable               mean mcse_mean
   ...
-    mean                  3.41    2.77  2.61  1.37   1.00   37126  ...
+10 mean                  3.41   0.0178  
 ```
 
 **Conclusion:** Essentially the same result (i.e., within [MCSE](../w09_workflow/topic05_mcmc_ess.qmd)), 

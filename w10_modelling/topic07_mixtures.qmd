@@ -154,7 +154,7 @@ with probability one.
 
 **Probably guessing:** feeding a score of **9** out of 20, we get:
 
-
+<!-- we need to show the output of this one! -->
 ```{r warning=FALSE}
 mod = cmdstan_model("students_guessing_simplified.stan")
 fit = mod$sample(
@@ -172,6 +172,7 @@ mean(guessing_probability_samples)
 
 **Probably not guessing:** feeding a score of **19** out of 20, we get:
 
+<!-- we need to show the output of this one! -->
 ```{r warning=FALSE}
 fit = mod$sample(
   seed = 1,
