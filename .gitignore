@@ -23,3 +23,11 @@ w09_workflow/stan_out
 betabinom
 unid
 vaccines
+chernobyl_naive
+chernobyl_rao_blackwellized
+gamma_with_mean
+kumaraswamy
+w10_modelling/stan_out
+kumaraswamy_as_function
+students_guessing
+students_guessing_simplified

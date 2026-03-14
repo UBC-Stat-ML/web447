@@ -71,33 +71,16 @@ realizations of that datatype. We now fill this gap.
 **Question:** consider the following Stan model:
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 ```
 
-```{stan output.var = "gamma"}
-data {
-  int<lower=0> n_obs;
-  vector<lower=0>[n_obs] observations;
-}
-
-parameters {
-  real<lower=0> shape;
-  real<lower=0> rate;
-}
-
-model {
-  // priors
-  shape ~ exponential(1.0/100);
-  rate ~ exponential(1.0/100);
-  
-  // likelihood
-  observations ~ gamma(shape, rate);
-}
+```stan {filename="gamma.stan"}
+{{< include gamma.stan >}}
 ```
 
 Notice that neither of the parameters passed in the likelihood can be interpreted as a mean. 
 However, you are asked to report a mean parameter for the population from which the observations come from. 
-How would you proceed?
+How would you proceed? 
 
 {{< include ../../clickers/w10/_c01.qmd >}}
 

@@ -49,37 +49,28 @@ where $x \in (0, 1)$ and $a, b$ are positive parameters.
     
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 ```
 
 
-```{stan output.var = "Kumaraswamy"}
-data {
-  real<lower=0> a;
-  real<lower=0> b;  
-}
-
-parameters {
-  real<lower=0, upper=1> x; # <1>
-}
-
-model {
-  target += log(a) + log(b) + (a-1) * log(x) + (b-1) * log1p(-x^a); # <2>
-                                                    // ^ log1p(z) = log(1+z)
-}
+```stan {shortcodes=true, filename="kumaraswamy.stan"}
+{{< include kumaraswamy.stan >}}
 ```
 1. Support is enforced. 
 2. Contribution of the Kumaraswamy log density added to the log joint density.
 
-```{r dependson=knitr::dep_prev()}
-fit = sampling(
-  Kumaraswamy,
+```{r message=FALSE, warning=FALSE, results=FALSE}
+mod = cmdstan_model("kumaraswamy.stan")
+fit = mod$sample(
   seed = 1,
   refresh = 0,
-  data = list(a = 2, b = 5),       
-  iter = 10000                   
+  data = list(a = 2, b = 5),  
+  chains = 1,
+  output_dir = "stan_out",
+  iter_sampling = 10000                   
 )
 ```
+
 
 Checking that the histogram roughly matches the one from the Wikipedia article (see [top of page Figure](topic03_custom_bricks.qmd), purple line).
 
@@ -88,7 +79,7 @@ Checking that the histogram roughly matches the one from the Wikipedia article (
 
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
-mcmc_hist(fit, pars = c("x")) + theme_minimal()
+mcmc_hist(fit$draws("x")) + theme_minimal()
 ```
 
 
@@ -140,37 +131,23 @@ loglikelihood
 
 If you are using a custom density for several variables, encapsulate it into a function:
 
-```{stan output.var = "Kumaraswamy_as_function"}
-functions { # <1>
-  real Kumaraswamy_lpdf(real x, real a, real b) { # <2>
-    return log(a) + log(b) + (a-1) * log(x) + (b-1) * log1p(-x^a);
-  }
-}
 
-data {
-  real<lower=0> a;
-  real<lower=0> b;  
-}
-
-parameters {
-  real<lower=0, upper=1> x; 
-}
-
-model {
-  x ~ Kumaraswamy(a, b); # <3>
-}
+```stan {shortcodes=true, filename="kumaraswamy_as_function.stan"}
+{{< include kumaraswamy_as_function.stan >}}
 ```
 1. The `function` block allows you to create custom functions. See [the Stan documentation for more details.](https://mc-stan.org/docs/stan-users-guide/user-functions.html#basic-functions.section)
 2. For Stan to pick up your function in its `~` syntax, you must use the special suffix `_lpdf` for your function name, which stands for "log probability density function."
 3. Then you can use your distribution name using `~` as usual (notice we do not include the `_lpdf` when we make such call). From this it is apparent that Stan's `~` notation is just a shortcut for `target += distributionName_lpdf(...)`. 
 
-```{r echo=FALSE, dependson=knitr::dep_prev()}
-fit = sampling(
-  Kumaraswamy_as_function,
+```{r message=FALSE, warning=FALSE, results=FALSE}
+mod = cmdstan_model("kumaraswamy_as_function.stan")
+fit = mod$sample(
   seed = 1,
   refresh = 0,
-  data = list(a = 2, b = 5),       
-  iter = 10000                   
+  data = list(a = 2, b = 5),  
+  chains = 1,
+  output_dir = "stan_out",
+  iter_sampling = 10000                   
 )
 ```
 
@@ -179,7 +156,7 @@ fit = sampling(
 
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
-mcmc_hist(fit, pars = c("x")) + theme_minimal()
+mcmc_hist(fit$draws("x")) + theme_minimal()
 ```
 
 

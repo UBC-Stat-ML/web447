@@ -100,36 +100,12 @@ The goal is to compute $\ex[\text{mean parameter} | Y] = \ex[1/X | Y]$.
 ### Stan implementation
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 ```
 
 
-```{stan output.var = "chernobyl_naive"}
-data {
-  int<lower=0> n_above_limit; # <1>
-  int<lower=0> n_below_limit; # <2>
-  real<lower=0> limit;
-  vector<upper=limit>[n_below_limit] data_below_limit; # <3>
-  
-}
-
-parameters {
-  real<lower=0> rate; 
-  vector<lower=limit>[n_above_limit] data_above_limit; # <4>
-}
-
-model {
-  // prior
-  rate ~ exponential(1.0/100);
-  
-  // likelihood
-  data_above_limit ~ exponential(rate);
-  data_below_limit ~ exponential(rate); 
-}
-
-generated quantities {
-  real mean = 1.0/rate;
-}
+```stan {shortcodes=true, filename="chernobyl_naive.stan"}
+{{< include chernobyl_naive.stan >}}
 ```
 1. The number of $H_i$'s above the detection limit. 
 2. The number of $H_i$'s below the detection limit.
@@ -137,9 +113,9 @@ generated quantities {
 4. The $H_i$'s above the limit are not observed, so they go in the `parameters` block (a better name would have been "latent block").
 
 
-```{r dependson=knitr::dep_prev()}
-fit = sampling(
-  chernobyl_naive,
+```{r warning=FALSE}
+mod = cmdstan_model("chernobyl_naive.stan")
+fit = mod$sample(
   seed = 1,
   chains = 1,
   data = list(
@@ -147,20 +123,22 @@ fit = sampling(
             n_above_limit = n_above_limit, 
             n_below_limit = n_below_limit,
             data_below_limit = data_below_limit
-          ),       
-  iter = 100000                   
+          ),  
+  output_dir = "stan_out",
+  refresh = 10000,
+  iter_sampling = 100000                   
 )
 ```
 
 ```{r}
-fit
+fit$summary(NULL, c("mean", "median", "sd", "mad", "rhat", "ess_bulk"))
 ```
 
 ```{r message=FALSE, warning=FALSE}
 
 suppressPackageStartupMessages(require(bayesplot))
 suppressPackageStartupMessages(require(ggplot2))
-mcmc_areas_ridges(fit, pars = c("mean")) + 
+mcmc_areas_ridges(fit$draws("mean")) + 
   theme_minimal() + 
   scale_x_continuous(limits = c(0, 10)) 
 ```
@@ -168,7 +146,7 @@ mcmc_areas_ridges(fit, pars = c("mean")) +
 Back to the question of whether the radiation is greater than 1.5 R/s:
 
 ```{r}
-samples = extract(fit)$mean
+samples = as.vector(fit$draws("mean"))
 
 sum(samples > 1.5) / length(samples)
 ```
