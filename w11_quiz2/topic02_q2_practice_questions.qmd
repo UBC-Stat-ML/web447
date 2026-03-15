@@ -26,7 +26,7 @@ since quiz 2 will cover that material as well.
 ### Libraries needed to run several examples below
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
+suppressPackageStartupMessages(require(cmdstanr))
 ```
 
 
@@ -297,7 +297,7 @@ model {
 }
 ```
 
-Identify as many bugs as you can, and correct each. 
+Identify as many bugs as you can, and correct each.
 
 
 {{< include ../../clickers/w11/_c13.qmd >}}
