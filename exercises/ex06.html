@@ -1116,7 +1116,7 @@ https://github.com/trevorcampbell/shortex
 <section id="q.2-laplace-approximation-of-a-hierarchical-model" class="level2">
 <h2 class="anchored" data-anchor-id="q.2-laplace-approximation-of-a-hierarchical-model">Q.2 Laplace approximation of a hierarchical model</h2>
 <p>We will use a subset of the launch data shown in class: download it <a href="https://github.com/UBC-Stat-ML/web447/blob/main/data/failure_counts.csv">here</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(<span class="st">"dplyr"</span>))</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(<span class="st">"dplyr"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"failure_counts.csv"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"^Delta"</span>, LV.Type)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notice that we have subsetted to <strong>only</strong> the rocket types with the prefix <em>Delta</em> in their name.</p>

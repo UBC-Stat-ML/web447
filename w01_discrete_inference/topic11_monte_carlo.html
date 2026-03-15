@@ -1145,26 +1145,23 @@ Y | X &amp;\sim {\mathrm{Unif}}\{1, \dots, X\}.
 </div></div><p><strong>Interpretation:</strong> you roll a D&amp;D d4 dice (blue one on the image), then pick an integer uniformly between 1 and the number on the dice.</p>
 <p>Let us use Monte Carlo to estimate <span class="math inline">\(\mathbb{E}[X^Y]\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(extraDistr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: extraDistr</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall our forward simulation code from earlier:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>forward_simulate_roll_and_pick <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">4</span>) <span class="co"># 1 uniform between 1-6, i.e. a dice</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span>x)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, y) <span class="co"># return a vector with these two realizations</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>n_iterations <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (iteration <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iterations) {</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">forward_simulate_roll_and_pick</span>()</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> sum <span class="sc">+</span> sample[<span class="dv">1</span>]<span class="sc">^</span>sample[<span class="dv">2</span>]</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum<span class="sc">/</span>n_iterations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extraDistr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall our forward simulation code from earlier:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>forward_simulate_roll_and_pick <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">4</span>) <span class="co"># 1 uniform between 1-6, i.e. a dice</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rdunif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span>x)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, y) <span class="co"># return a vector with these two realizations</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>n_iterations <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (iteration <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iterations) {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> <span class="fu">forward_simulate_roll_and_pick</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">&lt;-</span> sum <span class="sc">+</span> sample[<span class="dv">1</span>]<span class="sc">^</span>sample[<span class="dv">2</span>]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum<span class="sc">/</span>n_iterations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25.7831</code></pre>
 </div>

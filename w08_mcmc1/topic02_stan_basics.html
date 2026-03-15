@@ -1187,7 +1187,7 @@ https://github.com/trevorcampbell/shortex
 <p><strong>Question:</strong> How does Stan get the actual observed value <span class="math inline">\(y = 0.06\)</span>?</p>
 <p><strong>Answer:</strong> When Stan gets called from R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(cmdstanr))</span>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(cmdstanr))</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">=</span> <span class="fu">cmdstan_model</span>(<span class="st">"doomsday.stan"</span>)</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> mod<span class="sc">$</span><span class="fu">sample</span>(</span>
 <span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>,</span>
@@ -1217,7 +1217,7 @@ Chain 1 Iteration:      1 / 101000 [  0%]  (Warmup)
 Chain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) 
 Chain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 101000 / 101000 [100%]  (Sampling) 
-Chain 1 finished in 1.0 seconds.</code></pre>
+Chain 1 finished in 0.9 seconds.</code></pre>
 </div>
 </div>
 <p>We can now compare the approximation provided by Stan:</p>
@@ -1316,7 +1316,7 @@ Click for answer
 </div>
 <p>You can also use the <code>bayesplot</code> package which will be handy to create more complex plots from MCMC runs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">require</span>(bayesplot))</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(bayesplot))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(fit<span class="sc">$</span><span class="fu">draws</span>(), <span class="at">par =</span> <span class="fu">c</span>(<span class="st">"x"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
