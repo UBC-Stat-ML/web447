@@ -31,7 +31,7 @@ use as a starting point for either R script or notebook.
 For example:
 
 ```r
-require(rstan)
+library(rstan)
 fit = stan(
   seed = 123,
   file = "../w08_mcmc1/beta_binomial.stan",  # Stan program

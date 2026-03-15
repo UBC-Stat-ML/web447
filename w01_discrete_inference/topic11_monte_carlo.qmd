@@ -50,7 +50,7 @@ $$\hat G_M \approx \ex[g(X, Y)].$${#eq-mc}
 Let us use Monte Carlo to estimate $\ex[X^Y]$:
 
 ```{r}
-require(extraDistr)
+library(extraDistr)
 set.seed(4)
 
 # Recall our forward simulation code from earlier:

@@ -71,7 +71,7 @@ realizations of that datatype. We now fill this gap.
 **Question:** consider the following Stan model:
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 ```stan {filename="gamma.stan"}

@@ -84,7 +84,7 @@ First, copy and paste the following code into a file called `beta_binomial.stan`
 Second, run Stan as follows: 
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 mod = cmdstan_model("beta_binomial.stan")
 
 # create a directory where the samples will be saved 

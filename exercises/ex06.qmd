@@ -59,7 +59,7 @@ Hint: use a change of variable as used in integration or STAT 302 for transforma
 We will use a subset of the launch data shown in class: download it [here](https://github.com/UBC-Stat-ML/web447/blob/main/data/failure_counts.csv)
 
 ```r
-suppressPackageStartupMessages(require("dplyr"))
+suppressPackageStartupMessages(library("dplyr"))
 df = read.csv("failure_counts.csv") %>% 
       filter(grepl("^Delta", LV.Type)) 
 ```

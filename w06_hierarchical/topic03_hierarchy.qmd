@@ -36,7 +36,7 @@ to decrease prior sensitivity even when the dataset of interest is of limited si
 
 
 ```{r}
-suppressPackageStartupMessages(require("dplyr"))
+suppressPackageStartupMessages(library("dplyr"))
 df = read.csv("../data/failure_counts.csv") 
 rmarkdown::paged_table(df)
 ```
@@ -87,8 +87,8 @@ sum(df$numberOfFailures)
 
 
 ```{r message=F, warning=F}
-suppressPackageStartupMessages(require("ggplot2"))
-suppressPackageStartupMessages(require("latex2exp"))
+suppressPackageStartupMessages(library("ggplot2"))
+suppressPackageStartupMessages(library("latex2exp"))
 
 ggplot(df, aes(x = numberOfFailures / numberOfLaunches)) +
   geom_histogram() + 

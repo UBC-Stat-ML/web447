@@ -41,7 +41,7 @@ launched 11 times between 1979 and 1986.
 ```{r}
 source("../../solutions/simple.R")
 source("../blocks/simple_utils.R")
-suppressPackageStartupMessages(require("dplyr"))
+suppressPackageStartupMessages(library("dplyr"))
 set.seed(1)
 
 df = read.csv("../data/launches.csv") %>% filter(LV.Type == "Ariane 1")

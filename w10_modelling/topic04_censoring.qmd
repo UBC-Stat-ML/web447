@@ -55,7 +55,7 @@ mean(measurements)
 - Let us look at the raw data and histogram.
 
 ```{r message=FALSE, warning=FALSE}
-suppressPackageStartupMessages(require("ggplot2"))
+suppressPackageStartupMessages(library("ggplot2"))
 df = data.frame(measurements = measurements)
 
 ggplot(df, aes(x = measurements)) +
@@ -100,7 +100,7 @@ The goal is to compute $\ex[\text{mean parameter} | Y] = \ex[1/X | Y]$.
 ### Stan implementation
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 
@@ -136,8 +136,8 @@ fit$summary(NULL, c("mean", "mcse_mean"))
 
 ```{r message=FALSE, warning=FALSE}
 
-suppressPackageStartupMessages(require(bayesplot))
-suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(library(bayesplot))
+suppressPackageStartupMessages(library(ggplot2))
 mcmc_areas_ridges(fit$draws("mean")) + 
   theme_minimal() + 
   scale_x_continuous(limits = c(0, 10)) 

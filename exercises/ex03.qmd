@@ -50,9 +50,9 @@ distributions as objects---a necessary ingredient of every PPL. Load or install
 it using
 ```{r}
 #| eval: false
-if (!require(distr)){
+if (!library(distr)){
   install.packages("distr")
-  require(distr)
+  library(distr)
 }
 ```
 2. Read [this short tutorial on distr](ex03_distr_tutorial.qmd). Nothing to 

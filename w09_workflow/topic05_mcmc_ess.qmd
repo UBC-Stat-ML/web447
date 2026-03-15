@@ -75,7 +75,7 @@ We now show how to determine how many digits are reliable:
 **Example:** our simple [doomsday model](../w03_ppl/topic03_continuous.qmd)...
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 ```stan {shortcodes=true, filename="doomsday.stan"}

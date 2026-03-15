@@ -32,10 +32,10 @@ First, install the packages `magrittr` and `tidybayes` (and `ggplot2` if you hav
 then import them:
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
-suppressPackageStartupMessages(require(magrittr))
-suppressPackageStartupMessages(require(tidybayes))
-suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(library(cmdstanr))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(tidybayes))
+suppressPackageStartupMessages(library(ggplot2))
 ```
 
 

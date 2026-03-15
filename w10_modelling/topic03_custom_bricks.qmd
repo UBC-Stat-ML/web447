@@ -49,7 +49,7 @@ where $x \in (0, 1)$ and $a, b$ are positive parameters.
     
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 
@@ -77,8 +77,8 @@ Checking that the histogram roughly matches the one from the Wikipedia article (
 ```{r message=FALSE, warning=FALSE}
 #| column: margin
 
-suppressPackageStartupMessages(require(bayesplot))
-suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(library(bayesplot))
+suppressPackageStartupMessages(library(ggplot2))
 mcmc_hist(fit$draws("x")) + theme_minimal()
 ```
 
@@ -154,8 +154,8 @@ fit = mod$sample(
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 #| column: margin
 
-suppressPackageStartupMessages(require(bayesplot))
-suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(library(bayesplot))
+suppressPackageStartupMessages(library(ggplot2))
 mcmc_hist(fit$draws("x")) + theme_minimal()
 ```
 

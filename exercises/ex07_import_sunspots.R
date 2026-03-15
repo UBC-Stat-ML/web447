@@ -1,5 +1,5 @@
-suppressPackageStartupMessages(require(ggplot2))
-suppressPackageStartupMessages(require(dplyr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
 
 df = read.csv(
   "https://raw.githubusercontent.com/UBC-Stat-ML/web447/1e345149a5b698ccdf0a7e9b0aeabec2463c50ca/data/sunspots-SN_m_tot_V2.0.csv",

@@ -87,9 +87,9 @@ we will now implement and run the algorithm described above under "What do we me
 ```{r}
 #| code-fold: true
 
-suppressPackageStartupMessages(require("ggplot2"))
-suppressPackageStartupMessages(require("dplyr"))
-suppressPackageStartupMessages(require("tidyr"))
+suppressPackageStartupMessages(library("ggplot2"))
+suppressPackageStartupMessages(library("dplyr"))
+suppressPackageStartupMessages(library("tidyr"))
 theme_set(theme_bw())
 
 high_density_intervals <- function(alpha, posterior_probs){

@@ -179,8 +179,8 @@ Consider the following dataset, showing the monthly number of sun spots from 201
 
 
 # source: https://www.sidc.be/SILSO/infosnmtot
-suppressPackageStartupMessages(require("dplyr"))
-suppressPackageStartupMessages(require("ggplot2"))
+suppressPackageStartupMessages(library("dplyr"))
+suppressPackageStartupMessages(library("ggplot2"))
 
 df = read.csv("../data/sunspots-SN_m_tot_V2.0.csv", sep = ";", header=FALSE) %>%
         mutate(count = ceiling(V4)) %>%

@@ -1,6 +1,6 @@
-suppressPackageStartupMessages(require(rstan))
-suppressPackageStartupMessages(require(ggplot2))
-suppressPackageStartupMessages(require(dplyr))
+suppressPackageStartupMessages(library(rstan))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
 
 # data from: https://data.chhs.ca.gov/dataset/covid-19-variant-data
 df = read.csv("../data/covid19_variants.csv")

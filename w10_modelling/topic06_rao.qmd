@@ -32,7 +32,7 @@ Rao-Blackwellization is an important technique for two reasons:
 {{< include ../blocks/_chernobyl_data_gen.qmd >}}
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 ```stan {shortcodes=true, filename="chernobyl_rao_blackwellized.stan"}

@@ -19,9 +19,9 @@ to practice the Stan syntax introduced this week.
 
 
 ```{r}
-suppressPackageStartupMessages(require(rstan))
-suppressPackageStartupMessages(require(ggplot2))
-suppressPackageStartupMessages(require(dplyr))
+suppressPackageStartupMessages(library(rstan))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
 
 set.seed(1)
 

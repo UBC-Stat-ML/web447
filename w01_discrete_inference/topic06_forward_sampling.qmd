@@ -67,7 +67,7 @@ You will practice forward sampling in [Ex1, Q1.1.2](../exercises/ex01.qmd#sec-q1
 **Example of forward simulation code:**
 
 ```{r}
-require(extraDistr)
+library(extraDistr)
 set.seed(4)
 
 forward_simulate_roll_and_pick <- function() {

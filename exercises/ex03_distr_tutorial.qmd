@@ -8,7 +8,7 @@ Here are the functionalities in `distr` you will need for the exercise
 Loading the package without annoying prompt:
 
 ```{r}
-suppressPackageStartupMessages(require(distr))
+suppressPackageStartupMessages(library(distr))
 ```
 
 

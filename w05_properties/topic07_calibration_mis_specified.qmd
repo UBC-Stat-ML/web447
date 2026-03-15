@@ -35,9 +35,9 @@ One obvious possibility is to make the model better. But in the following we sho
 ```{r}
 #| code-fold: true
 
-suppressPackageStartupMessages(require("ggplot2"))
-suppressPackageStartupMessages(require("dplyr"))
-suppressPackageStartupMessages(require("tidyr"))
+suppressPackageStartupMessages(library("ggplot2"))
+suppressPackageStartupMessages(library("dplyr"))
+suppressPackageStartupMessages(library("tidyr"))
 theme_set(theme_bw())
 
  # Using now the same non-uniform prior as before for posterior calculation

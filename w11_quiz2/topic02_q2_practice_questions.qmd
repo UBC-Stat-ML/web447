@@ -26,7 +26,7 @@ since quiz 2 will cover that material as well.
 ### Libraries needed to run several examples below
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
+suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 

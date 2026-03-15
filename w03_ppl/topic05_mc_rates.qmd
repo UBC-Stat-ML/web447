@@ -60,7 +60,7 @@ truth = 1/3 * (1 + 1/2 + 1 + 4)
 truth
 
 set.seed(1)
-suppressMessages(require(extraDistr))
+suppressMessages(library(extraDistr))
 
 forward_sample = function() {
   x = rdunif(1, min=0, max=2)
@@ -130,7 +130,7 @@ Finally, plotting the errors in log-log scale (each of the $500 \cdot 5$ points 
 
 
 ```{r}
-require(ggplot2)
+library(ggplot2)
 ggplot(data=df, aes(x=n_iterations, y=errors)) +
   stat_summary(fun = mean, geom="line") + # Line averages over 1000 replicates
   scale_x_log10() +  # Show result in log-log scale

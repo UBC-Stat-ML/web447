@@ -59,7 +59,7 @@ This provides us with a second example of [Bayesian GLMs](../w04_glms/topic06_gl
 2. copy paste the code below and run it on your computer (after changing the path "`../data`" to the path on your computer)
 
 ```{r}
-suppressPackageStartupMessages(require("dplyr"))
+suppressPackageStartupMessages(library("dplyr"))
 df = read.csv("../data/hubble-1.csv") %>%
     rename(distance = R..Mpc.) %>%
     rename(velocity = v..km.sec.)

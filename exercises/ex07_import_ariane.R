@@ -1,5 +1,5 @@
-suppressPackageStartupMessages(require(ggplot2))
-suppressPackageStartupMessages(require(dplyr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
 
 df = read.csv("https://raw.githubusercontent.com/UBC-Stat-ML/web447/c0e4b4b416cc8909b3bb7b7877668b059f1390eb/data/launches.csv") %>% 
   filter(LV.Type == "Ariane 1")

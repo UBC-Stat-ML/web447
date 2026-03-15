@@ -62,9 +62,9 @@ Informally, there are two possible situations to distinguish:
 ### Examples
 
 ```{r}
-suppressPackageStartupMessages(require(cmdstanr))
-suppressPackageStartupMessages(require(ggplot2))
-suppressPackageStartupMessages(require(bayesplot))
+suppressPackageStartupMessages(library(cmdstanr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(bayesplot))
 ```
 
 
