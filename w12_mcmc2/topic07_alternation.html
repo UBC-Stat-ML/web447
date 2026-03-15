@@ -865,7 +865,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic03_markov_lln.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Law of large numbers for Markov chain</span></a>
+ <span class="menu-text">Law of large numbers for Markov chains</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1050,7 +1050,7 @@ window.Quarto = {
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#intuition" id="toc-intuition" class="nav-link" data-scroll-target="#intuition">Intuition</a></li>
   <li><a href="#coding-up-kernel-alternation" id="toc-coding-up-kernel-alternation" class="nav-link" data-scroll-target="#coding-up-kernel-alternation">Coding up kernel alternation</a></li>
-  <li><a href="#mathematical-notation-for-kernel-mixtures" id="toc-mathematical-notation-for-kernel-mixtures" class="nav-link" data-scroll-target="#mathematical-notation-for-kernel-mixtures">Mathematical notation for kernel mixtures</a></li>
+  <li><a href="#mathematical-notation-for-kernel-alternations" id="toc-mathematical-notation-for-kernel-alternations" class="nav-link" data-scroll-target="#mathematical-notation-for-kernel-alternations">Mathematical notation for kernel alternations</a></li>
   </ul></li>
   <li><a href="#invariance-result" id="toc-invariance-result" class="nav-link" data-scroll-target="#invariance-result">Invariance result</a>
   <ul class="collapse">
@@ -1145,13 +1145,13 @@ https://github.com/trevorcampbell/shortex
 <p><strong>Setup:</strong> Denote the 2 kernels we want to use by <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
 <p><strong>Idea:</strong> at each MCMC iteration, let <span class="math inline">\(x\)</span> denote the current state,</p>
 <ol type="1">
-<li>Sample from <span class="math inline">\(K_1\)</span> from the current state.</li>
-<li>Sample from <span class="math inline">\(K_2\)</span> from the state output by <span class="math inline">\(K_1\)</span>.</li>
+<li>Sample from <span class="math inline">\(K_1\)</span> based on the current state.</li>
+<li>Sample from <span class="math inline">\(K_2\)</span> based the state output by <span class="math inline">\(K_1\)</span>.</li>
 </ol>
 </section>
 <section id="coding-up-kernel-alternation" class="level3">
 <h3 class="anchored" data-anchor-id="coding-up-kernel-alternation">Coding up kernel alternation</h3>
-<p>Here is an example how to implement the alternation. It is based on the same normal proposal MH kernels, <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>, with standard deviations 1 and 2 respectively.</p>
+<p>Here is an example of how to implement the alternation. It is based on the same normal proposal MH kernels, <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>, with standard deviations 1 and 2 respectively.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1171,43 +1171,89 @@ https://github.com/trevorcampbell/shortex
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Metropolis-Hastings algorithm (normal proposal)</span></span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>mcmc_alternation <span class="ot">=</span> <span class="cf">function</span>(gamma, initial_point, n_iters) {</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>  samples <span class="ot">=</span> <span class="fu">numeric</span>(n_iters) </span>
-<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  dim <span class="ot">=</span> <span class="fu">length</span>(initial_point)</span>
-<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
-<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iters) {</span>
-<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    intermediate_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, current_point, <span class="dv">1</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-9" class="code-annotation-target"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>    current_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, intermediate_point, <span class="dv">2</span>)</span>
-<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>    samples[i] <span class="ot">=</span> current_point</span>
-<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
-<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_alternation</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a>  current_point <span class="ot">=</span> initial_point</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_iters) {</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-3-7" class="code-annotation-target"><a href="#annotated-cell-3-7" aria-hidden="true" tabindex="-1"></a>    intermediate_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, current_point, <span class="dv">1</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8" aria-hidden="true" tabindex="-1"></a>    current_point <span class="ot">=</span> <span class="fu">kernel</span>(gamma, intermediate_point, <span class="dv">2</span>)</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a>    samples[i] <span class="ot">=</span> current_point</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(samples)</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">=</span> <span class="fu">mcmc_alternation</span>(gamma_beta_binomial, <span class="fl">0.5</span>,  <span class="dv">1000</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="1">Sample from <span class="math inline">\(K_1\)</span>.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="7" data-code-annotation="1">Sample from <span class="math inline">\(K_1\)</span> based on the input state.</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="9" data-code-annotation="2">Sample from <span class="math inline">\(K_2\)</span> from the state output by <span class="math inline">\(K_1\)</span>.</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="2">Sample from <span class="math inline">\(K_2\)</span> based on the state output by <span class="math inline">\(K_1\)</span>.</span>
 </dd>
 </dl>
 </div>
 </div>
 </section>
-<section id="mathematical-notation-for-kernel-mixtures" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-notation-for-kernel-mixtures">Mathematical notation for kernel mixtures</h3>
-<p><strong>Question:</strong> write a mathematical expression for the alternation <span class="math inline">\(K_\text{alt}\)</span> in terms of <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
+<section id="mathematical-notation-for-kernel-alternations" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-notation-for-kernel-alternations">Mathematical notation for kernel alternations</h3>
+<p><strong>Question:</strong> write a mathematical expression for the alternation kernel <span class="math inline">\(K_\text{alt}\)</span> in terms of <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>.</p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $\Kalt(x' | x) = \sum_{\check x} K_1(\check x | x) K_2(x' | \check x)$
+2. $\Kalt(x' | x) = \sum_{\check x} K_1(\check x | x') K_2(x | \check x)$
+3. $\Kalt(x' | x) = \sum_{i=1}^2 0.5 K_i(x' | x).$
+4. $\Kalt(x' | x) = \sum_{i=1}^2 0.5 K_i(x | x').$
+5. None of the above.
+:::
+
+::: {.callout-caution collapse="true"} 
+## Click for hint
+
+use the following notation:
+
+- $X_1$: state before applying $\Kalt$ 
+- $X_2$: intermediate state obtained from $K_1$ (called `intermediate_point` in the code)
+- $X_3$: state after applying $\Kalt$
+
+We want an expression for $\Kalt(x' | x) = \pr(X_3 = x' | X_1 = x)$. Notice that we need 
+to "add" $X_2$ to this expression, how do we do this?
+:::
+
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+The first one. 
+
+
+We have:
+
+\begin{align*}
+\Kalt(x' | x) &= \pr(X_3 = x' | X_1 = x) \\
+&= \sum_{\check x} \pr(X_3 = x', X_2 = \check x | X_1 = x) \expl{marginalization} \\
+&= \sum_{\check x} \pr(X_2 = \check x | X_1 = x) \pr(X_3 = x' | X_2 = \check x,  X_1 = x) \expl{chain rule} \\
+&= \sum_{\check x} \pr(X_2 = \check x | X_1 = x) \pr(X_3 = x' | X_2 = \check x) \expl{Markov assumption} \\
+&= \sum_{\check x} K_1(\check x | x) K_2(x' | \check x) \expl{by definition}.
+\end{align*}
+:::
+
+
+-->
 </section>
 </section>
 <section id="invariance-result" class="level2">
 <h2 class="anchored" data-anchor-id="invariance-result">Invariance result</h2>
 <section id="alternation-preserves-invariance" class="level3">
 <h3 class="anchored" data-anchor-id="alternation-preserves-invariance">Alternation preserves invariance</h3>
-<p><strong>Proposition:</strong> if <span class="math inline">\(K_i\)</span> are <span class="math inline">\(\pi\)</span>-invariant, then their alternation is <span class="math inline">\(\pi\)</span>-invariant.</p>
+<p><strong>Proposition:</strong> if each <span class="math inline">\(K_i\)</span> is <span class="math inline">\(\pi\)</span>-invariant, then their alternation is <span class="math inline">\(\pi\)</span>-invariant.</p>
 <p><strong>Proof:</strong></p>
 <p><span class="math display">\[\begin{align*}
 \sum_{x} \pi(x) K_\text{alt}(x' | x) &amp;= \sum_{x} \pi(x) \sum_{\check x} K_1(\check x | x) K_2(x' | \check x) \\

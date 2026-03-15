@@ -831,7 +831,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic03_markov_lln.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Law of large numbers for Markov chain</span></a>
+ <span class="menu-text">Law of large numbers for Markov chains</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1072,8 +1072,8 @@ https://github.com/trevorcampbell/shortex
 <section id="rationale" class="level3">
 <h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
 <p>In our <a href="../w08_mcmc1/topic04_mh.html">first exposure to MH</a>, we defined the proposal as a probability distribution <span class="math inline">\(q(\cdot|x)\)</span> based on the current point <span class="math inline">\(x\)</span>.</p>
-<p>For HMC, it is more natural to consider the proposal as a deterministic function <span class="math inline">\(T(x)\)</span> (namely, <a href="../w12_mcmc2/topic10_hmc_intuition.html">as we saw</a>, the proposal is to “let the ball roll the ball a little bit”).</p>
-<p>We state a version of the MH algorithm based on such deterministic proposal here.</p>
+<p>For HMC, it is more natural to consider the proposal as a deterministic function <span class="math inline">\(T(x)\)</span> (namely, <a href="../w12_mcmc2/topic10_hmc_intuition.html">as we saw</a>, the proposal is to “let the marble roll a little bit”).</p>
+<p>We state a version of the MH algorithm based on such a deterministic proposal here.</p>
 </section>
 </section>
 <section id="mh-with-deterministic-proposals" class="level2">
@@ -1089,7 +1089,7 @@ https://github.com/trevorcampbell/shortex
 <li>Compute the ratio, <span class="math display">\[r(x) = \frac{\gamma(x^*)}{\gamma(x)} | \nabla T(x) |,\]</span> where <span class="math inline">\(| \nabla T(x) |\)</span> denotes the <a href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant">Jacobian determinant</a>.</li>
 <li>Accept <span class="math inline">\(x^*\)</span> with probability <span class="math inline">\(\alpha(x) = \min(1, r(x))\)</span>, otherwise stay at <span class="math inline">\(x\)</span>.</li>
 </ol>
-<p><strong>Calculus review:</strong> do you remember what is the Jacobian determinant?</p>
+<p><strong>Calculus review:</strong> do you remember what the Jacobian determinant is?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1104,9 +1104,9 @@ Click for answer
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[\begin{align*}
 \nabla T(x) &amp;= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_1}{\partial x_n}\\
+    \dfrac{\partial T_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_1}{\partial x_d}\\
     \vdots                             &amp; \ddots &amp; \vdots\\
-    \dfrac{\partial T_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_m}{\partial x_n}
+    \dfrac{\partial T_d}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial T_d}{\partial x_d}
 \end{bmatrix} \\
 |\nabla T(x)| &amp;= |\det  \nabla T(x)|.
 \end{align*}\]</span></p>
@@ -1127,6 +1127,33 @@ Click for answer
 <li><span class="math inline">\(T(T(x_1, x_2)) = T(x_2, x_1) = (x_1, x_2)\)</span> ✅</li>
 </ul>
 <p><strong>Multiplicative proposal:</strong> complete the definition of <span class="math inline">\(T\)</span> to make it an involution on <span class="math inline">\(\mathbb{R}\times \mathbb{R}^+\)</span>. <span class="math display">\[T(x_1, x_2) = T(x, m) = (mx, \_\_).\]</span></p>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. Any choice would work. 
+2. $T(x, m) = T(mx, m)$
+3. $T(x, m) = T(mx, m^2)$
+4. $T(x, m) = T(mx, 1/m)$
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is $T(x, m) = T(mx, 1/m)$, since 
+
+\begin{align*}
+T(T(x, m)) &= T(mx, 1/m) \\
+&= ((1/m)(mx), 1/(1/m)) \\
+&= (x, m).
+\end{align*}
+:::
+
+-->
 <p><strong>Question:</strong> Compute the Jacobian determinant of the multiplicative proposal involution.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1147,10 +1174,47 @@ Click for hint
     0 &amp; a_{22}
 \end{bmatrix}.
 \end{align*}\]</span></p>
-<p>Now recall that from <a href="https://en.wikipedia.org/wiki/Triangular_matrix#Properties">properties of triangular matrices</a>, this means that to compute it determinant, you just have to compute the product of the diagonal entries, <span class="math inline">\(\det \nabla T = a_{11} a_{22}\)</span>.</p>
+<p>Now recall that from <a href="https://en.wikipedia.org/wiki/Triangular_matrix#Properties">properties of triangular matrices</a>, this means that to compute its determinant, you just have to compute the product of the diagonal entries, <span class="math inline">\(\det \nabla T = a_{11} a_{22}\)</span>.</p>
 </div>
 </div>
 </div>
+<!--
+
+::: {.callout-caution collapse="true"} 
+## Click for choices
+
+1. $1/m$
+2. $1/m^2$
+3. $1/x$
+4. $1/x^2$
+5. None of the above. 
+:::
+
+
+
+::: {.callout-caution collapse="true"} 
+## Click for answer
+
+Correct answer is $1/m$.
+
+First, we compute the Jacobian matrix, where we denote $T_1(x, m) = xm$ and $T_2(x, m) = 1/m$:
+
+\begin{align*}
+\nabla T(x, m) &= \begin{bmatrix}
+    \dfrac{\partial T_1}{\partial x}  & \dfrac{\partial T_1}{\partial m}\\
+    \dfrac{\partial T_2}{\partial x} & \dfrac{\partial T_2}{\partial m}
+\end{bmatrix} \\
+&= \begin{bmatrix}
+    m & x \\
+    0 & -1/m^2
+\end{bmatrix}.
+\end{align*}
+
+
+Hence, the Jacobian determinant is $|1/m|$. Since $m \in \reals^+$, $|1/m| = 1/m$.
+:::
+
+-->
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

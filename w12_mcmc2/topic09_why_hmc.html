@@ -831,7 +831,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../w12_mcmc2/topic03_markov_lln.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Law of large numbers for Markov chain</span></a>
+ <span class="menu-text">Law of large numbers for Markov chains</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -1083,7 +1083,7 @@ https://github.com/trevorcampbell/shortex
 <section id="notion-of-computational-cost" class="level2">
 <h2 class="anchored" data-anchor-id="notion-of-computational-cost">Notion of computational cost</h2>
 <p>We first have to define what we mean by an MCMC algorithm being less “costly” than another one.</p>
-<p><strong>Question:</strong> is the time to compute one iteration (in e.g., in seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of computational cost for MCMC algorithms?</p>
+<p><strong>Question:</strong> is the time to compute one iteration (in e.g., seconds or <a href="https://en.wikipedia.org/wiki/FLOPS">FLOPS</a>) a reasonable notion of computational cost for MCMC algorithms?</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1117,11 +1117,11 @@ Click for answer
 <p><strong>Proposition:</strong> (<a href="https://arxiv.org/pdf/1001.4460.pdf">Beskos et al., 2010</a>) For <span class="math inline">\(d\)</span>-dimensional i.i.d. normal targets,</p>
 <ul>
 <li>optimally tuned HMC’s cost (seconds/ESS) scales in <span class="math inline">\(O(d^{5/4})\)</span>, whereas,</li>
-<li>optimally tuned random walk MH’ cost (seconds/ESS) scales in <span class="math inline">\(O(d^2)\)</span>.</li>
+<li>optimally tuned random walk MH’s cost (seconds/ESS) scales in <span class="math inline">\(O(d^2)\)</span>.</li>
 </ul>
 <p><strong>Notes:</strong></p>
 <ul>
-<li>This means as <span class="math inline">\(d\)</span> increases, there is an increasing performance gap in favour of HMC.</li>
+<li>This means that as <span class="math inline">\(d\)</span> increases, there is an increasing performance gap in favour of HMC.</li>
 <li>We would not use HMC for normal targets…
 <ul>
 <li>…but many real models are <a href="../w05_properties/topic07_calibration_mis_specified.html">approximately normal</a>,</li>

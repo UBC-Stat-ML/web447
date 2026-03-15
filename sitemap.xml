@@ -66,11 +66,11 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w13_advanced_infer/topic01_intro.html</loc>
-    <lastmod>2025-04-01T18:46:39.501Z</lastmod>
+    <lastmod>2026-03-15T00:30:06.066Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w13_advanced_infer/topic06_stoch_grad.html</loc>
-    <lastmod>2024-04-11T13:57:38.315Z</lastmod>
+    <lastmod>2026-03-15T04:02:09.777Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w11_quiz2/topic03_q2_logistics.html</loc>
@@ -78,7 +78,7 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w11_quiz2/topic02_q2_practice_questions.html</loc>
-    <lastmod>2026-03-14T19:27:45.621Z</lastmod>
+    <lastmod>2026-03-14T23:40:34.360Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic04_mcmc_diagnostics.html</loc>
@@ -94,11 +94,11 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic07_alternation.html</loc>
-    <lastmod>2025-04-01T16:04:46.516Z</lastmod>
+    <lastmod>2026-03-15T02:30:10.299Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic02_mh_as_markov.html</loc>
-    <lastmod>2025-03-27T14:22:20.275Z</lastmod>
+    <lastmod>2026-03-15T00:45:31.980Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_balance.html</loc>
@@ -110,15 +110,15 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic10_hmc_intuition.html</loc>
-    <lastmod>2024-04-05T19:55:16.956Z</lastmod>
+    <lastmod>2026-03-15T03:15:15.021Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic03_markov_lln.html</loc>
-    <lastmod>2024-03-31T23:31:01.525Z</lastmod>
+    <lastmod>2026-03-15T00:48:26.528Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic08_debug.html</loc>
-    <lastmod>2025-04-01T16:16:02.427Z</lastmod>
+    <lastmod>2026-03-15T02:35:46.960Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w05_properties/topic07_calibration_mis_specified.html</loc>
@@ -374,27 +374,27 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic11_involution.html</loc>
-    <lastmod>2025-04-03T16:09:47.135Z</lastmod>
+    <lastmod>2026-03-15T03:18:48.956Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_mix.html</loc>
-    <lastmod>2024-04-02T16:11:39.052Z</lastmod>
+    <lastmod>2026-03-15T02:25:56.203Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic12_hmc_as_involution.html</loc>
-    <lastmod>2025-04-03T16:16:10.560Z</lastmod>
+    <lastmod>2026-03-15T03:47:07.360Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic01_intro.html</loc>
-    <lastmod>2024-03-28T15:56:28.809Z</lastmod>
+    <lastmod>2026-03-15T00:45:42.490Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic13_autodiff.html</loc>
-    <lastmod>2025-01-21T16:48:07.644Z</lastmod>
+    <lastmod>2026-03-15T03:54:37.128Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic09_why_hmc.html</loc>
-    <lastmod>2025-04-03T15:57:46.753Z</lastmod>
+    <lastmod>2026-03-15T03:11:26.067Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic06_mh_invariance.html</loc>
@@ -402,7 +402,7 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w12_mcmc2/topic04_invariance.html</loc>
-    <lastmod>2024-04-01T16:33:33.334Z</lastmod>
+    <lastmod>2026-03-15T00:51:31.409Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w09_workflow/topic03_checking_correctness.html</loc>
@@ -422,11 +422,11 @@
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w13_advanced_infer/topic05_sgd.html</loc>
-    <lastmod>2024-04-11T13:48:06.766Z</lastmod>
+    <lastmod>2026-03-15T03:58:18.943Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w13_advanced_infer/topic03_kl.html</loc>
-    <lastmod>2025-04-01T18:47:26.771Z</lastmod>
+    <lastmod>2026-03-15T03:56:55.172Z</lastmod>
   </url>
   <url>
     <loc>https://UBC-Stat-ML.github.io/web447/w13_advanced_infer/topic02_variational.html</loc>
