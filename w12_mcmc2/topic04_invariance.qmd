@@ -24,7 +24,7 @@ Hence it is useful to build some intuition on what it means.
 
 ## Analogy: fixed point iteration 
 
-**Goal here:** gaining some intuition on what is the notion of $\pi$-invariance, using an analogy. 
+**Goal here:** to gain some intuition on what is the notion of $\pi$-invariance, using an analogy. 
 
 ### Fixed point iteration 
 
@@ -40,7 +40,7 @@ Hence it is useful to build some intuition on what it means.
     - Compute $x_3 = f(x_2)$
     - Compute $x_4 = f(x_3)$
     - etc.
-- Can we predict where will $x_n$ end up after an infinite number of iterations?
+- Can we predict where $x_n$ will end up after an infinite number of iterations?
     - Hint: try to understand why the figure has a blue line $y = x$.
 
 
@@ -54,12 +54,12 @@ Hence it is useful to build some intuition on what it means.
 ![](https://upload.wikimedia.org/wikipedia/commons/2/20/Fixed_point_example.svg){width="300"}
 :::
 
-**Question:** what are the fixed point in this picture?
+**Question:** what are the fixed points in this picture?
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-The 3 yellow points. These are the points where the curve intersect the line $y = x$. 
+The 3 yellow points. These are the points where the curve intersects the line $y = x$. 
 :::
 
 **Example:** 
@@ -70,9 +70,9 @@ The 3 yellow points. These are the points where the curve intersect the line $y 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/ea/Cosine_fixed_point.svg){width="500"}
 
 
-### Back to Markov chain
+### Back to Markov chains
 
-**Intuition:** $\pi$-invariance means "$\pi$ acts like a fixed-point of $K$." 
+**Intuition:** $\pi$-invariance means "$\pi$ acts like a fixed point of $K$." 
 
 **Connection:** 
 

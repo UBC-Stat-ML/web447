@@ -14,12 +14,12 @@ editor:
 
 ### Rationale
 
-It is easy for bugs to sneak in MCMC code. 
+It is easy for bugs to sneak into MCMC code. 
 In the workflow week, we have briefly outlined [how simulated data can be used to detect software defects](../w09_workflow/topic03_checking_correctness.qmd). 
-However, the test discussed there still left "MCMC too slow" as one possible issue confounding software defect. 
+However, the test discussed there still left "MCMC too slow" as one possible issue confounding a software defect. 
 
 Here we describe a new test (the *exact invariance test*) that excludes "MCMC too slow" from the possible causes of warning. 
-When the *exact invariance test* rises a warning, the only possible causes are "software defect" and "bad luck."
+When the *exact invariance test* raises a warning, the only possible causes are "software defects" and "bad luck."
 
 
 ## Example
@@ -48,7 +48,7 @@ It mixes up log-scale and non-log-scale computations, a common mistake.
 Concretely, the `log = TRUE` argument should be removed.
 :::
 
-Can we automatically detect there is a bug?
+Can we automatically detect bugs in MCMC code?
 
 
 ## Exact invariance test
@@ -73,7 +73,7 @@ Next, let's do the following:
 
 - Call our forward simulator. 
   $$(x, y) \sim \text{forward()}. $$
-- Run an MCMC algorithm **initialized** at the $(x, y)$ we just forward simulated. 
+- Run an MCMC algorithm **initialized** with the $(x, y)$ we just forward simulated. 
 
 ```{r}
 stationary_mcmc = function(joint, n_iterations) {
@@ -99,7 +99,7 @@ stationary_mcmc = function(joint, n_iterations) {
 3. Perform `n_iterations` rounds of MCMC conditioning on the `y` we simulated. 
 
 - Typically, we do MCMC on $x$ only...
-    - ...but here, view the MCMC as a chain on **pairs** $(x, y)$.
+    - ...but here, view the MCMC as a Markov chain on **pairs** $(x, y)$.
 - Typically, MCMC targets the conditional, $\pi(x) = p(x | y)$...
     - ...but here, view it as targeting the **joint**, $\pi(x, y) = p(x, y)$. 
 - What is the initial distribution, $\mu_1$?
@@ -112,7 +112,7 @@ stationary_mcmc = function(joint, n_iterations) {
 {{< include ../../clickers/w12/_c09.qmd >}} 
 
 
-### Repeat 2000 times
+### Repeat 1000 + 1000 = 2000 times
 
 - We now repeat what we just did 1000 times. 
 - We also do forward simulation alone, 1000 times (by setting `n_iterations` to zero).  
@@ -133,7 +133,7 @@ exact_invariance = function(joint) {
 - **Key property:** if they have different distributions, we can conclude that the code is not $\pi$-invariant, i.e., buggy. 
 - How to check this?
     - Let's use frequentist tools!
-        - Here `ks.test`, the Kolmogorov-Smirnov test, but a 2-samples, unpaired `t.test` would have worked too. 
+        - Here `ks.test`, the Kolmogorov-Smirnov test, but a two-samples, unpaired `t.test` would have worked too. 
     - One of the rare situations where a "point-null hypothesis" makes perfect sense.
         - i.e., exact equality of the distribution is precisely what we would expect if the code is correct. 
 

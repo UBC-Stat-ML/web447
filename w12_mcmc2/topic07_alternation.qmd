@@ -43,13 +43,13 @@ We use the same example as the [one we used for MCMC mixtures](topic06_mix.qmd).
 
 **Idea:** at each MCMC iteration, let $x$ denote the current state, 
 
-1. Sample from $K_1$ from the current state.
-2. Sample from $K_2$ from the state output by $K_1$. 
+1. Sample from $K_1$ based on the current state.
+2. Sample from $K_2$ based the state output by $K_1$. 
 
 
 ### Coding up kernel alternation
 
-Here is an example how to implement the alternation.
+Here is an example of how to implement the alternation.
 It is based on the same normal proposal MH kernels, $K_1$ and $K_2$, with 
 standard deviations 1 and 2 respectively.
 
@@ -64,7 +64,6 @@ standard deviations 1 and 2 respectively.
 # simple Metropolis-Hastings algorithm (normal proposal)
 mcmc_alternation = function(gamma, initial_point, n_iters) {
   samples = numeric(n_iters) 
-  dim = length(initial_point)
   current_point = initial_point
   for (i in 1:n_iters) {
 
@@ -78,12 +77,12 @@ mcmc_alternation = function(gamma, initial_point, n_iters) {
 
 samples = mcmc_alternation(gamma_beta_binomial, 0.5,  1000)
 ```
-1. Sample from $K_1$.
-2. Sample from $K_2$ from the state output by $K_1$. 
+1. Sample from $K_1$ based on the input state.
+2. Sample from $K_2$ based on the state output by $K_1$. 
 
-### Mathematical notation for kernel mixtures
+### Mathematical notation for kernel alternations
 
-**Question:** write a mathematical expression for the alternation $\Kalt$ in terms of $K_1$ and $K_2$. 
+**Question:** write a mathematical expression for the alternation kernel $\Kalt$ in terms of $K_1$ and $K_2$. 
 
 {{< include ../../clickers/w12/_c08.qmd >}} 
 
@@ -92,7 +91,7 @@ samples = mcmc_alternation(gamma_beta_binomial, 0.5,  1000)
 
 ### Alternation preserves invariance
 
-**Proposition:** if $K_i$ are $\pi$-invariant, then their alternation is $\pi$-invariant. 
+**Proposition:** if each $K_i$ is $\pi$-invariant, then their alternation is $\pi$-invariant. 
 
 **Proof:**
 

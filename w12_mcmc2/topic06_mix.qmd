@@ -20,7 +20,7 @@ To prove invariance of MCMC algorithms, a common strategy is to
 "break down" the algorithm into simpler pieces, and to first prove 
 invariance of each of the pieces. 
 
-This pages shows one way we can establish invariance of the overall algorithm "for free" 
+This page shows one way we can establish invariance of the overall algorithm "for free" 
 once we have established invariance of each of its parts. 
 
 **Note:** we used mixtures in the context of [model building](../w10_modelling/topic07_mixtures.qmd). 
@@ -46,14 +46,14 @@ Let us use the simple beta-binomial example from [question 3 of exercise 7](../e
 - We will write an MCMC algorithm for the above beta-binomial model ($x$ in math notation will be `p` in the above code). 
 - Suppose we want to use a [symmetric MH algorithm](../w08_mcmc1/topic04_mh.qmd) 
   with a normal proposal...
-- ....but we are not sure if we should use a proposal with standard deviation 1 or 2.
+- ...but we are not sure if we should use a proposal with standard deviation 1 or 2.
 - Let:
     - $K_1$ denote the MH kernel with proposal standard deviation 1, and 
     - $K_2$, the MH kernel with proposal standard deviation 2. 
 - Idea of **kernel mixture**: at each MCMC iteration, suppose we start at $x$
     - Flip a coin, 
     - if heads, use $K_1$, i.e., $x' \sim K_1(\cdot | x)$,
-    - if tails, $K_2$, i.e., $x' \sim K_2(\cdot | x)$.
+    - if tails, use $K_2$, i.e., $x' \sim K_2(\cdot | x)$.
 
 ### Coding up kernel mixtures
 
@@ -65,8 +65,8 @@ Let us use the simple beta-binomial example from [question 3 of exercise 7](../e
 #| file: ../blocks/normal_mh_kernel.R
 ```
 
-Based on these these kernels, 
-here is an example how to implement the mixture:
+Based on these kernels, 
+here is an example of how to implement the mixture:
 
 
 ```{r}
@@ -107,9 +107,9 @@ $$\Kmix(x' | x) = \sum_{i=1}^2 \rho_i K_i(x' | x). $$
 
 ### Mixtures preserve invariance
 
-**Proposition:** if $K_i$ are $\pi$-invariant, then their mixture is $\pi$-invariant. 
+**Proposition:** if each $K_i$ is $\pi$-invariant, then their mixture is $\pi$-invariant. 
 
-**Question:** can you prove this result? Convince yourself at the same time that the argument crucially depends on $\rho$
+**Question:** can you prove this result? Convince yourself at the same time that the argument crucially depends on $\rho_i$
  not varying with the current state.
 
 
@@ -128,6 +128,6 @@ $$\Kmix(x' | x) = \sum_{i=1}^2 \rho_i K_i(x' | x). $$
 
 ## Methodological application
 
-**Question:** would it be a good idea to use the current state to adapt the mixture proportion (i.e., using $\rho_i(x)$ instead of $\rho_i$? 
+**Question:** would it be a good idea to use the current state to adapt the mixture proportion (i.e., using $\rho_i(x)$ instead of $\rho_i$)? 
 
 {{< include ../../clickers/w12/_c07.qmd >}}

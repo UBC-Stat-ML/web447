@@ -36,7 +36,7 @@ For many models, HMC is less *computationally costly* than the basic MH algorith
 
 We first have to define what we mean by an MCMC algorithm being less "costly" than another one.
 
-**Question:** is the time to compute one iteration (in e.g., in seconds or [FLOPS](https://en.wikipedia.org/wiki/FLOPS)) a 
+**Question:** is the time to compute one iteration (in e.g., seconds or [FLOPS](https://en.wikipedia.org/wiki/FLOPS)) a 
 reasonable notion of computational cost for MCMC algorithms?
 
 ::: {.callout-caution collapse="true"} 
@@ -58,11 +58,11 @@ the latter is often called **random walk MH** (to avoid confusion since HMC is j
 **Proposition:** ([Beskos et al., 2010](https://arxiv.org/pdf/1001.4460.pdf)) For $d$-dimensional i.i.d. normal targets,
 
 - optimally tuned HMC's cost (seconds/ESS) scales in $O(d^{5/4})$, whereas,
-- optimally tuned random walk MH' cost (seconds/ESS) scales in $O(d^2)$. 
+- optimally tuned random walk MH's cost (seconds/ESS) scales in $O(d^2)$. 
 
 **Notes:** 
 
-- This means as $d$ increases, there is an increasing performance gap in favour of HMC.
+- This means that as $d$ increases, there is an increasing performance gap in favour of HMC.
 - We would not use HMC for normal targets...
     - ...but many real models are [approximately normal](../w05_properties/topic07_calibration_mis_specified.qmd), 
     - so this result is a useful rule of thumb. 

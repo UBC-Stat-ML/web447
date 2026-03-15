@@ -23,7 +23,7 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
 
 ## Plan
 
-- How to build and [involution](topic11_involution.qmd) for ["rolling a ball for time $t$ starting at current location and momentum"](topic10_hmc_intuition.qmd)?
+- How to build an [involution](topic11_involution.qmd) for ["rolling a ball for time $t$ starting at current location and momentum"](topic10_hmc_intuition.qmd)?
 - Start with an exact description of the ball's motion (in continuous time). 
 - Discretize time carefully to be able to compute trajectory while maintaining the involution property. 
 
@@ -31,7 +31,7 @@ MH with [deterministic proposal we just saw](topic11_involution.qmd).
 ## Inspiration from physics
 
 - Physics gives us precise expression for quantifying the notion of "rolling a ball". 
-- As often, it is easier to describe how **things change** rather than how thing are,
+- As often, it is easier to describe how **things change** rather than how things are,
     - i.e. to provide an **ordinary differential equation** (ODE).
 - ODE for the continuous time evolution of frictionless ball's position and momentum $(x^{(t)}, p^{(t)})$:
   \begin{align*}
@@ -66,7 +66,7 @@ the direction of steepest ascent.
 
 ## Discretization
 
-- we typically do not have close form solution for the ODE of motion
+- we typically do not have closed-form solution for the ODE of motion
 - we want to discretize it in a way that preserves the involution property
 - solution: "leap frog integrator"
 
@@ -79,7 +79,7 @@ the direction of steepest ascent.
 
 ### Leap frog integrator
 
-**Key idea:** update only one of $\{x, p\}$ at the time to get [triangular Jacobian matrices](topic11_involution.qmd#examples-of-involution) (easier to analyze). 
+**Key idea:** update only one of $\{x, p\}$ at a time to get [triangular Jacobian matrices](topic11_involution.qmd#examples-of-involution) (easier to analyze). 
 
 **Drift operator** 
 
@@ -123,20 +123,20 @@ initial = c(1.1, 2.3)
 
 # flip o kick o flip o kick
 #   where 'o' denotes 'function composition',
-#   which recall are read right to left
+#   which, recall, are read right to left
 newpoint = kick(initial) 
 flipped = flip(newpoint)
 traceback = kick(flipped)
-fipped_again = flip(traceback)
+flipped_again = flip(traceback)
 
 initial
 newpoint
 flipped
 traceback
-fipped_again
+flipped_again
 ```
 
-Ah! Ah! we come back where we started!
+Ah! Ah! We come back where we started!
 
 I.e., the code above illustrates that $\Tf \circ \Tk \circ \Tf \circ \Tk = I$, which is easy to show and a building block for showing that the full proposal is an involution. (And a great way to check correctness of involution-based MH algorithms!)
 
@@ -157,19 +157,19 @@ initial = c(1.1, 2.3)
 newpoint = drift(initial) 
 flipped = flip(newpoint)
 traceback = drift(flipped)
-fipped_again = flip(traceback)
+flipped_again = flip(traceback)
 
 initial
 newpoint
 flipped
 traceback
-fipped_again
+flipped_again
 ```
 
 **Leap frog**: 
 
 - Alternate between kick and drift. 
-- Do so in a palindromic fashion to obtain involution after flip.
+- Do so in a palindromic fashion to obtain an involution after flipping.
   $$\Tlf = \Tk \circ \Td \circ \Tk.$$ 
 
 ```{r}
@@ -211,7 +211,7 @@ Recall the high-level organization of HMC is the deterministic alternation of:
 - a complicated kernel $\Kh$: "rolling the ball",
 - a simple kernel $\Kg$: [sampling the momentum](topic10_hmc_intuition.qmd#sampling-a-new-momentum).
 
-We can now define $\Kh$: it it the [deterministic proposal MH](topic11_involution.qmd) with proposal $T = \Tf \circ \Tlf^L$. 
+We can now define $\Kh$: it is the [deterministic proposal MH](topic11_involution.qmd) with proposal $T = \Tf \circ \Tlf^L$. 
 
 
 ## Reference

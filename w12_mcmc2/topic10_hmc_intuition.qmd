@@ -24,7 +24,7 @@ editor:
     - Momentum at time $t$: $p^{(t)} \in \reals^d$
         - If you are rusty with physics, for today since we use marbles of mass one, think of momentum = velocity.
 - HMC at a high level: 
-    1. **proposal**: from the current position, let the ball roll for time $t$ (approximately)
+    1. **proposal**: from the current position, let the marble roll for time $t$ (approximately)
         - the position at time $t$ is the proposal.
     2. Perform an **MH accept/reject step** based on that proposal.
     3. **Sample a new momentum**.
@@ -111,6 +111,6 @@ where:
 
 HMC [alternates](topic07_alternation.qmd) between two kernels:
 
-- a complicated kernel $\Kh$: "rolling the ball", combined with MH accept-reject which we will explore in more details
+- a complicated kernel $\Kh$: "rolling the marble", combined with MH accept-reject which we will explore in more detail
 - a simple kernel $\Kg$: Gibbs sampling on the momentum.
     

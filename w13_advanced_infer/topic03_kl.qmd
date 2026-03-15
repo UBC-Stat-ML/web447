@@ -23,7 +23,7 @@ We define the KL and explain why it is used in variational inference.
 
 ## Definition
 
-Given two distribution $\pi$ and $q$, define the **Kullback-Leibler (KL) divergence** as:
+Given two distributions $\pi$ and $q$, define the **Kullback-Leibler (KL) divergence** as:
   $$\KL(q \| \pi) = \int q(x) \log \frac{q(x)}{\pi(x)} \dee x.$$
 
 **Note:** 

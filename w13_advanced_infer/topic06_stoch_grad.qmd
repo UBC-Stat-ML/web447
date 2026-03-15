@@ -32,7 +32,7 @@ It is called the "reparameterization trick" in the machine learning literature.
 L(\phi) &= \int q_\phi(x) \left[ \log q_\phi(x)  - \log \gamma(x)   \right] \dee x \\
 &= \ex_\phi\left[ \log q_\phi(X)  - \log \gamma(X) \right],
 \end{align*}
-where we use write a subscript $\phi$ on $\ex_\phi[\cdot]$ to emphasize that the 
+where we use a subscript $\phi$ on $\ex_\phi[\cdot]$ to emphasize that the 
 expectation is with respect to a distribution $q_\phi$ that depends on $\phi$. 
 
 
@@ -40,7 +40,7 @@ expectation is with respect to a distribution $q_\phi$ that depends on $\phi$.
 
 To make notation cleaner, we abstract out the problem to:
 
-**Definition:** the stochastic gradient estimation problem consists in finding an unbiased estimator for the gradient of
+**Definition:** the stochastic gradient estimation problem consists of finding an unbiased estimator for the gradient of
 $\ex_\phi[h(\phi, X)],$ where $X \sim q_\phi$. 
 
 **Example:** for VI, $h(\phi, x) = \log q_\phi(x)  - \log \gamma(x)$. 
@@ -93,13 +93,13 @@ Finally, one typically use [reverse mode autodiff](../w12_mcmc2/topic13_autodiff
 
 ## Subsampling
 
-- Often (but not always), the function $h$ be written as:
+- Often (but not always), the function $h$ can be written as:
   $$h(\phi, x) = \sum_{i=1}^N h_i(\phi, x),$$
 - example: when the data is i.i.d. (recall we are in log space, $h(\phi, x) = \log q_\phi(x)  - \log \gamma(x)$)
   - $N$ is then the number of data points
-- When $N$ is large "sub-sampling" will tradeoff:
+- When $N$ is large "sub-sampling" will trade off:
   - computationally cheaper gradient...
-  - ...at the cost of more noise (variance) and hence more SGD iterations $t$ needed. 
+  - ...at the cost of more noise (variance) and hence more SGD iterations. 
 - **Idea:** sub-sampling consists in
   - sampling one term (data point) $I \sim \distUnif\{1, 2, \dots, N\}$
   - computing unbiased estimate $\hat G_I$ for the random term

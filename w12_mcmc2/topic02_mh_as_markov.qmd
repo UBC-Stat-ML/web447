@@ -20,16 +20,16 @@ editor:
 
 **Why** is the [MH ratio](../w08_mcmc1/topic04_mh.qmd) defined as $\gamma(x')/\gamma(x)$?
 
-If we modified the MH ratio, would MCMC still "work"?
+If we modified the MH ratio, would MCMC still "works"?
 
-**Recall:** by "MCMC still work" we mean "MCMC still be [consistent](../w08_mcmc1/topic05_mcmc_consistency.qmd)" i.e. enjoy a law of large numbers. 
+**Recall:** by "MCMC still works" we mean "MCMC is still [consistent](../w08_mcmc1/topic05_mcmc_consistency.qmd)" i.e. admits a law of large numbers. 
 
 
 ## Markov chain definitions
 
 **To answer the question above:**
 
-- we need to study in more details law of large numbers for **Markov chains**. 
+- we need to study in more detail the law of large numbers for **Markov chains**. 
 - We will need some concepts related to Markov chains
 
 **Recall:** the random variables $X^{(1)}, X^{(2)}, \dots$ are called a Markov chain 
@@ -56,7 +56,7 @@ Recall MH involves:
 - a MH ratio $r(x, x') = \gamma(x') / \gamma(x)$, and
 - an **acceptance probability** $\alpha(x, x') = \min(1, r(x, x'))$. 
 
-**Question:** write the transition kernel $K(x' | x)$, assuming $x \neq x'$.
+**Question:** write the transition kernel $K(x' | x)$ for the MH chain, assuming $x \neq x'$.
 
 {{< include ../../clickers/w12/_c01.qmd >}}
 

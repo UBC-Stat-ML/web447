@@ -38,7 +38,7 @@ Why? Thanks to autodiff!
  
 ## Using Stan as a stand-alone autodiff system
 
-If you just need just the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use [BridgeStan](https://github.com/roualdes/bridgestan) (bridges Stan with R, Julia, Rust, etc).
+If you just need the gradient of the log density of your Stan model and not HMC (e.g., to develop new inference algorithms), use [BridgeStan](https://github.com/roualdes/bridgestan) (bridges Stan with R, Julia, Rust, etc).
 
 <!-- Had to remove bridge stan demo.. maybe have to add bridge stan to r env? Error was:
 

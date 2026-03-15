@@ -17,7 +17,7 @@ By "MCMC hacking," I mean learning the tools to:
 
 ## Rationale
 
-We need to write new MCMC algorithm because there are 
+We need to write new MCMC algorithms because there are 
 situations that Stan/other PPLs cannot handle automatically. 
 
 **Some examples:**

@@ -1,5 +1,5 @@
 ---
-title: "Law of large numbers for Markov chain"
+title: "Law of large numbers for Markov chains"
 editor: 
   mode: source
 ---
@@ -16,7 +16,7 @@ editor:
 
 ### Rationale
 
-Recall we have seen a special case of the LLN for Markov chain (for MH), 
+Recall we have seen a special case of the LLN for Markov chains, 
 [when talking about the consistency of MH](../w08_mcmc1/topic05_mcmc_consistency.qmd). 
 
 Here we look at LLNs for Markov chains more generally. 
@@ -48,5 +48,5 @@ $$X \sim \pi \text{ and } X' \sim K(\cdot|X) \Rightarrow X' \sim \pi.$$
 ## Plan
 
 - We will prove point 1 above, i.e., that MH is $\pi$-invariant.
-- For 2, see [further readings](../w08_mcmc1/topic04_mh.qmd#further-readings). 
+- For point 2, see [further readings](../w08_mcmc1/topic04_mh.qmd#further-readings). 
 

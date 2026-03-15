@@ -22,9 +22,9 @@ $q(\cdot|x)$ based on the current point $x$.
 
 For HMC, it is more natural to consider 
 the proposal as a deterministic function $T(x)$ 
-(namely, [as we saw](topic10_hmc_intuition.qmd), the proposal is to "let the ball roll the ball a little bit").
+(namely, [as we saw](topic10_hmc_intuition.qmd), the proposal is to "let the marble roll a little bit").
 
-We state a version of the MH algorithm based on such deterministic proposal here.  
+We state a version of the MH algorithm based on such a deterministic proposal here.  
 
 
 ## MH with deterministic proposals
@@ -40,16 +40,16 @@ We state a version of the MH algorithm based on such deterministic proposal here
   where $| \nabla T(x) |$ denotes the [Jacobian determinant](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant#Jacobian_determinant).
 4. Accept $x^*$ with probability $\alpha(x) = \min(1, r(x))$, otherwise stay at $x$. 
 
-**Calculus review:** do you remember what is the Jacobian determinant?
+**Calculus review:** do you remember what the Jacobian determinant is?
 
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
 \begin{align*}
 \nabla T(x) &= \begin{bmatrix}
-    \dfrac{\partial T_1}{\partial x_1} & \cdots & \dfrac{\partial T_1}{\partial x_n}\\
+    \dfrac{\partial T_1}{\partial x_1} & \cdots & \dfrac{\partial T_1}{\partial x_d}\\
     \vdots                             & \ddots & \vdots\\
-    \dfrac{\partial T_m}{\partial x_1} & \cdots & \dfrac{\partial T_m}{\partial x_n}
+    \dfrac{\partial T_d}{\partial x_1} & \cdots & \dfrac{\partial T_d}{\partial x_d}
 \end{bmatrix} \\
 |\nabla T(x)| &= |\det  \nabla T(x)|.
 \end{align*}
@@ -92,7 +92,7 @@ You should get a **triangular matrix** i.e. in our context of the form
 \end{align*}
 
 Now recall that from [properties of triangular matrices](https://en.wikipedia.org/wiki/Triangular_matrix#Properties), 
-this means that to compute it determinant, you just have to compute the product of the diagonal entries, $\det \nabla T = a_{11} a_{22}$.
+this means that to compute its determinant, you just have to compute the product of the diagonal entries, $\det \nabla T = a_{11} a_{22}$.
 :::
 
 {{< include ../../clickers/w12/_c11.qmd >}}
