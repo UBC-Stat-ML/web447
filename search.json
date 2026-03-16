@@ -135,7 +135,7 @@
     "href": "w10_modelling/topic04_censoring.html#bayesian-approach-to-censoring",
     "title": "Censoring",
     "section": "Bayesian approach to censoring",
-    "text": "Bayesian approach to censoring\n\nWhat we have encountered in the Chernobyl example is known as censoring.\nSolution: modelling the censoring process.\n\n\nMathematical description\n\nLet \\(L\\) denote a detection limit (here \\(L = 1.1\\))\nLet \\(X\\) denote the unknown parameter.\nLet \\(i\\) denote the observation index (worker \\(i \\in \\{1, 2, \\dots, 10\\}\\) in our example)\nLet \\(H_i\\) denote the measurements before censoring (i.e., if we had a perfect measurement device immune to saturation effects).\nLet \\(C_i\\) denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).\nLet \\(Y_i = C_i L + (1 - C_i) H_i\\).\n\nIn the Chernobyl example, we will use the following model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nH_i &\\sim {\\mathrm{Exp}}(X) \\\\\nC_i &= \\mathbb{1}[H_i \\ge L], \\\\\nY_i &= C_i L + (1 - C_i) H_i.\n\\end{align*}\\]\nThe goal is to compute \\(\\mathbb{E}[\\text{mean parameter} | Y] = \\mathbb{E}[1/X | Y]\\).\n\n\nStan implementation\n\nsuppressPackageStartupMessages(library(cmdstanr))\n\n\n\nchernobyl_naive.stan\n\ndata {\n1  int&lt;lower=0&gt; n_above_limit; //\n2  int&lt;lower=0&gt; n_below_limit; //\n  real&lt;lower=0&gt; limit;\n3  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit; //\n  \n}\n\nparameters {\n  real&lt;lower=0&gt; rate; \n4  vector&lt;lower=limit&gt;[n_above_limit] data_above_limit; //\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n  data_above_limit ~ exponential(rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nThe number of \\(H_i\\)’s above the detection limit.\n\n2\n\nThe number of \\(H_i\\)’s below the detection limit.\n\n3\n\nThe \\(H_i\\)’s below the limit are observed, so they go in the data block.\n\n4\n\nThe \\(H_i\\)’s above the limit are not observed, so they go in the parameters block (a better name would have been “latent block”).\n\n\n\n\nmod = cmdstan_model(\"chernobyl_naive.stan\")\nfit = mod$sample(\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),  \n  output_dir = \"stan_out\",\n  refresh = 10000,\n  iter_sampling = 100000                   \n)\n\nRunning MCMC with 1 chain...\n\nChain 1 Iteration:      1 / 101000 [  0%]  (Warmup) \nChain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) \nChain 1 Iteration:  11000 / 101000 [ 10%]  (Sampling) \nChain 1 Iteration:  21000 / 101000 [ 20%]  (Sampling) \nChain 1 Iteration:  31000 / 101000 [ 30%]  (Sampling) \nChain 1 Iteration:  41000 / 101000 [ 40%]  (Sampling) \nChain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) \nChain 1 Iteration:  61000 / 101000 [ 60%]  (Sampling) \nChain 1 Iteration:  71000 / 101000 [ 70%]  (Sampling) \nChain 1 Iteration:  81000 / 101000 [ 80%]  (Sampling) \nChain 1 Iteration:  91000 / 101000 [ 90%]  (Sampling) \nChain 1 Iteration: 101000 / 101000 [100%]  (Sampling) \nChain 1 finished in 1.6 seconds.\n\n\n\nfit$summary(NULL, c(\"mean\", \"mcse_mean\"))\n\n# A tibble: 10 × 3\n   variable               mean mcse_mean\n   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;\n 1 lp__                -19.3    0.0123  \n 2 rate                  0.393  0.000927\n 3 data_above_limit[1]   4.54   0.0249  \n 4 data_above_limit[2]   4.52   0.0244  \n 5 data_above_limit[3]   4.49   0.0236  \n 6 data_above_limit[4]   4.51   0.0214  \n 7 data_above_limit[5]   4.48   0.0260  \n 8 data_above_limit[6]   4.53   0.0234  \n 9 data_above_limit[7]   4.52   0.0243  \n10 mean                  3.41   0.0178  \n\n\n\nsuppressPackageStartupMessages(library(bayesplot))\nsuppressPackageStartupMessages(library(ggplot2))\nmcmc_areas_ridges(fit$draws(\"mean\")) + \n  theme_minimal() + \n  scale_x_continuous(limits = c(0, 10)) \n\n\n\n\n\n\n\n\nBack to the question of whether the radiation is greater than 1.5 R/s:\n\nsamples = as.vector(fit$draws(\"mean\"))\n\nsum(samples &gt; 1.5) / length(samples)\n\n[1] 0.90655",
+    "text": "Bayesian approach to censoring\n\nWhat we have encountered in the Chernobyl example is known as censoring.\nSolution: modelling the censoring process.\n\n\nMathematical description\n\nLet \\(L\\) denote a detection limit (here \\(L = 1.1\\))\nLet \\(X\\) denote the unknown parameter.\nLet \\(i\\) denote the observation index (worker \\(i \\in \\{1, 2, \\dots, 10\\}\\) in our example)\nLet \\(H_i\\) denote the measurements before censoring (i.e., if we had a perfect measurement device immune to saturation effects).\nLet \\(C_i\\) denote a binary indicator on the censoring (i.e., equal to one if the imperfect device has a saturation, zero otherwise).\nLet \\(Y_i = C_i L + (1 - C_i) H_i\\).\n\nIn the Chernobyl example, we will use the following model:\n\\[\\begin{align*}\nX &\\sim {\\mathrm{Exp}}(1/100) \\\\\nH_i &\\sim {\\mathrm{Exp}}(X) \\\\\nC_i &= \\mathbb{1}[H_i \\ge L], \\\\\nY_i &= C_i L + (1 - C_i) H_i.\n\\end{align*}\\]\nThe goal is to compute \\(\\mathbb{E}[\\text{mean parameter of uncensored measurements} | Y] = \\mathbb{E}[1/X | Y]\\).\n\n\nStan implementation\n\nsuppressPackageStartupMessages(library(cmdstanr))\n\n\n\nchernobyl_naive.stan\n\ndata {\n1  int&lt;lower=0&gt; n_above_limit; //\n2  int&lt;lower=0&gt; n_below_limit; //\n  real&lt;lower=0&gt; limit;\n3  vector&lt;upper=limit&gt;[n_below_limit] data_below_limit; //\n  \n}\n\nparameters {\n  real&lt;lower=0&gt; rate; \n4  vector&lt;lower=limit&gt;[n_above_limit] data_above_limit; //\n}\n\nmodel {\n  // prior\n  rate ~ exponential(1.0/100);\n  \n  // likelihood\n  data_above_limit ~ exponential(rate);\n  data_below_limit ~ exponential(rate); \n}\n\ngenerated quantities {\n  real mean = 1.0/rate;\n}\n\n\n1\n\nThe number of \\(H_i\\)’s above the detection limit.\n\n2\n\nThe number of \\(H_i\\)’s below the detection limit.\n\n3\n\nThe \\(H_i\\)’s below the limit are observed, so they go in the data block.\n\n4\n\nThe \\(H_i\\)’s above the limit are not observed, so they go in the parameters block (a better name would have been “latent block”).\n\n\n\n\nmod = cmdstan_model(\"chernobyl_naive.stan\")\nfit = mod$sample(\n  seed = 1,\n  chains = 1,\n  data = list(\n            limit = limit,\n            n_above_limit = n_above_limit, \n            n_below_limit = n_below_limit,\n            data_below_limit = data_below_limit\n          ),  \n  output_dir = \"stan_out\",\n  refresh = 10000,\n  iter_sampling = 100000                   \n)\n\nRunning MCMC with 1 chain...\n\nChain 1 Iteration:      1 / 101000 [  0%]  (Warmup) \nChain 1 Iteration:   1001 / 101000 [  0%]  (Sampling) \nChain 1 Iteration:  11000 / 101000 [ 10%]  (Sampling) \nChain 1 Iteration:  21000 / 101000 [ 20%]  (Sampling) \nChain 1 Iteration:  31000 / 101000 [ 30%]  (Sampling) \nChain 1 Iteration:  41000 / 101000 [ 40%]  (Sampling) \nChain 1 Iteration:  51000 / 101000 [ 50%]  (Sampling) \nChain 1 Iteration:  61000 / 101000 [ 60%]  (Sampling) \nChain 1 Iteration:  71000 / 101000 [ 70%]  (Sampling) \nChain 1 Iteration:  81000 / 101000 [ 80%]  (Sampling) \nChain 1 Iteration:  91000 / 101000 [ 90%]  (Sampling) \nChain 1 Iteration: 101000 / 101000 [100%]  (Sampling) \nChain 1 finished in 1.6 seconds.\n\n\n\nfit$summary(NULL, c(\"mean\", \"mcse_mean\"))\n\n# A tibble: 10 × 3\n   variable               mean mcse_mean\n   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;\n 1 lp__                -19.3    0.0123  \n 2 rate                  0.393  0.000927\n 3 data_above_limit[1]   4.54   0.0249  \n 4 data_above_limit[2]   4.52   0.0244  \n 5 data_above_limit[3]   4.49   0.0236  \n 6 data_above_limit[4]   4.51   0.0214  \n 7 data_above_limit[5]   4.48   0.0260  \n 8 data_above_limit[6]   4.53   0.0234  \n 9 data_above_limit[7]   4.52   0.0243  \n10 mean                  3.41   0.0178  \n\n\n\nsuppressPackageStartupMessages(library(bayesplot))\nsuppressPackageStartupMessages(library(ggplot2))\nmcmc_areas_ridges(fit$draws(\"mean\")) + \n  theme_minimal() + \n  scale_x_continuous(limits = c(0, 10)) \n\n\n\n\n\n\n\n\nBack to the question of whether the radiation is greater than 1.5 R/s:\n\nsamples = as.vector(fit$draws(\"mean\"))\n\nsum(samples &gt; 1.5) / length(samples)\n\n[1] 0.90655",
     "crumbs": [
       "Modelling techniques",
       "Censoring"
@@ -1033,6 +1033,17 @@
     "title": "Practice questions (Quiz 2)",
     "section": "",
     "text": "Representative examples of questions to prep for Quiz 2.\n\n\n\n\nMake sure to practice on the similar page for Quiz 1 since quiz 2 will cover that material as well.\n\n\n\n\nsuppressPackageStartupMessages(library(cmdstanr))",
+    "crumbs": [
+      "Quiz 2",
+      "Practice questions (Quiz 2)"
+    ]
+  },
+  {
+    "objectID": "w11_quiz2/topic02_q2_practice_questions.html#stan-proficiency",
+    "href": "w11_quiz2/topic02_q2_practice_questions.html#stan-proficiency",
+    "title": "Practice questions (Quiz 2)",
+    "section": "Stan proficiency",
+    "text": "Stan proficiency\nMake sure to finish these practice problems started in class and left for self-study: revisiting Bayesian GLMs in Stan.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -2412,20 +2423,6 @@
       "MCMC Hacking",
       "Challenge"
     ]
-  },
-  {
-    "objectID": "drafts/ex02.html",
-    "href": "drafts/ex02.html",
-    "title": "Exercise 2: Bayesian inference on discrete spaces",
-    "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change."
-  },
-  {
-    "objectID": "drafts/ex02.html#goals",
-    "href": "drafts/ex02.html#goals",
-    "title": "Exercise 2: Bayesian inference on discrete spaces",
-    "section": "Goals",
-    "text": "Goals\nA first contact with several Bayesian concepts. We use the same discrete model for all questions.\n\nNotions of priors, likelihood, posterior.\nPoint summary of posterior distribution: mean, median, mode.\nConstructing credible intervals.\nBasic decision theory.\nSequential update of posterior distribution."
   },
   {
     "objectID": "w01_discrete_inference/topic05_decision_diagrams.html",
@@ -4285,20 +4282,6 @@
       "Probability essentials",
       "Simple Monte Carlo"
     ]
-  },
-  {
-    "objectID": "drafts/ex03.html",
-    "href": "drafts/ex03.html",
-    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
-    "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change."
-  },
-  {
-    "objectID": "drafts/ex03.html#goals",
-    "href": "drafts/ex03.html#goals",
-    "title": "Exercise 3: Universal probabilistic inference via importance sampling",
-    "section": "Goals",
-    "text": "Goals\n\nUnderstanding and implementing importance sampling\nIntroduction to probabilistic programming"
   },
   {
     "objectID": "challenges/ch08.html",
