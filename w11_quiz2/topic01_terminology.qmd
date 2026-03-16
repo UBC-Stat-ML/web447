@@ -44,8 +44,8 @@ note additional distributions have been introduced [see the list](topic03_q2_log
 - "data block"
 - "parameters block"
 - "model block"
-- "transformed parameters block"
-- "generated quantities block"
+- ["transformed parameters block"](../w08_mcmc1/topic03_more_complex_example.qmd)
+- ["generated quantities block"](../w08_mcmc1/topic06_hands_on.qmd)
 
 ## Metropolis-Hastings
 

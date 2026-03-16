@@ -30,6 +30,10 @@ suppressPackageStartupMessages(library(cmdstanr))
 ```
 
 
+## Stan proficiency 
+
+Make sure to finish these practice problems started in class and left for 
+self-study: [revisiting Bayesian GLMs in Stan](../w08_mcmc1/topic06_hands_on.qmd).
 
 
 ## Model construction

@@ -94,7 +94,7 @@ C_i &= \ind[H_i \ge L], \\
 Y_i &= C_i L + (1 - C_i) H_i.
 \end{align*}
 
-The goal is to compute $\ex[\text{mean parameter} | Y] = \ex[1/X | Y]$. 
+The goal is to compute $\ex[\text{mean parameter of uncensored measurements} | Y] = \ex[1/X | Y]$. 
 
 
 ### Stan implementation
