@@ -1014,7 +1014,7 @@ window.Quarto = {
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
   <ul class="collapse">
   <li><a href="#truncation" id="toc-truncation" class="nav-link" data-scroll-target="#truncation">Truncation</a></li>
-  <li><a href="#non-ignorable-missingness" id="toc-non-ignorable-missingness" class="nav-link" data-scroll-target="#non-ignorable-missingness">Non-ignorable missingness</a></li>
+  <li><a href="#biased-data-collection" id="toc-biased-data-collection" class="nav-link" data-scroll-target="#biased-data-collection">Biased data collection</a></li>
   <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional readings</a></li>
   </ul></li>
   </ul>
@@ -1103,8 +1103,8 @@ Y &amp;= \{ H_i : I_i = 1 \}.
 <p><strong>Example:</strong> CRISPR-Cas9 unique molecular identifier (UMI) family size. “Families of cells” that left zero progeny are not observed!</p>
 <p><img src="../images/UMIs.png" class="img-fluid" width="600"></p>
 </section>
-<section id="non-ignorable-missingness" class="level3">
-<h3 class="anchored" data-anchor-id="non-ignorable-missingness">Non-ignorable missingness</h3>
+<section id="biased-data-collection" class="level3">
+<h3 class="anchored" data-anchor-id="biased-data-collection">Biased data collection</h3>
 <p>Truncation can be generalized as follows:</p>
 <ul>
 <li>Instead of a deterministic criterion based on <span class="math inline">\(H_i\)</span> to decide if to include in the set of observations or not,</li>
@@ -1117,7 +1117,7 @@ H_1, \dots, H_N &amp;\sim \text{likelihood}(X) \\
 I_i &amp;\sim {\mathrm{Bern}}(p(X, H_i)) \\
 Y &amp;= \{ H_i : I_i = 1 \}.
 \end{align*}\]</span></p>
-<p><strong>Question:</strong> how would you set <span class="math inline">\(p(x, h)\)</span> to recover truncation as a special case of non-ignorable missingness?</p>
+<p><strong>Question:</strong> how would you set <span class="math inline">\(p(x, h)\)</span> to recover truncation as a special case of biased data collection?</p>
 </section>
 <section id="additional-readings" class="level3">
 <h3 class="anchored" data-anchor-id="additional-readings">Additional readings</h3>
