@@ -48,7 +48,7 @@ Y &= \{ H_i : I_i = 1 \}.
 ![](../images/UMIs.png){width="600"}
 
 
-### Non-ignorable missingness
+### Biased data collection
 
 Truncation can be generalized as follows:
 
@@ -63,7 +63,7 @@ I_i &\sim \distBern(p(X, H_i)) \\
 Y &= \{ H_i : I_i = 1 \}.
 \end{align*}
 
-**Question:** how would you set $p(x, h)$ to recover truncation as a special case of non-ignorable missingness? 
+**Question:** how would you set $p(x, h)$ to recover truncation as a special case of biased data collection? 
 
 
 ### Additional readings 
