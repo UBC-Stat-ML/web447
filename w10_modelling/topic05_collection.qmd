@@ -21,9 +21,8 @@ to recognize that it is simply a special (but important) example of probabilisti
 modelling and the [first step of our Bayesian recipe](../w02_discrete_bayes/topic01_bayes_recipe.qmd#the-bayesian-recipe).
 
 
-## Examples 
 
-### Truncation 
+## Truncation 
 
 - In censoring, we knew how many $H_i$'s were above the detection limit. 
 - In **truncation**, a different setup, we now have even less information: 
@@ -48,7 +47,7 @@ Y &= \{ H_i : I_i = 1 \}.
 ![](../images/UMIs.png){width="600"}
 
 
-### Biased data collection
+## Biased data collection
 
 Truncation can be generalized as follows:
 
@@ -66,6 +65,17 @@ Y &= \{ H_i : I_i = 1 \}.
 **Question:** how would you set $p(x, h)$ to recover truncation as a special case of biased data collection? 
 
 
-### Additional readings 
+## Informative missingness
+
+A related situation is when say you perform a survey by knocking at doors and ask some questions. 
+Some people will refuse to response, and the statistical problem is that the responses for those who refuse to answer 
+might have a different distribution than those who accepted to talk to you and respond to the survey. 
+
+Mathematically, this is the same joint distribution as the previous section on biased data collection, but 
+in the survey situation, you get to observe the number of missing values (or equivalently, $N$ in the 
+mathematical notation used in that section). 
+
+
+## Additional readings 
 
 See this week's readings, Chapter 8 of [Gelman et al., 2013](http://www.stat.columbia.edu/~gelman/book/BDA3.pdf)

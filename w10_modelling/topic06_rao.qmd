@@ -55,7 +55,7 @@ fit = mod$sample(
             data_below_limit = data_below_limit
           ),  
   output_dir = "stan_out",
-  refresh = 10000,
+  refresh = 20000,
   iter_sampling = 100000                   
 )
 ```
