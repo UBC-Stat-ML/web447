@@ -1483,7 +1483,7 @@
     "href": "w12_mcmc2/topic02_mh_as_markov.html#the-mh-algorithm-as-a-markov-chain",
     "title": "MH as a Markov chain",
     "section": "The MH algorithm as a Markov chain",
-    "text": "The MH algorithm as a Markov chain\nRecall MH involves:\n\na proposal \\(q(x'|x)\\)\na MH ratio \\(r(x, x') = \\gamma(x') / \\gamma(x)\\), and\nan acceptance probability \\(\\alpha(x, x') = \\min(1, r(x, x'))\\).\n\nQuestion: write the transition kernel \\(K(x' | x)\\) for the MH chain, assuming \\(x \\neq x'\\).",
+    "text": "The MH algorithm as a Markov chain\nRecall MH involves:\n\na proposal \\(q(x'|x)\\)\na MH ratio \\(r(x, x') = \\gamma(x') / \\gamma(x)\\), and\nan acceptance probability \\(\\alpha(x, x') = \\min(1, r(x, x'))\\).\n\nQuestion: write the transition kernel \\(K(x' | x)\\) for the MH chain, assuming \\(x \\neq x'\\).\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\n\n\\(q(x' | x)\\)\n\\(q(x' | x) \\alpha(x, x')\\)\n\\(\\alpha(x, x')\\)\n\\(\\sum_{x'} q(x' | x) (1 - \\alpha(x, x'))\\)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for hint\n\n\n\n\n\nThe probability to move to \\(x' \\neq x\\) requires both:\n\nproposing to \\(x'\\), with probability \\(q(x'|x)\\), and,\naccepting the proposal, with probability \\(\\alpha(x, x')\\).\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe correct answer is \\(q(x' | x) \\alpha(x, x')\\).\nIntuition: the “and” in the hint suggests chain rule hence multiplication.\nMathematical derivation: first denote\n\nthe current state by \\(X\\)\nthe proposed state by \\(X^* \\sim q(\\cdot|X)\\)\nthe next state by \\(X'\\) (equal to either \\(X^*\\) if the proposal is accepted, \\(X\\) otherwise).\n\n\\[\\begin{align*}\nK(x'|x) &= \\mathbb{P}(X' = x' | X = x)  \\\\\n&= \\sum_{x^*} \\mathbb{P}(X' = x', X^* = x^* | X = x) \\;\\;\\text{(marginalization)} \\\\\n&= \\sum_{x^*} \\mathbb{P}(X^* = x^* | X = x) \\mathbb{P}(X' = x' | X^* = x^*, X = x) \\;\\;\\text{(chain rule)}\\\\\n&= \\sum_{x^*} q(x^*|x) \\mathbb{P}(X' = x' | X^* = x^*, X = x). \\;\\;\\text{(definition of proposal)}\n\\end{align*}\\]\n\nSince \\(x \\neq x'\\), we can only get to \\(x'\\) by accepting a proposal…\n…, i.e. when \\(x' = x^*\\).\nSo there is only one term in the sum where \\(\\mathbb{P}(X' = x' | X^* = x^*, X = x) &gt; 0\\)…\n…, namely when \\(x' = x^*\\).\n\n\\[\\begin{align*}\nK(x'|x) &= \\sum_{x^*} q(x^*|x) \\mathbb{P}(X' = x' | X^* = x^*, X = x) \\\\\n&= q(x'|x) \\mathbb{P}(X' = x' | X^* = x', X = x) \\;\\;\\text{(see expl. above)} \\\\\n&= q(x'|x) \\alpha(x, x'). \\;\\;\\text{(definition of accept probability)} \\\\\n\\end{align*}\\]\nNote: the case \\(x = x'\\) is a bit more complicated, because there are two situations where MH stays at the same state, namely,\n\nthe proposal tells us to stay at the current state (possible with discrete proposals only) and we accept that proposal, or,\nthe proposal tries to go somewhere (including \\(x\\)) but the proposal is rejected.\n\nNotice that the two situations are disjoint, so using the additivity axiom:\n\\[K(x | x) = q(x|x) \\alpha(x, x) + \\sum_{x'} q(x'|x) ( 1- \\alpha(x, x')).\\]\nThe above equation might be impossible to numerically compute in certain situations. Fortunately, we do not need to compute it to run MCMC, we only need to simulate from \\(K(\\cdot | x)\\). Why do we spend time writing expressions for \\(K(x'|x)\\) then? In order to do mathematical analysis, which gives us useful guarantees, such as law of large numbers and central limit theorems.",
     "crumbs": [
       "MCMC Hacking",
       "MH as a Markov chain"
@@ -1516,7 +1516,7 @@
     "href": "w12_mcmc2/topic06_balance.html#example",
     "title": "Balance equations",
     "section": "Example",
-    "text": "Example\nWe continue our eccentric tourists example…\nQuestion: which travelling scheme(s) are \\(\\pi\\)-invariant?\nIntuition: \\(\\pi\\)-invariance in this context just means the fraction of tourists in each city will stay constant over time.\n\nPairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (see figure, planes always full).\nA tour where a fixed number of planes, equal to the number of cities, go around the world on a common route.\nA central “hub”, where all flights land at the hub (see figure, again, planes always full).\n\n\n\n\na:  b:  c:",
+    "text": "Example\nWe continue our eccentric tourists example…\nQuestion: which travelling scheme(s) are \\(\\pi\\)-invariant?\nIntuition: \\(\\pi\\)-invariance in this context just means the fraction of tourists in each city will stay constant over time.\nLook at the Figures: Consider the following situations, where let us say in all case you observe that the planes are always full.\n\nPairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities.\nA tour where a fixed number of planes, equal to the number of cities, go around the world on a common route.\nA central “hub”, where all flights land at the hub.\n\nFollow-up: how to express “fraction of planes between cities \\(x\\) and \\(x'\\)” in terms of \\(\\mu_i\\), \\(K\\)?\n\n\n\na:  b:  c:",
     "crumbs": [
       "MCMC Hacking",
       "Balance equations"
@@ -1582,7 +1582,7 @@
     "href": "w12_mcmc2/topic05_cke.html#example",
     "title": "Marginals of a Markov chain",
     "section": "Example",
-    "text": "Example\n\nConsider a large group of identical tourists.\nThey travel the world in a finite set of cities (dots).\nEvery weekend they can board a plane and go somewhere else.\n\nThey base their choice of destination only on the current city.\nThey use randomness (e.g., if a tourist is in London, flip a coin to decide to go to Montreal or Stockholm).\n\n\n\n\n\n\nMarkov model for random tourists\n\n\\(X^{(1)}\\): pick one of the tourists at random, \\(X^{(1)}\\) encodes the city this tourist is in at week 1 (before taking a first flight).\nDistribution of \\(X^{(1)}\\): \\(\\mu_1(x)\\).\n\nInterpretation: for city \\(x\\), \\(\\mu_1(x)\\) tells you the fraction of tourists in city \\(x\\) on the first week.\nSize of the dots in the figure is the fraction of tourists in the city.\n\n\nReview: what is the name of the distribution of \\(X^{(1)}\\)?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe initial distribution.\n\n\n\n\n\\(K(x'|x)\\) encodes the probability that a tourist move to city \\(x'\\) next week given they are at \\(x\\) this week.\n\\(X^{(2)} \\sim K(\\cdot|X^{(1)})\\).\nOn the second week, some cities may now have more or less tourists.\nDistribution of \\(X^{(2)}\\): \\(\\mu_2(x)\\).\n\nInterpretation: for city \\(x\\), \\(\\mu_2(x)\\) tells you the fraction of tourists in city \\(x\\) on the second week.",
+    "text": "Example\n\nConsider a large group of identical tourists.\nThey travel the world in a finite set of cities (dots).\nEvery weekend they may board a plane and go somewhere else.\n\nThey base their choice (to stay or to move, and the choice of destination) only on the current city.\nThey use randomness (e.g., if a tourist is in London, flip a coin to decide to go to Montreal or Stockholm).\n\n\n\n\n\n\nMarkov model for random tourists\n\n\\(X^{(1)}\\): pick one of the tourists at random, \\(X^{(1)}\\) encodes the city this tourist is in at week 1 (before taking a first flight).\nDistribution of \\(X^{(1)}\\): \\(\\mu_1(x)\\).\n\nInterpretation: for city \\(x\\), \\(\\mu_1(x)\\) tells you the fraction of tourists in city \\(x\\) on the first week.\nSize of the dots in the figure is the fraction of tourists in the city.\n\n\nReview: what is the name of the distribution of \\(X^{(1)}\\)?\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe initial distribution.\n\n\n\n\n\\(K(x'|x)\\) encodes the probability that a tourist move to city \\(x'\\) next week given they are at \\(x\\) this week.\n\\(X^{(2)} \\sim K(\\cdot|X^{(1)})\\).\nOn the second week, some cities may now have more or less tourists.\nDistribution of \\(X^{(2)}\\): \\(\\mu_2(x)\\).\n\nInterpretation: for city \\(x\\), \\(\\mu_2(x)\\) tells you the fraction of tourists in city \\(x\\) on the second week.",
     "crumbs": [
       "MCMC Hacking",
       "Marginals of a Markov chain"
@@ -1604,7 +1604,7 @@
     "href": "w12_mcmc2/topic05_cke.html#computing-a-marginal",
     "title": "Marginals of a Markov chain",
     "section": "Computing a marginal",
-    "text": "Computing a marginal\nQuestion: write the marginal distribution at step 2, \\(\\mu_2\\) using \\(\\mu_1\\) and \\(K\\).",
+    "text": "Computing a marginal\nQuestion: write the marginal distribution at step 2, \\(\\mu_2\\) using \\(\\mu_1\\) and \\(K\\).\n\n\n\n\n\n\nClick for choices\n\n\n\n\n\nThe marginal \\(\\mu_2(x')\\) is given by…\n\n\\(\\mu_1(x) K(x' | x)\\)\n\\(\\mu_1(x') K(x | x')\\)\n\\(\\sum_x \\mu_1(x) K(x' | x)\\)\n\\(\\sum_x \\mu_1(x') K(x | x')\\)\nNone of the above.\n\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nWe have:\n\\[\\begin{align*}\n\\mu_2(x') &= \\mathbb{P}(X^{(2)} = x') \\\\\n&= \\sum_x \\mathbb{P}(X^{(1)} = x, X^{(2)} = x') \\;\\;\\text{(marginalization)} \\\\\n&= \\sum_x \\mathbb{P}(X^{(1)} = x) \\mathbb{P}(X^{(2)} = x' | X^{(1)} = x) \\;\\;\\text{(chain rule)} \\\\\n&= \\sum_x \\mu_1(x) K(x' | x). \\;\\;\\text{(by definition)} \\\\\n\\end{align*}\\]",
     "crumbs": [
       "MCMC Hacking",
       "Marginals of a Markov chain"
@@ -5333,7 +5333,7 @@
     "href": "w12_mcmc2/topic01_intro.html",
     "title": "Overview",
     "section": "",
-    "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debut your MCMC code.",
+    "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debug your MCMC code.",
     "crumbs": [
       "MCMC Hacking",
       "Overview"
@@ -5344,7 +5344,7 @@
     "href": "w12_mcmc2/topic01_intro.html#this-weeks-outline",
     "title": "Overview",
     "section": "",
-    "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debut your MCMC code.",
+    "text": "By “MCMC hacking,” I mean learning the tools to:\n\nPredict when some MCMC algorithm will fail.\nStrategies to fix it.\nHow to write a new MCMC algorithm.\nHow to debug your MCMC code.",
     "crumbs": [
       "MCMC Hacking",
       "Overview"

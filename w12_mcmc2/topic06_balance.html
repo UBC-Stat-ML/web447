@@ -1079,11 +1079,13 @@ https://github.com/trevorcampbell/shortex
 <p>We continue our <a href="../w12_mcmc2/topic05_cke.html">eccentric tourists example</a>…</p>
 <p><strong>Question:</strong> which travelling scheme(s) are <span class="math inline">\(\pi\)</span>-invariant?</p>
 <p><strong>Intuition:</strong> <span class="math inline">\(\pi\)</span>-invariance in this context just means the fraction of tourists in each city will stay constant over time.</p>
+<p><strong>Look at the Figures:</strong> Consider the following situations, where let us say in all case you observe that the <strong>planes are always full</strong>.</p>
 <ol type="a">
-<li>Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (see figure, planes always full).</li>
+<li>Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities.</li>
 <li>A <strong>tour</strong> where a fixed number of planes, equal to the number of cities, go around the world on a common route.</li>
-<li>A central “hub”, where all flights land at the hub (see figure, again, planes always full).</li>
+<li>A central “hub”, where all flights land at the hub.</li>
 </ol>
+<p><strong>Follow-up:</strong> how to express “fraction of planes between cities <span class="math inline">\(x\)</span> and <span class="math inline">\(x'\)</span>” in terms of <span class="math inline">\(\mu_i\)</span>, <span class="math inline">\(K\)</span>?</p>
 
 <!--
 
@@ -1102,14 +1104,14 @@ https://github.com/trevorcampbell/shortex
 ::: {.callout-caution collapse="true"} 
 ## Click for answer
 
-The correct answer is 1. Answer 4 is also accepted.
+The correct answer is 4.
 
-**Intuition:** in (a) there is always the same number of planes leaving and arriving each airport on a given weekend. 
+**Intuition:** in (a) and (b) there is always the same number of planes leaving and arriving each airport on a given weekend. Since the planes are full, this means the city's tourist population stays constant. 
 
 On the other hand, with the "hub" model, (c) it is easy to see that the city with the hub airport will have a number of people in it increasing over time, 
 hence not invariant.
 
-For (b), it depends: if the initial distribution is uniform, then we have invariance, otherwise, we do not. 
+**Follow-up question:** mathematically, the number of planes is proportional to $\mu_i(x) K(x' | x)$. It is the **flow** from state $x$ to $x'$. 
 :::
 
 -->
@@ -1188,7 +1190,6 @@ This equation, $\pi(x) K(x' | x) = \pi(x') K(x | x')$ is called **detailed balan
 <p><strong>Question:</strong> what is the relationship between local and global balance? Does one imply the other?</p>
 <!--
 
-
 ::: {.callout-caution collapse="true"} 
 ## Click for choices
 
@@ -1224,7 +1225,6 @@ there are situations where global balance holds but not detailed balance.
 
 
 :::
-
 
 -->
 
