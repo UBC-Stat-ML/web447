@@ -24,7 +24,7 @@ Here we look at LLNs for Markov chains more generally.
 
 ## Law of large numbers for Markov chains
 
-**Recall,** we mentioned a LLN for MH specifically (simplified here for finite state spaces):
+**Recall,** we mentioned a LLN for MH specifically (simplified here for finite state spaces): 
 
 **Proposition:** (discrete case) if the chain $X^\parm$ produced by MH is irreducible, then 
   we have a **LLN with respect to $\pi$**, i.e.,

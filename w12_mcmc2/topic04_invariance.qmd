@@ -10,14 +10,14 @@ editor:
 
 ### Topics
 
-- Intuition behind invariance
+- Intuition behind invariance 
 - Invariance as a fixed point
 
 
 ### Rationale
 
 Invariance is the key condition needed to establish 
-a [law of large numbers for Markov chains](topic03_markov_lln.qmd). 
+a [law of large numbers for Markov chains](topic03_markov_lln.qmd).
 Hence it is useful to build some intuition on what it means. 
 
 

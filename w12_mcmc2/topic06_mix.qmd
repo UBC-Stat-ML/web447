@@ -32,7 +32,7 @@ analyzing MCMC algorithms instead of model building.
 
 ### Example 
 
-Let us use the simple beta-binomial example from [question 3 of exercise 7](../exercises/ex07.qmd). 
+Let us use the simple beta-binomial example from [question 3 of exercise 7](../exercises/ex07.qmd).
 
 **Recall** the target is:
 

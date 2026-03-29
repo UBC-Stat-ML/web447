@@ -23,13 +23,17 @@ We need formulas to help us prove that MH is [$\pi$-invariant](topic04_invarianc
 
 We continue our [eccentric tourists example](topic05_cke.qmd)...
 
-**Question:** which travelling scheme(s) are $\pi$-invariant?
+**Question:** which travelling scheme(s) are $\pi$-invariant? 
 
 **Intuition:** $\pi$-invariance in this context just means the fraction of tourists in each city will stay constant over time.
 
-a. Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities (see figure, planes always full). 
+**Look at the Figures:** Consider the following situations, where let us say in all case you observe that the **planes are always full**. 
+
+a. Pairs of cities, where each pair of cities is assigned a fixed number of planes going back and forth between the two cities. 
 b. A **tour** where a fixed number of planes, equal to the number of cities, go around the world on a common route. 
-c. A central "hub", where all flights land at the hub (see figure, again, planes always full). 
+c. A central "hub", where all flights land at the hub. 
+
+**Follow-up:** how to express "fraction of planes between cities $x$ and $x'$" in terms of $\mu_i$, $K$? 
 
 ::: column-margin
 a:

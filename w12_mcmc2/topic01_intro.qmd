@@ -13,7 +13,7 @@ By "MCMC hacking," I mean learning the tools to:
 1. Predict when some MCMC algorithm will fail.
 2. Strategies to fix it. 
 3. How to write a new MCMC algorithm. 
-4. How to debut your MCMC code.
+4. How to debug your MCMC code.
 
 ## Rationale
 
