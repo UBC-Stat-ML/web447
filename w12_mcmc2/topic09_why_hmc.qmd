@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Motivation behind Hamiltonian Monte Carlo (HMC)
+- Motivation behind Hamiltonian Monte Carlo (HMC) 
 - Computational cost of MCMC methods
 - Computational cost scaling for popular Monte Carlo methods on normal targets 
 

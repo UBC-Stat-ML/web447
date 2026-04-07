@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Stochastic gradient estimation problem
+-   Stochastic gradient estimation problem 
 -   Push-out estimator (also known as "reparameterization trick")
 -   Subsampling
 

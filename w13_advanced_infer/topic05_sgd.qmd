@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Gradient descent
+-   Gradient descent 
 -   Stochastic gradient descent (SGD)
 
 ### Rationale

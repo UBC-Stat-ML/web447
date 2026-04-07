@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Global balance (synonym: invariance)
+- Global balance (synonym: invariance) 
 - Detailed balance (synonym: time-reversibility)
 
 ### Rationale

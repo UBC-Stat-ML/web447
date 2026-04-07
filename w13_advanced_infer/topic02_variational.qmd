@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Variational approximations
+-   Variational approximations 
 -   Distribution families
 -   Posterior approximation as optimization
 

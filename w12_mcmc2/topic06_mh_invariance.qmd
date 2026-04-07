@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Invariance of MH
+- Invariance of MH 
 
 ### Rationale
 

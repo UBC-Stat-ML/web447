@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Kullback-Leibler (KL) divergence
+-   Kullback-Leibler (KL) divergence 
 -   Evidence Lower Bound (ELBO)
 
 ### Rationale

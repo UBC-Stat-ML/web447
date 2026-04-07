@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Black-box / automatic differentiation variational inference (ADVI)
+-   Black-box / automatic differentiation variational inference (ADVI) 
 -   Coordinate ascent variational inference (CAVI)
 
 ### Rationale

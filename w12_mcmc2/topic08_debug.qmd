@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Exact invariance test
+- Exact invariance test 
 
 ### Rationale
 

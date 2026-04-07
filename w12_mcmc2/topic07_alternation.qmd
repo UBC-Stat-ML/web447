@@ -10,7 +10,7 @@ editor:
 
 ### Topics
 
-- Alternations of MCMC kernels
+- Alternations of MCMC kernels 
 - Code implementation
 - Alternations preserve invariance
 
