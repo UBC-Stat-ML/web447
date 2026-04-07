@@ -867,7 +867,7 @@
     "href": "w13_advanced_infer/topic01_intro.html",
     "title": "Overview",
     "section": "",
-    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods,\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods,\n…the model is not too complex but data is large: variational methods (VI),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
     "crumbs": [
       "Advanced inference",
       "Overview"
@@ -878,7 +878,7 @@
     "href": "w13_advanced_infer/topic01_intro.html#this-weeks-outline",
     "title": "Overview",
     "section": "",
-    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods,\n…the model is not too complex but data is large: variational methods (VI) (today),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
+    "text": "Resources when…\n\n…the model is complex but data not too large: tempering methods,\n…the model is not too complex but data is large: variational methods (VI),\n…the model is complex and data is large: largely open, we need more young researchers like you!!!",
     "crumbs": [
       "Advanced inference",
       "Overview"
@@ -6180,7 +6180,40 @@
     "href": "exercises/ex10.html",
     "title": "Exercise 10: Advanced inference",
     "section": "",
-    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
+    "text": "This week it’s enough to answer only one question\n\n\n\nTo give more time for the project, the grade for this last exercise will be the maximum of question 1, question 2, and question 3. I.e., you can solve only one of the three questions and get a full grade.",
+    "crumbs": [
+      "Advanced inference",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex10.html#q1-forward-kl-optimization",
+    "href": "exercises/ex10.html#q1-forward-kl-optimization",
+    "title": "Exercise 10: Advanced inference",
+    "section": "Q1: Forward KL optimization",
+    "text": "Q1: Forward KL optimization\nHere we explore an alternative to the reverse KL divergence for variational inference. Recall that the reverse KL divergence is defined as \\[ \\operatorname{KL}(q_\\phi \\| \\pi) = \\int q_\\phi(x) \\log \\frac{q_\\phi(x)}{\\pi(x)} \\, \\mathrm{d}x.\\] The forward KL is given by \\[ \\operatorname{KL}(\\pi \\| q_\\phi) = \\int \\pi(x) \\log \\frac{\\pi(x)}{q_\\phi(x)} \\, \\mathrm{d}x.\\]\nConsider the variational approximation \\[q_\\phi(x) = \\frac{1}{\\sqrt{2\\pi}} \\exp\\left(-\\frac{1}{2} (x - \\phi)^2 \\right).\\] That is, our variational approximation \\(q_\\phi\\) is a \\(\\mathcal{N}(\\phi, 1)\\) distribution. Our goal is to use this distribution to approximation \\(\\pi\\) using stochastic gradient descent.\n\nProve that \\[ \\nabla_\\phi \\operatorname{KL}(\\pi \\| q_\\phi) = \\phi - \\mathbb{E}_\\pi[X].\\]\nAre all of the quantities in the expression above known? If not, how might we estimate the unknown quantities?",
+    "crumbs": [
+      "Advanced inference",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex10.html#q2-asymmetric-proposal",
+    "href": "exercises/ex10.html#q2-asymmetric-proposal",
+    "title": "Exercise 10: Advanced inference",
+    "section": "Q2: Asymmetric proposal",
+    "text": "Q2: Asymmetric proposal\nSuppose you have a proposal \\(q(x' | x)\\) which is not symmetric. We show here how the deterministic proposal MH can be used to handle that case.\n\nOur goal is to sample from \\(\\pi(x)\\), \\(x \\in \\mathscr{X}\\).\nWe will use an augmented distribution \\(\\bar \\pi(x, v) = \\pi(x) q(v | x)\\), where \\(v \\in \\mathscr{X}\\).\nAlternate between two kernels \\(K_1\\) and \\(K_2\\):\n\n\\(K_1\\) consists in a deterministic proposal MH with a swap proposal, \\(T(x, v) = (v, x)\\).\n\\(K_2\\) keeps \\(x\\) constant and samples a new value for \\(v\\) from \\(q(\\cdot|x)\\) (i.e., a Gibbs sampler).\n\n\n\nWrite the MH ratio corresponding to the swap proposal in terms of \\(\\pi\\) and \\(q\\).\nModify the proof here to show that \\(K_2\\) is \\(\\bar \\pi\\)-invariant. You may assume \\(\\mathscr{X}\\) is discrete (this makes the notation simpler, but the result is the same in continuous space).",
+    "crumbs": [
+      "Advanced inference",
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/ex10.html#q3-implementing-hmc",
+    "href": "exercises/ex10.html#q3-implementing-hmc",
+    "title": "Exercise 10: Advanced inference",
+    "section": "Q3: Implementing HMC",
+    "text": "Q3: Implementing HMC\nRead how HMC can be viewed as MH with a deterministic proposal. That page provides code for a proposal.\n\nComplete the code to obtain an HMC algorithm. Use the following templates:\n\nset.seed(1234)\n\nlog_gamma = function(x) {\n  -x^2 # = - 0.5 x^2 / sigma^2, i.e. a normal with variance sigma^2 = 0.5\n}\n\n# code from the notes:\n\ngradient = function(x) {\n  -2*x\n}\n\nepsilon = 0.1\n\nkick = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, p + epsilon * gradient(x) / 2)\n}\n\ndrift = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x + epsilon * p, p)\n}\n\nflip = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  c(x, -p)\n}\n\nL = 5\n\nhmc_proposal = function(s) {\n  for (i in 1:L) {\n    s = kick(s)\n    s = drift(s)\n    s = kick(s)\n  }\n  flip(s)\n}\n\n# part to complete below\n\nhamiltonian = function(s) {\n  x = s[[1]]\n  p = s[[2]]\n  # TODO\n}\n\nhmc = function(initial_x, n_iteration) {\n  current_x = initial_x\n  samples = numeric(n_iterations)\n  for (i in 1:n_iteration) {\n    # TODO\n  }\n  return(samples)\n}\n\nCompute 10000 iterations and report the mean and variance of the samples.",
     "crumbs": [
       "Advanced inference",
       "Exercises"
