@@ -1,0 +1,130 @@
+---
+title: "VI with Stan"
+editor: 
+  mode: source
+---
+
+{{< include ../_macros.qmd >}}
+
+## Outline
+
+### Topics
+
+-   Calling VI with cmdstanr
+-   Main options
+-   Interpreting the output
+-   Alternatives to Stan
+
+### Rationale
+
+Now that you know how to write Stan models, we see here that you can run not only 
+HMC but also VI. 
+
+
+## Example
+
+We will use the [model for detecting random guessing](../w10_modelling/topic07_mixtures.qmd) 
+and compare the output of variational inference and HMC. 
+
+
+## Calling VI with cmdstanr
+
+The commands are very similar to how we call HMC. 
+
+First create the model exactly as before:
+
+```{r message=FALSE, warning=FALSE, results=FALSE}
+suppressPackageStartupMessages(library(cmdstanr))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(bayesplot))
+
+data = read.csv(url("https://github.com/UBC-Stat-ML/web447/raw/main/data/ScoreData.csv"))
+mod = cmdstan_model("../w10_modelling/students_guessing.stan")
+```
+
+Then to run VI: 
+
+```{r}
+fit.variational = mod$variational(
+  seed = 1,
+  refresh = 500,
+  output_dir = "stan_out",
+  algorithm = "meanfield", # <1>
+  output_samples = 1000, # <2>
+  data = list(
+            n_students = length(data$Score),
+            scores = data$Score
+          ) 
+)
+```
+1. This specifies the variational family $\family$. Use `meanfield` for a normal with diagonal covariance, `fullrank` for any normal. 
+2. How many samples from $q^*$ to output.
+
+**Note:** calling `mod$variational` does two things:
+
+1. First, find $q^* \in \family$ that is closest to $\pi$. 
+2. Sample from $q^*$ `output_samples` times (this provides independent and identical samples). 
+
+
+Compare this to how we ran HMC:
+
+```{r}
+fit.hmc = mod$sample(
+  seed = 1,
+  refresh = 500,
+  output_dir = "stan_out",
+  chains = 1,
+  data = list(
+            n_students = length(data$Score),
+            scores = data$Score
+          ) 
+)
+```
+
+
+
+## Comparing the output of VI and HMC
+
+Recall that in [the mixture page we defined](../w10_modelling/topic07_mixtures.qmd) random variables $X_i = \ex[G_i | A_i, Y]$, the 
+"guessing probabilities", with support on $[0, 1]$. 
+
+Let us look at the posteriors of $X_i$ for HMC vs VI:
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+library(bayesplot)
+library(ggplot2)
+library(dplyr)
+library(latex2exp)
+
+vars = fit.hmc$metadata()$model_params
+sel  = grep("^guessing_probabilities.*", vars, value = TRUE)
+
+data_hmc = mcmc_intervals_data(fit.hmc$draws(variables = sel)) %>% 
+  mutate(method = "HMC")
+
+data_vi = mcmc_intervals_data(fit.variational$draws(variables = sel)) %>% 
+  mutate(method = "Variational")
+
+bind_rows(data_hmc, data_vi) %>%
+  ggplot(aes(x = m, y = parameter, color = method)) +
+  geom_linerange(aes(xmin = ll, xmax = hh), 
+                 position = position_dodge(width = 0.5)) +
+  geom_linerange(aes(xmin = l, xmax = h), 
+                 position = position_dodge(width = 0.5), size = 1.5) +
+  geom_point(position = position_dodge(width = 0.5), size = 2) +
+  scale_x_continuous(limits = c(0, 1)) +
+  theme_minimal() +
+  labs(
+    x = TeX("$X_i$"),
+    y = NULL,
+    color = "Method"
+  )
+```
+
+**Question:** If the variational family is normal, how come the support of $X_i$  seems to be contained in the interval $[0, 1]$? 
+
+{{< include ../../clickers/w13/_c02.qmd >}}

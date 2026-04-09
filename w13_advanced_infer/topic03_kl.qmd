@@ -78,4 +78,4 @@ We show that optimizing the reverse KL does not require knowing the intractable 
 
 **Question:** how did we get $\log Z$ outside of the integral (step in red)?
 
-{{< include ../../clickers/w13/_c02.qmd >}}
+{{< include ../../clickers/w13/_c03.qmd >}}

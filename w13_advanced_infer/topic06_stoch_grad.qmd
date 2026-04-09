@@ -11,7 +11,7 @@ editor:
 
 ### Topics
 
--   Stochastic gradient estimation problem 
+-   Stochastic gradient estimation problem
 -   Push-out estimator (also known as "reparameterization trick")
 -   Subsampling
 
@@ -55,7 +55,7 @@ $\ex_\phi[h(\phi, X)],$ where $X \sim q_\phi$.
 &\approx \underbrace{ \frac{1}{M} \sum_{m=1}^M \nabla h(\phi, X^{(m)})}_{\text{broken stochastic gradient estimator}} \expl{simple Monte Carlo}.
 \end{align*}
 
-{{< include ../../clickers/w13/_c03.qmd >}}
+{{< include ../../clickers/w13/_c04.qmd >}}
 
 
 ## Solution: reparameterization

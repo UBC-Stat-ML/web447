@@ -253,3 +253,4 @@ mcmc_areas_ridges(fit$draws(c("predictive_score_non_guessing"))) +
   theme_minimal() + 
   scale_x_continuous(limits = c(0, 20)) 
 ```
+

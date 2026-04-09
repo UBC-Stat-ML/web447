@@ -34,10 +34,10 @@ the direction of steepest ascent.
 :::
 
 **Gradient descent:** at each iteration, move the current point in the direction opposite to the gradient,
-  $$\phi^{(t+1)} \gets \phi^{(t)} - \epsilon_t \nabla L(\phi^{(t)}),$$
-  where $\epsilon_t > 0$ is called a **step size**. 
+  $$\phi^{(t+1)} \gets \phi^{(t)} - \eta_t \nabla L(\phi^{(t)}),$$
+  where $\eta_t > 0$ is called a **step size** ($\eta$ is the "eta" encountered in the [Stan VI output](topic02_xtra_stanvi.qmd)). 
   
-**Property:** for the right choice of step size $\epsilon_t$, the gradient descent algorithm converges to 
+**Property:** for the right choice of step size $\eta_t$, the gradient descent algorithm converges to 
 the minimum of the convex function ([Boyd and Vandenberghe, 2004](https://web.stanford.edu/~boyd/cvxbook/)). 
 
 
@@ -51,5 +51,5 @@ the minimum of the convex function ([Boyd and Vandenberghe, 2004](https://web.st
 In our situation it will correspond to the randomness of sampling from our current variational family, $q_{\phi^{(t)}}$. 
 
 **Property:** if $\hat \nabla L$ is unbiased, the objective function is convex, and the variance of $\ex[\hat \nabla L]$ is bounded, 
-stochastic gradient descent converges to the optimal solution $t \to \infty$ with $\epsilon_t = t^{-\alpha}$ for $\alpha \in (1/2, 1]$ ([Benveriste et al., 1990](https://link.springer.com/book/10.1007/978-3-642-75894-2)).
+stochastic gradient descent converges to the optimal solution $t \to \infty$ with $\eta_t = t^{-\alpha}$ for $\alpha \in (1/2, 1]$ ([Benveriste et al., 1990](https://link.springer.com/book/10.1007/978-3-642-75894-2)).
 
