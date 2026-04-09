@@ -22,11 +22,15 @@ We still need to pick a numerical method to optimize it.
 
 ## Overview
 
+**Two methods to optimize the KL:**
+
 1. Before ~2015, the user had to do mathematical derivation each time they wanted to apply VI to a new model.
 2. This changed with the advent of "black box methods" such ADVI.
 
-- In this course we focus on 2 since they are easier to use. 
-- However, 1 is still useful as it can be much faster in practice. 
+**In this lecture...**
+
+- we focus on method 2 since they are easier to use, ...
+- however, method 1 is still useful as it can be much faster in practice. 
 
 
 ## Black box methods

@@ -128,3 +128,9 @@ bind_rows(data_hmc, data_vi) %>%
 **Question:** If the variational family is normal, how come the support of $X_i$  seems to be contained in the interval $[0, 1]$? 
 
 {{< include ../../clickers/w13/_c02.qmd >}}
+
+
+## Alternatives
+
+- Stan supports another Variational method, "path finder", which is often faster. 
+- But neither path finder nor Stan VI support data subsampling, so for large dataset, consider using [NumPyro](https://num.pyro.ai/en/stable/).

@@ -50,6 +50,6 @@ the minimum of the convex function ([Boyd and Vandenberghe, 2004](https://web.st
 **Note:** the expectation in "$\ex[\hat \nabla L]$" is with respect to the randomness used to create the random approximation. 
 In our situation it will correspond to the randomness of sampling from our current variational family, $q_{\phi^{(t)}}$. 
 
-**Property:** if $\hat \nabla L$ is unbiased, the objective function is convex, and the variance of $\ex[\hat \nabla L]$ is bounded, 
+**Property:** if $\hat \nabla L$ is unbiased, the objective function is convex, and the variance of $\hat \nabla L$ is bounded, 
 stochastic gradient descent converges to the optimal solution $t \to \infty$ with $\eta_t = t^{-\alpha}$ for $\alpha \in (1/2, 1]$ ([Benveriste et al., 1990](https://link.springer.com/book/10.1007/978-3-642-75894-2)).
 
