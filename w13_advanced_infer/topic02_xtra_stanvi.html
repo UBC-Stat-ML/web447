@@ -1054,6 +1054,7 @@ window.Quarto = {
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#calling-vi-with-cmdstanr" id="toc-calling-vi-with-cmdstanr" class="nav-link" data-scroll-target="#calling-vi-with-cmdstanr">Calling VI with cmdstanr</a></li>
   <li><a href="#comparing-the-output-of-vi-and-hmc" id="toc-comparing-the-output-of-vi-and-hmc" class="nav-link" data-scroll-target="#comparing-the-output-of-vi-and-hmc">Comparing the output of VI and HMC</a></li>
+  <li><a href="#alternatives" id="toc-alternatives" class="nav-link" data-scroll-target="#alternatives">Alternatives</a></li>
   </ul>
 </nav>
     </div>
@@ -1229,13 +1230,13 @@ See https://mc-stan.org/misc/warnings for details.</code></pre>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> fit.hmc<span class="sc">$</span><span class="fu">metadata</span>()<span class="sc">$</span>model_params</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>sel  <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"^guessing_probabilities.*"</span>, vars, <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">=</span> fit.hmc<span class="sc">$</span><span class="fu">metadata</span>()<span class="sc">$</span>model_params</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>sel  <span class="ot">=</span> <span class="fu">grep</span>(<span class="st">"^guessing_probabilities.*"</span>, vars, <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data_hmc <span class="ot">&lt;-</span> <span class="fu">mcmc_intervals_data</span>(fit.hmc<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> sel)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data_hmc <span class="ot">=</span> <span class="fu">mcmc_intervals_data</span>(fit.hmc<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> sel)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"HMC"</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>data_vi <span class="ot">&lt;-</span> <span class="fu">mcmc_intervals_data</span>(fit.variational<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> sel)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>data_vi <span class="ot">=</span> <span class="fu">mcmc_intervals_data</span>(fit.variational<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> sel)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"Variational"</span>)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(data_hmc, data_vi) <span class="sc">%&gt;%</span></span>
@@ -1261,36 +1262,56 @@ See https://mc-stan.org/misc/warnings for details.</code></pre>
 </div>
 </div>
 </div>
-<p><strong>Question:</strong> If the variational family is normal, how come the support of <span class="math inline">\(P_i\)</span> seems to be contained in the interval <span class="math inline">\([0, 1]\)</span>?</p>
-<!--
-
-::: {.callout-caution collapse="true"} 
-## Click for choices
-
-1. The support of the normal distribution can be adjusted to be [0, 1]
-2. The variational fit is done in the unconstrained space
-3. Stan discards all samples that violate the support constraints
-4. The support is not actually contained in the interval [0, 1]
-5. None of the above
-:::
-
-
-
-::: {.callout-caution collapse="true"} 
-## Click for answer
-
-Correct answer is: *the variational fit is done in the unconstrained space*. 
-
-As discussed [earlier](../w08_mcmc1/topic03_more_complex_example.qmd), Stan uses a change of variable to transform the latent variables into an unconstrained space. This is the same technique as used in [exercise 6](../exercises/ex06.qmd). 
-
-In [exercise 6](../exercises/ex06.qmd) we called the constraining transform $c$. 
-
-This means that after sampling $\tilde X^{(m)} \sim q^*$, Stan will transform it back to the constrained (original) parameterization, i.e., $X^{(m)} = c^{-1}(\tilde X^{(m)})$. 
-
-The samples in the fit objects are the independent and identically distributed random variables $X^{(1)}, \dots, X^{(M)}$. 
-:::
-
--->
+<p><strong>Question:</strong> If the variational family is normal, how come the support of <span class="math inline">\(X_i\)</span> seems to be contained in the interval <span class="math inline">\([0, 1]\)</span>?</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for choices
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The support of the normal distribution can be adjusted to be [0, 1]</li>
+<li>The variational fit is done in the unconstrained space</li>
+<li>Stan discards all samples that violate the support constraints</li>
+<li>The support is not actually contained in the interval [0, 1]</li>
+<li>None of the above</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Correct answer is: <em>the variational fit is done in the unconstrained space</em>.</p>
+<p>As discussed <a href="../w08_mcmc1/topic03_more_complex_example.html">earlier</a>, Stan uses a change of variable to transform the latent variables into an unconstrained space. This is the same technique as used in <a href="../exercises/ex06.html">exercise 6</a>.</p>
+<p>In <a href="../exercises/ex06.html">exercise 6</a> we called the constraining transform <span class="math inline">\(c\)</span>.</p>
+<p>This means that after sampling <span class="math inline">\(\tilde X^{(m)} \sim q^*\)</span>, Stan will transform it back to the constrained (original) parameterization, i.e., <span class="math inline">\(X^{(m)} = c^{-1}(\tilde X^{(m)})\)</span>.</p>
+<p>The samples in the fit objects are the independent and identically distributed random variables <span class="math inline">\(X^{(1)}, \dots, X^{(M)}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="alternatives" class="level2">
+<h2 class="anchored" data-anchor-id="alternatives">Alternatives</h2>
+<ul>
+<li>Stan supports another Variational method, “path finder”, which is often faster.</li>
+<li>But neither path finder nor Stan VI support data subsampling, so for large dataset, consider using <a href="https://num.pyro.ai/en/stable/">NumPyro</a>.</li>
+</ul>
 
 
 </section>
