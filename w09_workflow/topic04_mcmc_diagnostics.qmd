@@ -31,11 +31,13 @@ Informally, there are two possible situations to distinguish:
 
 - The chain is almost like i.i.d. sampling, just a **constant time** slower (e.g., 2x slower).
     - This constant is related to the relative effective sample size (e.g., if 2x slower, relative ESS would be $1/2$).
-    - Notice Stan estimates ESS when printing a `fit` object, look for column `n_eff`.
+    - Notice Stan estimates ESS when printing a `fit` object, look for column `ess_bulk`.[^1]
     - More on this soon.
-- Fast mixing happens when the dependence between time step $i$ and $i+m$ decays exponentially in $m$.[^1]
+- Fast mixing happens when the dependence between time step $i$ and $i+m$ decays exponentially in $m$.[^2]
 
-[^1]: "Fast mixing" is often formalized using [one of several equivalent definitions of geometric ergodicity](https://arxiv.org/pdf/2203.04395.pdf).
+[^1]: The column `ess_bulk` was called `n_eff` in older versions.
+
+[^2]: "Fast mixing" is often formalized using [one of several equivalent definitions of geometric ergodicity](https://arxiv.org/pdf/2203.04395.pdf).
 
 
 **Slow/torpid mixing:**

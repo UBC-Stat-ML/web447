@@ -104,7 +104,9 @@ When using MCMC, will the output change if, for $x > 0$...
 
 ## Intervals
 
-Suppose you see the following output from a Stan MCMC fit object:
+Suppose you see the following output from a Stan MCMC fit object:[^2]
+
+[^2]:  `n_eff` is equivalent to `ess_bulk`, you might see one or other depending on the Stan version you are using.
 
 ```
 Inference for Stan model: anon_model.
