@@ -1137,14 +1137,14 @@ https://github.com/trevorcampbell/shortex
 <p>Change point models are related to <a href="../w10_modelling/topic07_mixtures.html">mixture models</a>, but instead of each data point being free to pick which of the two clusters to belong to, change point models have a different cluster membership mechanism, defined as follows:</p>
 <ol type="1">
 <li>Pick a change point <span class="math inline">\(C\)</span> uniformly among the days <span class="math inline">\(d \in \{1, 2, \dots, 74\}\)</span>.</li>
-<li>The likelihood for days before the change point <span class="math inline">\(C\)</span> uses the parameter of cluster 1.</li>
+<li>The likelihood for days before or at the change point <span class="math inline">\(C\)</span> uses the parameter of cluster 1.</li>
 <li>The likelihood for days after the change point <span class="math inline">\(C\)</span> uses the parameter of cluster 2.</li>
 </ol>
 <p><strong>Mathematical description:</strong></p>
 <p><span class="math display">\[\begin{align*}
 \lambda_i &amp;\sim {\mathrm{Exp}}(1/100), \text{ for }i \in \{1, 2\}, \;\;\text{(parameters for 2 clusters)} \\
 C &amp;\sim {\mathrm{Unif}}\{1, 2, \dots 74\}, \;\;\text{(change point)} \\
-Y_d &amp;\sim {\mathrm{Poisson}}(\lambda_{\mathbb{1}[d &lt; C] + 1}), \text{ for }d \in \{1, 2, \dots, 74\} \;\;\text{(likelihood)}.
+Y_d &amp;\sim {\mathrm{Poisson}}(\lambda_{\mathbb{1}[d &gt; C] + 1}), \text{ for }d \in \{1, 2, \dots, 74\} \;\;\text{(likelihood)}.
 \end{align*}\]</span></p>
 <p><strong>R implementation:</strong></p>
 <p>We provide an implementation of the joint distribution of this model below. You will need it in this exercise.</p>
