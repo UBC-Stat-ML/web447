@@ -1124,10 +1124,10 @@ https://github.com/trevorcampbell/shortex
 <li>The chain is almost like i.i.d. sampling, just a <strong>constant time</strong> slower (e.g., 2x slower).
 <ul>
 <li>This constant is related to the relative effective sample size (e.g., if 2x slower, relative ESS would be <span class="math inline">\(1/2\)</span>).</li>
-<li>Notice Stan estimates ESS when printing a <code>fit</code> object, look for column <code>n_eff</code>.</li>
+<li>Notice Stan estimates ESS when printing a <code>fit</code> object, look for column <code>ess_bulk</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li>More on this soon.</li>
 </ul></li>
-<li>Fast mixing happens when the dependence between time step <span class="math inline">\(i\)</span> and <span class="math inline">\(i+m\)</span> decays exponentially in <span class="math inline">\(m\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Fast mixing happens when the dependence between time step <span class="math inline">\(i\)</span> and <span class="math inline">\(i+m\)</span> decays exponentially in <span class="math inline">\(m\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ul>
 <p><strong>Slow/torpid mixing:</strong></p>
 <ul>
@@ -1284,7 +1284,8 @@ https://github.com/trevorcampbell/shortex
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>“Fast mixing” is often formalized using <a href="https://arxiv.org/pdf/2203.04395.pdf">one of several equivalent definitions of geometric ergodicity</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The column <code>ess_bulk</code> was called <code>n_eff</code> in older versions.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>“Fast mixing” is often formalized using <a href="https://arxiv.org/pdf/2203.04395.pdf">one of several equivalent definitions of geometric ergodicity</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

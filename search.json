@@ -5619,7 +5619,7 @@
     "href": "w09_workflow/topic04_mcmc_diagnostics.html#overview",
     "title": "MCMC diagnostics",
     "section": "Overview",
-    "text": "Overview\nInformally, there are two possible situations to distinguish:\nFast mixing:\n\nThe chain is almost like i.i.d. sampling, just a constant time slower (e.g., 2x slower).\n\nThis constant is related to the relative effective sample size (e.g., if 2x slower, relative ESS would be \\(1/2\\)).\nNotice Stan estimates ESS when printing a fit object, look for column n_eff.\nMore on this soon.\n\nFast mixing happens when the dependence between time step \\(i\\) and \\(i+m\\) decays exponentially in \\(m\\).1\n\nSlow/torpid mixing:\n\nTerminology: slow/torpid mixing.\nMCMC still consistent, but you may have to wait for years to get a usable answer!\nIn this case, changes have to be made to the sampler.\nWe will cover two alternatives to consider for these difficult targets:\n\nTempering methods (week 12).\nVariational methods (week 13).",
+    "text": "Overview\nInformally, there are two possible situations to distinguish:\nFast mixing:\n\nThe chain is almost like i.i.d. sampling, just a constant time slower (e.g., 2x slower).\n\nThis constant is related to the relative effective sample size (e.g., if 2x slower, relative ESS would be \\(1/2\\)).\nNotice Stan estimates ESS when printing a fit object, look for column ess_bulk.1\nMore on this soon.\n\nFast mixing happens when the dependence between time step \\(i\\) and \\(i+m\\) decays exponentially in \\(m\\).2\n\nSlow/torpid mixing:\n\nTerminology: slow/torpid mixing.\nMCMC still consistent, but you may have to wait for years to get a usable answer!\nIn this case, changes have to be made to the sampler.\nWe will cover two alternatives to consider for these difficult targets:\n\nTempering methods (week 12).\nVariational methods (week 13).",
     "crumbs": [
       "Bayesian workflow",
       "MCMC diagnostics"
@@ -5641,7 +5641,7 @@
     "href": "w09_workflow/topic04_mcmc_diagnostics.html#footnotes",
     "title": "MCMC diagnostics",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\n“Fast mixing” is often formalized using one of several equivalent definitions of geometric ergodicity.↩︎",
+    "text": "Footnotes\n\n\nThe column ess_bulk was called n_eff in older versions.↩︎\n“Fast mixing” is often formalized using one of several equivalent definitions of geometric ergodicity.↩︎",
     "crumbs": [
       "Bayesian workflow",
       "MCMC diagnostics"
@@ -5718,7 +5718,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html#intervals",
     "title": "Practice questions (Quiz 2)",
     "section": "Intervals",
-    "text": "Intervals\nSuppose you see the following output from a Stan MCMC fit object:\nInference for Stan model: anon_model.\n1 chains, each with iter=2000; warmup=1000; thin=1; \npost-warmup draws per chain=1000, total post-warmup draws=1000.\n\n            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat\nslope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1\nsigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1\nprediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1\nlp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1\n\nSamples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\nReport an 80% confidence interval to capture the Monte Carlo error for the posterior mean of the prediction parameter.\n\nSome of the following will be helpful in answering that question:\n\nqnorm(0.8)\n\n[1] 0.8416212\n\nqnorm(0.9)\n\n[1] 1.281552\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n\nReport a 50% credible interval for the prediction parameter. You can ignore Monte Carlo error in this sub-question.\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nWe need to split the \\(1-20\\%\\) into the two tails, hence we are looking for the 10% tail.\n\nThe radius of the interval is therefore:\n\n0.01 * qnorm(0.9)\n\n[1] 0.01281552\n\n\nHence the interval is \\([0.64 \\pm 0.01]\\).\n\nA quantile-based credible interval gives \\([0.47, 0.81]\\).",
+    "text": "Intervals\nSuppose you see the following output from a Stan MCMC fit object:1\nInference for Stan model: anon_model.\n1 chains, each with iter=2000; warmup=1000; thin=1; \npost-warmup draws per chain=1000, total post-warmup draws=1000.\n\n            mean se_mean   sd  2.5%   25%   50%   75% 97.5% n_eff Rhat\nslope       0.42    0.00 0.04  0.34  0.40  0.42  0.45  0.51   719    1\nsigma       0.24    0.00 0.04  0.18  0.21  0.24  0.27  0.33   639    1\nprediction  0.64    0.01 0.27  0.14  0.47  0.64  0.81  1.20  1023    1\nlp__       21.32    0.06 1.04 18.46 20.94 21.62 22.09 22.36   331    1\n\nSamples were drawn using NUTS(diag_e) at Thu Mar 14 14:41:50 2024.\nFor each parameter, n_eff is a crude measure of effective sample size,\nand Rhat is the potential scale reduction factor on split chains (at \nconvergence, Rhat=1).\n\nReport an 80% confidence interval to capture the Monte Carlo error for the posterior mean of the prediction parameter.\n\nSome of the following will be helpful in answering that question:\n\nqnorm(0.8)\n\n[1] 0.8416212\n\nqnorm(0.9)\n\n[1] 1.281552\n\nqnorm(0.95)\n\n[1] 1.644854\n\n\n\nReport a 50% credible interval for the prediction parameter. You can ignore Monte Carlo error in this sub-question.\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nWe need to split the \\(1-20\\%\\) into the two tails, hence we are looking for the 10% tail.\n\nThe radius of the interval is therefore:\n\n0.01 * qnorm(0.9)\n\n[1] 0.01281552\n\n\nHence the interval is \\([0.64 \\pm 0.01]\\).\n\nA quantile-based credible interval gives \\([0.47, 0.81]\\).",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -5729,7 +5729,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html#bias-and-consistency",
     "title": "Practice questions (Quiz 2)",
     "section": "Bias and consistency",
-    "text": "Bias and consistency\nLet \\(\\hat G_M\\) denote a Monte Carlo estimator based on \\(M\\) iterations, providing an approximation for an intractable expectation, \\(g^* = \\mathbb{E}_\\pi[g(X)]\\).\n\nDefine the notion of bias.\nDefine the notion of consistency.\nIn the context of Monte Carlo methods, what is more important, a bias of zero (unbiasedness) or consistency? Why?\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\n\\(\\operatorname{Bias}(\\hat G_M, g^*) = \\mathbb{E}[\\hat G_M] - g^*\\).\n\\(\\hat G_M \\to g^*\\).1\nConsistency is more important. Consistency means that the error decreases as \\(M\\) increases. In contrast, even if a method is unbiased, it still leads to error due to its variance.",
+    "text": "Bias and consistency\nLet \\(\\hat G_M\\) denote a Monte Carlo estimator based on \\(M\\) iterations, providing an approximation for an intractable expectation, \\(g^* = \\mathbb{E}_\\pi[g(X)]\\).\n\nDefine the notion of bias.\nDefine the notion of consistency.\nIn the context of Monte Carlo methods, what is more important, a bias of zero (unbiasedness) or consistency? Why?\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\n\\(\\operatorname{Bias}(\\hat G_M, g^*) = \\mathbb{E}[\\hat G_M] - g^*\\).\n\\(\\hat G_M \\to g^*\\).2\nConsistency is more important. Consistency means that the error decreases as \\(M\\) increases. In contrast, even if a method is unbiased, it still leads to error due to its variance.",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"
@@ -5850,7 +5850,7 @@
     "href": "w11_quiz2/topic02_q2_practice_questions.html#footnotes",
     "title": "Practice questions (Quiz 2)",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nWhere convergence is either almost sure (strong consistency), or in probability (weak consistency).↩︎",
+    "text": "Footnotes\n\n\nn_eff is equivalent to ess_bulk, you might see one or other depending on the Stan version you are using.↩︎\nWhere convergence is either almost sure (strong consistency), or in probability (weak consistency).↩︎",
     "crumbs": [
       "Quiz 2",
       "Practice questions (Quiz 2)"

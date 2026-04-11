@@ -1318,7 +1318,7 @@ r = \frac{\gamma(\tilde x)}{\gamma(x)} = \frac{ f(\tilde x) \exp(-\tilde x) \til
 </section>
 <section id="intervals" class="level2">
 <h2 class="anchored" data-anchor-id="intervals">Intervals</h2>
-<p>Suppose you see the following output from a Stan MCMC fit object:</p>
+<p>Suppose you see the following output from a Stan MCMC fit object:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <pre><code>Inference for Stan model: anon_model.
 1 chains, each with iter=2000; warmup=1000; thin=1; 
 post-warmup draws per chain=1000, total post-warmup draws=1000.
@@ -1406,7 +1406,7 @@ Click for answer
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><span class="math inline">\(\operatorname{Bias}(\hat G_M, g^*) = \mathbb{E}[\hat G_M] - g^*\)</span>.</li>
-<li><span class="math inline">\(\hat G_M \to g^*\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li><span class="math inline">\(\hat G_M \to g^*\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li>Consistency is more important. Consistency means that the error decreases as <span class="math inline">\(M\)</span> increases. In contrast, even if a method is unbiased, it still leads to error due to its variance.</li>
 </ol>
 </div>
@@ -1769,7 +1769,8 @@ Click for answer
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Where convergence is either almost sure (strong consistency), or in probability (weak consistency).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><code>n_eff</code> is equivalent to <code>ess_bulk</code>, you might see one or other depending on the Stan version you are using.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Where convergence is either almost sure (strong consistency), or in probability (weak consistency).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
