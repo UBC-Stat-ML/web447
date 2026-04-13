@@ -1111,10 +1111,11 @@ L([c, d], x) = \mathbb{1}\{x \notin [c, d]\} + k (d - c)
 \delta_{\text{B}}(Y) &amp;= \operatorname{arg\,min}\{ \mathbb{E}[L(a, X) | Y] : a \in A \} \\
 &amp;=  \operatorname{arg\,min}\{ \Pr[X \notin [c, d] | Y] + k(d - c) : [c,d] \in A \} \\
 &amp;=  \operatorname{arg\,min}\{ \Pr[X &lt; c|Y] + \Pr[X &gt; d |Y] + k(d - c) : [c,d] \in A \}  \\
+&amp;=  \operatorname{arg\,min}\{ \Pr[X \le c|Y] + 1 - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \} \\
 &amp;=  \operatorname{arg\,min}\{ \Pr[X \le c|Y] - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \}
 \end{aligned}
 \]</span></p>
-<p>Here we assume the posterior has a continuous density <span class="math inline">\(f\)</span> to change <span class="math inline">\(&lt;\)</span> into <span class="math inline">\(\le\)</span>.</p>
+<p>Here we assume the posterior has a continuous density <span class="math inline">\(f\)</span> to change <span class="math inline">\(&lt;\)</span> into <span class="math inline">\(\le\)</span>. We have also used that removing “<span class="math inline">\(+1\)</span>” does not change the value of the <span class="math inline">\(\operatorname{arg\,min}\)</span>.</p>
 <p>As we did with <a href="../w05_properties/topic03_decision_to_point.html">point estimation</a>, we take the derivative with respect to <span class="math inline">\(c\)</span> and set to zero (then will do the same thing for <span class="math inline">\(d\)</span>).</p>
 <p>Notice that <span class="math inline">\(\Pr[X \le c|Y]\)</span> is the posterior cumulative distribution function (CDF)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so taking the derivative with respect to <span class="math inline">\(c\)</span> yields a density:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><span class="math display">\[
