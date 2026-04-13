@@ -56,11 +56,12 @@ $$
 \best(Y) &= \argmin \{ \E[L(a, X) | Y] : a \in A \} \\
 &=  \argmin \{ \Pr[X \notin [c, d] | Y] + k(d - c) : [c,d] \in A \} \\
 &=  \argmin \{ \Pr[X < c|Y] + \Pr[X > d |Y] + k(d - c) : [c,d] \in A \}  \\
+&=  \argmin \{ \Pr[X \le c|Y] + 1 - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \} \\
 &=  \argmin \{ \Pr[X \le c|Y] - \Pr[X \le d |Y] + k(d - c) : [c,d] \in A \}
 \end{aligned} 
 $$
 
-Here we assume the posterior has a continuous density $f$ to change $<$ into $\le$. 
+Here we assume the posterior has a continuous density $f$ to change $<$ into $\le$. We have also used that removing "$+1$" does not change the value of the $\argmin$. 
 
 As we did with [point estimation](../w05_properties/topic03_decision_to_point.qmd), we take the derivative with respect to $c$ and set to zero (then will do the same thing for $d$).
 
