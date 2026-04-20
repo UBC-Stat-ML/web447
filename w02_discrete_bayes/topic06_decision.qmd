@@ -31,8 +31,8 @@ emerge when specific loss functions are selected).
 Your friend proposes the following game (a good model for lottery!):
 
 - She flips a standard coin:
-    - if it's a "heads": you give her \$10 
-    - if it's a "tails": she gives you \$9. 
+    - if it's a "tails": you give her \$10 
+    - if it's a "heads": she gives you \$9. 
 - Your decision: to play or not to play? 
 
 ### Mathematical formulation

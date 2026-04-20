@@ -42,10 +42,10 @@ we will use the exact same probability model as the bag of coins example from la
 Use the following correspondence to link last week's example with this week's:
 
 - $(Y_i = 1)$: 
-    - $\leftrightarrow$ "$i$-th flip is a heads" 
+    - $\leftrightarrow$ "$i$-th flip is a tails" 
     - $\leftrightarrow$ "$i$-th launch is a success"
 - $(X = k)$:
-    - $\leftrightarrow$ "the coin drawn from bag has probability $p = k/K$ of heads"
+    - $\leftrightarrow$ "the coin drawn from bag has probability $p = k/K$ of tails"
     - $\leftrightarrow$ "this type of rocket has probability $p = k/K$ of success."
     
     
