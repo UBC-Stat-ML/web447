@@ -5,9 +5,9 @@ my_first_probabilistic_program = function() {
   
   # Similar to forward sampling, but use 'observe' when the variable is observed
   coin_index = simulate(DiscreteDistribution(supp = 0:2))
-  prob_heads = coin_index/2
+  prob_tails = coin_index/2
   for (i in seq_along(coin_flips)) { 
-    observe(coin_flips[i], Bern(prob_heads)) 
+    observe(coin_flips[i], Bern(prob_tails)) 
   }
   
   # return the test function g(x, y)
