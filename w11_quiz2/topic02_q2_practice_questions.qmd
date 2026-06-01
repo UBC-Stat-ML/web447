@@ -160,7 +160,7 @@ Consider the following code to
 perform Bayesian linear regression on galaxy distances and velocities:
 
 
-```{stan output.var = "hubble_basic"}
+```stan
 data {
   int<lower=0> N; // number of observations
   vector[N] xs;   // independent variable

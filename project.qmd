@@ -59,7 +59,7 @@ See [schedule](schedule.qmd).
 -   Basic requirements
     -   Team is identified.
     -   There is a working link to a public repo containing commits from all team members. 
--   Two related real-world candidate datasets appropriate for the selected theme are clearly described (one main, one back-up) 
+-   Two related real-world candidate datasets are clearly described (one main, one back-up) 
     - Show the structure or `head` of the dataframe.
     - Provide a URL to the data, or explain why it is not possible to provide a URL. 
     - If you are collecting data yourself, it is OK if you do not have the full data yet but you should have at least a prototype. 
@@ -81,7 +81,6 @@ As long as the team submits a reasonable project proposal, I will give full grad
 -   Problem formulation. (5%) The report clearly describes:
     -   a real-world inference task/problem,
     -   succinct but sufficient context (e.g. biological terminology) needed to understand the problem,
-    -   the key modelling/methodological/challenge, clearly associating it with one of the items under "menu of project themes" above.
 -   The report contains a literature review: (5%) relevant literature is cited and properly summarized.
     -   If you are using a publicly available dataset, you should clearly identify the most closely related reference and clearly explain how your report differs from it. 
 -   Core requirements:

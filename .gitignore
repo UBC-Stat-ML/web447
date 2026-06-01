@@ -34,3 +34,5 @@ students_guessing_simplified
 hubble_predictions
 w11_quiz2/stan_out
 w13_advanced_infer/stan_out
+
+**/*.quarto_ipynb
