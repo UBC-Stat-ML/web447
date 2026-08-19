@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Date\nTopics\nReadings\n\n\n\n\nTue, Jan 6\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 8\n\n\n\n\nTue, Jan 13\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 15\n\n\n\n\nTue, Jan 20\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 22\n\n\n\n\nTue, Jan 27\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 29\n\n\n\n\nTue, Feb 3\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 5\n\n\n\n\nTue, Feb 10\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 12\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 19\nReading week.\n\n\n\nTue, Feb 24\nQuiz 1.\n\n\n\nTh, Feb 26\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 3\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 5\n\n\n\n\nTue, Mar 10\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 12\n\n\n\n\nFri, Mar 13\nProject proposal due.\n\n\n\nTue, Mar 17\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 19\n\n\n\n\nTue, Mar 24\nQuiz 2.\n\n\n\nTh, Mar 26\nMCMC developer guide.\n\n\n\nTue, Mar 31\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 2\n\n\n\n\nTue, Apr 7\nMore inference techniques.\nBDA 13.7\n\n\nTh, Apr 9\n\n\n\n\nSat, Apr 18\nFinal project due.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.\n\n\n\n\n\n\n\n\n\n\nDate\nTopics\nReadings\n\n\n\n\nTue, Jan 6\nOverview. Probabilistic inference on discrete spaces.\nBDA 1.1-1.10\n\n\nTh, Jan 8\n\n\n\n\nTue, Jan 13\nA tour of Bayesian inference (on discrete spaces).\nBDA 2.1-2.5\n\n\nTh, Jan 15\n\n\n\n\nTue, Jan 20\nUniversal probabilistic inference via importance sampling.\nBDA 9.1-9.5 (going further on Decision Theory)\n\n\nTh, Jan 22\n\n\n\n\nTue, Jan 27\nBayesian classification, regression, GLMs, and beyond.\nBDA 14.1-14.5\n\n\nTh, Jan 29\n\n\n\n\nTue, Feb 3\nProperties of Bayesian models.\nBDA 4.1-4.5\n\n\nTh, Feb 5\n\n\n\n\nTue, Feb 10\nHierarchical models.\nBDA 5.1-5.7\n\n\nTh, Feb 12\n\n\n\n\nTue, Feb 18\nReading week.\nBDA 16.1-16.7\n\n\nTh, Feb 19\nReading week.\n\n\n\nTue, Feb 24\nQuiz 1.\n\n\n\nTh, Feb 26\nQuiz debrief. Stan basics. Project logistics.\n\n\n\nTue, Mar 3\nMCMC user guide (via Stan).\nBDA 11.1-11.6\n\n\nTh, Mar 5\n\n\n\n\nTue, Mar 10\nBayesian workflow.\nBDA 6.1-6.5\n\n\nTh, Mar 12\n\n\n\n\nFri, Mar 13\nProject proposal due.\n\n\n\nTue, Mar 17\nModelling techniques (selected from prior design, mixtures, imputation, complex data collection).\nBDA 8.1-8.7\n\n\nTh, Mar 19\n\n\n\n\nTue, Mar 24\nQuiz 2.\n\n\n\nTh, Mar 26\nMCMC developer guide.\n\n\n\nTue, Mar 31\nMCMC developer guide.\nBDA 12.1-12.6\n\n\nTh, Apr 2\n\n\n\n\nTue, Apr 7\nMore inference techniques.\nBDA 13.7\n\n\nTh, Apr 9\n\n\n\n\nSat, Apr 18\nFinal project due.",
     "crumbs": [
       "Schedule"
     ]
@@ -4717,28 +4717,28 @@
     "href": "index.html",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years."
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change."
   },
   {
     "objectID": "index.html#course-description",
     "href": "index.html#course-description",
     "title": "Syllabus: STAT405 Bayesian Statistics",
-    "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years."
+    "section": "Course description",
+    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years."
   },
   {
     "objectID": "index.html#lecture-time-and-place",
     "href": "index.html#lecture-time-and-place",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Lecture time and place",
-    "text": "Lecture time and place\nLecture dates: Tuesday and Thursday, 9:30-11:00. See Canvas for location. Detailed schedule"
+    "text": "Lecture time and place\nLecture dates: See Canvas. Detailed schedule"
   },
   {
     "objectID": "index.html#teaching-team",
     "href": "index.html#teaching-team",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Teaching team",
-    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nCaden Hewlett (TA)\nJunsong Tang (TA)"
+    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Co-Instructor)\n[Charles Margossian (Co-Instructor)]https://charlesm93.github.io/)\nTAs TBD"
   },
   {
     "objectID": "index.html#prerequisite",
@@ -6649,7 +6649,7 @@
     "href": "syllabus.html",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Syllabus"
     ]
@@ -6658,8 +6658,8 @@
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
     "title": "Syllabus: STAT405 Bayesian Statistics",
-    "section": "",
-    "text": "Bayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
+    "section": "Course description",
+    "text": "Course description\nBayesian inference is a flexible and powerful approach to modeling reality, making optimal predictions from data, and quantifying uncertainty in a coherent manner. Thanks to their versatility, Bayesian methods are now widely used in virtually all fields of science, engineering, and beyond.\nIn STAT 405, you will:\n\ndesign probabilistic models to approach real-world inferential problems;\nperform inference using Bayesian modelling languages;\ncritically assess, debug, and iteratively improve Bayesian workflows;\ndevelop and analyze custom posterior approximation machinery.\n\nNote: this course was called 447C in previous years.",
     "crumbs": [
       "Syllabus"
     ]
@@ -6669,7 +6669,7 @@
     "href": "syllabus.html#lecture-time-and-place",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Lecture time and place",
-    "text": "Lecture time and place\nLecture dates: Tuesday and Thursday, 9:30-11:00. See Canvas for location. Detailed schedule",
+    "text": "Lecture time and place\nLecture dates: See Canvas. Detailed schedule",
     "crumbs": [
       "Syllabus"
     ]
@@ -6679,7 +6679,7 @@
     "href": "syllabus.html#teaching-team",
     "title": "Syllabus: STAT405 Bayesian Statistics",
     "section": "Teaching team",
-    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Instructor)\nCaden Hewlett (TA)\nJunsong Tang (TA)",
+    "text": "Teaching team\n\nAlexandre Bouchard-Côté (Co-Instructor)\n[Charles Margossian (Co-Instructor)]https://charlesm93.github.io/)\nTAs TBD",
     "crumbs": [
       "Syllabus"
     ]
