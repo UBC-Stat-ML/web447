@@ -6846,7 +6846,7 @@
     "href": "project.html",
     "title": "Final project",
     "section": "",
-    "text": "Teams of maximum 2-3 people are strongly encouraged\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.",
+    "text": "Caution\n\n\n\nPage under construction: information on this page may change.",
     "crumbs": [
       "Final project"
     ]
@@ -6855,8 +6855,8 @@
     "objectID": "project.html#logistics",
     "href": "project.html#logistics",
     "title": "Final project",
-    "section": "",
-    "text": "Teams of maximum 2-3 people are strongly encouraged\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.",
+    "section": "Logistics",
+    "text": "Logistics\n\nTeams of maximum 2-3 people are strongly encouraged\nYou should outline in the final report who did what\nSubmit on canvas, a pdf document of maximum 4 pages for a 1 person project, 6 for a 2-person project, 8 for a 3-person project, excluding references and appendices. The appendix can have arbitrary length but may not be read in detail during grading.\nBoth proposal and submitted project should contain a link to a public git repository containing the source code for generating the report and figures. Make sure each team member commit their change using their account to document the contributions of each team member.",
     "crumbs": [
       "Final project"
     ]
